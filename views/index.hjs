@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Ben Bernstein</title>
+		<meta name="Description" content="I'm a freshman at UPenn who's fascinated by technology and engineering. I'm also interested in science, sports, history, music, and economics." />
+		<meta charset="UTF-8">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <style type="text/css">
+			body {width: 100%; text-align: center;}
+
+			#ManualSched {
+			    width: 1000px; height: 400px;
+			    background-color: #E6E6E6;
+			    display: inline-block;
+			    position: relative;
+			    margin: 0 auto;
+			}
+
+			.timeSlot {
+				width: 200px; 
+				display: inline-block; box-sizing: border-box;
+				border: 1px solid black;
+				position: absolute;
+				text-align: center;}
+        </style>
+	</head>
+    <body>
+        <h1>{{ title }}</h1>
+        <div id="ManualSched">
+        </div>
+    </body>
+    <script type="text/javascript">
+    $('#ManualSched').click(function () {
+    	$.get("/Chem")
+		.done(function(data) {
+			console.log(data);
+		})
+    })
+    </script>
+</html>
