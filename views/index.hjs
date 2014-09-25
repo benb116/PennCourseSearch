@@ -17,7 +17,10 @@
 				width: 300px; height: 300px;
 				background-color: white;
 				float: left;
-				border-right: 3px solid blue;}
+				border-right: 3px solid blue;
+				overflow: scroll;}
+
+			#CourseList li {cursor: pointer;}
         </style>
 	</head>
     <body>
@@ -54,6 +57,16 @@
 					.done(function(data) {
 						$('#CourseList').html(data);
 						$('#LoadingInfo').css('opacity', '0');
+
+						$('#CourseList li').click(function() {
+							console.log('click');
+							var courseName = $(this).html().replace(' ', "/");
+							
+							$.get("/"+courseName)
+							.done(function(data) {
+								$('#InfoPanel').html(data);
+							});
+						});
 					});
 				} else {
 					$('#InfoPanel').html("No Results");
@@ -62,5 +75,6 @@
 			catch(err) {console.log('No Results');}
 		}, 200);
 	});
+	
     </script>
 </html>

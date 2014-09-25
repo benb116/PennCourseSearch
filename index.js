@@ -91,11 +91,10 @@ function parseCourseList(JSONString) {
 	var coursesList = ''
 	for(var key in Res.result_data) {
       for(var nkey in key) {
-      	tempName = Res.result_data[key].section_id_normalized.slice(0, -4);
+      	tempName = Res.result_data[key].section_id_normalized//.slice(0, -4);
       	tempName = tempName.replace('-', " ");
       	if (coursesList.indexOf(tempName) == -1) {
       		coursesList += '<li>'+tempName+'</li>';
-      		console.log(coursesList)
       	};
       }
     }
