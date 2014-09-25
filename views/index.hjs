@@ -23,7 +23,7 @@
     <body>
         <h1>{{ title }}</h1>
         <form>
-			Search for courses: <input id="CSearch" type="text" name="courseSearch">
+			Search for courses: <input id="CSearch" type="text" name="courseSearch"><span id="LoadingInfo" style="opacity:0;">Loading...</span>
 		</form>
         <div id="BottomResults">
         	<div id="CourseList"></div>
@@ -49,14 +49,18 @@
 				if (searchTerms != "" && searchTerms != 'favicon.ico') {
 					searchTerms = searchTerms.replace(' ', "/");
 					searchTerms = searchTerms.replace('-', "/");
+					$('#LoadingInfo').css('opacity', '1');
 					$.get("/"+searchTerms)
-					.done(function(data) {$('#InfoPanel').html(data);});
+					.done(function(data) {
+						$('#CourseList').html(data);
+						$('#LoadingInfo').css('opacity', '0');
+					});
 				} else {
 					$('#InfoPanel').html("No Results");
 				}
 			} 
 			catch(err) {console.log('No Results');}
-		}, 0);
+		}, 200);
 	});
     </script>
 </html>
