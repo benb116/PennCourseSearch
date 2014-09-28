@@ -24,7 +24,7 @@ app.get('/:deptId', function(req, res) {
 	function requestPage(dept, num, sec) {
 		console.log('course_id='+dept+num+sec)
 		request({
-		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+dept+'&number_of_results_per_page=100',
+		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+dept+'&number_of_results_per_page=400',
 		  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
 		}, function(error, response, body) {
 			return res.send(parseDeptList(body));
