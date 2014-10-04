@@ -25,7 +25,7 @@ app.get('/Search/:deptId', function(req, res) {
 		function requestPage(dept, num, sec) {
 			console.log('Search Terms: '+dept+num+sec)
 			request({
-			  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_info/'+dept+'?number_of_results_per_page=200&term=2014C',
+			  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_info/'+dept+'?number_of_results_per_page=200',
 			  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
 			}, function(error, response, body) {
 				return res.send(parseDeptList(body));
@@ -39,7 +39,7 @@ app.get('/Search/:deptId/:courseId', function(req, res) {
 	function requestPage(dept, num, sec) {
 		console.log('Search Terms: '+dept+num+sec)
 		request({
-		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+dept+num+'&term=2014C&number_of_results_per_page=100',
+		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+dept+num+'&number_of_results_per_page=100',
 		  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
 		}, function(error, response, body) {
 			return res.send(parseCourseList(body));
@@ -66,7 +66,8 @@ function parseDeptList(JSONString) {
 	for(var key in Res.result_data) {
       for(var nkey in key) {
       	var courseListName = Res.result_data[key].department+' '+Res.result_data[key].course_number;
-      	if (coursesList.indexOf(courseListName) == -1) {
+      	var termsOffered = Res.result_data[key].terms_offered_code;
+      	if ((coursesList.indexOf(courseListName) == -1) && (termsOffered == "A" || termsOffered == "B" || termsOffered == "C")) {
       		coursesList.push(courseListName);
       	};
       }
@@ -84,12 +85,19 @@ function parseCourseList(JSONString) {
 	for(var key in Res.result_data) {
       for(var nkey in key) {
       	tempName = Res.result_data[key].section_id_normalized;
+      	OCStatus = Res.result_data[key].course_status;
+      	if (OCStatus == "O") {
+      		var StatusClass = 'OpenSec'
+      	} else {
+      		var StatusClass = 'ClosedSec'
+      	};
       	tempName = tempName.replace('-', " ").replace('-', " ");
       	if (sectionsList.indexOf(tempName) == -1) {
-      		sectionsList += '<li>'+tempName+'</li>';
+      		sectionsList += '<li class="'+StatusClass+'">'+tempName+'</li>';
       	};
       }
     }
+    if (sectionsList == "") {sectionsList = "No Results"};
     return sectionsList;
 }
 
@@ -104,6 +112,7 @@ function parseSectionList(JSONString) {
 			var StartTime = entry.meetings[0].start_time;
 			var EndTime = entry.meetings[0].end_time;
 			var MeetDays = entry.meetings[0].meeting_days;
+			var OpenClose = entry.course_status_normalized;
 			TimeInfo = "<br><br>"+StartTime+" - "+EndTime+" on "+MeetDays 
 		}
 		catch(err) {
@@ -135,7 +144,7 @@ function parseSectionList(JSONString) {
 			AsscList = '';
 		};
 
-		return FullID + ' - ' + Title + "<br>" + Desc + TimeInfo + AsscList;		
+		return FullID + ' - ' + Title + "<br>"+ OpenClose+ "<br>" + Desc + TimeInfo + AsscList;		
 	}
  	catch(err) {
 		return 'No Results';

@@ -25,7 +25,8 @@
 			#InfoPanel {overflow: scroll; height: 300px;}
 			ul {list-style-type: none; padding: 0;}
 			li {cursor: pointer;}
-			li:hover {background-color: #3399FF;}
+			.OpenSec {background-color: #47EA4C;}
+			.ClosedSec {background-color: #F73B3B;}
 
 			input[type="text"] { 
 			    width: 40em;
@@ -56,7 +57,7 @@
 	  };
 	})();
 
-   	$('#CSearch').on('keyup', function(e){
+   	$('#CSearch').on('input', function(){
 		$('#LoadingInfo').css('opacity', '1');
 		delay(function(){
 		  	var searchTerms = $('#CSearch').val();
@@ -76,22 +77,26 @@
 					};
 					if ((searchTerms.split("/").length - 1) >= 2) {
 						getSectionNumbers(deptSearch+'/'+numbSearch);
+					} else {
+						$('#SectionList').empty();
+						$('#InfoPanel').empty();
 					};
 					if ((searchTerms.split("/").length - 1) == 3) {
 						getSectionInfo(deptSearch+'/'+numbSearch+'/'+sectSearch);
-					};
-					
+					} else {
+						$('#InfoPanel').empty();
+					};					
 				} else {
 					$('#CourseList').empty();
 					$('#SectionList').empty();
 					$('#InfoPanel').empty();
-					console.log('test')
 				}
 			} 
 			catch(err) {console.log('No Results');}
 
 		}, 400);
 	});
+
 	function getCourseNumbers(dept) {
 		$.get("/Search/"+dept)
 		.done(function(data) {
@@ -99,8 +104,8 @@
 			$('#LoadingInfo').css('opacity', '0');
 			$('#CourseList li').click(function() {
 				$('#CSearch').val($(this).html());
-				var courseName = $(this).html().replace(' ', "/");
 				$('#InfoPanel').html('');
+				var courseName = $(this).html().replace(' ', "/");
 				getSectionNumbers(courseName);
 			});
 		});
