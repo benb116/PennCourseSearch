@@ -20,8 +20,10 @@
 				background-color: white;
 				float: left;
 				border-right: 3px solid #3399FF;
-				overflow: scroll;}
+				overflow: scroll;
+				list-style-type: none;}
 			#InfoPanel {overflow: scroll; height: 300px;}
+			ul {list-style-type: none; padding: 0;}
 			li {cursor: pointer;}
 			li:hover {background-color: #3399FF;}
 
@@ -37,7 +39,7 @@
     <body>
         <h1>{{ title }}</h1>
         <form onkeypress="return event.keyCode != 13;">
-			Search for courses: <input id="CSearch" type="text" name="courseSearch"><span id="LoadingInfo" style="opacity:0;">Loading...</span>
+			Search for courses: <input id="CSearch" type="text" name="courseSearch" autocomplete="off"><span id="LoadingInfo" style="opacity:0;">Loading...</span>
 		</form>
         <div id="BottomResults">
         	<div id="CourseList"></div>
@@ -54,37 +56,35 @@
 	  };
 	})();
 
-   	$('#CSearch').on('input', function(e){
+   	$('#CSearch').on('keyup', function(e){
+		$('#LoadingInfo').css('opacity', '1');
 		delay(function(){
 		  	var searchTerms = $('#CSearch').val();
 
 			try {
 				if (searchTerms != "" && searchTerms != 'favicon.ico') {
-					searchTerms = searchTerms.replace(' ', "/");
-					searchTerms = searchTerms.replace(' ', "/");
-					searchTerms = searchTerms.replace('-', "/");
-					$('#LoadingInfo').css('opacity', '1');
+					searchTerms = searchTerms.replace(' ', "/").replace(' ', "/").replace('-', "/").replace('-', "/");
 					if (searchTerms.slice(-1) != '/') {
 						searchTerms = searchTerms+'/';
 					};
-					console.log(searchTerms)
-					if ((searchTerms.split("/").length - 1) == 1) {
-						getCourseNumbers(searchTerms);
-						$('#InfoPanel').empty();
-						$('#SectionList').empty();
+
+					var deptSearch = searchTerms.split("/")[0];
+					var numbSearch = searchTerms.split("/")[1];
+					var sectSearch = searchTerms.split("/")[2];
+					if ((searchTerms.split("/").length - 1) >= 1) {
+						getCourseNumbers(deptSearch);
 					};
-					if ((searchTerms.split("/").length - 1) == 2) {
-						getSectionNumbers(searchTerms);
-						$('#InfoPanel').empty();
+					if ((searchTerms.split("/").length - 1) >= 2) {
+						getSectionNumbers(deptSearch+'/'+numbSearch);
 					};
 					if ((searchTerms.split("/").length - 1) == 3) {
-						getSectionInfo(searchTerms);
+						getSectionInfo(deptSearch+'/'+numbSearch+'/'+sectSearch);
 					};
 					
 				} else {
 					$('#CourseList').empty();
 					$('#SectionList').empty();
-					$('#InfoPanel').html("No Results");
+					$('#InfoPanel').empty();
 					console.log('test')
 				}
 			} 
@@ -93,7 +93,7 @@
 		}, 400);
 	});
 	function getCourseNumbers(dept) {
-		$.get("/"+dept)
+		$.get("/Search/"+dept)
 		.done(function(data) {
 			$('#CourseList').html(data);
 			$('#LoadingInfo').css('opacity', '0');
@@ -106,7 +106,7 @@
 		});
 	}
 	function getSectionNumbers(cnum) {
-		$.get("/"+cnum)
+		$.get("/Search/"+cnum)
 		.done(function(data) {
 			$('#SectionList').html(data);
 			$('#LoadingInfo').css('opacity', '0');
@@ -118,7 +118,7 @@
 		});
 	}
 	function getSectionInfo(sec) {
-		$.get("/"+sec)
+		$.get("/Search/"+sec)
 		.done(function(data) {
 			$('#InfoPanel').html(data);
 			$('#LoadingInfo').css('opacity', '0');
