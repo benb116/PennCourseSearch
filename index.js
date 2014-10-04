@@ -82,15 +82,28 @@ function parseCourseList(JSONString) {
 	var sectionsList = ''
 	for(var key in Res.result_data) {
       	tempName = Res.result_data[key].section_id_normalized;
+      	tempName = tempName.replace('-', " ").replace('-', " ");
       	OCStatus = Res.result_data[key].course_status;
       	if (OCStatus == "O") {
       		var StatusClass = 'OpenSec' // If it's open, add class open
       	} else {
       		var StatusClass = 'ClosedSec' // If it's closed, add class closed
       	};
-      	tempName = tempName.replace('-', " ").replace('-', " ");
-      	if (sectionsList.indexOf(tempName) == -1) { // If it's not already in the list
-      		sectionsList += '<li class="'+StatusClass+'">'+tempName+'</li>'; // Add and format
+
+		try { // Not all sections have time info
+			var StartTime = Res.result_data[key].meetings[0].start_time.split(":")[0];
+			if (StartTime[0] == '0') {StartTime = StartTime.split("0")[1]};
+			var EndTime = Res.result_data[key].meetings[0].end_time.split(":")[0];
+			if (EndTime[0] == '0') {EndTime = EndTime.split("0")[1]};
+			var MeetDays = Res.result_data[key].meetings[0].meeting_days;
+			TimeInfo = StartTime+" to "+EndTime+" on "+MeetDays ;
+		}
+		catch(err) {
+			console.log("Error getting times")
+			var TimeInfo = '';
+		}
+		if (sectionsList.indexOf(tempName) == -1) { // If it's not already in the list
+      		sectionsList += '<li><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp</span>&nbsp'+tempName+' - '+TimeInfo+'</li>'; // Add and format
       	};
     }
     if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'

@@ -1,0 +1,114 @@
+{
+  "service_meta" : {
+    "results_per_page" : 20,
+    "next_page_number" : 1,
+    "current_page_number" : 1,
+    "error_text" : "",
+    "number_of_pages" : 1,
+    "previous_page_number" : 1
+  },
+  "result_data" : [
+    {
+      "course_notes" : "",
+      "term" : "2014C",
+      "end_date" : "2014-12-09T05:00:00Z",
+      "course_status" : "O",
+      "course_title" : "General Chemistry I",
+      "important_notes" : [
+        "Course is available to Freshmen and Upperclassmen.",
+        "Registration also required for Lecture (see below)"
+      ],
+      "start_date" : "2014-08-27T04:00:00Z",
+      "corequisite_activity" : "",
+      "credit_type" : "CU",
+      "fulfills_college_requirements" : [],
+      "section_title" : "General Chemistry I",
+      "max_enrollment" : "25",
+      "lectures" : [
+        {
+          "subject" : "CHEM",
+          "section_id" : "001",
+          "course_id" : "101"
+        }
+      ],
+      "department_url" : "http://www.chem.upenn.edu/chem/",
+      "activity_description" : "Recitation",
+      "course_notes_message" : "",
+      "maximum_credit" : "0",
+      "section_id_normalized" : "CHEM-101-220",
+      "course_terms_offered" : "One-term course offered either term",
+      "course_number" : "101",
+      "is_special_session" : false,
+      "term_normalized" : "Fall 2014",
+      "syllabus_url" : "",
+      "is_cancelled" : false,
+      "minimum_credit" : "0",
+      "first_meeting_days" : "R11:00 AMLRSM112B",
+      "term_session" : "",
+      "course_description" : "Basic concepts and principles of chemistry and their applications in chemistry and closely-related fields. The first term emphasizes the understanding of chemical reactions through atomic and molecular structure. This is a university level course, treating the material in sufficient depth so that students can solve chemical problems and can understand the principles involved in their solution. It includes an introduction to condensed matter. This course is suitable for majors or non-majors and is recommended to satisfy either major or preprofessional requirements for general chemistry. This course is presented for students with high school chemistry and calculus. Students with a lesser background than this should take Chemistry 100.",
+      "department_description" : "Chemistry",
+      "course_status_reason_code" : "",
+      "max_enrollment_crosslist" : "25",
+      "course_status_normalized" : "Open",
+      "is_crosslist_primary" : false,
+      "grade_type" : "",
+      "requirements_title" : "Associated lectures",
+      "instructors" : [
+        {
+          "section_id" : "CHEM101220",
+          "name" : "Yuanwei Chen",
+          "term" : "2014C"
+        }
+      ],
+      "credit_connector" : "F",
+      "meetings" : [
+        {
+          "room_number" : "112B",
+          "end_hour_24" : 12,
+          "building_name" : "Lab for Research on the Structure of Matter",
+          "section_id_normalized" : "CHEM-101-220",
+          "start_minutes" : 0,
+          "meeting_days" : "R",
+          "start_time" : "11:00 AM",
+          "end_time_24" : 12,
+          "start_hour_24" : 11,
+          "end_time" : "12:00 PM",
+          "section_id" : "CHEM101220",
+          "building_code" : "LRSM",
+          "start_time_24" : 11,
+          "term" : "2014C",
+          "end_minutes" : 0
+        }
+      ],
+      "course_meeting_message" : "",
+      "is_closed" : false,
+      "crosslistings" : [],
+      "prerequisite_notes" : [],
+      "crosslist_primary" : "",
+      "labs" : [],
+      "credits" : "0 CU",
+      "is_not_scheduled" : false,
+      "primary_instructor" : "",
+      "course_department" : "CHEM",
+      "recitations" : [],
+      "section_id" : "CHEM101220",
+      "section_number" : "220",
+      "corequisite_activity_description" : "",
+      "credit_and_grade_type" : "0 CU",
+      "requirements" : [
+        {
+          "registration_control_code" : "CA",
+          "value_normalized" : "Lecture",
+          "argument" : "",
+          "value" : "LEC",
+          "section_id" : "CHEM101220",
+          "requirement_description" : "Section Activity Co-Requisite Required",
+          "term" : "2014C"
+        }
+      ],
+      "activity" : "REC",
+      "course_description_url" : "",
+      "third_party_links" : []
+    }
+  ]
+}

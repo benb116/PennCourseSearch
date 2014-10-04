@@ -1,0 +1,4181 @@
+{
+  "service_meta" : {
+    "results_per_page" : 200,
+    "next_page_number" : 1,
+    "current_page_number" : 1,
+    "error_text" : "",
+    "number_of_pages" : 1,
+    "previous_page_number" : 1
+  },
+  "result_data" : [
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM093",
+      "activities_and_credits" : [
+        {
+          "credit" : ".25",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "093",
+      "instructors" : "",
+      "terms_offered_code" : "",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "Building upon the basics covered in 091, this intermediate-level course includes detailed operation sequencing, fixture design, and hands-on conversational CNC programming for the ProtoTrak Hybrid Mill.",
+      "course_title" : "Shop Tr: Hybrid Milling",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM094",
+      "activities_and_credits" : [
+        {
+          "credit" : ".25",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "094",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "Building upon proficiency in 091 and 093, this hands-on course covers the details of full computer-controlled machining using SolidCAM and the Haas MiniMill.",
+      "course_title" : "Tr: CNC Milling/solidcam",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM699",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "SEM"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "699",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "The seminar course has been established so that students get recognition for their seminar attendance as well as to encourage students to attend. Students registered for this course are required to attend weekly departmental seminars given by distinguished speakers from around the world. There will be no quizzes, tests, or homeworks. The course will be graded S/U. In order to obtain a satisfactory (S) grade, the student will need to attend more than 70% of the departmental seminars. Participation in the seminar course will be documented and recorded on the students transcript. In order to obtain their degree, doctoral students will be required to accumulate six seminar courses and MS candidates (beginning in the Fall 2001) two courses. Under special circumstances, i.e. in case of conflict with a course, the student may waive the seminar requirement for a particular semester by petition to the Graduate Group Chair.",
+      "course_title" : "MEAM Seminar",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM599",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "IND"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "V",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "599",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "",
+      "course_title" : "Master's Independent Study",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM645",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "645",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Gas kinetic theory: Boltzmann equation. H-theorem, equilibrium solutions, transport coefficients. Rarified gas dynamics, methods of approximate solution to Boltzmann equation. Continuum limit: Navier-Stokes equations.",
+      "course_title" : "Fluid Mechanics IV",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM632",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "632",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 519 or permission of instructor.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Plastic yield conditions and associated flow rules. Phenomenological theories for strain-hardening plasticity. Large strain theory. Physical theories of single crystal and polycrystal plasticity. Boundary value problems and plane strain slipline fields. Variational principles and limit analysis. Creep. Applications to structures, metal forming, friction and wear, contact, and fracture.",
+      "course_title" : "Plasticity",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM347",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LAB"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "347",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Junior standing in engineering",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This is a junior level laboratory course. The course teaches the principles of design and measurement systems including basic electromechanical systems. It follows MEAM 302 and MEAM 321 including experiments in fluid mechanics, and vibration in the design of mechanical systems.",
+      "course_title" : "Mechanical Engineering Design Laboratory",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM446",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "06",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "446",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This is the second course in the two course sequence involving the capstone design project. See MEAM 445 for course description.",
+      "course_title" : "Mechanical Engineering Design Projects",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM519",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MSE",
+          "section_id" : "",
+          "course_id" : "550"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "519",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course is targeted to engineering students working in the areas on micro/nanomechanics of materials. The course will start with a quick review of the equations of linear elasticity and proceed to solutions of specific problems such as the Hertz contact problem, Eshelby's problem etc. Failure mechanisms such as fracture and the fundamentals of dislocations/plasticity will also be discussed.",
+      "course_title" : "Elasticity and Micromechanics of Materials",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM570",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "CBE",
+          "section_id" : "",
+          "course_id" : "640"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "570",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "The course provides a unified introduction to momentum, energy (heat), and mass transport processes. The basic mechanisms and the constitutive laws for the various transport processes will be delineated, and the conservation equations will be derived and applied to internal and external flows featuring a few examples from mechanical, chemical, and biological systems. Reactive flows will also be considered.",
+      "course_title" : "Transport Processes I",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM302",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "05",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "302",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MATH 241 or ENM 251 and PHYS 150 or MEAM 110/147",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "Physical properties; fluid statics; Bernoulli equation; fluid kinematics; conservation laws and finite control-volume analysis; conservation laws and differential analysis; inviscid flow; The Navier-Stokes equation and some exact solutions; similitude, dimensional analysis, and modeling; flow in pipes and channels; boundary layer theory; lift and drag.",
+      "course_title" : "Fluid Mechanics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM333",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "02",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "333",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 203 and MEAM 302",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This course covers fundamentals of heat and mass transfer and applications to practical problems in energy conversion and conservation. Emphasis will be on developing a physical and analytical understanding of conductive, convective, and radiative heat transfer, as well as design of heat exchangers and heat transfer with phase change. Topics covered will include: types of heat transfer processes, their relative importance, and the interactions between them, solutions of steady state and transient state conduction, emission and absorption of radiation by real surfaces and radiative transfer between surfaces, heat transfer by forced and natural convection owing to flow around bodies and through ducts, analytical solutions for some sample cases and applications of correlations for engineering problems. Students will develop an ability to apply governing principles and physical intuition to solve problems.",
+      "course_title" : "Heat and Mass Transfer",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM454",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MEAM",
+          "section_id" : "",
+          "course_id" : "554"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "454",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 210 and/or MEAM 354, MATH 240, 241 or ENM 251",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This course is an upper level course that discusses the behavior of materials, the selection of materials in mechanical components, and the mechanics of deformable bodies. It is intended for students interested in material science, mechanical engineering, and civil engineering. The topics covered include: Stress. Strain. Principal Stresses. Compatibility. Elastic stress-strain relations. Strain energy. Plane strain. Plane stress. Rods and trusses. Bending of beams. Torsion. Rotating disks. Castigliano's Theorem. Dummy loads. Principle of virtual work. The Rayleigh-Ritz Methods. Introduction to the finite element method. Non-linear material behavior. Yielding. Failure.",
+      "course_title" : "Mechanics of Materials",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM503",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "503",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "The course focuses on devices that convert heat or solar energy directly to electricity, i.e., without intermediate mechanical machinery such as a turbine. A variety of converters with sizes ranging from macro to nano scale will be discussed. Topics will include thermoelectric energy converters and radioisotope thermoelectric generator (RTGs), thermionic energy converters (TEC), photovoltaic (PV) and thermophotovoltaic (TPV) cells. Additional topics may include alkali metal thermal to electric converter (AMTEC), as well as magnetohydrodynamic (MHD) and piezoelectric generators.",
+      "course_title" : "Direct Energy Conversion: from Macro to Nano",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM535",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "535",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Rigid body kinematics; Newtonian formulations of laws of motion; concepts of momentum, energy and inertia properties; generalized coordinates, holonomic and nonholonomic constraints. Generalized forces, principle of virtual work, D'Alembert's principle. Lagrange's equations of motion and Hamilton's equations. Conservation laws and integrals of motion. Friction, impulsive forces and impact. Applications to systems of rigid bodies.",
+      "course_title" : "Advanced Dynamics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM571",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "571",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Either MEAM 570, MEAM 642, CHE 640 or equivalent, or Written permission of the Instructor.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "The course deals with advanced topics in transport phenomena and is suitable for graduate students in mechanical, chemical and bioengineering who plan to pursue research in areas related to transport phenomena or work in an industrial setting that deals with transport issues. Topics include: Transport processes with drops, Bubbles and particles; Phase change Phenomena: -condensation, evaporation, and combustion; Radiation heat transfer: non-participating media, participating media, equation of radiative transfer, optically thin and thick limits; Introduction to Hydrodynamic and Thermal Instability; Microscale energy transport; Nano-particle motion in fluids and transport.",
+      "course_title" : "Advanced Topics in Transport Phenomena",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM903",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Two terms. student must enter first term.",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "903",
+      "instructors" : "",
+      "terms_offered_code" : "E",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "J",
+      "course_description" : "",
+      "course_title" : "Topics in Advanced Engineering I",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM348",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LAB"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "348",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Junior standing in engineering",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "This course is a junior lab which follows MEAM 333 Heat Transfer and MEAM 354 Mechanics of Materials with design projects based on those topics. In the broader context of design/independent skill development, this course also introduces open ended topics, wider design options, and introduces project planning and management.",
+      "course_title" : "Mechanical Engineering Design Laboratory",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM402",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "05",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "402",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 203 or equivalent, and MEAM 333 or equivalent, (Heat Transfer can be taken concurrently with MEAM 402)",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "Quantitative introduction to the broad area of energy engineering, from basic principles to applications. The focus is on the science and engineering, and includes environmental impact and some economics considerations. A review of energy consumption, use, and resources; sustainability, methods of energy and exergy (second law) analysis; power cycles, combined cycles, and co-generation; batteries and fuel cells; nuclear energy and wastes; fusion power; solar energy; power generation in space.",
+      "course_title" : "Energy Engineering",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM455",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "BE",
+          "section_id" : "",
+          "course_id" : "455"
+        },
+        {
+          "subject" : "MEAM",
+          "section_id" : "",
+          "course_id" : "544"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "455",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "Continuum mechanics with applications to biological systems. Fundamental engineering conservation laws are introduced and illustrated using biological and non-biological examples. Kinematics of deformation, stress, and conservation of mass, momentum, and energy. Constitutive equations for fluids, solids, and intermediate types of media are described and applied to selected biological examples. Class work is complemented by hands-on experimental and computational laboratory experiences.",
+      "course_title" : "Continuum Biomechanics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM500",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "500",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MATH 240 and 241 or their equivalent",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Vector-tensor calculus: Cartesian and curvilinear coordinates. Linear algebra; practical solutions of linear equations, eigenvalue problems, and similarity transformations. Complex variables: contour integration and conformal mapping.",
+      "course_title" : "Engineering Mathematics I",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM516",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LAB"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "IPD",
+          "section_id" : "",
+          "course_id" : "516"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "516",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course teaches advanced mechatronics concepts that include the design and implementation of networked embedded systems, large-scale actuation, advanced sensing and control. This course pairs design school and engineering students to form interdisciplinary teams that together design and build electro-mechanical reactive spaces and scenic/architectural elements in the context of the performing arts. The two disciplinary groups will be treated separately and receive credit for different courses (ARCH746 will be taught concurrently and in some cases co-located) as they will be learning different things. Engineering students gain design sensibilities and advanced mechatronics in the form of networked embedded processing and protocols for large scale actuation and sensing. Design students learn elementary mechatronics and design reactive architectures and work with engineering students to build them. The class will culminate in a collection of short performance pieces inspired by Shakespeare's A Midsummer Night's Dream with both mechatronic and human performers from the Pig Iron Theater Troupe. A final paper will be required that is ready for conference proceedings.",
+      "course_title" : "Advanced Mechatronic Reactive Spaces.",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM637",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "AMCS",
+          "section_id" : "",
+          "course_id" : "637"
+        },
+        {
+          "subject" : "MSE",
+          "section_id" : "",
+          "course_id" : "637"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "637",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "When demand permits.",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course is targeted at engineering, physical science, computational and mathematics Ph.D. students. The course focuses on techniques for the simulation/modeling of materials on a time and/or length scale that is large compared with atomistic/molecular but with structure that is fine on the scale of typical (homogenized) continuum theory. The course explores kinetic models, defect dynamics, and statistical mechanics models and their implementation in computer simulation.",
+      "course_title" : "Modern Applications of Dynamics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM661",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "661",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "Upon demand",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Classical statistical mechanics as developed by Gibbs and Boltzmann. The H-theoremand approach to equilibrium. Fluctuations, application to ideal and real gases and to chemical equilibrium, quantized systems, theory of specific heats, Maxwell Boltzmann, Bose-Einstein and Fermi-Dirac Statistics, mean-free path phenomena diffusion, the Boltzmann equation and transport phenomena.",
+      "course_title" : "Advanced Thermodynamics Seminar",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM666",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "666",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 664 and 665",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Introduction, black body radiation, radiation to and from a surface element, radiative heat exchange among surfaces separated by a non-participating medium, radiation and conduction in non-participating media, radiation and convection in non-participating media, introduction to radiative heat transfer in participating media.",
+      "course_title" : "Heat Transfer III: Radiation",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM338",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "05",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "338",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 203 or CBE 231",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "To introduce students to advanced classical equilibrium thermodynamics based on Callen's postulatory approach, to exergy (Second-Law) analysis, and to fundamentals of statistical and nonequilibrium thermodynamics. Applications to be discussed include advanced power and aerospace propulsion cycles, fuel cells, combustion, diffusion, transport in membranes, materials properties, superconductivity, elasticity, and biological processes.",
+      "course_title" : "Thermodynamics II",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM415",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "IPD",
+          "section_id" : "",
+          "course_id" : "515"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "415",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "This course provides tools and methods for creating new products. The course is intended for students with a strong career interest in new product development, entrepreneurship, and/or technology development. The course follows an overall product design methodology, including the identification of customer needs, generation of product concepts, prototyping, and design-for-manufacturing. Weekly student assignments are focused on the design of a new product and culminate in the creation of a prototype. The course is open to juniors and seniors in SEAS or Wharton.",
+      "course_title" : "Product Design",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM513",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "ESE",
+          "section_id" : "",
+          "course_id" : "505"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "513",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 321 or ESE 210, Juniors and Seniors encouraged to enroll",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Basic methods for analysis and design of feedback control in systems. Applications to practical systems. Methods presented include time response analysis, frequency response analysis, root locus, Nyquist and Bode plots, and the state-space approach.",
+      "course_title" : "Feedback Control Design and Analysis",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM522",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "522",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Explores the principles of sensor science, develops the relationship between intensive and extensive variables, and presents the linear laws between these variables. Students will review the flux-force relations describing kinetic phenomena against the context of means for transducing temperature, stress, strain, magnetic processes and chemical concentration into electrical signals. The need for multivariate signal processing will be introduced and selected applied topics considered.",
+      "course_title" : "Fundamentals of Sensor Technology",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM529",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "ESE",
+          "section_id" : "",
+          "course_id" : "529"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "529",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Introduction to RM MEMS technologies; need for RF MEMS components in wireless communications. Review of micromachining techniques and MEMS fabrication approaches. Actuation methods in MEMS, TRF MEMS design and modeling. Examples of RF MEMS components from industry and academia. Case studies: micro-switches, tunable capacitors, inductors, resonators, filters, oscillators and micromachined antennas. Overview of RF NEMS.",
+      "course_title" : "Introduction to MEMS and NEMS",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM995",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "DIS"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "995",
+      "instructors" : "",
+      "terms_offered_code" : "",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "",
+      "course_description" : "",
+      "course_title" : "Dissertation",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM895",
+      "activities_and_credits" : [
+        {
+          "credit" : ".5",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "895",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course provides training in the practical aspects of teaching. The students will attend seminars emphasizing teaching and communication skills, deliver demonstration lectures, lead recitations, lead tutorials, supervise laboratory experiments, develop instructional laboratories, develop instructional material, prepare and grade homework; grade laboratory reports, and prepare and grade examinations. Some of the recitations will be supervised and feedback and comments will be provided to the student by the faculty responsible for the course. At the completion of the 0.5 c.u. of teaching practicum, the student will receive a Satisfactory/Unsatisfactory grade and a written evaluation signed by the faculty member responsible for the course. The evaluation will be based on comments of the students taking the course and the impressions of the faculty in charge.",
+      "course_title" : "Teaching Practicum",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM999",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "IND"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "V",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "999",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "Both terms.",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "For students working on an advanced research program leading to the completion of master's thesis or Ph.D. dissertation requirements.",
+      "course_title" : "Thesis/Dissertation Research",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM092",
+      "activities_and_credits" : [
+        {
+          "credit" : ".25",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "092",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "Fundamental principles of manual turning of metals using a lathe, including hands-on training in the machine shop.",
+      "course_title" : "Shop Tr: Manual Turning",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM100",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LAB"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "100",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This freshman level course introduces students in engineering and non engineering disciplines to the basics of design and manufacturing. The lectures will cover topics in computer aided design (CAD), mechanism design and analysis, computer aided manufacturing (CAM), automotive engineering, and robotics using the internal combustion engine as a running example. In the laboratory component of the course, students will learn to use ProEngineer (a solid modeling package) and MATLAB (a software package for engineering analysis). In addition, they will be exposed to machining processes and techniques to automatically manufacture three-dimensional components on numerically controlled machine tools.",
+      "course_title" : "Introduction to Design and Manufacturing",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM321",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "02",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "321",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MATH 241 or ENM 251 and MEAM 211",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This course teaches the fundamental concepts underlying the dynamics of vibrations for single-degree of freedom, multi-degree and infinite-degree of freedom mechanical systems. The course will focus on Newton's Force Methods, Virtual-Work Methods, and Lagrange's Variation Methods for analyzing problems in vibrations. Students will learn how to analyze transient, steady state and forced motion of single and multi-degree of freedom linear and non-linear systems. The course teaches analytical solution techniques for linear systems and practical numerical and simulation methods for analysis and design of nonlinear systems.",
+      "course_title" : "Vibrations of Mechanical Systems",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM505",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MEAM",
+          "section_id" : "",
+          "course_id" : "405"
+        },
+        {
+          "subject" : "MSE",
+          "section_id" : "",
+          "course_id" : "405"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "505",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "The application of continuum and microstructural concepts to consideration of the mechanics and mechanisms of flow and fracture in metals, polymers and ceramics. The course includes a review of tensors and elasticity with special emphasis on the effects of symmetry on tensor properties. Then deformation, fracture and degradation (fatique and wear) are treated, including mapping strategies for understanding the ranges of material properties.",
+      "course_title" : "Mechanical Properties of Macro/Nanoscale Materials",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM507",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MSE",
+          "section_id" : "",
+          "course_id" : "507"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "507",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course will provide a graduate level introduction to the science and engineering of materials. It is designed specifically to meet the needs of students who will be doing research that involves materials but who do not have an extensive background in the field. The focus is on fundamental aspects of materials science and will emphasize phenomena and how to describe them . The course assumes an undergraduate background in any area of physical/chemical science and undergraduate mathematics appropriate to this. The course will also be accessible to students of applied mathematics.",
+      "course_title" : "Fundamentals of Materials",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM530",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "530",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Multivariable Calculus, Linear Algebra, Partial Differential Equations",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course serves as a basic introduction to the Mechanics of continuous media, and it will prepare the student for more advanced courses in solid and fluid mechanics. The topics to be covered include: Tensor algebra and calculus, Lagrangian and Eulerian kinematics, Cauchy and Piola-Kirchhoff stresses, General principles: conservation of mass, conservation of linear and angular momentum, energy and the first law of thermodynamics, entropy and the second law of thermodynamics; constitutive theory, ideal fluids, Newtonian and non-Newtonian fluids, finite elasticity, linear elasticity, materials with microstructure.",
+      "course_title" : "Continuum Mechanics.",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM635",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "635",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "ENM 510",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course deals with the prediction of the average, or effective properties of composite materials. The emphasis will be on methods for determining effective behavior. The course will be concerned mostly with linear mechanical and physical properties, with particular emphasis on the effective conductivity and elastic moduli of multi-phase composites and polycrystals. However, time-dependent and non-linear properties will also be discussed.",
+      "course_title" : "Composite Materials",
+      "corequisites" : "ENM 511"
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM642",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "642",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Fluid mechanics as a vector field theory; basic conservation laws, constitutive relations, boundary conditions, Bernoulli theorems, vorticity theorems, potential flow. Viscous flow; large Reynolds number limit; boundary layers.",
+      "course_title" : "Advanced Fluid Mechanics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM899",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "IND"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "V",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "899",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "For students who are studying specific advanced subject areas in mechanical engineering and applied mechanics. Before the beginning of the term, the student must submit a proposal outlining and detailing the study area, along with the faculty supervisor's consent, to the graduate group chair for approval. At the conclusion of the independent study, the student should prepare a brief report.",
+      "course_title" : "Independent Study",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM990",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "MST"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "990",
+      "instructors" : "",
+      "terms_offered_code" : "",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "",
+      "course_description" : "Master's Thesis",
+      "course_title" : "Masters Thesis",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM210",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "210",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 110/147 or Physics 150",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This course is primarily intended for students in mechanical engineering, but may also be of interest to students in materials science and other fields. It continues the treatment of statics of rigid bodies begun in MEAM 110/PHYS 150 and progresses to the treatment of deformable bodies and their response to loads. The concepts of stress, strain, and linearly elastic response are introduced and applied to the behavior of rods, shafts, beams and other mechanical components. The failure and design of mechanical components are discussed.",
+      "course_title" : "Statics and Strength of Materials",
+      "corequisites" : "Math 240 and MEAM 247 are strongly recommended"
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM101",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LAB"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "101",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "This course is available to all Engineering majors.",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This hands-on, project-based course covers the fundamentals of the modern mechanical design process, from needfinding and brainstorming to the basics of computerized manufacturing and rapid prototyping. Topics include: product definition (needfinding, observation, sketching, and brainstorming); computer-aided design (part creation, assemblies, and animation using SolidWorks); fundamental engineering design practices (material selection, dimensioning, tolerances, etc.); basic computer simulation and analysis; and rapid prototyping (laser cutter, 3-D fused-deposition modeling, and an introduction to computer-controlled machining).",
+      "course_title" : "Introduction to Mechanical Design",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM445",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "06",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "445",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Junior standing",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This is a capstone design project course in mechanical engineering and is required of all mechanical engineering students. Students will be involved in selected group or individual projects emphasizing design, development, and experimentation, under the supervision of a MEAM faculty advisor. Projects are sponsored either by industry or by Penn professors. Alternatively, students may propose their own projects. Each project is approved by the instructor and the faculty advisor. The work is spread over MEAM 445 and MEAM 446. In addition to being involved in the design project, MEAM 445 covers project planning, patent and library searches, professional education, ethics, writing skills, communication, and technical presentation.",
+      "course_title" : "Mechanical Engineering Design Projects",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM537",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MSE",
+          "section_id" : "",
+          "course_id" : "537"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "537",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Freshman physics; MEAM 354 or equivalent, or consent of instructor.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Engineering is progressing to ever smaller scales, enabling new technologies, materials, devices, and applications. This course will provide an introduction to nano-scale mechanics and tribology at interfaces, and the critical role these topics play in the developing area of nanoscience and nanotechnology. We will discuss how mechanics and tribology at interfaces become integrated with the fields of materials science, chemistry, physics, and biology at this scale. We will cover a variety of concepts and applications, drawing connections to both established and new approaches. We will discuss the limits of continuum mechanics and present newly developed theories and experiments tailored to describe micro- and nano-scale phenomena. We will emphasize specific applications throughout the course. Literature reviews, critical peer discussion, individual and team problem assignments, and a peer reviewed literature research project will be assigned as part of the course.",
+      "course_title" : "Nanotribology",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM575",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "575",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "The course will focus on a few topics relevant to micro-fluidics and nano-technology. In particular, we will learn how the solid liquid interface acquires charge and the role that this charge plays in colloid stability, electroosmosis, and electrophoresis. Other topics will include controlled nano-assembly with dielectrophoresis, and stirring at very low Reynolds numbers (Lagrangian Chaos). The focus of the course will be on the physical phenomena from the continuum point of view. The mathematical complexity will be kept to a minimum. Software tools such as Maple and Femlab will be used throughout the course. The course will be reasonably self- contained and necessary background material will be provided consistent with the students' level of preparation.",
+      "course_title" : "Micro and Nano Fluidics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM091",
+      "activities_and_credits" : [
+        {
+          "credit" : ".25",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "091",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "Fundamental principles of manual milling of metals, including hands-on training in the machine shop.",
+      "course_title" : "Shop Tr: Manual Milling",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM354",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "354",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 210 or equivalent, BE200 or permission of instructor.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "This course builds on the fundamentals of solid mechanics taught in MEAM 210 and addresses more advanced problems in strength of materials. The students will be exposed to a wide array of applications from traditional engineering disciplines as well as emerging areas such as biotechnology and nanotechnology. The methods of analysis developed in this course will form the cornerstone of machine design and also more advanced topics in the mechanics of materials.",
+      "course_title" : "Mechanics of Solids",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM399",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "399",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "Not every great idea leads to a great product. The process of \"crystallizing\" a clever idea into a saleable asset demands a mix of creativity, systems thinking, sound business instincts, and the courage ot do things differently. Students in this project-centered course will gain the necessary skills and experience from concentrated work on early-stage inventions drawn from Penn's technology portfolio. Is the invention feasible? Patentable? How should it be designed and produced? What will it cost? Is there a market? Does the payoff justify the investment? These and similar questions will be answered through a multifaceted process including analysis, experimentation, design, and/or market research. The projects are not \"case studies,\" but rather involve real, current intellectual property of potential value to the University. Project work will be complemented by lectures and exercises dealing with the patent process, cost and market estimation, project planning, economic analysis, and the systems approach to new product design. Note: This is an approved \"Technology in Business and Society\" course.",
+      "course_title" : "Special Topics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM405",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MEAM",
+          "section_id" : "",
+          "course_id" : "505"
+        },
+        {
+          "subject" : "MSE",
+          "section_id" : "",
+          "course_id" : "405"
+        },
+        {
+          "subject" : "MSE",
+          "section_id" : "",
+          "course_id" : "505"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "405",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "The application of continuum and microstructural concepts to consideration of the mechanics and mechanisms of flow and fracture in metals, polymers and ceramics. The course includes a review of tensors and elasticity with special emphasis on the effects of symmetry on tensor properties. Then deformation, fracture and degradation (fatique and wear) are treated, including mapping strategies for understanding the ranges of material properties.",
+      "course_title" : "Mechanical Properties of Macro/Nanoscale Materials",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM436",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "05",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "436",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 302",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This is an intermediate course in mechanics of viscous fluid flows. It covers the following topics: fundamental laws of fluid mechanics, the kinematics and dynamics of viscous flows, analysis and discussion of the theory of incompressible viscous flow, vorticity dynamics, solutions of Navier Stokes equations, low Reynolds number flows, laminar boundary layer theory, stability and turbulence.",
+      "course_title" : "Viscous Fluid Flow",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM511",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "511",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This is a creative & iterative problem solving course that uses a series of mechanical design challenge projects to move students into the broad realm of unpredictable often incalculable time-constrained problem solving. It explores a wide variety of problem definition, exploration and solving \"tools,\" and a variety of surrounding \"design thinking\" topics, such as ethics and the design of experience. Drawing and prototyping are used in the projects for ideation, iteration, speculation and communication.",
+      "course_title" : "Creative Thinking and Design",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM691",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "691",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course will be offered when demand permits. The topics will change due to the interests and specialties of the instructor(s). Some topics could include: Compliant Mechanisms, Optimal Control, and Fluid-Structure interaction.",
+      "course_title" : "Special Topics in Mechanics of Materials",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM555",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "BE",
+          "section_id" : "",
+          "course_id" : "555"
+        },
+        {
+          "subject" : "CBE",
+          "section_id" : "",
+          "course_id" : "555"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "555",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Background in Biology, Chemistry or Engineering with coursework in thermodynamics or permission of the instructor",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "From single cell manipulations down to studies of single nanoparticles and single molecules, basic cell- molecular biology and biotechnologies are increasingly 'nano' as well as quantitative. Lectures and laboratories in this course start with nano aspects of optical detection, address the basic thermodynamics of biomolecular interactions, and then cover genomic scale devices. Nanoprobe methods are then complemented by basic theories of self-assembly and polymers as well as application in drug delivery and virus engineering with analyses of limitations imposed by the innate immune system. Skills in analytical and professional presentations, papers and laboratory work will be developed.",
+      "course_title" : "Nanoscale Systems Biology",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM663",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "663",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course is targeted for engineering/physics students working in the areas of nano/bio technology. The course will start with a quick review of statistical mechanics and proceed to topics such as Langevin dynamics, solution biochemistry (Poisson-Boltzmann and Debye-Huckel theory), entropic elasticity of bio-polymers and networks, reaction rate kinetics, solid state physics and other areas of current technological relevance. Students will be expected to have knowledge of undergraduate mechanics, physics and thermodynamics.",
+      "course_title" : "Entropic Forces in Biomechanics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM690",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "690",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course will be offered when demand permits. The topics will change due to the interest and specialties of the instructor(s). Some topics could include: Computational Fluid Mechanics, Visualization of Computational Results, Free Surface Flows, Fluid Mechanics of the Respiratory System, and transport in Reacting Systems.",
+      "course_title" : "Advanced Topics in Thermal Fluid Science or Energy",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM211",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "211",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 210",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This course introduces the basic concepts in kinematics and dynamics that are necessary to understand, analyze and design mechanisms and machines. These concepts are also fundamental to the modeling and analysis of human movement, biomechanics, animation of synthetic human models and robotics. The topics covered include: Particle dynamics using energy and momentum methods of analysis; Dynamics of systems of particles; Impact; Systems of variable mass; Kinematics and dynamics of rigid bodies in plane motion; Computer-aided dynamic simulation and animation.",
+      "course_title" : "Engineering Mechanics: Dynamics",
+      "corequisites" : "MATH 241 or ENM 251 and EAS 105 or equivalent"
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM248",
+      "activities_and_credits" : [
+        {
+          "credit" : ".5",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LAB"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "248",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Sophomore standing in engineering",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "This is the second of a two-semester sophomore level laboratory sequence that students complete over the fall and spring semesters. The course teaches the principles of experimentation and measurement as well as analysis and application to design. The spring semester course follows closely with MEAM 203 and MEAM 211, expanding upon the principles of experimentation, measurement, analysis, and design of systems through hands-on laboratories and projects in thermodynamics and dynamics.",
+      "course_title" : "Mechanical Engineering Lab I",
+      "corequisites" : "MEAM 203 and MEAM 211 are strongly recommended"
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM630",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "630",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "One graduate level course in applied mathematics and one in either fluid or Solid Mechanics.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course is a more advanced version of MEAM 530. The topics to be covered include: tensor algebra and calculus, Lagrangian and Eulerian kinematics; Cauchy and Piola-Kirchhoff stresses. General principles: conservation of mass, conservation of linear and angular momentum, energy and the first law of hermodynamics, entropy and the second law of thermodynamics. Constitutive theory, ideal fluids, Newtonian and non-Newtonian fluids, finite elasticity, linear elasticity, materials with microstructure.",
+      "course_title" : "Advanced Continuum Mechanics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM643",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "643",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Waves, one-dimensional gas dynamics. Transition, turbulence. Small Reynolds number limit: Stokes' flow. Compressible potential flow. Method of characteristics. Rotating flows. Stratified flows. Jets.",
+      "course_title" : "Fluid Mechanics II",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM662",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "BE",
+          "section_id" : "",
+          "course_id" : "662"
+        },
+        {
+          "subject" : "CBE",
+          "section_id" : "",
+          "course_id" : "618"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "662",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Review of classical thermodynamics. Phase and chemical equilibrium for multicomponent systems. Prediction of thermodynamic functions from molecular properties. Concepts in applied statistical mechanics. Modern theories of liquid mixtures.",
+      "course_title" : "Advanced Molecular Thermodynamics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM692",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "692",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course will be offered when demand permits. The topics will change due to the interests and specialties of the instructor(s). Some topics could include: Electromagnetics, Control Theory, and Micro-Electro-Mechanical Systems.",
+      "course_title" : "Topics in Mechanical Systems",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM901",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Two terms. student must enter first term.",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "901",
+      "instructors" : "",
+      "terms_offered_code" : "E",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "Given at Lockheed-Martin, Valley Forge, PA.",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Review of advanced mathematics, control theory, principles of: thermodynamics, fluid mechanics, heat transfer, elasticity, rigid body dynamics, flight mechanics, probability and statistics, communication theory, digital signal processing, remote sensing; computer engineering.",
+      "course_title" : "Topics in Advanced Engineering I",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM646",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "646",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "ENM 510, ENM 511, and one graduate level introductory course in mechanics. FORTRAN or C programming experience is necessary.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "The course is divided into two parts. The course first introduces general numerical techniques for elliptical partial differential equations - finite difference method, finite element method and spectral method. The second part of the course introduces finite volume method. SIMPLER formulation for the Navier-Stokes equations will be fully described in the class. Students will be given chances to modify a program specially written for this course to solve some practical problems in heat transfer and fluid flows.",
+      "course_title" : "Computational Mechanics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM550",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "550",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 354 or equivalent is recommended.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "A course that covers the design and fabrication of micro- and nano-electromechanical systems. Topics in the course include micro- and nano-fabrication techniques, mechanics of flexures, thin film mechanics, sensing and actuation approaches (e.g., electrostatic, plezoelectric, and piezoresistive), as well as materials and reliability issues. The fundamentals of these topics will be augmented with device-based case studies.",
+      "course_title" : "Design of Microelectromechanical Systems",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM564",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LAB"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "ESE",
+          "section_id" : "",
+          "course_id" : "460"
+        },
+        {
+          "subject" : "ESE",
+          "section_id" : "",
+          "course_id" : "574"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "564",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Any of the following courses: ESE 218, MSE 321, MEAM 333, CHE 351, CHEM 321/322, Phys 250 or permission of the instructor",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "A laboratory course on fabricating microelectronic and micromechanical devices using photolithographic processing and related fabrication technologies. Lectures discuss: clean room procedures, microelectronic and microstructural materials, photolithography, diffusion, oxidation, materials deposition, etching and plasma processes. Basic laboratory processes are covered in the first two thirds of the course with students completing structures appropriate to their major in the final third. Students registering for ESE 574 will be expected to do extra work (including term paper and additional project).",
+      "course_title" : "The Principles and Practice of Microfabrication Technology",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM533",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MEAM",
+          "section_id" : "",
+          "course_id" : "433"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "533",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 302 and MEAM 333 or equivalent",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course follows a first general course in heat transfer, to give further understanding of the basic mechanisms, the kinds of transport processes and of engineering applications, design and methodology. More generalized formulations, treatment, and results for conductive, convective, radiative and combined transport will be given. Extensive use of computers for numerical solutions of complex problems and computer-aided education. Several specific design applications will be considered in detail, such as the following: heat exchangers, thermal stressing, solar collectors, electronic equipment cooling, cooling towers, environmental discharges, engine cooling and structure icing.",
+      "course_title" : "Advanced Heat and Mass Transfer",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM215",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "215",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 210, MSE 220, or equivalent; MATH 240 corequisite; MEAM 101 helpful but not required",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "This course introduces the broad field of mechanical design, in which engineering science and inventive thinking are combined to solve real-world problems.Many of the tools, techniques, materials, and devices required for practical applications are covered, with emphasis on how to intelligently select and employ them. Topics include modern design methods (simulation, graphics, ergonomics, etc), manufacturing processes (machining, casting, automation, etc), and physical components (bearings, gears, pumps, motors, etc). Students receive a comprehensive technological grounding which, in conjunction with theoretical and specialized knowledge, will empower them to produce creative and practicable new designs.",
+      "course_title" : "Elements of Mechanical Engineering Design",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM410",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LAB"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MEAM",
+          "section_id" : "",
+          "course_id" : "510"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "06",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "410",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Junior or Senior standing in MEAM and a first course in Programming",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "In many modern systems, mechanical elements are tightly coupled with electronic components and embedded computers. Mechatronics is the study of how these domains are interconnected, and this hands-on, project-based course provides an integrated introduction to the fundamental components within each of the three domains, including: mechanical elements (prototyping, materials, actuators and sensors, transmissions, and fundamental kinematics), electronics(basic circuits, filters, op amps, discrete logic, and interfacing with mechanical elements), and computing (interfacing with the analog world, microprocessor technology, basic control theory, and programming).",
+      "course_title" : "Design of Mechatronic Systems",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM561",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "561",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Undergraduate thermodynamics.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "To introduce students to advanced classical equilibrium thermodynamics based on Callen's postulatory approach, to exergy (Second-Law) analysis, and to fundamentals of nonequilibrium thermodynamics. Applications to be treated include the thermodynamic foundations of energy processes and systems including advanced power generation and aerospace propulsion cycles, batteries and fuel cells, combustion, diffusion, transport in membranes, materials properties and elasticity, superconductivity, biological processes.",
+      "course_title" : "Thermodynamics: Foundations, Energy, Materials",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM664",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "664",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "ENM 510 or equivalent, and undergraduate level heat and/or mass transfer",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Advanced modeling and solutions of heat conduction and mass diffusion, with emphasis on the similarities and analogies between these phenomena. Analytical and numerical solutions, including the use of available general and specific software for the solution of the associated differential equations. Inverse problem solution techniques. Applications including basic and combined problems as well as moving interfaces, effects of energy sources and chemical reactions, interfacial contact resistance, advanced insulation, thermal stresses, composite materials, and microscale and non-continuum systems.",
+      "course_title" : "Heat Conduction and Mass Diffusion",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM597",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "MST"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "V",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "597",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "",
+      "course_title" : "Master's Thesis Research",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM610",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "610",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 410/510 or equivalent, (understanding of DC motors, basic prototyping skills, familiarity with programming microcontrollers, basic digital electronics, ideal op-amps).",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course provides an in-depth exploration into electro-mechanical systems.Topics covered will expand on actuation mechanisms (including shape memory alloy and brushless motors); sensing mechanisms (including range sensors and proximity detectors), signal conditioning (with particular emphasis on dealing with noise and the non-idealities of typical components); programming modalities (including real-time operating systems and filters); and communication mechanisms (such as wireless RF, CANbus, SPI/I2C and others). The project-based course will focus on the integration of systems at the OEM-component level and will include significant mechanical interface design.",
+      "course_title" : "Advanced Mechatronics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM572",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "572",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Undergraduate thermodynamics and heat transfer (or equivalent), or permission of the instructor.  Undergraduates may enroll with permission of the instructor",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "As materials and devices shrink to the micro- and nanoscale, they transmit heat, light and electronic energy much differently than at the macroscopic length scales. This course provides a foundation for studying the transport of thermal,optical, and electronic energy from a microscopic perspective. Concepts from solid state physics and statistical mechanics will be introduced to analyze the influence of small characteristic dimensions on the propagatin of crystal vibratins, electrons, photons, and molecules. Applications to mdern microdevices and therometry techniques will be discussed. Topics to be covered include natural and fabricated microstructures, transport and scattering of phonons and electrons in solids, photon-phonon and photon-electron interactions, radiative recombinations, elementary kinetic theory, and the Boltzmann transport equation.",
+      "course_title" : "Micro/Nanoscale Energy Transport",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM095",
+      "activities_and_credits" : [
+        {
+          "credit" : ".25",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "095",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "Building upon the basics of 092, this course explores advanced computer-controlled turning using SolidCAM and the Haas TL-1.",
+      "course_title" : "Shop Tr: CNC Turning",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM150",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LAB"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "150",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "Constructing functional prototypes is an intrinsic part of the mechanical design process. This hands-on course covers the fundamentals of layout, measurement, part generation, milling, turning, and computer-controlled machining. By immersion in the department's manufacturing environment, students will gain an intuitive understanding of the techniques and skills necessary to successfully prototype a wide variety of mechanical systems. Enrollment is limited.",
+      "course_title" : "Fundamentals of Mechanical Protoyping",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM247",
+      "activities_and_credits" : [
+        {
+          "credit" : ".5",
+          "activity_code" : "LAB"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "247",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Sophomore standing in engineering",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This is the first of a two semester sophomore level laboratory sequence that students complete over the fall and spring semesters. The course teaches the principles of experimentation and measurement as well as analysis and application to design. This fall semester course follows closely with MEAM 210, involving experiments to explore the principles of statics and strength of materials.",
+      "course_title" : "Mechanical Engineering Laboratory I",
+      "corequisites" : "MEAM 210 strongly recommended"
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM625",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "625",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Graduate standing in engineering and MEAM 510 (Mechatronics), MEAM 520 (Intro to Robotics), MEAM 535 (Advanced Dynamics) or equivalent.  Undergraduates require permission.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This class provides a graduate-level introduction to the field of haptics, which involves human interaction with real, remote, and virtual objects through the sense of touch. Haptic interfaces employ specialized robotic hardware and unique computer algorithms to enable users to explore and manipulate simulated and distant environments. Primary class topics include human haptic sensing and control, haptic interface design, virtual environment rendering methods, teleoperation control algorithms, and system evaluation; current applications for these technologies will be highlighted, and important techniques will be demonstrated in a laboratory setting. Coursework includes problem sets, programming assignments, reading and discussion of research papers, and a final project. Appropriate for students in any engineering discipline with interest in robotics, dynamic systems, controls, or human-computer interaction.",
+      "course_title" : "Haptic Interfaces",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM502",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "502",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 203 or equivalent, and MEAM 333 or equivalent (Heat Transfer, that could be taken concurrently with MEAM 402)",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Quantitative introduction to the broad area of energy engineering, from basic principles to applications. The focus is on the science and engineering of power generation. The course includes a review of energy resources and consumption, power cycles, combined cycles, and co-generation, nuclear energy and wastes, solar thermal and photovoltaic energy, and wind power. Additional energy conversion topics including energy storage and geothermal, thermoelectric, hydroelectric and biomass power will be briefly discussed.",
+      "course_title" : "Energy Engineering",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM521",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "521",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Programming.  Familiarity with Linux or Unix will help.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "From numerical weather prediction and earthquake simulations, to quantum mechanics, and to genome sequencing and molecular dynamics, high-performance computing (HPC) is a fundamental tool for science. The basic principles on how to design, implement, and evaluate HPC techniques will be covered. Topics include parallel non-numerical and numerical algorithms, computing platforms, and message passing interface. Science applications will sample techniques applied to partial differential equations, many-body problems, and statistical physics. Practical problem-solving and hands-on examples will be a basic part of the course.",
+      "course_title" : "Introduction to Parallel Computing",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM633",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "633",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Background equivalent to MEAM 519 and ENM 510",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Linear elastic analysis of bodies with cracks. Energy balance criterion for crack growth and stability. Analysis of cracks in elastic-plastic and rate-dependent materials. J integral and applications to crack growth and stability. Large-scale yielding and dynamic fracture. Interface fracture.",
+      "course_title" : "Mechanics of Plastic Flow and Fracture",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM647",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "647",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "ENM 510, MEAM 530 or MEAM 570, or permission of the instructor",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Complex fluids are a broad class of materials. They are usually homogeneous at the macroscopic scale and disordered at the microscopic scale, but possess structure at an intermediate scale. The macroscopic behavior of these fluids is controlled by the fluid intermediate scale. This course will cover the basic concepts of structure, dynamics, and flow properties of polymers, colloids, liquid crystals, and other substances with both liquid and solid-like characteristics. Both the experimental and theoretical aspects of rheology will be discussed. The basic forces influencing complex fluid rheology will be outlined and discussed. These include van der Waals, electrostatic, excluded volume and other interactions. Methods for characterizing structure will be covered including scattering techniques, optical microscopy. Examples will focus on several types of complex fluids such as polymeric solutions and melts, emulsions & foams, gelling systems, suspensions and self-assembling fluids.",
+      "course_title" : "Fundamentals of Complex Fluids",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM665",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "665",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Undergraduate level heat transfer and MEAM 642 or permission of instructor",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Development of formulations governing forced, buoyancy induced, and phase change transport and convective motions with emphasis on the underlying conservation principles. Following the delineation of the different kinds of transport, the principal models, and methods applicable for each kind are discussed.",
+      "course_title" : "Heat Transfer II:  Convection",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM631",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "631",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 519 or permission of instructor.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Reciprocal theorem. Uniqueness. Variational theorems. Rayleigh-Ritz, Galerkin, and weighted residue methods. Three-dimensional solutions and potentials. Papkovitch-Neuber formulation. Problems of Boussinesq and Mindlin. Hertz theory of contact stress.",
+      "course_title" : "Advanced Elasticity",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM644",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "644",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Role of transport processes in biological systems; Detailed review of Fluid Mechanics, Heat transfer and Mass transfer to enable a study of BioTransport; Cardiovascular system; Respiratory system; Rheology of Blood; Approximate methods for the analysis of complex physiological flows; Detailed treatment of blood flow in vessels; Mass transport in biological systems; Transport in porous media; Transport of gases between blood and tissues; Introduction to Bioheat transfer.",
+      "course_title" : "BioTransport: Fluid Mechanics, Heat and Mass Transfer",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM660",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "660",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Why and what to model: Complex lattice structures, structures of lattice defects, crystal surfaces, interfaces, liquids, linking structural studies with experimental observations, computer experiments. Methods: Molecular statics, molecular dynamics, Monte Carlo. Evaluation of physical quantities employing averages, fluctuations, correlations, autocorrelations, radial distribution function, etc. Total energy and interatomic forces: Local density functional theory and abinitio electronic structure calculations, tight-binding methods, empirical potentials for metals, semiconductors and ionic crystals.",
+      "course_title" : "Atomistic Modeling in Materials Science",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM250",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "250",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Sophomore standing in Engineering.  Freshman Chemistry, Freshman Physics or Mechanics",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "The course will present a comprehensive overview of the global demand for energy, and the resource availability and technology used in its current and future supply. Through a personal energy audit, students will be made aware of the extensive role that energy plays in modern life, both directly, through electricity and transportation fuel, and indirectly in the manufacturing of goods they use. The course will cover how that energy is supplied, the anticipated global growth in energy demand, the resource availability and the role of science and technology in meeting that demand in a world concerned about climate change. The roles of conservation, improved efficiency and renewable energy in meeting future demand in a sustainable, environmentally benign way will be covered.",
+      "course_title" : "Energy Systems, Resources and Technology",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM510",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LAB"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MEAM",
+          "section_id" : "",
+          "course_id" : "410"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "510",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Graduate standing in engineering or permission of the instructor",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "In many modern systems, mechanical elements are tightly coupled with electronic components and embedded computers. Mechatronics is the study of how these domains are interconnected, and this hands-on, project-based course provides an integrated introduction to the fundamental components within each of the three domains, including: mechanical elements (prototyping, materials, actuators and sensors, transmissions, and fundamental kinematics), electronics(basic circuits, filters, op amps, discrete logic, and interfacing with mechanielements), and computing (interfacing with the analog world, microprocessor technology, basic control theory, and programming).",
+      "course_title" : "Design of Mechatronic Systems",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM201",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LAB"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "02",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "201",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 101 recommended, MEAM 210 or equivalent as co/pre-requisite (or permission of the instructor)",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "Building upon the fundamentals of mechanical design taught in MEAM 101, this hands-on, project-based course provides students with the knowledge and skills necessary to design, analyze, manufacture. and test fully-functional mechanical systems. Topics covered include an introduction to machine elements, analysis of the mechanics of machining, manufacturing technology, precision fabrication (milling, turning, and computer-controlled machining), metrology, tolerances, cutting-tool fundamentals and engineering materials. Enrollment is limited.",
+      "course_title" : "Machine Design and Manufacturing",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM544",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "BE",
+          "section_id" : "",
+          "course_id" : "455"
+        },
+        {
+          "subject" : "MEAM",
+          "section_id" : "",
+          "course_id" : "455"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "544",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Statics, linear algebra, and differential equations.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Biological and non-biological systems are both subject to several basic physical balance laws of broad engineering importance. Fundamental conservation laws are introduced and illustrated using examples from both animate as well as inanimate systems. Topics include kinematics of deformation, the concept of stress, conservation of mass, momentum, and energy. Mechanical constitutive equations for fluids, solids and intermediate types of media are described and complemented by hands-on experimental and computational laboratory experiences. Practical problem solving using numerical methods will be introduced.",
+      "course_title" : "Continuum Biomechanics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM634",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "634",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "First-year graduate-level applied mathematics for engineers (ENM 510 and 511) and a first course in continuum mechanics or elasticity or permission of instructor.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course is intended for 2nd year graduate students and introduces continuum mechanics theory of rods and shells with applications to structures and to biological systems as well as stability and buckling. The course begins with topics from differential geometry of curves and surfaces and the associated tensor analysis on Riemannian spaces. A brief introduction to variational calculus is included since variational methods are a powerful tool for formulating approximate structural mechanics theories and for numerical analysis. The structural mechanics theories of rods, plates and shells are introduced including both linear and nonlinear theories.",
+      "course_title" : "Rods and Shells",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM245",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "LAB"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "245",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "PHYS 150 or MEAM 110/147",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "Basic concepts: pressure, density, velocity, forces. The standard atmosphere. Introduction to low speed aerodynamics. Airfoils, wings, and other aerodynamic shapes. Aircraft performance. Aircraft stability and control. Aircraft propulsion.",
+      "course_title" : "Introduction to Flight",
+      "corequisites" : "MATH 240"
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM514",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "IPD",
+          "section_id" : "",
+          "course_id" : "514"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "514",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 101 or equivalent, MEAM 210 or equivalent, senior or graduate standing in the School of Design, Engineering, or Business with completed product development and/or design engineering core coursework or related experience.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course is aimed at providing current and future product design/development engineers, manufacturing engineers, and product development managers with an applied understanding of Design for Manufacturability (DFM) concepts and methods. The course content includes materials from multiple disciplines including: engineering design, manufacturing, marketing, finance, project management, and quality systems.",
+      "course_title" : "Design for Manufacturability",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM553",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MSE",
+          "section_id" : "",
+          "course_id" : "561"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "553",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Why and what to model: Complex lattice structures, structures of lattice defects, crystal surfaces, liquids, linking structural studies with experimental observations, computer experiments.  Methods: Molecular statics, molecular dynamics, Monte Carlo.  Evaluation of physical quantities employing averages, fluctuations, correlations, autocorrelations, radial distribution function, etc.  Total energy and interatomic forces; Local density functional theory and abinitio electronic structure calculations, tight-binding methods, empirical pontentials for metals, semiconductors and ionic crystals.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "",
+      "course_title" : "Atom Mod in Mats Science",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM540",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "540",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MATH 240, 312 or equivalent; MEAM 210, 453 or equivalent, or permission of the instructor; familiarity with a computer language; undergraduates require permission",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Mathematical modeling of mechanical design problems for optimization. Highlights and overview of optimization methods: unconstrained optimization, unidirectional search techniques, gradient, conjugate direction, and Newton methods. Constrained optimization. KKT optimality conditions, penalty formulations, augmented Lagrangians, and others. SLP and SQP and other approximate techniques for solving practical design problems. Monotonicity analysis and modeling of optimal design problems. Optimization of structural elements including shape and topology synthesis. Variational formulation of distributed and discrete parameter structures. Design criteria for stiffness and strength. Design sensitivity analysis. The course will include computer programs to implement the algorithms discussed and solve realistic design problems. A term project is required.",
+      "course_title" : "Optimal Design of Mechanical Systems",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM580",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "580",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Undergraduate course in Fluid Mechanics (MEAM 302), and in Heat and Mass Transfer (MEAM 333)",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Principles and mathematical models of electrochemical processes in energy conversion and storage, water desalination, nanofabrication, and sensing for engineering and science graduate students and advanced undergraduates, lacking prior background in electrochemistry. The course covers equivalent circuits, electrode kinetics, electrokinetic and transport phenomena, and electrostatics. The course will introduce and use the finite element program COMSOLTM. We will discuss, among other things, applications to stationary and flow batteries, supercapacitors, integrated electric circuit fabrication, electrokinetics, and biosensing. In contrast to CBE 545 Electrochemical Energy Conversion that focuses on solid state electrochemistry, this course emphasizes liquid-based electrochemistry.",
+      "course_title" : "Electrochemistry for Energy, Nanofabrication and Sensing",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM620",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "620",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Graduate standing in engineering and MEAM 535 or ESE 500 or CIS 580 or MEAM 520.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course covers advanced topics in robotics and includes such topics as multi-body dynamics, nonlinear control theory and planning algorithms with application to robots and systems of multiple robots.",
+      "course_title" : "Advanced Robotics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM203",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "05",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "203",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Math 104 and Math 114",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "Thermodynamics is the study of the fundamental concepts underlying the conversion of energy in such mechanical systems as internal and external combustion engines (including automobile and aircraft engines), compressors, pumps, refrigerators, and turbines. This course is intended for students in mechanical engineering, chemical engineering, materials science, physics and other fields. The topics include: Basic definitions, microscopic and macroscopic points of view; properties of pure substances and reversibility and irreversibility, the thermodynamic temperature scale, entropy, availability, second law analysis, power and refrigeration cycles and their engineering applications.",
+      "course_title" : "Thermodynamics I",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM413",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "413",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MATH 241 and MEAM 321 or SYS 222, or permission of the instructor",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This course is an introduction to automatic control systems and control theory. It is intended for students in computer science and engineering, electrical engineering, mechanical engineering and systems engineering at the junior or senior level. Topics include: Modeling and simulation of feedback systems, classical control theory in the frequency and time domains, introduction to software packages (MATLAB and SIMULINK) frequency response techniques, controllability and observabiltiy in the time domain, stability and performance criteria, state-space representation, control system design, digital systems and the effects ofs ampling aliasing, and discretizaiton; applications in robotics, flexible structures, servo motors, and vehicle dynamics.",
+      "course_title" : "Modeling and Control of Physical Systems",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM420",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "420",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MATH 240, PHYS 150 or MEAM 110/147",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "The rapidly evolving field of robotics includes systems designed to replace, assist, or even entertain humans in a wide variety of tasks. Recent examples include planetary rovers, robotic pets, medical surgical-assistive devices, and semi-autonomous search-and-rescue vehicles. This introductory-level course presents the fundamental kinematic, dynamic, and computational principles underlying most modern robotic systems. The main topics of the course include: coordinate transformations, manipulator kinematics, mobile-robot kinematics, actuation and sensing, feedback control, vision, motion planning, and learning. The material is reinforced with hands-on lab exercises including basic robot-arm control and the programming of vision-guided mobile robots",
+      "course_title" : "Robotics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM509",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "509",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This course considers normal human movement (especially grasping, reaching, walking, and running), pathological conditions (e.g., resulting from disease, injury, malformations), and engineering approaches such as prostheses (limb replacements) and orthoses (limb assists) that may ameliorate the conditions and promote normal movements and function. In doing so, we will also learn musculoskeletal anatomy, comparative anatomy, muscle mechanics, and neural control. An objective of the course is to bring together technical analysis and synthesis skills of students with the practical problems of persons disabled by amputation, stroke, spinal cord injury, and other causes. The potential problems of applying engineering techniques to human beings will be emphasized. Engineering design comprises that are necessary are also given emphasis.",
+      "course_title" : "Mechanics of Human Motion",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM520",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "520",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 211 and MATH 240 or equivalent",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "The rapidly evolving field of robotics includes systems designed to replace, assist, or even entertain humans in a wide variety of tasks. Recent examples include planetary rovers, robotic pets, medical surgical-assistive devices, and semi-autonomous search-and-rescue vehicles. This introductory-level course presents the fundamental kinematic, dynamic, and computational principles underlying most modern robotic systems. The main topics of the course include: coordinate transformations, manipulator kinematics, mobile-robot kinematics, actuation and sensing, feedback control, vision, and motion planning. The material is reinforced with hands-on lab exercises including robot-arm control and the programming of vision-guided mobile robots.",
+      "course_title" : "Introduction to Robotics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM527",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "ENM",
+          "section_id" : "",
+          "course_id" : "427"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "527",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MATH 241 or ENM 251 and PHYS 151",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "The objective of this course is to equip students with the background needed to carry out finite elements-based simulations of various engineering problems. The first part of the course will outline the theory of finite elements. The second part of the course will address the solution of classical equations of mathematical physics such as Laplace, Poisson, Helmholtz, the wave and the Heat equations. The third part of the course will consist of case studies taken from various areas of engineering and the sciences on topics that require or can benefit from finite element modeling. The students will gain hand-on experience with the multi-physics, finite element package FemLab.",
+      "course_title" : "Finite Element Analysis",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM528",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "528",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Multivariate calculus, introductory abstract algebra, mathematical maturity",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Differential geometry, Lie groups and rigid body kinematics, Lie algebra, quaternions and dual number algebra, geometry of curves and ruled surfaces, trajectory generation and motion planning, applications to robotics and spatial mechanisms.",
+      "course_title" : "Advanced Kinematics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM504",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "504",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "Senior standing in Mechanical Engineering or Materials Science or by permission of the instructor.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "The course will compreshensively cover both theorectical and practical tribology, the science and technology of interacting surfaces in relative motion. The various modes of lubrication, hydrodynamic, elastohydradynamic, hydrostatic, mixed, solid and dry, will be studied in detail. The contact between solid surfaces will be covered, leading to an understanding of friction and various modes of wear. At each stage, it will be shown how the tribological principles learned can be applied in practice to improve the efficiency and durability of mechanical equipment and thereby enhance sustainability through energy and materials conservation.",
+      "course_title" : "Tribology",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM545",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in spring term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "545",
+      "instructors" : "",
+      "terms_offered_code" : "B",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 302",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Review of fluid kinematics and conservation laws; vorticity theorems; two-dimensional potential flow; airfoil theory; finite wings; oblique shocks; supersonic wing theory; laminar and turbulent boundary layers.",
+      "course_title" : "Aerodynamics",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM613",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "CBE",
+          "section_id" : "",
+          "course_id" : "617"
+        },
+        {
+          "subject" : "CIS",
+          "section_id" : "",
+          "course_id" : "613"
+        },
+        {
+          "subject" : "ESE",
+          "section_id" : "",
+          "course_id" : "617"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "613",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "A sufficient background to linear algebra (ENM 510/511 or equivalent) and a course in linear control theory (MEAM 513 or equivalent), or written permission of the instructor.",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "The course studies issues in nonlinear control theory, with a particular emphasis on the use of geometric principles. Topics include: controllability, accessibility, and observability, for nonlinear systems; Forbenius' theorem; feedback and input/outpub linearization for SISO and MIMO systems; dynamic extension; zero dynamics; output tracking and regulation; model matching disturbance decoupling; examples will be taken from mechanical systems, robotic systems, including those involving nonholonomic constraints, and active control of vibrations.",
+      "course_title" : "Nonlinear Control Theory",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM099",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "IND"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "099",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "Open to all students.  A maximum of 2 c.u. of MEAM 099 may be applied toward the B.A.S. or B.S.E. degree requirements",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "An opportunity for the student to become closely associated with a professor in (1) a research effort to develop research skills and technique and/or (2) to develop a program of independent in-depth study in a subject area in which the professor and student have a common interest. The challenge of the task undertaken must be consistent with the student's academic level. To register for this course, the student and professor jointly submit a detailed proposal. Subject to the approval of the MEAM Undergraduate Curriculum Chair.",
+      "course_title" : "Independent Study",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM536",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "536",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "This course is intended for juniors, seniors and graduate students from the Schools of Engineering and/or Arts and Sciences that have a general interest in fluid dynamics and its modern applications.  Students should have an understanding of basic concepts in fluid mechanics and a good grasp on differential equations.",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "This is an intermediate course that builds on the basic principles of Fluid Mechanics. The course provides a more in depth and unified framework to understand fluid flow at different time and length scales, in particular fiscous flows. Topics include review of basic concepts, conservation laws (momentum, mass, and heat), fluid kinematics, tensor analysis, Stokes' approximations, non-Newtonian fluid mechanics, and tubulence. The course will explore important modern topics such as microfluidics, swimming of micro-organisms, wind turbines, rheology, biofluid mechanics, and boundary layers.",
+      "course_title" : "Viscous Fluid Flow and Modern Applications",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM554",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MEAM",
+          "section_id" : "",
+          "course_id" : "454"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "554",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 210, MEAM 354, MATH 240, 241",
+      "course_credit_type" : "CU",
+      "course_notes" : "This course is cross-listed with an advanced level undergraduate course.  It may be taken by M.S.E. students for credit.  M.S.E. students will be required to do some extra work, they will be graded on a different scale than undergraduate students, and they will be required to demonstrate a higher level of maturity in their class assignments.",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Rods and trusses. Stress. Principal stresses. Strain. Compatibility. Elastic stress-strain relations. Strain energy. Plane strain. Plane stress. Bending of beams. Torsion. Rotating disks. Castigliano's Theorem. Dummy loads. Principle of virtual work. The Rayleigh-Ritz methods. Introduction to the finite element method. Non-linear material behavior. Yielding. Failure.",
+      "course_title" : "Mechanics of Materials",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM902",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "902",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 901 or permission of instructor",
+      "course_credit_type" : "CU",
+      "course_notes" : "Suggested: SYS 601.  Given at Lockheed-Martin, Valley Forge, PA",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "Earth and space environment. Coordinate systems and time reference. Two-body problem. Basic orbit determination; state estimation theory. Ephemeris computations, forces, and observation classes. Relativity. Ballistic missile trajectories. Manned space vehicles, mission planning and simulation. Attitude control, hardware and estimation.",
+      "course_title" : "Aerospace Engineering.  Orbit and Attitude Determination",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM433",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MEAM",
+          "section_id" : "",
+          "course_id" : "533"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course not offered every year",
+      "eas_credit_factor_code" : "05",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "433",
+      "instructors" : "",
+      "terms_offered_code" : "M",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "MEAM 302 and 333, or equivalent",
+      "course_credit_type" : "CU",
+      "course_notes" : "This course may be taken by M.S.E. students for credit.  M.S.E. students will be required to do some extra work, they will be graded on a different grade scale than undergraduate students, and they will be required to demonstrate a higher level of maturity in their class assignments.  MEAM doctoral candidates will not be permitted to count this course as part of their degree requirements.",
+      "school_code" : "EG",
+      "scheduling_priority" : "A",
+      "course_description" : "This course follows a first general course in heat transfer (MEAM 333), to give further understanding of the basic mechanisms of heat transport processes and of engineering applications, design and methodology. More generalized formulations, treatment, and results for conductive, convective, radiative and combined transport will be given. Extensive use of computers for numerical solutions of complex problems and computer-aided education. Several specific design applications will be considered in detail, such as the following: heat exchangers, thermal stressing, solar collectors, electronic equipment cooling, cooling towers, environmental discharges, engine cooling and structure icing.",
+      "course_title" : "Advanced Heat and Mass Transfer",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM110",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        },
+        {
+          "credit" : "0",
+          "activity_code" : "REC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "110",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "This lecture course and a companion laboratory course (MEAM 147) build upon the concepts of Newtonian (classical) mechanics and their application to engineered systems. This course introduces students to mechanical principles that are the foundation of upper-level engineering courses including MEAM 210 and 211. The three major parts of this course are: I. Vector Mechanics; II. Statics and Structures; and III. Kinematics and Dynamics. Topics include: vector analysis, statics of rigid bodies, introduction to deformable bodies, friction, kinematics of motion, work and energy, and dynamics of particles. Case studies will be introduced, and the role of Newtonian mechanics in emerging applications including bio- and nano- technologies will be discussed.",
+      "course_title" : "Introduction to Mechanics",
+      "corequisites" : "MATH 104 (The Engineering section of this class is strongly recommended) and MEAM 147."
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM147",
+      "activities_and_credits" : [
+        {
+          "credit" : ".5",
+          "activity_code" : "LAB"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "Course usually offered in fall term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "147",
+      "instructors" : "",
+      "terms_offered_code" : "A",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "This half-credit laboratory class is a companion to the Introduction to Mechanics lecture course (MEAM 110). It investigates the concepts of Newtonian (classical) mechanics through weekly hands-on experiments, emphasizing connections between theoretical principles and practical applications in engineering. In addition to furthering their understanding about the workings of the physical world, students will improve their skills at conducting experiments, obtaining reliable data, presenting numerical results, and extracting meaningful information from such numbers.",
+      "course_title" : "Introduction to Mechanics Lab",
+      "corequisites" : "MEAM 110 or AP credit for Physics C, Mechanics"
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM650",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [
+        {
+          "subject" : "MSE",
+          "section_id" : "",
+          "course_id" : "650"
+        }
+      ],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "650",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "H",
+      "course_description" : "",
+      "course_title" : "Mech of Nano&Biomaterial",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM298",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "298",
+      "instructors" : "",
+      "terms_offered_code" : "",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "",
+      "course_description" : "",
+      "course_title" : "Study Abroad",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM297",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "297",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "D",
+      "course_description" : "",
+      "course_title" : "Study Abroad - Te",
+      "corequisites" : ""
+    },
+    {
+      "department_of_record" : "MEAM",
+      "register_subgroup_one" : "",
+      "requirements_met" : [],
+      "course_id" : "MEAM404",
+      "activities_and_credits" : [
+        {
+          "credit" : "1",
+          "activity_code" : "LEC"
+        }
+      ],
+      "crosslistings" : [],
+      "course_credit_connector" : "F",
+      "terms_offered_description" : "One-term course offered either term",
+      "eas_credit_factor_code" : "",
+      "register_subgroup_two" : "",
+      "distribution_requirement" : "",
+      "course_level" : "",
+      "course_number" : "404",
+      "instructors" : "",
+      "terms_offered_code" : "C",
+      "course_level_description" : "",
+      "department" : "MEAM",
+      "prerequisites" : "",
+      "course_credit_type" : "CU",
+      "course_notes" : "",
+      "school_code" : "EG",
+      "scheduling_priority" : "C",
+      "course_description" : "",
+      "course_title" : "Materials in Mech Design",
+      "corequisites" : ""
+    }
+  ]
+}

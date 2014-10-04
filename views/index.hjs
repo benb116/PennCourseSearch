@@ -5,24 +5,26 @@
 		<meta charset="UTF-8">
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <style type="text/css">
-			body {width: 100%; text-align: center; margin: 0;}
-
+			body {width: 100%; height: 100%; text-align: center; margin: 0 auto;}
+			#Top {height: 5em;}
 			#LoadingInfo {margin-left: 1em;}
-
+			h1 {margin-top: 1em;}
 			#BottomResults {
-			    width: 100%; height: 300px;
-			    position: absolute;
+			    width: 100%;
 			    background-color: #E6E6E6;
-			    bottom: 0;
+			    margin-top: 3em;
 			}
 			#CourseList, #SectionList {
-				width: 200px; height: 300px;
+				height: calc(100vh - 10em);
 				background-color: white;
 				float: left;
-				border-right: 3px solid #3399FF;
-				overflow: scroll;
+/*				border-right: 3px solid #3399FF;
+*/				overflow: scroll;
 				list-style-type: none;}
-			#InfoPanel {overflow: scroll; height: 300px;}
+			#CourseList {width: 150px;}
+			#SectionList {width: 300px; text-align: left;}
+			#SectionList li {padding-left: 1em;}
+			#InfoPanel {height: calc(100vh - 10em); overflow: scroll; padding-left: 2em; padding-right: 2em;}
 			ul {list-style-type: none; padding: 0;}
 			li {cursor: pointer;}
 			.OpenSec {background-color: #47EA4C;}
@@ -38,10 +40,12 @@
         </style>
 	</head>
     <body>
-        <h1>{{ title }}</h1>
-        <form onkeypress="return event.keyCode != 13;">
-			Search for courses: <input id="CSearch" type="text" name="courseSearch" autocomplete="off"><span id="LoadingInfo" style="opacity:0;">Loading...</span>
-		</form>
+        <div id="Top">
+	        <h1>{{ title }}</h1>
+	        <form onkeypress="return event.keyCode != 13;">
+				Search for courses: <input id="CSearch" type="text" name="courseSearch" autocomplete="off"><span id="LoadingInfo" style="opacity:0;">Loading...</span>
+			</form>
+		</div>
         <div id="BottomResults">
         	<div id="CourseList"></div>
         	<div id="SectionList"></div>
@@ -109,6 +113,7 @@
 					$('#CourseList').empty();
 					$('#SectionList').empty();
 					$('#InfoPanel').empty();
+					$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
 				}
 			} 
 			catch(err) {console.log('No Results');}
@@ -125,6 +130,7 @@
 				$('#CSearch').val($(this).html()); // Change the search box to match
 				$('#InfoPanel').html(''); // Clear the info panel (don't know which section yet)
 				var courseName = $(this).html().replace(' ', "/"); // Format the course name for searching
+				$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 				getSectionNumbers(courseName); // Search for sections
 			});
 		});
@@ -135,8 +141,9 @@
 			$('#SectionList').html(data); // Put the section list in #SectionList
 			$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
 			$('#SectionList li').click(function() { // If a section is clicked
-				$('#CSearch').val($(this).html()); // Change the search box to match
-				var secname = $(this).html().replace(' ', "/").replace(' ', "/"); // Format the section name for searching
+				$('#CSearch').val($(this).html().split("-")[0].split(";")[5]); // Change the search box to match
+				var secname = $(this).html().split("-")[0].split(";")[5].replace(' ', "/").replace(' ', "/"); // Format the section name for searching
+				$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 				getSectionInfo(secname); // Search for section info
 			});
 		});
@@ -148,6 +155,7 @@
 			$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
 			$('#InfoPanel li').click(function() { // If an associated section is clicked
 				var secname = $(this).html().replace(' ', "/").replace(' ', "/"); // Formatht the section name for searching
+				$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 				getSectionInfo(secname); // Search for section info
 			});
 		});
