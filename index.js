@@ -61,54 +61,50 @@ app.get('/Search/:deptId/:courseId/:secId', function(req, res) {
 });
 
 function parseDeptList(JSONString) {
-	var Res = JSON.parse(JSONString);
-	var coursesList = []
-	for(var key in Res.result_data) {
-      for(var nkey in key) {
-      	var courseListName = Res.result_data[key].department+' '+Res.result_data[key].course_number;
+	var Res = JSON.parse(JSONString); // Convert to JSON object
+	var coursesList = [];
+	for(var key in Res.result_data) { // Iterate through each course
+      	var courseListName = Res.result_data[key].department+' '+Res.result_data[key].course_number; // Get course dept and number
       	var termsOffered = Res.result_data[key].terms_offered_code;
-      	if ((coursesList.indexOf(courseListName) == -1) && (termsOffered == "A" || termsOffered == "B" || termsOffered == "C")) {
+      	if ((coursesList.indexOf(courseListName) == -1) && (termsOffered == "A" || termsOffered == "B" || termsOffered == "C")) { // If it's not in the list already and it is not available 'M'
       		coursesList.push(courseListName);
       	};
-      }
     }
     coursesList.sort()
     for (var i = 0; i < coursesList.length; i++) {
-    	coursesList[i] = '<li>'+coursesList[i]+'</li>'
+    	coursesList[i] = '<li>'+coursesList[i]+'</li>' // Format as HTML list
     };
 	return coursesList;
 }
 
 function parseCourseList(JSONString) {
-	var Res = JSON.parse(JSONString);
+	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var sectionsList = ''
 	for(var key in Res.result_data) {
-      for(var nkey in key) {
       	tempName = Res.result_data[key].section_id_normalized;
       	OCStatus = Res.result_data[key].course_status;
       	if (OCStatus == "O") {
-      		var StatusClass = 'OpenSec'
+      		var StatusClass = 'OpenSec' // If it's open, add class open
       	} else {
-      		var StatusClass = 'ClosedSec'
+      		var StatusClass = 'ClosedSec' // If it's closed, add class closed
       	};
       	tempName = tempName.replace('-', " ").replace('-', " ");
-      	if (sectionsList.indexOf(tempName) == -1) {
-      		sectionsList += '<li class="'+StatusClass+'">'+tempName+'</li>';
+      	if (sectionsList.indexOf(tempName) == -1) { // If it's not already in the list
+      		sectionsList += '<li class="'+StatusClass+'">'+tempName+'</li>'; // Add and format
       	};
-      }
     }
-    if (sectionsList == "") {sectionsList = "No Results"};
+    if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'
     return sectionsList;
 }
 
 function parseSectionList(JSONString) {
-	var Res = JSON.parse(JSONString);
+	var Res = JSON.parse(JSONString); // Convert to JSON Object
 	var entry = Res.result_data[0];
 	try {
 		var Title = entry.course_title;
-		var FullID = entry.section_id_normalized.replace('-', " ").replace('-', " ");
+		var FullID = entry.section_id_normalized.replace('-', " ").replace('-', " "); // Format name
 		var Desc = entry.course_description;
-		try {
+		try { // Not all sections have time info
 			var StartTime = entry.meetings[0].start_time;
 			var EndTime = entry.meetings[0].end_time;
 			var MeetDays = entry.meetings[0].meeting_days;
@@ -119,21 +115,21 @@ function parseSectionList(JSONString) {
 			console.log("Error getting times")
 			var TimeInfo = '';
 		}
-		if (entry['recitations'] != false) {
+		if (entry['recitations'] != false) { // If it has recitations
 			var AsscList = '<br><br>Associated Recitations: <ul>';
 			for(var key in entry.recitations) {
 				AsscList += '<li>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</li>'
 			};
 			AsscList += '</ul>';
 
-		} else if (entry['labs'] != false) {
+		} else if (entry['labs'] != false) { // If it has labs
 			var AsscList = '<br><br>Associated Labs: <ul>';
 			for(var key in entry.labs) {
 				AsscList += '<li>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</li>'
 			};
 			AsscList += '</ul>';
 
-		} else if (entry['lectures'] != false) {
+		} else if (entry['lectures'] != false) { // If it has lectures
 			var AsscList = '<br><br>Associated Lectures: <ul>';
 			for(var key in entry.lectures) {
 				AsscList += '<li>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</li>'
@@ -144,7 +140,7 @@ function parseSectionList(JSONString) {
 			AsscList = '';
 		};
 
-		return FullID + ' - ' + Title + "<br>"+ OpenClose+ "<br>" + Desc + TimeInfo + AsscList;		
+		return FullID + ' - ' + Title + "<br>"+ OpenClose+ "<br>" + Desc + TimeInfo + AsscList; // Format the whole response
 	}
  	catch(err) {
 		return 'No Results';
