@@ -22,11 +22,12 @@
 */				overflow: scroll;
 				list-style-type: none;}
 			#CourseList {width: 150px;}
-			#SectionList {width: 300px; text-align: left;}
+			#SectionList {width: 350px; text-align: left;}
 			#SectionList li {padding-left: 1em;}
 			#InfoPanel {height: calc(100vh - 10em); overflow: scroll; padding-left: 2em; padding-right: 2em;}
 			ul {list-style-type: none; padding: 0;}
 			li {cursor: pointer;}
+			li:active {background-color: #00B3FF;}
 			.OpenSec {background-color: #47EA4C;}
 			.ClosedSec {background-color: #F73B3B;}
 
@@ -42,9 +43,11 @@
     <body>
         <div id="Top">
 	        <h1>{{ title }}</h1>
+	        <span>Cause PennInTouch sucks.</span>
 	        <form onkeypress="return event.keyCode != 13;">
 				Search for courses: <input id="CSearch" type="text" name="courseSearch" autocomplete="off"><span id="LoadingInfo" style="opacity:0;">Loading...</span>
 			</form>
+			<span class="OpenSec">&nbsp&nbsp&nbsp&nbsp</span><span> = Open </span><span class="ClosedSec">&nbsp&nbsp&nbsp&nbsp</span><span> = Closed </span>
 		</div>
         <div id="BottomResults">
         	<div id="CourseList"></div>
@@ -62,7 +65,6 @@
 	})();
 
    	$('#CSearch').on('input', function(){ // When the search terms change
-		$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 		delay(function(){ // Don't check instantaneously
 		  	var searchTerms = $('#CSearch').val(); // Get raw search
 
@@ -71,22 +73,26 @@
 					// Format search terms for server request
 					searchTerms = searchTerms.replace(' ', "/").replace(' ', "/").replace('-', "/").replace('-', "/"); // Replace spaces and dashes with slashes
 
-					if (searchTerms.slice(-1) != '/') {
-						searchTerms = searchTerms+'/'; // Tack on an extra slash at the end if there is none
-					};
+					if (searchTerms.slice(-1) != '/') {searchTerms = searchTerms+'/'}; // Tack on an extra slash at the end if there is none
 
 					var deptSearch = searchTerms.split("/")[0]; // Get guess for the department
 					//If the user enters everything without spaces or dashes
-					if (parseFloat(deptSearch[3])==deptSearch[3]) { // If the fourth character is a number (e.g. CIS110)
+					if (parseFloat(deptSearch[2]) == deptSearch[2]) { // If the third character is a number (e.g. BE100)
+						searchTerms = searchTerms.substr(0, 2)+'/'+searchTerms.substr(2); // Splice the search query with a slash after the deptartment
+
+						if (parseFloat(deptSearch[5]) == deptSearch[5]) { // Then, if the sixth character is a number (e.g. BE100001)
+							searchTerms = searchTerms.substr(0, 5)+'/'+searchTerms.substr(6); // Splice the search query with a slash after the course number
+						}
+					} else if (parseFloat(deptSearch[3]) == deptSearch[3]) { // If the fourth character is a number (e.g. CIS110)
 						searchTerms = searchTerms.substr(0, 3)+'/'+searchTerms.substr(3); // Splice the search query with a slash after the deptartment
 
-						if (parseFloat(deptSearch[6])==deptSearch[6]) { // Then, if the seventh character is a number (e.g. CIS110001)
+						if (parseFloat(deptSearch[6]) == deptSearch[6]) { // Then, if the seventh character is a number (e.g. CIS110001)
 							searchTerms = searchTerms.substr(0, 6)+'/'+searchTerms.substr(6); // Splice the search query with a slash after the course number
 						}
-					} else if (parseFloat(deptSearch[4])==deptSearch[4]) { // If the fifth character is a number (e.g. MEAM110)
+					} else if (parseFloat(deptSearch[4]) == deptSearch[4]) { // If the fifth character is a number (e.g. MEAM110)
 						searchTerms = searchTerms.substr(0, 4)+'/'+searchTerms.substr(4); // Splice the search query with a slash after the deptartment
 
-						if (parseFloat(deptSearch[7])==deptSearch[7]) { // Then, if the eighth character is a number (e.g. MEAM110001)
+						if (parseFloat(deptSearch[7]) == deptSearch[7]) { // Then, if the eighth character is a number (e.g. MEAM110001)
 							searchTerms = searchTerms.substr(0, 7)+'/'+searchTerms.substr(7); // Splice the search query with a slash after the course number
 						}
 					};
@@ -99,13 +105,13 @@
 						getCourseNumbers(deptSearch);
 					};
 					if ((searchTerms.split("/").length - 1) >= 2) { // If there is a course number
-						getSectionNumbers(deptSearch+'/'+numbSearch);
+						if (numbSearch.length == 3) {getSectionNumbers(deptSearch+'/'+numbSearch)};
 					} else { // If there is no course number, clear the section list and info panel
 						$('#SectionList').empty();
 						$('#InfoPanel').empty();
 					};
 					if ((searchTerms.split("/").length - 1) == 3) { // If there is a section
-						getSectionInfo(deptSearch+'/'+numbSearch+'/'+sectSearch);
+						if (sectSearch.length == 3) {getSectionInfo(deptSearch+'/'+numbSearch+'/'+sectSearch)};
 					} else { // If there is no section, clear the info panel
 						$('#InfoPanel').empty();
 					};					
@@ -122,6 +128,7 @@
 	});
 
 	function getCourseNumbers(dept) { // Getting info about courses in a department
+		$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 		$.get("/Search/"+dept) // Make the request
 		.done(function(data) {
 			$('#CourseList').html(data); // Put the course number list in #CourseList
@@ -136,19 +143,21 @@
 		});
 	}
 	function getSectionNumbers(cnum) { // Getting info about sections in a department
+		$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 		$.get("/Search/"+cnum) // Make the request
 		.done(function(data) {
 			$('#SectionList').html(data); // Put the section list in #SectionList
 			$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
 			$('#SectionList li').click(function() { // If a section is clicked
-				$('#CSearch').val($(this).html().split("-")[0].split(";")[5]); // Change the search box to match
-				var secname = $(this).html().split("-")[0].split(";")[5].replace(' ', "/").replace(' ', "/"); // Format the section name for searching
+				$('#CSearch').val($(this).html().split("-")[0].split(";")[6]); // Change the search box to match
+				var secname = $(this).html().split("-")[0].split(";")[6].replace(' ', "/").replace(' ', "/"); // Format the section name for searching
 				$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 				getSectionInfo(secname); // Search for section info
 			});
 		});
 	}
 	function getSectionInfo(sec) { // Getting info about a section
+		$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 		$.get("/Search/"+sec) // Make the request
 		.done(function(data) {
 			$('#InfoPanel').html(data); // Put the section info in the info panel

@@ -64,7 +64,7 @@ function parseDeptList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var coursesList = [];
 	for(var key in Res.result_data) { // Iterate through each course
-      	var courseListName = Res.result_data[key].department+' '+Res.result_data[key].course_number; // Get course dept and number
+      	var courseListName = Res.result_data[key].department.split(" ")[0]+' '+Res.result_data[key].course_number; // Get course dept and number
       	var termsOffered = Res.result_data[key].terms_offered_code;
       	if ((coursesList.indexOf(courseListName) == -1) && (termsOffered == "A" || termsOffered == "B" || termsOffered == "C")) { // If it's not in the list already and it is not available 'M'
       		coursesList.push(courseListName);
@@ -81,7 +81,8 @@ function parseCourseList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var sectionsList = ''
 	for(var key in Res.result_data) {
-      	tempName = Res.result_data[key].section_id_normalized;
+      	tempName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number+' '+Res.result_data[key].section_number;
+      	console.log(tempName)
       	tempName = tempName.replace('-', " ").replace('-', " ");
       	OCStatus = Res.result_data[key].course_status;
       	if (OCStatus == "O") {
@@ -91,19 +92,19 @@ function parseCourseList(JSONString) {
       	};
 
 		try { // Not all sections have time info
-			var StartTime = Res.result_data[key].meetings[0].start_time.split(":")[0];
-			if (StartTime[0] == '0') {StartTime = StartTime.split("0")[1]};
-			var EndTime = Res.result_data[key].meetings[0].end_time.split(":")[0];
-			if (EndTime[0] == '0') {EndTime = EndTime.split("0")[1]};
+			var StartTime = Res.result_data[key].meetings[0].start_time.split(" ")[0];
+			if (StartTime[0] == '0') {StartTime = StartTime.slice(1)};
+			var EndTime = Res.result_data[key].meetings[0].end_time.split(" ")[0];
+			if (EndTime[0] == '0') {EndTime = EndTime.slice(1)};
 			var MeetDays = Res.result_data[key].meetings[0].meeting_days;
-			TimeInfo = StartTime+" to "+EndTime+" on "+MeetDays ;
+			TimeInfo = ' - '+StartTime+" to "+EndTime+" on "+MeetDays ;
 		}
 		catch(err) {
 			console.log("Error getting times")
 			var TimeInfo = '';
 		}
 		if (sectionsList.indexOf(tempName) == -1) { // If it's not already in the list
-      		sectionsList += '<li><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp</span>&nbsp'+tempName+' - '+TimeInfo+'</li>'; // Add and format
+      		sectionsList += '<li><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+tempName+TimeInfo+'</li>'; // Add and format
       	};
     }
     if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'
