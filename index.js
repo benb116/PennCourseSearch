@@ -25,7 +25,7 @@ app.get('/Search/:deptId', function(req, res) {
 		function requestPage(dept, num, sec) {
 			console.log('Search Terms: '+dept+num+sec)
 			request({
-			  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_info/'+dept+'?number_of_results_per_page=200',
+			  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+dept+'&number_of_results_per_page=200',
 			  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
 			}, function(error, response, body) {
 				return res.send(parseDeptList(body));
@@ -64,10 +64,9 @@ function parseDeptList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var coursesList = [];
 	for(var key in Res.result_data) { // Iterate through each course
-      	var courseListName = Res.result_data[key].department.split(" ")[0]+' '+Res.result_data[key].course_number; // Get course dept and number
-      	var termsOffered = Res.result_data[key].terms_offered_code;
-      	if ((coursesList.indexOf(courseListName) == -1) && (termsOffered == "A" || termsOffered == "B" || termsOffered == "C")) { // If it's not in the list already and it is not available 'M'
-      		coursesList.push(courseListName);
+      	var courseListName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
+      	if (coursesList.indexOf(courseListName) == -1) { // If it's not already in the list
+      		coursesList.push(courseListName); // Add and format
       	};
     }
     coursesList.sort()
