@@ -21,23 +21,37 @@
 /*				border-right: 3px solid #3399FF;
 */				overflow: scroll;
 				list-style-type: none;}
+
+			#TestDiv {
+				background-color: white;
+				width: 95%;
+				height: 80%;
+				margin: 0 auto;
+				margin-top: 2em;
+				border-collapse: collapse;
+			}
+
+			.SchedBlock {width:19.5%; display: table-cell; position:absolute; border: 1px solid black;}
+
 			#CourseList {width: 150px;}
 			#SectionList {width: 350px; text-align: left;}
 			#SectionList li {padding-left: 1em;}
 			#InfoPanel {height: calc(100vh - 10em); overflow: scroll; padding-left: 2em; padding-right: 2em;}
 			ul {list-style-type: none; padding: 0;}
 			li {cursor: pointer;}
-			li:active {background-color: #00B3FF;}
+			#CourseList li:active {background-color: #00B3FF;}
+			#SectionList span:nth-child(1):active {background-color: #00B3FF;}
 			.OpenSec {background-color: #47EA4C;}
 			.ClosedSec {background-color: #F73B3B;}
 
 			input[type="text"] { 
-			    width: 40em;
+			    width: 40em; margin-bottom: 0.5em;
 			    border-radius:2px; 
 			    border: solid 1px #ccc; 
 			    padding:0.4em; 
 			    background-color: #f5f5f5; 
 			}
+
         </style>
 	</head>
     <body>
@@ -45,17 +59,46 @@
 	        <h1>{{ title }}</h1>
 	        <span>Cause PennInTouch sucks.</span>
 	        <form onkeypress="return event.keyCode != 13;">
-				Search for courses: <input id="CSearch" type="text" name="courseSearch" autocomplete="off"><span id="LoadingInfo" style="opacity:0;">Loading...</span>
+				Search for courses: <input id="CSearch" type="text" name="courseSearch" autocomplete="off"><span style="margin-left:1em">{{ currentTerm }}</span><span id="LoadingInfo" style="opacity:0;">Loading...</span>
 			</form>
 			<span class="OpenSec">&nbsp&nbsp&nbsp&nbsp</span><span> = Open </span><span class="ClosedSec">&nbsp&nbsp&nbsp&nbsp</span><span> = Closed </span>
 		</div>
         <div id="BottomResults">
         	<div id="CourseList"></div>
         	<div id="SectionList"></div>
-        	<div id="InfoPanel"></div>
+        	<div id="InfoPanel">
+        		
+	        	<div id="TestDiv" style="position:relative;"></div>
+
+        	</div>
         </div>
     </body>
     <script type="text/javascript">
+
+	var weekdays = ['M', 'T', 'W', 'R', 'F'];
+
+	function SpitSched(ScheduledCourses) {
+	   	var startHour = 16;
+	   	var endHour = 36;
+	 	var halfScale = 100 / (endHour - startHour);
+	   	for (var sec in ScheduledCourses) {
+	   		for (var day in ScheduledCourses[sec].meetDay) {
+	   			var letterDay = ScheduledCourses[sec].meetDay[day]
+	   			for (var possDay in weekdays) {
+	   				if (weekdays[possDay] == letterDay) {
+	   					var blockleft = possDay*20; { break }
+	   				}
+	   			}	   		
+
+		   		var blocktop = (ScheduledCourses[sec].meetHour - startHour) * halfScale;
+		   		var blockheight = ScheduledCourses[sec].halfHourLength * halfScale;
+		   		var blockname = ScheduledCourses[sec].fullCourseName
+		   		$('#TestDiv').append('<div class="SchedBlock" style="top:'+blocktop+'%;left:'+blockleft+'%;height:'+blockheight+'%;">'+blockname+'</div>');
+	   		}
+	   	}
+	}
+
+
    	var delay = (function(){
 	  var timer = 0;
 	  return function(callback, ms){
@@ -108,17 +151,14 @@
 						if (numbSearch.length == 3) {getSectionNumbers(deptSearch+'/'+numbSearch)};
 					} else { // If there is no course number, clear the section list and info panel
 						$('#SectionList').empty();
-						$('#InfoPanel').empty();
 					};
 					if ((searchTerms.split("/").length - 1) == 3) { // If there is a section
 						if (sectSearch.length == 3) {getSectionInfo(deptSearch+'/'+numbSearch+'/'+sectSearch)};
 					} else { // If there is no section, clear the info panel
-						$('#InfoPanel').empty();
 					};					
 				} else { // If there are no good search terms, clear everything
 					$('#CourseList').empty();
 					$('#SectionList').empty();
-					$('#InfoPanel').empty();
 					$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
 				}
 			} 
@@ -135,7 +175,6 @@
 			$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
 			$('#CourseList li').click(function() { // If a course is clicked
 				$('#CSearch').val($(this).html()); // Change the search box to match
-				$('#InfoPanel').html(''); // Clear the info panel (don't know which section yet)
 				var courseName = $(this).html().replace(' ', "/"); // Format the course name for searching
 				$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 				getSectionNumbers(courseName); // Search for sections
@@ -148,10 +187,8 @@
 		.done(function(data) {
 			$('#SectionList').html(data); // Put the section list in #SectionList
 			$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
-			$('#SectionList li').click(function() { // If a section is clicked
-				$('#CSearch').val($(this).html().split("-")[0].split(";")[6]); // Change the search box to match
-				var secname = $(this).html().split("-")[0].split(";")[6].replace(' ', "/").replace(' ', "/"); // Format the section name for searching
-				$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+			$('#SectionList span:nth-child(1)').click(function() { // If a section is clicked
+				var secname = $(this).next().next().html().split("-")[0].replace(' ', "/").replace(' ', "/"); // Format the section name for searching
 				getSectionInfo(secname); // Search for section info
 			});
 		});
@@ -160,13 +197,8 @@
 		$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 		$.get("/Search/"+sec) // Make the request
 		.done(function(data) {
-			$('#InfoPanel').html(data); // Put the section info in the info panel
-			$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
-			$('#InfoPanel li').click(function() { // If an associated section is clicked
-				var secname = $(this).html().replace(' ', "/").replace(' ', "/"); // Formatht the section name for searching
-				$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
-				getSectionInfo(secname); // Search for section info
-			});
+			SpitSched(data)
+			$('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
 		});
 	}
     </script>

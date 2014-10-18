@@ -2,6 +2,9 @@ var path = require('path');
 var express = require('express')
 var app = express();
 var request = require("request");
+var currentTerm = '2015A'
+
+SchedCourses = {};
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
@@ -11,7 +14,8 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(req, res) {
   return res.render('index', {
-    title: 'PennCourseScheduler'
+    title: 'PennCourseScheduler',
+    currentTerm: currentTerm
   });
 })
 
@@ -23,7 +27,7 @@ app.get('/Search/:deptId', function(req, res) {
 	if (req.params.deptId != 'favicon.ico') {
 		requestPage(req.params.deptId, "", "")
 		function requestPage(dept, num, sec) {
-			console.log('Search Terms: '+dept+num+sec)
+			// console.log('Search Terms: '+dept+num+sec)
 			request({
 			  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+dept+'&number_of_results_per_page=200',
 			  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
@@ -37,7 +41,7 @@ app.get('/Search/:deptId', function(req, res) {
 app.get('/Search/:deptId/:courseId', function(req, res) {
 	requestPage(req.params.deptId, req.params.courseId, "")
 	function requestPage(dept, num, sec) {
-		console.log('Search Terms: '+dept+num+sec)
+		// console.log('Search Terms: '+dept+num+sec)
 		request({
 		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+dept+num+'&number_of_results_per_page=100',
 		  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
@@ -50,12 +54,18 @@ app.get('/Search/:deptId/:courseId', function(req, res) {
 app.get('/Search/:deptId/:courseId/:secId', function(req, res) {
 	requestPage(req.params.deptId, req.params.courseId, req.params.secId)
 	function requestPage(dept, num, sec) {
-		console.log('Search Terms: '+dept+num+sec)
+		// console.log('Search Terms: '+dept+num+sec)
 		request({
 		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+dept+num+sec,
 		  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
 		}, function(error, response, body) {
-			return res.send(parseSectionList(body));
+			resJSON = parseSectionList(body);
+			for (var i = 0; i < Object.keys(resJSON).length; i++) {
+				var JSONSecID = Object.keys(resJSON)[i]
+				SchedCourses[JSONSecID] = resJSON[JSONSecID];
+			};
+			console.log(SchedCourses);
+			return res.send(resJSON);
 		});
 	}
 });
@@ -81,8 +91,6 @@ function parseCourseList(JSONString) {
 	var sectionsList = ''
 	for(var key in Res.result_data) {
       	tempName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number+' '+Res.result_data[key].section_number;
-      	console.log(tempName)
-      	tempName = tempName.replace('-', " ").replace('-', " ");
       	OCStatus = Res.result_data[key].course_status;
       	if (OCStatus == "O") {
       		var StatusClass = 'OpenSec' // If it's open, add class open
@@ -103,7 +111,7 @@ function parseCourseList(JSONString) {
 			var TimeInfo = '';
 		}
 		if (sectionsList.indexOf(tempName) == -1) { // If it's not already in the list
-      		sectionsList += '<li><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+tempName+TimeInfo+'</li>'; // Add and format
+      		sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+tempName+TimeInfo+'</span></li>'; // Add and format
       	};
     }
     if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'
@@ -115,45 +123,29 @@ function parseSectionList(JSONString) {
 	var entry = Res.result_data[0];
 	try {
 		var Title = entry.course_title;
-		var FullID = entry.section_id_normalized.replace('-', " ").replace('-', " "); // Format name
+		var SectionName = entry.section_id_normalized.replace('-', ' ').replace('-', ' '); // Format name
+		var SectionID = entry.section_id_normalized.replace('-', '').replace('-', ''); // Format name
 		var Desc = entry.course_description;
+		var resJSON = { };
 		try { // Not all sections have time info
-			var StartTime = entry.meetings[0].start_time;
-			var EndTime = entry.meetings[0].end_time;
-			var MeetDays = entry.meetings[0].meeting_days;
-			var OpenClose = entry.course_status_normalized;
-			TimeInfo = "<br><br>"+StartTime+" - "+EndTime+" on "+MeetDays 
+			for (var meeti in entry.meetings) {
+				var StartTime = (entry.meetings[meeti].start_hour_24)*2 + (entry.meetings[meeti].start_minutes)/30;
+				var EndTime = (entry.meetings[meeti].end_hour_24)*2 + (entry.meetings[meeti].end_minutes)/30;
+				var halfLength = EndTime - StartTime;
+				var MeetDays = entry.meetings[meeti].meeting_days;
+				var OpenClose = entry.course_status_normalized;
+
+				resJSON[SectionID+MeetDays+StartTime] = {'fullCourseName': SectionName,
+		    		'halfHourLength': halfLength,
+		    		'meetDay': MeetDays,
+		    		'meetHour': StartTime};
+	    	}
 		}
 		catch(err) {
 			console.log("Error getting times")
 			var TimeInfo = '';
 		}
-		if (entry['recitations'] != false) { // If it has recitations
-			var AsscList = '<br><br>Associated Recitations: <ul>';
-			for(var key in entry.recitations) {
-				AsscList += '<li>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</li>'
-			};
-			AsscList += '</ul>';
-
-		} else if (entry['labs'] != false) { // If it has labs
-			var AsscList = '<br><br>Associated Labs: <ul>';
-			for(var key in entry.labs) {
-				AsscList += '<li>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</li>'
-			};
-			AsscList += '</ul>';
-
-		} else if (entry['lectures'] != false) { // If it has lectures
-			var AsscList = '<br><br>Associated Lectures: <ul>';
-			for(var key in entry.lectures) {
-				AsscList += '<li>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</li>'
-			};
-			AsscList += '</ul>';
-
-		} else {
-			AsscList = '';
-		};
-
-		return FullID + ' - ' + Title + "<br>"+ OpenClose+ "<br>" + Desc + TimeInfo + AsscList; // Format the whole response
+		return resJSON;
 	}
  	catch(err) {
 		return 'No Results';
