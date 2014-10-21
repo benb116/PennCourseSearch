@@ -3,69 +3,26 @@
 	<head>
 		<title>PennCourseScheduler</title>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="/css/index.css">
+		<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans|Istok+Web|Sniglet|Open+Sans'>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <style type="text/css">
-			body {width: 100%; height: 100%; text-align: center; margin: 0 auto;}
-			#Top {height: 5em;}
-			#LoadingInfo {margin-left: 1em;}
-			h1 {margin-top: 1em;}
-			#BottomResults {
-			    width: 100%;
-			    background-color: #E6E6E6;
-			    margin-top: 3em;
-			}
-			#CourseList, #SectionList {
-				height: calc(100vh - 10em);
-				background-color: white;
-				float: left;
-/*				border-right: 3px solid #3399FF;
-*/				overflow: scroll;
-				list-style-type: none;}
-
-			#TestDiv {
-				background-color: white;
-				width: 95%;
-				height: 80%;
-				margin: 0 auto;
-				margin-top: 2em;
-				border-collapse: collapse;
-			}
-
-			.SchedBlock {width:19.5%; display: table-cell; position:absolute; border: 1px solid black;}
-
-			#CourseList {width: 150px;}
-			#SectionList {width: 350px; text-align: left;}
-			#SectionList li {padding-left: 1em;}
-			#InfoPanel {height: calc(100vh - 10em); overflow: scroll; padding-left: 2em; padding-right: 2em;}
-			ul {list-style-type: none; padding: 0;}
-			li {cursor: pointer;}
-			#CourseList li:active {background-color: #00B3FF;}
-			#SectionList span:nth-child(1):active {background-color: #00B3FF;}
-			.OpenSec {background-color: #47EA4C;}
-			.ClosedSec {background-color: #F73B3B;}
-
-			input[type="text"] { 
-			    width: 40em; margin-bottom: 0.5em;
-			    border-radius:2px; 
-			    border: solid 1px #ccc; 
-			    padding:0.4em; 
-			    background-color: #f5f5f5; 
-			}
-
-        </style>
+        <script type="text/javascript" src="/js/main.js"></script>
 	</head>
     <body>
         <div id="Top">
 	        <h1>{{ title }}</h1>
 	        <span>Cause PennInTouch sucks.</span>
 	        <form onkeypress="return event.keyCode != 13;">
-				Search for courses: <input id="CSearch" type="text" name="courseSearch" autocomplete="off"><span style="margin-left:1em">{{ currentTerm }}</span><span id="LoadingInfo" style="opacity:0;">Loading...</span>
+				Search for courses: &nbsp<input id="CSearch" type="text" name="courseSearch" autocomplete="off"><span style="margin-left:1em">{{ currentTerm }}</span><span style="margin-left:1em;" class="OpenSec">&nbsp&nbsp&nbsp&nbsp</span><span> = Open </span><span class="ClosedSec">&nbsp&nbsp&nbsp&nbsp</span><span> = Closed </span><span id="LoadingInfo" style="opacity:0;">Loading...</span>
 			</form>
-			<span class="OpenSec">&nbsp&nbsp&nbsp&nbsp</span><span> = Open </span><span class="ClosedSec">&nbsp&nbsp&nbsp&nbsp</span><span> = Closed </span>
+			
 		</div>
         <div id="BottomResults">
         	<div id="CourseList"></div>
-        	<div id="SectionList"></div>
+        	<div id="SectionCol">
+        		<div id="SectionList"></div>
+        		<div id="SectionInfo"></div>
+        	</div>
         	<div id="InfoPanel">
         		
 	        	<div id="TestDiv" style="position:relative;"></div>
@@ -73,133 +30,4 @@
         	</div>
         </div>
     </body>
-    <script type="text/javascript">
-
-	var weekdays = ['M', 'T', 'W', 'R', 'F'];
-
-	function SpitSched(ScheduledCourses) {
-	   	var startHour = 16;
-	   	var endHour = 36;
-	 	var halfScale = 100 / (endHour - startHour);
-	   	for (var sec in ScheduledCourses) {
-	   		for (var day in ScheduledCourses[sec].meetDay) {
-	   			var letterDay = ScheduledCourses[sec].meetDay[day]
-	   			for (var possDay in weekdays) {
-	   				if (weekdays[possDay] == letterDay) {
-	   					var blockleft = possDay*20; { break }
-	   				}
-	   			}	   		
-
-		   		var blocktop = (ScheduledCourses[sec].meetHour - startHour) * halfScale;
-		   		var blockheight = ScheduledCourses[sec].halfHourLength * halfScale;
-		   		var blockname = ScheduledCourses[sec].fullCourseName
-		   		$('#TestDiv').append('<div class="SchedBlock" style="top:'+blocktop+'%;left:'+blockleft+'%;height:'+blockheight+'%;">'+blockname+'</div>');
-	   		}
-	   	}
-	}
-
-
-   	var delay = (function(){
-	  var timer = 0;
-	  return function(callback, ms){
-	    clearTimeout (timer);
-	    timer = setTimeout(callback, ms);
-	  };
-	})();
-
-   	$('#CSearch').on('input', function(){ // When the search terms change
-		delay(function(){ // Don't check instantaneously
-		  	var searchTerms = $('#CSearch').val(); // Get raw search
-
-			try {
-				if (searchTerms != "" && searchTerms != 'favicon.ico') { // Initial filtering
-					// Format search terms for server request
-					searchTerms = searchTerms.replace(' ', "/").replace(' ', "/").replace('-', "/").replace('-', "/"); // Replace spaces and dashes with slashes
-
-					if (searchTerms.slice(-1) != '/') {searchTerms = searchTerms+'/'}; // Tack on an extra slash at the end if there is none
-
-					var deptSearch = searchTerms.split("/")[0]; // Get guess for the department
-					//If the user enters everything without spaces or dashes
-					if (parseFloat(deptSearch[2]) == deptSearch[2]) { // If the third character is a number (e.g. BE100)
-						searchTerms = searchTerms.substr(0, 2)+'/'+searchTerms.substr(2); // Splice the search query with a slash after the deptartment
-
-						if (parseFloat(deptSearch[5]) == deptSearch[5]) { // Then, if the sixth character is a number (e.g. BE100001)
-							searchTerms = searchTerms.substr(0, 5)+'/'+searchTerms.substr(6); // Splice the search query with a slash after the course number
-						}
-					} else if (parseFloat(deptSearch[3]) == deptSearch[3]) { // If the fourth character is a number (e.g. CIS110)
-						searchTerms = searchTerms.substr(0, 3)+'/'+searchTerms.substr(3); // Splice the search query with a slash after the deptartment
-
-						if (parseFloat(deptSearch[6]) == deptSearch[6]) { // Then, if the seventh character is a number (e.g. CIS110001)
-							searchTerms = searchTerms.substr(0, 6)+'/'+searchTerms.substr(6); // Splice the search query with a slash after the course number
-						}
-					} else if (parseFloat(deptSearch[4]) == deptSearch[4]) { // If the fifth character is a number (e.g. MEAM110)
-						searchTerms = searchTerms.substr(0, 4)+'/'+searchTerms.substr(4); // Splice the search query with a slash after the deptartment
-
-						if (parseFloat(deptSearch[7]) == deptSearch[7]) { // Then, if the eighth character is a number (e.g. MEAM110001)
-							searchTerms = searchTerms.substr(0, 7)+'/'+searchTerms.substr(7); // Splice the search query with a slash after the course number
-						}
-					};
-					// By now the search terms should be 'DEPT/NUM/SEC/' although NUM/ and SEC/ may not be included
-					var deptSearch = searchTerms.split("/")[0]; // Get deptartment
-					var numbSearch = searchTerms.split("/")[1]; // Get course number
-					var sectSearch = searchTerms.split("/")[2]; // Get section number
-
-					if ((searchTerms.split("/").length - 1) >= 1) { // If there is a department
-						getCourseNumbers(deptSearch);
-					};
-					if ((searchTerms.split("/").length - 1) >= 2) { // If there is a course number
-						if (numbSearch.length == 3) {getSectionNumbers(deptSearch+'/'+numbSearch)};
-					} else { // If there is no course number, clear the section list and info panel
-						$('#SectionList').empty();
-					};
-					if ((searchTerms.split("/").length - 1) == 3) { // If there is a section
-						if (sectSearch.length == 3) {getSectionInfo(deptSearch+'/'+numbSearch+'/'+sectSearch)};
-					} else { // If there is no section, clear the info panel
-					};					
-				} else { // If there are no good search terms, clear everything
-					$('#CourseList').empty();
-					$('#SectionList').empty();
-					$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
-				}
-			} 
-			catch(err) {console.log('No Results');}
-
-		}, 400);
-	});
-
-	function getCourseNumbers(dept) { // Getting info about courses in a department
-		$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
-		$.get("/Search/"+dept) // Make the request
-		.done(function(data) {
-			$('#CourseList').html(data); // Put the course number list in #CourseList
-			$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
-			$('#CourseList li').click(function() { // If a course is clicked
-				$('#CSearch').val($(this).html()); // Change the search box to match
-				var courseName = $(this).html().replace(' ', "/"); // Format the course name for searching
-				$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
-				getSectionNumbers(courseName); // Search for sections
-			});
-		});
-	}
-	function getSectionNumbers(cnum) { // Getting info about sections in a department
-		$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
-		$.get("/Search/"+cnum) // Make the request
-		.done(function(data) {
-			$('#SectionList').html(data); // Put the section list in #SectionList
-			$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
-			$('#SectionList span:nth-child(1)').click(function() { // If a section is clicked
-				var secname = $(this).next().next().html().split("-")[0].replace(' ', "/").replace(' ', "/"); // Format the section name for searching
-				getSectionInfo(secname); // Search for section info
-			});
-		});
-	}
-	function getSectionInfo(sec) { // Getting info about a section
-		$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
-		$.get("/Search/"+sec) // Make the request
-		.done(function(data) {
-			SpitSched(data)
-			$('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
-		});
-	}
-    </script>
 </html>
