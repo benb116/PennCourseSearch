@@ -8,6 +8,13 @@ $(document).ready(function() {
 	    timer = setTimeout(callback, ms);
 	  };})();
 
+	$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+	$.get("/Sched?addRem=blank&courseID=blank") // Make the request
+	.done(function(data) {
+		$('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
+		SpitSched(data)
+	});
+
    	$('#CSearch').on('input', function(){ // When the search terms change
 		delay(function(){ // Don't check instantaneously
 		  	var searchTerms = $('#CSearch').val(); // Get raw search
@@ -134,8 +141,6 @@ function addToSched(sec) { // Getting info about a section
 	});
 }
 function removeFromSched(sec) {
-	console.log(sec)
-	
 	for (var i = 7; i < sec.length; i++) {
 		if (parseFloat(sec[i]) != sec[i]) {
 			secname = sec.substr(0, i);
@@ -148,7 +153,6 @@ function removeFromSched(sec) {
 	.done(function(data) {
 		SpitSched(data)
 		$('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
-		
 	});
 }
 function SpitSched(ScheduledCourses) {
@@ -168,11 +172,32 @@ function SpitSched(ScheduledCourses) {
 	   		var blocktop = (ScheduledCourses[sec].meetHour - startHour) * halfScale;
 	   		var blockheight = ScheduledCourses[sec].halfHourLength * halfScale;
 	   		var blockname = ScheduledCourses[sec].fullCourseName
-	   		$('#TestDiv').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;height:'+blockheight+'%;">'+blockname+'</div>');
+	   		$('#TestDiv').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;height:'+blockheight+'%;"><div class="CloseX">x</div>'+blockname+'</div>');
    		}
    	}
-   	$('.SchedBlock').click(function() { // If a course is clicked
-		console.log('test')
-		removeFromSched($(this).attr('id'));
+   		console.log('a')
+
+   	$('.CloseX').click(function(e) { // If a course is clicked
+		removeFromSched($(this).parent().attr('id'));
+		e.stopPropagation();
+	});
+	$('.SchedBlock')
+	.mouseover(function() {
+		console.log('t')
+		$(this).find('.CloseX').css('opacity', '1');
+	})
+	.mouseout(function() {
+		$(this).find('.CloseX').css('opacity', '0');
+	})
+  	.click(function() { // If a course is clicked
+		sec = $(this).attr('id');
+		for (var i = 7; i < sec.length; i++) {
+			if (parseFloat(sec[i]) != sec[i]) {
+				secname = sec.substr(0, i);
+				{ break }
+			}
+		};
+		$('#CSearch').val($(this).html().split(">")[2]); // Change the search box to match
+		getSectionInfo(secname);
 	});
 }

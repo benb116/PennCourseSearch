@@ -1,3 +1,4 @@
+var config = require('./config')
 var path = require('path');
 var express = require('express')
 var app = express();
@@ -28,12 +29,12 @@ app.get('/Search', function(req, res) {
 	console.log(courseIDSearch);
 	var searchType = req.query.searchType;
 	if (courseIDSearch != 'favicon.ico') {
-		console.time('requestTime');
+		console.time('  Request Time');
 		request({
 		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseIDSearch+'&number_of_results_per_page=200',
-		  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
+		  method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
 		}, function(error, response, body) {
-			console.timeEnd('requestTime');
+			console.timeEnd('  Request Time');
 			try {
 				if (searchType == 'deptSearch') {
 					var searchResponse = parseDeptList(body)
@@ -65,7 +66,7 @@ app.get('/Sched', function(req, res) {
 			console.log(SchedCourses)
 			return res.send(SchedCourses);
 		});
-	} else {
+	} else if (addRem == 'rem') {
 		console.log('remove: '+courseID)
 		for (meetsec in SchedCourses) {
 			if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) {
@@ -73,6 +74,8 @@ app.get('/Sched', function(req, res) {
 			}
 		}
 		console.log(SchedCourses)
+		return res.send(SchedCourses);
+	} else {
 		return res.send(SchedCourses);
 	}
 	
@@ -146,6 +149,11 @@ function parseSectionList(JSONString) {
 	try {
 		var Title = entry.course_title;
 		var FullID = entry.section_id_normalized.replace(/-/g, " "); // Format name
+		try {
+			var Instructor = "<br><br>Instructor: " + entry.instructors[0].name;
+		} catch(err) {
+			var Instructor = "";
+		}
 		var Desc = entry.course_description;
 		var TimeInfoArray = getTimeInfo(entry);
       	var StatusClass = TimeInfoArray[0];
@@ -182,7 +190,7 @@ function parseSectionList(JSONString) {
 			AsscList = '';
 		};
 
-		return FullID + " - " + Title + "<br><br>" + Desc+ "<br><br>Status: " + OpenClose + "<br><br>" + TimeInfo + AsscList; // Format the whole response
+		return FullID + " - " + Title + Instructor +  "<br><br>" + Desc + "<br><br>Status: " + OpenClose + "<br><br>" + TimeInfo + AsscList; // Format the whole response
 	}
  	catch(err) {
 		return 'No Results';
