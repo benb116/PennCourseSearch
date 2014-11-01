@@ -13,7 +13,7 @@
 	        <h1>{{ title }}</h1>
 	        <span>Cause PennInTouch sucks.</span>
 	        <form onkeypress="return event.keyCode != 13;">
-				Search for courses: &nbsp<input id="CSearch" type="text" name="courseSearch" autocomplete="off"><span style="margin-left:1em">{{ currentTerm }}</span><span style="margin-left:1em;" class="OpenSec">&nbsp&nbsp&nbsp&nbsp</span><span> = Open </span><span class="ClosedSec">&nbsp&nbsp&nbsp&nbsp</span><span> = Closed </span><span id="LoadingInfo" style="opacity:0;">Loading...</span>
+				Search for courses: &nbsp<input id="CSearch" type="text" name="courseSearch" autocomplete="off"><span style="margin-left:1em">{{ currentTerm }}</span><span style="margin-left:1em;" class="OpenSec">&nbsp&nbsp&nbsp&nbsp&nbsp</span><span> = Open </span><span class="ClosedSec">&nbsp&nbsp&nbsp&nbsp&nbsp</span><span> = Closed </span><span id="LoadingInfo" style="opacity:0;">Loading...</span>
 			</form>
 			
 		</div>

@@ -49,18 +49,33 @@ app.get('/Search', function(req, res) {
 });
 
 app.get('/Sched', function(req, res) {
-	var courseIDSearch = req.query.courseID;
-	request({
-	  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseIDSearch,
-	  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
-	}, function(error, response, body) {
-		resJSON = getSchedInfo(body);
-		for (var i = 0; i < Object.keys(resJSON).length; i++) {
-			var JSONSecID = Object.keys(resJSON)[i]
-			SchedCourses[JSONSecID] = resJSON[JSONSecID];
-		};
-		return res.send(resJSON);
-	});
+	var addRem = req.query.addRem;
+	var courseID = req.query.courseID;
+
+	if (addRem == 'add') {
+		request({
+		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
+		  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
+		}, function(error, response, body) {
+			resJSON = getSchedInfo(body);
+			for (var i = 0; i < Object.keys(resJSON).length; i++) {
+				var JSONSecID = Object.keys(resJSON)[i]
+				SchedCourses[JSONSecID] = resJSON[JSONSecID];
+			};
+			console.log(SchedCourses)
+			return res.send(SchedCourses);
+		});
+	} else {
+		console.log('remove: '+courseID)
+		for (meetsec in SchedCourses) {
+			if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) {
+				delete SchedCourses[meetsec];
+			}
+		}
+		console.log(SchedCourses)
+		return res.send(SchedCourses);
+	}
+	
 
 });
 
@@ -118,7 +133,7 @@ function parseCourseList(JSONString) {
       	var StatusClass = TimeInfoArray[0];
       	var TimeInfo = TimeInfoArray[1][0];
 		if (sectionsList.indexOf(tempName) == -1) { // If it's not already in the list
-      		sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+tempName+TimeInfo+'</span></li>'; // Add and format
+      		sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+tempName+TimeInfo+'</span></li>'; // Add and format
       	};
     }
     if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'
@@ -130,7 +145,7 @@ function parseSectionList(JSONString) {
 	var entry = Res.result_data[0];
 	try {
 		var Title = entry.course_title;
-		var FullID = entry.section_id_normalized.replace('-', " ").replace('-', " "); // Format name
+		var FullID = entry.section_id_normalized.replace(/-/g, " "); // Format name
 		var Desc = entry.course_description;
 		var TimeInfoArray = getTimeInfo(entry);
       	var StatusClass = TimeInfoArray[0];
@@ -179,8 +194,8 @@ function getSchedInfo(JSONString) {
 	var entry = Res.result_data[0];
 	try {
 		var Title = entry.course_title;
-		var SectionName = entry.section_id_normalized.replace('-', ' ').replace('-', ' '); // Format name
-		var SectionID = entry.section_id_normalized.replace('-', '').replace('-', ''); // Format name
+		var SectionName = entry.section_id_normalized.replace(/-/g, " "); // Format name
+		var SectionID = entry.section_id_normalized.replace(/-/g, ""); // Format name
 		var Desc = entry.course_description;
 		var resJSON = { };
 		try { // Not all sections have time info
@@ -191,7 +206,7 @@ function getSchedInfo(JSONString) {
 				var MeetDays = entry.meetings[meeti].meeting_days;
 				var OpenClose = entry.course_status_normalized;
 
-				resJSON[SectionID+MeetDays+StartTime] = {'fullCourseName': SectionName,
+				resJSON[SectionID.replace(/ /g, "")+MeetDays+StartTime] = {'fullCourseName': SectionName,
 		    		'halfHourLength': halfLength,
 		    		'meetDay': MeetDays,
 		    		'meetHour': StartTime};

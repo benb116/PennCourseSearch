@@ -15,7 +15,7 @@ $(document).ready(function() {
 			try {
 				if (searchTerms != "" && searchTerms != 'favicon.ico') { // Initial filtering
 					// Format search terms for server request
-					searchTerms = searchTerms.replace(' ', "").replace(' ', "").replace('-', "").replace('-', ""); // Replace spaces and dashes with slashes
+					searchTerms = searchTerms.replace(/ /g, "").replace(/-/g, ""); // Replace spaces and dashes with slashes
 
 					//If the user enters everything without spaces or dashes
 					if (parseFloat(searchTerms[2]) == searchTerms[2]) { // If the third character is a number (e.g. BE100)
@@ -65,11 +65,7 @@ $(document).ready(function() {
 		}, 400);
 	});
 
-	$('.SchedBlock').click(function() { // If a course is clicked
-		console.log('tes')
-		var secname = $(this).html().replace(' ', "").replace(' ', ""); // Format the section name for searching
-		getSectionInfo(secname);
-	});
+	
 
 });
 
@@ -82,7 +78,7 @@ function getCourseNumbers(dept) { // Getting info about courses in a department
 		$('#CourseList li').click(function() { // If a course is clicked
 			$('#CSearch').val($(this).html()); // Change the search box to match
 			$('#SectionInfo').empty();
-			var courseName = $(this).html().replace(' ', ""); // Format the course name for searching
+			var courseName = $(this).html().replace(/ /g, " "); // Format the course name for searching
 			$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 			getSectionNumbers(courseName); // Search for sections
 		});
@@ -95,12 +91,22 @@ function getSectionNumbers(cnum) { // Getting info about sections in a departmen
 		$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
 		$('#SectionList').html(data); // Put the section list in #SectionList
 		$('#SectionList span:nth-child(1)').click(function() { // If a section is clicked
-			var secname = $(this).next().next().html().split("-")[0].replace(' ', "").replace(' ', ""); // Format the section name for searching
-			addToSched(secname); // Search for section info
+			
+			// console.log($(this).html())
+			var secname = $(this).next().next().html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
+			// if ($(this).html() == '&nbsp; + &nbsp;') {
+				addToSched(secname); // Search for section info
+			// 	console.log('1')
+			// 	$(this).html('&nbsp; - &nbsp;');
+			// } else if ($(this).html() == '&nbsp; - &nbsp;') {
+			// 	removeFromSched(secname); // Search for section info
+			// 	$(this).html('&nbsp; + &nbsp;');
+			// }
+			
 		});
 		$('#SectionList span:nth-child(3)').click(function() { // If a section is clicked
 			$('#CSearch').val($(this).html().split("-")[0]);
-			var secname = $(this).html().split("-")[0].replace(' ', "").replace(' ', ""); // Format the section name for searching
+			var secname = $(this).html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
 			getSectionInfo(secname); // Search for section info
 		});
 	});
@@ -113,7 +119,7 @@ function getSectionInfo(sec) {
 		$('#SectionInfo').html(data);
 		$('#SectionInfo li').click(function() { // If a course is clicked
 			$('#CSearch').val($(this).html()); // Change the search box to match
-			var courseName = $(this).html().replace(' ', "").replace(' ', ""); // Format the course name for searching
+			var courseName = $(this).html().replace(/ /g, " "); // Format the course name for searching
 			$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 			getSectionInfo(courseName); // Search for sections
 		});
@@ -121,13 +127,32 @@ function getSectionInfo(sec) {
 }
 function addToSched(sec) { // Getting info about a section
 	$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
-	$.get("/Sched?courseID="+sec) // Make the request
+	$.get("/Sched?addRem=add&courseID="+sec) // Make the request
+	.done(function(data) {
+		$('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
+		SpitSched(data)
+	});
+}
+function removeFromSched(sec) {
+	console.log(sec)
+	
+	for (var i = 7; i < sec.length; i++) {
+		if (parseFloat(sec[i]) != sec[i]) {
+			secname = sec.substr(0, i);
+			{ break }
+		}
+	};
+
+	$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+	$.get("/Sched?addRem=rem&courseID="+secname) // Make the request
 	.done(function(data) {
 		SpitSched(data)
 		$('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
+		
 	});
 }
 function SpitSched(ScheduledCourses) {
+	$('#TestDiv').empty();
 	var weekdays = ['M', 'T', 'W', 'R', 'F'];
    	var startHour = 16;
    	var endHour = 36;
@@ -143,7 +168,11 @@ function SpitSched(ScheduledCourses) {
 	   		var blocktop = (ScheduledCourses[sec].meetHour - startHour) * halfScale;
 	   		var blockheight = ScheduledCourses[sec].halfHourLength * halfScale;
 	   		var blockname = ScheduledCourses[sec].fullCourseName
-	   		$('#TestDiv').append('<div class="SchedBlock" style="top:'+blocktop+'%;left:'+blockleft+'%;height:'+blockheight+'%;">'+blockname+'</div>');
+	   		$('#TestDiv').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;height:'+blockheight+'%;">'+blockname+'</div>');
    		}
    	}
+   	$('.SchedBlock').click(function() { // If a course is clicked
+		console.log('test')
+		removeFromSched($(this).attr('id'));
+	});
 }
