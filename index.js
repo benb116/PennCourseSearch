@@ -10,7 +10,6 @@ SchedCourses = {};
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 
-app.set('port', process.env.PORT || 3000)
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
@@ -20,7 +19,7 @@ app.get('/', function(req, res) {
   });
 })
 
-app.listen(app.get('port'), function() {
+app.listen(process.env.PORT || 3000, function(){
   console.log("Node app is running at localhost:" + app.get('port'))
 })
 
