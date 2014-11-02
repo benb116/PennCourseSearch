@@ -63,7 +63,8 @@ app.get('/Sched', function(req, res) {
 				var JSONSecID = Object.keys(resJSON)[i]
 				SchedCourses[JSONSecID] = resJSON[JSONSecID];
 			};
-			console.log(SchedCourses)
+			console.log('Added: ')
+			console.log(resJSON)
 			return res.send(SchedCourses);
 		});
 	} else if (addRem == 'rem') {
@@ -73,7 +74,8 @@ app.get('/Sched', function(req, res) {
 				delete SchedCourses[meetsec];
 			}
 		}
-		console.log(SchedCourses)
+		console.log('Removed: ')
+		console.log(resJSON)
 		return res.send(SchedCourses);
 	} else {
 		return res.send(SchedCourses);
@@ -89,14 +91,11 @@ function parseDeptList(JSONString) {
 	var coursesList = [];
 	for(var key in Res.result_data) { // Iterate through each course
       	var courseListName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
-      	if (coursesList.indexOf(courseListName) == -1) { // If it's not already in the list
-      		coursesList.push(courseListName); // Add and format
+      	if (coursesList.indexOf('<li>'+courseListName+'<span class="CourseTitle"> - '+courseTitle+'</span></li>') == -1) { // If it's not already in the list
+      		var courseTitle = Res.result_data[key].course_title;
+      		coursesList.push('<li>'+courseListName+'<span class="CourseTitle"> - '+courseTitle+'</span></li>'); // Add and format
       	};
     }
-    coursesList.sort()
-    for (var i = 0; i < coursesList.length; i++) {
-    	coursesList[i] = '<li>'+coursesList[i]+'</li>' // Format as HTML list
-    };
 	return coursesList;
 }
 
@@ -208,14 +207,14 @@ function getSchedInfo(JSONString) {
 		var resJSON = { };
 		try { // Not all sections have time info
 			for (var meeti in entry.meetings) {
-				var StartTime = (entry.meetings[meeti].start_hour_24)*2 + (entry.meetings[meeti].start_minutes)/30;
-				var EndTime = (entry.meetings[meeti].end_hour_24)*2 + (entry.meetings[meeti].end_minutes)/30;
+				var StartTime = (entry.meetings[meeti].start_hour_24) + (entry.meetings[meeti].start_minutes)/60;
+				var EndTime = (entry.meetings[meeti].end_hour_24) + (entry.meetings[meeti].end_minutes)/60;
 				var halfLength = EndTime - StartTime;
 				var MeetDays = entry.meetings[meeti].meeting_days;
 				var OpenClose = entry.course_status_normalized;
 
 				resJSON[SectionID.replace(/ /g, "")+MeetDays+StartTime] = {'fullCourseName': SectionName,
-		    		'halfHourLength': halfLength,
+		    		'HourLength': halfLength,
 		    		'meetDay': MeetDays,
 		    		'meetHour': StartTime};
 	    	}
