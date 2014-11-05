@@ -76,7 +76,10 @@ app.get('/Sched', function(req, res) {
 		console.log('Removed: ')
 		console.log(resJSON)
 		return res.send(SchedCourses);
-	} else {
+	} else if (addRem == 'clear') {
+		SchedCourses = {};
+	}
+	else {
 		return res.send(SchedCourses);
 	}
 	

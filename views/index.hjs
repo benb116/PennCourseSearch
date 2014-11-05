@@ -26,6 +26,7 @@
         	<div id="InfoPanel">
         		
 	        	<div id="Schedule" style="position:relative;"></div>
+                <span>Toggle course titles</span><span>Clear All</span>
 
         	</div>
         </div>

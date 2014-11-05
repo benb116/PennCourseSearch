@@ -15,6 +15,17 @@ $(document).ready(function() {
 		SpitSched(data)
 	});
 
+	$('#InfoPanel span').click(function() {
+		if ($(this).html() == 'Toggle course titles') {
+			$('.CourseTitle').toggle();
+		}
+		if ($(this).html() == 'Clear All') {
+			console.log('a')
+			$.get("/Sched?addRem=clear")
+			$('#Schedule').empty();
+		}
+	});
+
    	$('#CSearch').on('input', function(){ // When the search terms change
 		delay(function(){ // Don't check instantaneously
 		  	var searchTerms = $('#CSearch').val(); // Get raw search
@@ -131,22 +142,23 @@ function addToSched(sec) { // Getting info about a section
 	});
 }
 function removeFromSched(sec) {
+	console.log(sec)
 	for (var i = 7; i < sec.length; i++) {
 		if (parseFloat(sec[i]) != sec[i]) {
 			secname = sec.substr(0, i);
 			{ break }
 		}
 	};
-
 	$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 	$.get("/Sched?addRem=rem&courseID="+secname) // Make the request
 	.done(function(data) {
-		SpitSched(data)
 		$('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
+		SpitSched(data)
 	});
 }
 function SpitSched(ScheduledCourses) {
 	$('#Schedule').empty();
+	console.log(ScheduledCourses)
 	var weekdays = ['M', 'T', 'W', 'R', 'F'];
 
    	var startHour = 10;
@@ -160,8 +172,6 @@ function SpitSched(ScheduledCourses) {
    			endHour = ScheduledCourses[sec].meetHour+ScheduledCourses[sec].HourLength + 0.5
    		}
    	}
-   	console.log(startHour);
-   	console.log(endHour);
 
  	var halfScale = 100 / (endHour - startHour);
    	for (var sec in ScheduledCourses) {
@@ -200,5 +210,6 @@ function SpitSched(ScheduledCourses) {
 		};
 		$('#CSearch').val($(this).html().split(">")[2]); // Change the search box to match
 		getSectionInfo(secname);
+		getSectionNumbers(secname);
 	});
 }
