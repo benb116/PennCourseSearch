@@ -82,11 +82,8 @@ app.get('/Sched', function(req, res) {
 	else {
 		return res.send(SchedCourses);
 	}
-	
 
 });
-
-
 
 function parseDeptList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object

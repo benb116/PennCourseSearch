@@ -15,9 +15,12 @@ $(document).ready(function() {
 		SpitSched(data)
 	});
 
+	var TitleHidden = true;
+	console.log(TitleHidden)
 	$('#InfoPanel span').click(function() {
 		if ($(this).html() == 'Toggle course titles') {
 			$('.CourseTitle').toggle();
+			TitleHidden = !TitleHidden;
 		}
 		if ($(this).html() == 'Clear All') {
 			console.log('a')
@@ -62,7 +65,7 @@ $(document).ready(function() {
 					if(typeof numbSearch === 'undefined'){var numbSearch = '';};
 					if(typeof sectSearch === 'undefined'){var sectSearch = '';};
 
-					getCourseNumbers(deptSearch);
+					getCourseNumbers(deptSearch, TitleHidden);
 					if (numbSearch.length == 3) {
 						getSectionNumbers(deptSearch+numbSearch)
 					} else { // If there is no course number, clear the section list and info panel
@@ -87,12 +90,13 @@ $(document).ready(function() {
 
 });
 
-function getCourseNumbers(dept) { // Getting info about courses in a department
+function getCourseNumbers(dept, TitleHidden) { // Getting info about courses in a department
 	$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 	$.get("/Search?searchType=deptSearch&courseID="+dept) // Make the request
 	.done(function(data) {
-		$('#CourseList').html(data); // Put the course number list in #CourseList
 		$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
+		$('#CourseList').html(data); // Put the course number list in #CourseList
+		if (TitleHidden == false) {$('.CourseTitle').toggle();}
 		$('#CourseList li').click(function() { // If a course is clicked
 			$('#CSearch').val($(this).html().split("<")[0]); // Change the search box to match
 			$('#SectionInfo').empty();
@@ -208,8 +212,11 @@ function SpitSched(ScheduledCourses) {
 				{ break }
 			}
 		};
-		$('#CSearch').val($(this).html().split(">")[2]); // Change the search box to match
+		var secname = $(this).html().split(">")[2]
+		var cnum = secname.split(" ").slice(0,2).join(' ');
+		console.log(cnum)
+		$('#CSearch').val(secname); // Change the search box to match
 		getSectionInfo(secname);
-		getSectionNumbers(secname);
+		getSectionNumbers(cnum);
 	});
 }
