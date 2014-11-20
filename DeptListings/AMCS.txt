@@ -1,0 +1,1 @@
+[  "<li>AMCS 525<span class="CourseTitle"> - Partial Dif Equations</span></li>",  "<li>AMCS 602<span class="CourseTitle"> - Algebraic Techniques for Applied Mathematics and Computational Science, II.</span></li>",  "<li>AMCS 609<span class="CourseTitle"> - Analysis</span></li>"]

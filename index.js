@@ -23,6 +23,18 @@ app.listen(process.env.PORT || 3000, function(){
   console.log("Node app is running at localhost:" + app.get('port'))
 })
 
+app.get('/Spit', function(req, res) {
+	var thedept = req.query.dept;
+	console.log(thedept)
+	request({
+		uri: 'http://localhost:3000/Search?searchType=deptSearch&courseID=' + thedept
+	}, function(error, response, body) {
+		return res.render('new', {
+			text: body
+		});
+	});
+});
+
 app.get('/Search', function(req, res) {
 	var courseIDSearch = req.query.courseID;
 	console.log(courseIDSearch);

@@ -1,0 +1,1 @@
+[  "<li>DTCH 104<span class="CourseTitle"> - Intermediate Dutch II</span></li>",  "<li>DTCH 230<span class="CourseTitle"> - Topics in Dutch Studies</span></li>",  "<li>DTCH 504<span class="CourseTitle"> - Intermediate Dutch II</span></li>",  "<li>DTCH 530<span class="CourseTitle"> - Topics in Dutch Studies</span></li>"]

@@ -1,0 +1,1 @@
+[  "<li>LGIC 010<span class="CourseTitle"> - Ideas in Logic and Computation</span></li>",  "<li>LGIC 220<span class="CourseTitle"> - Applied Mathematics of Information and Computation II</span></li>"]

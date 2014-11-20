@@ -1,0 +1,1 @@
+[  "<li>HSSC 508<span class="CourseTitle"> - Knowledge in Motion</span></li>",  "<li>HSSC 588<span class="CourseTitle"> - Humanmities Beyond the Human</span></li>",  "<li>HSSC 665<span class="CourseTitle"> - Research Seminar im the History of Medicine</span></li>"]

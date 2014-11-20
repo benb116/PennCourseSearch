@@ -1,0 +1,1 @@
+[  "<li>CIT 590<span class="CourseTitle"> - Programming Languages and Techniques.</span></li>",  "<li>CIT 594<span class="CourseTitle"> - Programming Languages and Techniques II</span></li>",  "<li>CIT 595<span class="CourseTitle"> - Digital System Organization and Design</span></li>",  "<li>CIT 596<span class="CourseTitle"> - Theory of Computation</span></li>"]

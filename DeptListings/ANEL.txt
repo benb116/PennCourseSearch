@@ -1,0 +1,1 @@
+[  "<li>ANEL 546<span class="CourseTitle"> - Intermediate Sumerian</span></li>",  "<li>ANEL 560<span class="CourseTitle"> - Late Egyptian</span></li>",  "<li>ANEL 641<span class="CourseTitle"> - 1st Year Akkadian II</span></li>",  "<li>ANEL 740<span class="CourseTitle"> - Akkadian Religious and Scientific Texts</span></li>"]

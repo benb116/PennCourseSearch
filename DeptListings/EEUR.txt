@@ -1,0 +1,1 @@
+[  "<li>EEUR 122<span class="CourseTitle"> - Elementary Hungarian II</span></li>",  "<li>EEUR 124<span class="CourseTitle"> - Intermediate Hungarian II</span></li>"]

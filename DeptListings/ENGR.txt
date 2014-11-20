@@ -1,0 +1,1 @@
+[  "<li>ENGR 105<span class="CourseTitle"> - Introduction to Scientific Computing</span></li>",  "<li>ENGR 250<span class="CourseTitle"> - Energy Systems, Resources and Technology</span></li>",  "<li>ENGR 503<span class="CourseTitle"> - Engineering in Oil, Gas and Coal, from Productin to End Use</span></li>"]
