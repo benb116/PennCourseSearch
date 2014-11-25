@@ -1,1 +1,1 @@
-[  "<li>GUJR 403<span class="CourseTitle"> - Beginning Gujarati Part II</span></li>",  "<li>GUJR 423<span class="CourseTitle"> - Intermediate Gujarati Part II</span></li>",  "<li>GUJR 442<span class="CourseTitle"> - Advanced Gujarati</span></li>"]
+<li>GUJR 403<span class="CourseTitle"> - Beginning Gujarati Part II</span></li><li>GUJR 423<span class="CourseTitle"> - Intermediate Gujarati Part II</span></li><li>GUJR 442<span class="CourseTitle"> - Advanced Gujarati</span></li>

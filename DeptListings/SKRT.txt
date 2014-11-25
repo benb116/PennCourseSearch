@@ -1,1 +1,1 @@
-[  "<li>SKRT 461<span class="CourseTitle"> - Sanskrit 1st Year Part II</span></li>",  "<li>SKRT 471<span class="CourseTitle"> - Intermediate Sanskrit Part II</span></li>",  "<li>SKRT 480<span class="CourseTitle"> - Readings in Sankrit Lit</span></li>"]
+<li>SKRT 461<span class="CourseTitle"> - Sanskrit 1st Year Part II</span></li><li>SKRT 471<span class="CourseTitle"> - Intermediate Sanskrit Part II</span></li><li>SKRT 480<span class="CourseTitle"> - Readings in Sankrit Lit</span></li>

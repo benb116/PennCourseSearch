@@ -40,23 +40,26 @@ app.get('/Search', function(req, res) {
 	console.log(courseIDSearch);
 	var searchType = req.query.searchType;
 	if (courseIDSearch != 'favicon.ico') {
-		console.time('  Request Time');
-		request({
-		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseIDSearch+'&number_of_results_per_page=200',
-		  method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
-		}, function(error, response, body) {
-			console.timeEnd('  Request Time');
-			try {
-				if (searchType == 'deptSearch') {
-					var searchResponse = parseDeptList(body)
-				} else if (searchType == 'numbSearch') {
-					var searchResponse = parseCourseList(body)
-				} else if (searchType == 'sectSearch') {
-					var searchResponse = parseSectionList(body)
-				} else {var searchResponse = ''}
-			} catch(err) {var searchResponse = 'No Results '+err}
-			return res.send(searchResponse);
-		});
+		if (searchType == 'deptSearch') {
+			return res.sendfile(__dirname + '/DeptListings/'+courseIDSearch+'.txt')
+			// var searchResponse = parseDeptList(body)
+		} else {
+			console.time('  Request Time');
+			request({
+			  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseIDSearch+'&number_of_results_per_page=200',
+			  method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
+			}, function(error, response, body) {
+				console.timeEnd('  Request Time');
+				try {
+					if (searchType == 'numbSearch') {
+						var searchResponse = parseCourseList(body)
+					} else if (searchType == 'sectSearch') {
+						var searchResponse = parseSectionList(body)
+					} else {var searchResponse = ''}
+				} catch(err) {var searchResponse = 'No Results '+err}
+				return res.send(searchResponse);
+			});
+		};
 	};
 });
 

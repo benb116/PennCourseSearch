@@ -1,1 +1,1 @@
-[  "<li>LSMP 421<span class="CourseTitle"> - Lsmp Capstone</span></li>"]
+<li>LSMP 421<span class="CourseTitle"> - Lsmp Capstone</span></li>
