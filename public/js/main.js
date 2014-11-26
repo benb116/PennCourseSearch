@@ -34,7 +34,7 @@ $(document).ready(function() {
 		  	var searchTerms = $('#CSearch').val(); // Get raw search
 
 			try {
-				if (searchTerms != "" && searchTerms != 'favicon.ico') { // Initial filtering
+				if (searchTerms != "" && searchTerms != 'favicon.ico' && searchTerms != 'blank') { // Initial filtering
 					// Format search terms for server request
 					searchTerms = searchTerms.replace(/ /g, "").replace(/-/g, ""); // Replace spaces and dashes
 

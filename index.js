@@ -11,6 +11,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
   return res.render('index', {
@@ -41,7 +42,8 @@ app.get('/Search', function(req, res) {
 	var searchType = req.query.searchType;
 	if (courseIDSearch != 'favicon.ico') {
 		if (searchType == 'deptSearch') {
-			return res.sendfile(__dirname + '/DeptListings/'+courseIDSearch+'.txt')
+			console.log('')
+			return res.sendfile(path.join(__dirname, 'public/DeptListings/'+courseIDSearch+'.txt'));
 			// var searchResponse = parseDeptList(body)
 		} else {
 			console.time('  Request Time');
