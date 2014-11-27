@@ -42,7 +42,6 @@ app.get('/Search', function(req, res) {
 	var searchType = req.query.searchType;
 	if (courseIDSearch != 'favicon.ico') {
 		if (searchType == 'deptSearch') {
-			console.log('')
 			return res.sendfile(path.join(__dirname, 'public/DeptListings/'+courseIDSearch+'.txt'));
 			// var searchResponse = parseDeptList(body)
 		} else {
@@ -58,7 +57,7 @@ app.get('/Search', function(req, res) {
 					} else if (searchType == 'sectSearch') {
 						var searchResponse = parseSectionList(body)
 					} else {var searchResponse = ''}
-				} catch(err) {var searchResponse = 'No Results '+err}
+				} catch(err) {var searchResponse = 'No results :('}
 				return res.send(searchResponse);
 			});
 		};
@@ -95,6 +94,7 @@ app.get('/Sched', function(req, res) {
 		return res.send(SchedCourses);
 	} else if (addRem == 'clear') {
 		SchedCourses = {};
+		console.log('Cleared')
 	}
 	else {
 		return res.send(SchedCourses);
@@ -119,8 +119,10 @@ function getTimeInfo(JSONObj) {
 	OCStatus = JSONObj.course_status;
   	if (OCStatus == "O") {
   		var StatusClass = 'OpenSec' // If it's open, add class open
-  	} else {
+  	} else if (OCStatus == "C") {
   		var StatusClass = 'ClosedSec' // If it's closed, add class closed
+  	} else {
+  		var StatusClass = 'ErrorSec' // Otherwise make it gray
   	};
   	var TimeInfo = [];
 	try { // Not all sections have time info
@@ -136,7 +138,8 @@ function getTimeInfo(JSONObj) {
 	}
 	catch(err) {
 		console.log("Error getting times")
-		var TimeInfo = [];
+		console.log('catch')
+		var TimeInfo = '';
 	}
 	return [StatusClass, TimeInfo];
 }
@@ -150,6 +153,9 @@ function parseCourseList(JSONString) {
       	var TimeInfoArray = getTimeInfo(Res.result_data[key]);
       	var StatusClass = TimeInfoArray[0];
       	var TimeInfo = TimeInfoArray[1][0];
+      	if(typeof TimeInfo === 'undefined'){
+		   TimeInfo = '';
+		};
 		if (sectionsList.indexOf(tempName) == -1) { // If it's not already in the list
       		sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+tempName+TimeInfo+'</span></li>'; // Add and format
       	};

@@ -8,26 +8,30 @@ $(document).ready(function() {
 	    timer = setTimeout(callback, ms);
 	  };})();
 
-	$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+	LoadingSum = 0;
+
+	LoadingSum += 1;
 	$.get("/Sched?addRem=blank&courseID=blank") // Make the request
 	.done(function(data) {
-		$('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
 		SpitSched(data)
+	})
+	.always(function() {
+		LoadingSum -= 1;
+		LoadingIndicate()
 	});
 
 	var TitleHidden = true;
-	console.log(TitleHidden)
 	$('#InfoPanel span').click(function() {
 		if ($(this).html() == 'Toggle course titles') {
 			$('.CourseTitle').toggle();
 			TitleHidden = !TitleHidden;
 		}
 		if ($(this).html() == 'Clear All') {
-			console.log('a')
 			$.get("/Sched?addRem=clear")
 			$('#Schedule').empty();
 		}
 	});
+
 
    	$('#CSearch').on('input', function(){ // When the search terms change
 		delay(function(){ // Don't check instantaneously
@@ -77,13 +81,13 @@ $(document).ready(function() {
 						$('#SectionInfo').empty();
 					};
 					
-				} else { // If there are no good search terms, clear everything
+				} else if (searchTerms != "" ) { // If there are no good search terms, clear everything
 					$('#CourseList').empty();
 					$('#SectionList').empty();
-					$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
+					$('#SectionInfo').empty();
 				}
 			} 
-			catch(err) {console.log('No Results');}
+			catch(err) {console.log('No Results '+ err);}
 
 		}, 400);
 	});
@@ -91,10 +95,9 @@ $(document).ready(function() {
 });
 
 function getCourseNumbers(dept, TitleHidden) { // Getting info about courses in a department
-	$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+	LoadingSum += 1;
 	$.get("/Search?searchType=deptSearch&courseID="+dept) // Make the request
 	.done(function(data) {
-		$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
 		$('#CourseList').html(data); // Put the course number list in #CourseList
 		if (TitleHidden == false) {$('.CourseTitle').toggle();}
 		$('#CourseList li').click(function() { // If a course is clicked
@@ -104,13 +107,19 @@ function getCourseNumbers(dept, TitleHidden) { // Getting info about courses in 
 			$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 			getSectionNumbers(courseName); // Search for sections
 		});
+	})
+	.fail(function() {
+		$('#CourseList').html('No results :(');
+	})
+	.always(function() {
+		LoadingSum -= 1;
+		LoadingIndicate()
 	});
 }
 function getSectionNumbers(cnum) { // Getting info about sections in a department
-	$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+	LoadingSum += 1;
 	$.get("/Search?searchType=numbSearch&courseID="+cnum) // Make the request
 	.done(function(data) {
-		$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
 		$('#SectionList').html(data); // Put the section list in #SectionList
 		$('#SectionList span:nth-child(1)').click(function() { // If a section is clicked
 			var secname = $(this).next().next().html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
@@ -121,13 +130,16 @@ function getSectionNumbers(cnum) { // Getting info about sections in a departmen
 			var secname = $(this).html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
 			getSectionInfo(secname); // Search for section info
 		});
+	})
+	.always(function() {
+		LoadingSum -= 1;
+		LoadingIndicate()
 	});
 }
 function getSectionInfo(sec) {
-	$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+	LoadingSum += 1;
 	$.get("/Search?searchType=sectSearch&courseID="+sec) // Make the request
 	.done(function(data) {
-		$('#LoadingInfo').css('opacity', '0'); // Turn off loading indicator
 		$('#SectionInfo').html(data);
 		$('#SectionInfo li').click(function() { // If a course is clicked
 			$('#CSearch').val($(this).html()); // Change the search box to match
@@ -135,34 +147,42 @@ function getSectionInfo(sec) {
 			$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 			getSectionInfo(courseName); // Search for sections
 		});
+	})
+	.always(function() {
+		LoadingSum -= 1;
+		LoadingIndicate()
 	});
 }
 function addToSched(sec) { // Getting info about a section
-	$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+	LoadingSum += 1;
 	$.get("/Sched?addRem=add&courseID="+sec) // Make the request
 	.done(function(data) {
-		$('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
 		SpitSched(data)
+	})
+	.always(function() {
+		LoadingSum -= 1;
+		LoadingIndicate()
 	});
 }
 function removeFromSched(sec) {
-	console.log(sec)
 	for (var i = 7; i < sec.length; i++) {
 		if (parseFloat(sec[i]) != sec[i]) {
 			secname = sec.substr(0, i);
 			{ break }
 		}
 	};
-	$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+	LoadingSum += 1;
 	$.get("/Sched?addRem=rem&courseID="+secname) // Make the request
 	.done(function(data) {
-		$('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
 		SpitSched(data)
+	})
+	.always(function() {
+		LoadingSum -= 1;
+		LoadingIndicate()
 	});
 }
 function SpitSched(ScheduledCourses) {
 	$('#Schedule').empty();
-	console.log(ScheduledCourses)
 	var weekdays = ['M', 'T', 'W', 'R', 'F'];
 
    	var startHour = 10;
@@ -219,4 +239,12 @@ function SpitSched(ScheduledCourses) {
 		getSectionInfo(secname);
 		getSectionNumbers(cnum);
 	});
+}
+
+function LoadingIndicate() {
+	if (LoadingSum > 0) {
+		$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+	} else {
+		$('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
+	};
 }
