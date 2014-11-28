@@ -21,24 +21,28 @@ h1 {margin-top: 1em;}
 #SectionInfo {padding-top: 2%; height: 65%;}
 ul {list-style-type: none; padding: 0; margin: 0;}
 #SectionList li {padding-left: 0.0em;}
-#CourseList li, #SectionList li span, #SectionInfo li {cursor: pointer;}
-#CourseList li:active, #SectionList li span:active, #SectionInfo li:active {background-color: #00B3FF;}
+#CourseList li, #SectionList li span, #SectionInfo span {cursor: pointer;}
+#CourseList li:active, #SectionList li span:active, #SectionInfo span:active {background-color: #00B3FF;}
 .OpenSec {background-color: #47EA4C;}
 .ClosedSec {background-color: #F73B3B;}
 .ErrorSec {background-color: #E6E6E6;}
 .CourseTitle {display: none;}
+#SectionInfo p {margin: 0;}
+.DescButton:hover {font-weight: bolder;}
+.DescText {display: none;}
 
 #InfoPanel {height: calc(100vh - 16em); overflow: scroll; padding-left: 2em; padding-right: 2em; font-size: 12px;}
 #InfoPanel span {margin: 1em; cursor: pointer;}
-#Schedule {
-	background-color: white;
-	width: 95%;
+#TimeCol, #Schedule {background-color: white;
 	height: 80%;
 	margin: 0 auto;
-	border-collapse: collapse;
-}
-.SchedBlock {width:20%; display: table-cell; position: absolute; border: 1px solid black; cursor: pointer}
-
+	display: inline-block;
+	vertical-align: top;}
+#TimeCol {width: 5%}
+#Schedule {width: 90%}
+.SchedBlock {width:20%; display: table-cell; position: absolute; border: 1px solid black; cursor: pointer; background-color: #E6E6E6; box-sizing: border-box;}
+.TimeBlock, hr {position: relative; position: absolute; text-align: center;}
+.TimeBlock {width: 5%}
 .CloseX {position: absolute; top: 0; left: 0; display: block; width: 15px; height: 15px; color: #ADADAD; opacity: 0; 
 	-webkit-transition: opacity .15s ease-in-out; transition: opacity .15s ease-in-out;
 	-webkit-transition: color .15s ease-in-out; transition: color .15s ease-in-out;}

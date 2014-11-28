@@ -24,7 +24,7 @@
         		<div id="SectionInfo"></div>
         	</div>
         	<div id="InfoPanel">
-        		
+        		<div id="TimeCol" style="position:relative;"></div>
 	        	<div id="Schedule" style="position:relative;"></div>
                 <span>Toggle course titles</span><span>Clear All</span>
 

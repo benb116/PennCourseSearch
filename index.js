@@ -6,6 +6,7 @@ var request = require("request");
 var currentTerm = '2015A'
 
 SchedCourses = {};
+RequestDept = false;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
@@ -41,7 +42,7 @@ app.get('/Search', function(req, res) {
 	console.log(courseIDSearch);
 	var searchType = req.query.searchType;
 	if (courseIDSearch != 'favicon.ico') {
-		if (searchType == 'deptSearch') {
+		if (searchType == 'deptSearch' && RequestDept == false) {
 			return res.sendfile(path.join(__dirname, 'public/DeptListings/'+courseIDSearch+'.txt'));
 			// var searchResponse = parseDeptList(body)
 		} else {
@@ -52,7 +53,9 @@ app.get('/Search', function(req, res) {
 			}, function(error, response, body) {
 				console.timeEnd('  Request Time');
 				try {
-					if (searchType == 'numbSearch') {
+					if (searchType == 'deptSearch' && RequestDept == true){
+						var searchResponse = parseDeptList(body)
+					} else if (searchType == 'numbSearch') {
 						var searchResponse = parseCourseList(body)
 					} else if (searchType == 'sectSearch') {
 						var searchResponse = parseSectionList(body)
@@ -189,21 +192,21 @@ function parseSectionList(JSONString) {
 		if (entry['recitations'] != false) { // If it has recitations
 			var AsscList = '<br>Associated Recitations: <ul>';
 			for(var key in entry.recitations) {
-				AsscList += '<li>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</li>'
+				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</span></li>'
 			};
 			AsscList += '</ul>';
 
 		} else if (entry['labs'] != false) { // If it has labs
 			var AsscList = '<br>Associated Labs: <ul>';
 			for(var key in entry.labs) {
-				AsscList += '<li>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</li>'
+				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</span></li>'
 			};
 			AsscList += '</ul>';
 
 		} else if (entry['lectures'] != false) { // If it has lectures
 			var AsscList = '<br>Associated Lectures: <ul>';
 			for(var key in entry.lectures) {
-				AsscList += '<li>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</li>'
+				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</span></li>'
 			};
 			AsscList += '</ul>';
 
@@ -211,7 +214,7 @@ function parseSectionList(JSONString) {
 			AsscList = '';
 		};
 
-		return FullID + " - " + Title + Instructor +  "<br><br>" + Desc + "<br><br>Status: " + OpenClose + "<br><br>" + TimeInfo + AsscList; // Format the whole response
+		return "<span>&nbsp + &nbsp</span><span>" + FullID + "</span> - " + Title + Instructor +  "<br><br><span class='DescButton'>Description</span><br><p class='DescText'>" + Desc + "</p><br>Status: " + OpenClose + "<br><br>" + TimeInfo + AsscList; // Format the whole response
 	}
  	catch(err) {
 		return 'No Results';
