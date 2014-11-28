@@ -202,39 +202,62 @@ function removeFromSched(sec) {
 function SpitSched(ScheduledCourses) {
 	$('#Schedule').empty();
 	$('#TimeCol').empty();
+	if (Object.keys(ScheduledCourses).length == 0) {
+		return
+	};
+
 	var weekdays = ['M', 'T', 'W', 'R', 'F'];
 
    	var startHour = 10;
    	var endHour = 18;
+   	var percentWidth = 20;
+	incSun = 0
+	incSat = 0
 
    	for (var sec in ScheduledCourses) {
-   		if (ScheduledCourses[sec].meetHour <= startHour + 0) {
-   			startHour = ScheduledCourses[sec].meetHour - 0
+   		if (ScheduledCourses[sec].meetHour <= startHour) {
+   			startHour = ScheduledCourses[sec].meetHour
    		}
-   		if (ScheduledCourses[sec].meetHour+ScheduledCourses[sec].HourLength >= endHour - 0) {
-   			endHour = ScheduledCourses[sec].meetHour+ScheduledCourses[sec].HourLength + 0
+   		if (ScheduledCourses[sec].meetHour+ScheduledCourses[sec].HourLength >= endHour) {
+   			endHour = ScheduledCourses[sec].meetHour+ScheduledCourses[sec].HourLength
+   		}
+   		for (var day in ScheduledCourses[sec].meetDay) {
+   			var letterDay = ScheduledCourses[sec].meetDay[day]
+   			if (letterDay == 'U') {
+   				incSun = 1;
+   			}
+   			if (letterDay == 'S') {
+   				incSat = 1;	
+   			}
    		}
    	}
+
+   	if (incSun == 1) {weekdays.unshift('U')}
+	if (incSat == 1) {weekdays.push('S')}
+
+   	var percentWidth = 100 / (5 + incSun + incSat)
+
  	var halfScale = 100 / (endHour - startHour + 1);
 
    	for (var i = 0; i <= (endHour - startHour); i++) {
    		toppos = (i) * halfScale + 2.5;
-	   	$('#TimeCol').append('<div class="TimeBlock" style="top:'+toppos+'%">'+Math.round(i+startHour)+':00</div>');
+   		hourtext = Math.round(i+startHour)
+   		if (hourtext > 12) {hourtext -= 12}
+	   	$('#TimeCol').append('<div class="TimeBlock" style="top:'+toppos+'%">'+hourtext+':00</div>');
 	   	$('#Schedule').append('<hr width="100%"style="top:'+toppos+'%" >')
    	};
-
    	for (var sec in ScheduledCourses) {
    		for (var day in ScheduledCourses[sec].meetDay) {
    			var letterDay = ScheduledCourses[sec].meetDay[day]
    			for (var possDay in weekdays) {
    				if (weekdays[possDay] == letterDay) {
-   					var blockleft = possDay*20; { break }
+   					var blockleft = possDay*percentWidth; { break }
    				}
    			}
 	   		var blocktop = (ScheduledCourses[sec].meetHour - startHour) * halfScale + 4;
 	   		var blockheight = ScheduledCourses[sec].HourLength * halfScale;
 	   		var blockname = ScheduledCourses[sec].fullCourseName
-	   		$('#Schedule').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;height:'+blockheight+'%;"><div class="CloseX">x</div>'+blockname+'</div>');
+	   		$('#Schedule').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;width:'+percentWidth+'%;height:'+blockheight+'%;"><div class="CloseX">x</div>'+blockname+'</div>');
    		}
    	}
 
@@ -257,9 +280,8 @@ function SpitSched(ScheduledCourses) {
 				{ break }
 			}
 		};
-		var secname = $(this).html().split(">")[2]
-		var cnum = secname.split(" ").slice(0,2).join(' ');
-		console.log(cnum)
+		var secname = $(this).attr('id').slice(0,10)
+		var cnum = secname.slice(0,7);
 		$('#CSearch').val(secname); // Change the search box to match
 		getSectionInfo(secname);
 		getSectionNumbers(cnum);

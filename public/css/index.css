@@ -40,7 +40,14 @@ ul {list-style-type: none; padding: 0; margin: 0;}
 	vertical-align: top;}
 #TimeCol {width: 5%}
 #Schedule {width: 90%}
-.SchedBlock {width:20%; display: table-cell; position: absolute; border: 1px solid black; cursor: pointer; background-color: #E6E6E6; box-sizing: border-box;}
+.SchedBlock {
+	display: table-cell; 
+	vertical-align: middle;
+	position: absolute; 
+	border: 1px solid black; 
+	cursor: pointer; 
+	background-color: #E6E6E6; 
+	box-sizing: border-box;}
 .TimeBlock, hr {position: relative; position: absolute; text-align: center;}
 .TimeBlock {width: 5%}
 .CloseX {position: absolute; top: 0; left: 0; display: block; width: 15px; height: 15px; color: #ADADAD; opacity: 0; 

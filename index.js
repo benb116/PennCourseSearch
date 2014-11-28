@@ -25,6 +25,7 @@ app.listen(process.env.PORT || 3000, function(){
   console.log("Node app is running at localhost:" + app.get('port'))
 })
 
+// This request manager is for spitting the department lists. They are saved for faster responses
 app.get('/Spit', function(req, res) {
 	var thedept = req.query.dept;
 	console.log(thedept)
@@ -37,65 +38,65 @@ app.get('/Spit', function(req, res) {
 	});
 });
 
+// Manage search requests
 app.get('/Search', function(req, res) {
 	var courseIDSearch = req.query.courseID;
 	console.log(courseIDSearch);
 	var searchType = req.query.searchType;
 	if (courseIDSearch != 'favicon.ico') {
-		if (searchType == 'deptSearch' && RequestDept == false) {
-			return res.sendfile(path.join(__dirname, 'public/DeptListings/'+courseIDSearch+'.txt'));
-			// var searchResponse = parseDeptList(body)
+		if (searchType == 'deptSearch' && RequestDept == false) { // If it's a dept search and we aren't rechecking the API
+			return res.sendfile(path.join(__dirname, 'public/DeptListings/'+courseIDSearch+'.txt')); // Send the premade text
 		} else {
-			console.time('  Request Time');
+			console.time('  Request Time'); // Start the timer
 			request({
 			  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseIDSearch+'&number_of_results_per_page=200',
 			  method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
 			}, function(error, response, body) {
 				console.timeEnd('  Request Time');
 				try {
-					if (searchType == 'deptSearch' && RequestDept == true){
-						var searchResponse = parseDeptList(body)
+					if (searchType == 'deptSearch' && RequestDept == true){ // If we are checking the API
+						var searchResponse = parseDeptList(body) // Parse the dept response
 					} else if (searchType == 'numbSearch') {
-						var searchResponse = parseCourseList(body)
+						var searchResponse = parseCourseList(body) // Parse the num response
 					} else if (searchType == 'sectSearch') {
-						var searchResponse = parseSectionList(body)
+						var searchResponse = parseSectionList(body) // Parse the sec response
 					} else {var searchResponse = ''}
 				} catch(err) {var searchResponse = 'No results :('}
-				return res.send(searchResponse);
+				return res.send(searchResponse); // return correct info
 			});
 		};
 	};
 });
 
+// Manage scheduling requests
 app.get('/Sched', function(req, res) {
-	var addRem = req.query.addRem;
+	var addRem = req.query.addRem; // Are we adding, removing, or clearing?
 	var courseID = req.query.courseID;
 
-	if (addRem == 'add') {
+	if (addRem == 'add') { // If we need to add, then we get time info for the section
 		request({
 		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
 		  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
 		}, function(error, response, body) {
-			resJSON = getSchedInfo(body);
-			for (var i = 0; i < Object.keys(resJSON).length; i++) {
+			resJSON = getSchedInfo(body); // Format the response
+			console.log('Added: ')
+			for (var i = 0; i < Object.keys(resJSON).length; i++) { // Compile a list of courses
 				var JSONSecID = Object.keys(resJSON)[i]
 				SchedCourses[JSONSecID] = resJSON[JSONSecID];
+				console.log(JSONSecID)
 			};
-			console.log('Added: ')
-			console.log(resJSON)
 			return res.send(SchedCourses);
 		});
-	} else if (addRem == 'rem') {
-		console.log('remove: '+courseID)
+	} else if (addRem == 'rem') { // If we need to remove
+		console.log('Removed: ')
 		for (meetsec in SchedCourses) {
-			if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) {
+			if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) { // Find all meeting times of a given course
 				delete SchedCourses[meetsec];
+				console.log(courseID)
 			}
 		}
-		console.log('Removed: ')
-		console.log(resJSON)
 		return res.send(SchedCourses);
-	} else if (addRem == 'clear') {
+	} else if (addRem == 'clear') { // Clear all
 		SchedCourses = {};
 		console.log('Cleared')
 	}
@@ -156,9 +157,8 @@ function parseCourseList(JSONString) {
       	var TimeInfoArray = getTimeInfo(Res.result_data[key]);
       	var StatusClass = TimeInfoArray[0];
       	var TimeInfo = TimeInfoArray[1][0];
-      	if(typeof TimeInfo === 'undefined'){
-		   TimeInfo = '';
-		};
+      	if(typeof TimeInfoArray[1][1] !== 'undefined'){TimeInfo += ' ...';};
+      	if(typeof TimeInfo === 'undefined'){TimeInfo = '';};
 		if (sectionsList.indexOf(tempName) == -1) { // If it's not already in the list
       		sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+tempName+TimeInfo+'</span></li>'; // Add and format
       	};
@@ -225,10 +225,8 @@ function getSchedInfo(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON Object
 	var entry = Res.result_data[0];
 	try {
-		var Title = entry.course_title;
 		var SectionName = entry.section_id_normalized.replace(/-/g, " "); // Format name
 		var SectionID = entry.section_id_normalized.replace(/-/g, ""); // Format name
-		var Desc = entry.course_description;
 		var resJSON = { };
 		try { // Not all sections have time info
 			for (var meeti in entry.meetings) {
