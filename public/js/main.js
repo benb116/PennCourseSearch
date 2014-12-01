@@ -202,9 +202,6 @@ function removeFromSched(sec) {
 function SpitSched(ScheduledCourses) {
 	$('#Schedule').empty();
 	$('#TimeCol').empty();
-	if (Object.keys(ScheduledCourses).length == 0) {
-		return
-	};
 
 	var weekdays = ['M', 'T', 'W', 'R', 'F'];
 

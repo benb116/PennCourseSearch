@@ -6,13 +6,13 @@ var request = require("request");
 var currentTerm = '2015A'
 
 SchedCourses = {};
-RequestDept = false;
+RequestDept = true;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/public', express.static(path.join(__dirname, 'public')));
+process.env.PWD = process.cwd()
 
 app.get('/', function(req, res) {
   return res.render('index', {
@@ -45,7 +45,7 @@ app.get('/Search', function(req, res) {
 	var searchType = req.query.searchType;
 	if (courseIDSearch != 'favicon.ico') {
 		if (searchType == 'deptSearch' && RequestDept == false) { // If it's a dept search and we aren't rechecking the API
-			return res.sendfile(path.join(__dirname, 'public/DeptListings/'+courseIDSearch+'.txt')); // Send the premade text
+			return res.sendfile(process.env.PWD+'/public/DeptListings/'+courseIDSearch+'.txt'); // Send the premade text
 		} else {
 			console.time('  Request Time'); // Start the timer
 			request({
