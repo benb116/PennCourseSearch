@@ -38,8 +38,8 @@ ul {list-style-type: none; padding: 0; margin: 0;}
 	margin: 0 auto;
 	display: inline-block;
 	vertical-align: top;}
-#TimeCol {width: 5%}
-#Schedule {width: 90%}
+#TimeCol {width: 5%;}
+#Schedule {width: 90%;}
 .SchedBlock {
 	display: table-cell; 
 	vertical-align: middle;
@@ -49,7 +49,7 @@ ul {list-style-type: none; padding: 0; margin: 0;}
 	background-color: #E6E6E6; 
 	box-sizing: border-box;}
 .TimeBlock, hr {position: relative; position: absolute; text-align: center;}
-.TimeBlock {width: 5%}
+.TimeBlock {width: 5%;}
 .CloseX {position: absolute; top: 0; left: 0; display: block; width: 15px; height: 15px; color: #ADADAD; opacity: 0; 
 	-webkit-transition: opacity .15s ease-in-out; transition: opacity .15s ease-in-out;
 	-webkit-transition: color .15s ease-in-out; transition: color .15s ease-in-out;}

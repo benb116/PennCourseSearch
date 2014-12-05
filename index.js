@@ -6,23 +6,35 @@ var request = require("request");
 var currentTerm = '2015A'
 
 SchedCourses = {};
-RequestDept = true;
+if (__dirname == '/app') {
+	RequestDept = true;
+} else {
+	RequestDept = false;
+}
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function(error, req, res, next) {
+    res.status(500);
+    res.render('500.hjs');
+  });
 process.env.PWD = process.cwd()
 
+subtitles = ["Cause PennInTouch sucks.", "You can press the back button, but you don't even need to.", "This site was invented by Benjamin Franklin in 1793."];
+
 app.get('/', function(req, res) {
+  thissub = subtitles[Math.floor(Math.random() * subtitles.length)];
   return res.render('index', {
-    title: 'PennCourseScheduler',
-    currentTerm: currentTerm
+    title: 'Penn Course Search',
+    currentTerm: currentTerm,
+    subtitle: thissub
   });
 })
 
 app.listen(process.env.PORT || 3000, function(){
-  console.log("Node app is running at localhost:" + app.get('port'))
+  console.log("Node app is running. Better go catch it")
 })
 
 // This request manager is for spitting the department lists. They are saved for faster responses
@@ -46,6 +58,16 @@ app.get('/Search', function(req, res) {
 	if (courseIDSearch != 'favicon.ico') {
 		if (searchType == 'deptSearch' && RequestDept == false) { // If it's a dept search and we aren't rechecking the API
 			return res.sendfile(process.env.PWD+'/public/DeptListings/'+courseIDSearch+'.txt'); // Send the premade text
+		} else if (searchType == 'descSearch') { // If it's a desc search and we aren't rechecking the API
+			console.time('  Request Time'); // Start the timer
+			request({
+			  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?description='+courseIDSearch+'&number_of_results_per_page=200',
+			  method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
+			}, function(error, response, body) {
+				console.timeEnd('  Request Time');
+				var searchResponse = parseDeptList(body) // Parse the dept response
+				return res.send(searchResponse); // return correct info
+			});
 		} else {
 			console.time('  Request Time'); // Start the timer
 			request({
@@ -183,6 +205,8 @@ function parseSectionList(JSONString) {
       	var StatusClass = TimeInfoArray[0];
       	var meetArray = TimeInfoArray[1];
       	var TimeInfo = '';
+      	var prereq = entry.prerequisite_notes;
+      	if (prereq == "") {prereq = "none"}
       	for(var listing in meetArray) {
       		TimeInfo += meetArray[listing].split("-")[1] + '<br>';
       	}
@@ -214,7 +238,7 @@ function parseSectionList(JSONString) {
 			AsscList = '';
 		};
 
-		return "<span>&nbsp + &nbsp</span><span>" + FullID + "</span> - " + Title + Instructor +  "<br><br><span class='DescButton'>Description</span><br><p class='DescText'>" + Desc + "</p><br>Status: " + OpenClose + "<br><br>" + TimeInfo + AsscList; // Format the whole response
+		return "<span>&nbsp + &nbsp</span><span>" + FullID + "</span> - " + Title + Instructor +  "<br><br><span class='DescButton'>Description</span><br><p class='DescText'>" + Desc + "</p><br>Status: " + OpenClose + "<br><br>Prerequisites: " + prereq + "<br><br>" + TimeInfo + AsscList; // Format the whole response
 	}
  	catch(err) {
 		return 'No Results';
