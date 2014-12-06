@@ -106,23 +106,12 @@ function getCourseNumbers(dept, desc, TitleHidden) { // Getting info about cours
 	LoadingIndicate();
 	$.get("/Search?searchType=deptSearch&courseID="+deptSearch) // Make the request
 	.done(function(data) {
-		LoadingSum -= 1;
-		LoadingIndicate()
-		$('#CourseList').html(data); // Put the course number list in #CourseList
-		if (TitleHidden == false) {$('.CourseTitle').toggle();}
-		$('#CourseList li').click(function() { // If a course is clicked
-			$('#CSearch').val($(this).html().split("<")[0]); // Change the search box to match
-			$('#SectionInfo').empty();
-			var courseName = $(this).html().split("<")[0].replace(/ /g, " "); // Format the course name for searching
-			$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
-			getSectionNumbers(courseName); // Search for sections
 
-		});
-	})
-	.fail(function() {
-		$.get("/Search?searchType=descSearch&courseID="+desc) // Make the request
-		.done(function(data) {
+		if (data == "") {
+			searchDesc(desc)
+		} else {
 			$('#CourseList').html(data); // Put the course number list in #CourseList
+			if (TitleHidden == false) {$('.CourseTitle').toggle();}
 			$('#CourseList li').click(function() { // If a course is clicked
 				$('#CSearch').val($(this).html().split("<")[0]); // Change the search box to match
 				$('#SectionInfo').empty();
@@ -130,16 +119,38 @@ function getCourseNumbers(dept, desc, TitleHidden) { // Getting info about cours
 				$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 				getSectionNumbers(courseName); // Search for sections
 			});
-		})
-		.fail(function() {
-			$('#CourseList').html('No results :(');
-		})
-		.always(function() {
-			LoadingSum -= 1;
-			LoadingIndicate()
-		});
-	})
+		}
+	})	
+	.fail(function() {
+		searchDesc(desc)
+	})	
+	.always(function() {
+		LoadingSum -= 1;
+		LoadingIndicate()
+	});
 }
+
+function searchDesc(desc) {
+	LoadingSum += 1;
+	LoadingIndicate()
+	$.get("/Search?searchType=descSearch&courseID="+desc) // Make the request
+	.done(function(data) {
+		$('#CourseList').html(data); // Put the course number list in #CourseList
+		$('#CourseList li').click(function() { // If a course is clicked
+			$('#CSearch').val($(this).html().split("<")[0]); // Change the search box to match
+			$('#SectionInfo').empty();
+			var courseName = $(this).html().split("<")[0].replace(/ /g, " "); // Format the course name for searching
+			$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+			getSectionNumbers(courseName); // Search for sections
+		});
+	})		
+	.always(function() {
+		LoadingSum -= 1;
+		LoadingIndicate()
+	});
+}
+
+
 function getSectionNumbers(cnum) { // Getting info about sections in a department
 	LoadingSum += 1;
 	LoadingIndicate();

@@ -57,7 +57,9 @@ app.get('/Search', function(req, res) {
 	var searchType = req.query.searchType;
 	if (courseIDSearch != 'favicon.ico') {
 		if (searchType == 'deptSearch' && RequestDept == false) { // If it's a dept search and we aren't rechecking the API
+			
 			return res.sendfile(process.env.PWD+'/public/DeptListings/'+courseIDSearch+'.txt'); // Send the premade text
+		
 		} else if (searchType == 'descSearch') { // If it's a desc search and we aren't rechecking the API
 			console.time('  Request Time'); // Start the timer
 			request({
