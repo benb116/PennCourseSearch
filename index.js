@@ -3,14 +3,8 @@ var path = require('path');
 var express = require('express')
 var app = express();
 var request = require("request");
+var mongojs = require("mongojs");
 var currentTerm = '2015A'
-
-SchedCourses = {};
-if (__dirname == '/app') {
-	RequestDept = true;
-} else {
-	RequestDept = false;
-}
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
@@ -22,9 +16,14 @@ app.use(function(error, req, res, next) {
   });
 process.env.PWD = process.cwd()
 
+
+var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@ds063180.mongolab.com:63180/pcs1',
+    db = mongojs.connect(uri, ["Students"]);
+
 subtitles = ["Cause PennInTouch sucks.", "You can press the back button, but you don't even need to.", "This site was invented by Benjamin Franklin in 1793."];
 
 app.get('/', function(req, res) {
+  console.log('Page Refresh')
   thissub = subtitles[Math.floor(Math.random() * subtitles.length)];
   return res.render('index', {
     title: 'Penn Course Search',
@@ -56,11 +55,7 @@ app.get('/Search', function(req, res) {
 	console.log(courseIDSearch);
 	var searchType = req.query.searchType;
 	if (courseIDSearch != 'favicon.ico') {
-		if (searchType == 'deptSearch' && RequestDept == false) { // If it's a dept search and we aren't rechecking the API
-			
-			return res.sendfile(process.env.PWD+'/public/DeptListings/'+courseIDSearch+'.txt'); // Send the premade text
-		
-		} else if (searchType == 'descSearch') { // If it's a desc search and we aren't rechecking the API
+		if (searchType == 'descSearch') { // If it's a desc search and we aren't rechecking the API
 			console.time('  Request Time'); // Start the timer
 			request({
 			  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?description='+courseIDSearch+'&number_of_results_per_page=200',
@@ -78,7 +73,7 @@ app.get('/Search', function(req, res) {
 			}, function(error, response, body) {
 				console.timeEnd('  Request Time');
 				try {
-					if (searchType == 'deptSearch' && RequestDept == true){ // If we are checking the API
+					if (searchType == 'deptSearch'){ // If we are checking the API
 						var searchResponse = parseDeptList(body) // Parse the dept response
 					} else if (searchType == 'numbSearch') {
 						var searchResponse = parseCourseList(body) // Parse the num response
@@ -90,6 +85,11 @@ app.get('/Search', function(req, res) {
 			});
 		};
 	};
+});
+
+SchedCourses = {};
+db.Students.find({Pennkey: "bernsb"}, { Sched1: 1}, function(err, doc) {
+	SchedCourses = doc[0].Sched1;
 });
 
 // Manage scheduling requests
@@ -109,6 +109,7 @@ app.get('/Sched', function(req, res) {
 				SchedCourses[JSONSecID] = resJSON[JSONSecID];
 				console.log(JSONSecID)
 			};
+			db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }});
 			return res.send(SchedCourses);
 		});
 	} else if (addRem == 'rem') { // If we need to remove
@@ -119,9 +120,11 @@ app.get('/Sched', function(req, res) {
 				console.log(courseID)
 			}
 		}
+		db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }});
 		return res.send(SchedCourses);
 	} else if (addRem == 'clear') { // Clear all
 		SchedCourses = {};
+		db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }});
 		console.log('Cleared')
 	}
 	else {
@@ -261,15 +264,15 @@ function getSchedInfo(JSONString) {
 				var halfLength = EndTime - StartTime;
 				var MeetDays = entry.meetings[meeti].meeting_days;
 				var OpenClose = entry.course_status_normalized;
-
-				resJSON[SectionID.replace(/ /g, "")+MeetDays+StartTime] = {'fullCourseName': SectionName,
+				var FullID = SectionID.replace(/ /g, "")+MeetDays+StartTime.toString().replace(/\./g, "");
+				resJSON[FullID] = {'fullCourseName': SectionName,
 		    		'HourLength': halfLength,
 		    		'meetDay': MeetDays,
 		    		'meetHour': StartTime};
 	    	}
 		}
 		catch(err) {
-			console.log("Error getting times")
+			console.log("Error getting times: "+err)
 			var TimeInfo = '';
 		}
 		return resJSON;

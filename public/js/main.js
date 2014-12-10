@@ -104,7 +104,7 @@ function getCourseNumbers(dept, desc, TitleHidden) { // Getting info about cours
 	var deptSearch = dept.split("/")[0]; // Get deptartment
 	LoadingSum += 1;
 	LoadingIndicate();
-	$.get("/Search?searchType=deptSearch&courseID="+deptSearch) // Make the request
+	$.get("/DeptListings/"+deptSearch.toUpperCase()+".txt") // Make the request
 	.done(function(data) {
 
 		if (data == "") {
