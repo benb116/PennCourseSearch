@@ -1,0 +1,40 @@
+<li PCR="1.00">SAST 001<span class="CourseTitle"> - Introduction to Modern India</span></li>
+<li PCR="3.18">SAST 003<span class="CourseTitle"> - History, Culture,and Religion in Early India</span></li>
+<li PCR="2.90">SAST 004<span class="CourseTitle"> - India&#39;s Literature: Love, War, Wisdom and Humor</span></li>
+<li PCR="3.18">SAST 105<span class="CourseTitle"> - Beginning Tabla II</span></li>
+<li PCR="4.00">SAST 107<span class="CourseTitle"> - Beginning Sitar II</span></li>
+<li PCR="4.00">SAST 109<span class="CourseTitle"> - Intermediate Sitar II</span></li>
+<li PCR="3.20">SAST 116<span class="CourseTitle"> - Music Cultures of North India and Pakistan</span></li>
+<li PCR="3.00">SAST 124<span class="CourseTitle"> - Narrative Across Cultures</span></li>
+<li PCR="3.82">SAST 142<span class="CourseTitle"> - Introduction to Buddhism</span></li>
+<li PCR="2.75">SAST 165<span class="CourseTitle"> - Masala Matters</span></li>
+<li PCR="2.83">SAST 170<span class="CourseTitle"> - Psychology of Asian Americans</span></li>
+<li PCR="0.00">SAST 217<span class="CourseTitle"> - CU In India - Topics Course</span></li>
+<li PCR="0.00">SAST 227<span class="CourseTitle"> - The Hindi Nation and its Fragments</span></li>
+<li PCR="0.00">SAST 249<span class="CourseTitle"> - Re-enchanting Modernity: A Guide to Sufism in South Asia</span></li>
+<li PCR="0.00">SAST 250<span class="CourseTitle"> - History of Hinduism</span></li>
+<li PCR="0.00">SAST 252<span class="CourseTitle"> - Music of South and Southeast Asia</span></li>
+<li PCR="0.00">SAST 265<span class="CourseTitle"> - Indian Folklore</span></li>
+<li PCR="0.00">SAST 270<span class="CourseTitle"> - The Agrarian Question in Asia: A Chapter in the History of Economic Thought</span></li>
+<li PCR="0.00">SAST 296<span class="CourseTitle"> - Tpcs Social Dvlpmt India</span></li>
+<li PCR="0.00">SAST 312<span class="CourseTitle"> - 20th Century South Asian Art</span></li>
+<li PCR="3.25">SAST 323<span class="CourseTitle"> - Topics In Postcolonial Literature</span></li>
+<li PCR="0.00">SAST 324<span class="CourseTitle"> - Sanskrit Literature and Poetry</span></li>
+<li PCR="2.70">SAST 350<span class="CourseTitle"> - Themes in Indian Philosophy</span></li>
+<li PCR="4.00">SAST 406<span class="CourseTitle"> - Beginning Pashtu Part II</span></li>
+<li PCR="3.00">SAST 408<span class="CourseTitle"> - Beginning Kannada Part II</span></li>
+<li PCR="4.00">SAST 411<span class="CourseTitle"> - Beginning Marathi Part II</span></li>
+<li PCR="3.33">SAST 413<span class="CourseTitle"> - Intermediate Marathi Part II</span></li>
+<li PCR="4.00">SAST 426<span class="CourseTitle"> - Intermediate Pashtu Part II</span></li>
+<li PCR="4.00">SAST 428<span class="CourseTitle"> - Intermediate Kannada Part II</span></li>
+<li PCR="0.00">SAST 447<span class="CourseTitle"> - Advanced Kannada: Selected Topics</span></li>
+<li PCR="4.00">SAST 505<span class="CourseTitle"> - Topics in Indian Art</span></li>
+<li PCR="0.00">SAST 517<span class="CourseTitle"> - CU In India - Topics Course</span></li>
+<li PCR="0.00">SAST 527<span class="CourseTitle"> - The Hindi Nation and its Fragments</span></li>
+<li PCR="4.00">SAST 541<span class="CourseTitle"> - Islam &amp; Religious Image</span></li>
+<li PCR="0.00">SAST 550<span class="CourseTitle"> - History of Hinduism</span></li>
+<li PCR="0.00">SAST 565<span class="CourseTitle"> - Indian Folklore</span></li>
+<li PCR="0.00">SAST 570<span class="CourseTitle"> - The Agrarian Question in Asia: A Chapter in the History of Economic Thought</span></li>
+<li PCR="0.00">SAST 624<span class="CourseTitle"> - Sanskrit Literature and Poetry</span></li>
+<li PCR="2.70">SAST 650<span class="CourseTitle"> - Themes in Indian Philosophy</span></li>
+<li PCR="0.00">SAST 710<span class="CourseTitle"> - Seminar Classical Indian Studies</span></li>

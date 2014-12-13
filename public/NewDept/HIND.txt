@@ -1,0 +1,3 @@
+<li PCR="3.00">HIND 401<span class="CourseTitle"> - Beginning Hindi-Urdu Part II</span></li>
+<li PCR="3.00">HIND 421<span class="CourseTitle"> - Intermediate Hindi Part II</span></li>
+<li PCR="1.50">HIND 430<span class="CourseTitle"> - Advanced Hindi</span></li>

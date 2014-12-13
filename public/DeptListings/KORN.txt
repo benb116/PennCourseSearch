@@ -1,1 +1,8 @@
-<li>KORN 012<span class="CourseTitle"> - Elementary Korean II</span></li><li>KORN 112<span class="CourseTitle"> - Intermediate Korean II</span></li><li>KORN 132<span class="CourseTitle"> - Korean for Heritage Speakers II</span></li><li>KORN 212<span class="CourseTitle"> - Advanced Korean II</span></li><li>KORN 312<span class="CourseTitle"> - Current Korean Media II</span></li><li>KORN 381<span class="CourseTitle"> - Business Korean I</span></li><li>KORN 432<span class="CourseTitle"> - Advanced Readings Modern Korean II</span></li><li>KORN 482<span class="CourseTitle"> - Advanced Business Korean II</span></li>
+<li PCR="">KORN 012<span class="CourseTitle"> - Elementary Korean II</span></li>
+<li PCR="">KORN 112<span class="CourseTitle"> - Intermediate Korean II</span></li>
+<li PCR="">KORN 132<span class="CourseTitle"> - Korean for Heritage Speakers II</span></li>
+<li PCR="">KORN 212<span class="CourseTitle"> - Advanced Korean II</span></li>
+<li PCR="">KORN 312<span class="CourseTitle"> - Current Korean Media II</span></li>
+<li PCR="">KORN 381<span class="CourseTitle"> - Business Korean I</span></li>
+<li PCR="">KORN 432<span class="CourseTitle"> - Advanced Readings Modern Korean II</span></li>
+<li PCR="">KORN 482<span class="CourseTitle"> - Advanced Business Korean II</span></li>

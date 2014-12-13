@@ -1,0 +1,61 @@
+<li PCR="2.22">AFST 050<span class="CourseTitle"> - World Musics and Cultures</span></li>
+<li PCR="3.67">AFST 056<span class="CourseTitle"> - Seeing/Hearing South Africa: Politics and History through Contemporary Performance</span></li>
+<li PCR="2.73">AFST 062<span class="CourseTitle"> - Land of the Pharaohs</span></li>
+<li PCR="2.86">AFST 075<span class="CourseTitle"> - Africa Before 1800</span></li>
+<li PCR="0.00">AFST 102<span class="CourseTitle"> - Study of A Theme</span></li>
+<li PCR="3.33">AFST 149<span class="CourseTitle"> - Elementary Zulu: Accelerated</span></li>
+<li PCR="3.00">AFST 151<span class="CourseTitle"> - Elementary Zulu II</span></li>
+<li PCR="3.50">AFST 161<span class="CourseTitle"> - Elementary Twi II</span></li>
+<li PCR="0.00">AFST 167<span class="CourseTitle"> - THE NEW AFRICAN DIASPORA: AFRICAN IMMIGRANT LIVES IN WEST PHILADELPHIA</span></li>
+<li PCR="3.50">AFST 171<span class="CourseTitle"> - Elementary Yoruba II</span></li>
+<li PCR="4.00">AFST 181<span class="CourseTitle"> - Elementary Swahili II</span></li>
+<li PCR="2.25">AFST 210<span class="CourseTitle"> - African Religions</span></li>
+<li PCR="3.25">AFST 221<span class="CourseTitle"> - African Women&#39;s Lives: Past and Present</span></li>
+<li PCR="2.42">AFST 225<span class="CourseTitle"> - African Languages and Culture</span></li>
+<li PCR="3.00">AFST 241<span class="CourseTitle"> - Elementary Amharic II</span></li>
+<li PCR="3.75">AFST 243<span class="CourseTitle"> - Intermediate Amharic II</span></li>
+<li PCR="4.00">AFST 247<span class="CourseTitle"> - Advanced Amharic</span></li>
+<li PCR="4.00">AFST 251<span class="CourseTitle"> - Intermediate Zulu II</span></li>
+<li PCR="3.67">AFST 263<span class="CourseTitle"> - Intermediate Twi II</span></li>
+<li PCR="4.00">AFST 271<span class="CourseTitle"> - Intermediate Yoruba II</span></li>
+<li PCR="3.33">AFST 281<span class="CourseTitle"> - Intermediate Swahili II</span></li>
+<li PCR="4.00">AFST 285<span class="CourseTitle"> - Advanced Swahili II</span></li>
+<li PCR="0.00">AFST 351<span class="CourseTitle"> - Advanced Zulu II</span></li>
+<li PCR="3.33">AFST 363<span class="CourseTitle"> - Advanced Twi II</span></li>
+<li PCR="0.00">AFST 371<span class="CourseTitle"> - Advanced Yoruba II</span></li>
+<li PCR="3.11">AFST 372<span class="CourseTitle"> - The History of Foreign Aid to Africa</span></li>
+<li PCR="0.00">AFST 394<span class="CourseTitle"> - NGO&#39;S &amp; HUMANITARIANISM</span></li>
+<li PCR="0.00">AFST 451<span class="CourseTitle"> - Zulu Lang &amp; Culture II</span></li>
+<li PCR="3.27">AFST 467<span class="CourseTitle"> - Introduction to Egyptian Culture and Archaeology</span></li>
+<li PCR="0.00">AFST 471<span class="CourseTitle"> - Twi Lang &amp; Culture II</span></li>
+<li PCR="0.00">AFST 485<span class="CourseTitle"> - Swahili Lang/Culture II</span></li>
+<li PCR="4.00">AFST 487<span class="CourseTitle"> - Yoruba Language &amp; Culture II</span></li>
+<li PCR="2.50">AFST 491<span class="CourseTitle"> - African Language Tutorial - Elementary II</span></li>
+<li PCR="3.50">AFST 493<span class="CourseTitle"> - African Language Tutorial - Intermediate II</span></li>
+<li PCR="0.00">AFST 495<span class="CourseTitle"> - African Language Tutor: Adv II</span></li>
+<li PCR="0.00">AFST 497<span class="CourseTitle"> - Language &amp; Culture II</span></li>
+<li PCR="4.00">AFST 509<span class="CourseTitle"> - Arabic: Reading Historical Manuscripts</span></li>
+<li PCR="3.25">AFST 516<span class="CourseTitle"> - Public Interest Workshop</span></li>
+<li PCR="3.50">AFST 518<span class="CourseTitle"> - Elementary Yoruba II</span></li>
+<li PCR="4.00">AFST 532<span class="CourseTitle"> - Intermediate Yoruba II</span></li>
+<li PCR="3.00">AFST 541<span class="CourseTitle"> - Elementary Amharic II</span></li>
+<li PCR="3.75">AFST 544<span class="CourseTitle"> - Intermediate Amharic II</span></li>
+<li PCR="4.00">AFST 547<span class="CourseTitle"> - Advanced Amharic</span></li>
+<li PCR="3.33">AFST 549<span class="CourseTitle"> - Elementary Zulu: Accelerated</span></li>
+<li PCR="3.00">AFST 551<span class="CourseTitle"> - Elementary Zulu II</span></li>
+<li PCR="4.00">AFST 553<span class="CourseTitle"> - Intermediate Zulu II</span></li>
+<li PCR="0.00">AFST 555<span class="CourseTitle"> - Advanced Zulu II</span></li>
+<li PCR="3.50">AFST 565<span class="CourseTitle"> - Elementary Twi II</span></li>
+<li PCR="3.67">AFST 567<span class="CourseTitle"> - Intermediate Twi II</span></li>
+<li PCR="3.33">AFST 569<span class="CourseTitle"> - Advanced Twi II</span></li>
+<li PCR="4.00">AFST 581<span class="CourseTitle"> - Elementary Swahili II</span></li>
+<li PCR="3.33">AFST 583<span class="CourseTitle"> - Intermediate Swahili II</span></li>
+<li PCR="4.00">AFST 586<span class="CourseTitle"> - Advanced Swahili II</span></li>
+<li PCR="0.00">AFST 588<span class="CourseTitle"> - Advanced Yoruba II</span></li>
+<li PCR="0.00">AFST 591<span class="CourseTitle"> - Swahili Lang/Culture II</span></li>
+<li PCR="2.50">AFST 593<span class="CourseTitle"> - Studies-Francophone Literature</span></li>
+<li PCR="0.00">AFST 597<span class="CourseTitle"> - African Language Tutorial - Intermediate II</span></li>
+<li PCR="0.00">AFST 599<span class="CourseTitle"> - African Language Tutor: Adv II</span></li>
+<li PCR="0.00">AFST 650<span class="CourseTitle"> - Topics in African History</span></li>
+<li PCR="0.00">AFST 694<span class="CourseTitle"> - NGO&#39;S &amp; HUMANITARIANISM</span></li>
+<li PCR="0.00">AFST 696<span class="CourseTitle"> - Postco Theory Francophon</span></li>

@@ -1,1 +1,16 @@
-<li>HEBR 051<span class="CourseTitle"> - Elementary Modern Hebrew I</span></li><li>HEBR 052<span class="CourseTitle"> - Elementary Modern Hebrew II</span></li><li>HEBR 053<span class="CourseTitle"> - Intermediate Modern Hebrew III</span></li><li>HEBR 054<span class="CourseTitle"> - Intermediate Modern Hebrew IV</span></li><li>HEBR 059<span class="CourseTitle"> - Advanced Modern Hebrew: Reading and Composition</span></li><li>HEBR 152<span class="CourseTitle"> - Elementary Biblical Hebrew II</span></li><li>HEBR 154<span class="CourseTitle"> - Intermediate Biblical Hebrew II</span></li><li>HEBR 257<span class="CourseTitle"> - Studies in Rabbinic Literature</span></li><li>HEBR 452<span class="CourseTitle"> - Elementary Biblical Hebrew II</span></li><li>HEBR 454<span class="CourseTitle"> - Intermediate Biblical Hebrew II</span></li><li>HEBR 552<span class="CourseTitle"> - Advanced Modern Hebrew: Reading and Composition</span></li><li>HEBR 557<span class="CourseTitle"> - Studies in Rabbinic Literature</span></li><li>HEBR 651<span class="CourseTitle"> - Elementary Modern Hebrew I</span></li><li>HEBR 652<span class="CourseTitle"> - Elementary Modern Hebrew II</span></li><li>HEBR 653<span class="CourseTitle"> - Intermediate Modern Hebrew III</span></li><li>HEBR 654<span class="CourseTitle"> - Intermediate Modern Hebrew IV</span></li>
+<li PCR="">HEBR 051<span class="CourseTitle"> - Elementary Modern Hebrew I</span></li>
+<li PCR="">HEBR 052<span class="CourseTitle"> - Elementary Modern Hebrew II</span></li>
+<li PCR="">HEBR 053<span class="CourseTitle"> - Intermediate Modern Hebrew III</span></li>
+<li PCR="">HEBR 054<span class="CourseTitle"> - Intermediate Modern Hebrew IV</span></li>
+<li PCR="">HEBR 059<span class="CourseTitle"> - Advanced Modern Hebrew: Reading and Composition</span></li>
+<li PCR="">HEBR 152<span class="CourseTitle"> - Elementary Biblical Hebrew II</span></li>
+<li PCR="">HEBR 154<span class="CourseTitle"> - Intermediate Biblical Hebrew II</span></li>
+<li PCR="">HEBR 257<span class="CourseTitle"> - Studies in Rabbinic Literature</span></li>
+<li PCR="">HEBR 452<span class="CourseTitle"> - Elementary Biblical Hebrew II</span></li>
+<li PCR="">HEBR 454<span class="CourseTitle"> - Intermediate Biblical Hebrew II</span></li>
+<li PCR="">HEBR 552<span class="CourseTitle"> - Advanced Modern Hebrew: Reading and Composition</span></li>
+<li PCR="">HEBR 557<span class="CourseTitle"> - Studies in Rabbinic Literature</span></li>
+<li PCR="">HEBR 651<span class="CourseTitle"> - Elementary Modern Hebrew I</span></li>
+<li PCR="">HEBR 652<span class="CourseTitle"> - Elementary Modern Hebrew II</span></li>
+<li PCR="">HEBR 653<span class="CourseTitle"> - Intermediate Modern Hebrew III</span></li>
+<li PCR="">HEBR 654<span class="CourseTitle"> - Intermediate Modern Hebrew IV</span></li>

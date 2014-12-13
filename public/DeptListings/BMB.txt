@@ -1,1 +1,22 @@
-<li>BMB 509<span class="CourseTitle"> - Structural and Mechanistic Biochemistry</span></li><li>BMB 518<span class="CourseTitle"> - Protein Conformation Diseases</span></li><li>BMB 554<span class="CourseTitle"> - Macromolecular Crystallography Methods</span></li><li>BMB 560<span class="CourseTitle"> - Methods of Scientific Inquiry in Biological Systems</span></li><li>BMB 567<span class="CourseTitle"> - Bioinorganic Chemistry</span></li><li>BMB 581<span class="CourseTitle"> - Techniques of Magnetic Resonance Imaging</span></li><li>BMB 590<span class="CourseTitle"> - Biological Physics</span></li><li>BMB 601<span class="CourseTitle"> - Fundamentals of Magnetic Resonance</span></li><li>BMB 602<span class="CourseTitle"> - Imaging Biomarkers</span></li><li>BMB 616<span class="CourseTitle"> - Medical Problems in Modern Biochemistry</span></li><li>BMB 619<span class="CourseTitle"> - Protein Folding</span></li><li>BMB 622<span class="CourseTitle"> - Physical Principles of Mechano-Enzymes</span></li><li>BMB 624<span class="CourseTitle"> - Molecular and Physical Basis of Ion Channels</span></li><li>BMB 626<span class="CourseTitle"> - Mass Spectrometry and Proteomics</span></li><li>BMB 627<span class="CourseTitle"> - Computer Programming for Biochemists and Biophysicists</span></li><li>BMB 628<span class="CourseTitle"> - Principles of Scientific Instruments</span></li><li>BMB 632<span class="CourseTitle"> - Probing Structure and Function of Complex RNA-Protein Machines</span></li><li>BMB 650<span class="CourseTitle"> - Current Biochemical Topics</span></li><li>BMB 699<span class="CourseTitle"> - Laboratory Rotation</span></li><li>BMB 700<span class="CourseTitle"> - Selected Topics in Chemistry</span></li><li>BMB 705<span class="CourseTitle"> - Candidacy Exam Preparation Course</span></li><li>BMB 995<span class="CourseTitle"> - Dissertation Research</span></li>
+<li PCR="">BMB 509<span class="CourseTitle"> - Structural and Mechanistic Biochemistry</span></li>
+<li PCR="">BMB 518<span class="CourseTitle"> - Protein Conformation Diseases</span></li>
+<li PCR="">BMB 554<span class="CourseTitle"> - Macromolecular Crystallography Methods</span></li>
+<li PCR="">BMB 560<span class="CourseTitle"> - Methods of Scientific Inquiry in Biological Systems</span></li>
+<li PCR="">BMB 567<span class="CourseTitle"> - Bioinorganic Chemistry</span></li>
+<li PCR="">BMB 581<span class="CourseTitle"> - Techniques of Magnetic Resonance Imaging</span></li>
+<li PCR="">BMB 590<span class="CourseTitle"> - Biological Physics</span></li>
+<li PCR="">BMB 601<span class="CourseTitle"> - Fundamentals of Magnetic Resonance</span></li>
+<li PCR="">BMB 602<span class="CourseTitle"> - Imaging Biomarkers</span></li>
+<li PCR="">BMB 616<span class="CourseTitle"> - Medical Problems in Modern Biochemistry</span></li>
+<li PCR="">BMB 619<span class="CourseTitle"> - Protein Folding</span></li>
+<li PCR="">BMB 622<span class="CourseTitle"> - Physical Principles of Mechano-Enzymes</span></li>
+<li PCR="">BMB 624<span class="CourseTitle"> - Molecular and Physical Basis of Ion Channels</span></li>
+<li PCR="">BMB 626<span class="CourseTitle"> - Mass Spectrometry and Proteomics</span></li>
+<li PCR="">BMB 627<span class="CourseTitle"> - Computer Programming for Biochemists and Biophysicists</span></li>
+<li PCR="">BMB 628<span class="CourseTitle"> - Principles of Scientific Instruments</span></li>
+<li PCR="">BMB 632<span class="CourseTitle"> - Probing Structure and Function of Complex RNA-Protein Machines</span></li>
+<li PCR="">BMB 650<span class="CourseTitle"> - Current Biochemical Topics</span></li>
+<li PCR="">BMB 699<span class="CourseTitle"> - Laboratory Rotation</span></li>
+<li PCR="">BMB 700<span class="CourseTitle"> - Selected Topics in Chemistry</span></li>
+<li PCR="">BMB 705<span class="CourseTitle"> - Candidacy Exam Preparation Course</span></li>
+<li PCR="">BMB 995<span class="CourseTitle"> - Dissertation Research</span></li>

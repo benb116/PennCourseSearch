@@ -1,0 +1,97 @@
+<li PCR="3.20">FNAR 061<span class="CourseTitle"> - Video I</span></li>
+<li PCR="3.00">FNAR 062<span class="CourseTitle"> - Video II</span></li>
+<li PCR="3.33">FNAR 065<span class="CourseTitle"> - Cinema Production</span></li>
+<li PCR="3.31">FNAR 070<span class="CourseTitle"> - Film Sound: History, Aesthetics and Subversion</span></li>
+<li PCR="4.00">FNAR 075<span class="CourseTitle"> - Image and Sound Editing</span></li>
+<li PCR="3.00">FNAR 123<span class="CourseTitle"> - Drawing I</span></li>
+<li PCR="4.00">FNAR 124<span class="CourseTitle"> - Drawing Investigations</span></li>
+<li PCR="3.83">FNAR 126<span class="CourseTitle"> - Sequential Drawing</span></li>
+<li PCR="3.00">FNAR 142<span class="CourseTitle"> - 3-D Design</span></li>
+<li PCR="3.00">FNAR 145<span class="CourseTitle"> - Sculpture Practices</span></li>
+<li PCR="4.00">FNAR 146<span class="CourseTitle"> - Sculpture II: Object and Installation</span></li>
+<li PCR="3.14">FNAR 150<span class="CourseTitle"> - Photography Practices</span></li>
+<li PCR="2.67">FNAR 222<span class="CourseTitle"> - The Big Picture: Mural Arts in Philadelphia</span></li>
+<li PCR="0.00">FNAR 227<span class="CourseTitle"> - Children&#39;s Picture Books</span></li>
+<li PCR="3.40">FNAR 231<span class="CourseTitle"> - Painting Practices</span></li>
+<li PCR="3.67">FNAR 233<span class="CourseTitle"> - Digital Illustration</span></li>
+<li PCR="2.60">FNAR 234<span class="CourseTitle"> - Web Design</span></li>
+<li PCR="3.00">FNAR 235<span class="CourseTitle"> - 3-D Computer Modeling</span></li>
+<li PCR="3.59">FNAR 236<span class="CourseTitle"> - Digital Figure Modeling</span></li>
+<li PCR="0.00">FNAR 247<span class="CourseTitle"> - Environmental Animation</span></li>
+<li PCR="3.80">FNAR 250<span class="CourseTitle"> - Introduction to Printmaking</span></li>
+<li PCR="3.88">FNAR 251<span class="CourseTitle"> - Printmaking: Etching</span></li>
+<li PCR="3.00">FNAR 253<span class="CourseTitle"> - Advanced Projects in Printmaking</span></li>
+<li PCR="2.50">FNAR 254<span class="CourseTitle"> - Printmaking &amp; Publications: Intro to Independent Publishing and Artists&#39; Publications</span></li>
+<li PCR="4.00">FNAR 258<span class="CourseTitle"> - Introduction to Clay: the Potter&#39;s Wheel and Beyond</span></li>
+<li PCR="4.00">FNAR 259<span class="CourseTitle"> - Beginning Clay: Handbuilding and Casting Techniques</span></li>
+<li PCR="3.00">FNAR 263<span class="CourseTitle"> - Advanced Wheel Studio</span></li>
+<li PCR="2.83">FNAR 264<span class="CourseTitle"> - Art, Design and Digital Culture</span></li>
+<li PCR="3.27">FNAR 266<span class="CourseTitle"> - Graphic Design with Creative Technologies</span></li>
+<li PCR="3.77">FNAR 269<span class="CourseTitle"> - Typography</span></li>
+<li PCR="2.90">FNAR 270<span class="CourseTitle"> - Graphic Design Practicum</span></li>
+<li PCR="3.38">FNAR 271<span class="CourseTitle"> - Introduction to Photography</span></li>
+<li PCR="3.50">FNAR 272<span class="CourseTitle"> - Advanced Photography: Integrated Techniques and Strategies</span></li>
+<li PCR="3.70">FNAR 280<span class="CourseTitle"> - Figure Drawing I</span></li>
+<li PCR="3.71">FNAR 281<span class="CourseTitle"> - Figure Drawing II</span></li>
+<li PCR="0.00">FNAR 285<span class="CourseTitle"> - Photography and Fiction</span></li>
+<li PCR="3.75">FNAR 289<span class="CourseTitle"> - Mixed Media Animation</span></li>
+<li PCR="0.00">FNAR 331<span class="CourseTitle"> - Interdisciplinary Studio: Sites of Color, Convergence and Hybridity</span></li>
+<li PCR="3.67">FNAR 337<span class="CourseTitle"> - Information Design and Visualization</span></li>
+<li PCR="2.86">FNAR 340<span class="CourseTitle"> - Digital Photography</span></li>
+<li PCR="0.00">FNAR 343<span class="CourseTitle"> - Language of Design</span></li>
+<li PCR="3.00">FNAR 349<span class="CourseTitle"> - Advanced Digital Photography</span></li>
+<li PCR="0.00">FNAR 350<span class="CourseTitle"> - Shared Culture: New Strategies for Artists in the Digital Age</span></li>
+<li PCR="3.67">FNAR 366<span class="CourseTitle"> - Advanced 3-D Modeling</span></li>
+<li PCR="0.00">FNAR 378<span class="CourseTitle"> - Interfacing Cultures: Designing for Mobile, Web and Public Media</span></li>
+<li PCR="3.25">FNAR 399<span class="CourseTitle"> - Independent Study</span></li>
+<li PCR="1.54">FNAR 489<span class="CourseTitle"> - Senior Seminar Project</span></li>
+<li PCR="0.00">FNAR 502<span class="CourseTitle"> - Graduate Studio II</span></li>
+<li PCR="0.00">FNAR 515<span class="CourseTitle"> - Photography Studio Abroad</span></li>
+<li PCR="3.00">FNAR 523<span class="CourseTitle"> - Drawing I</span></li>
+<li PCR="4.00">FNAR 524<span class="CourseTitle"> - Drawing Investigations</span></li>
+<li PCR="3.83">FNAR 526<span class="CourseTitle"> - Sequential Drawing</span></li>
+<li PCR="0.00">FNAR 527<span class="CourseTitle"> - Writing with Pictures</span></li>
+<li PCR="3.40">FNAR 531<span class="CourseTitle"> - Painting Practices</span></li>
+<li PCR="3.59">FNAR 536<span class="CourseTitle"> - Digital Figure Modeling</span></li>
+<li PCR="3.00">FNAR 542<span class="CourseTitle"> - 3-D Design</span></li>
+<li PCR="3.00">FNAR 545<span class="CourseTitle"> - Sculpture Practices</span></li>
+<li PCR="4.00">FNAR 546<span class="CourseTitle"> - Sculpture II: Object &amp; Installation</span></li>
+<li PCR="0.00">FNAR 547<span class="CourseTitle"> - Environmental Animation</span></li>
+<li PCR="3.80">FNAR 550<span class="CourseTitle"> - Introduction to Printmaking</span></li>
+<li PCR="3.88">FNAR 551<span class="CourseTitle"> - Printmaking: Etching</span></li>
+<li PCR="3.00">FNAR 553<span class="CourseTitle"> - Advanced Projects in Printmaking</span></li>
+<li PCR="4.00">FNAR 558<span class="CourseTitle"> - Introduction to Clay: the Potter&#39;s Wheel and Beyond</span></li>
+<li PCR="4.00">FNAR 559<span class="CourseTitle"> - Beginning Clay: Handbuilding and Casting Techniques</span></li>
+<li PCR="3.00">FNAR 563<span class="CourseTitle"> - Advanced Wheel Studio</span></li>
+<li PCR="3.27">FNAR 566<span class="CourseTitle"> - Graphic Design with Creative Technologies</span></li>
+<li PCR="3.77">FNAR 569<span class="CourseTitle"> - Typography</span></li>
+<li PCR="2.90">FNAR 570<span class="CourseTitle"> - Graphic Design Practicum</span></li>
+<li PCR="3.38">FNAR 571<span class="CourseTitle"> - Introduction to Photography</span></li>
+<li PCR="3.50">FNAR 572<span class="CourseTitle"> - Advanced Photography: Integrated Techniques and Strategies</span></li>
+<li PCR="0.00">FNAR 575<span class="CourseTitle"> - Graduate Drawing Seminar</span></li>
+<li PCR="3.70">FNAR 580<span class="CourseTitle"> - Figure Drawing I</span></li>
+<li PCR="3.71">FNAR 581<span class="CourseTitle"> - Figure Drawing II</span></li>
+<li PCR="3.75">FNAR 589<span class="CourseTitle"> - Mixed Media Animation</span></li>
+<li PCR="0.00">FNAR 591<span class="CourseTitle"> - The Body and Photography</span></li>
+<li PCR="0.00">FNAR 598<span class="CourseTitle"> - Grad Sculpture Seminar</span></li>
+<li PCR="0.00">FNAR 602<span class="CourseTitle"> - Graduate Studio IV</span></li>
+<li PCR="2.67">FNAR 622<span class="CourseTitle"> - The Big Picture: Mural Arts in Philadelphia</span></li>
+<li PCR="0.00">FNAR 631<span class="CourseTitle"> - Interdisciplinary Studio: Sites of Color, Convergence and Hybridity</span></li>
+<li PCR="3.67">FNAR 633<span class="CourseTitle"> - Digital Illustration</span></li>
+<li PCR="2.60">FNAR 634<span class="CourseTitle"> - Web Design</span></li>
+<li PCR="3.00">FNAR 635<span class="CourseTitle"> - 3-D Computer Modeling</span></li>
+<li PCR="2.83">FNAR 636<span class="CourseTitle"> - Art, Design and Digital Culture</span></li>
+<li PCR="3.67">FNAR 637<span class="CourseTitle"> - Information Design and Visualization</span></li>
+<li PCR="2.86">FNAR 640<span class="CourseTitle"> - Digital Photography</span></li>
+<li PCR="0.00">FNAR 643<span class="CourseTitle"> - Language of Design</span></li>
+<li PCR="3.67">FNAR 646<span class="CourseTitle"> - ADVANCED 3D MODELING</span></li>
+<li PCR="3.00">FNAR 649<span class="CourseTitle"> - Advanced Digital Photography</span></li>
+<li PCR="0.00">FNAR 650<span class="CourseTitle"> - Shared Culture: New Strategies for Artists in the Digital Age</span></li>
+<li PCR="2.50">FNAR 654<span class="CourseTitle"> - Printmaking &amp; Publications: Intro to Independent Publishing and Artists&#39; Publications</span></li>
+<li PCR="3.20">FNAR 661<span class="CourseTitle"> - Video I</span></li>
+<li PCR="3.00">FNAR 662<span class="CourseTitle"> - Video II</span></li>
+<li PCR="3.33">FNAR 665<span class="CourseTitle"> - Cinema Production</span></li>
+<li PCR="3.31">FNAR 671<span class="CourseTitle"> - Film Sound: History, Aesthetics and Subversion</span></li>
+<li PCR="4.00">FNAR 675<span class="CourseTitle"> - Image and Sound Editing</span></li>
+<li PCR="0.00">FNAR 678<span class="CourseTitle"> - Interfacing Culture: Designing for Mobile, Web and Public Media</span></li>
+<li PCR="0.00">FNAR 685<span class="CourseTitle"> - Photograhy and Fiction</span></li>

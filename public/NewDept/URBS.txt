@@ -1,0 +1,46 @@
+<li PCR="1.88">URBS 018<span class="CourseTitle"> - Freshman seminar.</span></li>
+<li PCR="1.89">URBS 104<span class="CourseTitle"> - Transformation of Urban America: From the Mid-Twentieth Century to the Present</span></li>
+<li PCR="2.97">URBS 112<span class="CourseTitle"> - Urban Sociology</span></li>
+<li PCR="2.10">URBS 136<span class="CourseTitle"> - Urban Politics in the United States</span></li>
+<li PCR="0.00">URBS 167<span class="CourseTitle"> - THE NEW AFRICAN DIASPORA: AFRICAN IMMIGRANT LIVES IN WEST PHILADELPHIA</span></li>
+<li PCR="2.69">URBS 178<span class="CourseTitle"> - Faculty-Student Collaborative Action Seminar in Urban University-Community Relations</span></li>
+<li PCR="1.94">URBS 200<span class="CourseTitle"> - Urban Research Methods</span></li>
+<li PCR="3.61">URBS 201<span class="CourseTitle"> - Urban Health Systems</span></li>
+<li PCR="2.69">URBS 202<span class="CourseTitle"> - Urban Education</span></li>
+<li PCR="2.71">URBS 205<span class="CourseTitle"> - People and Design</span></li>
+<li PCR="1.38">URBS 206<span class="CourseTitle"> - Public Environment of Cities: An Introduction to the Urban Landscape</span></li>
+<li PCR="2.88">URBS 207<span class="CourseTitle"> - Asian American Communities</span></li>
+<li PCR="2.50">URBS 210<span class="CourseTitle"> - The City</span></li>
+<li PCR="3.00">URBS 213<span class="CourseTitle"> - Urban Ethnography</span></li>
+<li PCR="3.08">URBS 215<span class="CourseTitle"> - Topics in Asian American Sociology</span></li>
+<li PCR="2.35">URBS 216<span class="CourseTitle"> - Social Entrepreneurship</span></li>
+<li PCR="3.56">URBS 217<span class="CourseTitle"> - America in the 1960&#39;s</span></li>
+<li PCR="0.00">URBS 219<span class="CourseTitle"> - The Heart of Social Change</span></li>
+<li PCR="3.27">URBS 250<span class="CourseTitle"> - Urban Public Policy: Contemporary Philadelphia -- A Case Study</span></li>
+<li PCR="3.90">URBS 252<span class="CourseTitle"> - Urban Journalism</span></li>
+<li PCR="3.00">URBS 253<span class="CourseTitle"> - Cities, Suburbs, Regions</span></li>
+<li PCR="2.20">URBS 259<span class="CourseTitle"> - Post Industrial City: Media City -- New Lifestyles, New Forms</span></li>
+<li PCR="3.18">URBS 270<span class="CourseTitle"> - The Immigrant City</span></li>
+<li PCR="3.29">URBS 273<span class="CourseTitle"> - Advanced Non-Fiction Writing</span></li>
+<li PCR="2.13">URBS 280<span class="CourseTitle"> - Neighborhood Dynamics of Crime</span></li>
+<li PCR="2.88">URBS 300<span class="CourseTitle"> - Fieldwork Seminar</span></li>
+<li PCR="2.83">URBS 305<span class="CourseTitle"> - Franklin Community Seminar</span></li>
+<li PCR="2.67">URBS 322<span class="CourseTitle"> - The Big Picture: Mural Arts in Philadelphia</span></li>
+<li PCR="0.00">URBS 323<span class="CourseTitle"> - Tutoring in Urban Public Schools: Theory and Practice</span></li>
+<li PCR="1.75">URBS 352<span class="CourseTitle"> - Food Habits in Philadelphia Communities: Exploring Eating and Changing Food Habits in Philadelphia Middle Schools</span></li>
+<li PCR="3.67">URBS 401<span class="CourseTitle"> - URBAN STUDIES HONORS</span></li>
+<li PCR="3.50">URBS 404<span class="CourseTitle"> - Philanthropy &amp; The City</span></li>
+<li PCR="3.62">URBS 405<span class="CourseTitle"> - Religion, Social Justice &amp; Urban Development</span></li>
+<li PCR="2.79">URBS 417<span class="CourseTitle"> - Cities and Sustainability</span></li>
+<li PCR="0.00">URBS 428<span class="CourseTitle"> - Research Seminar in 21st Century Urbanism</span></li>
+<li PCR="0.00">URBS 438<span class="CourseTitle"> - SOCIAL SCIENCE STUDIO: IMMIGRANTS MAKE THE CITY</span></li>
+<li PCR="2.86">URBS 448<span class="CourseTitle"> - Neighborhood Displacement &amp; Community Power</span></li>
+<li PCR="2.25">URBS 450<span class="CourseTitle"> - Urban Redevelopment</span></li>
+<li PCR="2.57">URBS 460<span class="CourseTitle"> - School Reform and Public Policy</span></li>
+<li PCR="0.00">URBS 476<span class="CourseTitle"> - BANKERS, ACTIVISTS, &amp; GOVNT: THE MAKING OF URBAN HOUSING POLICY IN AMERICA</span></li>
+<li PCR="1.38">URBS 506<span class="CourseTitle"> - Public Environment of Cities: An Introduction to the Urban Landscape</span></li>
+<li PCR="3.00">URBS 513<span class="CourseTitle"> - Urban Ethnography</span></li>
+<li PCR="3.25">URBS 516<span class="CourseTitle"> - Public Interest Workshop</span></li>
+<li PCR="0.00">URBS 524<span class="CourseTitle"> - Metro Labor Markets</span></li>
+<li PCR="0.00">URBS 547<span class="CourseTitle"> - Anthropology &amp; Education</span></li>
+<li PCR="0.00">URBS 608<span class="CourseTitle"> - Proseminar in Urban Studies</span></li>

@@ -1,1 +1,5 @@
-<li>NSCI 100<span class="CourseTitle"> - Naval Science Drill</span></li><li>NSCI 102<span class="CourseTitle"> - Seapower and Maritime Affairs</span></li><li>NSCI 202<span class="CourseTitle"> - Navigation I</span></li><li>NSCI 302<span class="CourseTitle"> - Weapons</span></li><li>NSCI 402<span class="CourseTitle"> - Leadership and Ethics</span></li>
+<li PCR="">NSCI 100<span class="CourseTitle"> - Naval Science Drill</span></li>
+<li PCR="">NSCI 102<span class="CourseTitle"> - Seapower and Maritime Affairs</span></li>
+<li PCR="">NSCI 202<span class="CourseTitle"> - Navigation I</span></li>
+<li PCR="">NSCI 302<span class="CourseTitle"> - Weapons</span></li>
+<li PCR="">NSCI 402<span class="CourseTitle"> - Leadership and Ethics</span></li>

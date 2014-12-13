@@ -1,1 +1,2 @@
-<li>DPED 751<span class="CourseTitle"> - Pediatric Dentistry Clin</span></li><li>DPED 851<span class="CourseTitle"> - Pediatric Dentistry Clin</span></li>
+<li PCR="">DPED 751<span class="CourseTitle"> - Pediatric Dentistry Clin</span></li>
+<li PCR="">DPED 851<span class="CourseTitle"> - Pediatric Dentistry Clin</span></li>

@@ -1,0 +1,8 @@
+<li PCR="0.00">WH 191<span class="CourseTitle"> - Presentation Skills</span></li>
+<li PCR="0.00">WH 214<span class="CourseTitle"> - Fnce in Middle East &amp; Na</span></li>
+<li PCR="0.00">WH 215<span class="CourseTitle"> - Finance in Europe</span></li>
+<li PCR="0.00">WH 219<span class="CourseTitle"> - Sustainable Growth Asean</span></li>
+<li PCR="0.00">WH 297<span class="CourseTitle"> - Sf Tech Industry Explor</span></li>
+<li PCR="0.00">WH 390<span class="CourseTitle"> - Study Abroad</span></li>
+<li PCR="3.78">WH 398<span class="CourseTitle"> - Senior Capstone</span></li>
+<li PCR="2.91">WH 399<span class="CourseTitle"> - J W Scholar Sr Res Sem</span></li>

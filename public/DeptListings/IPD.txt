@@ -1,1 +1,13 @@
-<li>IPD 501<span class="CourseTitle"> - Integrated Computer-Aided Design, Manufacturing and Analysis</span></li><li>IPD 509<span class="CourseTitle"> - Needfinding</span></li><li>IPD 514<span class="CourseTitle"> - Design for Manufacturability</span></li><li>IPD 515<span class="CourseTitle"> - Product Design.</span></li><li>IPD 526<span class="CourseTitle"> - Contemporary Furniture Design</span></li><li>IPD 527<span class="CourseTitle"> - Industrial Design I.</span></li><li>IPD 528<span class="CourseTitle"> - Design of Contemporary Products</span></li><li>IPD 544<span class="CourseTitle"> - Digital Fabrication</span></li><li>IPD 545<span class="CourseTitle"> - Eng Entrepreneurship I</span></li><li>IPD 552<span class="CourseTitle"> - Problem Framing</span></li><li>IPD 562<span class="CourseTitle"> - IPD Theories/Methods II</span></li><li>IPD 699<span class="CourseTitle"> - IPD Seminar.</span></li><li>IPD 799<span class="CourseTitle"> - Studio Project Thesis.</span></li>
+<li PCR="">IPD 501<span class="CourseTitle"> - Integrated Computer-Aided Design, Manufacturing and Analysis</span></li>
+<li PCR="">IPD 509<span class="CourseTitle"> - Needfinding</span></li>
+<li PCR="">IPD 514<span class="CourseTitle"> - Design for Manufacturability</span></li>
+<li PCR="">IPD 515<span class="CourseTitle"> - Product Design.</span></li>
+<li PCR="">IPD 526<span class="CourseTitle"> - Contemporary Furniture Design</span></li>
+<li PCR="">IPD 527<span class="CourseTitle"> - Industrial Design I.</span></li>
+<li PCR="">IPD 528<span class="CourseTitle"> - Design of Contemporary Products</span></li>
+<li PCR="">IPD 544<span class="CourseTitle"> - Digital Fabrication</span></li>
+<li PCR="">IPD 545<span class="CourseTitle"> - Eng Entrepreneurship I</span></li>
+<li PCR="">IPD 552<span class="CourseTitle"> - Problem Framing</span></li>
+<li PCR="">IPD 562<span class="CourseTitle"> - IPD Theories/Methods II</span></li>
+<li PCR="">IPD 699<span class="CourseTitle"> - IPD Seminar.</span></li>
+<li PCR="">IPD 799<span class="CourseTitle"> - Studio Project Thesis.</span></li>

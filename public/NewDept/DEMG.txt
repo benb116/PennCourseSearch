@@ -1,0 +1,7 @@
+<li PCR="3.48">DEMG 536<span class="CourseTitle"> - Quantitative Methods in Sociology II</span></li>
+<li PCR="0.00">DEMG 604<span class="CourseTitle"> - Methodology of Social Research</span></li>
+<li PCR="0.00">DEMG 634<span class="CourseTitle"> - Population Processes II</span></li>
+<li PCR="0.00">DEMG 677<span class="CourseTitle"> - International Migration</span></li>
+<li PCR="0.00">DEMG 708<span class="CourseTitle"> - Seminar in Demographic Research II</span></li>
+<li PCR="0.00">DEMG 731<span class="CourseTitle"> - Advanced Demographic Methods</span></li>
+<li PCR="0.00">DEMG 796<span class="CourseTitle"> - Demographic, Economic, and Social Interrelations</span></li>

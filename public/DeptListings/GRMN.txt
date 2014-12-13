@@ -1,1 +1,27 @@
-<li>GRMN 101<span class="CourseTitle"> - Elementary German I</span></li><li>GRMN 102<span class="CourseTitle"> - Elementary German II</span></li><li>GRMN 103<span class="CourseTitle"> - Intermediate German I</span></li><li>GRMN 104<span class="CourseTitle"> - Intermediate German II</span></li><li>GRMN 107<span class="CourseTitle"> - Accelerated Intermediate German</span></li><li>GRMN 180<span class="CourseTitle"> - German in Residence</span></li><li>GRMN 203<span class="CourseTitle"> - TEXTS AND CONTEXTS.</span></li><li>GRMN 220<span class="CourseTitle"> - Business German: A Micro Perspective</span></li><li>GRMN 253<span class="CourseTitle"> - Freud: The Invention of Psychoanalysis</span></li><li>GRMN 256<span class="CourseTitle"> - The Devil&#39;s Pact in Literature, Music and Film</span></li><li>GRMN 264<span class="CourseTitle"> - Translating Cultures: Literature on and in Translation</span></li><li>GRMN 301<span class="CourseTitle"> - Handschrift-Hypertext: Deutsche Medien</span></li><li>GRMN 364<span class="CourseTitle"> - Topics vary annually.  The topic for Spring 2015 is: Unhuman Encounters</span></li><li>GRMN 403<span class="CourseTitle"> - Senior Colloquium.</span></li><li>GRMN 501<span class="CourseTitle"> - Elementary German I</span></li><li>GRMN 502<span class="CourseTitle"> - Elementary German II</span></li><li>GRMN 506<span class="CourseTitle"> - Texts and Contexts</span></li><li>GRMN 509<span class="CourseTitle"> - Gtfd Von Strsbrg</span></li><li>GRMN 514<span class="CourseTitle"> - Accelerated Intermd Grmn</span></li><li>GRMN 516<span class="CourseTitle"> - Teaching Methods</span></li><li>GRMN 527<span class="CourseTitle"> - Philosophy &amp; Psychoanalysis: Freud and the Interpretation of Culture</span></li><li>GRMN 532<span class="CourseTitle"> - German Literature 18th Century to Present</span></li><li>GRMN 555<span class="CourseTitle"> - Topics in Dutch Studies</span></li><li>GRMN 580<span class="CourseTitle"> - Topics In Aesthetics</span></li><li>GRMN 581<span class="CourseTitle"> - Topics in Jewish-German Culture</span></li><li>GRMN 678<span class="CourseTitle"> - Realism: Literature and Theory</span></li><li>GRMN 684<span class="CourseTitle"> - Topics in Philosophy.  Title for Spring 2015: After Idealism: Political thought in Germany from Weber to Habermas.</span></li>
+<li PCR="">GRMN 101<span class="CourseTitle"> - Elementary German I</span></li>
+<li PCR="">GRMN 102<span class="CourseTitle"> - Elementary German II</span></li>
+<li PCR="">GRMN 103<span class="CourseTitle"> - Intermediate German I</span></li>
+<li PCR="">GRMN 104<span class="CourseTitle"> - Intermediate German II</span></li>
+<li PCR="">GRMN 107<span class="CourseTitle"> - Accelerated Intermediate German</span></li>
+<li PCR="">GRMN 180<span class="CourseTitle"> - German in Residence</span></li>
+<li PCR="">GRMN 203<span class="CourseTitle"> - TEXTS AND CONTEXTS.</span></li>
+<li PCR="">GRMN 220<span class="CourseTitle"> - Business German: A Micro Perspective</span></li>
+<li PCR="">GRMN 253<span class="CourseTitle"> - Freud: The Invention of Psychoanalysis</span></li>
+<li PCR="">GRMN 256<span class="CourseTitle"> - The Devil&#39;s Pact in Literature, Music and Film</span></li>
+<li PCR="">GRMN 264<span class="CourseTitle"> - Translating Cultures: Literature on and in Translation</span></li>
+<li PCR="">GRMN 301<span class="CourseTitle"> - Handschrift-Hypertext: Deutsche Medien</span></li>
+<li PCR="">GRMN 364<span class="CourseTitle"> - Topics vary annually.  The topic for Spring 2015 is: Unhuman Encounters</span></li>
+<li PCR="">GRMN 403<span class="CourseTitle"> - Senior Colloquium.</span></li>
+<li PCR="">GRMN 501<span class="CourseTitle"> - Elementary German I</span></li>
+<li PCR="">GRMN 502<span class="CourseTitle"> - Elementary German II</span></li>
+<li PCR="">GRMN 506<span class="CourseTitle"> - Texts and Contexts</span></li>
+<li PCR="">GRMN 509<span class="CourseTitle"> - Gtfd Von Strsbrg</span></li>
+<li PCR="">GRMN 514<span class="CourseTitle"> - Accelerated Intermd Grmn</span></li>
+<li PCR="">GRMN 516<span class="CourseTitle"> - Teaching Methods</span></li>
+<li PCR="">GRMN 527<span class="CourseTitle"> - Philosophy &amp; Psychoanalysis: Freud and the Interpretation of Culture</span></li>
+<li PCR="">GRMN 532<span class="CourseTitle"> - German Literature 18th Century to Present</span></li>
+<li PCR="">GRMN 555<span class="CourseTitle"> - Topics in Dutch Studies</span></li>
+<li PCR="">GRMN 580<span class="CourseTitle"> - Topics In Aesthetics</span></li>
+<li PCR="">GRMN 581<span class="CourseTitle"> - Topics in Jewish-German Culture</span></li>
+<li PCR="">GRMN 678<span class="CourseTitle"> - Realism: Literature and Theory</span></li>
+<li PCR="">GRMN 684<span class="CourseTitle"> - Topics in Philosophy.  Title for Spring 2015: After Idealism: Political thought in Germany from Weber to Habermas.</span></li>

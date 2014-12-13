@@ -1,0 +1,4 @@
+<li PCR="3.80">URDU 402<span class="CourseTitle"> - Beginning Hindi-Urdu Part II</span></li>
+<li PCR="4.00">URDU 422<span class="CourseTitle"> - Intermediate Urdu Part II</span></li>
+<li PCR="3.50">URDU 431<span class="CourseTitle"> - Advanced Urdu</span></li>
+<li PCR="0.00">URDU 462<span class="CourseTitle"> - Urdu Topics Course</span></li>

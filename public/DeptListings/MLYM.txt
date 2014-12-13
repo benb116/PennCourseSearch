@@ -1,1 +1,3 @@
-<li>MLYM 409<span class="CourseTitle"> - Beginning Malayalam Part II</span></li><li>MLYM 429<span class="CourseTitle"> - Intermediate Malayalam Part II</span></li><li>MLYM 448<span class="CourseTitle"> - Advanced Malayalam</span></li>
+<li PCR="">MLYM 409<span class="CourseTitle"> - Beginning Malayalam Part II</span></li>
+<li PCR="">MLYM 429<span class="CourseTitle"> - Intermediate Malayalam Part II</span></li>
+<li PCR="">MLYM 448<span class="CourseTitle"> - Advanced Malayalam</span></li>

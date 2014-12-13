@@ -1,1 +1,13 @@
-<li>THAR 102<span class="CourseTitle"> - THEATRE ARTS 102: THEATRE, HISTORY, &amp; CULTURE II: Romantics, Realists and Revolutionaries</span></li><li>THAR 114<span class="CourseTitle"> - Playwriting Workshop</span></li><li>THAR 120<span class="CourseTitle"> - Introduction to Acting</span></li><li>THAR 125<span class="CourseTitle"> - The Play: Structure, Style, Meaning</span></li><li>THAR 130<span class="CourseTitle"> - Introduction to Light, Set, and Costume Design</span></li><li>THAR 133<span class="CourseTitle"> - Concepts of Stage Design</span></li><li>THAR 171<span class="CourseTitle"> - Movement for the Actor</span></li><li>THAR 250<span class="CourseTitle"> - Theatre Workshop</span></li><li>THAR 271<span class="CourseTitle"> - American Musical Theatre</span></li><li>THAR 274<span class="CourseTitle"> - Dramaturgy</span></li><li>THAR 275<span class="CourseTitle"> - Advanced Topics in Theatre</span></li><li>THAR 320<span class="CourseTitle"> - Scene Study</span></li><li>THAR 350<span class="CourseTitle"> - Rehearsal and Performance</span></li>
+<li PCR="">THAR 102<span class="CourseTitle"> - THEATRE ARTS 102: THEATRE, HISTORY, &amp; CULTURE II: Romantics, Realists and Revolutionaries</span></li>
+<li PCR="">THAR 114<span class="CourseTitle"> - Playwriting Workshop</span></li>
+<li PCR="">THAR 120<span class="CourseTitle"> - Introduction to Acting</span></li>
+<li PCR="">THAR 125<span class="CourseTitle"> - The Play: Structure, Style, Meaning</span></li>
+<li PCR="">THAR 130<span class="CourseTitle"> - Introduction to Light, Set, and Costume Design</span></li>
+<li PCR="">THAR 133<span class="CourseTitle"> - Concepts of Stage Design</span></li>
+<li PCR="">THAR 171<span class="CourseTitle"> - Movement for the Actor</span></li>
+<li PCR="">THAR 250<span class="CourseTitle"> - Theatre Workshop</span></li>
+<li PCR="">THAR 271<span class="CourseTitle"> - American Musical Theatre</span></li>
+<li PCR="">THAR 274<span class="CourseTitle"> - Dramaturgy</span></li>
+<li PCR="">THAR 275<span class="CourseTitle"> - Advanced Topics in Theatre</span></li>
+<li PCR="">THAR 320<span class="CourseTitle"> - Scene Study</span></li>
+<li PCR="">THAR 350<span class="CourseTitle"> - Rehearsal and Performance</span></li>

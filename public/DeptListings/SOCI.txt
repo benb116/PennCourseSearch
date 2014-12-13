@@ -1,1 +1,51 @@
-<li>SOCI 001<span class="CourseTitle"> - Introduction to Sociology</span></li><li>SOCI 003<span class="CourseTitle"> - Deviance and Social Control</span></li><li>SOCI 006<span class="CourseTitle"> - Race and Ethnic Relations</span></li><li>SOCI 010<span class="CourseTitle"> - Social Stratification</span></li><li>SOCI 011<span class="CourseTitle"> - Urban Sociology</span></li><li>SOCI 033<span class="CourseTitle"> - Technology &amp; Society</span></li><li>SOCI 100<span class="CourseTitle"> - Introduction to Sociological Research</span></li><li>SOCI 101<span class="CourseTitle"> - Bioethics</span></li><li>SOCI 105<span class="CourseTitle"> - Indus Rel &amp; Hum Res Mgmt</span></li><li>SOCI 110<span class="CourseTitle"> - The Rich and The Poor</span></li><li>SOCI 111<span class="CourseTitle"> - Health of Populations</span></li><li>SOCI 120<span class="CourseTitle"> - Social Statistics</span></li><li>SOCI 122<span class="CourseTitle"> - The Sociology of Gender</span></li><li>SOCI 126<span class="CourseTitle"> - Contemporary Sociological Theory</span></li><li>SOCI 130<span class="CourseTitle"> - Special Topics in Sociology</span></li><li>SOCI 134<span class="CourseTitle"> - Health and Social Policy</span></li><li>SOCI 135<span class="CourseTitle"> - Law and Society</span></li><li>SOCI 137<span class="CourseTitle"> - The Sociology of Media and Popular Culture</span></li><li>SOCI 154<span class="CourseTitle"> - Afro-Latinos in the U.S.</span></li><li>SOCI 200<span class="CourseTitle"> - Criminal Justice</span></li><li>SOCI 222<span class="CourseTitle"> - Field Methods of Sociological Research</span></li><li>SOCI 230<span class="CourseTitle"> - Special Topics in Sociology</span></li><li>SOCI 231<span class="CourseTitle"> - Special Topics in Sociology</span></li><li>SOCI 235<span class="CourseTitle"> - Law and Social Change</span></li><li>SOCI 238<span class="CourseTitle"> - Media Culture &amp; Society in Contemporary China</span></li><li>SOCI 254<span class="CourseTitle"> - Cities, Suburbs, Regions</span></li><li>SOCI 270<span class="CourseTitle"> - The Immigrant City</span></li><li>SOCI 275<span class="CourseTitle"> - Medical Sociology</span></li><li>SOCI 277<span class="CourseTitle"> - Mental Illness</span></li><li>SOCI 322<span class="CourseTitle"> - Advanced Topics in Gender and Sexuality Studies</span></li><li>SOCI 425<span class="CourseTitle"> - Latin American Topics</span></li><li>SOCI 430<span class="CourseTitle"> - Advanced Topics in Sociology</span></li><li>SOCI 438<span class="CourseTitle"> - SOCIAL SCIENCE STUDIO: IMMIGRANTS MAKE THE CITY</span></li><li>SOCI 460<span class="CourseTitle"> - Advanced Topics in Africana Studies</span></li><li>SOCI 488<span class="CourseTitle"> - Culture, Sexuality and Global Health</span></li><li>SOCI 530<span class="CourseTitle"> - Advanced Selected Topics</span></li><li>SOCI 536<span class="CourseTitle"> - Quantitative Methods in Sociology II</span></li><li>SOCI 553<span class="CourseTitle"> - Field Methods in Qualitative Research</span></li><li>SOCI 561<span class="CourseTitle"> - Class Cultures and Historical Change</span></li><li>SOCI 570<span class="CourseTitle"> - VISUALIZING W.  E.  B.  DUBOIS</span></li><li>SOCI 596<span class="CourseTitle"> - Sociology of Education</span></li><li>SOCI 601<span class="CourseTitle"> - Contemporary Social Theory</span></li><li>SOCI 604<span class="CourseTitle"> - Methodology of Social Research</span></li><li>SOCI 649<span class="CourseTitle"> - A Course On Elites</span></li><li>SOCI 660<span class="CourseTitle"> - Advanced Topics in Africana Studies</span></li><li>SOCI 677<span class="CourseTitle"> - International Migration</span></li><li>SOCI 690<span class="CourseTitle"> - Sociology Writing Workshop I</span></li><li>SOCI 691<span class="CourseTitle"> - Sociology Writing Workshop II</span></li><li>SOCI 699<span class="CourseTitle"> - Cluster Workshop</span></li><li>SOCI 731<span class="CourseTitle"> - Advanced Demographic Methods</span></li><li>SOCI 796<span class="CourseTitle"> - Demographic, Economic, and Social Interrelations</span></li>
+<li PCR="">SOCI 001<span class="CourseTitle"> - Introduction to Sociology</span></li>
+<li PCR="">SOCI 003<span class="CourseTitle"> - Deviance and Social Control</span></li>
+<li PCR="">SOCI 006<span class="CourseTitle"> - Race and Ethnic Relations</span></li>
+<li PCR="">SOCI 010<span class="CourseTitle"> - Social Stratification</span></li>
+<li PCR="">SOCI 011<span class="CourseTitle"> - Urban Sociology</span></li>
+<li PCR="">SOCI 033<span class="CourseTitle"> - Technology &amp; Society</span></li>
+<li PCR="">SOCI 100<span class="CourseTitle"> - Introduction to Sociological Research</span></li>
+<li PCR="">SOCI 101<span class="CourseTitle"> - Bioethics</span></li>
+<li PCR="">SOCI 105<span class="CourseTitle"> - Indus Rel &amp; Hum Res Mgmt</span></li>
+<li PCR="">SOCI 110<span class="CourseTitle"> - The Rich and The Poor</span></li>
+<li PCR="">SOCI 111<span class="CourseTitle"> - Health of Populations</span></li>
+<li PCR="">SOCI 120<span class="CourseTitle"> - Social Statistics</span></li>
+<li PCR="">SOCI 122<span class="CourseTitle"> - The Sociology of Gender</span></li>
+<li PCR="">SOCI 126<span class="CourseTitle"> - Contemporary Sociological Theory</span></li>
+<li PCR="">SOCI 130<span class="CourseTitle"> - Special Topics in Sociology</span></li>
+<li PCR="">SOCI 134<span class="CourseTitle"> - Health and Social Policy</span></li>
+<li PCR="">SOCI 135<span class="CourseTitle"> - Law and Society</span></li>
+<li PCR="">SOCI 137<span class="CourseTitle"> - The Sociology of Media and Popular Culture</span></li>
+<li PCR="">SOCI 154<span class="CourseTitle"> - Afro-Latinos in the U.S.</span></li>
+<li PCR="">SOCI 200<span class="CourseTitle"> - Criminal Justice</span></li>
+<li PCR="">SOCI 222<span class="CourseTitle"> - Field Methods of Sociological Research</span></li>
+<li PCR="">SOCI 230<span class="CourseTitle"> - Special Topics in Sociology</span></li>
+<li PCR="">SOCI 231<span class="CourseTitle"> - Special Topics in Sociology</span></li>
+<li PCR="">SOCI 235<span class="CourseTitle"> - Law and Social Change</span></li>
+<li PCR="">SOCI 238<span class="CourseTitle"> - Media Culture &amp; Society in Contemporary China</span></li>
+<li PCR="">SOCI 254<span class="CourseTitle"> - Cities, Suburbs, Regions</span></li>
+<li PCR="">SOCI 270<span class="CourseTitle"> - The Immigrant City</span></li>
+<li PCR="">SOCI 275<span class="CourseTitle"> - Medical Sociology</span></li>
+<li PCR="">SOCI 277<span class="CourseTitle"> - Mental Illness</span></li>
+<li PCR="">SOCI 322<span class="CourseTitle"> - Advanced Topics in Gender and Sexuality Studies</span></li>
+<li PCR="">SOCI 425<span class="CourseTitle"> - Latin American Topics</span></li>
+<li PCR="">SOCI 430<span class="CourseTitle"> - Advanced Topics in Sociology</span></li>
+<li PCR="">SOCI 438<span class="CourseTitle"> - SOCIAL SCIENCE STUDIO: IMMIGRANTS MAKE THE CITY</span></li>
+<li PCR="">SOCI 460<span class="CourseTitle"> - Advanced Topics in Africana Studies</span></li>
+<li PCR="">SOCI 488<span class="CourseTitle"> - Culture, Sexuality and Global Health</span></li>
+<li PCR="">SOCI 530<span class="CourseTitle"> - Advanced Selected Topics</span></li>
+<li PCR="">SOCI 536<span class="CourseTitle"> - Quantitative Methods in Sociology II</span></li>
+<li PCR="">SOCI 553<span class="CourseTitle"> - Field Methods in Qualitative Research</span></li>
+<li PCR="">SOCI 561<span class="CourseTitle"> - Class Cultures and Historical Change</span></li>
+<li PCR="">SOCI 570<span class="CourseTitle"> - VISUALIZING W.  E.  B.  DUBOIS</span></li>
+<li PCR="">SOCI 596<span class="CourseTitle"> - Sociology of Education</span></li>
+<li PCR="">SOCI 601<span class="CourseTitle"> - Contemporary Social Theory</span></li>
+<li PCR="">SOCI 604<span class="CourseTitle"> - Methodology of Social Research</span></li>
+<li PCR="">SOCI 649<span class="CourseTitle"> - A Course On Elites</span></li>
+<li PCR="">SOCI 660<span class="CourseTitle"> - Advanced Topics in Africana Studies</span></li>
+<li PCR="">SOCI 677<span class="CourseTitle"> - International Migration</span></li>
+<li PCR="">SOCI 690<span class="CourseTitle"> - Sociology Writing Workshop I</span></li>
+<li PCR="">SOCI 691<span class="CourseTitle"> - Sociology Writing Workshop II</span></li>
+<li PCR="">SOCI 699<span class="CourseTitle"> - Cluster Workshop</span></li>
+<li PCR="">SOCI 731<span class="CourseTitle"> - Advanced Demographic Methods</span></li>
+<li PCR="">SOCI 796<span class="CourseTitle"> - Demographic, Economic, and Social Interrelations</span></li>

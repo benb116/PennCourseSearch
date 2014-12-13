@@ -1,0 +1,21 @@
+<li PCR="3.31">MSE 215<span class="CourseTitle"> - Introduction to Nanoscale Functional Materials</span></li>
+<li PCR="3.00">MSE 221<span class="CourseTitle"> - Quantum Physics of Materials</span></li>
+<li PCR="2.41">MSE 250<span class="CourseTitle"> - Nano-scale Materials Lab</span></li>
+<li PCR="3.19">MSE 260<span class="CourseTitle"> - Energetics of Macro and Nano-scale Materials</span></li>
+<li PCR="2.65">MSE 393<span class="CourseTitle"> - Materials Selection</span></li>
+<li PCR="2.15">MSE 440<span class="CourseTitle"> - Phase Transformations</span></li>
+<li PCR="2.04">MSE 465<span class="CourseTitle"> - Fabrication and Characterization of Micro and Nanostructured Devices</span></li>
+<li PCR="2.60">MSE 496<span class="CourseTitle"> - Senior Design</span></li>
+<li PCR="3.42">MSE 520<span class="CourseTitle"> - Structure of Materials</span></li>
+<li PCR="3.33">MSE 537<span class="CourseTitle"> - Nanotribology</span></li>
+<li PCR="2.00">MSE 540<span class="CourseTitle"> - Phase Transformations</span></li>
+<li PCR="3.00">MSE 550<span class="CourseTitle"> - Mechanical Properties of Nano and Macro-Scale Materials</span></li>
+<li PCR="2.33">MSE 555<span class="CourseTitle"> - Environmental Degradation of Materials</span></li>
+<li PCR="3.40">MSE 561<span class="CourseTitle"> - Atomic Modeling in Materials Science</span></li>
+<li PCR="1.98">MSE 565<span class="CourseTitle"> - Fabrication and Characterization of Nanostructured Devices</span></li>
+<li PCR="3.20">MSE 575<span class="CourseTitle"> - Statistical Mechanics</span></li>
+<li PCR="0.00">MSE 650<span class="CourseTitle"> - Mechanics of Nano and Biomaterials</span></li>
+<li PCR="0.00">MSE 895<span class="CourseTitle"> - Teaching Practicum.</span></li>
+<li PCR="0.00">MSE 899<span class="CourseTitle"> - Independent Study</span></li>
+<li PCR="0.00">MSE 995<span class="CourseTitle"> - Dissertation</span></li>
+<li PCR="0.00">MSE 999<span class="CourseTitle"> - Thesis/Diss Research</span></li>

@@ -1,1 +1,16 @@
-<li>HSPV 528<span class="CourseTitle"> - American Vernacular Architecture</span></li><li>HSPV 531<span class="CourseTitle"> - American Domestic Interiors</span></li><li>HSPV 538<span class="CourseTitle"> - Cultural Landscapes and Landscape Preservation</span></li><li>HSPV 551<span class="CourseTitle"> - Building Pathology</span></li><li>HSPV 555<span class="CourseTitle"> - Conservation Science</span></li><li>HSPV 601<span class="CourseTitle"> - Research, Recording and Interpretation II</span></li><li>HSPV 606<span class="CourseTitle"> - Historic Site Management</span></li><li>HSPV 620<span class="CourseTitle"> - Seminar in American Architecture</span></li><li>HSPV 625<span class="CourseTitle"> - Preservation Economics</span></li><li>HSPV 638<span class="CourseTitle"> - Topics in Historic Preservation</span></li><li>HSPV 703<span class="CourseTitle"> - Topical Seminar</span></li><li>HSPV 711<span class="CourseTitle"> - Thesis II</span></li><li>HSPV 740<span class="CourseTitle"> - Conservation Seminar</span></li><li>HSPV 741<span class="CourseTitle"> - Special Problems in Preservation</span></li><li>HSPV 744<span class="CourseTitle"> - Architectural Archaeology: Building Lives</span></li><li>HSPV 999<span class="CourseTitle"> - Independent Study</span></li>
+<li PCR="">HSPV 528<span class="CourseTitle"> - American Vernacular Architecture</span></li>
+<li PCR="">HSPV 531<span class="CourseTitle"> - American Domestic Interiors</span></li>
+<li PCR="">HSPV 538<span class="CourseTitle"> - Cultural Landscapes and Landscape Preservation</span></li>
+<li PCR="">HSPV 551<span class="CourseTitle"> - Building Pathology</span></li>
+<li PCR="">HSPV 555<span class="CourseTitle"> - Conservation Science</span></li>
+<li PCR="">HSPV 601<span class="CourseTitle"> - Research, Recording and Interpretation II</span></li>
+<li PCR="">HSPV 606<span class="CourseTitle"> - Historic Site Management</span></li>
+<li PCR="">HSPV 620<span class="CourseTitle"> - Seminar in American Architecture</span></li>
+<li PCR="">HSPV 625<span class="CourseTitle"> - Preservation Economics</span></li>
+<li PCR="">HSPV 638<span class="CourseTitle"> - Topics in Historic Preservation</span></li>
+<li PCR="">HSPV 703<span class="CourseTitle"> - Topical Seminar</span></li>
+<li PCR="">HSPV 711<span class="CourseTitle"> - Thesis II</span></li>
+<li PCR="">HSPV 740<span class="CourseTitle"> - Conservation Seminar</span></li>
+<li PCR="">HSPV 741<span class="CourseTitle"> - Special Problems in Preservation</span></li>
+<li PCR="">HSPV 744<span class="CourseTitle"> - Architectural Archaeology: Building Lives</span></li>
+<li PCR="">HSPV 999<span class="CourseTitle"> - Independent Study</span></li>

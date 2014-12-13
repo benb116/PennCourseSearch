@@ -1,1 +1,3 @@
-<li>BCHE 299<span class="CourseTitle"> - Undergraduate Research Projects</span></li><li>BCHE 300<span class="CourseTitle"> - Senior Research Projects</span></li><li>BCHE 404<span class="CourseTitle"> - Biochemistry Laboratory</span></li>
+<li PCR="">BCHE 299<span class="CourseTitle"> - Undergraduate Research Projects</span></li>
+<li PCR="">BCHE 300<span class="CourseTitle"> - Senior Research Projects</span></li>
+<li PCR="">BCHE 404<span class="CourseTitle"> - Biochemistry Laboratory</span></li>

@@ -1,0 +1,4 @@
+<li PCR="3.33">ANEL 546<span class="CourseTitle"> - Intermediate Sumerian</span></li>
+<li PCR="3.50">ANEL 560<span class="CourseTitle"> - Late Egyptian</span></li>
+<li PCR="0.00">ANEL 641<span class="CourseTitle"> - 1st Year Akkadian II</span></li>
+<li PCR="0.00">ANEL 740<span class="CourseTitle"> - Akkadian Religious and Scientific Texts</span></li>

@@ -1,0 +1,25 @@
+<li PCR="3.50">FREN 110<span class="CourseTitle"> - Elementary French I</span></li>
+<li PCR="2.88">FREN 120<span class="CourseTitle"> - Elementary French II</span></li>
+<li PCR="2.89">FREN 130<span class="CourseTitle"> - Intermediate French I</span></li>
+<li PCR="3.38">FREN 134<span class="CourseTitle"> - Accelerated Intermediate French</span></li>
+<li PCR="2.25">FREN 140<span class="CourseTitle"> - Intermediate French II</span></li>
+<li PCR="2.71">FREN 180<span class="CourseTitle"> - Advanced French in Residence</span></li>
+<li PCR="2.88">FREN 202<span class="CourseTitle"> - Advanced French</span></li>
+<li PCR="3.63">FREN 211<span class="CourseTitle"> - French for the Professions I</span></li>
+<li PCR="3.17">FREN 212<span class="CourseTitle"> - Advanced French Grammar and Composition</span></li>
+<li PCR="2.80">FREN 214<span class="CourseTitle"> - Advanced French Composition and Conversation</span></li>
+<li PCR="3.88">FREN 217<span class="CourseTitle"> - French Phonetics</span></li>
+<li PCR="3.82">FREN 222<span class="CourseTitle"> - Perspectives in French Literature</span></li>
+<li PCR="2.38">FREN 227<span class="CourseTitle"> - Modern France, 1789-1944</span></li>
+<li PCR="0.00">FREN 229<span class="CourseTitle"> - Fr Dans Monde/Fr in Wrld</span></li>
+<li PCR="0.00">FREN 300<span class="CourseTitle"> - The Making of Modern Paris</span></li>
+<li PCR="0.00">FREN 308<span class="CourseTitle"> - Topics in French Culture</span></li>
+<li PCR="2.89">FREN 313<span class="CourseTitle"> - French for the Professions II</span></li>
+<li PCR="3.50">FREN 325<span class="CourseTitle"> - Advanced French Translation</span></li>
+<li PCR="3.27">FREN 386<span class="CourseTitle"> - Paris in Film</span></li>
+<li PCR="2.60">FREN 389<span class="CourseTitle"> - France and Its Others</span></li>
+<li PCR="0.00">FREN 601<span class="CourseTitle"> - Language Teaching/Learning</span></li>
+<li PCR="0.00">FREN 619<span class="CourseTitle"> - Poetique du Recit</span></li>
+<li PCR="0.00">FREN 675<span class="CourseTitle"> - Topics in 19th Century Literature</span></li>
+<li PCR="0.00">FREN 680<span class="CourseTitle"> - Studies in the 20th Century</span></li>
+<li PCR="0.00">FREN 696<span class="CourseTitle"> - Postco Theory Francophon</span></li>

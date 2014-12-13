@@ -1,1 +1,4 @@
-<li>MUSA 504<span class="CourseTitle"> - Business and Crime Geographics</span></li><li>MUSA 505<span class="CourseTitle"> - Web-based Mapping</span></li><li>MUSA 800<span class="CourseTitle"> - MUSA Capstone Project</span></li><li>MUSA 999<span class="CourseTitle"> - Independent Study</span></li>
+<li PCR="">MUSA 504<span class="CourseTitle"> - Business and Crime Geographics</span></li>
+<li PCR="">MUSA 505<span class="CourseTitle"> - Web-based Mapping</span></li>
+<li PCR="">MUSA 800<span class="CourseTitle"> - MUSA Capstone Project</span></li>
+<li PCR="">MUSA 999<span class="CourseTitle"> - Independent Study</span></li>

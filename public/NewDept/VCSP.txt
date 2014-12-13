@@ -1,0 +1,8 @@
+<li PCR="0.00">VCSP 652<span class="CourseTitle"> - Shelter Animal Medicine</span></li>
+<li PCR="0.00">VCSP 719<span class="CourseTitle"> - Sa Peds/Gen/Repro/Cp</span></li>
+<li PCR="0.00">VCSP 778<span class="CourseTitle"> - Sa Neurology</span></li>
+<li PCR="0.00">VCSP 779<span class="CourseTitle"> - Sa Peds/Gen/Repro/Cp</span></li>
+<li PCR="0.00">VCSP 800<span class="CourseTitle"> - Sa Surgery - Foundation</span></li>
+<li PCR="0.00">VCSP 872<span class="CourseTitle"> - Sa Ophthalmology</span></li>
+<li PCR="0.00">VCSP 875<span class="CourseTitle"> - Sa Anesthesia</span></li>
+<li PCR="0.00">VCSP 877<span class="CourseTitle"> - Sa Dentistry</span></li>

@@ -1,1 +1,5 @@
-<li>MSSP 629<span class="CourseTitle"> - Research and Evaluation Design</span></li><li>MSSP 631<span class="CourseTitle"> - Law and Social Policy</span></li><li>MSSP 632<span class="CourseTitle"> - Capstone Seminar I and II</span></li><li>MSSP 780<span class="CourseTitle"> - Policy and "Difference" in Postmodernity</span></li><li>MSSP 897<span class="CourseTitle"> - Applied Linear Modeling</span></li>
+<li PCR="">MSSP 629<span class="CourseTitle"> - Research and Evaluation Design</span></li>
+<li PCR="">MSSP 631<span class="CourseTitle"> - Law and Social Policy</span></li>
+<li PCR="">MSSP 632<span class="CourseTitle"> - Capstone Seminar I and II</span></li>
+<li PCR="">MSSP 780<span class="CourseTitle"> - Policy and "Difference" in Postmodernity</span></li>
+<li PCR="">MSSP 897<span class="CourseTitle"> - Applied Linear Modeling</span></li>

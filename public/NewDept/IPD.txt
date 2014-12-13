@@ -1,0 +1,13 @@
+<li PCR="2.78">IPD 501<span class="CourseTitle"> - Integrated Computer-Aided Design, Manufacturing and Analysis</span></li>
+<li PCR="2.72">IPD 509<span class="CourseTitle"> - Needfinding</span></li>
+<li PCR="2.21">IPD 514<span class="CourseTitle"> - Design for Manufacturability</span></li>
+<li PCR="3.25">IPD 515<span class="CourseTitle"> - Product Design.</span></li>
+<li PCR="0.00">IPD 526<span class="CourseTitle"> - Contemporary Furniture Design</span></li>
+<li PCR="3.07">IPD 527<span class="CourseTitle"> - Industrial Design I.</span></li>
+<li PCR="0.00">IPD 528<span class="CourseTitle"> - Design of Contemporary Products</span></li>
+<li PCR="0.00">IPD 544<span class="CourseTitle"> - Digital Fabrication</span></li>
+<li PCR="3.70">IPD 545<span class="CourseTitle"> - Eng Entrepreneurship I</span></li>
+<li PCR="2.58">IPD 552<span class="CourseTitle"> - Problem Framing</span></li>
+<li PCR="0.00">IPD 562<span class="CourseTitle"> - IPD Theories/Methods II</span></li>
+<li PCR="0.00">IPD 699<span class="CourseTitle"> - IPD Seminar.</span></li>
+<li PCR="0.00">IPD 799<span class="CourseTitle"> - Studio Project Thesis.</span></li>

@@ -1,0 +1,42 @@
+<li PCR="3.10">GSWS 002<span class="CourseTitle"> - Gender and Society</span></li>
+<li PCR="3.67">GSWS 003<span class="CourseTitle"> - Introduction to Sexuality Studies and Queer Theory</span></li>
+<li PCR="0.00">GSWS 006<span class="CourseTitle"> - History of Modern Philosophy</span></li>
+<li PCR="3.38">GSWS 090<span class="CourseTitle"> - Gender, Sexuality and Literature</span></li>
+<li PCR="2.94">GSWS 096<span class="CourseTitle"> - Theories of Gender and Sexuality</span></li>
+<li PCR="3.15">GSWS 102<span class="CourseTitle"> - Intro to Literary Study</span></li>
+<li PCR="0.00">GSWS 118<span class="CourseTitle"> - Iranian Cinema: Gender, Politics and Religion</span></li>
+<li PCR="2.08">GSWS 122<span class="CourseTitle"> - The Sociology of Gender</span></li>
+<li PCR="2.58">GSWS 125<span class="CourseTitle"> - The Adultery Novel</span></li>
+<li PCR="3.08">GSWS 128<span class="CourseTitle"> - The Diary</span></li>
+<li PCR="0.00">GSWS 145<span class="CourseTitle"> - Adv Non-Fic Writing</span></li>
+<li PCR="3.05">GSWS 216<span class="CourseTitle"> - Gender and Health</span></li>
+<li PCR="3.25">GSWS 222<span class="CourseTitle"> - African Women&#39;s Lives: Past and Present 125</span></li>
+<li PCR="3.67">GSWS 229<span class="CourseTitle"> - The Politics of Reform in the Antebellum United States</span></li>
+<li PCR="0.00">GSWS 234<span class="CourseTitle"> - Gender and Religion in China</span></li>
+<li PCR="0.00">GSWS 235<span class="CourseTitle"> - Psychology of Women</span></li>
+<li PCR="3.43">GSWS 242<span class="CourseTitle"> - Science of Sex &amp; Sexuality</span></li>
+<li PCR="0.00">GSWS 249<span class="CourseTitle"> - Philosophy of Education</span></li>
+<li PCR="2.76">GSWS 252<span class="CourseTitle"> - Freud: The Invention of Psychoanalysis</span></li>
+<li PCR="0.00">GSWS 259<span class="CourseTitle"> - Gender and Sexuality in Japan</span></li>
+<li PCR="0.00">GSWS 285<span class="CourseTitle"> - Kelly Writers House Seminar</span></li>
+<li PCR="3.29">GSWS 290<span class="CourseTitle"> - Topics in Women and Literature</span></li>
+<li PCR="0.00">GSWS 294<span class="CourseTitle"> - Art Now</span></li>
+<li PCR="0.00">GSWS 296<span class="CourseTitle"> - Topics In Literary Theory</span></li>
+<li PCR="2.75">GSWS 320<span class="CourseTitle"> - Contemporary Feminist Thought</span></li>
+<li PCR="3.33">GSWS 322<span class="CourseTitle"> - Advanced Topics in Gender and Sexuality Studies</span></li>
+<li PCR="0.00">GSWS 344<span class="CourseTitle"> - Psychology of Personal Growth</span></li>
+<li PCR="2.54">GSWS 345<span class="CourseTitle"> - Sinners, Sex and Slaves: Race and Sex in Early America</span></li>
+<li PCR="3.15">GSWS 349<span class="CourseTitle"> - History of Sexuality in the U.S.</span></li>
+<li PCR="3.33">GSWS 400<span class="CourseTitle"> - Senior Seminar</span></li>
+<li PCR="0.00">GSWS 488<span class="CourseTitle"> - Culture, Sexuality and Global Health</span></li>
+<li PCR="0.00">GSWS 509<span class="CourseTitle"> - Topics in Yiddish Lit</span></li>
+<li PCR="3.25">GSWS 516<span class="CourseTitle"> - Public Interest Workshop</span></li>
+<li PCR="2.97">GSWS 518<span class="CourseTitle"> - Nursing, Health and Illness in the U.S., 1860-1985</span></li>
+<li PCR="0.00">GSWS 527<span class="CourseTitle"> - Race, Gender and Auto/Biography</span></li>
+<li PCR="2.83">GSWS 555<span class="CourseTitle"> - Women and Incarceration</span></li>
+<li PCR="0.00">GSWS 572<span class="CourseTitle"> - Language and Gender</span></li>
+<li PCR="0.00">GSWS 590<span class="CourseTitle"> - Gender and Education (ELD)</span></li>
+<li PCR="0.00">GSWS 612<span class="CourseTitle"> - Counseling and Development of LGBT Individuals</span></li>
+<li PCR="0.00">GSWS 630<span class="CourseTitle"> - Gender &amp; Relig in China</span></li>
+<li PCR="0.00">GSWS 670<span class="CourseTitle"> - Comparing Slavery and Emancipation</span></li>
+<li PCR="0.00">GSWS 740<span class="CourseTitle"> - Slavery in the Middle East and Africa</span></li>

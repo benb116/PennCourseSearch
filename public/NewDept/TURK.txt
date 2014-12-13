@@ -1,0 +1,11 @@
+<li PCR="3.50">TURK 022<span class="CourseTitle"> - Elementary Turkish II</span></li>
+<li PCR="3.86">TURK 024<span class="CourseTitle"> - Intermediate Turkish II</span></li>
+<li PCR="4.00">TURK 122<span class="CourseTitle"> - Advanced Turkish Culture &amp; Media II</span></li>
+<li PCR="0.00">TURK 228<span class="CourseTitle"> - Structure of Turkish</span></li>
+<li PCR="4.00">TURK 229<span class="CourseTitle"> - Ottoman Turkish I</span></li>
+<li PCR="0.00">TURK 329<span class="CourseTitle"> - Adv Rdgs Ottoman Texts</span></li>
+<li PCR="4.00">TURK 522<span class="CourseTitle"> - Advanced Turkish Culture &amp; Media II</span></li>
+<li PCR="3.50">TURK 622<span class="CourseTitle"> - Elementary Turkish II</span></li>
+<li PCR="3.86">TURK 624<span class="CourseTitle"> - Intermediate Turkish II</span></li>
+<li PCR="4.00">TURK 629<span class="CourseTitle"> - Ottoman Turkish I</span></li>
+<li PCR="0.00">TURK 729<span class="CourseTitle"> - Adv Rdgs Ottoman Texts</span></li>

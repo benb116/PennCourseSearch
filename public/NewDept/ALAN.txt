@@ -1,0 +1,11 @@
+<li PCR="0.00">ALAN 031<span class="CourseTitle"> - Beginning Tibetan II</span></li>
+<li PCR="3.00">ALAN 110<span class="CourseTitle"> - Elementary Vietnamese I &amp; II</span></li>
+<li PCR="3.60">ALAN 120<span class="CourseTitle"> - Beginning Filipino I &amp; II</span></li>
+<li PCR="3.50">ALAN 130<span class="CourseTitle"> - Beginning Thai I &amp; II</span></li>
+<li PCR="0.00">ALAN 151<span class="CourseTitle"> - Elementary Indonesian II</span></li>
+<li PCR="2.50">ALAN 210<span class="CourseTitle"> - Intermediate Vietnamese I &amp; II</span></li>
+<li PCR="1.00">ALAN 220<span class="CourseTitle"> - Intermediate Filipino I &amp; II</span></li>
+<li PCR="4.00">ALAN 230<span class="CourseTitle"> - Intermediate Thai I &amp; II</span></li>
+<li PCR="0.00">ALAN 251<span class="CourseTitle"> - Intermed Indonesian II</span></li>
+<li PCR="4.00">ALAN 320<span class="CourseTitle"> - Filipino Lang &amp; Culture</span></li>
+<li PCR="0.00">ALAN 531<span class="CourseTitle"> - Beginning Tibetan II</span></li>

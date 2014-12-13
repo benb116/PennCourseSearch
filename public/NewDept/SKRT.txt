@@ -1,0 +1,3 @@
+<li PCR="3.67">SKRT 461<span class="CourseTitle"> - Sanskrit 1st Year Part II</span></li>
+<li PCR="3.00">SKRT 471<span class="CourseTitle"> - Intermediate Sanskrit Part II</span></li>
+<li PCR="4.00">SKRT 480<span class="CourseTitle"> - Readings in Sankrit Lit</span></li>

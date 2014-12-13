@@ -1,1 +1,2 @@
-<li>MLA 541<span class="CourseTitle"> - Academic Writing and Research Design in the Arts and Sciences</span></li><li>MLA 699<span class="CourseTitle"> - Capstone Project Seminar</span></li>
+<li PCR="">MLA 541<span class="CourseTitle"> - Academic Writing and Research Design in the Arts and Sciences</span></li>
+<li PCR="">MLA 699<span class="CourseTitle"> - Capstone Project Seminar</span></li>

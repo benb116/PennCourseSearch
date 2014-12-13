@@ -1,1 +1,2 @@
-<li>WHCP 614<span class="CourseTitle"> - Management Communication</span></li><li>WHCP 619<span class="CourseTitle"> - Mgmt Comm: Adv. Persuas</span></li>
+<li PCR="">WHCP 614<span class="CourseTitle"> - Management Communication</span></li>
+<li PCR="">WHCP 619<span class="CourseTitle"> - Mgmt Comm: Adv. Persuas</span></li>

@@ -1,0 +1,97 @@
+<li PCR="3.44">ENGL 010<span class="CourseTitle"> - Creative Writing</span></li>
+<li PCR="3.50">ENGL 016<span class="CourseTitle"> - Topics in Literature</span></li>
+<li PCR="3.21">ENGL 020<span class="CourseTitle"> - Literature Before 1660</span></li>
+<li PCR="3.67">ENGL 021<span class="CourseTitle"> - Medieval Literature and Culture</span></li>
+<li PCR="2.91">ENGL 024<span class="CourseTitle"> - Introduction to American and British Film and Media</span></li>
+<li PCR="3.00">ENGL 040<span class="CourseTitle"> - British Poetry 1660 - 1914</span></li>
+<li PCR="3.25">ENGL 041<span class="CourseTitle"> - 18th-Century British Literature</span></li>
+<li PCR="0.00">ENGL 043<span class="CourseTitle"> - Early American Literature</span></li>
+<li PCR="2.75">ENGL 050<span class="CourseTitle"> - The Romantic Period</span></li>
+<li PCR="3.04">ENGL 053<span class="CourseTitle"> - 19th-Century American Literature</span></li>
+<li PCR="3.40">ENGL 055<span class="CourseTitle"> - 19th-Century Novel</span></li>
+<li PCR="3.77">ENGL 058<span class="CourseTitle"> - Irish Literature</span></li>
+<li PCR="1.83">ENGL 059<span class="CourseTitle"> - Modernisms and Modernities</span></li>
+<li PCR="3.67">ENGL 060<span class="CourseTitle"> - Rise of the Novel</span></li>
+<li PCR="3.69">ENGL 062<span class="CourseTitle"> - 20th-Century Poetry</span></li>
+<li PCR="2.45">ENGL 066<span class="CourseTitle"> - Literature and Law</span></li>
+<li PCR="2.58">ENGL 075<span class="CourseTitle"> - Science and Literature</span></li>
+<li PCR="3.29">ENGL 081<span class="CourseTitle"> - African-American Literature</span></li>
+<li PCR="3.69">ENGL 085<span class="CourseTitle"> - Medicine and Literature</span></li>
+<li PCR="3.38">ENGL 090<span class="CourseTitle"> - Gender, Sexuality, and Literature</span></li>
+<li PCR="2.95">ENGL 091<span class="CourseTitle"> - World Film History to 1945</span></li>
+<li PCR="2.93">ENGL 092<span class="CourseTitle"> - World Film History 1945-Present</span></li>
+<li PCR="2.95">ENGL 094<span class="CourseTitle"> - Introduction to Literary Theory</span></li>
+<li PCR="2.98">ENGL 095<span class="CourseTitle"> - Introduction to Film Theory</span></li>
+<li PCR="2.94">ENGL 096<span class="CourseTitle"> - Theories of Gender and Sexuality</span></li>
+<li PCR="2.76">ENGL 097<span class="CourseTitle"> - Theatre, History and Culture II</span></li>
+<li PCR="3.30">ENGL 099<span class="CourseTitle"> - Folklore and Literature</span></li>
+<li PCR="3.69">ENGL 101<span class="CourseTitle"> - Study of an Author</span></li>
+<li PCR="3.15">ENGL 102<span class="CourseTitle"> - Study of a Literary Theme</span></li>
+<li PCR="2.68">ENGL 103<span class="CourseTitle"> - Study of a Literary Genre</span></li>
+<li PCR="3.62">ENGL 104<span class="CourseTitle"> - Study of a Literary Period</span></li>
+<li PCR="3.32">ENGL 105<span class="CourseTitle"> - Topics in Literature and Society</span></li>
+<li PCR="3.10">ENGL 111<span class="CourseTitle"> - Experimental Writing Seminar</span></li>
+<li PCR="3.43">ENGL 112<span class="CourseTitle"> - Workshop for Fiction Writers</span></li>
+<li PCR="3.00">ENGL 113<span class="CourseTitle"> - Poetry Writing Workshop</span></li>
+<li PCR="3.30">ENGL 114<span class="CourseTitle"> - Playwriting Workshop</span></li>
+<li PCR="3.60">ENGL 115<span class="CourseTitle"> - Workshop for Advanced Fiction Writers</span></li>
+<li PCR="2.40">ENGL 116<span class="CourseTitle"> - Screenwriting Workshop</span></li>
+<li PCR="3.60">ENGL 117<span class="CourseTitle"> - The Arts and Popular Culture</span></li>
+<li PCR="3.90">ENGL 118<span class="CourseTitle"> - Advanced Poetry Writing Workshop</span></li>
+<li PCR="3.78">ENGL 120<span class="CourseTitle"> - Working with Translations</span></li>
+<li PCR="3.70">ENGL 121<span class="CourseTitle"> - Writing for Children</span></li>
+<li PCR="3.83">ENGL 122<span class="CourseTitle"> - Grotesque Forms</span></li>
+<li PCR="3.86">ENGL 130<span class="CourseTitle"> - Advanced Screenwriting</span></li>
+<li PCR="3.20">ENGL 135<span class="CourseTitle"> - Creative Non-Fiction Writing</span></li>
+<li PCR="3.29">ENGL 145<span class="CourseTitle"> - Advanced Non-Fiction Writing</span></li>
+<li PCR="3.83">ENGL 155<span class="CourseTitle"> - Writing in the Documentary Tradition</span></li>
+<li PCR="3.57">ENGL 157<span class="CourseTitle"> - Enterpreneurial Journalism</span></li>
+<li PCR="2.67">ENGL 158<span class="CourseTitle"> - Journalistic Story-Telling</span></li>
+<li PCR="2.72">ENGL 160<span class="CourseTitle"> - Reading &amp; Writing In The "New Journalism"</span></li>
+<li PCR="3.80">ENGL 162<span class="CourseTitle"> - Covering Political Elections</span></li>
+<li PCR="2.80">ENGL 170<span class="CourseTitle"> - Advanced Projects in Popular Culture</span></li>
+<li PCR="3.50">ENGL 222<span class="CourseTitle"> - Topics In Romance</span></li>
+<li PCR="3.00">ENGL 229<span class="CourseTitle"> - Topics In Classicism and Literature</span></li>
+<li PCR="3.14">ENGL 234<span class="CourseTitle"> - Topics In The History of the Book</span></li>
+<li PCR="2.92">ENGL 241<span class="CourseTitle"> - Topics In 18th-Century Literature</span></li>
+<li PCR="1.82">ENGL 256<span class="CourseTitle"> - Topics In Modern Drama</span></li>
+<li PCR="3.56">ENGL 259<span class="CourseTitle"> - Topics In Modernism</span></li>
+<li PCR="3.64">ENGL 260<span class="CourseTitle"> - Topics In The Novel</span></li>
+<li PCR="3.73">ENGL 261<span class="CourseTitle"> - Topics In 20th-Century Literature</span></li>
+<li PCR="3.00">ENGL 264<span class="CourseTitle"> - Topics In Modern American Literature</span></li>
+<li PCR="3.13">ENGL 266<span class="CourseTitle"> - Topics In Law and Literature</span></li>
+<li PCR="3.00">ENGL 272<span class="CourseTitle"> - Topics In Asian American Literature</span></li>
+<li PCR="2.73">ENGL 274<span class="CourseTitle"> - Topics In Contemporary American Literature</span></li>
+<li PCR="0.00">ENGL 278<span class="CourseTitle"> - Topics in Digital and New Media</span></li>
+<li PCR="2.93">ENGL 284<span class="CourseTitle"> - Topics In Race and Ethnicity</span></li>
+<li PCR="2.00">ENGL 286<span class="CourseTitle"> - Topics In American Literature</span></li>
+<li PCR="3.67">ENGL 288<span class="CourseTitle"> - Topics In American Poetry</span></li>
+<li PCR="2.25">ENGL 290<span class="CourseTitle"> - Topics In Gender, Sexuality, and Literature</span></li>
+<li PCR="3.44">ENGL 292<span class="CourseTitle"> - Topics In Film Studies</span></li>
+<li PCR="3.93">ENGL 293<span class="CourseTitle"> - Topics In Postcolonial Literature</span></li>
+<li PCR="3.00">ENGL 294<span class="CourseTitle"> - Topics In Literary Theory</span></li>
+<li PCR="3.09">ENGL 295<span class="CourseTitle"> - Topics In Cultural Studies</span></li>
+<li PCR="3.33">ENGL 323<span class="CourseTitle"> - Topics In Medieval Poetry</span></li>
+<li PCR="3.63">ENGL 329<span class="CourseTitle"> - Topics In Classicism and Literature</span></li>
+<li PCR="4.00">ENGL 345<span class="CourseTitle"> - Topics In The 18th Century Novel</span></li>
+<li PCR="3.50">ENGL 360<span class="CourseTitle"> - Topics In The Novel</span></li>
+<li PCR="3.24">ENGL 363<span class="CourseTitle"> - Topics In 20th-Century American Literature</span></li>
+<li PCR="4.00">ENGL 392<span class="CourseTitle"> - Topics In Film Studies</span></li>
+<li PCR="3.36">ENGL 410<span class="CourseTitle"> - Modernism</span></li>
+<li PCR="3.58">ENGL 412<span class="CourseTitle"> - Fiction Writing Workshop</span></li>
+<li PCR="2.88">ENGL 492<span class="CourseTitle"> - 20th C American Film</span></li>
+<li PCR="4.00">ENGL 524<span class="CourseTitle"> - Topics Medieval Studies</span></li>
+<li PCR="0.00">ENGL 560<span class="CourseTitle"> - The Novel</span></li>
+<li PCR="3.60">ENGL 564<span class="CourseTitle"> - British Modernism</span></li>
+<li PCR="3.40">ENGL 573<span class="CourseTitle"> - Topics in Criticism and Theory</span></li>
+<li PCR="0.00">ENGL 574<span class="CourseTitle"> - Introduction to Bibliography</span></li>
+<li PCR="3.33">ENGL 591<span class="CourseTitle"> - Modernism</span></li>
+<li PCR="3.71">ENGL 595<span class="CourseTitle"> - Post-Colonial Literature</span></li>
+<li PCR="0.00">ENGL 730<span class="CourseTitle"> - Topics in 16th-Century History and Culture</span></li>
+<li PCR="0.00">ENGL 736<span class="CourseTitle"> - Renaissance Studies</span></li>
+<li PCR="0.00">ENGL 773<span class="CourseTitle"> - Modernism</span></li>
+<li PCR="0.00">ENGL 783<span class="CourseTitle"> - Major American Author</span></li>
+<li PCR="0.00">ENGL 790<span class="CourseTitle"> - Recent Issues in Critical Theory</span></li>
+<li PCR="0.00">ENGL 799<span class="CourseTitle"> - Topics in American Literature</span></li>
+<li PCR="0.00">ENGL 800<span class="CourseTitle"> - Teaching of Literature and Composition</span></li>
+<li PCR="0.00">ENGL 801<span class="CourseTitle"> - Pedagogy</span></li>

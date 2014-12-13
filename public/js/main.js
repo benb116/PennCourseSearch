@@ -4,11 +4,12 @@ $(document).ready(function() {
 	var delay = (function(){
 	  var timer = 0;
 	  return function(callback, ms){
-	    clearTimeout (timer);
-	    timer = setTimeout(callback, ms);
-	  };})();
+		clearTimeout (timer);
+		timer = setTimeout(callback, ms);
+	  };
+	})(); // The delay function that prevents immediate requests
 
-	LoadingSum = 0;
+	LoadingSum = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
 
 	LoadingSum += 1;
 	LoadingIndicate()
@@ -101,10 +102,11 @@ $(document).ready(function() {
 });
 
 function getCourseNumbers(dept, desc, TitleHidden) { // Getting info about courses in a department
+	var termSelect = $('#TermSelect').val();
 	var deptSearch = dept.split("/")[0]; // Get deptartment
 	LoadingSum += 1;
 	LoadingIndicate();
-	$.get("/DeptListings/"+deptSearch.toUpperCase()+".txt") // Make the request
+	$.get("/NewDept/"+deptSearch.toUpperCase()+".txt") // Make the request
 	.done(function(data) {
 
 		if (data == "") {
@@ -131,9 +133,10 @@ function getCourseNumbers(dept, desc, TitleHidden) { // Getting info about cours
 }
 
 function searchDesc(desc) {
+	var termSelect = $('#TermSelect').val();
 	LoadingSum += 1;
 	LoadingIndicate()
-	$.get("/Search?searchType=descSearch&courseID="+desc) // Make the request
+	$.get("/Search?searchType=descSearch&courseID="+desc+"&term="+termSelect) // Make the request
 	.done(function(data) {
 		$('#CourseList').html(data); // Put the course number list in #CourseList
 		$('#CourseList li').click(function() { // If a course is clicked
@@ -152,9 +155,10 @@ function searchDesc(desc) {
 
 
 function getSectionNumbers(cnum) { // Getting info about sections in a department
+	var termSelect = $('#TermSelect').val();
 	LoadingSum += 1;
 	LoadingIndicate();
-	$.get("/Search?searchType=numbSearch&courseID="+cnum) // Make the request
+	$.get("/Search?searchType=numbSearch&courseID="+cnum+"&term="+termSelect) // Make the request
 	.done(function(data) {
 		$('#SectionList').html(data); // Put the section list in #SectionList
 		$('#SectionList span:nth-child(1)').click(function() { // If a section is clicked
@@ -173,9 +177,10 @@ function getSectionNumbers(cnum) { // Getting info about sections in a departmen
 	});
 }
 function getSectionInfo(sec) {
+	var termSelect = $('#TermSelect').val();
 	LoadingSum += 1;
 	LoadingIndicate();
-	$.get("/Search?searchType=sectSearch&courseID="+sec) // Make the request
+	$.get("/Search?searchType=sectSearch&courseID="+sec+"&term="+termSelect) // Make the request
 	.done(function(data) {
 		$('#SectionInfo').html(data);
 		$('.DescButton').click(function() { // If a course is clicked
@@ -199,9 +204,10 @@ function getSectionInfo(sec) {
 	});
 }
 function addToSched(sec) { // Getting info about a section
+	var termSelect = $('#TermSelect').val();
 	LoadingSum += 1;
 	LoadingIndicate();
-	$.get("/Sched?addRem=add&courseID="+sec) // Make the request
+	$.get("/Sched?addRem=add&courseID="+sec+"&term="+termSelect) // Make the request
 	.done(function(data) {
 		SpitSched(data)
 	})

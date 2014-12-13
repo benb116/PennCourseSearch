@@ -1,0 +1,41 @@
+<li PCR="2.98">EALC 002<span class="CourseTitle"> - Introduction to Japanese Civilization</span></li>
+<li PCR="2.29">EALC 013<span class="CourseTitle"> - Art and Civilization in East Asia</span></li>
+<li PCR="3.82">EALC 015<span class="CourseTitle"> - Introduction to Buddhism</span></li>
+<li PCR="3.23">EALC 018<span class="CourseTitle"> - Globalizing East Asia</span></li>
+<li PCR="3.25">EALC 038<span class="CourseTitle"> - Topics East Asian Religions</span></li>
+<li PCR="2.69">EALC 044<span class="CourseTitle"> - US and China 1912-2012</span></li>
+<li PCR="2.75">EALC 069<span class="CourseTitle"> - Japanese Popular Culture</span></li>
+<li PCR="3.34">EALC 071<span class="CourseTitle"> - Modern Japanese History</span></li>
+<li PCR="0.00">EALC 080<span class="CourseTitle"> - Introduction to Korean Civilization</span></li>
+<li PCR="2.42">EALC 116<span class="CourseTitle"> - East Asian Gardens</span></li>
+<li PCR="2.72">EALC 125<span class="CourseTitle"> - Cultural Chinas: 20th Century Chinese Literature and Film</span></li>
+<li PCR="3.67">EALC 126<span class="CourseTitle"> - Topics Chinese Iterature</span></li>
+<li PCR="3.59">EALC 131<span class="CourseTitle"> - Introduction to Classical Chinese Thought</span></li>
+<li PCR="0.00">EALC 138<span class="CourseTitle"> - Political Economy of Contemporary China</span></li>
+<li PCR="2.67">EALC 141<span class="CourseTitle"> - Topics in Asian History</span></li>
+<li PCR="2.92">EALC 175<span class="CourseTitle"> - Ancient Japanese CIV</span></li>
+<li PCR="0.00">EALC 193<span class="CourseTitle"> - S.Korea/Global Economy</span></li>
+<li PCR="3.75">EALC 222<span class="CourseTitle"> - 1st Year Classical Chin II</span></li>
+<li PCR="0.00">EALC 230<span class="CourseTitle"> - Gender and Religion in China</span></li>
+<li PCR="3.38">EALC 232<span class="CourseTitle"> - Cultural Memory in Contemporary China</span></li>
+<li PCR="0.00">EALC 242<span class="CourseTitle"> - Medicine and Healing in China</span></li>
+<li PCR="3.00">EALC 254<span class="CourseTitle"> - War and Literature in Japan: Tales of the Heike</span></li>
+<li PCR="3.29">EALC 259<span class="CourseTitle"> - Gender and Sexuality in Japan</span></li>
+<li PCR="3.71">EALC 291<span class="CourseTitle"> - Archaeology of Central Asia</span></li>
+<li PCR="3.57">EALC 442<span class="CourseTitle"> - History of China</span></li>
+<li PCR="2.42">EALC 516<span class="CourseTitle"> - East Asian Gardens</span></li>
+<li PCR="2.72">EALC 525<span class="CourseTitle"> - Cultural Chinas: 20th Century Chinese Literature and Film</span></li>
+<li PCR="3.59">EALC 531<span class="CourseTitle"> - Introduction to Classical Chinese Thought</span></li>
+<li PCR="0.00">EALC 538<span class="CourseTitle"> - Political Economy of Contemporary China</span></li>
+<li PCR="3.75">EALC 622<span class="CourseTitle"> - 1st Year Classical Chin II</span></li>
+<li PCR="0.00">EALC 630<span class="CourseTitle"> - Gender and Religion in China</span></li>
+<li PCR="3.38">EALC 632<span class="CourseTitle"> - Cultural Memory in Contemporary China</span></li>
+<li PCR="0.00">EALC 642<span class="CourseTitle"> - Medicine and Healing in China</span></li>
+<li PCR="3.00">EALC 654<span class="CourseTitle"> - Tales of the Heike</span></li>
+<li PCR="3.29">EALC 659<span class="CourseTitle"> - Gender and Sexuality in Japan</span></li>
+<li PCR="3.71">EALC 691<span class="CourseTitle"> - Archaeology of Central Asia</span></li>
+<li PCR="0.00">EALC 720<span class="CourseTitle"> - Topics in Chinese Studies</span></li>
+<li PCR="0.00">EALC 722<span class="CourseTitle"> - Adv Classical Chinese II</span></li>
+<li PCR="0.00">EALC 735<span class="CourseTitle"> - Chinese Palaeography</span></li>
+<li PCR="0.00">EALC 749<span class="CourseTitle"> - Japanese for Sinologists</span></li>
+<li PCR="0.00">EALC 774<span class="CourseTitle"> - Readings Modern Japan History</span></li>

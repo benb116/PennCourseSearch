@@ -1,0 +1,12 @@
+<li PCR="3.43">EAS 203<span class="CourseTitle"> - Engineering Ethics</span></li>
+<li PCR="3.25">EAS 306<span class="CourseTitle"> - Electricity and Systems Markets</span></li>
+<li PCR="2.38">EAS 403<span class="CourseTitle"> - Energy Systems and Policy</span></li>
+<li PCR="2.38">EAS 503<span class="CourseTitle"> - Energy Systems and Policy</span></li>
+<li PCR="3.25">EAS 506<span class="CourseTitle"> - Electricity and Systems Markets</span></li>
+<li PCR="2.89">EAS 510<span class="CourseTitle"> - Technical Communication and Academic Wrting for Non-native Speakers of English</span></li>
+<li PCR="3.70">EAS 545<span class="CourseTitle"> - Engineering Entrepreneurship I</span></li>
+<li PCR="3.85">EAS 546<span class="CourseTitle"> - Engineering Entrepreneurship II</span></li>
+<li PCR="1.25">EAS 590<span class="CourseTitle"> - Commercializing Information Technology</span></li>
+<li PCR="3.14">EAS 591<span class="CourseTitle"> - Leading Technology Teams</span></li>
+<li PCR="3.57">EAS 595<span class="CourseTitle"> - Foundations of Leadership</span></li>
+<li PCR="0.00">EAS 897<span class="CourseTitle"> - Cpt Practicum</span></li>

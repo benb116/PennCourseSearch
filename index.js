@@ -1,51 +1,80 @@
+// Initial configuration
 var config = require('./config')
 var path = require('path');
 var express = require('express')
 var app = express();
 var request = require("request");
 var mongojs = require("mongojs");
-var currentTerm = '2015A'
+var colors = require('colors');
 
+// Set paths and errors
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
-
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(function(error, req, res, next) {
-    res.status(500);
-    res.render('500.hjs');
-  });
 process.env.PWD = process.cwd()
 
-
-var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@ds063180.mongolab.com:63180/pcs1',
+// Connect to database
+var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
     db = mongojs.connect(uri, ["Students"]);
 
-subtitles = ["Cause PennInTouch sucks.", "You can press the back button, but you don't even need to.", "This site was invented by Benjamin Franklin in 1793."];
-
-app.get('/', function(req, res) {
-  console.log('Page Refresh')
-  thissub = subtitles[Math.floor(Math.random() * subtitles.length)];
-  return res.render('index', {
-    title: 'Penn Course Search',
-    currentTerm: currentTerm,
-    subtitle: thissub
-  });
+// Start the server
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Node app is running. Better go catch it.")
 })
 
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Node app is running. Better go catch it")
+// Rotating subtitles
+subtitles = [	"Cause PennInTouch sucks.", 
+				"You can press the back button, but you don't even need to.",
+				"This site was invented by Benjamin Franklin in 1793."];
+// Handle main page requests
+app.get('/', function(req, res) {
+  console.log('Page Refresh')
+  thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
+  return res.render('index', { // Send page
+    title: 'Penn Course Search',
+    subtitle: thissub
+  });
 })
 
 // This request manager is for spitting the department lists. They are saved for faster responses
 app.get('/Spit', function(req, res) {
 	var thedept = req.query.dept;
-	console.log(thedept)
 	request({
-		uri: 'http://localhost:3000/Search?searchType=deptSearch&courseID=' + thedept
+		uri: 'http://localhost:3000/Search?searchType=deptSearch&courseID=' + thedept // Get preformatted results
 	}, function(error, response, body) {
 		return res.render('new', {
 			text: body
 		});
+	});
+});
+// This request manager is for spitting the PCR Course ID's. They are saved for faster responses
+app.get('/PCRSpitID', function(req, res) {
+	var courseID = req.query.courseID;
+	request({
+		uri: 'http://api.penncoursereview.com/v1/coursehistories/'+courseID+'?token='+config.PCRToken // Get preformatted results
+	}, function(error, response, body) {
+		try {
+			var Res = JSON.parse(body); // Convert to JSON object
+			console.log(Res.result.id)
+			return res.send((Res.result.courses[Res.result.courses.length - 1].id).toString())
+		} catch(err) {
+			return res.send('0000')
+		}
+	});
+});
+// This request manager is for spitting the PCR reviews. They are saved for faster responses
+app.get('/PCRSpitRev', function(req, res) {
+	var courseID = req.query.courseID;
+	request({
+		uri: 'http://api.penncoursereview.com/v1/courses/'+courseID+'/reviews?token='+config.PCRToken // Get preformatted results
+	}, function(error, response, body) {
+		try {
+			var Res = JSON.parse(body); // Convert to JSON object
+			cQ = Res.result.values[Res.result.values.length - 1].ratings.rCourseQuality
+			return res.send(cQ.toString())
+		} catch(err) {
+			return res.send(err)
+		}
 	});
 });
 
@@ -54,39 +83,39 @@ app.get('/Search', function(req, res) {
 	var courseIDSearch = req.query.courseID;
 	console.log(courseIDSearch);
 	var searchType = req.query.searchType;
-	if (courseIDSearch != 'favicon.ico') {
-		if (searchType == 'descSearch') { // If it's a desc search and we aren't rechecking the API
-			console.time('  Request Time'); // Start the timer
-			request({
-			  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?description='+courseIDSearch+'&number_of_results_per_page=200',
-			  method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
-			}, function(error, response, body) {
-				console.timeEnd('  Request Time');
-				var searchResponse = parseDeptList(body) // Parse the dept response
-				return res.send(searchResponse); // return correct info
-			});
-		} else {
-			console.time('  Request Time'); // Start the timer
-			request({
-			  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseIDSearch+'&number_of_results_per_page=200',
-			  method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
-			}, function(error, response, body) {
-				console.timeEnd('  Request Time');
-				try {
-					if (searchType == 'deptSearch'){ // If we are checking the API
-						var searchResponse = parseDeptList(body) // Parse the dept response
-					} else if (searchType == 'numbSearch') {
-						var searchResponse = parseCourseList(body) // Parse the num response
-					} else if (searchType == 'sectSearch') {
-						var searchResponse = parseSectionList(body) // Parse the sec response
-					} else {var searchResponse = ''}
-				} catch(err) {var searchResponse = 'No results :('}
-				return res.send(searchResponse); // return correct info
-			});
-		};
+	var termSelect = req.query.term;
+	if (searchType == 'descSearch') { // If it's a description search
+		console.time('  Request Time'); // Start the timer
+		request({
+		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?description='+courseIDSearch+'&number_of_results_per_page=200&term='+termSelect,
+		  method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
+		}, function(error, response, body) {
+			console.timeEnd('  Request Time');
+			var searchResponse = parseDeptList(body) // Parse the coursenumber response
+			return res.send(searchResponse); // return correct info
+		});
+	} else {
+		console.time('  Request Time'); // Start the timer
+		request({
+		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseIDSearch+'&number_of_results_per_page=200&term='+termSelect,
+		  method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
+		}, function(error, response, body) {
+			console.timeEnd('  Request Time');
+			try {
+				if (searchType == 'deptSearch'){ // This will only receive requests if we are checking the API
+					var searchResponse = parseDeptList(body) // Parse the dept response
+				} else if (searchType == 'numbSearch') {
+					var searchResponse = parseCourseList(body) // Parse the num response
+				} else if (searchType == 'sectSearch') {
+					var searchResponse = parseSectionList(body) // Parse the sec response
+				} else {var searchResponse = ''}
+			} catch(err) {var searchResponse = 'No results :('}
+			return res.send(searchResponse); // return correct info
+		});
 	};
 });
 
+// Get previously scheduled sections
 SchedCourses = {};
 db.Students.find({Pennkey: "bernsb"}, { Sched1: 1}, function(err, doc) {
 	SchedCourses = doc[0].Sched1;
@@ -96,10 +125,10 @@ db.Students.find({Pennkey: "bernsb"}, { Sched1: 1}, function(err, doc) {
 app.get('/Sched', function(req, res) {
 	var addRem = req.query.addRem; // Are we adding, removing, or clearing?
 	var courseID = req.query.courseID;
-
-	if (addRem == 'add') { // If we need to add, then we get time info for the section
+	var termSelect = req.query.term;
+	if (addRem == 'add') { // If we need to add, then we get meeting info for the section
 		request({
-		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
+		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID+"&term="+termSelect,
 		  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
 		}, function(error, response, body) {
 			resJSON = getSchedInfo(body); // Format the response
@@ -109,7 +138,7 @@ app.get('/Sched', function(req, res) {
 				SchedCourses[JSONSecID] = resJSON[JSONSecID];
 				console.log(JSONSecID)
 			};
-			db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }});
+			db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
 			return res.send(SchedCourses);
 		});
 	} else if (addRem == 'rem') { // If we need to remove
@@ -120,15 +149,15 @@ app.get('/Sched', function(req, res) {
 				console.log(courseID)
 			}
 		}
-		db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }});
+		db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
 		return res.send(SchedCourses);
 	} else if (addRem == 'clear') { // Clear all
 		SchedCourses = {};
-		db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }});
+		db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
 		console.log('Cleared')
 	}
 	else {
-		return res.send(SchedCourses);
+		return res.send(SchedCourses); // On a blank request
 	}
 
 });
@@ -146,23 +175,23 @@ function parseDeptList(JSONString) {
 	return coursesList;
 }
 
-function getTimeInfo(JSONObj) {
+function getTimeInfo(JSONObj) { // A function to retrieve and format meeting times
 	OCStatus = JSONObj.course_status;
   	if (OCStatus == "O") {
-  		var StatusClass = 'OpenSec' // If it's open, add class open
+  		var StatusClass = 'OpenSec' // If section is open, add class open
   	} else if (OCStatus == "C") {
-  		var StatusClass = 'ClosedSec' // If it's closed, add class closed
+  		var StatusClass = 'ClosedSec' // If section is closed, add class closed
   	} else {
   		var StatusClass = 'ErrorSec' // Otherwise make it gray
   	};
   	var TimeInfo = [];
 	try { // Not all sections have time info
-		for(var meetList in JSONObj.meetings) {
-			var StartTime = JSONObj.meetings[meetList].start_time.split(" ")[0];
-			if (StartTime[0] == '0') {StartTime = StartTime.slice(1)};
-			var EndTime = JSONObj.meetings[meetList].end_time.split(" ")[0];
+		for(var meeting in JSONObj.meetings) { // Some sections have multiple meeting forms (I'm looking at you PHYS151)
+			var StartTime = JSONObj.meetings[meeting].start_time.split(" ")[0]; // Get start time
+			if (StartTime[0] == '0') {StartTime = StartTime.slice(1)}; // If it's 08:00, make it 8:00
+			var EndTime = JSONObj.meetings[meeting].end_time.split(" ")[0];
 			if (EndTime[0] == '0') {EndTime = EndTime.slice(1)};
-			var MeetDays = JSONObj.meetings[meetList].meeting_days;
+			var MeetDays = JSONObj.meetings[meeting].meeting_days; // Output like MWF or TR
 			meetListInfo = ' - '+StartTime+" to "+EndTime+" on "+MeetDays;
 			TimeInfo.push(meetListInfo);
 		}
@@ -178,16 +207,16 @@ function getTimeInfo(JSONObj) {
 function parseCourseList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var courseTitle = Res.result_data[0].course_title;
-	var sectionsList = '<span>'+courseTitle+'</span>'
+	var sectionsList = '<span>'+courseTitle+'</span>' // Give the list a title
 	for(var key in Res.result_data) {
-      	var tempName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number+' '+Res.result_data[key].section_number;
-      	var TimeInfoArray = getTimeInfo(Res.result_data[key]);
+      	var SectionName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number+' '+Res.result_data[key].section_number;
+      	var TimeInfoArray = getTimeInfo(Res.result_data[key]); // Get meeting times for a section
       	var StatusClass = TimeInfoArray[0];
-      	var TimeInfo = TimeInfoArray[1][0];
-      	if(typeof TimeInfoArray[1][1] !== 'undefined'){TimeInfo += ' ...';};
+      	var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
+      	if(typeof TimeInfoArray[1][1] !== 'undefined'){TimeInfo += ' ...';}; // If there are multiple meeting times
       	if(typeof TimeInfo === 'undefined'){TimeInfo = '';};
-		if (sectionsList.indexOf(tempName) == -1) { // If it's not already in the list
-      		sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+tempName+TimeInfo+'</span></li>'; // Add and format
+		if (sectionsList.indexOf(SectionName) == -1) { // If it's not already in the list
+      		sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+SectionName+TimeInfo+'</span></li>'; // Add and format
       	};
     }
     if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'
@@ -212,6 +241,7 @@ function parseSectionList(JSONString) {
       	var TimeInfo = '';
       	var prereq = entry.prerequisite_notes;
       	if (prereq == "") {prereq = "none"}
+  		var termsOffered = entry.course_terms_offered;
       	for(var listing in meetArray) {
       		TimeInfo += meetArray[listing].split("-")[1] + '<br>';
       	}
@@ -243,7 +273,7 @@ function parseSectionList(JSONString) {
 			AsscList = '';
 		};
 
-		return "<span>&nbsp + &nbsp</span><span>" + FullID + "</span> - " + Title + Instructor +  "<br><br><span class='DescButton'>Description</span><br><p class='DescText'>" + Desc + "</p><br>Status: " + OpenClose + "<br><br>Prerequisites: " + prereq + "<br><br>" + TimeInfo + AsscList; // Format the whole response
+		return "<span>&nbsp + &nbsp</span><span>" + FullID + "</span> - " + Title + Instructor +  "<br><br><span class='DescButton'>Description</span><br><p class='DescText'>" + Desc + "</p><br>Status: " + OpenClose + "<br><br>"+termsOffered+"<br><br>Prerequisites: " + prereq + "<br><br>" + TimeInfo + AsscList; // Format the whole response
 	}
  	catch(err) {
 		return 'No Results';

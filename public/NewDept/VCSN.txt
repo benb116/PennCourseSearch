@@ -1,0 +1,11 @@
+<li PCR="0.00">VCSN 656<span class="CourseTitle"> - Fa Pharmacology</span></li>
+<li PCR="0.00">VCSN 657<span class="CourseTitle"> - One Health &amp; Global Food</span></li>
+<li PCR="0.00">VCSN 661<span class="CourseTitle"> - Swine Neonatology</span></li>
+<li PCR="0.00">VCSN 662<span class="CourseTitle"> - Swine Neonatology</span></li>
+<li PCR="0.00">VCSN 663<span class="CourseTitle"> - Swine Husbandry</span></li>
+<li PCR="0.00">VCSN 664<span class="CourseTitle"> - Swine Husbandry</span></li>
+<li PCR="0.00">VCSN 700<span class="CourseTitle"> - La Medicine - Foundation</span></li>
+<li PCR="0.00">VCSN 815<span class="CourseTitle"> - La Anesthesia</span></li>
+<li PCR="0.00">VCSN 875<span class="CourseTitle"> - La Anesthesia Service</span></li>
+<li PCR="0.00">VCSN 879<span class="CourseTitle"> - Equine Podology</span></li>
+<li PCR="0.00">VCSN 885<span class="CourseTitle"> - Equine Ophthalmology</span></li>

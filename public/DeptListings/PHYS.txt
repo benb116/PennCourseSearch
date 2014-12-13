@@ -1,1 +1,31 @@
-<li>PHYS 016<span class="CourseTitle"> - Energy, Oil, and Global Warming</span></li><li>PHYS 050<span class="CourseTitle"> - Physics Laboratory I</span></li><li>PHYS 051<span class="CourseTitle"> - Physics Laboratory II</span></li><li>PHYS 101<span class="CourseTitle"> - General Physics: Mechanics, Heat and Sound</span></li><li>PHYS 102<span class="CourseTitle"> - General Physics: Electromagnetism, Optics, and Modern Physics</span></li><li>PHYS 140<span class="CourseTitle"> - Principles of Physics I (without laboratory)</span></li><li>PHYS 141<span class="CourseTitle"> - Principles of Physics II (without laboratory)</span></li><li>PHYS 150<span class="CourseTitle"> - Principles of Physics I: Mechanics and Wave Motion</span></li><li>PHYS 151<span class="CourseTitle"> - Principles of Physics II: Electromagnetism and Radiation</span></li><li>PHYS 171<span class="CourseTitle"> - Honors Physics II: Electromagnetism and Radiation</span></li><li>PHYS 240<span class="CourseTitle"> - Principles IV: Modern Physics</span></li><li>PHYS 250<span class="CourseTitle"> - Principles of Physics III: Modern Physics</span></li><li>PHYS 314<span class="CourseTitle"> - Ocean-Atmosphere Dynamics and Implications for Future Climate Change</span></li><li>PHYS 351<span class="CourseTitle"> - Analytical Mechanics</span></li><li>PHYS 362<span class="CourseTitle"> - Electromagnetism II: Magnetism, Maxwell&#39;s Equations, and Electromagnetic Waves</span></li><li>PHYS 412<span class="CourseTitle"> - Introduction to Quantum Mechanics II</span></li><li>PHYS 414<span class="CourseTitle"> - Laboratory in Modern Physics</span></li><li>PHYS 501<span class="CourseTitle"> - Introduction to Research</span></li><li>PHYS 505<span class="CourseTitle"> - Introduction to Cosmology</span></li><li>PHYS 512<span class="CourseTitle"> - Introduction to Quantum Mechanics II</span></li><li>PHYS 516<span class="CourseTitle"> - Electromagnetic Phenomena</span></li><li>PHYS 518<span class="CourseTitle"> - Introduction to Condensed Matter Physics</span></li><li>PHYS 521<span class="CourseTitle"> - Advanced Laboratory</span></li><li>PHYS 522<span class="CourseTitle"> - Introduction to Elementary Particle Physics</span></li><li>PHYS 530<span class="CourseTitle"> - Modern Optical Physics and Spectroscopy</span></li><li>PHYS 532<span class="CourseTitle"> - Quantum Mechanics II</span></li><li>PHYS 562<span class="CourseTitle"> - Electromagnetism II: Magnetism, Maxwell&#39;s Equations, and Electromagnetic Waves</span></li><li>PHYS 580<span class="CourseTitle"> - Biological Physics</span></li><li>PHYS 585<span class="CourseTitle"> - Theoretical and Computational Neuroscience</span></li><li>PHYS 633<span class="CourseTitle"> - Relativistic Quantum Field Theory</span></li><li>PHYS 662<span class="CourseTitle"> - Solid State Theory II</span></li>
+<li PCR="">PHYS 016<span class="CourseTitle"> - Energy, Oil, and Global Warming</span></li>
+<li PCR="">PHYS 050<span class="CourseTitle"> - Physics Laboratory I</span></li>
+<li PCR="">PHYS 051<span class="CourseTitle"> - Physics Laboratory II</span></li>
+<li PCR="">PHYS 101<span class="CourseTitle"> - General Physics: Mechanics, Heat and Sound</span></li>
+<li PCR="">PHYS 102<span class="CourseTitle"> - General Physics: Electromagnetism, Optics, and Modern Physics</span></li>
+<li PCR="">PHYS 140<span class="CourseTitle"> - Principles of Physics I (without laboratory)</span></li>
+<li PCR="">PHYS 141<span class="CourseTitle"> - Principles of Physics II (without laboratory)</span></li>
+<li PCR="">PHYS 150<span class="CourseTitle"> - Principles of Physics I: Mechanics and Wave Motion</span></li>
+<li PCR="">PHYS 151<span class="CourseTitle"> - Principles of Physics II: Electromagnetism and Radiation</span></li>
+<li PCR="">PHYS 171<span class="CourseTitle"> - Honors Physics II: Electromagnetism and Radiation</span></li>
+<li PCR="">PHYS 240<span class="CourseTitle"> - Principles IV: Modern Physics</span></li>
+<li PCR="">PHYS 250<span class="CourseTitle"> - Principles of Physics III: Modern Physics</span></li>
+<li PCR="">PHYS 314<span class="CourseTitle"> - Ocean-Atmosphere Dynamics and Implications for Future Climate Change</span></li>
+<li PCR="">PHYS 351<span class="CourseTitle"> - Analytical Mechanics</span></li>
+<li PCR="">PHYS 362<span class="CourseTitle"> - Electromagnetism II: Magnetism, Maxwell&#39;s Equations, and Electromagnetic Waves</span></li>
+<li PCR="">PHYS 412<span class="CourseTitle"> - Introduction to Quantum Mechanics II</span></li>
+<li PCR="">PHYS 414<span class="CourseTitle"> - Laboratory in Modern Physics</span></li>
+<li PCR="">PHYS 501<span class="CourseTitle"> - Introduction to Research</span></li>
+<li PCR="">PHYS 505<span class="CourseTitle"> - Introduction to Cosmology</span></li>
+<li PCR="">PHYS 512<span class="CourseTitle"> - Introduction to Quantum Mechanics II</span></li>
+<li PCR="">PHYS 516<span class="CourseTitle"> - Electromagnetic Phenomena</span></li>
+<li PCR="">PHYS 518<span class="CourseTitle"> - Introduction to Condensed Matter Physics</span></li>
+<li PCR="">PHYS 521<span class="CourseTitle"> - Advanced Laboratory</span></li>
+<li PCR="">PHYS 522<span class="CourseTitle"> - Introduction to Elementary Particle Physics</span></li>
+<li PCR="">PHYS 530<span class="CourseTitle"> - Modern Optical Physics and Spectroscopy</span></li>
+<li PCR="">PHYS 532<span class="CourseTitle"> - Quantum Mechanics II</span></li>
+<li PCR="">PHYS 562<span class="CourseTitle"> - Electromagnetism II: Magnetism, Maxwell&#39;s Equations, and Electromagnetic Waves</span></li>
+<li PCR="">PHYS 580<span class="CourseTitle"> - Biological Physics</span></li>
+<li PCR="">PHYS 585<span class="CourseTitle"> - Theoretical and Computational Neuroscience</span></li>
+<li PCR="">PHYS 633<span class="CourseTitle"> - Relativistic Quantum Field Theory</span></li>
+<li PCR="">PHYS 662<span class="CourseTitle"> - Solid State Theory II</span></li>

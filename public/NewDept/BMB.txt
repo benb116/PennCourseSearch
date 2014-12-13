@@ -1,0 +1,22 @@
+<li PCR="0.00">BMB 509<span class="CourseTitle"> - Structural and Mechanistic Biochemistry</span></li>
+<li PCR="0.00">BMB 518<span class="CourseTitle"> - Protein Conformation Diseases</span></li>
+<li PCR="2.69">BMB 554<span class="CourseTitle"> - Macromolecular Crystallography Methods</span></li>
+<li PCR="0.00">BMB 560<span class="CourseTitle"> - Methods of Scientific Inquiry in Biological Systems</span></li>
+<li PCR="2.00">BMB 567<span class="CourseTitle"> - Bioinorganic Chemistry</span></li>
+<li PCR="0.00">BMB 581<span class="CourseTitle"> - Techniques of Magnetic Resonance Imaging</span></li>
+<li PCR="2.78">BMB 590<span class="CourseTitle"> - Biological Physics</span></li>
+<li PCR="0.00">BMB 601<span class="CourseTitle"> - Fundamentals of Magnetic Resonance</span></li>
+<li PCR="0.00">BMB 602<span class="CourseTitle"> - Imaging Biomarkers</span></li>
+<li PCR="0.00">BMB 616<span class="CourseTitle"> - Medical Problems in Modern Biochemistry</span></li>
+<li PCR="0.00">BMB 619<span class="CourseTitle"> - Protein Folding</span></li>
+<li PCR="0.00">BMB 622<span class="CourseTitle"> - Physical Principles of Mechano-Enzymes</span></li>
+<li PCR="0.00">BMB 624<span class="CourseTitle"> - Molecular and Physical Basis of Ion Channels</span></li>
+<li PCR="0.00">BMB 626<span class="CourseTitle"> - Mass Spectrometry and Proteomics</span></li>
+<li PCR="0.00">BMB 627<span class="CourseTitle"> - Computer Programming for Biochemists and Biophysicists</span></li>
+<li PCR="0.00">BMB 628<span class="CourseTitle"> - Principles of Scientific Instruments</span></li>
+<li PCR="0.00">BMB 632<span class="CourseTitle"> - Probing Structure and Function of Complex RNA-Protein Machines</span></li>
+<li PCR="0.00">BMB 650<span class="CourseTitle"> - Current Biochemical Topics</span></li>
+<li PCR="0.00">BMB 699<span class="CourseTitle"> - Laboratory Rotation</span></li>
+<li PCR="0.00">BMB 700<span class="CourseTitle"> - Selected Topics in Chemistry</span></li>
+<li PCR="0.00">BMB 705<span class="CourseTitle"> - Candidacy Exam Preparation Course</span></li>
+<li PCR="0.00">BMB 995<span class="CourseTitle"> - Dissertation Research</span></li>

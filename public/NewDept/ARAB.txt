@@ -1,0 +1,16 @@
+<li PCR="3.42">ARAB 032<span class="CourseTitle"> - Elementary Arabic II</span></li>
+<li PCR="3.13">ARAB 034<span class="CourseTitle"> - Intermediate Arabic IV</span></li>
+<li PCR="1.50">ARAB 036<span class="CourseTitle"> - Advanced Intermediate Arabic II</span></li>
+<li PCR="3.25">ARAB 039<span class="CourseTitle"> - Colloquial Arabic</span></li>
+<li PCR="2.33">ARAB 042<span class="CourseTitle"> - Beginning Arabic II</span></li>
+<li PCR="0.00">ARAB 044<span class="CourseTitle"> - Continuing Arabic IV</span></li>
+<li PCR="3.67">ARAB 180<span class="CourseTitle"> - Arabic in Residence</span></li>
+<li PCR="3.50">ARAB 333<span class="CourseTitle"> - Readings in the Qur&#39;an and Tafsir</span></li>
+<li PCR="3.17">ARAB 433<span class="CourseTitle"> - Arabic Readings in the Social Sciences and the Media</span></li>
+<li PCR="4.00">ARAB 534<span class="CourseTitle"> - Arabic: Reading Historical Manuscripts</span></li>
+<li PCR="3.42">ARAB 632<span class="CourseTitle"> - Elementary Arabic II</span></li>
+<li PCR="3.13">ARAB 634<span class="CourseTitle"> - Intermediate Arabic IV</span></li>
+<li PCR="1.50">ARAB 636<span class="CourseTitle"> - Advanced Intermediate Arabic II</span></li>
+<li PCR="3.25">ARAB 639<span class="CourseTitle"> - Colloquial Arabic</span></li>
+<li PCR="0.00">ARAB 731<span class="CourseTitle"> - Topics in Islamic Studies</span></li>
+<li PCR="0.00">ARAB 735<span class="CourseTitle"> - The Adab Tradition</span></li>

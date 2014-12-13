@@ -1,0 +1,3 @@
+<li PCR="0.00">NETS 150<span class="CourseTitle"> - Market and Social Systems on the Internet</span></li>
+<li PCR="0.00">NETS 312<span class="CourseTitle"> - Theory of Networks</span></li>
+<li PCR="3.22">NETS 412<span class="CourseTitle"> - Algorithmic Game Theory</span></li>

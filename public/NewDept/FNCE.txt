@@ -1,0 +1,55 @@
+<li PCR="2.75">FNCE 100<span class="CourseTitle"> - Corporate Finance</span></li>
+<li PCR="1.30">FNCE 101<span class="CourseTitle"> - Monetary Economics and the Global Economy</span></li>
+<li PCR="2.32">FNCE 203<span class="CourseTitle"> - Advanced Corporate Finance</span></li>
+<li PCR="2.80">FNCE 205<span class="CourseTitle"> - Investment Management</span></li>
+<li PCR="2.62">FNCE 206<span class="CourseTitle"> - Financial Derivatives</span></li>
+<li PCR="2.83">FNCE 207<span class="CourseTitle"> - Corporate Valuation</span></li>
+<li PCR="3.03">FNCE 208<span class="CourseTitle"> - International Corporate Finance</span></li>
+<li PCR="2.90">FNCE 209<span class="CourseTitle"> - Real Estate Investment: Analysis and Financing</span></li>
+<li PCR="2.81">FNCE 219<span class="CourseTitle"> - International Financial Markets</span></li>
+<li PCR="2.66">FNCE 220<span class="CourseTitle"> - International Banking</span></li>
+<li PCR="2.33">FNCE 235<span class="CourseTitle"> - Fixed Income Securities</span></li>
+<li PCR="2.98">FNCE 238<span class="CourseTitle"> - Capital Markets - Formerly Funding Investments</span></li>
+<li PCR="2.70">FNCE 239<span class="CourseTitle"> - Behavioral Finance</span></li>
+<li PCR="2.79">FNCE 250<span class="CourseTitle"> - Venture Capital and the Finance of Innovation</span></li>
+<li PCR="2.68">FNCE 251<span class="CourseTitle"> - The Finance of Buyouts and Acquisitions</span></li>
+<li PCR="0.00">FNCE 254<span class="CourseTitle"> - IMPACT INVESTING</span></li>
+<li PCR="0.00">FNCE 256<span class="CourseTitle"> - FINANCE ENERGY</span></li>
+<li PCR="0.00">FNCE 383<span class="CourseTitle"> - STRATEGIC EQUITY FINANCE</span></li>
+<li PCR="2.92">FNCE 391<span class="CourseTitle"> - CORPORATE RESTRUCTURING</span></li>
+<li PCR="3.36">FNCE 392<span class="CourseTitle"> - Financial Engineering</span></li>
+<li PCR="3.05">FNCE 394<span class="CourseTitle"> - Managing Fixed-Income Portfolios</span></li>
+<li PCR="3.00">FNCE 396<span class="CourseTitle"> - Finance in Europe</span></li>
+<li PCR="0.00">FNCE 397<span class="CourseTitle"> - FNCE in Mid East &amp; N Afr</span></li>
+<li PCR="2.95">FNCE 611<span class="CourseTitle"> - Corporate Finance</span></li>
+<li PCR="3.24">FNCE 613<span class="CourseTitle"> - Macroeconomics and the Global Economic Environment</span></li>
+<li PCR="0.00">FNCE 614<span class="CourseTitle"> - CORPORATE FINANCE (Half CU)</span></li>
+<li PCR="2.75">FNCE 615<span class="CourseTitle"> - MACROECONOMICS AND THE GLOBAL ECONOMIC ENVIRONMENT (Half CU)</span></li>
+<li PCR="3.78">FNCE 717<span class="CourseTitle"> - Financial Derivatives</span></li>
+<li PCR="2.35">FNCE 719<span class="CourseTitle"> - International Financial Markets</span></li>
+<li PCR="2.76">FNCE 720<span class="CourseTitle"> - Investment Management</span></li>
+<li PCR="2.80">FNCE 721<span class="CourseTitle"> - Real Estate Investment: Analysis and Financing</span></li>
+<li PCR="2.58">FNCE 725<span class="CourseTitle"> - Fixed Income Securities</span></li>
+<li PCR="3.29">FNCE 726<span class="CourseTitle"> - Advanced Corporate Finance</span></li>
+<li PCR="3.00">FNCE 728<span class="CourseTitle"> - Corporate Valuation</span></li>
+<li PCR="2.55">FNCE 731<span class="CourseTitle"> - International Corporate Finance</span></li>
+<li PCR="2.41">FNCE 732<span class="CourseTitle"> - International Banking</span></li>
+<li PCR="1.81">FNCE 738<span class="CourseTitle"> - Capital Markets - formerly Funding Investments</span></li>
+<li PCR="2.57">FNCE 739<span class="CourseTitle"> - Behavioral Finance</span></li>
+<li PCR="1.98">FNCE 750<span class="CourseTitle"> - Venture Capital and the Finance of Innovation</span></li>
+<li PCR="3.00">FNCE 751<span class="CourseTitle"> - The Finance of Buyouts and Acquisitions</span></li>
+<li PCR="0.00">FNCE 754<span class="CourseTitle"> - IMPACT INVESTING</span></li>
+<li PCR="0.00">FNCE 756<span class="CourseTitle"> - FINANCE ENERGY</span></li>
+<li PCR="0.00">FNCE 883<span class="CourseTitle"> - Strategic Equity Finance</span></li>
+<li PCR="3.02">FNCE 891<span class="CourseTitle"> - ADVANCED STUDY PROJECT - CORPORATE RESTRUCTURING</span></li>
+<li PCR="3.05">FNCE 894<span class="CourseTitle"> - Managing Fixed Income Portfolios</span></li>
+<li PCR="3.00">FNCE 896<span class="CourseTitle"> - Finance in Europe</span></li>
+<li PCR="2.67">FNCE 897<span class="CourseTitle"> - FINANCE IN THE MIDDLE EAST &amp; NORTH AFRICA</span></li>
+<li PCR="3.44">FNCE 912<span class="CourseTitle"> - Corporate Finance and Financial Institutions</span></li>
+<li PCR="2.63">FNCE 921<span class="CourseTitle"> - Introduction to Empirical Methods in Finance</span></li>
+<li PCR="3.78">FNCE 922<span class="CourseTitle"> - Continuous-Time Financial Economics</span></li>
+<li PCR="0.00">FNCE 923<span class="CourseTitle"> - Financial Economics Under Imperfect Information</span></li>
+<li PCR="4.00">FNCE 924<span class="CourseTitle"> - Intertemporal Macroeconomics and Finance</span></li>
+<li PCR="3.88">FNCE 926<span class="CourseTitle"> - Empirical Methods in Corporate Finance</span></li>
+<li PCR="0.00">FNCE 932<span class="CourseTitle"> - Corporate Finance</span></li>
+<li PCR="0.00">FNCE 950<span class="CourseTitle"> - Research Seminar in Finance</span></li>

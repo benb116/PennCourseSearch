@@ -1,1 +1,4 @@
-<li>IMUN 507<span class="CourseTitle"> - Immunopathology</span></li><li>IMUN 607<span class="CourseTitle"> - Grant Writing</span></li><li>IMUN 699<span class="CourseTitle"> - Laboratory Rotation</span></li><li>IMUN 899<span class="CourseTitle"> - Predissertation Lab</span></li>
+<li PCR="">IMUN 507<span class="CourseTitle"> - Immunopathology</span></li>
+<li PCR="">IMUN 607<span class="CourseTitle"> - Grant Writing</span></li>
+<li PCR="">IMUN 699<span class="CourseTitle"> - Laboratory Rotation</span></li>
+<li PCR="">IMUN 899<span class="CourseTitle"> - Predissertation Lab</span></li>

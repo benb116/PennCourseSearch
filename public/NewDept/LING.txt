@@ -1,0 +1,29 @@
+<li PCR="1.67">LING 001<span class="CourseTitle"> - Introduction to Linguistics</span></li>
+<li PCR="1.44">LING 057<span class="CourseTitle"> - The Evolution of Language</span></li>
+<li PCR="3.67">LING 071<span class="CourseTitle"> - American Sign Language I</span></li>
+<li PCR="3.50">LING 072<span class="CourseTitle"> - American Sign Language II</span></li>
+<li PCR="3.18">LING 073<span class="CourseTitle"> - American Sign Language III</span></li>
+<li PCR="4.00">LING 074<span class="CourseTitle"> - American Sign Language IV</span></li>
+<li PCR="0.00">LING 077<span class="CourseTitle"> - ASL/Deaf Studies - ABCS</span></li>
+<li PCR="3.00">LING 078<span class="CourseTitle"> - Deaf Culture</span></li>
+<li PCR="3.33">LING 082<span class="CourseTitle"> - Beginning Irish Gaelic II</span></li>
+<li PCR="4.00">LING 084<span class="CourseTitle"> - Intermediate Irish Gaelic II</span></li>
+<li PCR="3.50">LING 086<span class="CourseTitle"> - Advanced Irish Gaelic II</span></li>
+<li PCR="2.24">LING 102<span class="CourseTitle"> - Introduction to Sociolinguistics</span></li>
+<li PCR="0.00">LING 229<span class="CourseTitle"> - Fr Dans Monde/Fr in Wrld</span></li>
+<li PCR="2.94">LING 230<span class="CourseTitle"> - Sound Structure of Language</span></li>
+<li PCR="0.00">LING 247<span class="CourseTitle"> - Structure of American Sign Language</span></li>
+<li PCR="2.17">LING 302<span class="CourseTitle"> - Linguistic Field Methods</span></li>
+<li PCR="4.00">LING 405<span class="CourseTitle"> - Morphology Theory II</span></li>
+<li PCR="2.17">LING 502<span class="CourseTitle"> - Linguistic Field Methods</span></li>
+<li PCR="2.94">LING 503<span class="CourseTitle"> - Sound Structure of Language</span></li>
+<li PCR="4.00">LING 521<span class="CourseTitle"> - Introduction to Phonetics II</span></li>
+<li PCR="3.25">LING 531<span class="CourseTitle"> - Phonology II</span></li>
+<li PCR="4.00">LING 551<span class="CourseTitle"> - Syntax II</span></li>
+<li PCR="3.00">LING 570<span class="CourseTitle"> - Developmental Psycholinguistics</span></li>
+<li PCR="3.33">LING 581<span class="CourseTitle"> - Semantics II</span></li>
+<li PCR="0.00">LING 603<span class="CourseTitle"> - Topics in Phonology</span></li>
+<li PCR="0.00">LING 608<span class="CourseTitle"> - Topics in Semantics and Pragmatics</span></li>
+<li PCR="0.00">LING 630<span class="CourseTitle"> - Seminar in Morphology</span></li>
+<li PCR="0.00">LING 650<span class="CourseTitle"> - Topics in Natural-Language Syntax</span></li>
+<li PCR="0.00">LING 670<span class="CourseTitle"> - Topics in the Cultural Evolution of Language</span></li>

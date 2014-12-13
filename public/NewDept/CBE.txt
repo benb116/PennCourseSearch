@@ -1,0 +1,22 @@
+<li PCR="2.92">CBE 160<span class="CourseTitle"> - Introduction to Chemical Engineering</span></li>
+<li PCR="3.32">CBE 231<span class="CourseTitle"> - Thermodynamics of Fluids</span></li>
+<li PCR="2.88">CBE 351<span class="CourseTitle"> - Heat and Mass Transport</span></li>
+<li PCR="2.52">CBE 371<span class="CourseTitle"> - Separation Processes</span></li>
+<li PCR="2.21">CBE 375<span class="CourseTitle"> - Engineering and the Environment</span></li>
+<li PCR="1.50">CBE 459<span class="CourseTitle"> - Product and Process Design Projects</span></li>
+<li PCR="1.71">CBE 460<span class="CourseTitle"> - Chemical Process Control</span></li>
+<li PCR="2.67">CBE 480<span class="CourseTitle"> - Laboratory in Biotechnology and Genetic Engineering</span></li>
+<li PCR="2.73">CBE 535<span class="CourseTitle"> - Interfacial Phenomena.</span></li>
+<li PCR="3.06">CBE 540<span class="CourseTitle"> - Biomolecular and Cellular Engineering</span></li>
+<li PCR="0.00">CBE 541<span class="CourseTitle"> - Engineering and Biological Principles in Cancer</span></li>
+<li PCR="2.45">CBE 543<span class="CourseTitle"> - Sust Dev/Water Res Sys</span></li>
+<li PCR="3.05">CBE 545<span class="CourseTitle"> - Electrochemical Energy Conversion and Storage.</span></li>
+<li PCR="3.50">CBE 546<span class="CourseTitle"> - Fundamentals of Industrial Catalytic Processes</span></li>
+<li PCR="2.18">CBE 557<span class="CourseTitle"> - Stem Cells, Proteomics and Drug Delivery - Soft Matter Fundamentals</span></li>
+<li PCR="2.72">CBE 562<span class="CourseTitle"> - Drug Discovery and Development</span></li>
+<li PCR="2.47">CBE 564<span class="CourseTitle"> - Drug Delivery.</span></li>
+<li PCR="4.00">CBE 597<span class="CourseTitle"> - Master&#39;s Thesis Research</span></li>
+<li PCR="0.00">CBE 602<span class="CourseTitle"> - Statistical Mechanics of Liquids</span></li>
+<li PCR="0.00">CBE 641<span class="CourseTitle"> - Transport Processes II (Nanoscale Transport)</span></li>
+<li PCR="0.00">CBE 990<span class="CourseTitle"> - Masters Thesis</span></li>
+<li PCR="0.00">CBE 995<span class="CourseTitle"> - Dissertation</span></li>

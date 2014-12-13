@@ -1,1 +1,31 @@
-<li>MKTG 101<span class="CourseTitle"> - Introduction to Marketing</span></li><li>MKTG 211<span class="CourseTitle"> - Consumer Behavior</span></li><li>MKTG 212<span class="CourseTitle"> - Marketing Research</span></li><li>MKTG 221<span class="CourseTitle"> - New Product Management</span></li><li>MKTG 224<span class="CourseTitle"> - Advertising Management</span></li><li>MKTG 225<span class="CourseTitle"> - Principles of Retailing</span></li><li>MKTG 230<span class="CourseTitle"> - Digital Marketing and Electronic Commerce</span></li><li>MKTG 265<span class="CourseTitle"> - Principles of Advertising</span></li><li>MKTG 278<span class="CourseTitle"> - Strategic Brand Management</span></li><li>MKTG 288<span class="CourseTitle"> - Pricing Strategies</span></li><li>MKTG 306<span class="CourseTitle"> - Special Topics: Retail Merchandising</span></li><li>MKTG 309<span class="CourseTitle"> - Special Topics: Experiments for Business Decision Making</span></li><li>MKTG 476<span class="CourseTitle"> - Applied Probability Models for Marketing</span></li><li>MKTG 490<span class="CourseTitle"> - Special Topics in Communication: Reinventing the Media Economy -Experiments in Averting E-pocalypse.</span></li><li>MKTG 612<span class="CourseTitle"> - Dynamic Marketing Strategy</span></li><li>MKTG 613<span class="CourseTitle"> - Strategic Marketing Simulation</span></li><li>MKTG 711<span class="CourseTitle"> - Consumer Behavior</span></li><li>MKTG 712<span class="CourseTitle"> - Marketing Research</span></li><li>MKTG 725<span class="CourseTitle"> - Principles of Retailing</span></li><li>MKTG 730<span class="CourseTitle"> - Special Topics: Digital Marketing and Electronic Commerce</span></li><li>MKTG 775<span class="CourseTitle"> - Managing Customer Value</span></li><li>MKTG 776<span class="CourseTitle"> - Applied Probability Models in Marketing</span></li><li>MKTG 778<span class="CourseTitle"> - Strategic Brand Management</span></li><li>MKTG 806<span class="CourseTitle"> - Special Topics: Retail Merchandising</span></li><li>MKTG 809<span class="CourseTitle"> - Special Topics: Experiments for Business Decision Making</span></li><li>MKTG 940<span class="CourseTitle"> - Measurement and Data Analysis in Marketing - Part A</span></li><li>MKTG 941<span class="CourseTitle"> - Measurement and Data Analysis in Marketing - Part B</span></li><li>MKTG 955<span class="CourseTitle"> - Economic/OR Models of Marketing - Part B</span></li><li>MKTG 957<span class="CourseTitle"> - Empirical Models in Marketing - Part B</span></li><li>MKTG 968<span class="CourseTitle"> - Advanced Topics in Marketing Research</span></li><li>MKTG 969<span class="CourseTitle"> - Advanced Topics in Consumer Behavior</span></li>
+<li PCR="">MKTG 101<span class="CourseTitle"> - Introduction to Marketing</span></li>
+<li PCR="">MKTG 211<span class="CourseTitle"> - Consumer Behavior</span></li>
+<li PCR="">MKTG 212<span class="CourseTitle"> - Marketing Research</span></li>
+<li PCR="">MKTG 221<span class="CourseTitle"> - New Product Management</span></li>
+<li PCR="">MKTG 224<span class="CourseTitle"> - Advertising Management</span></li>
+<li PCR="">MKTG 225<span class="CourseTitle"> - Principles of Retailing</span></li>
+<li PCR="">MKTG 230<span class="CourseTitle"> - Digital Marketing and Electronic Commerce</span></li>
+<li PCR="">MKTG 265<span class="CourseTitle"> - Principles of Advertising</span></li>
+<li PCR="">MKTG 278<span class="CourseTitle"> - Strategic Brand Management</span></li>
+<li PCR="">MKTG 288<span class="CourseTitle"> - Pricing Strategies</span></li>
+<li PCR="">MKTG 306<span class="CourseTitle"> - Special Topics: Retail Merchandising</span></li>
+<li PCR="">MKTG 309<span class="CourseTitle"> - Special Topics: Experiments for Business Decision Making</span></li>
+<li PCR="">MKTG 476<span class="CourseTitle"> - Applied Probability Models for Marketing</span></li>
+<li PCR="">MKTG 490<span class="CourseTitle"> - Special Topics in Communication: Reinventing the Media Economy -Experiments in Averting E-pocalypse.</span></li>
+<li PCR="">MKTG 612<span class="CourseTitle"> - Dynamic Marketing Strategy</span></li>
+<li PCR="">MKTG 613<span class="CourseTitle"> - Strategic Marketing Simulation</span></li>
+<li PCR="">MKTG 711<span class="CourseTitle"> - Consumer Behavior</span></li>
+<li PCR="">MKTG 712<span class="CourseTitle"> - Marketing Research</span></li>
+<li PCR="">MKTG 725<span class="CourseTitle"> - Principles of Retailing</span></li>
+<li PCR="">MKTG 730<span class="CourseTitle"> - Special Topics: Digital Marketing and Electronic Commerce</span></li>
+<li PCR="">MKTG 775<span class="CourseTitle"> - Managing Customer Value</span></li>
+<li PCR="">MKTG 776<span class="CourseTitle"> - Applied Probability Models in Marketing</span></li>
+<li PCR="">MKTG 778<span class="CourseTitle"> - Strategic Brand Management</span></li>
+<li PCR="">MKTG 806<span class="CourseTitle"> - Special Topics: Retail Merchandising</span></li>
+<li PCR="">MKTG 809<span class="CourseTitle"> - Special Topics: Experiments for Business Decision Making</span></li>
+<li PCR="">MKTG 940<span class="CourseTitle"> - Measurement and Data Analysis in Marketing - Part A</span></li>
+<li PCR="">MKTG 941<span class="CourseTitle"> - Measurement and Data Analysis in Marketing - Part B</span></li>
+<li PCR="">MKTG 955<span class="CourseTitle"> - Economic/OR Models of Marketing - Part B</span></li>
+<li PCR="">MKTG 957<span class="CourseTitle"> - Empirical Models in Marketing - Part B</span></li>
+<li PCR="">MKTG 968<span class="CourseTitle"> - Advanced Topics in Marketing Research</span></li>
+<li PCR="">MKTG 969<span class="CourseTitle"> - Advanced Topics in Consumer Behavior</span></li>

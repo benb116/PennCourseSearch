@@ -1,1 +1,40 @@
-<li>BIOL 008<span class="CourseTitle"> - The Superbug Epidemic</span></li><li>BIOL 015<span class="CourseTitle"> - Biology of Human Disease</span></li><li>BIOL 102<span class="CourseTitle"> - Introduction to Biology B</span></li><li>BIOL 109<span class="CourseTitle"> - Introduction to Brain and Behavior</span></li><li>BIOL 121<span class="CourseTitle"> - Introduction to Biology - The Molecular Biology of Life</span></li><li>BIOL 123<span class="CourseTitle"> - Introductory Molecular Biology Laboratory</span></li><li>BIOL 124<span class="CourseTitle"> - Introductory Organismal Biology Lab</span></li><li>BIOL 201<span class="CourseTitle"> - Essentials of Cell Biology</span></li><li>BIOL 204<span class="CourseTitle"> - Biochemistry</span></li><li>BIOL 211<span class="CourseTitle"> - Essentials of Molecular Biology and Genetics</span></li><li>BIOL 215<span class="CourseTitle"> - Vertebrate Physiology</span></li><li>BIOL 221<span class="CourseTitle"> - Molecular Biology and Genetics</span></li><li>BIOL 230<span class="CourseTitle"> - Evolutionary Biology</span></li><li>BIOL 275<span class="CourseTitle"> - Fundamental Microbiology</span></li><li>BIOL 304<span class="CourseTitle"> - Infectious Disease Biology</span></li><li>BIOL 306<span class="CourseTitle"> - Histology</span></li><li>BIOL 330<span class="CourseTitle"> - Comparative Vertebrate Anatomy and Evolution</span></li><li>BIOL 336<span class="CourseTitle"> - Comparative Vertebrate Anatomy Lab</span></li><li>BIOL 354<span class="CourseTitle"> - Developmental Biology</span></li><li>BIOL 375<span class="CourseTitle"> - Microbial Diversity and Pathogenesis</span></li><li>BIOL 376<span class="CourseTitle"> - Microbial Diversity and Pathogenesis Lab</span></li><li>BIOL 404<span class="CourseTitle"> - Immunobiology</span></li><li>BIOL 405<span class="CourseTitle"> - First Line of Defense: The Role of Innate Immunity in Disease</span></li><li>BIOL 406<span class="CourseTitle"> - Molecular Mechanisms of Infectious Disease Biology</span></li><li>BIOL 407<span class="CourseTitle"> - Cancer Cell Biology</span></li><li>BIOL 411<span class="CourseTitle"> - Evolutionary Ecology</span></li><li>BIOL 415<span class="CourseTitle"> - Freshwater Ecology</span></li><li>BIOL 422<span class="CourseTitle"> - Human Genetics and Genomics</span></li><li>BIOL 425<span class="CourseTitle"> - Biochemistry and Molecular Genetics Superlab</span></li><li>BIOL 438<span class="CourseTitle"> - Systems Biology: Integrative physiology and biomechanics of the muscular system</span></li><li>BIOL 451<span class="CourseTitle"> - Neural Systems and Behavior</span></li><li>BIOL 480<span class="CourseTitle"> - Advanced Cell Biology</span></li><li>BIOL 482<span class="CourseTitle"> - Cell Signaling</span></li><li>BIOL 493<span class="CourseTitle"> - Epigenetics of Human Health and Disease</span></li><li>BIOL 527<span class="CourseTitle"> - Genetics for Computational Biology</span></li><li>BIOL 537<span class="CourseTitle"> - Advanced Computational Biology</span></li><li>BIOL 540<span class="CourseTitle"> - Genetic Analysis</span></li><li>BIOL 575<span class="CourseTitle"> - Microbial Diversity and Pathogenesis</span></li><li>BIOL 576<span class="CourseTitle"> - Microbial Diversity and Pathogenesis Lab</span></li><li>BIOL 610<span class="CourseTitle"> - Advanced Topics in Evolution</span></li>
+<li PCR="">BIOL 008<span class="CourseTitle"> - The Superbug Epidemic</span></li>
+<li PCR="">BIOL 015<span class="CourseTitle"> - Biology of Human Disease</span></li>
+<li PCR="">BIOL 102<span class="CourseTitle"> - Introduction to Biology B</span></li>
+<li PCR="">BIOL 109<span class="CourseTitle"> - Introduction to Brain and Behavior</span></li>
+<li PCR="">BIOL 121<span class="CourseTitle"> - Introduction to Biology - The Molecular Biology of Life</span></li>
+<li PCR="">BIOL 123<span class="CourseTitle"> - Introductory Molecular Biology Laboratory</span></li>
+<li PCR="">BIOL 124<span class="CourseTitle"> - Introductory Organismal Biology Lab</span></li>
+<li PCR="">BIOL 201<span class="CourseTitle"> - Essentials of Cell Biology</span></li>
+<li PCR="">BIOL 204<span class="CourseTitle"> - Biochemistry</span></li>
+<li PCR="">BIOL 211<span class="CourseTitle"> - Essentials of Molecular Biology and Genetics</span></li>
+<li PCR="">BIOL 215<span class="CourseTitle"> - Vertebrate Physiology</span></li>
+<li PCR="">BIOL 221<span class="CourseTitle"> - Molecular Biology and Genetics</span></li>
+<li PCR="">BIOL 230<span class="CourseTitle"> - Evolutionary Biology</span></li>
+<li PCR="">BIOL 275<span class="CourseTitle"> - Fundamental Microbiology</span></li>
+<li PCR="">BIOL 304<span class="CourseTitle"> - Infectious Disease Biology</span></li>
+<li PCR="">BIOL 306<span class="CourseTitle"> - Histology</span></li>
+<li PCR="">BIOL 330<span class="CourseTitle"> - Comparative Vertebrate Anatomy and Evolution</span></li>
+<li PCR="">BIOL 336<span class="CourseTitle"> - Comparative Vertebrate Anatomy Lab</span></li>
+<li PCR="">BIOL 354<span class="CourseTitle"> - Developmental Biology</span></li>
+<li PCR="">BIOL 375<span class="CourseTitle"> - Microbial Diversity and Pathogenesis</span></li>
+<li PCR="">BIOL 376<span class="CourseTitle"> - Microbial Diversity and Pathogenesis Lab</span></li>
+<li PCR="">BIOL 404<span class="CourseTitle"> - Immunobiology</span></li>
+<li PCR="">BIOL 405<span class="CourseTitle"> - First Line of Defense: The Role of Innate Immunity in Disease</span></li>
+<li PCR="">BIOL 406<span class="CourseTitle"> - Molecular Mechanisms of Infectious Disease Biology</span></li>
+<li PCR="">BIOL 407<span class="CourseTitle"> - Cancer Cell Biology</span></li>
+<li PCR="">BIOL 411<span class="CourseTitle"> - Evolutionary Ecology</span></li>
+<li PCR="">BIOL 415<span class="CourseTitle"> - Freshwater Ecology</span></li>
+<li PCR="">BIOL 422<span class="CourseTitle"> - Human Genetics and Genomics</span></li>
+<li PCR="">BIOL 425<span class="CourseTitle"> - Biochemistry and Molecular Genetics Superlab</span></li>
+<li PCR="">BIOL 438<span class="CourseTitle"> - Systems Biology: Integrative physiology and biomechanics of the muscular system</span></li>
+<li PCR="">BIOL 451<span class="CourseTitle"> - Neural Systems and Behavior</span></li>
+<li PCR="">BIOL 480<span class="CourseTitle"> - Advanced Cell Biology</span></li>
+<li PCR="">BIOL 482<span class="CourseTitle"> - Cell Signaling</span></li>
+<li PCR="">BIOL 493<span class="CourseTitle"> - Epigenetics of Human Health and Disease</span></li>
+<li PCR="">BIOL 527<span class="CourseTitle"> - Genetics for Computational Biology</span></li>
+<li PCR="">BIOL 537<span class="CourseTitle"> - Advanced Computational Biology</span></li>
+<li PCR="">BIOL 540<span class="CourseTitle"> - Genetic Analysis</span></li>
+<li PCR="">BIOL 575<span class="CourseTitle"> - Microbial Diversity and Pathogenesis</span></li>
+<li PCR="">BIOL 576<span class="CourseTitle"> - Microbial Diversity and Pathogenesis Lab</span></li>
+<li PCR="">BIOL 610<span class="CourseTitle"> - Advanced Topics in Evolution</span></li>

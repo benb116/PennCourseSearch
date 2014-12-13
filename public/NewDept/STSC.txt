@@ -1,0 +1,16 @@
+<li PCR="3.22">STSC 003<span class="CourseTitle"> - Technology and Society</span></li>
+<li PCR="3.08">STSC 110<span class="CourseTitle"> - Science and Literature</span></li>
+<li PCR="2.24">STSC 123<span class="CourseTitle"> - Darwin&#39;s Legacy: The Evolution of Evolution</span></li>
+<li PCR="2.38">STSC 135<span class="CourseTitle"> - Emergence of Modern Biology</span></li>
+<li PCR="2.57">STSC 145<span class="CourseTitle"> - Comparative Medicine</span></li>
+<li PCR="3.09">STSC 162<span class="CourseTitle"> - Technology and Medicine in Modern America</span></li>
+<li PCR="0.00">STSC 168<span class="CourseTitle"> - Environment anbd Society</span></li>
+<li PCR="2.71">STSC 201<span class="CourseTitle"> - Hist Phys Sci 19th &amp; 20th Century</span></li>
+<li PCR="3.25">STSC 202<span class="CourseTitle"> - The Scientific Revolution in World-Historical Context</span></li>
+<li PCR="0.00">STSC 231<span class="CourseTitle"> - Insect Epidemiology Pests, Pollinators and Disease Vectors</span></li>
+<li PCR="2.95">STSC 272<span class="CourseTitle"> - Energy in American History</span></li>
+<li PCR="0.00">STSC 314<span class="CourseTitle"> - Cosmopolitan Urbanism: Rio de Janeiro</span></li>
+<li PCR="0.00">STSC 328<span class="CourseTitle"> - What is Prediction?</span></li>
+<li PCR="3.40">STSC 400<span class="CourseTitle"> - Undergraduate Seminar in Science Technology and Society</span></li>
+<li PCR="0.00">STSC 436<span class="CourseTitle"> - Biopiracy: Medicinal Plants and Global Power</span></li>
+<li PCR="2.24">STSC 454<span class="CourseTitle"> - Military Medicine and Technology</span></li>

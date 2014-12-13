@@ -1,0 +1,14 @@
+<li PCR="0.00">PHRM 510<span class="CourseTitle"> - Neuropharm/Neurochem</span></li>
+<li PCR="0.00">PHRM 550<span class="CourseTitle"> - Advanced Topics in Neuropsychopharmacology</span></li>
+<li PCR="0.00">PHRM 564<span class="CourseTitle"> - DRUG DELIVERY</span></li>
+<li PCR="0.00">PHRM 570<span class="CourseTitle"> - Principles of Cardiovascular Biology</span></li>
+<li PCR="0.00">PHRM 580<span class="CourseTitle"> - Topics In Pharmacogenetics</span></li>
+<li PCR="0.00">PHRM 590<span class="CourseTitle"> - Molecular Toxicology: Chemical and Biological Mechanisms</span></li>
+<li PCR="0.00">PHRM 623<span class="CourseTitle"> - Fundamentals of Pharmacology</span></li>
+<li PCR="0.00">PHRM 632<span class="CourseTitle"> - Cell Cont Sig Trans Path.</span></li>
+<li PCR="0.00">PHRM 640<span class="CourseTitle"> - Topics in Cancer Pharmacology</span></li>
+<li PCR="0.00">PHRM 650<span class="CourseTitle"> - Topics in Cardiovascular Pharmacology</span></li>
+<li PCR="0.00">PHRM 660<span class="CourseTitle"> - Frontiers in Cancer Pharmacology</span></li>
+<li PCR="0.00">PHRM 699<span class="CourseTitle"> - Laboratory Rotation</span></li>
+<li PCR="0.00">PHRM 899<span class="CourseTitle"> - Pre-Dissertation Lab Rotation</span></li>
+<li PCR="0.00">PHRM 990<span class="CourseTitle"> - Masters Thesis</span></li>

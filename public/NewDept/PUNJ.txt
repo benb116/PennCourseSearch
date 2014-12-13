@@ -1,0 +1,3 @@
+<li PCR="0.00">PUNJ 405<span class="CourseTitle"> - Beginning Punjabi Part II</span></li>
+<li PCR="0.00">PUNJ 425<span class="CourseTitle"> - Inermediate Punjabi Part II</span></li>
+<li PCR="3.50">PUNJ 434<span class="CourseTitle"> - Advanced Punjabi</span></li>
