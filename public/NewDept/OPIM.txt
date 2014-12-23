@@ -1,41 +1,41 @@
-<li PCR="2.80">OPIM 101<span class="CourseTitle"> - An Introduction to Operations and Information Management</span></li>
-<li PCR="2.97">OPIM 210<span class="CourseTitle"> - Management Information Systems</span></li>
-<li PCR="2.94">OPIM 220<span class="CourseTitle"> - Introduction to Operations Management</span></li>
-<li PCR="2.71">OPIM 224<span class="CourseTitle"> - Service Operations: Models and Applications</span></li>
-<li PCR="2.39">OPIM 240<span class="CourseTitle"> - Gamification for Business</span></li>
-<li PCR="2.63">OPIM 261<span class="CourseTitle"> - Risk Analysis and Environmental Management</span></li>
-<li PCR="0.00">OPIM 263<span class="CourseTitle"> - Environ. &amp; Energy Econ</span></li>
-<li PCR="3.20">OPIM 290<span class="CourseTitle"> - Decision Processes</span></li>
-<li PCR="3.38">OPIM 291<span class="CourseTitle"> - Negotiations</span></li>
-<li PCR="3.13">OPIM 292<span class="CourseTitle"> - Adv Topics Negotiation.</span></li>
-<li PCR="3.04">OPIM 311<span class="CourseTitle"> - Business Computer Languages</span></li>
-<li PCR="3.22">OPIM 314<span class="CourseTitle"> - Enabling Technologies</span></li>
-<li PCR="2.79">OPIM 319<span class="CourseTitle"> - Advanced Decision Systems: Evolutionary Computation</span></li>
-<li PCR="3.40">OPIM 353<span class="CourseTitle"> - Math Mdlng Appl in Fnce</span></li>
-<li PCR="3.00">OPIM 397<span class="CourseTitle"> - Retail Supply Chain Management</span></li>
-<li PCR="3.25">OPIM 415<span class="CourseTitle"> - Product Design</span></li>
-<li PCR="3.08">OPIM 612<span class="CourseTitle"> - Business Analytics</span></li>
-<li PCR="2.66">OPIM 613<span class="CourseTitle"> - Managing the Productive Core of the Firm: Information and Business Transformation</span></li>
-<li PCR="3.00">OPIM 614<span class="CourseTitle"> - Innovation</span></li>
-<li PCR="3.33">OPIM 615<span class="CourseTitle"> - Operations Strategy</span></li>
-<li PCR="0.00">OPIM 652<span class="CourseTitle"> - Advanced Management Science: Models and Applications</span></li>
-<li PCR="3.40">OPIM 653<span class="CourseTitle"> - Mathematical Modeling and its Application in Finance</span></li>
-<li PCR="3.43">OPIM 654<span class="CourseTitle"> - Product Design and Development</span></li>
-<li PCR="2.56">OPIM 658<span class="CourseTitle"> - Service Operations Management</span></li>
-<li PCR="2.98">OPIM 662<span class="CourseTitle"> - Enabling Technologies</span></li>
-<li PCR="3.77">OPIM 690<span class="CourseTitle"> - Managerial Decision Making</span></li>
-<li PCR="2.22">OPIM 691<span class="CourseTitle"> - Negotiations</span></li>
-<li PCR="2.85">OPIM 692<span class="CourseTitle"> - Advanced Topics Negotiation</span></li>
-<li PCR="0.00">OPIM 693<span class="CourseTitle"> - Influence</span></li>
-<li PCR="3.00">OPIM 697<span class="CourseTitle"> - Retail Supply Chain Management</span></li>
-<li PCR="2.63">OPIM 761<span class="CourseTitle"> - Risk Analysis and Environmental Management</span></li>
-<li PCR="2.77">OPIM 762<span class="CourseTitle"> - Environmental Sustainability and Value Creation</span></li>
-<li PCR="0.00">OPIM 763<span class="CourseTitle"> - Energy Markets &amp; Policy</span></li>
-<li PCR="3.90">OPIM 900<span class="CourseTitle"> - Foundations of Decision Processes</span></li>
-<li PCR="0.00">OPIM 913<span class="CourseTitle"> - Advanced Linear Programming</span></li>
-<li PCR="0.00">OPIM 915<span class="CourseTitle"> - Advanced Graph Theory</span></li>
-<li PCR="0.00">OPIM 931<span class="CourseTitle"> - Stochastic Processes ll</span></li>
-<li PCR="0.00">OPIM 932<span class="CourseTitle"> - Queuing Theory</span></li>
-<li PCR="0.00">OPIM 941<span class="CourseTitle"> - Distribution Systems Seminar</span></li>
-<li PCR="0.00">OPIM 955<span class="CourseTitle"> - Research Seminar in Information Systems</span></li>
-<li PCR="0.00">OPIM 992<span class="CourseTitle"> - Conflict Mgmt Seminar</span></li>
+<li data-pcr="2.80">OPIM 101<span class="CourseTitle"> - An Introduction to Operations and Information Management</span></li>
+<li data-pcr="2.97">OPIM 210<span class="CourseTitle"> - Management Information Systems</span></li>
+<li data-pcr="2.94">OPIM 220<span class="CourseTitle"> - Introduction to Operations Management</span></li>
+<li data-pcr="2.71">OPIM 224<span class="CourseTitle"> - Service Operations: Models and Applications</span></li>
+<li data-pcr="2.39">OPIM 240<span class="CourseTitle"> - Gamification for Business</span></li>
+<li data-pcr="2.63">OPIM 261<span class="CourseTitle"> - Risk Analysis and Environmental Management</span></li>
+<li data-pcr="0.00">OPIM 263<span class="CourseTitle"> - Environ. &amp; Energy Econ</span></li>
+<li data-pcr="3.20">OPIM 290<span class="CourseTitle"> - Decision Processes</span></li>
+<li data-pcr="3.38">OPIM 291<span class="CourseTitle"> - Negotiations</span></li>
+<li data-pcr="3.13">OPIM 292<span class="CourseTitle"> - Adv Topics Negotiation.</span></li>
+<li data-pcr="3.04">OPIM 311<span class="CourseTitle"> - Business Computer Languages</span></li>
+<li data-pcr="3.22">OPIM 314<span class="CourseTitle"> - Enabling Technologies</span></li>
+<li data-pcr="2.79">OPIM 319<span class="CourseTitle"> - Advanced Decision Systems: Evolutionary Computation</span></li>
+<li data-pcr="3.40">OPIM 353<span class="CourseTitle"> - Math Mdlng Appl in Fnce</span></li>
+<li data-pcr="3.00">OPIM 397<span class="CourseTitle"> - Retail Supply Chain Management</span></li>
+<li data-pcr="3.25">OPIM 415<span class="CourseTitle"> - Product Design</span></li>
+<li data-pcr="3.08">OPIM 612<span class="CourseTitle"> - Business Analytics</span></li>
+<li data-pcr="2.66">OPIM 613<span class="CourseTitle"> - Managing the Productive Core of the Firm: Information and Business Transformation</span></li>
+<li data-pcr="3.00">OPIM 614<span class="CourseTitle"> - Innovation</span></li>
+<li data-pcr="3.33">OPIM 615<span class="CourseTitle"> - Operations Strategy</span></li>
+<li data-pcr="0.00">OPIM 652<span class="CourseTitle"> - Advanced Management Science: Models and Applications</span></li>
+<li data-pcr="3.40">OPIM 653<span class="CourseTitle"> - Mathematical Modeling and its Application in Finance</span></li>
+<li data-pcr="3.43">OPIM 654<span class="CourseTitle"> - Product Design and Development</span></li>
+<li data-pcr="2.56">OPIM 658<span class="CourseTitle"> - Service Operations Management</span></li>
+<li data-pcr="2.98">OPIM 662<span class="CourseTitle"> - Enabling Technologies</span></li>
+<li data-pcr="3.77">OPIM 690<span class="CourseTitle"> - Managerial Decision Making</span></li>
+<li data-pcr="2.22">OPIM 691<span class="CourseTitle"> - Negotiations</span></li>
+<li data-pcr="2.85">OPIM 692<span class="CourseTitle"> - Advanced Topics Negotiation</span></li>
+<li data-pcr="0.00">OPIM 693<span class="CourseTitle"> - Influence</span></li>
+<li data-pcr="3.00">OPIM 697<span class="CourseTitle"> - Retail Supply Chain Management</span></li>
+<li data-pcr="2.63">OPIM 761<span class="CourseTitle"> - Risk Analysis and Environmental Management</span></li>
+<li data-pcr="2.77">OPIM 762<span class="CourseTitle"> - Environmental Sustainability and Value Creation</span></li>
+<li data-pcr="0.00">OPIM 763<span class="CourseTitle"> - Energy Markets &amp; Policy</span></li>
+<li data-pcr="3.90">OPIM 900<span class="CourseTitle"> - Foundations of Decision Processes</span></li>
+<li data-pcr="0.00">OPIM 913<span class="CourseTitle"> - Advanced Linear Programming</span></li>
+<li data-pcr="0.00">OPIM 915<span class="CourseTitle"> - Advanced Graph Theory</span></li>
+<li data-pcr="0.00">OPIM 931<span class="CourseTitle"> - Stochastic Processes ll</span></li>
+<li data-pcr="0.00">OPIM 932<span class="CourseTitle"> - Queuing Theory</span></li>
+<li data-pcr="0.00">OPIM 941<span class="CourseTitle"> - Distribution Systems Seminar</span></li>
+<li data-pcr="0.00">OPIM 955<span class="CourseTitle"> - Research Seminar in Information Systems</span></li>
+<li data-pcr="0.00">OPIM 992<span class="CourseTitle"> - Conflict Mgmt Seminar</span></li>

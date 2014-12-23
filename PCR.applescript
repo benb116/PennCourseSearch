@@ -1,13 +1,13 @@
 set depts to paragraphs of (do shell script "ls /Users/Ben/Dropbox/Developer/PennCourseSearch/public/DeptListings/ | cut -d '.' -f 1")
 
-(*repeat with dept in depts
+repeat with dept in depts
 	
 	set courses to (do shell script "cat /Users/Ben/Desktop/DeptListings/" & dept & ".txt | cut -d '-' -f 1")
 	do shell script "echo " & courses & " >  /Users/Ben/Desktop/DeptListings/" & dept & ".txt"
 	
-end repeat*)
+end repeat
 
-(*repeat with x from 1 to count of depts
+repeat with x from 1 to count of depts
 	set dept to item x of depts
 	set courses to paragraphs of (do shell script "cat /Users/Ben/Desktop/DeptListings/" & dept & ".txt")
 	
@@ -17,9 +17,9 @@ end repeat*)
 		do shell script "echo " & course & " : " & CID & " >> /Users/Ben/Desktop/PCR-Rankings/" & dept & ".txt"
 		delay 0.05
 	end repeat
-end repeat*)
+end repeat
 
-(*repeat with x from 1 to count of depts
+repeat with x from 1 to count of depts
 	set dept to item x of depts
 	set courses to paragraphs of (do shell script "cat /Users/Ben/Desktop/PCR-Rankings2/" & dept & ".txt")
 	
@@ -33,7 +33,8 @@ end repeat*)
 		end if
 		delay 0.05
 	end repeat
-end repeat*)
+end repeat
+
 repeat with x from 1 to count of depts
 	set dept to item x of depts
 	set courses to paragraphs of (do shell script "cat /Users/Ben/Dropbox/Developer/PennCourseSearch/public/DeptListings/" & dept & ".txt")
@@ -56,7 +57,3 @@ repeat with x from 1 to count of depts
 		delay 0.1
 	end repeat
 end repeat
-
-
-
-

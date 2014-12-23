@@ -1,7 +1,7 @@
-<li PCR="3.14">PRTG 114<span class="CourseTitle"> - Portuguese for Spanish Speakers</span></li>
-<li PCR="3.80">PRTG 120<span class="CourseTitle"> - Elementary Portuguese II</span></li>
-<li PCR="4.00">PRTG 134<span class="CourseTitle"> - Intermediate Portuguese: Accelerated</span></li>
-<li PCR="4.00">PRTG 140<span class="CourseTitle"> - Intermediate Portuguese II</span></li>
-<li PCR="3.75">PRTG 202<span class="CourseTitle"> - Advanced Portuguese</span></li>
-<li PCR="3.50">PRTG 221<span class="CourseTitle"> - Topics in Brazilian Culture</span></li>
-<li PCR="4.00">PRTG 240<span class="CourseTitle"> - Topics in Brazilian Culture</span></li>
+<li data-pcr="3.14">PRTG 114<span class="CourseTitle"> - Portuguese for Spanish Speakers</span></li>
+<li data-pcr="3.80">PRTG 120<span class="CourseTitle"> - Elementary Portuguese II</span></li>
+<li data-pcr="4.00">PRTG 134<span class="CourseTitle"> - Intermediate Portuguese: Accelerated</span></li>
+<li data-pcr="4.00">PRTG 140<span class="CourseTitle"> - Intermediate Portuguese II</span></li>
+<li data-pcr="3.75">PRTG 202<span class="CourseTitle"> - Advanced Portuguese</span></li>
+<li data-pcr="3.50">PRTG 221<span class="CourseTitle"> - Topics in Brazilian Culture</span></li>
+<li data-pcr="4.00">PRTG 240<span class="CourseTitle"> - Topics in Brazilian Culture</span></li>

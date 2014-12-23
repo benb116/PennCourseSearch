@@ -19,17 +19,22 @@ var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI
 
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
-  console.log("Node app is running. Better go catch it.")
+  console.log("Node app is running. Better go catch it.".green)
+  console.log("Search ".yellow + "Add ".cyan + "Remove ".magenta + "Spit ".blue + "Error ".red)
 })
 
 // Rotating subtitles
 subtitles = [	"Cause PennInTouch sucks.", 
 				"You can press the back button, but you don't even need to.",
-				"This site was invented by Benjamin Franklin in 1793."];
+				"Invented by Benjamin Franklin in 1793.",
+				"Multi-page functionality. One page simplicity.",
+				"Focus on your classes, not your schedule.",
+				"Faster than you can say 'Wawa run.'"];
 // Handle main page requests
 app.get('/', function(req, res) {
-  console.log('Page Refresh')
+
   thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
+  console.log(thissub)
   return res.render('index', { // Send page
     title: 'Penn Course Search',
     subtitle: thissub
@@ -42,9 +47,8 @@ app.get('/Spit', function(req, res) {
 	request({
 		uri: 'http://localhost:3000/Search?searchType=deptSearch&courseID=' + thedept // Get preformatted results
 	}, function(error, response, body) {
-		return res.render('new', {
-			text: body
-		});
+		return res.render('new', {text: body});
+		console.log(('List Spit: '+thedept).blue)
 	});
 });
 // This request manager is for spitting the PCR Course ID's. They are saved for faster responses
@@ -55,7 +59,7 @@ app.get('/PCRSpitID', function(req, res) {
 	}, function(error, response, body) {
 		try {
 			var Res = JSON.parse(body); // Convert to JSON object
-			console.log(Res.result.id)
+			console.log(('PCR ID Spit: '+courseID).blue)
 			return res.send((Res.result.courses[Res.result.courses.length - 1].id).toString())
 		} catch(err) {
 			return res.send('0000')
@@ -71,6 +75,7 @@ app.get('/PCRSpitRev', function(req, res) {
 		try {
 			var Res = JSON.parse(body); // Convert to JSON object
 			cQ = Res.result.values[Res.result.values.length - 1].ratings.rCourseQuality
+			console.log(('PCR Rev Spit: '+courseID).blue)
 			return res.send(cQ.toString())
 		} catch(err) {
 			return res.send(err)
@@ -81,7 +86,7 @@ app.get('/PCRSpitRev', function(req, res) {
 // Manage search requests
 app.get('/Search', function(req, res) {
 	var courseIDSearch = req.query.courseID;
-	console.log(courseIDSearch);
+	console.log(courseIDSearch.yellow);
 	var searchType = req.query.searchType;
 	var termSelect = req.query.term;
 	if (searchType == 'descSearch') { // If it's a description search
@@ -117,8 +122,16 @@ app.get('/Search', function(req, res) {
 
 // Get previously scheduled sections
 SchedCourses = {};
-db.Students.find({Pennkey: "bernsb"}, { Sched1: 1}, function(err, doc) {
+myPennkey = 'bernsb';
+console.time('DB Time')
+db.Students.find({Pennkey: myPennkey}, { Sched1: 1}, function(err, doc) {
+	try {
 	SchedCourses = doc[0].Sched1;
+	} catch(error) {
+		db.Students.insert({Pennkey: myPennkey});
+		db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database	
+	}
+	console.timeEnd('DB Time')
 });
 
 // Manage scheduling requests
@@ -132,29 +145,29 @@ app.get('/Sched', function(req, res) {
 		  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
 		}, function(error, response, body) {
 			resJSON = getSchedInfo(body); // Format the response
-			console.log('Added: ')
+			console.log('Sched Added: '.cyan)
 			for (var i = 0; i < Object.keys(resJSON).length; i++) { // Compile a list of courses
 				var JSONSecID = Object.keys(resJSON)[i]
 				SchedCourses[JSONSecID] = resJSON[JSONSecID];
-				console.log(JSONSecID)
+				console.log(JSONSecID.cyan)
 			};
-			db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
+			db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
 			return res.send(SchedCourses);
 		});
 	} else if (addRem == 'rem') { // If we need to remove
-		console.log('Removed: ')
+		console.log('Sched Removed: '.magenta)
 		for (meetsec in SchedCourses) {
 			if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) { // Find all meeting times of a given course
 				delete SchedCourses[meetsec];
-				console.log(courseID)
+				console.log(courseID.magenta)
 			}
 		}
-		db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
+		db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
 		return res.send(SchedCourses);
 	} else if (addRem == 'clear') { // Clear all
 		SchedCourses = {};
-		db.Students.update({Pennkey: "bernsb"}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
-		console.log('Cleared')
+		db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
+		console.log('Sched Cleared'.magenta)
 	}
 	else {
 		return res.send(SchedCourses); // On a blank request
@@ -197,8 +210,7 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 		}
 	}
 	catch(err) {
-		console.log("Error getting times")
-		console.log('catch')
+		console.log("Error getting times".red)
 		var TimeInfo = '';
 	}
 	return [StatusClass, TimeInfo];
@@ -284,7 +296,8 @@ function getSchedInfo(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON Object
 	var entry = Res.result_data[0];
 	try {
-		var SectionName = entry.section_id_normalized.replace(/-/g, " "); // Format name
+		var SectionName = entry.section_id_normalized.replace(/ /g, "").replace(/-/g, " "); // Format name
+		console.log(SectionName)
 		var SectionID = entry.section_id_normalized.replace(/-/g, ""); // Format name
 		var resJSON = { };
 		try { // Not all sections have time info
@@ -294,15 +307,24 @@ function getSchedInfo(JSONString) {
 				var halfLength = EndTime - StartTime;
 				var MeetDays = entry.meetings[meeti].meeting_days;
 				var OpenClose = entry.course_status_normalized;
+				try {
+				var Building = entry.meetings[meeti].building_code;
+				var Room = entry.meetings[meeti].room_number;
+				} catch(err) {
+					var Building = "";
+					var Room = "";
+				}
 				var FullID = SectionID.replace(/ /g, "")+MeetDays+StartTime.toString().replace(/\./g, "");
 				resJSON[FullID] = {'fullCourseName': SectionName,
 		    		'HourLength': halfLength,
 		    		'meetDay': MeetDays,
-		    		'meetHour': StartTime};
+		    		'meetHour': StartTime,
+		    		'meetRoom': Building+' '+Room
+	    		};
 	    	}
 		}
 		catch(err) {
-			console.log("Error getting times: "+err)
+			console.log(("Error getting times: "+err).red)
 			var TimeInfo = '';
 		}
 		return resJSON;

@@ -1,32 +1,32 @@
-<li PCR="2.67">PHIL 001<span class="CourseTitle"> - Introduction to Philosophy</span></li>
-<li PCR="1.67">PHIL 002<span class="CourseTitle"> - Ethics</span></li>
-<li PCR="2.71">PHIL 003<span class="CourseTitle"> - History of Ancient Philosophy</span></li>
-<li PCR="2.83">PHIL 004<span class="CourseTitle"> - History of Modern Philosophy</span></li>
-<li PCR="1.98">PHIL 005<span class="CourseTitle"> - Formal Logic I</span></li>
-<li PCR="2.72">PHIL 008<span class="CourseTitle"> - The Social Contract</span></li>
-<li PCR="1.91">PHIL 025<span class="CourseTitle"> - Philosophy of Science</span></li>
-<li PCR="0.00">PHIL 029<span class="CourseTitle"> - Philosophy of Sport</span></li>
-<li PCR="2.88">PHIL 032<span class="CourseTitle"> - Topics in Contemporary Philosophy</span></li>
-<li PCR="2.86">PHIL 073<span class="CourseTitle"> - Topics in Ethics</span></li>
-<li PCR="0.00">PHIL 202<span class="CourseTitle"> - Topics in Ethics I</span></li>
-<li PCR="2.94">PHIL 211<span class="CourseTitle"> - Ancient Moral Philosophy</span></li>
-<li PCR="2.12">PHIL 228<span class="CourseTitle"> - Philosophy of Social Science</span></li>
-<li PCR="2.12">PHIL 244<span class="CourseTitle"> - Introduction to Philosophy of Mind</span></li>
-<li PCR="3.00">PHIL 249<span class="CourseTitle"> - Philosophy of Education</span></li>
-<li PCR="3.10">PHIL 272<span class="CourseTitle"> - Ethics &amp; the Professions</span></li>
-<li PCR="3.27">PHIL 376<span class="CourseTitle"> - Justice</span></li>
-<li PCR="3.13">PHIL 412<span class="CourseTitle"> - Topics in Logic</span></li>
-<li PCR="3.31">PHIL 423<span class="CourseTitle"> - Philosophy and Visual Perception</span></li>
-<li PCR="3.08">PHIL 472<span class="CourseTitle"> - Survey of Ethical Theory</span></li>
-<li PCR="3.00">PHIL 480<span class="CourseTitle"> - Aesthetics</span></li>
-<li PCR="1.98">PHIL 505<span class="CourseTitle"> - Formal Logic</span></li>
-<li PCR="3.20">PHIL 526<span class="CourseTitle"> - Philosophy of Psychology</span></li>
-<li PCR="0.00">PHIL 531<span class="CourseTitle"> - Social Norms</span></li>
-<li PCR="2.50">PHIL 532<span class="CourseTitle"> - Topics in Epistemology</span></li>
-<li PCR="3.00">PHIL 536<span class="CourseTitle"> - Stoicism</span></li>
-<li PCR="3.63">PHIL 550<span class="CourseTitle"> - Topics in Philosophy of Education</span></li>
-<li PCR="4.00">PHIL 572<span class="CourseTitle"> - Contemporary Ethics</span></li>
-<li PCR="3.50">PHIL 577<span class="CourseTitle"> - Topics in Philosophy of Law</span></li>
-<li PCR="3.20">PHIL 578<span class="CourseTitle"> - Topics in Political Philosophy</span></li>
-<li PCR="0.00">PHIL 601<span class="CourseTitle"> - Consortium Course</span></li>
-<li PCR="0.00">PHIL 700<span class="CourseTitle"> - Dissertation Workshop</span></li>
+<li data-pcr="2.67">PHIL 001<span class="CourseTitle"> - Introduction to Philosophy</span></li>
+<li data-pcr="1.67">PHIL 002<span class="CourseTitle"> - Ethics</span></li>
+<li data-pcr="2.71">PHIL 003<span class="CourseTitle"> - History of Ancient Philosophy</span></li>
+<li data-pcr="2.83">PHIL 004<span class="CourseTitle"> - History of Modern Philosophy</span></li>
+<li data-pcr="1.98">PHIL 005<span class="CourseTitle"> - Formal Logic I</span></li>
+<li data-pcr="2.72">PHIL 008<span class="CourseTitle"> - The Social Contract</span></li>
+<li data-pcr="1.91">PHIL 025<span class="CourseTitle"> - Philosophy of Science</span></li>
+<li data-pcr="0.00">PHIL 029<span class="CourseTitle"> - Philosophy of Sport</span></li>
+<li data-pcr="2.88">PHIL 032<span class="CourseTitle"> - Topics in Contemporary Philosophy</span></li>
+<li data-pcr="2.86">PHIL 073<span class="CourseTitle"> - Topics in Ethics</span></li>
+<li data-pcr="0.00">PHIL 202<span class="CourseTitle"> - Topics in Ethics I</span></li>
+<li data-pcr="2.94">PHIL 211<span class="CourseTitle"> - Ancient Moral Philosophy</span></li>
+<li data-pcr="2.12">PHIL 228<span class="CourseTitle"> - Philosophy of Social Science</span></li>
+<li data-pcr="2.12">PHIL 244<span class="CourseTitle"> - Introduction to Philosophy of Mind</span></li>
+<li data-pcr="3.00">PHIL 249<span class="CourseTitle"> - Philosophy of Education</span></li>
+<li data-pcr="3.10">PHIL 272<span class="CourseTitle"> - Ethics &amp; the Professions</span></li>
+<li data-pcr="3.27">PHIL 376<span class="CourseTitle"> - Justice</span></li>
+<li data-pcr="3.13">PHIL 412<span class="CourseTitle"> - Topics in Logic</span></li>
+<li data-pcr="3.31">PHIL 423<span class="CourseTitle"> - Philosophy and Visual Perception</span></li>
+<li data-pcr="3.08">PHIL 472<span class="CourseTitle"> - Survey of Ethical Theory</span></li>
+<li data-pcr="3.00">PHIL 480<span class="CourseTitle"> - Aesthetics</span></li>
+<li data-pcr="1.98">PHIL 505<span class="CourseTitle"> - Formal Logic</span></li>
+<li data-pcr="3.20">PHIL 526<span class="CourseTitle"> - Philosophy of Psychology</span></li>
+<li data-pcr="0.00">PHIL 531<span class="CourseTitle"> - Social Norms</span></li>
+<li data-pcr="2.50">PHIL 532<span class="CourseTitle"> - Topics in Epistemology</span></li>
+<li data-pcr="3.00">PHIL 536<span class="CourseTitle"> - Stoicism</span></li>
+<li data-pcr="3.63">PHIL 550<span class="CourseTitle"> - Topics in Philosophy of Education</span></li>
+<li data-pcr="4.00">PHIL 572<span class="CourseTitle"> - Contemporary Ethics</span></li>
+<li data-pcr="3.50">PHIL 577<span class="CourseTitle"> - Topics in Philosophy of Law</span></li>
+<li data-pcr="3.20">PHIL 578<span class="CourseTitle"> - Topics in Political Philosophy</span></li>
+<li data-pcr="0.00">PHIL 601<span class="CourseTitle"> - Consortium Course</span></li>
+<li data-pcr="0.00">PHIL 700<span class="CourseTitle"> - Dissertation Workshop</span></li>

@@ -1,26 +1,26 @@
-<li PCR="2.95">CLST 027<span class="CourseTitle"> - Ancient Rome</span></li>
-<li PCR="0.00">CLST 029<span class="CourseTitle"> - ROME &amp; AMERICA</span></li>
-<li PCR="3.30">CLST 100<span class="CourseTitle"> - Greek &amp; Roman Mythology</span></li>
-<li PCR="2.71">CLST 103<span class="CourseTitle"> - History of Ancient Philosophy</span></li>
-<li PCR="3.55">CLST 117<span class="CourseTitle"> - Pericean Athens</span></li>
-<li PCR="3.13">CLST 123<span class="CourseTitle"> - Great Discoveries in Archaeology</span></li>
-<li PCR="3.38">CLST 146<span class="CourseTitle"> - Ancient Mediterranean Empires</span></li>
-<li PCR="2.94">CLST 211<span class="CourseTitle"> - Ancient Moral Philosophy</span></li>
-<li PCR="0.00">CLST 268<span class="CourseTitle"> - LIVING WORLD IN ARCHAEOLOGICAL SCIENCE</span></li>
-<li PCR="3.20">CLST 275<span class="CourseTitle"> - Introduction to Greek Archaeology</span></li>
-<li PCR="3.20">CLST 308<span class="CourseTitle"> - Visions of Rome in Art, Literature, and Cinema</span></li>
-<li PCR="3.56">CLST 310<span class="CourseTitle"> - Ancient and Modern Constitution Making</span></li>
-<li PCR="2.69">CLST 324<span class="CourseTitle"> - Age of Caesar</span></li>
-<li PCR="3.78">CLST 328<span class="CourseTitle"> - Topography and Monuments of Ancient Rome</span></li>
-<li PCR="3.00">CLST 329<span class="CourseTitle"> - Topics in Classicism and Literature</span></li>
-<li PCR="3.63">CLST 402<span class="CourseTitle"> - Post-Baccalaureate Studies in Greek</span></li>
-<li PCR="3.77">CLST 403<span class="CourseTitle"> - Post-Baccalaureate Studies in Latin</span></li>
-<li PCR="2.67">CLST 427<span class="CourseTitle"> - Roman Sculpture</span></li>
-<li PCR="3.63">CLST 512<span class="CourseTitle"> - Petrography of Cultural Materials</span></li>
-<li PCR="0.00">CLST 517<span class="CourseTitle"> - Mla Proseminar</span></li>
-<li PCR="2.42">CLST 521<span class="CourseTitle"> - Proseminar in Classical Art</span></li>
-<li PCR="0.00">CLST 533<span class="CourseTitle"> - Topog &amp; Mon of Anc Rome</span></li>
-<li PCR="0.00">CLST 568<span class="CourseTitle"> - Lvng Wrld in Arch Sci</span></li>
-<li PCR="0.00">CLST 611<span class="CourseTitle"> - Greek Epigraphy</span></li>
-<li PCR="0.00">CLST 698<span class="CourseTitle"> - Prospectus Workshop</span></li>
-<li PCR="0.00">CLST 705<span class="CourseTitle"> - ETHNOARCHAEOLOGY GREECE</span></li>
+<li data-pcr="2.95">CLST 027<span class="CourseTitle"> - Ancient Rome</span></li>
+<li data-pcr="0.00">CLST 029<span class="CourseTitle"> - ROME &amp; AMERICA</span></li>
+<li data-pcr="3.30">CLST 100<span class="CourseTitle"> - Greek &amp; Roman Mythology</span></li>
+<li data-pcr="2.71">CLST 103<span class="CourseTitle"> - History of Ancient Philosophy</span></li>
+<li data-pcr="3.55">CLST 117<span class="CourseTitle"> - Pericean Athens</span></li>
+<li data-pcr="3.13">CLST 123<span class="CourseTitle"> - Great Discoveries in Archaeology</span></li>
+<li data-pcr="3.38">CLST 146<span class="CourseTitle"> - Ancient Mediterranean Empires</span></li>
+<li data-pcr="2.94">CLST 211<span class="CourseTitle"> - Ancient Moral Philosophy</span></li>
+<li data-pcr="0.00">CLST 268<span class="CourseTitle"> - LIVING WORLD IN ARCHAEOLOGICAL SCIENCE</span></li>
+<li data-pcr="3.20">CLST 275<span class="CourseTitle"> - Introduction to Greek Archaeology</span></li>
+<li data-pcr="3.20">CLST 308<span class="CourseTitle"> - Visions of Rome in Art, Literature, and Cinema</span></li>
+<li data-pcr="3.56">CLST 310<span class="CourseTitle"> - Ancient and Modern Constitution Making</span></li>
+<li data-pcr="2.69">CLST 324<span class="CourseTitle"> - Age of Caesar</span></li>
+<li data-pcr="3.78">CLST 328<span class="CourseTitle"> - Topography and Monuments of Ancient Rome</span></li>
+<li data-pcr="3.00">CLST 329<span class="CourseTitle"> - Topics in Classicism and Literature</span></li>
+<li data-pcr="3.63">CLST 402<span class="CourseTitle"> - Post-Baccalaureate Studies in Greek</span></li>
+<li data-pcr="3.77">CLST 403<span class="CourseTitle"> - Post-Baccalaureate Studies in Latin</span></li>
+<li data-pcr="2.67">CLST 427<span class="CourseTitle"> - Roman Sculpture</span></li>
+<li data-pcr="3.63">CLST 512<span class="CourseTitle"> - Petrography of Cultural Materials</span></li>
+<li data-pcr="0.00">CLST 517<span class="CourseTitle"> - Mla Proseminar</span></li>
+<li data-pcr="2.42">CLST 521<span class="CourseTitle"> - Proseminar in Classical Art</span></li>
+<li data-pcr="0.00">CLST 533<span class="CourseTitle"> - Topog &amp; Mon of Anc Rome</span></li>
+<li data-pcr="0.00">CLST 568<span class="CourseTitle"> - Lvng Wrld in Arch Sci</span></li>
+<li data-pcr="0.00">CLST 611<span class="CourseTitle"> - Greek Epigraphy</span></li>
+<li data-pcr="0.00">CLST 698<span class="CourseTitle"> - Prospectus Workshop</span></li>
+<li data-pcr="0.00">CLST 705<span class="CourseTitle"> - ETHNOARCHAEOLOGY GREECE</span></li>

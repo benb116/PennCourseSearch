@@ -1,77 +1,77 @@
-<li PCR="2.67">AFRC 001<span class="CourseTitle"> - Introduction to Africana Studies</span></li>
-<li PCR="2.52">AFRC 002<span class="CourseTitle"> - Introduction to Sociology</span></li>
-<li PCR="2.97">AFRC 011<span class="CourseTitle"> - Urban Sociology</span></li>
-<li PCR="2.22">AFRC 050<span class="CourseTitle"> - World Musics and Cultures</span></li>
-<li PCR="3.67">AFRC 056<span class="CourseTitle"> - South Africa: Contemporary Performance</span></li>
-<li PCR="2.69">AFRC 078<span class="CourseTitle"> - Faculty-Student Collaborative Action Seminar in Urban University-Community Relations</span></li>
-<li PCR="3.29">AFRC 081<span class="CourseTitle"> - African-American Literature</span></li>
-<li PCR="0.00">AFRC 108<span class="CourseTitle"> - Study of a Literary Theme</span></li>
-<li PCR="0.00">AFRC 121<span class="CourseTitle"> - Writing for Children</span></li>
-<li PCR="0.00">AFRC 134<span class="CourseTitle"> - Creative Non-Fiction Writing</span></li>
-<li PCR="2.10">AFRC 136<span class="CourseTitle"> - Urban Politics in the United States</span></li>
-<li PCR="3.33">AFRC 149<span class="CourseTitle"> - Elementary Zulu: Accelerated</span></li>
-<li PCR="3.00">AFRC 152<span class="CourseTitle"> - Elementary Zulu II</span></li>
-<li PCR="0.00">AFRC 155<span class="CourseTitle"> - Afro-Latinos in the U.S.</span></li>
-<li PCR="3.50">AFRC 163<span class="CourseTitle"> - Elementary Twi II</span></li>
-<li PCR="0.00">AFRC 167<span class="CourseTitle"> - THE NEW AFRICAN DIASPORA: AFRICAN IMMIGRANT LIVES IN WEST PHILADELPHIA</span></li>
-<li PCR="3.20">AFRC 169<span class="CourseTitle"> - History of American Law Since 1877</span></li>
-<li PCR="3.50">AFRC 171<span class="CourseTitle"> - Elementary Yoruba II</span></li>
-<li PCR="2.64">AFRC 175<span class="CourseTitle"> - Society and Culture of Brazil</span></li>
-<li PCR="3.10">AFRC 177<span class="CourseTitle"> - Afro-American History 1876 to Present</span></li>
-<li PCR="4.00">AFRC 181<span class="CourseTitle"> - Elementary Swahili II</span></li>
-<li PCR="3.89">AFRC 187<span class="CourseTitle"> - Topics in Africana Studies</span></li>
-<li PCR="3.08">AFRC 218<span class="CourseTitle"> - Race, Racism and American Law</span></li>
-<li PCR="0.00">AFRC 219<span class="CourseTitle"> - African Architecture</span></li>
-<li PCR="2.42">AFRC 225<span class="CourseTitle"> - African Languages and Culture</span></li>
-<li PCR="3.80">AFRC 230<span class="CourseTitle"> - Special Topics in Sociology</span></li>
-<li PCR="2.97">AFRC 232<span class="CourseTitle"> - Race and Ethnic Politics</span></li>
-<li PCR="2.67">AFRC 234<span class="CourseTitle"> - World History: East Asia or Latin America</span></li>
-<li PCR="2.47">AFRC 235<span class="CourseTitle"> - Law and Social Change</span></li>
-<li PCR="3.00">AFRC 241<span class="CourseTitle"> - Elementary Amharic II</span></li>
-<li PCR="3.75">AFRC 243<span class="CourseTitle"> - Intermediate Amharic II</span></li>
-<li PCR="4.00">AFRC 251<span class="CourseTitle"> - Intermediate Zulu II</span></li>
-<li PCR="3.67">AFRC 265<span class="CourseTitle"> - Intermediate Twi II</span></li>
-<li PCR="4.00">AFRC 271<span class="CourseTitle"> - Intermediate Yoruba II</span></li>
-<li PCR="3.33">AFRC 282<span class="CourseTitle"> - Intermediate Swahili II</span></li>
-<li PCR="4.00">AFRC 285<span class="CourseTitle"> - Advanced Swahili II</span></li>
-<li PCR="2.93">AFRC 286<span class="CourseTitle"> - Topics in Race and Ethnicity - Intimacy and Distance: Faulkner, Hurston, Welty,and Wright</span></li>
-<li PCR="3.29">AFRC 290<span class="CourseTitle"> - Topics in Women and Literature</span></li>
-<li PCR="0.00">AFRC 296<span class="CourseTitle"> - Topics in Cultural Studies</span></li>
-<li PCR="0.00">AFRC 345<span class="CourseTitle"> - Race and Sex in Early America</span></li>
-<li PCR="0.00">AFRC 351<span class="CourseTitle"> - Advanced Zulu II</span></li>
-<li PCR="3.33">AFRC 364<span class="CourseTitle"> - Advanced Twi II</span></li>
-<li PCR="3.62">AFRC 405<span class="CourseTitle"> - Religion, Social Justice &amp; Urban Development</span></li>
-<li PCR="2.33">AFRC 420<span class="CourseTitle"> - Advanced topics in Africana Studies</span></li>
-<li PCR="2.67">AFRC 433<span class="CourseTitle"> - Social Movement</span></li>
-<li PCR="0.00">AFRC 435<span class="CourseTitle"> - MODERN PRESIDENCY &amp; RACE</span></li>
-<li PCR="3.87">AFRC 437<span class="CourseTitle"> - Race &amp; Criminal Justice</span></li>
-<li PCR="0.00">AFRC 448<span class="CourseTitle"> - Neighborhood Displacement and Community Power</span></li>
-<li PCR="2.57">AFRC 460<span class="CourseTitle"> - School Reform and Public Policy</span></li>
-<li PCR="3.15">AFRC 488<span class="CourseTitle"> - Culture, Sexuality and Global Health</span></li>
-<li PCR="2.50">AFRC 491<span class="CourseTitle"> - African Language Tutorial - Elementary II</span></li>
-<li PCR="3.50">AFRC 493<span class="CourseTitle"> - African Language Tutorial - Intermediate II</span></li>
-<li PCR="0.00">AFRC 495<span class="CourseTitle"> - African Language Tutor: Adv II</span></li>
-<li PCR="0.00">AFRC 497<span class="CourseTitle"> - Language &amp; Culture II</span></li>
-<li PCR="3.50">AFRC 517<span class="CourseTitle"> - Elementary Yoruba II</span></li>
-<li PCR="0.00">AFRC 522<span class="CourseTitle"> - Psychology of the African-American: Implications for Counseling and Human Develoment</span></li>
-<li PCR="0.00">AFRC 527<span class="CourseTitle"> - Race, Gender &amp; Auto/Biography</span></li>
-<li PCR="3.46">AFRC 533<span class="CourseTitle"> - Advanced Selected Topics</span></li>
-<li PCR="4.00">AFRC 534<span class="CourseTitle"> - Intermediate Yoruba II</span></li>
-<li PCR="3.00">AFRC 541<span class="CourseTitle"> - Elementary Amharic II</span></li>
-<li PCR="3.75">AFRC 544<span class="CourseTitle"> - Intermediate Amharic II</span></li>
-<li PCR="0.00">AFRC 545<span class="CourseTitle"> - Historically Black Colleges and Universities: Current and Historical Issues</span></li>
-<li PCR="0.00">AFRC 547<span class="CourseTitle"> - Topics in Religion</span></li>
-<li PCR="3.33">AFRC 549<span class="CourseTitle"> - Elementary Zulu: Accelerated</span></li>
-<li PCR="0.00">AFRC 571<span class="CourseTitle"> - VISUALIZING W.  E.  B.  DUBOIS</span></li>
-<li PCR="0.00">AFRC 594<span class="CourseTitle"> - POST-COLONIALISM LITERATURE</span></li>
-<li PCR="0.00">AFRC 619<span class="CourseTitle"> - African Architecture</span></li>
-<li PCR="2.33">AFRC 620<span class="CourseTitle"> - Advanced Topics in Africana Studies</span></li>
-<li PCR="3.87">AFRC 638<span class="CourseTitle"> - Race and Criminal Justice</span></li>
-<li PCR="0.00">AFRC 640<span class="CourseTitle"> - Proseminar in Africana Studies</span></li>
-<li PCR="0.00">AFRC 641<span class="CourseTitle"> - Topics in African American History</span></li>
-<li PCR="0.00">AFRC 650<span class="CourseTitle"> - Topics in African History</span></li>
-<li PCR="0.00">AFRC 670<span class="CourseTitle"> - Topics in Trans Regional History</span></li>
-<li PCR="0.00">AFRC 692<span class="CourseTitle"> - NGOs and Humanitarianism</span></li>
-<li PCR="0.00">AFRC 740<span class="CourseTitle"> - Research Seminar in Middle Eastern History</span></li>
-<li PCR="0.00">AFRC 771<span class="CourseTitle"> - Seminar in Afro-American Music</span></li>
-<li PCR="0.00">AFRC 799<span class="CourseTitle"> - Topics in American Literature</span></li>
+<li data-pcr="2.67">AFRC 001<span class="CourseTitle"> - Introduction to Africana Studies</span></li>
+<li data-pcr="2.52">AFRC 002<span class="CourseTitle"> - Introduction to Sociology</span></li>
+<li data-pcr="2.97">AFRC 011<span class="CourseTitle"> - Urban Sociology</span></li>
+<li data-pcr="2.22">AFRC 050<span class="CourseTitle"> - World Musics and Cultures</span></li>
+<li data-pcr="3.67">AFRC 056<span class="CourseTitle"> - South Africa: Contemporary Performance</span></li>
+<li data-pcr="2.69">AFRC 078<span class="CourseTitle"> - Faculty-Student Collaborative Action Seminar in Urban University-Community Relations</span></li>
+<li data-pcr="3.29">AFRC 081<span class="CourseTitle"> - African-American Literature</span></li>
+<li data-pcr="0.00">AFRC 108<span class="CourseTitle"> - Study of a Literary Theme</span></li>
+<li data-pcr="0.00">AFRC 121<span class="CourseTitle"> - Writing for Children</span></li>
+<li data-pcr="0.00">AFRC 134<span class="CourseTitle"> - Creative Non-Fiction Writing</span></li>
+<li data-pcr="2.10">AFRC 136<span class="CourseTitle"> - Urban Politics in the United States</span></li>
+<li data-pcr="3.33">AFRC 149<span class="CourseTitle"> - Elementary Zulu: Accelerated</span></li>
+<li data-pcr="3.00">AFRC 152<span class="CourseTitle"> - Elementary Zulu II</span></li>
+<li data-pcr="0.00">AFRC 155<span class="CourseTitle"> - Afro-Latinos in the U.S.</span></li>
+<li data-pcr="3.50">AFRC 163<span class="CourseTitle"> - Elementary Twi II</span></li>
+<li data-pcr="0.00">AFRC 167<span class="CourseTitle"> - THE NEW AFRICAN DIASPORA: AFRICAN IMMIGRANT LIVES IN WEST PHILADELPHIA</span></li>
+<li data-pcr="3.20">AFRC 169<span class="CourseTitle"> - History of American Law Since 1877</span></li>
+<li data-pcr="3.50">AFRC 171<span class="CourseTitle"> - Elementary Yoruba II</span></li>
+<li data-pcr="2.64">AFRC 175<span class="CourseTitle"> - Society and Culture of Brazil</span></li>
+<li data-pcr="3.10">AFRC 177<span class="CourseTitle"> - Afro-American History 1876 to Present</span></li>
+<li data-pcr="4.00">AFRC 181<span class="CourseTitle"> - Elementary Swahili II</span></li>
+<li data-pcr="3.89">AFRC 187<span class="CourseTitle"> - Topics in Africana Studies</span></li>
+<li data-pcr="3.08">AFRC 218<span class="CourseTitle"> - Race, Racism and American Law</span></li>
+<li data-pcr="0.00">AFRC 219<span class="CourseTitle"> - African Architecture</span></li>
+<li data-pcr="2.42">AFRC 225<span class="CourseTitle"> - African Languages and Culture</span></li>
+<li data-pcr="3.80">AFRC 230<span class="CourseTitle"> - Special Topics in Sociology</span></li>
+<li data-pcr="2.97">AFRC 232<span class="CourseTitle"> - Race and Ethnic Politics</span></li>
+<li data-pcr="2.67">AFRC 234<span class="CourseTitle"> - World History: East Asia or Latin America</span></li>
+<li data-pcr="2.47">AFRC 235<span class="CourseTitle"> - Law and Social Change</span></li>
+<li data-pcr="3.00">AFRC 241<span class="CourseTitle"> - Elementary Amharic II</span></li>
+<li data-pcr="3.75">AFRC 243<span class="CourseTitle"> - Intermediate Amharic II</span></li>
+<li data-pcr="4.00">AFRC 251<span class="CourseTitle"> - Intermediate Zulu II</span></li>
+<li data-pcr="3.67">AFRC 265<span class="CourseTitle"> - Intermediate Twi II</span></li>
+<li data-pcr="4.00">AFRC 271<span class="CourseTitle"> - Intermediate Yoruba II</span></li>
+<li data-pcr="3.33">AFRC 282<span class="CourseTitle"> - Intermediate Swahili II</span></li>
+<li data-pcr="4.00">AFRC 285<span class="CourseTitle"> - Advanced Swahili II</span></li>
+<li data-pcr="2.93">AFRC 286<span class="CourseTitle"> - Topics in Race and Ethnicity - Intimacy and Distance: Faulkner, Hurston, Welty,and Wright</span></li>
+<li data-pcr="3.29">AFRC 290<span class="CourseTitle"> - Topics in Women and Literature</span></li>
+<li data-pcr="0.00">AFRC 296<span class="CourseTitle"> - Topics in Cultural Studies</span></li>
+<li data-pcr="0.00">AFRC 345<span class="CourseTitle"> - Race and Sex in Early America</span></li>
+<li data-pcr="0.00">AFRC 351<span class="CourseTitle"> - Advanced Zulu II</span></li>
+<li data-pcr="3.33">AFRC 364<span class="CourseTitle"> - Advanced Twi II</span></li>
+<li data-pcr="3.62">AFRC 405<span class="CourseTitle"> - Religion, Social Justice &amp; Urban Development</span></li>
+<li data-pcr="2.33">AFRC 420<span class="CourseTitle"> - Advanced topics in Africana Studies</span></li>
+<li data-pcr="2.67">AFRC 433<span class="CourseTitle"> - Social Movement</span></li>
+<li data-pcr="0.00">AFRC 435<span class="CourseTitle"> - MODERN PRESIDENCY &amp; RACE</span></li>
+<li data-pcr="3.87">AFRC 437<span class="CourseTitle"> - Race &amp; Criminal Justice</span></li>
+<li data-pcr="0.00">AFRC 448<span class="CourseTitle"> - Neighborhood Displacement and Community Power</span></li>
+<li data-pcr="2.57">AFRC 460<span class="CourseTitle"> - School Reform and Public Policy</span></li>
+<li data-pcr="3.15">AFRC 488<span class="CourseTitle"> - Culture, Sexuality and Global Health</span></li>
+<li data-pcr="2.50">AFRC 491<span class="CourseTitle"> - African Language Tutorial - Elementary II</span></li>
+<li data-pcr="3.50">AFRC 493<span class="CourseTitle"> - African Language Tutorial - Intermediate II</span></li>
+<li data-pcr="0.00">AFRC 495<span class="CourseTitle"> - African Language Tutor: Adv II</span></li>
+<li data-pcr="0.00">AFRC 497<span class="CourseTitle"> - Language &amp; Culture II</span></li>
+<li data-pcr="3.50">AFRC 517<span class="CourseTitle"> - Elementary Yoruba II</span></li>
+<li data-pcr="0.00">AFRC 522<span class="CourseTitle"> - Psychology of the African-American: Implications for Counseling and Human Develoment</span></li>
+<li data-pcr="0.00">AFRC 527<span class="CourseTitle"> - Race, Gender &amp; Auto/Biography</span></li>
+<li data-pcr="3.46">AFRC 533<span class="CourseTitle"> - Advanced Selected Topics</span></li>
+<li data-pcr="4.00">AFRC 534<span class="CourseTitle"> - Intermediate Yoruba II</span></li>
+<li data-pcr="3.00">AFRC 541<span class="CourseTitle"> - Elementary Amharic II</span></li>
+<li data-pcr="3.75">AFRC 544<span class="CourseTitle"> - Intermediate Amharic II</span></li>
+<li data-pcr="0.00">AFRC 545<span class="CourseTitle"> - Historically Black Colleges and Universities: Current and Historical Issues</span></li>
+<li data-pcr="0.00">AFRC 547<span class="CourseTitle"> - Topics in Religion</span></li>
+<li data-pcr="3.33">AFRC 549<span class="CourseTitle"> - Elementary Zulu: Accelerated</span></li>
+<li data-pcr="0.00">AFRC 571<span class="CourseTitle"> - VISUALIZING W.  E.  B.  DUBOIS</span></li>
+<li data-pcr="0.00">AFRC 594<span class="CourseTitle"> - POST-COLONIALISM LITERATURE</span></li>
+<li data-pcr="0.00">AFRC 619<span class="CourseTitle"> - African Architecture</span></li>
+<li data-pcr="2.33">AFRC 620<span class="CourseTitle"> - Advanced Topics in Africana Studies</span></li>
+<li data-pcr="3.87">AFRC 638<span class="CourseTitle"> - Race and Criminal Justice</span></li>
+<li data-pcr="0.00">AFRC 640<span class="CourseTitle"> - Proseminar in Africana Studies</span></li>
+<li data-pcr="0.00">AFRC 641<span class="CourseTitle"> - Topics in African American History</span></li>
+<li data-pcr="0.00">AFRC 650<span class="CourseTitle"> - Topics in African History</span></li>
+<li data-pcr="0.00">AFRC 670<span class="CourseTitle"> - Topics in Trans Regional History</span></li>
+<li data-pcr="0.00">AFRC 692<span class="CourseTitle"> - NGOs and Humanitarianism</span></li>
+<li data-pcr="0.00">AFRC 740<span class="CourseTitle"> - Research Seminar in Middle Eastern History</span></li>
+<li data-pcr="0.00">AFRC 771<span class="CourseTitle"> - Seminar in Afro-American Music</span></li>
+<li data-pcr="0.00">AFRC 799<span class="CourseTitle"> - Topics in American Literature</span></li>

@@ -1,19 +1,19 @@
-<li PCR="3.00">BIBB 050<span class="CourseTitle"> - Forensic Neuroscience</span></li>
-<li PCR="2.86">BIBB 109<span class="CourseTitle"> - Introduction to Brain and Behavior</span></li>
-<li PCR="0.00">BIBB 207<span class="CourseTitle"> - Genetic Basis of Behav</span></li>
-<li PCR="3.27">BIBB 240<span class="CourseTitle"> - Human Chronobiology and Sleep</span></li>
-<li PCR="1.63">BIBB 249<span class="CourseTitle"> - Cognitive Neuroscience</span></li>
-<li PCR="2.70">BIBB 260<span class="CourseTitle"> - Neuroendocrinology</span></li>
-<li PCR="2.91">BIBB 270<span class="CourseTitle"> - Drugs, Brain and Mind</span></li>
-<li PCR="0.00">BIBB 310<span class="CourseTitle"> - Laboratory in the Structure of the Nervous System</span></li>
-<li PCR="3.53">BIBB 409<span class="CourseTitle"> - Clinical Research in Neuroscience</span></li>
-<li PCR="3.08">BIBB 417<span class="CourseTitle"> - Seminar in Perception: Visual Processing</span></li>
-<li PCR="3.52">BIBB 421<span class="CourseTitle"> - Functional Imaging of the Human Brain</span></li>
-<li PCR="1.75">BIBB 430<span class="CourseTitle"> - Neurobiological Basis of Autism</span></li>
-<li PCR="2.57">BIBB 473<span class="CourseTitle"> - Neuroeconomics</span></li>
-<li PCR="3.38">BIBB 475<span class="CourseTitle"> - Neurodegenerative Diseases</span></li>
-<li PCR="4.00">BIBB 479<span class="CourseTitle"> - Neural Systems and Behavior</span></li>
-<li PCR="3.71">BIBB 481<span class="CourseTitle"> - Behavioral Pharmacology</span></li>
-<li PCR="3.56">BIBB 482<span class="CourseTitle"> - Clinical Psychopharmacology</span></li>
-<li PCR="3.40">BIBB 492<span class="CourseTitle"> - Experimental Methods in Synaptic Physiology</span></li>
-<li PCR="2.91">BIBB 585<span class="CourseTitle"> - Theoretical and Computational Neuroscience</span></li>
+<li data-pcr="3.00">BIBB 050<span class="CourseTitle"> - Forensic Neuroscience</span></li>
+<li data-pcr="2.86">BIBB 109<span class="CourseTitle"> - Introduction to Brain and Behavior</span></li>
+<li data-pcr="0.00">BIBB 207<span class="CourseTitle"> - Genetic Basis of Behav</span></li>
+<li data-pcr="3.27">BIBB 240<span class="CourseTitle"> - Human Chronobiology and Sleep</span></li>
+<li data-pcr="1.63">BIBB 249<span class="CourseTitle"> - Cognitive Neuroscience</span></li>
+<li data-pcr="2.70">BIBB 260<span class="CourseTitle"> - Neuroendocrinology</span></li>
+<li data-pcr="2.91">BIBB 270<span class="CourseTitle"> - Drugs, Brain and Mind</span></li>
+<li data-pcr="0.00">BIBB 310<span class="CourseTitle"> - Laboratory in the Structure of the Nervous System</span></li>
+<li data-pcr="3.53">BIBB 409<span class="CourseTitle"> - Clinical Research in Neuroscience</span></li>
+<li data-pcr="3.08">BIBB 417<span class="CourseTitle"> - Seminar in Perception: Visual Processing</span></li>
+<li data-pcr="3.52">BIBB 421<span class="CourseTitle"> - Functional Imaging of the Human Brain</span></li>
+<li data-pcr="1.75">BIBB 430<span class="CourseTitle"> - Neurobiological Basis of Autism</span></li>
+<li data-pcr="2.57">BIBB 473<span class="CourseTitle"> - Neuroeconomics</span></li>
+<li data-pcr="3.38">BIBB 475<span class="CourseTitle"> - Neurodegenerative Diseases</span></li>
+<li data-pcr="4.00">BIBB 479<span class="CourseTitle"> - Neural Systems and Behavior</span></li>
+<li data-pcr="3.71">BIBB 481<span class="CourseTitle"> - Behavioral Pharmacology</span></li>
+<li data-pcr="3.56">BIBB 482<span class="CourseTitle"> - Clinical Psychopharmacology</span></li>
+<li data-pcr="3.40">BIBB 492<span class="CourseTitle"> - Experimental Methods in Synaptic Physiology</span></li>
+<li data-pcr="2.91">BIBB 585<span class="CourseTitle"> - Theoretical and Computational Neuroscience</span></li>

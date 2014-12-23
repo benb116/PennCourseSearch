@@ -1,44 +1,44 @@
-<li PCR="3.20">ESE 170<span class="CourseTitle"> - Principles of Digital Design</span></li>
-<li PCR="3.20">ESE 171<span class="CourseTitle"> - Principles of Digital Design Lab</span></li>
-<li PCR="2.30">ESE 224<span class="CourseTitle"> - Signal and Information Processing</span></li>
-<li PCR="1.79">ESE 250<span class="CourseTitle"> - Digital Audio Basics</span></li>
-<li PCR="1.61">ESE 301<span class="CourseTitle"> - Engineering Probability</span></li>
-<li PCR="2.04">ESE 302<span class="CourseTitle"> - Engineering Applications of Statistics</span></li>
-<li PCR="1.77">ESE 304<span class="CourseTitle"> - Optimization of Systems</span></li>
-<li PCR="3.14">ESE 310<span class="CourseTitle"> - Electric and Magnetic Fields I</span></li>
-<li PCR="2.50">ESE 319<span class="CourseTitle"> - Fundamentals of Solid-State Circuits</span></li>
-<li PCR="3.56">ESE 350<span class="CourseTitle"> - Embedded Systems/Microcontroller Laboratory</span></li>
-<li PCR="2.21">ESE 360<span class="CourseTitle"> - Introduction to Environmental Systems</span></li>
-<li PCR="3.45">ESE 400<span class="CourseTitle"> - Engineering Economics</span></li>
-<li PCR="2.43">ESE 406<span class="CourseTitle"> - Control of Systems</span></li>
-<li PCR="2.50">ESE 418<span class="CourseTitle"> - Electrical Energy Storage Systems</span></li>
-<li PCR="1.59">ESE 444<span class="CourseTitle"> - Project Management</span></li>
-<li PCR="1.08">ESE 451<span class="CourseTitle"> - Senior Design Project II - EE and SSE</span></li>
-<li PCR="3.13">ESE 501<span class="CourseTitle"> - Networking - Theory and Fundamentals</span></li>
-<li PCR="2.07">ESE 502<span class="CourseTitle"> - Introduction to Spatial Analysis</span></li>
-<li PCR="2.43">ESE 505<span class="CourseTitle"> - Control of Systems</span></li>
-<li PCR="2.71">ESE 519<span class="CourseTitle"> - Real-Time Embedded Systems</span></li>
-<li PCR="3.28">ESE 521<span class="CourseTitle"> - The Physics of Solid State Energy Devices</span></li>
-<li PCR="2.38">ESE 529<span class="CourseTitle"> - Introduction to MEMS and NEMS</span></li>
-<li PCR="3.69">ESE 535<span class="CourseTitle"> - Electronic Design Automation</span></li>
-<li PCR="3.45">ESE 540<span class="CourseTitle"> - Engineering Economics</span></li>
-<li PCR="1.59">ESE 544<span class="CourseTitle"> - Project Management</span></li>
-<li PCR="0.00">ESE 550<span class="CourseTitle"> - Logistics and Transportation Systems</span></li>
-<li PCR="2.45">ESE 560<span class="CourseTitle"> - Sustainable Development of Water Resource Systems</span></li>
-<li PCR="2.63">ESE 567<span class="CourseTitle"> - Risk Analysis and Environmental Management</span></li>
-<li PCR="2.76">ESE 570<span class="CourseTitle"> - Digital Integrated Circuits and VLSI-Fundamentals</span></li>
-<li PCR="3.00">ESE 576<span class="CourseTitle"> - Digital Communication Systems</span></li>
-<li PCR="3.31">ESE 578<span class="CourseTitle"> - RFIC (Radio Frequency Integrated Circuit) Design</span></li>
-<li PCR="2.38">ESE 590<span class="CourseTitle"> - Systems Methodology</span></li>
-<li PCR="0.00">ESE 597<span class="CourseTitle"> - Master&#39;s Thesis</span></li>
-<li PCR="0.00">ESE 599<span class="CourseTitle"> - Independent Study for Master&#39;s credit</span></li>
-<li PCR="0.00">ESE 603<span class="CourseTitle"> - Simulation Modeling and Analysis</span></li>
-<li PCR="0.00">ESE 605<span class="CourseTitle"> - Modern Convex Optimization</span></li>
-<li PCR="0.00">ESE 650<span class="CourseTitle"> - Learning in Robotics</span></li>
-<li PCR="0.00">ESE 674<span class="CourseTitle"> - Information Theory</span></li>
-<li PCR="0.00">ESE 680<span class="CourseTitle"> - Special Topics in Electrical and Systems Engineering</span></li>
-<li PCR="0.00">ESE 895<span class="CourseTitle"> - Teaching Practicum</span></li>
-<li PCR="0.00">ESE 899<span class="CourseTitle"> - Independent Study for PhD credit</span></li>
-<li PCR="0.00">ESE 990<span class="CourseTitle"> - Masters Thesis</span></li>
-<li PCR="0.00">ESE 995<span class="CourseTitle"> - Dissertation</span></li>
-<li PCR="0.00">ESE 999<span class="CourseTitle"> - Thesis/Disseratation Research</span></li>
+<li data-pcr="3.20">ESE 170<span class="CourseTitle"> - Principles of Digital Design</span></li>
+<li data-pcr="3.20">ESE 171<span class="CourseTitle"> - Principles of Digital Design Lab</span></li>
+<li data-pcr="2.30">ESE 224<span class="CourseTitle"> - Signal and Information Processing</span></li>
+<li data-pcr="1.79">ESE 250<span class="CourseTitle"> - Digital Audio Basics</span></li>
+<li data-pcr="1.61">ESE 301<span class="CourseTitle"> - Engineering Probability</span></li>
+<li data-pcr="2.04">ESE 302<span class="CourseTitle"> - Engineering Applications of Statistics</span></li>
+<li data-pcr="1.77">ESE 304<span class="CourseTitle"> - Optimization of Systems</span></li>
+<li data-pcr="3.14">ESE 310<span class="CourseTitle"> - Electric and Magnetic Fields I</span></li>
+<li data-pcr="2.50">ESE 319<span class="CourseTitle"> - Fundamentals of Solid-State Circuits</span></li>
+<li data-pcr="3.56">ESE 350<span class="CourseTitle"> - Embedded Systems/Microcontroller Laboratory</span></li>
+<li data-pcr="2.21">ESE 360<span class="CourseTitle"> - Introduction to Environmental Systems</span></li>
+<li data-pcr="3.45">ESE 400<span class="CourseTitle"> - Engineering Economics</span></li>
+<li data-pcr="2.43">ESE 406<span class="CourseTitle"> - Control of Systems</span></li>
+<li data-pcr="2.50">ESE 418<span class="CourseTitle"> - Electrical Energy Storage Systems</span></li>
+<li data-pcr="1.59">ESE 444<span class="CourseTitle"> - Project Management</span></li>
+<li data-pcr="1.08">ESE 451<span class="CourseTitle"> - Senior Design Project II - EE and SSE</span></li>
+<li data-pcr="3.13">ESE 501<span class="CourseTitle"> - Networking - Theory and Fundamentals</span></li>
+<li data-pcr="2.07">ESE 502<span class="CourseTitle"> - Introduction to Spatial Analysis</span></li>
+<li data-pcr="2.43">ESE 505<span class="CourseTitle"> - Control of Systems</span></li>
+<li data-pcr="2.71">ESE 519<span class="CourseTitle"> - Real-Time Embedded Systems</span></li>
+<li data-pcr="3.28">ESE 521<span class="CourseTitle"> - The Physics of Solid State Energy Devices</span></li>
+<li data-pcr="2.38">ESE 529<span class="CourseTitle"> - Introduction to MEMS and NEMS</span></li>
+<li data-pcr="3.69">ESE 535<span class="CourseTitle"> - Electronic Design Automation</span></li>
+<li data-pcr="3.45">ESE 540<span class="CourseTitle"> - Engineering Economics</span></li>
+<li data-pcr="1.59">ESE 544<span class="CourseTitle"> - Project Management</span></li>
+<li data-pcr="0.00">ESE 550<span class="CourseTitle"> - Logistics and Transportation Systems</span></li>
+<li data-pcr="2.45">ESE 560<span class="CourseTitle"> - Sustainable Development of Water Resource Systems</span></li>
+<li data-pcr="2.63">ESE 567<span class="CourseTitle"> - Risk Analysis and Environmental Management</span></li>
+<li data-pcr="2.76">ESE 570<span class="CourseTitle"> - Digital Integrated Circuits and VLSI-Fundamentals</span></li>
+<li data-pcr="3.00">ESE 576<span class="CourseTitle"> - Digital Communication Systems</span></li>
+<li data-pcr="3.31">ESE 578<span class="CourseTitle"> - RFIC (Radio Frequency Integrated Circuit) Design</span></li>
+<li data-pcr="2.38">ESE 590<span class="CourseTitle"> - Systems Methodology</span></li>
+<li data-pcr="0.00">ESE 597<span class="CourseTitle"> - Master&#39;s Thesis</span></li>
+<li data-pcr="0.00">ESE 599<span class="CourseTitle"> - Independent Study for Master&#39;s credit</span></li>
+<li data-pcr="0.00">ESE 603<span class="CourseTitle"> - Simulation Modeling and Analysis</span></li>
+<li data-pcr="0.00">ESE 605<span class="CourseTitle"> - Modern Convex Optimization</span></li>
+<li data-pcr="0.00">ESE 650<span class="CourseTitle"> - Learning in Robotics</span></li>
+<li data-pcr="0.00">ESE 674<span class="CourseTitle"> - Information Theory</span></li>
+<li data-pcr="0.00">ESE 680<span class="CourseTitle"> - Special Topics in Electrical and Systems Engineering</span></li>
+<li data-pcr="0.00">ESE 895<span class="CourseTitle"> - Teaching Practicum</span></li>
+<li data-pcr="0.00">ESE 899<span class="CourseTitle"> - Independent Study for PhD credit</span></li>
+<li data-pcr="0.00">ESE 990<span class="CourseTitle"> - Masters Thesis</span></li>
+<li data-pcr="0.00">ESE 995<span class="CourseTitle"> - Dissertation</span></li>
+<li data-pcr="0.00">ESE 999<span class="CourseTitle"> - Thesis/Disseratation Research</span></li>

@@ -1,44 +1,44 @@
-<li PCR="3.07">CIS 110<span class="CourseTitle"> - Introduction to Computer Programming</span></li>
-<li PCR="3.17">CIS 120<span class="CourseTitle"> - Programming Languages and Techniques I</span></li>
-<li PCR="2.25">CIS 121<span class="CourseTitle"> - Programming Languages and Technigues II: Data Structures in Java</span></li>
-<li PCR="2.91">CIS 125<span class="CourseTitle"> - Technology and Policy</span></li>
-<li PCR="2.07">CIS 160<span class="CourseTitle"> - Mathematical Foundations of Computer Science</span></li>
-<li PCR="2.62">CIS 190<span class="CourseTitle"> - C++ Programming</span></li>
-<li PCR="3.15">CIS 191<span class="CourseTitle"> - Using and Understanding Unix and Linux</span></li>
-<li PCR="2.95">CIS 240<span class="CourseTitle"> - Introduction to Computer Architecture</span></li>
-<li PCR="2.83">CIS 277<span class="CourseTitle"> - Introduction to Computer Graphics Techniques</span></li>
-<li PCR="3.30">CIS 320<span class="CourseTitle"> - Introduction to Algorithms</span></li>
-<li PCR="0.00">CIS 331<span class="CourseTitle"> - Introduction to Networks and Security</span></li>
-<li PCR="3.83">CIS 334<span class="CourseTitle"> - Advanced Topics in Algorithms</span></li>
-<li PCR="3.15">CIS 341<span class="CourseTitle"> - Compilers and Interpreters</span></li>
-<li PCR="3.30">CIS 350<span class="CourseTitle"> - Software Design/Engineering</span></li>
-<li PCR="3.06">CIS 371<span class="CourseTitle"> - Computer Organization and Design</span></li>
-<li PCR="2.70">CIS 398<span class="CourseTitle"> - Quantum Computer and Information Science</span></li>
-<li PCR="3.11">CIS 399<span class="CourseTitle"> - Special Topics</span></li>
-<li PCR="1.74">CIS 401<span class="CourseTitle"> - Senior Project</span></li>
-<li PCR="0.00">CIS 450<span class="CourseTitle"> - Database &amp; Info Systems</span></li>
-<li PCR="3.45">CIS 455<span class="CourseTitle"> - Internet and Web Systems</span></li>
-<li PCR="2.67">CIS 497<span class="CourseTitle"> - DMD Senior Project</span></li>
-<li PCR="2.92">CIS 501<span class="CourseTitle"> - Computer Architecture</span></li>
-<li PCR="2.01">CIS 505<span class="CourseTitle"> - Software Systems</span></li>
-<li PCR="2.75">CIS 510<span class="CourseTitle"> - Curves and Surfaces: Theory and Applications</span></li>
-<li PCR="2.86">CIS 511<span class="CourseTitle"> - Theory of Computation</span></li>
-<li PCR="2.88">CIS 521<span class="CourseTitle"> - Fundamentals of AI</span></li>
-<li PCR="0.00">CIS 526<span class="CourseTitle"> - Machine Translation</span></li>
-<li PCR="2.37">CIS 535<span class="CourseTitle"> - Introduction to Bioinformatics</span></li>
-<li PCR="2.83">CIS 537<span class="CourseTitle"> - Biomedical Image Analysis</span></li>
-<li PCR="2.28">CIS 540<span class="CourseTitle"> - Principles of Embedded Computation</span></li>
-<li PCR="2.82">CIS 550<span class="CourseTitle"> - Database and Information Systems</span></li>
-<li PCR="2.48">CIS 553<span class="CourseTitle"> - Networked Systems</span></li>
-<li PCR="3.45">CIS 555<span class="CourseTitle"> - Internet and Web Systems</span></li>
-<li PCR="2.81">CIS 563<span class="CourseTitle"> - Physically Based Animation</span></li>
-<li PCR="3.25">CIS 568<span class="CourseTitle"> - Game Design Practicum</span></li>
-<li PCR="3.40">CIS 580<span class="CourseTitle"> - Machine Perception</span></li>
-<li PCR="0.00">CIS 610<span class="CourseTitle"> - Advanced Geometric Methods in Computer Science</span></li>
-<li PCR="0.00">CIS 625<span class="CourseTitle"> - Computational Learning Theory</span></li>
-<li PCR="0.00">CIS 630<span class="CourseTitle"> - Advanced Topics in Natural Language Processing</span></li>
-<li PCR="0.00">CIS 660<span class="CourseTitle"> - Advanced Topics in Computer Graphics and Animation</span></li>
-<li PCR="0.00">CIS 800<span class="CourseTitle"> - PhD Special Topics</span></li>
-<li PCR="0.00">CIS 895<span class="CourseTitle"> - Teaching Practicum</span></li>
-<li PCR="0.00">CIS 899<span class="CourseTitle"> - Doctoral Independent Study</span></li>
-<li PCR="0.00">CIS 999<span class="CourseTitle"> - Thesis/Dissertation Research</span></li>
+<li data-pcr="3.07">CIS 110<span class="CourseTitle"> - Introduction to Computer Programming</span></li>
+<li data-pcr="3.17">CIS 120<span class="CourseTitle"> - Programming Languages and Techniques I</span></li>
+<li data-pcr="2.25">CIS 121<span class="CourseTitle"> - Programming Languages and Technigues II: Data Structures in Java</span></li>
+<li data-pcr="2.91">CIS 125<span class="CourseTitle"> - Technology and Policy</span></li>
+<li data-pcr="2.07">CIS 160<span class="CourseTitle"> - Mathematical Foundations of Computer Science</span></li>
+<li data-pcr="2.62">CIS 190<span class="CourseTitle"> - C++ Programming</span></li>
+<li data-pcr="3.15">CIS 191<span class="CourseTitle"> - Using and Understanding Unix and Linux</span></li>
+<li data-pcr="2.95">CIS 240<span class="CourseTitle"> - Introduction to Computer Architecture</span></li>
+<li data-pcr="2.83">CIS 277<span class="CourseTitle"> - Introduction to Computer Graphics Techniques</span></li>
+<li data-pcr="3.30">CIS 320<span class="CourseTitle"> - Introduction to Algorithms</span></li>
+<li data-pcr="0.00">CIS 331<span class="CourseTitle"> - Introduction to Networks and Security</span></li>
+<li data-pcr="3.83">CIS 334<span class="CourseTitle"> - Advanced Topics in Algorithms</span></li>
+<li data-pcr="3.15">CIS 341<span class="CourseTitle"> - Compilers and Interpreters</span></li>
+<li data-pcr="3.30">CIS 350<span class="CourseTitle"> - Software Design/Engineering</span></li>
+<li data-pcr="3.06">CIS 371<span class="CourseTitle"> - Computer Organization and Design</span></li>
+<li data-pcr="2.70">CIS 398<span class="CourseTitle"> - Quantum Computer and Information Science</span></li>
+<li data-pcr="3.11">CIS 399<span class="CourseTitle"> - Special Topics</span></li>
+<li data-pcr="1.74">CIS 401<span class="CourseTitle"> - Senior Project</span></li>
+<li data-pcr="0.00">CIS 450<span class="CourseTitle"> - Database &amp; Info Systems</span></li>
+<li data-pcr="3.45">CIS 455<span class="CourseTitle"> - Internet and Web Systems</span></li>
+<li data-pcr="2.67">CIS 497<span class="CourseTitle"> - DMD Senior Project</span></li>
+<li data-pcr="2.92">CIS 501<span class="CourseTitle"> - Computer Architecture</span></li>
+<li data-pcr="2.01">CIS 505<span class="CourseTitle"> - Software Systems</span></li>
+<li data-pcr="2.75">CIS 510<span class="CourseTitle"> - Curves and Surfaces: Theory and Applications</span></li>
+<li data-pcr="2.86">CIS 511<span class="CourseTitle"> - Theory of Computation</span></li>
+<li data-pcr="2.88">CIS 521<span class="CourseTitle"> - Fundamentals of AI</span></li>
+<li data-pcr="0.00">CIS 526<span class="CourseTitle"> - Machine Translation</span></li>
+<li data-pcr="2.37">CIS 535<span class="CourseTitle"> - Introduction to Bioinformatics</span></li>
+<li data-pcr="2.83">CIS 537<span class="CourseTitle"> - Biomedical Image Analysis</span></li>
+<li data-pcr="2.28">CIS 540<span class="CourseTitle"> - Principles of Embedded Computation</span></li>
+<li data-pcr="2.82">CIS 550<span class="CourseTitle"> - Database and Information Systems</span></li>
+<li data-pcr="2.48">CIS 553<span class="CourseTitle"> - Networked Systems</span></li>
+<li data-pcr="3.45">CIS 555<span class="CourseTitle"> - Internet and Web Systems</span></li>
+<li data-pcr="2.81">CIS 563<span class="CourseTitle"> - Physically Based Animation</span></li>
+<li data-pcr="3.25">CIS 568<span class="CourseTitle"> - Game Design Practicum</span></li>
+<li data-pcr="3.40">CIS 580<span class="CourseTitle"> - Machine Perception</span></li>
+<li data-pcr="0.00">CIS 610<span class="CourseTitle"> - Advanced Geometric Methods in Computer Science</span></li>
+<li data-pcr="0.00">CIS 625<span class="CourseTitle"> - Computational Learning Theory</span></li>
+<li data-pcr="0.00">CIS 630<span class="CourseTitle"> - Advanced Topics in Natural Language Processing</span></li>
+<li data-pcr="0.00">CIS 660<span class="CourseTitle"> - Advanced Topics in Computer Graphics and Animation</span></li>
+<li data-pcr="0.00">CIS 800<span class="CourseTitle"> - PhD Special Topics</span></li>
+<li data-pcr="0.00">CIS 895<span class="CourseTitle"> - Teaching Practicum</span></li>
+<li data-pcr="0.00">CIS 899<span class="CourseTitle"> - Doctoral Independent Study</span></li>
+<li data-pcr="0.00">CIS 999<span class="CourseTitle"> - Thesis/Dissertation Research</span></li>

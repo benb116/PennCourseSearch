@@ -1,40 +1,40 @@
-<li PCR="2.42">ECON 001<span class="CourseTitle"> - Introduction to Micro Economics</span></li>
-<li PCR="2.17">ECON 002<span class="CourseTitle"> - Introductory Economics: Macro</span></li>
-<li PCR="2.28">ECON 013<span class="CourseTitle"> - Strategic Reasoning</span></li>
-<li PCR="2.76">ECON 014<span class="CourseTitle"> - American Capitalism</span></li>
-<li PCR="0.00">ECON 028<span class="CourseTitle"> - Globalization, Regional Blocks and Sustainable Development</span></li>
-<li PCR="2.72">ECON 039<span class="CourseTitle"> - Economics and Financing of Health Care Delivery</span></li>
-<li PCR="2.67">ECON 050<span class="CourseTitle"> - International Economics</span></li>
-<li PCR="1.27">ECON 101<span class="CourseTitle"> - Intermediate Microeconomics</span></li>
-<li PCR="1.95">ECON 102<span class="CourseTitle"> - Intermediate Macroeconomics</span></li>
-<li PCR="2.95">ECON 103<span class="CourseTitle"> - Statistics for Economists</span></li>
-<li PCR="2.55">ECON 104<span class="CourseTitle"> - Econometrics</span></li>
-<li PCR="2.33">ECON 211<span class="CourseTitle"> - Social Choice Theory</span></li>
-<li PCR="3.00">ECON 212<span class="CourseTitle"> - Game Theory</span></li>
-<li PCR="3.00">ECON 221<span class="CourseTitle"> - Econometric Forecasting</span></li>
-<li PCR="2.74">ECON 222<span class="CourseTitle"> - Advanced Econometric Techniques and Applications</span></li>
-<li PCR="2.21">ECON 233<span class="CourseTitle"> - Labor Economics</span></li>
-<li PCR="1.75">ECON 234<span class="CourseTitle"> - Law and Economics</span></li>
-<li PCR="1.91">ECON 235<span class="CourseTitle"> - Industrial Organization</span></li>
-<li PCR="3.00">ECON 242<span class="CourseTitle"> - Topics in Macroeconomics</span></li>
-<li PCR="2.33">ECON 246<span class="CourseTitle"> - Money and Banking</span></li>
-<li PCR="2.50">ECON 251<span class="CourseTitle"> - International Trade</span></li>
-<li PCR="3.00">ECON 300<span class="CourseTitle"> - Honors Seminar</span></li>
-<li PCR="0.00">ECON 682<span class="CourseTitle"> - Game Theory and Applications.</span></li>
-<li PCR="0.00">ECON 702<span class="CourseTitle"> - Macroeconomic Theory I</span></li>
-<li PCR="0.00">ECON 704<span class="CourseTitle"> - Macroeconomic Theory II</span></li>
-<li PCR="0.00">ECON 706<span class="CourseTitle"> - Econometrics II: Methods &amp; Models</span></li>
-<li PCR="0.00">ECON 708<span class="CourseTitle"> - The Economics of Agency, Information, and Incentives</span></li>
-<li PCR="0.00">ECON 712<span class="CourseTitle"> - Topics in Advanced Economic Theory and Mathematical Economics</span></li>
-<li PCR="0.00">ECON 719<span class="CourseTitle"> - Economic Theory</span></li>
-<li PCR="0.00">ECON 722<span class="CourseTitle"> - Econometrics IV: Advanced Techniques of Time-Series Econometrics</span></li>
-<li PCR="0.00">ECON 729<span class="CourseTitle"> - Econometrics</span></li>
-<li PCR="0.00">ECON 739<span class="CourseTitle"> - International Economics</span></li>
-<li PCR="0.00">ECON 749<span class="CourseTitle"> - Monetary Economics</span></li>
-<li PCR="0.00">ECON 751<span class="CourseTitle"> - Public Economics II</span></li>
-<li PCR="0.00">ECON 759<span class="CourseTitle"> - Political Economy</span></li>
-<li PCR="0.00">ECON 769<span class="CourseTitle"> - Economic Development Workshop</span></li>
-<li PCR="0.00">ECON 779<span class="CourseTitle"> - Comparative Economic Systems</span></li>
-<li PCR="0.00">ECON 789<span class="CourseTitle"> - Applied Microeconomics Workshop</span></li>
-<li PCR="0.00">ECON 792<span class="CourseTitle"> - Economics of Labor I</span></li>
-<li PCR="0.00">ECON 799<span class="CourseTitle"> - Empirical Microeconomics</span></li>
+<li data-pcr="2.42">ECON 001<span class="CourseTitle"> - Introduction to Micro Economics</span></li>
+<li data-pcr="2.17">ECON 002<span class="CourseTitle"> - Introductory Economics: Macro</span></li>
+<li data-pcr="2.28">ECON 013<span class="CourseTitle"> - Strategic Reasoning</span></li>
+<li data-pcr="2.76">ECON 014<span class="CourseTitle"> - American Capitalism</span></li>
+<li data-pcr="0.00">ECON 028<span class="CourseTitle"> - Globalization, Regional Blocks and Sustainable Development</span></li>
+<li data-pcr="2.72">ECON 039<span class="CourseTitle"> - Economics and Financing of Health Care Delivery</span></li>
+<li data-pcr="2.67">ECON 050<span class="CourseTitle"> - International Economics</span></li>
+<li data-pcr="1.27">ECON 101<span class="CourseTitle"> - Intermediate Microeconomics</span></li>
+<li data-pcr="1.95">ECON 102<span class="CourseTitle"> - Intermediate Macroeconomics</span></li>
+<li data-pcr="2.95">ECON 103<span class="CourseTitle"> - Statistics for Economists</span></li>
+<li data-pcr="2.55">ECON 104<span class="CourseTitle"> - Econometrics</span></li>
+<li data-pcr="2.33">ECON 211<span class="CourseTitle"> - Social Choice Theory</span></li>
+<li data-pcr="3.00">ECON 212<span class="CourseTitle"> - Game Theory</span></li>
+<li data-pcr="3.00">ECON 221<span class="CourseTitle"> - Econometric Forecasting</span></li>
+<li data-pcr="2.74">ECON 222<span class="CourseTitle"> - Advanced Econometric Techniques and Applications</span></li>
+<li data-pcr="2.21">ECON 233<span class="CourseTitle"> - Labor Economics</span></li>
+<li data-pcr="1.75">ECON 234<span class="CourseTitle"> - Law and Economics</span></li>
+<li data-pcr="1.91">ECON 235<span class="CourseTitle"> - Industrial Organization</span></li>
+<li data-pcr="3.00">ECON 242<span class="CourseTitle"> - Topics in Macroeconomics</span></li>
+<li data-pcr="2.33">ECON 246<span class="CourseTitle"> - Money and Banking</span></li>
+<li data-pcr="2.50">ECON 251<span class="CourseTitle"> - International Trade</span></li>
+<li data-pcr="3.00">ECON 300<span class="CourseTitle"> - Honors Seminar</span></li>
+<li data-pcr="0.00">ECON 682<span class="CourseTitle"> - Game Theory and Applications.</span></li>
+<li data-pcr="0.00">ECON 702<span class="CourseTitle"> - Macroeconomic Theory I</span></li>
+<li data-pcr="0.00">ECON 704<span class="CourseTitle"> - Macroeconomic Theory II</span></li>
+<li data-pcr="0.00">ECON 706<span class="CourseTitle"> - Econometrics II: Methods &amp; Models</span></li>
+<li data-pcr="0.00">ECON 708<span class="CourseTitle"> - The Economics of Agency, Information, and Incentives</span></li>
+<li data-pcr="0.00">ECON 712<span class="CourseTitle"> - Topics in Advanced Economic Theory and Mathematical Economics</span></li>
+<li data-pcr="0.00">ECON 719<span class="CourseTitle"> - Economic Theory</span></li>
+<li data-pcr="0.00">ECON 722<span class="CourseTitle"> - Econometrics IV: Advanced Techniques of Time-Series Econometrics</span></li>
+<li data-pcr="0.00">ECON 729<span class="CourseTitle"> - Econometrics</span></li>
+<li data-pcr="0.00">ECON 739<span class="CourseTitle"> - International Economics</span></li>
+<li data-pcr="0.00">ECON 749<span class="CourseTitle"> - Monetary Economics</span></li>
+<li data-pcr="0.00">ECON 751<span class="CourseTitle"> - Public Economics II</span></li>
+<li data-pcr="0.00">ECON 759<span class="CourseTitle"> - Political Economy</span></li>
+<li data-pcr="0.00">ECON 769<span class="CourseTitle"> - Economic Development Workshop</span></li>
+<li data-pcr="0.00">ECON 779<span class="CourseTitle"> - Comparative Economic Systems</span></li>
+<li data-pcr="0.00">ECON 789<span class="CourseTitle"> - Applied Microeconomics Workshop</span></li>
+<li data-pcr="0.00">ECON 792<span class="CourseTitle"> - Economics of Labor I</span></li>
+<li data-pcr="0.00">ECON 799<span class="CourseTitle"> - Empirical Microeconomics</span></li>

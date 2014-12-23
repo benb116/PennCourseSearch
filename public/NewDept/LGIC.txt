@@ -1,2 +1,2 @@
-<li PCR="1.98">LGIC 010<span class="CourseTitle"> - Ideas in Logic and Computation</span></li>
-<li PCR="1.83">LGIC 220<span class="CourseTitle"> - Applied Mathematics of Information and Computation II</span></li>
+<li data-pcr="1.98">LGIC 010<span class="CourseTitle"> - Ideas in Logic and Computation</span></li>
+<li data-pcr="1.83">LGIC 220<span class="CourseTitle"> - Applied Mathematics of Information and Computation II</span></li>

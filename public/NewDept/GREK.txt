@@ -1,10 +1,10 @@
-<li PCR="3.00">GREK 016<span class="CourseTitle"> - Elementary Modern Greek II</span></li>
-<li PCR="3.50">GREK 102<span class="CourseTitle"> - Elementary Classical Greek II</span></li>
-<li PCR="0.00">GREK 116<span class="CourseTitle"> - Greek/Heritage Speakers II</span></li>
-<li PCR="2.60">GREK 204<span class="CourseTitle"> - Intermediate Classical Greek: Poetry</span></li>
-<li PCR="3.80">GREK 309<span class="CourseTitle"> - Topics in Greek Literature</span></li>
-<li PCR="0.00">GREK 401<span class="CourseTitle"> - Greek for Advanced Students</span></li>
-<li PCR="0.00">GREK 402<span class="CourseTitle"> - Adv. Readings in Greek</span></li>
-<li PCR="0.00">GREK 600<span class="CourseTitle"> - Graduate Greek Seminar, Prose and Poetry.</span></li>
-<li PCR="3.50">GREK 609<span class="CourseTitle"> - Peter Struck</span></li>
-<li PCR="0.00">GREK 611<span class="CourseTitle"> - Greek Epigraphy</span></li>
+<li data-pcr="3.00">GREK 016<span class="CourseTitle"> - Elementary Modern Greek II</span></li>
+<li data-pcr="3.50">GREK 102<span class="CourseTitle"> - Elementary Classical Greek II</span></li>
+<li data-pcr="0.00">GREK 116<span class="CourseTitle"> - Greek/Heritage Speakers II</span></li>
+<li data-pcr="2.60">GREK 204<span class="CourseTitle"> - Intermediate Classical Greek: Poetry</span></li>
+<li data-pcr="3.80">GREK 309<span class="CourseTitle"> - Topics in Greek Literature</span></li>
+<li data-pcr="0.00">GREK 401<span class="CourseTitle"> - Greek for Advanced Students</span></li>
+<li data-pcr="0.00">GREK 402<span class="CourseTitle"> - Adv. Readings in Greek</span></li>
+<li data-pcr="0.00">GREK 600<span class="CourseTitle"> - Graduate Greek Seminar, Prose and Poetry.</span></li>
+<li data-pcr="3.50">GREK 609<span class="CourseTitle"> - Peter Struck</span></li>
+<li data-pcr="0.00">GREK 611<span class="CourseTitle"> - Greek Epigraphy</span></li>

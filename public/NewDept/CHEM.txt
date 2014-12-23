@@ -1,25 +1,25 @@
-<li PCR="1.77">CHEM 022<span class="CourseTitle"> - Structural Biology</span></li>
-<li PCR="2.29">CHEM 053<span class="CourseTitle"> - General Chemistry Laboratory I</span></li>
-<li PCR="1.84">CHEM 054<span class="CourseTitle"> - General Chemistry Laboratory II</span></li>
-<li PCR="2.19">CHEM 101<span class="CourseTitle"> - General Chemistry I</span></li>
-<li PCR="2.84">CHEM 102<span class="CourseTitle"> - General Chemistry II</span></li>
-<li PCR="2.81">CHEM 116<span class="CourseTitle"> - Honors Chemistry II</span></li>
-<li PCR="2.03">CHEM 222<span class="CourseTitle"> - Physical Chemistry II</span></li>
-<li PCR="2.29">CHEM 223<span class="CourseTitle"> - Experimental Physical Chemistry I</span></li>
-<li PCR="2.55">CHEM 241<span class="CourseTitle"> - Principles of Organic Chemistry</span></li>
-<li PCR="1.38">CHEM 242<span class="CourseTitle"> - Principles of Organic Chemistry</span></li>
-<li PCR="2.58">CHEM 243<span class="CourseTitle"> - Organic Chemistry II: Principles of Organic Chemistry with applications in Chemical Biology</span></li>
-<li PCR="1.92">CHEM 245<span class="CourseTitle"> - Experimental Organic Chemistry I</span></li>
-<li PCR="1.66">CHEM 251<span class="CourseTitle"> - Principles of Biological Chemistry</span></li>
-<li PCR="1.94">CHEM 452<span class="CourseTitle"> - Biological Chemistry II</span></li>
-<li PCR="3.17">CHEM 462<span class="CourseTitle"> - Inorganic Chemistry II</span></li>
-<li PCR="2.82">CHEM 522<span class="CourseTitle"> - Statistical Mechanics II</span></li>
-<li PCR="2.67">CHEM 524<span class="CourseTitle"> - Quantum Chemistry II</span></li>
-<li PCR="3.43">CHEM 526<span class="CourseTitle"> - Chemical Dynamics</span></li>
-<li PCR="3.07">CHEM 541<span class="CourseTitle"> - Physical Organic Chemistry</span></li>
-<li PCR="2.00">CHEM 567<span class="CourseTitle"> - Bio-inorganic Chemistry</span></li>
-<li PCR="0.00">CHEM 601<span class="CourseTitle"> - Adv Chemistry Sem</span></li>
-<li PCR="0.00">CHEM 646<span class="CourseTitle"> - Advanced Organic Synthesis</span></li>
-<li PCR="0.00">CHEM 700<span class="CourseTitle"> - Selected Topics in Chemistry</span></li>
-<li PCR="0.00">CHEM 701<span class="CourseTitle"> - Topics in Org Chemistry</span></li>
-<li PCR="0.00">CHEM 801<span class="CourseTitle"> - Chem Candidacy Tutorial</span></li>
+<li data-pcr="1.77">CHEM 022<span class="CourseTitle"> - Structural Biology</span></li>
+<li data-pcr="2.29">CHEM 053<span class="CourseTitle"> - General Chemistry Laboratory I</span></li>
+<li data-pcr="1.84">CHEM 054<span class="CourseTitle"> - General Chemistry Laboratory II</span></li>
+<li data-pcr="2.19">CHEM 101<span class="CourseTitle"> - General Chemistry I</span></li>
+<li data-pcr="2.84">CHEM 102<span class="CourseTitle"> - General Chemistry II</span></li>
+<li data-pcr="2.81">CHEM 116<span class="CourseTitle"> - Honors Chemistry II</span></li>
+<li data-pcr="2.03">CHEM 222<span class="CourseTitle"> - Physical Chemistry II</span></li>
+<li data-pcr="2.29">CHEM 223<span class="CourseTitle"> - Experimental Physical Chemistry I</span></li>
+<li data-pcr="2.55">CHEM 241<span class="CourseTitle"> - Principles of Organic Chemistry</span></li>
+<li data-pcr="1.38">CHEM 242<span class="CourseTitle"> - Principles of Organic Chemistry</span></li>
+<li data-pcr="2.58">CHEM 243<span class="CourseTitle"> - Organic Chemistry II: Principles of Organic Chemistry with applications in Chemical Biology</span></li>
+<li data-pcr="1.92">CHEM 245<span class="CourseTitle"> - Experimental Organic Chemistry I</span></li>
+<li data-pcr="1.66">CHEM 251<span class="CourseTitle"> - Principles of Biological Chemistry</span></li>
+<li data-pcr="1.94">CHEM 452<span class="CourseTitle"> - Biological Chemistry II</span></li>
+<li data-pcr="3.17">CHEM 462<span class="CourseTitle"> - Inorganic Chemistry II</span></li>
+<li data-pcr="2.82">CHEM 522<span class="CourseTitle"> - Statistical Mechanics II</span></li>
+<li data-pcr="2.67">CHEM 524<span class="CourseTitle"> - Quantum Chemistry II</span></li>
+<li data-pcr="3.43">CHEM 526<span class="CourseTitle"> - Chemical Dynamics</span></li>
+<li data-pcr="3.07">CHEM 541<span class="CourseTitle"> - Physical Organic Chemistry</span></li>
+<li data-pcr="2.00">CHEM 567<span class="CourseTitle"> - Bio-inorganic Chemistry</span></li>
+<li data-pcr="0.00">CHEM 601<span class="CourseTitle"> - Adv Chemistry Sem</span></li>
+<li data-pcr="0.00">CHEM 646<span class="CourseTitle"> - Advanced Organic Synthesis</span></li>
+<li data-pcr="0.00">CHEM 700<span class="CourseTitle"> - Selected Topics in Chemistry</span></li>
+<li data-pcr="0.00">CHEM 701<span class="CourseTitle"> - Topics in Org Chemistry</span></li>
+<li data-pcr="0.00">CHEM 801<span class="CourseTitle"> - Chem Candidacy Tutorial</span></li>

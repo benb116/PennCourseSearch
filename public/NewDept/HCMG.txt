@@ -1,18 +1,18 @@
-<li PCR="2.57">HCMG 101<span class="CourseTitle"> - Health Care Systems</span></li>
-<li PCR="2.72">HCMG 202<span class="CourseTitle"> - The Economics and Financing of Health Care Delivery</span></li>
-<li PCR="3.04">HCMG 203<span class="CourseTitle"> - Clinical Issues in Health Care Management: Doctors, Patients and Managers in Modern Society</span></li>
-<li PCR="3.18">HCMG 212<span class="CourseTitle"> - Health Care Quality and Outcomes: Measurement and Management</span></li>
-<li PCR="2.95">HCMG 215<span class="CourseTitle"> - Management and Economics of Pharmaceutical, Biotech, and Medical Device Industries</span></li>
-<li PCR="3.33">HCMG 216<span class="CourseTitle"> - Health Insurance and Health Care Strategy</span></li>
-<li PCR="0.00">HCMG 352<span class="CourseTitle"> - HEALTH SERVICES DELIVERY: A MANAGERIAL ECONOMIC APPROACH</span></li>
-<li PCR="0.00">HCMG 391<span class="CourseTitle"> - Health Care Entrepreneurship</span></li>
-<li PCR="0.00">HCMG 653<span class="CourseTitle"> - Health Care Field Application Project</span></li>
-<li PCR="2.90">HCMG 845<span class="CourseTitle"> - Managed Care and the Industrial Organization of Health Care</span></li>
-<li PCR="3.00">HCMG 852<span class="CourseTitle"> - Health Services Delivery: A Managerial Economic Approach</span></li>
-<li PCR="2.58">HCMG 863<span class="CourseTitle"> - Management and Economics of Pharmaceutical, Biotech and Medical Device Industries</span></li>
-<li PCR="2.29">HCMG 866<span class="CourseTitle"> - E-Health: Business Models and Impact</span></li>
-<li PCR="2.69">HCMG 867<span class="CourseTitle"> - Health Care Entrepreneurship</span></li>
-<li PCR="2.26">HCMG 868<span class="CourseTitle"> - Private Sector Role in Global Health</span></li>
-<li PCR="3.74">HCMG 890<span class="CourseTitle"> - Advanced Study Project Seminar</span></li>
-<li PCR="0.00">HCMG 900<span class="CourseTitle"> - Proseminar in Health Services Research</span></li>
-<li PCR="0.00">HCMG 903<span class="CourseTitle"> - Economics of Health Care and Policy</span></li>
+<li data-pcr="2.57">HCMG 101<span class="CourseTitle"> - Health Care Systems</span></li>
+<li data-pcr="2.72">HCMG 202<span class="CourseTitle"> - The Economics and Financing of Health Care Delivery</span></li>
+<li data-pcr="3.04">HCMG 203<span class="CourseTitle"> - Clinical Issues in Health Care Management: Doctors, Patients and Managers in Modern Society</span></li>
+<li data-pcr="3.18">HCMG 212<span class="CourseTitle"> - Health Care Quality and Outcomes: Measurement and Management</span></li>
+<li data-pcr="2.95">HCMG 215<span class="CourseTitle"> - Management and Economics of Pharmaceutical, Biotech, and Medical Device Industries</span></li>
+<li data-pcr="3.33">HCMG 216<span class="CourseTitle"> - Health Insurance and Health Care Strategy</span></li>
+<li data-pcr="0.00">HCMG 352<span class="CourseTitle"> - HEALTH SERVICES DELIVERY: A MANAGERIAL ECONOMIC APPROACH</span></li>
+<li data-pcr="0.00">HCMG 391<span class="CourseTitle"> - Health Care Entrepreneurship</span></li>
+<li data-pcr="0.00">HCMG 653<span class="CourseTitle"> - Health Care Field Application Project</span></li>
+<li data-pcr="2.90">HCMG 845<span class="CourseTitle"> - Managed Care and the Industrial Organization of Health Care</span></li>
+<li data-pcr="3.00">HCMG 852<span class="CourseTitle"> - Health Services Delivery: A Managerial Economic Approach</span></li>
+<li data-pcr="2.58">HCMG 863<span class="CourseTitle"> - Management and Economics of Pharmaceutical, Biotech and Medical Device Industries</span></li>
+<li data-pcr="2.29">HCMG 866<span class="CourseTitle"> - E-Health: Business Models and Impact</span></li>
+<li data-pcr="2.69">HCMG 867<span class="CourseTitle"> - Health Care Entrepreneurship</span></li>
+<li data-pcr="2.26">HCMG 868<span class="CourseTitle"> - Private Sector Role in Global Health</span></li>
+<li data-pcr="3.74">HCMG 890<span class="CourseTitle"> - Advanced Study Project Seminar</span></li>
+<li data-pcr="0.00">HCMG 900<span class="CourseTitle"> - Proseminar in Health Services Research</span></li>
+<li data-pcr="0.00">HCMG 903<span class="CourseTitle"> - Economics of Health Care and Policy</span></li>

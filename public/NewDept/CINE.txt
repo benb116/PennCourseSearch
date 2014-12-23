@@ -1,41 +1,41 @@
-<li PCR="2.91">CINE 024<span class="CourseTitle"> - Introduction to American and British Film and Media</span></li>
-<li PCR="3.20">CINE 061<span class="CourseTitle"> - Video I</span></li>
-<li PCR="3.00">CINE 062<span class="CourseTitle"> - Video II</span></li>
-<li PCR="3.33">CINE 065<span class="CourseTitle"> - Cinema Production</span></li>
-<li PCR="3.31">CINE 070<span class="CourseTitle"> - Film Sound: History, Aesthetics &amp; Subversion</span></li>
-<li PCR="4.00">CINE 075<span class="CourseTitle"> - Image and Sound Editing</span></li>
-<li PCR="3.69">CINE 085<span class="CourseTitle"> - Medicine in Lit and Film</span></li>
-<li PCR="2.95">CINE 101<span class="CourseTitle"> - World Film History to 1945</span></li>
-<li PCR="2.93">CINE 102<span class="CourseTitle"> - World Film History, 1945-present</span></li>
-<li PCR="2.98">CINE 103<span class="CourseTitle"> - Introduction to Film Theory</span></li>
-<li PCR="3.15">CINE 112<span class="CourseTitle"> - Study of a Theme</span></li>
-<li PCR="3.67">CINE 116<span class="CourseTitle"> - Screenwriting Workshop</span></li>
-<li PCR="2.91">CINE 118<span class="CourseTitle"> - Iranian Cinema: Gender, Politics, Religion</span></li>
-<li PCR="2.58">CINE 125<span class="CourseTitle"> - Adultery Novel</span></li>
-<li PCR="3.86">CINE 130<span class="CourseTitle"> - Advanced Screenwriting</span></li>
-<li PCR="0.00">CINE 131<span class="CourseTitle"> - Intro Light, Set,Costume</span></li>
-<li PCR="3.13">CINE 165<span class="CourseTitle"> - Russian and East European Film After WWII</span></li>
-<li PCR="3.27">CINE 180<span class="CourseTitle"> - Film Culture in Residence</span></li>
-<li PCR="3.44">CINE 202<span class="CourseTitle"> - Topics in Film Studies</span></li>
-<li PCR="3.67">CINE 206<span class="CourseTitle"> - Italian History on Screen</span></li>
-<li PCR="0.00">CINE 217<span class="CourseTitle"> - Survey of Ital Theater</span></li>
-<li PCR="2.72">CINE 220<span class="CourseTitle"> - 20th Century Chinese Literature &amp; Film</span></li>
-<li PCR="0.00">CINE 266<span class="CourseTitle"> - Topics Law &amp; Literature</span></li>
-<li PCR="2.73">CINE 271<span class="CourseTitle"> - American Musical Theatre</span></li>
-<li PCR="2.65">CINE 275<span class="CourseTitle"> - Russian History in Film</span></li>
-<li PCR="0.00">CINE 278<span class="CourseTitle"> - Tpcs Digital/New Media</span></li>
-<li PCR="2.86">CINE 282<span class="CourseTitle"> - Native American Lit&amp;Film</span></li>
-<li PCR="3.43">CINE 285<span class="CourseTitle"> - Art and Business of Film</span></li>
-<li PCR="3.75">CINE 289<span class="CourseTitle"> - Mixed Media Animation</span></li>
-<li PCR="3.71">CINE 292<span class="CourseTitle"> - Study of an Auter</span></li>
-<li PCR="3.26">CINE 295<span class="CourseTitle"> - Topics in Cultural Studies</span></li>
-<li PCR="2.67">CINE 300<span class="CourseTitle"> - Topics in Italian History, Literature, and Culture</span></li>
-<li PCR="3.54">CINE 352<span class="CourseTitle"> - Devil&#39;s Pact Literature and Film</span></li>
-<li PCR="3.27">CINE 386<span class="CourseTitle"> - Paris in Film</span></li>
-<li PCR="2.96">CINE 388<span class="CourseTitle"> - Tpcs: Span/Ltam Cinema</span></li>
-<li PCR="4.00">CINE 392<span class="CourseTitle"> - Topics in Cinema Studies</span></li>
-<li PCR="2.54">CINE 430<span class="CourseTitle"> - Ethnic Conflict in Film</span></li>
-<li PCR="2.88">CINE 440<span class="CourseTitle"> - 20th Century American Cinema</span></li>
-<li PCR="3.06">CINE 492<span class="CourseTitle"> - American Film Festivals</span></li>
-<li PCR="3.38">CINE 500<span class="CourseTitle"> - MLA Seminars in Cinema</span></li>
-<li PCR="0.00">CINE 694<span class="CourseTitle"> - Mexican Cinema</span></li>
+<li data-pcr="2.91">CINE 024<span class="CourseTitle"> - Introduction to American and British Film and Media</span></li>
+<li data-pcr="3.20">CINE 061<span class="CourseTitle"> - Video I</span></li>
+<li data-pcr="3.00">CINE 062<span class="CourseTitle"> - Video II</span></li>
+<li data-pcr="3.33">CINE 065<span class="CourseTitle"> - Cinema Production</span></li>
+<li data-pcr="3.31">CINE 070<span class="CourseTitle"> - Film Sound: History, Aesthetics &amp; Subversion</span></li>
+<li data-pcr="4.00">CINE 075<span class="CourseTitle"> - Image and Sound Editing</span></li>
+<li data-pcr="3.69">CINE 085<span class="CourseTitle"> - Medicine in Lit and Film</span></li>
+<li data-pcr="2.95">CINE 101<span class="CourseTitle"> - World Film History to 1945</span></li>
+<li data-pcr="2.93">CINE 102<span class="CourseTitle"> - World Film History, 1945-present</span></li>
+<li data-pcr="2.98">CINE 103<span class="CourseTitle"> - Introduction to Film Theory</span></li>
+<li data-pcr="3.15">CINE 112<span class="CourseTitle"> - Study of a Theme</span></li>
+<li data-pcr="3.67">CINE 116<span class="CourseTitle"> - Screenwriting Workshop</span></li>
+<li data-pcr="2.91">CINE 118<span class="CourseTitle"> - Iranian Cinema: Gender, Politics, Religion</span></li>
+<li data-pcr="2.58">CINE 125<span class="CourseTitle"> - Adultery Novel</span></li>
+<li data-pcr="3.86">CINE 130<span class="CourseTitle"> - Advanced Screenwriting</span></li>
+<li data-pcr="0.00">CINE 131<span class="CourseTitle"> - Intro Light, Set,Costume</span></li>
+<li data-pcr="3.13">CINE 165<span class="CourseTitle"> - Russian and East European Film After WWII</span></li>
+<li data-pcr="3.27">CINE 180<span class="CourseTitle"> - Film Culture in Residence</span></li>
+<li data-pcr="3.44">CINE 202<span class="CourseTitle"> - Topics in Film Studies</span></li>
+<li data-pcr="3.67">CINE 206<span class="CourseTitle"> - Italian History on Screen</span></li>
+<li data-pcr="0.00">CINE 217<span class="CourseTitle"> - Survey of Ital Theater</span></li>
+<li data-pcr="2.72">CINE 220<span class="CourseTitle"> - 20th Century Chinese Literature &amp; Film</span></li>
+<li data-pcr="0.00">CINE 266<span class="CourseTitle"> - Topics Law &amp; Literature</span></li>
+<li data-pcr="2.73">CINE 271<span class="CourseTitle"> - American Musical Theatre</span></li>
+<li data-pcr="2.65">CINE 275<span class="CourseTitle"> - Russian History in Film</span></li>
+<li data-pcr="0.00">CINE 278<span class="CourseTitle"> - Tpcs Digital/New Media</span></li>
+<li data-pcr="2.86">CINE 282<span class="CourseTitle"> - Native American Lit&amp;Film</span></li>
+<li data-pcr="3.43">CINE 285<span class="CourseTitle"> - Art and Business of Film</span></li>
+<li data-pcr="3.75">CINE 289<span class="CourseTitle"> - Mixed Media Animation</span></li>
+<li data-pcr="3.71">CINE 292<span class="CourseTitle"> - Study of an Auter</span></li>
+<li data-pcr="3.26">CINE 295<span class="CourseTitle"> - Topics in Cultural Studies</span></li>
+<li data-pcr="2.67">CINE 300<span class="CourseTitle"> - Topics in Italian History, Literature, and Culture</span></li>
+<li data-pcr="3.54">CINE 352<span class="CourseTitle"> - Devil&#39;s Pact Literature and Film</span></li>
+<li data-pcr="3.27">CINE 386<span class="CourseTitle"> - Paris in Film</span></li>
+<li data-pcr="2.96">CINE 388<span class="CourseTitle"> - Tpcs: Span/Ltam Cinema</span></li>
+<li data-pcr="4.00">CINE 392<span class="CourseTitle"> - Topics in Cinema Studies</span></li>
+<li data-pcr="2.54">CINE 430<span class="CourseTitle"> - Ethnic Conflict in Film</span></li>
+<li data-pcr="2.88">CINE 440<span class="CourseTitle"> - 20th Century American Cinema</span></li>
+<li data-pcr="3.06">CINE 492<span class="CourseTitle"> - American Film Festivals</span></li>
+<li data-pcr="3.38">CINE 500<span class="CourseTitle"> - MLA Seminars in Cinema</span></li>
+<li data-pcr="0.00">CINE 694<span class="CourseTitle"> - Mexican Cinema</span></li>

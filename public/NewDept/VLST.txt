@@ -1,18 +1,18 @@
-<li PCR="2.32">VLST 101<span class="CourseTitle"> - Eye, Mind, and Image</span></li>
-<li PCR="3.00">VLST 103<span class="CourseTitle"> - 3 Dimensions: Time and Space</span></li>
-<li PCR="2.39">VLST 211<span class="CourseTitle"> - Perception</span></li>
-<li PCR="0.00">VLST 221<span class="CourseTitle"> - Introduction to Philosophy of Mind</span></li>
-<li PCR="3.15">VLST 223<span class="CourseTitle"> - Philosophy and Visual Perception</span></li>
-<li PCR="0.00">VLST 232<span class="CourseTitle"> - Renaissance to Contemporary: Introduction to Western Art, 1400 to the Present</span></li>
-<li PCR="0.00">VLST 233<span class="CourseTitle"> - Art and Civiliation in East Asia</span></li>
-<li PCR="0.00">VLST 236<span class="CourseTitle"> - Contemporary Art</span></li>
-<li PCR="0.00">VLST 250<span class="CourseTitle"> - Introduction to Printmaking</span></li>
-<li PCR="0.00">VLST 251<span class="CourseTitle"> - Introduction to Photography</span></li>
-<li PCR="0.00">VLST 252<span class="CourseTitle"> - Sculpture Practices</span></li>
-<li PCR="0.00">VLST 253<span class="CourseTitle"> - Drawing I</span></li>
-<li PCR="0.00">VLST 260<span class="CourseTitle"> - Photography Practices</span></li>
-<li PCR="0.00">VLST 261<span class="CourseTitle"> - Video I</span></li>
-<li PCR="2.83">VLST 264<span class="CourseTitle"> - Art, Design and Digital Culture</span></li>
-<li PCR="0.00">VLST 265<span class="CourseTitle"> - Digital Photography</span></li>
-<li PCR="1.75">VLST 301<span class="CourseTitle"> - What is Visual Studies?</span></li>
-<li PCR="1.92">VLST 395<span class="CourseTitle"> - Senior Project</span></li>
+<li data-pcr="2.32">VLST 101<span class="CourseTitle"> - Eye, Mind, and Image</span></li>
+<li data-pcr="3.00">VLST 103<span class="CourseTitle"> - 3 Dimensions: Time and Space</span></li>
+<li data-pcr="2.39">VLST 211<span class="CourseTitle"> - Perception</span></li>
+<li data-pcr="0.00">VLST 221<span class="CourseTitle"> - Introduction to Philosophy of Mind</span></li>
+<li data-pcr="3.15">VLST 223<span class="CourseTitle"> - Philosophy and Visual Perception</span></li>
+<li data-pcr="0.00">VLST 232<span class="CourseTitle"> - Renaissance to Contemporary: Introduction to Western Art, 1400 to the Present</span></li>
+<li data-pcr="0.00">VLST 233<span class="CourseTitle"> - Art and Civiliation in East Asia</span></li>
+<li data-pcr="0.00">VLST 236<span class="CourseTitle"> - Contemporary Art</span></li>
+<li data-pcr="0.00">VLST 250<span class="CourseTitle"> - Introduction to Printmaking</span></li>
+<li data-pcr="0.00">VLST 251<span class="CourseTitle"> - Introduction to Photography</span></li>
+<li data-pcr="0.00">VLST 252<span class="CourseTitle"> - Sculpture Practices</span></li>
+<li data-pcr="0.00">VLST 253<span class="CourseTitle"> - Drawing I</span></li>
+<li data-pcr="0.00">VLST 260<span class="CourseTitle"> - Photography Practices</span></li>
+<li data-pcr="0.00">VLST 261<span class="CourseTitle"> - Video I</span></li>
+<li data-pcr="2.83">VLST 264<span class="CourseTitle"> - Art, Design and Digital Culture</span></li>
+<li data-pcr="0.00">VLST 265<span class="CourseTitle"> - Digital Photography</span></li>
+<li data-pcr="1.75">VLST 301<span class="CourseTitle"> - What is Visual Studies?</span></li>
+<li data-pcr="1.92">VLST 395<span class="CourseTitle"> - Senior Project</span></li>

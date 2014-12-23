@@ -1,11 +1,11 @@
-<li PCR="0.00">NPLD 510<span class="CourseTitle"> - Social Innovation</span></li>
-<li PCR="0.00">NPLD 581<span class="CourseTitle"> - Effective Governance Practices for Nonprofits</span></li>
-<li PCR="0.00">NPLD 582<span class="CourseTitle"> - NGOs and International Development</span></li>
-<li PCR="0.00">NPLD 592<span class="CourseTitle"> - Collaboration across Sectors</span></li>
-<li PCR="0.00">NPLD 782<span class="CourseTitle"> - Small Group Processes</span></li>
-<li PCR="0.00">NPLD 789<span class="CourseTitle"> - Budgeting: Strategic Allocation of Financial Resources for Nonprofits</span></li>
-<li PCR="0.00">NPLD 792<span class="CourseTitle"> - Social Entrepreneurship</span></li>
-<li PCR="0.00">NPLD 793<span class="CourseTitle"> - Leadership Within &amp; Across Boundaries</span></li>
-<li PCR="0.00">NPLD 795<span class="CourseTitle"> - Skill Building for Successful Social Impact</span></li>
-<li PCR="0.00">NPLD 796<span class="CourseTitle"> - Philanthropy and Fundraising Tools for Managers</span></li>
-<li PCR="0.00">NPLD 797<span class="CourseTitle"> - Philanthropy and the City</span></li>
+<li data-pcr="0.00">NPLD 510<span class="CourseTitle"> - Social Innovation</span></li>
+<li data-pcr="0.00">NPLD 581<span class="CourseTitle"> - Effective Governance Practices for Nonprofits</span></li>
+<li data-pcr="0.00">NPLD 582<span class="CourseTitle"> - NGOs and International Development</span></li>
+<li data-pcr="0.00">NPLD 592<span class="CourseTitle"> - Collaboration across Sectors</span></li>
+<li data-pcr="0.00">NPLD 782<span class="CourseTitle"> - Small Group Processes</span></li>
+<li data-pcr="0.00">NPLD 789<span class="CourseTitle"> - Budgeting: Strategic Allocation of Financial Resources for Nonprofits</span></li>
+<li data-pcr="0.00">NPLD 792<span class="CourseTitle"> - Social Entrepreneurship</span></li>
+<li data-pcr="0.00">NPLD 793<span class="CourseTitle"> - Leadership Within &amp; Across Boundaries</span></li>
+<li data-pcr="0.00">NPLD 795<span class="CourseTitle"> - Skill Building for Successful Social Impact</span></li>
+<li data-pcr="0.00">NPLD 796<span class="CourseTitle"> - Philanthropy and Fundraising Tools for Managers</span></li>
+<li data-pcr="0.00">NPLD 797<span class="CourseTitle"> - Philanthropy and the City</span></li>

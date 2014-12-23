@@ -1,14 +1,14 @@
-<li PCR="0.00">NGG 510<span class="CourseTitle"> - Neurotransmitter Signaling &amp; Pharmacology</span></li>
-<li PCR="3.39">NGG 521<span class="CourseTitle"> - Brain Computer Interface</span></li>
-<li PCR="0.00">NGG 534<span class="CourseTitle"> - Sem Current Genetics Research</span></li>
-<li PCR="0.00">NGG 573<span class="CourseTitle"> - Systems Neuroscience</span></li>
-<li PCR="0.00">NGG 576<span class="CourseTitle"> - Neuropsychopharmacology.</span></li>
-<li PCR="0.00">NGG 589<span class="CourseTitle"> - Neuroendocrinology</span></li>
-<li PCR="2.91">NGG 594<span class="CourseTitle"> - Theoretical and Computational Neuroscience</span></li>
-<li PCR="0.00">NGG 597<span class="CourseTitle"> - Neural Development, Regeneration and Repair</span></li>
-<li PCR="0.00">NGG 600<span class="CourseTitle"> - Topics in Neurobiology of Disease 001: Neurodegenerative Diseases</span></li>
-<li PCR="0.00">NGG 618<span class="CourseTitle"> - Recovery After Neural Injury</span></li>
-<li PCR="0.00">NGG 699<span class="CourseTitle"> - Lab Rotation</span></li>
-<li PCR="0.00">NGG 899<span class="CourseTitle"> - Pre-Dissertation Lab Rotation</span></li>
-<li PCR="0.00">NGG 990<span class="CourseTitle"> - Master&#39;s Thesis</span></li>
-<li PCR="0.00">NGG 995<span class="CourseTitle"> - Dissertation</span></li>
+<li data-pcr="0.00">NGG 510<span class="CourseTitle"> - Neurotransmitter Signaling &amp; Pharmacology</span></li>
+<li data-pcr="3.39">NGG 521<span class="CourseTitle"> - Brain Computer Interface</span></li>
+<li data-pcr="0.00">NGG 534<span class="CourseTitle"> - Sem Current Genetics Research</span></li>
+<li data-pcr="0.00">NGG 573<span class="CourseTitle"> - Systems Neuroscience</span></li>
+<li data-pcr="0.00">NGG 576<span class="CourseTitle"> - Neuropsychopharmacology.</span></li>
+<li data-pcr="0.00">NGG 589<span class="CourseTitle"> - Neuroendocrinology</span></li>
+<li data-pcr="2.91">NGG 594<span class="CourseTitle"> - Theoretical and Computational Neuroscience</span></li>
+<li data-pcr="0.00">NGG 597<span class="CourseTitle"> - Neural Development, Regeneration and Repair</span></li>
+<li data-pcr="0.00">NGG 600<span class="CourseTitle"> - Topics in Neurobiology of Disease 001: Neurodegenerative Diseases</span></li>
+<li data-pcr="0.00">NGG 618<span class="CourseTitle"> - Recovery After Neural Injury</span></li>
+<li data-pcr="0.00">NGG 699<span class="CourseTitle"> - Lab Rotation</span></li>
+<li data-pcr="0.00">NGG 899<span class="CourseTitle"> - Pre-Dissertation Lab Rotation</span></li>
+<li data-pcr="0.00">NGG 990<span class="CourseTitle"> - Master&#39;s Thesis</span></li>
+<li data-pcr="0.00">NGG 995<span class="CourseTitle"> - Dissertation</span></li>

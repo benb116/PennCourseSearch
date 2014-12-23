@@ -1,50 +1,50 @@
-<li PCR="2.79">PSCI 110<span class="CourseTitle"> - Introduction to Comparative Politics</span></li>
-<li PCR="3.20">PSCI 116<span class="CourseTitle"> - Political Change in the "Third World"</span></li>
-<li PCR="3.21">PSCI 130<span class="CourseTitle"> - Introduction to American Politics</span></li>
-<li PCR="3.37">PSCI 131<span class="CourseTitle"> - American Foreign Policy</span></li>
-<li PCR="2.10">PSCI 136<span class="CourseTitle"> - Urban Politics in the United States</span></li>
-<li PCR="2.94">PSCI 138<span class="CourseTitle"> - Policymaking in the US</span></li>
-<li PCR="2.47">PSCI 150<span class="CourseTitle"> - Introduction to International Relations</span></li>
-<li PCR="3.14">PSCI 151<span class="CourseTitle"> - International Security</span></li>
-<li PCR="3.67">PSCI 152<span class="CourseTitle"> - International Political Economy</span></li>
-<li PCR="2.97">PSCI 153<span class="CourseTitle"> - International Law &amp; Institutions</span></li>
-<li PCR="1.79">PSCI 181<span class="CourseTitle"> - Modern Political Thought</span></li>
-<li PCR="3.43">PSCI 182<span class="CourseTitle"> - Contemporary Political Thought</span></li>
-<li PCR="2.75">PSCI 198<span class="CourseTitle"> - Selected Topics in Political Science</span></li>
-<li PCR="2.81">PSCI 210<span class="CourseTitle"> - Contemporary African Politics</span></li>
-<li PCR="3.00">PSCI 215<span class="CourseTitle"> - The European Union</span></li>
-<li PCR="3.27">PSCI 228<span class="CourseTitle"> - S.Korea/Global Economy</span></li>
-<li PCR="2.97">PSCI 231<span class="CourseTitle"> - Race and Ethnic Politics</span></li>
-<li PCR="3.22">PSCI 241<span class="CourseTitle"> - Polarization</span></li>
-<li PCR="3.02">PSCI 253<span class="CourseTitle"> - International Politics of the Middle East</span></li>
-<li PCR="3.17">PSCI 255<span class="CourseTitle"> - The Causes of War &amp; Peace</span></li>
-<li PCR="3.21">PSCI 258<span class="CourseTitle"> - Human Rights</span></li>
-<li PCR="3.80">PSCI 259<span class="CourseTitle"> - Chinese Foreign Policy</span></li>
-<li PCR="0.00">PSCI 272<span class="CourseTitle"> - American Constitutional Law II</span></li>
-<li PCR="1.67">PSCI 330<span class="CourseTitle"> - Politics,Power, and Policymaking in Washington</span></li>
-<li PCR="1.25">PSCI 332<span class="CourseTitle"> - Discourse &amp; American Politics</span></li>
-<li PCR="2.82">PSCI 334<span class="CourseTitle"> - Emergency Response</span></li>
-<li PCR="2.96">PSCI 335<span class="CourseTitle"> - Healthy Schools</span></li>
-<li PCR="0.00">PSCI 336<span class="CourseTitle"> - Congress, Elections and American Democracy</span></li>
-<li PCR="2.44">PSCI 338<span class="CourseTitle"> - Statistical Methods PSCI</span></li>
-<li PCR="3.60">PSCI 395<span class="CourseTitle"> - Power Sharing in Deeply Divided Places - BFS</span></li>
-<li PCR="3.50">PSCI 398<span class="CourseTitle"> - Selected Topics in Political Science</span></li>
-<li PCR="3.17">PSCI 410<span class="CourseTitle"> - Compar Pol Communication</span></li>
-<li PCR="3.90">PSCI 418<span class="CourseTitle"> - Evolution, Politics and Computer Simulation</span></li>
-<li PCR="2.67">PSCI 433<span class="CourseTitle"> - Social Movements</span></li>
-<li PCR="0.00">PSCI 434<span class="CourseTitle"> - Advanced Topics in American Politics</span></li>
-<li PCR="3.87">PSCI 437<span class="CourseTitle"> - Race &amp; Criminal Justice</span></li>
-<li PCR="0.00">PSCI 441<span class="CourseTitle"> - Theory Practice&amp;Purpose</span></li>
-<li PCR="3.50">PSCI 452<span class="CourseTitle"> - Civil Wars</span></li>
-<li PCR="3.50">PSCI 498<span class="CourseTitle"> - Selected Topics in Political Science</span></li>
-<li PCR="0.00">PSCI 554<span class="CourseTitle"> - Politics of Global Environment</span></li>
-<li PCR="3.21">PSCI 558<span class="CourseTitle"> - Human Rights</span></li>
-<li PCR="3.00">PSCI 598<span class="CourseTitle"> - Selected Topics</span></li>
-<li PCR="0.00">PSCI 618<span class="CourseTitle"> - International Political Economy</span></li>
-<li PCR="0.00">PSCI 631<span class="CourseTitle"> - American Political Development</span></li>
-<li PCR="0.00">PSCI 635<span class="CourseTitle"> - Exp Design &amp; Iss Causal</span></li>
-<li PCR="0.00">PSCI 637<span class="CourseTitle"> - Survey American Institut</span></li>
-<li PCR="3.87">PSCI 638<span class="CourseTitle"> - Race &amp; Criminal Justice</span></li>
-<li PCR="0.00">PSCI 655<span class="CourseTitle"> - Democracy in Comparative Perspective</span></li>
-<li PCR="0.00">PSCI 684<span class="CourseTitle"> - After Idealism</span></li>
-<li PCR="0.00">PSCI 697<span class="CourseTitle"> - Stat Analy for PSCI 2.</span></li>
+<li data-pcr="2.79">PSCI 110<span class="CourseTitle"> - Introduction to Comparative Politics</span></li>
+<li data-pcr="3.20">PSCI 116<span class="CourseTitle"> - Political Change in the "Third World"</span></li>
+<li data-pcr="3.21">PSCI 130<span class="CourseTitle"> - Introduction to American Politics</span></li>
+<li data-pcr="3.37">PSCI 131<span class="CourseTitle"> - American Foreign Policy</span></li>
+<li data-pcr="2.10">PSCI 136<span class="CourseTitle"> - Urban Politics in the United States</span></li>
+<li data-pcr="2.94">PSCI 138<span class="CourseTitle"> - Policymaking in the US</span></li>
+<li data-pcr="2.47">PSCI 150<span class="CourseTitle"> - Introduction to International Relations</span></li>
+<li data-pcr="3.14">PSCI 151<span class="CourseTitle"> - International Security</span></li>
+<li data-pcr="3.67">PSCI 152<span class="CourseTitle"> - International Political Economy</span></li>
+<li data-pcr="2.97">PSCI 153<span class="CourseTitle"> - International Law &amp; Institutions</span></li>
+<li data-pcr="1.79">PSCI 181<span class="CourseTitle"> - Modern Political Thought</span></li>
+<li data-pcr="3.43">PSCI 182<span class="CourseTitle"> - Contemporary Political Thought</span></li>
+<li data-pcr="2.75">PSCI 198<span class="CourseTitle"> - Selected Topics in Political Science</span></li>
+<li data-pcr="2.81">PSCI 210<span class="CourseTitle"> - Contemporary African Politics</span></li>
+<li data-pcr="3.00">PSCI 215<span class="CourseTitle"> - The European Union</span></li>
+<li data-pcr="3.27">PSCI 228<span class="CourseTitle"> - S.Korea/Global Economy</span></li>
+<li data-pcr="2.97">PSCI 231<span class="CourseTitle"> - Race and Ethnic Politics</span></li>
+<li data-pcr="3.22">PSCI 241<span class="CourseTitle"> - Polarization</span></li>
+<li data-pcr="3.02">PSCI 253<span class="CourseTitle"> - International Politics of the Middle East</span></li>
+<li data-pcr="3.17">PSCI 255<span class="CourseTitle"> - The Causes of War &amp; Peace</span></li>
+<li data-pcr="3.21">PSCI 258<span class="CourseTitle"> - Human Rights</span></li>
+<li data-pcr="3.80">PSCI 259<span class="CourseTitle"> - Chinese Foreign Policy</span></li>
+<li data-pcr="0.00">PSCI 272<span class="CourseTitle"> - American Constitutional Law II</span></li>
+<li data-pcr="1.67">PSCI 330<span class="CourseTitle"> - Politics,Power, and Policymaking in Washington</span></li>
+<li data-pcr="1.25">PSCI 332<span class="CourseTitle"> - Discourse &amp; American Politics</span></li>
+<li data-pcr="2.82">PSCI 334<span class="CourseTitle"> - Emergency Response</span></li>
+<li data-pcr="2.96">PSCI 335<span class="CourseTitle"> - Healthy Schools</span></li>
+<li data-pcr="0.00">PSCI 336<span class="CourseTitle"> - Congress, Elections and American Democracy</span></li>
+<li data-pcr="2.44">PSCI 338<span class="CourseTitle"> - Statistical Methods PSCI</span></li>
+<li data-pcr="3.60">PSCI 395<span class="CourseTitle"> - Power Sharing in Deeply Divided Places - BFS</span></li>
+<li data-pcr="3.50">PSCI 398<span class="CourseTitle"> - Selected Topics in Political Science</span></li>
+<li data-pcr="3.17">PSCI 410<span class="CourseTitle"> - Compar Pol Communication</span></li>
+<li data-pcr="3.90">PSCI 418<span class="CourseTitle"> - Evolution, Politics and Computer Simulation</span></li>
+<li data-pcr="2.67">PSCI 433<span class="CourseTitle"> - Social Movements</span></li>
+<li data-pcr="0.00">PSCI 434<span class="CourseTitle"> - Advanced Topics in American Politics</span></li>
+<li data-pcr="3.87">PSCI 437<span class="CourseTitle"> - Race &amp; Criminal Justice</span></li>
+<li data-pcr="0.00">PSCI 441<span class="CourseTitle"> - Theory Practice&amp;Purpose</span></li>
+<li data-pcr="3.50">PSCI 452<span class="CourseTitle"> - Civil Wars</span></li>
+<li data-pcr="3.50">PSCI 498<span class="CourseTitle"> - Selected Topics in Political Science</span></li>
+<li data-pcr="0.00">PSCI 554<span class="CourseTitle"> - Politics of Global Environment</span></li>
+<li data-pcr="3.21">PSCI 558<span class="CourseTitle"> - Human Rights</span></li>
+<li data-pcr="3.00">PSCI 598<span class="CourseTitle"> - Selected Topics</span></li>
+<li data-pcr="0.00">PSCI 618<span class="CourseTitle"> - International Political Economy</span></li>
+<li data-pcr="0.00">PSCI 631<span class="CourseTitle"> - American Political Development</span></li>
+<li data-pcr="0.00">PSCI 635<span class="CourseTitle"> - Exp Design &amp; Iss Causal</span></li>
+<li data-pcr="0.00">PSCI 637<span class="CourseTitle"> - Survey American Institut</span></li>
+<li data-pcr="3.87">PSCI 638<span class="CourseTitle"> - Race &amp; Criminal Justice</span></li>
+<li data-pcr="0.00">PSCI 655<span class="CourseTitle"> - Democracy in Comparative Perspective</span></li>
+<li data-pcr="0.00">PSCI 684<span class="CourseTitle"> - After Idealism</span></li>
+<li data-pcr="0.00">PSCI 697<span class="CourseTitle"> - Stat Analy for PSCI 2.</span></li>

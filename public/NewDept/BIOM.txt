@@ -1,6 +1,6 @@
-<li PCR="0.00">BIOM 502<span class="CourseTitle"> - Molecular Basis of Disease I</span></li>
-<li PCR="0.00">BIOM 515<span class="CourseTitle"> - Public Health Certificate Program</span></li>
-<li PCR="0.00">BIOM 555<span class="CourseTitle"> - Regulation of the Genome</span></li>
-<li PCR="0.00">BIOM 599<span class="CourseTitle"> - GTMS Clinical Clerkship</span></li>
-<li PCR="0.00">BIOM 611<span class="CourseTitle"> - Biological Data Analysis</span></li>
-<li PCR="0.00">BIOM 990<span class="CourseTitle"> - Masters Thesis</span></li>
+<li data-pcr="0.00">BIOM 502<span class="CourseTitle"> - Molecular Basis of Disease I</span></li>
+<li data-pcr="0.00">BIOM 515<span class="CourseTitle"> - Public Health Certificate Program</span></li>
+<li data-pcr="0.00">BIOM 555<span class="CourseTitle"> - Regulation of the Genome</span></li>
+<li data-pcr="0.00">BIOM 599<span class="CourseTitle"> - GTMS Clinical Clerkship</span></li>
+<li data-pcr="0.00">BIOM 611<span class="CourseTitle"> - Biological Data Analysis</span></li>
+<li data-pcr="0.00">BIOM 990<span class="CourseTitle"> - Masters Thesis</span></li>

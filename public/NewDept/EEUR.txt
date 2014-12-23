@@ -1,2 +1,2 @@
-<li PCR="3.59">EEUR 122<span class="CourseTitle"> - Elementary Hungarian II</span></li>
-<li PCR="3.78">EEUR 124<span class="CourseTitle"> - Intermediate Hungarian II</span></li>
+<li data-pcr="3.59">EEUR 122<span class="CourseTitle"> - Elementary Hungarian II</span></li>
+<li data-pcr="3.78">EEUR 124<span class="CourseTitle"> - Intermediate Hungarian II</span></li>

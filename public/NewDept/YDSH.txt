@@ -1,5 +1,5 @@
-<li PCR="4.00">YDSH 102<span class="CourseTitle"> - Beginning Yiddish II</span></li>
-<li PCR="3.67">YDSH 104<span class="CourseTitle"> - Intermediate Yiddish II</span></li>
-<li PCR="4.00">YDSH 502<span class="CourseTitle"> - Beginning Yiddish II</span></li>
-<li PCR="3.67">YDSH 504<span class="CourseTitle"> - Intermediate Yiddish II</span></li>
-<li PCR="0.00">YDSH 509<span class="CourseTitle"> - Topics vary annually.  In Spring 2015, the title is: Jewish Women Writers</span></li>
+<li data-pcr="4.00">YDSH 102<span class="CourseTitle"> - Beginning Yiddish II</span></li>
+<li data-pcr="3.67">YDSH 104<span class="CourseTitle"> - Intermediate Yiddish II</span></li>
+<li data-pcr="4.00">YDSH 502<span class="CourseTitle"> - Beginning Yiddish II</span></li>
+<li data-pcr="3.67">YDSH 504<span class="CourseTitle"> - Intermediate Yiddish II</span></li>
+<li data-pcr="0.00">YDSH 509<span class="CourseTitle"> - Topics vary annually.  In Spring 2015, the title is: Jewish Women Writers</span></li>

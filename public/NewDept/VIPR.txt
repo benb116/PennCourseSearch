@@ -1,1 +1,1 @@
-<li PCR="3.13">VIPR 120<span class="CourseTitle"> - Vagelos Integrated Program in Energy Research (VIPER) Seminar, Part I</span></li>
+<li data-pcr="3.13">VIPR 120<span class="CourseTitle"> - Vagelos Integrated Program in Energy Research (VIPER) Seminar, Part I</span></li>

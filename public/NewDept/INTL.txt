@@ -1,9 +1,9 @@
-<li PCR="0.00">INTL BBB<span class="CourseTitle"> - Univ Sao Paulo</span></li>
-<li PCR="0.00">INTL BBH<span class="CourseTitle"> - Sa Budapest Hungary Math</span></li>
-<li PCR="0.00">INTL BDF<span class="CourseTitle"> - Cardiff University</span></li>
-<li PCR="0.00">INTL BEK<span class="CourseTitle"> - Sit Ecuador: Dpl</span></li>
-<li PCR="0.00">INTL BGD<span class="CourseTitle"> - Inp Grenoble</span></li>
-<li PCR="0.00">INTL BLU<span class="CourseTitle"> - Luiss Guido Carli PPE</span></li>
-<li PCR="0.00">INTL BRN<span class="CourseTitle"> - Study Abroad Ciee Sao Pa</span></li>
-<li PCR="0.00">INTL BRZ<span class="CourseTitle"> - Study Abroad Ciee Rio</span></li>
-<li PCR="0.00">INTL BSL<span class="CourseTitle"> - Isle - Sri Lanka</span></li>
+<li data-pcr="0.00">INTL BBB<span class="CourseTitle"> - Univ Sao Paulo</span></li>
+<li data-pcr="0.00">INTL BBH<span class="CourseTitle"> - Sa Budapest Hungary Math</span></li>
+<li data-pcr="0.00">INTL BDF<span class="CourseTitle"> - Cardiff University</span></li>
+<li data-pcr="0.00">INTL BEK<span class="CourseTitle"> - Sit Ecuador: Dpl</span></li>
+<li data-pcr="0.00">INTL BGD<span class="CourseTitle"> - Inp Grenoble</span></li>
+<li data-pcr="0.00">INTL BLU<span class="CourseTitle"> - Luiss Guido Carli PPE</span></li>
+<li data-pcr="0.00">INTL BRN<span class="CourseTitle"> - Study Abroad Ciee Sao Pa</span></li>
+<li data-pcr="0.00">INTL BRZ<span class="CourseTitle"> - Study Abroad Ciee Rio</span></li>
+<li data-pcr="0.00">INTL BSL<span class="CourseTitle"> - Isle - Sri Lanka</span></li>

@@ -1,4 +1,4 @@
-<li PCR="2.50">COLL 135<span class="CourseTitle"> - The Art of Speaking</span></li>
-<li PCR="3.50">COLL 221<span class="CourseTitle"> - Perspectives in French Literature - World Literatures Course</span></li>
-<li PCR="3.50">COLL 223<span class="CourseTitle"> - Perspectives in Spanish American Literature I - World Literatures Course</span></li>
-<li PCR="3.29">COLL 228<span class="CourseTitle"> - World Literatures</span></li>
+<li data-pcr="2.50">COLL 135<span class="CourseTitle"> - The Art of Speaking</span></li>
+<li data-pcr="3.50">COLL 221<span class="CourseTitle"> - Perspectives in French Literature - World Literatures Course</span></li>
+<li data-pcr="3.50">COLL 223<span class="CourseTitle"> - Perspectives in Spanish American Literature I - World Literatures Course</span></li>
+<li data-pcr="3.29">COLL 228<span class="CourseTitle"> - World Literatures</span></li>

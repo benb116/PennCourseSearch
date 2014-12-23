@@ -1,34 +1,34 @@
-<li PCR="0.00">MEAM 091<span class="CourseTitle"> - Shop Tr: Manual Milling</span></li>
-<li PCR="0.00">MEAM 092<span class="CourseTitle"> - Shop Tr: Manual Turning</span></li>
-<li PCR="0.00">MEAM 093<span class="CourseTitle"> - Shop Tr: Hybrid Milling</span></li>
-<li PCR="0.00">MEAM 094<span class="CourseTitle"> - Tr: CNC Milling/solidcam</span></li>
-<li PCR="0.00">MEAM 095<span class="CourseTitle"> - Shop Tr: CNC Turning</span></li>
-<li PCR="3.36">MEAM 101<span class="CourseTitle"> - Introduction to Mechanical Design</span></li>
-<li PCR="3.50">MEAM 201<span class="CourseTitle"> - Machine Design and Manufacturing</span></li>
-<li PCR="1.52">MEAM 203<span class="CourseTitle"> - Thermodynamics I</span></li>
-<li PCR="2.86">MEAM 211<span class="CourseTitle"> - Engineering Mechanics: Dynamics</span></li>
-<li PCR="2.55">MEAM 248<span class="CourseTitle"> - Mechanical Engineering Lab I</span></li>
-<li PCR="2.67">MEAM 321<span class="CourseTitle"> - Vibrations of Mechanical Systems</span></li>
-<li PCR="2.31">MEAM 333<span class="CourseTitle"> - Heat and Mass Transfer</span></li>
-<li PCR="2.46">MEAM 348<span class="CourseTitle"> - Mechanical Engineering Design Laboratory</span></li>
-<li PCR="0.00">MEAM 404<span class="CourseTitle"> - Materials in Mech Design</span></li>
-<li PCR="3.25">MEAM 415<span class="CourseTitle"> - Product Design</span></li>
-<li PCR="1.02">MEAM 446<span class="CourseTitle"> - Mechanical Engineering Design Projects</span></li>
-<li PCR="2.43">MEAM 513<span class="CourseTitle"> - Feedback Control Design and Analysis</span></li>
-<li PCR="2.21">MEAM 514<span class="CourseTitle"> - Design for Manufacturability</span></li>
-<li PCR="3.00">MEAM 519<span class="CourseTitle"> - Elasticity and Micromechanics of Materials</span></li>
-<li PCR="2.38">MEAM 529<span class="CourseTitle"> - Introduction to MEMS and NEMS</span></li>
-<li PCR="2.43">MEAM 536<span class="CourseTitle"> - Viscous Fluid Flow and Modern Applications</span></li>
-<li PCR="3.33">MEAM 537<span class="CourseTitle"> - Nanotribology</span></li>
-<li PCR="3.40">MEAM 553<span class="CourseTitle"> - Atom Mod in Mats Science</span></li>
-<li PCR="2.30">MEAM 561<span class="CourseTitle"> - Thermodynamics: Foundations, Energy, Materials</span></li>
-<li PCR="0.00">MEAM 580<span class="CourseTitle"> - Electrochemistry for Energy, Nanofabrication and Sensing</span></li>
-<li PCR="0.00">MEAM 620<span class="CourseTitle"> - Advanced Robotics</span></li>
-<li PCR="0.00">MEAM 633<span class="CourseTitle"> - Mechanics of Plastic Flow and Fracture</span></li>
-<li PCR="0.00">MEAM 646<span class="CourseTitle"> - Computational Mechanics</span></li>
-<li PCR="0.00">MEAM 650<span class="CourseTitle"> - Mech of Nano&amp;Biomaterial</span></li>
-<li PCR="0.00">MEAM 699<span class="CourseTitle"> - MEAM Seminar</span></li>
-<li PCR="0.00">MEAM 895<span class="CourseTitle"> - Teaching Practicum</span></li>
-<li PCR="0.00">MEAM 899<span class="CourseTitle"> - Independent Study</span></li>
-<li PCR="0.00">MEAM 990<span class="CourseTitle"> - Masters Thesis</span></li>
-<li PCR="0.00">MEAM 999<span class="CourseTitle"> - Thesis/Dissertation Research</span></li>
+<li data-pcr="0.00">MEAM 091<span class="CourseTitle"> - Shop Tr: Manual Milling</span></li>
+<li data-pcr="0.00">MEAM 092<span class="CourseTitle"> - Shop Tr: Manual Turning</span></li>
+<li data-pcr="0.00">MEAM 093<span class="CourseTitle"> - Shop Tr: Hybrid Milling</span></li>
+<li data-pcr="0.00">MEAM 094<span class="CourseTitle"> - Tr: CNC Milling/solidcam</span></li>
+<li data-pcr="0.00">MEAM 095<span class="CourseTitle"> - Shop Tr: CNC Turning</span></li>
+<li data-pcr="3.36">MEAM 101<span class="CourseTitle"> - Introduction to Mechanical Design</span></li>
+<li data-pcr="3.50">MEAM 201<span class="CourseTitle"> - Machine Design and Manufacturing</span></li>
+<li data-pcr="1.52">MEAM 203<span class="CourseTitle"> - Thermodynamics I</span></li>
+<li data-pcr="2.86">MEAM 211<span class="CourseTitle"> - Engineering Mechanics: Dynamics</span></li>
+<li data-pcr="2.55">MEAM 248<span class="CourseTitle"> - Mechanical Engineering Lab I</span></li>
+<li data-pcr="2.67">MEAM 321<span class="CourseTitle"> - Vibrations of Mechanical Systems</span></li>
+<li data-pcr="2.31">MEAM 333<span class="CourseTitle"> - Heat and Mass Transfer</span></li>
+<li data-pcr="2.46">MEAM 348<span class="CourseTitle"> - Mechanical Engineering Design Laboratory</span></li>
+<li data-pcr="0.00">MEAM 404<span class="CourseTitle"> - Materials in Mech Design</span></li>
+<li data-pcr="3.25">MEAM 415<span class="CourseTitle"> - Product Design</span></li>
+<li data-pcr="1.02">MEAM 446<span class="CourseTitle"> - Mechanical Engineering Design Projects</span></li>
+<li data-pcr="2.43">MEAM 513<span class="CourseTitle"> - Feedback Control Design and Analysis</span></li>
+<li data-pcr="2.21">MEAM 514<span class="CourseTitle"> - Design for Manufacturability</span></li>
+<li data-pcr="3.00">MEAM 519<span class="CourseTitle"> - Elasticity and Micromechanics of Materials</span></li>
+<li data-pcr="2.38">MEAM 529<span class="CourseTitle"> - Introduction to MEMS and NEMS</span></li>
+<li data-pcr="2.43">MEAM 536<span class="CourseTitle"> - Viscous Fluid Flow and Modern Applications</span></li>
+<li data-pcr="3.33">MEAM 537<span class="CourseTitle"> - Nanotribology</span></li>
+<li data-pcr="3.40">MEAM 553<span class="CourseTitle"> - Atom Mod in Mats Science</span></li>
+<li data-pcr="2.30">MEAM 561<span class="CourseTitle"> - Thermodynamics: Foundations, Energy, Materials</span></li>
+<li data-pcr="0.00">MEAM 580<span class="CourseTitle"> - Electrochemistry for Energy, Nanofabrication and Sensing</span></li>
+<li data-pcr="0.00">MEAM 620<span class="CourseTitle"> - Advanced Robotics</span></li>
+<li data-pcr="0.00">MEAM 633<span class="CourseTitle"> - Mechanics of Plastic Flow and Fracture</span></li>
+<li data-pcr="0.00">MEAM 646<span class="CourseTitle"> - Computational Mechanics</span></li>
+<li data-pcr="0.00">MEAM 650<span class="CourseTitle"> - Mech of Nano&amp;Biomaterial</span></li>
+<li data-pcr="0.00">MEAM 699<span class="CourseTitle"> - MEAM Seminar</span></li>
+<li data-pcr="0.00">MEAM 895<span class="CourseTitle"> - Teaching Practicum</span></li>
+<li data-pcr="0.00">MEAM 899<span class="CourseTitle"> - Independent Study</span></li>
+<li data-pcr="0.00">MEAM 990<span class="CourseTitle"> - Masters Thesis</span></li>
+<li data-pcr="0.00">MEAM 999<span class="CourseTitle"> - Thesis/Dissertation Research</span></li>

@@ -1,7 +1,7 @@
-<li PCR="0.00">HPR 550<span class="CourseTitle"> - Clinical Economics and Clinical Decision Making</span></li>
-<li PCR="0.00">HPR 601<span class="CourseTitle"> - Contextual Foundations of Community Health 1</span></li>
-<li PCR="0.00">HPR 602<span class="CourseTitle"> - Topics in Leadership for Health Policy 1</span></li>
-<li PCR="0.00">HPR 607<span class="CourseTitle"> - Health Services and Policy Research Methods II</span></li>
-<li PCR="0.00">HPR 608<span class="CourseTitle"> - Applied Regression Analysis for Health Policy Research</span></li>
-<li PCR="0.00">HPR 610<span class="CourseTitle"> - Achieving Evidence-Based Health Policy</span></li>
-<li PCR="0.00">HPR 611<span class="CourseTitle"> - Implementation Science in Health and Health Care</span></li>
+<li data-pcr="0.00">HPR 550<span class="CourseTitle"> - Clinical Economics and Clinical Decision Making</span></li>
+<li data-pcr="0.00">HPR 601<span class="CourseTitle"> - Contextual Foundations of Community Health 1</span></li>
+<li data-pcr="0.00">HPR 602<span class="CourseTitle"> - Topics in Leadership for Health Policy 1</span></li>
+<li data-pcr="0.00">HPR 607<span class="CourseTitle"> - Health Services and Policy Research Methods II</span></li>
+<li data-pcr="0.00">HPR 608<span class="CourseTitle"> - Applied Regression Analysis for Health Policy Research</span></li>
+<li data-pcr="0.00">HPR 610<span class="CourseTitle"> - Achieving Evidence-Based Health Policy</span></li>
+<li data-pcr="0.00">HPR 611<span class="CourseTitle"> - Implementation Science in Health and Health Care</span></li>

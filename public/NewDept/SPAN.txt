@@ -1,30 +1,30 @@
-<li PCR="2.08">SPAN 120<span class="CourseTitle"> - Elementary Spanish II</span></li>
-<li PCR="3.31">SPAN 121<span class="CourseTitle"> - Elementary Spanish I and II: Advanced Beginners</span></li>
-<li PCR="3.60">SPAN 125<span class="CourseTitle"> - Spanish for the Medical Professions, Elementary II</span></li>
-<li PCR="3.50">SPAN 130<span class="CourseTitle"> - Intermediate Spanish I</span></li>
-<li PCR="3.71">SPAN 134<span class="CourseTitle"> - Intermediate Spanish I and II: Accelerated</span></li>
-<li PCR="3.00">SPAN 140<span class="CourseTitle"> - Intermediate Spanish II</span></li>
-<li PCR="3.67">SPAN 145<span class="CourseTitle"> - Spanish for the Medical Professions, Intermediate II</span></li>
-<li PCR="4.00">SPAN 180<span class="CourseTitle"> - Spanish Conversation</span></li>
-<li PCR="3.29">SPAN 202<span class="CourseTitle"> - Advanced Spanish</span></li>
-<li PCR="3.00">SPAN 205<span class="CourseTitle"> - Advanced Spanish for the Medical Professions</span></li>
-<li PCR="3.30">SPAN 208<span class="CourseTitle"> - Business Spanish I</span></li>
-<li PCR="4.00">SPAN 212<span class="CourseTitle"> - Advanced Spanish Grammar</span></li>
-<li PCR="3.83">SPAN 215<span class="CourseTitle"> - Spanish for the Professions I</span></li>
-<li PCR="2.43">SPAN 219<span class="CourseTitle"> - Hispanic Texts and Contexts</span></li>
-<li PCR="3.57">SPAN 223<span class="CourseTitle"> - Perspectives of Spanish and Latin American Literatures</span></li>
-<li PCR="2.86">SPAN 319<span class="CourseTitle"> - History of the Spanish Language</span></li>
-<li PCR="3.00">SPAN 325<span class="CourseTitle"> - Span &amp; Romance Languages</span></li>
-<li PCR="2.67">SPAN 380<span class="CourseTitle"> - Contemporary Spanish Literature</span></li>
-<li PCR="3.67">SPAN 386<span class="CourseTitle"> - Studies in Spanish Culture</span></li>
-<li PCR="2.96">SPAN 388<span class="CourseTitle"> - Tpcs: Span/Ltam Cinema</span></li>
-<li PCR="2.40">SPAN 390<span class="CourseTitle"> - Introduction to Spanish American Literature</span></li>
-<li PCR="3.64">SPAN 394<span class="CourseTitle"> - Spanish American Fiction</span></li>
-<li PCR="3.80">SPAN 395<span class="CourseTitle"> - Hispanic Theater</span></li>
-<li PCR="2.89">SPAN 396<span class="CourseTitle"> - Studies in Spanish American Culture</span></li>
-<li PCR="3.00">SPAN 397<span class="CourseTitle"> - History of Spanish American Culture</span></li>
-<li PCR="0.00">SPAN 609<span class="CourseTitle"> - Language Teaching and Learning</span></li>
-<li PCR="0.00">SPAN 630<span class="CourseTitle"> - Studies in the Spanish Middle Ages</span></li>
-<li PCR="0.00">SPAN 686<span class="CourseTitle"> - Studies in Spanish Culture</span></li>
-<li PCR="0.00">SPAN 690<span class="CourseTitle"> - Studies in 19th- and 20th-Century Spanish American Literature</span></li>
-<li PCR="0.00">SPAN 694<span class="CourseTitle"> - Modern Spanish American Narrative</span></li>
+<li data-pcr="2.08">SPAN 120<span class="CourseTitle"> - Elementary Spanish II</span></li>
+<li data-pcr="3.31">SPAN 121<span class="CourseTitle"> - Elementary Spanish I and II: Advanced Beginners</span></li>
+<li data-pcr="3.60">SPAN 125<span class="CourseTitle"> - Spanish for the Medical Professions, Elementary II</span></li>
+<li data-pcr="3.50">SPAN 130<span class="CourseTitle"> - Intermediate Spanish I</span></li>
+<li data-pcr="3.71">SPAN 134<span class="CourseTitle"> - Intermediate Spanish I and II: Accelerated</span></li>
+<li data-pcr="3.00">SPAN 140<span class="CourseTitle"> - Intermediate Spanish II</span></li>
+<li data-pcr="3.67">SPAN 145<span class="CourseTitle"> - Spanish for the Medical Professions, Intermediate II</span></li>
+<li data-pcr="4.00">SPAN 180<span class="CourseTitle"> - Spanish Conversation</span></li>
+<li data-pcr="3.29">SPAN 202<span class="CourseTitle"> - Advanced Spanish</span></li>
+<li data-pcr="3.00">SPAN 205<span class="CourseTitle"> - Advanced Spanish for the Medical Professions</span></li>
+<li data-pcr="3.30">SPAN 208<span class="CourseTitle"> - Business Spanish I</span></li>
+<li data-pcr="4.00">SPAN 212<span class="CourseTitle"> - Advanced Spanish Grammar</span></li>
+<li data-pcr="3.83">SPAN 215<span class="CourseTitle"> - Spanish for the Professions I</span></li>
+<li data-pcr="2.43">SPAN 219<span class="CourseTitle"> - Hispanic Texts and Contexts</span></li>
+<li data-pcr="3.57">SPAN 223<span class="CourseTitle"> - Perspectives of Spanish and Latin American Literatures</span></li>
+<li data-pcr="2.86">SPAN 319<span class="CourseTitle"> - History of the Spanish Language</span></li>
+<li data-pcr="3.00">SPAN 325<span class="CourseTitle"> - Span &amp; Romance Languages</span></li>
+<li data-pcr="2.67">SPAN 380<span class="CourseTitle"> - Contemporary Spanish Literature</span></li>
+<li data-pcr="3.67">SPAN 386<span class="CourseTitle"> - Studies in Spanish Culture</span></li>
+<li data-pcr="2.96">SPAN 388<span class="CourseTitle"> - Tpcs: Span/Ltam Cinema</span></li>
+<li data-pcr="2.40">SPAN 390<span class="CourseTitle"> - Introduction to Spanish American Literature</span></li>
+<li data-pcr="3.64">SPAN 394<span class="CourseTitle"> - Spanish American Fiction</span></li>
+<li data-pcr="3.80">SPAN 395<span class="CourseTitle"> - Hispanic Theater</span></li>
+<li data-pcr="2.89">SPAN 396<span class="CourseTitle"> - Studies in Spanish American Culture</span></li>
+<li data-pcr="3.00">SPAN 397<span class="CourseTitle"> - History of Spanish American Culture</span></li>
+<li data-pcr="0.00">SPAN 609<span class="CourseTitle"> - Language Teaching and Learning</span></li>
+<li data-pcr="0.00">SPAN 630<span class="CourseTitle"> - Studies in the Spanish Middle Ages</span></li>
+<li data-pcr="0.00">SPAN 686<span class="CourseTitle"> - Studies in Spanish Culture</span></li>
+<li data-pcr="0.00">SPAN 690<span class="CourseTitle"> - Studies in 19th- and 20th-Century Spanish American Literature</span></li>
+<li data-pcr="0.00">SPAN 694<span class="CourseTitle"> - Modern Spanish American Narrative</span></li>

@@ -1,19 +1,19 @@
-<li PCR="0.00">PUBH 501<span class="CourseTitle"> - Introduction to Biostatistics</span></li>
-<li PCR="2.92">PUBH 502<span class="CourseTitle"> - Introduction to the Principles and Methods of Epidemiology</span></li>
-<li PCR="0.00">PUBH 503<span class="CourseTitle"> - Environmental and Occupational Health</span></li>
-<li PCR="0.00">PUBH 504<span class="CourseTitle"> - Behavioral and Social Sciences in Public Health</span></li>
-<li PCR="0.00">PUBH 505<span class="CourseTitle"> - Public Health Policy and Administration</span></li>
-<li PCR="0.00">PUBH 506<span class="CourseTitle"> - Methods for Public Health Practice</span></li>
-<li PCR="0.00">PUBH 507<span class="CourseTitle"> - Ethics, Law and Policy in Public Health</span></li>
-<li PCR="0.00">PUBH 508<span class="CourseTitle"> - Capstone Seminar</span></li>
-<li PCR="0.00">PUBH 515<span class="CourseTitle"> - Community Development</span></li>
-<li PCR="0.00">PUBH 517<span class="CourseTitle"> - Introduction to the Epidemiologic Study of Geography and Health</span></li>
-<li PCR="0.00">PUBH 521<span class="CourseTitle"> - Program Evaluation in Public Health</span></li>
-<li PCR="0.00">PUBH 523<span class="CourseTitle"> - Disease Detectives and Social Engineers</span></li>
-<li PCR="2.75">PUBH 526<span class="CourseTitle"> - Anthropology and Public Health</span></li>
-<li PCR="0.00">PUBH 537<span class="CourseTitle"> - Evidenced-Based Health Policy</span></li>
-<li PCR="2.86">PUBH 539<span class="CourseTitle"> - Designing Interventions</span></li>
-<li PCR="0.00">PUBH 551<span class="CourseTitle"> - Global Health Policy and Delivery</span></li>
-<li PCR="0.00">PUBH 588<span class="CourseTitle"> - Advanced Leadership Skills in Community Health</span></li>
-<li PCR="0.00">PUBH 598<span class="CourseTitle"> - Immersion Experience in Global Public Health</span></li>
-<li PCR="0.00">PUBH 604<span class="CourseTitle"> - Qual Rsrch in Soc Sci</span></li>
+<li data-pcr="0.00">PUBH 501<span class="CourseTitle"> - Introduction to Biostatistics</span></li>
+<li data-pcr="2.92">PUBH 502<span class="CourseTitle"> - Introduction to the Principles and Methods of Epidemiology</span></li>
+<li data-pcr="0.00">PUBH 503<span class="CourseTitle"> - Environmental and Occupational Health</span></li>
+<li data-pcr="0.00">PUBH 504<span class="CourseTitle"> - Behavioral and Social Sciences in Public Health</span></li>
+<li data-pcr="0.00">PUBH 505<span class="CourseTitle"> - Public Health Policy and Administration</span></li>
+<li data-pcr="0.00">PUBH 506<span class="CourseTitle"> - Methods for Public Health Practice</span></li>
+<li data-pcr="0.00">PUBH 507<span class="CourseTitle"> - Ethics, Law and Policy in Public Health</span></li>
+<li data-pcr="0.00">PUBH 508<span class="CourseTitle"> - Capstone Seminar</span></li>
+<li data-pcr="0.00">PUBH 515<span class="CourseTitle"> - Community Development</span></li>
+<li data-pcr="0.00">PUBH 517<span class="CourseTitle"> - Introduction to the Epidemiologic Study of Geography and Health</span></li>
+<li data-pcr="0.00">PUBH 521<span class="CourseTitle"> - Program Evaluation in Public Health</span></li>
+<li data-pcr="0.00">PUBH 523<span class="CourseTitle"> - Disease Detectives and Social Engineers</span></li>
+<li data-pcr="2.75">PUBH 526<span class="CourseTitle"> - Anthropology and Public Health</span></li>
+<li data-pcr="0.00">PUBH 537<span class="CourseTitle"> - Evidenced-Based Health Policy</span></li>
+<li data-pcr="2.86">PUBH 539<span class="CourseTitle"> - Designing Interventions</span></li>
+<li data-pcr="0.00">PUBH 551<span class="CourseTitle"> - Global Health Policy and Delivery</span></li>
+<li data-pcr="0.00">PUBH 588<span class="CourseTitle"> - Advanced Leadership Skills in Community Health</span></li>
+<li data-pcr="0.00">PUBH 598<span class="CourseTitle"> - Immersion Experience in Global Public Health</span></li>
+<li data-pcr="0.00">PUBH 604<span class="CourseTitle"> - Qual Rsrch in Soc Sci</span></li>

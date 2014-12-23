@@ -1,6 +1,4 @@
-var CurrentCourses = {};
-
-$(document).ready(function() {
+ $(document).ready(function() {
 	var delay = (function(){
 	  var timer = 0;
 	  return function(callback, ms){
@@ -22,8 +20,8 @@ $(document).ready(function() {
 		LoadingIndicate()
 	});
 
-	var TitleHidden = true;
-	$('#InfoPanel span').click(function() {
+	TitleHidden = true;
+	$('#Top span').click(function() {
 		if ($(this).html() == 'Toggle course titles') {
 			$('.CourseTitle').toggle();
 			TitleHidden = !TitleHidden;
@@ -37,6 +35,15 @@ $(document).ready(function() {
 			});
 			SpitSched()
 		}
+		if ($(this).html() == 'Download Schedule') {
+			html2canvas($('#InfoPanel'), {
+			  onrendered: function(canvas) {
+			    var image = new Image();
+			    image.src = canvas.toDataURL("image/png");
+			    window.location.href = image.src;
+			  }
+			});	
+		};
 	});
 
 
@@ -114,6 +121,11 @@ function getCourseNumbers(dept, desc, TitleHidden) { // Getting info about cours
 		} else {
 			$('#CourseList').html(data); // Put the course number list in #CourseList
 			if (TitleHidden == false) {$('.CourseTitle').toggle();}
+			$( "#CourseList li" ).each(function( index ) {
+				PCR = $(this).data('pcr');
+				pcrFrac = PCR / 4;
+				$(this).css('background-color', 'rgba(45, 160, 240, '+pcrFrac*pcrFrac+')')
+			});
 			$('#CourseList li').click(function() { // If a course is clicked
 				$('#CSearch').val($(this).html().split("<")[0]); // Change the search box to match
 				$('#SectionInfo').empty();
@@ -234,27 +246,27 @@ function removeFromSched(sec) {
 		LoadingIndicate()
 	});
 }
-function SpitSched(ScheduledCourses) {
+function SpitSched(courseSched) {
 	$('#Schedule').empty();
 	$('#TimeCol').empty();
 
 	var weekdays = ['M', 'T', 'W', 'R', 'F'];
-
+	var colorPalette = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#ecf0f1','#2ecc71','#95a5a6','#FF73FD','#e67e22','#73F1FF','#CA75FF'];
    	var startHour = 10;
    	var endHour = 18;
    	var percentWidth = 20;
 	incSun = 0
 	incSat = 0
 
-   	for (var sec in ScheduledCourses) {
-   		if (ScheduledCourses[sec].meetHour <= startHour) {
-   			startHour = ScheduledCourses[sec].meetHour
+   	for (var sec in courseSched) {
+   		if (courseSched[sec].meetHour <= startHour) {
+   			startHour = courseSched[sec].meetHour
    		}
-   		if (ScheduledCourses[sec].meetHour+ScheduledCourses[sec].HourLength >= endHour) {
-   			endHour = ScheduledCourses[sec].meetHour+ScheduledCourses[sec].HourLength
+   		if (courseSched[sec].meetHour+courseSched[sec].HourLength >= endHour) {
+   			endHour = courseSched[sec].meetHour+courseSched[sec].HourLength
    		}
-   		for (var day in ScheduledCourses[sec].meetDay) {
-   			var letterDay = ScheduledCourses[sec].meetDay[day]
+   		for (var day in courseSched[sec].meetDay) {
+   			var letterDay = courseSched[sec].meetDay[day]
    			if (letterDay == 'U') {
    				incSun = 1;
    			}
@@ -278,18 +290,31 @@ function SpitSched(ScheduledCourses) {
 	   	$('#TimeCol').append('<div class="TimeBlock" style="top:'+toppos+'%">'+hourtext+':00</div>');
 	   	$('#Schedule').append('<hr width="100%"style="top:'+toppos+'%" >')
    	};
-   	for (var sec in ScheduledCourses) {
-   		for (var day in ScheduledCourses[sec].meetDay) {
-   			var letterDay = ScheduledCourses[sec].meetDay[day]
+   	var colorMap = {};
+   	var colorinc = 0;
+   	for (var sec in courseSched) {
+   		// var colorInd = Math.floor(Math.random() * colorPalette.length)
+   		// var colAdd = colorPalette[colorInd]; // Get random color
+   		// colorPalette.splice(colorInd, 1);
+   		console.log(colorPalette[colorinc])
+   		colorMap[courseSched[sec].fullCourseName] = colorPalette[colorinc];
+   		colorinc += 1;
+   	}
+   	console.log(colorMap)
+   	for (var sec in courseSched) {
+   		for (var day in courseSched[sec].meetDay) {
+   			var letterDay = courseSched[sec].meetDay[day]
    			for (var possDay in weekdays) {
    				if (weekdays[possDay] == letterDay) {
    					var blockleft = possDay*percentWidth; { break }
    				}
    			}
-	   		var blocktop = (ScheduledCourses[sec].meetHour - startHour) * halfScale + 4;
-	   		var blockheight = ScheduledCourses[sec].HourLength * halfScale;
-	   		var blockname = ScheduledCourses[sec].fullCourseName
-	   		$('#Schedule').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;width:'+percentWidth+'%;height:'+blockheight+'%;"><div class="CloseX">x</div>'+blockname+'</div>');
+	   		var blocktop = (courseSched[sec].meetHour - startHour) * halfScale + 4;
+	   		var blockheight = courseSched[sec].HourLength * halfScale;
+	   		var blockname = courseSched[sec].fullCourseName
+	   		var meetRoom = courseSched[sec].meetRoom;
+	   		var thiscol = colorMap[courseSched[sec].fullCourseName];
+	   		$('#Schedule').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;width:'+percentWidth+'%;height:'+blockheight+'%;background-color:'+thiscol+'"><div class="CloseX">x</div>'+blockname+'<br>'+meetRoom+'</div>');
    		}
    	}
 
@@ -312,15 +337,20 @@ function SpitSched(ScheduledCourses) {
 				{ break }
 			}
 		};
-		var secname = $(this).attr('id').slice(0,10)
-		var cnum = secname.slice(0,7);
+		console.log(secname)
+		// var secname = $(this).attr('id').slice(0,10)
+		var cnum = secname.slice(0,-3);
+		var dept = secname.slice(0,-6);
+		console.log(cnum)
 		$('#CSearch').val(secname); // Change the search box to match
 		getSectionInfo(secname);
 		getSectionNumbers(cnum);
+		getCourseNumbers(dept, '', TitleHidden)
 	});
 }
 
 function LoadingIndicate() {
+	// console.log(LoadingSum)
 	if (LoadingSum > 0) {
 		$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 	} else {

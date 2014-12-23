@@ -1,3 +1,3 @@
-<li PCR="0.00">WHG 632<span class="CourseTitle"> - Intl Exch Paris</span></li>
-<li PCR="0.00">WHG 647<span class="CourseTitle"> - Univ Adolfo Ibanez</span></li>
-<li PCR="0.00">WHG 648<span class="CourseTitle"> - Int&#39;l Exch Hkust</span></li>
+<li data-pcr="0.00">WHG 632<span class="CourseTitle"> - Intl Exch Paris</span></li>
+<li data-pcr="0.00">WHG 647<span class="CourseTitle"> - Univ Adolfo Ibanez</span></li>
+<li data-pcr="0.00">WHG 648<span class="CourseTitle"> - Int&#39;l Exch Hkust</span></li>

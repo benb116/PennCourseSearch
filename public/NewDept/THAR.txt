@@ -1,13 +1,13 @@
-<li PCR="0.00">THAR 102<span class="CourseTitle"> - THEATRE ARTS 102: THEATRE, HISTORY, &amp; CULTURE II: Romantics, Realists and Revolutionaries</span></li>
-<li PCR="3.30">THAR 114<span class="CourseTitle"> - Playwriting Workshop</span></li>
-<li PCR="2.00">THAR 120<span class="CourseTitle"> - Introduction to Acting</span></li>
-<li PCR="2.43">THAR 125<span class="CourseTitle"> - The Play: Structure, Style, Meaning</span></li>
-<li PCR="2.25">THAR 130<span class="CourseTitle"> - Introduction to Light, Set, and Costume Design</span></li>
-<li PCR="3.70">THAR 133<span class="CourseTitle"> - Concepts of Stage Design</span></li>
-<li PCR="3.47">THAR 171<span class="CourseTitle"> - Movement for the Actor</span></li>
-<li PCR="3.75">THAR 250<span class="CourseTitle"> - Theatre Workshop</span></li>
-<li PCR="2.73">THAR 271<span class="CourseTitle"> - American Musical Theatre</span></li>
-<li PCR="3.33">THAR 274<span class="CourseTitle"> - Dramaturgy</span></li>
-<li PCR="2.25">THAR 275<span class="CourseTitle"> - Advanced Topics in Theatre</span></li>
-<li PCR="3.80">THAR 320<span class="CourseTitle"> - Scene Study</span></li>
-<li PCR="3.33">THAR 350<span class="CourseTitle"> - Rehearsal and Performance</span></li>
+<li data-pcr="0.00">THAR 102<span class="CourseTitle"> - THEATRE ARTS 102: THEATRE, HISTORY, &amp; CULTURE II: Romantics, Realists and Revolutionaries</span></li>
+<li data-pcr="3.30">THAR 114<span class="CourseTitle"> - Playwriting Workshop</span></li>
+<li data-pcr="2.00">THAR 120<span class="CourseTitle"> - Introduction to Acting</span></li>
+<li data-pcr="2.43">THAR 125<span class="CourseTitle"> - The Play: Structure, Style, Meaning</span></li>
+<li data-pcr="2.25">THAR 130<span class="CourseTitle"> - Introduction to Light, Set, and Costume Design</span></li>
+<li data-pcr="3.70">THAR 133<span class="CourseTitle"> - Concepts of Stage Design</span></li>
+<li data-pcr="3.47">THAR 171<span class="CourseTitle"> - Movement for the Actor</span></li>
+<li data-pcr="3.75">THAR 250<span class="CourseTitle"> - Theatre Workshop</span></li>
+<li data-pcr="2.73">THAR 271<span class="CourseTitle"> - American Musical Theatre</span></li>
+<li data-pcr="3.33">THAR 274<span class="CourseTitle"> - Dramaturgy</span></li>
+<li data-pcr="2.25">THAR 275<span class="CourseTitle"> - Advanced Topics in Theatre</span></li>
+<li data-pcr="3.80">THAR 320<span class="CourseTitle"> - Scene Study</span></li>
+<li data-pcr="3.33">THAR 350<span class="CourseTitle"> - Rehearsal and Performance</span></li>

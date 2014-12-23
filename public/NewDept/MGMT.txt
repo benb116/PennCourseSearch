@@ -1,62 +1,62 @@
-<li PCR="2.41">MGMT 100<span class="CourseTitle"> - Leadership and Communication in Groups</span></li>
-<li PCR="3.05">MGMT 101<span class="CourseTitle"> - Introduction To Management</span></li>
-<li PCR="2.02">MGMT 104<span class="CourseTitle"> - Industrial Relations and Human Resource Management</span></li>
-<li PCR="2.67">MGMT 111<span class="CourseTitle"> - Multinational Management</span></li>
-<li PCR="3.83">MGMT 199<span class="CourseTitle"> - Independent Study</span></li>
-<li PCR="2.09">MGMT 212<span class="CourseTitle"> - Social Entrepreneurship</span></li>
-<li PCR="2.65">MGMT 223<span class="CourseTitle"> - Business Strategy and Policy</span></li>
-<li PCR="2.17">MGMT 225<span class="CourseTitle"> - Value Creation and Value Capture in American Business History</span></li>
-<li PCR="3.40">MGMT 230<span class="CourseTitle"> - Entrepreneurship</span></li>
-<li PCR="3.00">MGMT 233<span class="CourseTitle"> - Strategies and Practices of Family-Controlled Companies</span></li>
-<li PCR="3.27">MGMT 234<span class="CourseTitle"> - International Comparative Management: The Challenge of Diversity and Integration</span></li>
-<li PCR="3.58">MGMT 237<span class="CourseTitle"> - Management of Technology</span></li>
-<li PCR="0.00">MGMT 241<span class="CourseTitle"> - Knowledge for Social Impact: Analyzing Current Issues &amp; Approaches</span></li>
-<li PCR="3.36">MGMT 247<span class="CourseTitle"> - Employment Law</span></li>
-<li PCR="3.08">MGMT 249<span class="CourseTitle"> - Mergers and Acquisitions</span></li>
-<li PCR="0.00">MGMT 273<span class="CourseTitle"> - Managing Org Change</span></li>
-<li PCR="3.38">MGMT 291<span class="CourseTitle"> - Negotiations</span></li>
-<li PCR="3.13">MGMT 292<span class="CourseTitle"> - Advanced Negotiation.</span></li>
-<li PCR="3.57">MGMT 353<span class="CourseTitle"> - Wharton Field Challenge</span></li>
-<li PCR="3.10">MGMT 611<span class="CourseTitle"> - Managing Established Enterprises</span></li>
-<li PCR="0.00">MGMT 612<span class="CourseTitle"> - Management of Emerging Enterprises</span></li>
-<li PCR="2.88">MGMT 625<span class="CourseTitle"> - Corporate Governance, Executive Compensation and the Board</span></li>
-<li PCR="0.00">MGMT 653<span class="CourseTitle"> - Field Application Project</span></li>
-<li PCR="2.19">MGMT 656<span class="CourseTitle"> - Global Immersion Program</span></li>
-<li PCR="2.79">MGMT 671<span class="CourseTitle"> - Executive Leadership</span></li>
-<li PCR="3.77">MGMT 690<span class="CourseTitle"> - Managerial Decision Making</span></li>
-<li PCR="2.22">MGMT 691<span class="CourseTitle"> - Negotiations</span></li>
-<li PCR="2.85">MGMT 692<span class="CourseTitle"> - Advanced Negotiation.</span></li>
-<li PCR="3.52">MGMT 701<span class="CourseTitle"> - Strategy and Competitive Advantage</span></li>
-<li PCR="2.14">MGMT 711<span class="CourseTitle"> - Competitive Strategy and Industrial Structure</span></li>
-<li PCR="0.00">MGMT 712<span class="CourseTitle"> - Managing Interfirm Alliances</span></li>
-<li PCR="2.17">MGMT 714<span class="CourseTitle"> - American Business History</span></li>
-<li PCR="3.68">MGMT 715<span class="CourseTitle"> - Political Environment of the Multinational Firm</span></li>
-<li PCR="2.14">MGMT 717<span class="CourseTitle"> - Deals: The Economic Structure of Transacting and Contracting</span></li>
-<li PCR="2.35">MGMT 721<span class="CourseTitle"> - Corporate Development: Mergers and Acquisitions</span></li>
-<li PCR="3.19">MGMT 731<span class="CourseTitle"> - Technology Strategy</span></li>
-<li PCR="2.10">MGMT 773<span class="CourseTitle"> - Managing Organizational Change</span></li>
-<li PCR="2.03">MGMT 782<span class="CourseTitle"> - Strategic Implementation</span></li>
-<li PCR="1.25">MGMT 784<span class="CourseTitle"> - Managerial Economics and Game Theory</span></li>
-<li PCR="0.00">MGMT 785<span class="CourseTitle"> - Learning Strategies</span></li>
-<li PCR="0.00">MGMT 794<span class="CourseTitle"> - Understanding Careers and Executive Labor Markets</span></li>
-<li PCR="3.04">MGMT 801<span class="CourseTitle"> - Entrepreneurship</span></li>
-<li PCR="1.14">MGMT 802<span class="CourseTitle"> - Change, Innovation &amp; Entrepreneurship</span></li>
-<li PCR="2.29">MGMT 804<span class="CourseTitle"> - Venture Capital and Entrepreneurial Management</span></li>
-<li PCR="3.29">MGMT 806<span class="CourseTitle"> - Formation and Implementation of Entrepreneurial Ventures</span></li>
-<li PCR="3.30">MGMT 809<span class="CourseTitle"> - Private Equity in Emerging Markets</span></li>
-<li PCR="2.09">MGMT 810<span class="CourseTitle"> - Social Entrepreneurship</span></li>
-<li PCR="3.29">MGMT 811<span class="CourseTitle"> - Entrepreneurship Through Acquisition</span></li>
-<li PCR="2.87">MGMT 815<span class="CourseTitle"> - Sports Business Management</span></li>
-<li PCR="1.40">MGMT 816<span class="CourseTitle"> - Building Human Assets in Entrepreneurial Ventures</span></li>
-<li PCR="2.68">MGMT 833<span class="CourseTitle"> - Strategies and Practices of Family-controlled Companies</span></li>
-<li PCR="2.76">MGMT 871<span class="CourseTitle"> - Multinational Business Strategy</span></li>
-<li PCR="3.20">MGMT 892<span class="CourseTitle"> - Advanced Study Project - Technological Innovation</span></li>
-<li PCR="3.36">MGMT 893<span class="CourseTitle"> - Advanced Study Project for Entrepreneurial Management</span></li>
-<li PCR="0.00">MGMT 925<span class="CourseTitle"> - Sem Corp Strategy</span></li>
-<li PCR="0.00">MGMT 935<span class="CourseTitle"> - Network Theory and Applications</span></li>
-<li PCR="0.00">MGMT 952<span class="CourseTitle"> - Seminar in Macro-Organizational Behavior</span></li>
-<li PCR="0.00">MGMT 953<span class="CourseTitle"> - Seminar on Research Methods</span></li>
-<li PCR="0.00">MGMT 955<span class="CourseTitle"> - Seminar in International Management</span></li>
-<li PCR="0.00">MGMT 960<span class="CourseTitle"> - Inst &amp; Multinational Management</span></li>
-<li PCR="0.00">MGMT 962<span class="CourseTitle"> - Mult Firms Glob Econ (A)</span></li>
-<li PCR="0.00">MGMT 963<span class="CourseTitle"> - Mult Firms Glob Econ (B)</span></li>
+<li data-pcr="2.41">MGMT 100<span class="CourseTitle"> - Leadership and Communication in Groups</span></li>
+<li data-pcr="3.05">MGMT 101<span class="CourseTitle"> - Introduction To Management</span></li>
+<li data-pcr="2.02">MGMT 104<span class="CourseTitle"> - Industrial Relations and Human Resource Management</span></li>
+<li data-pcr="2.67">MGMT 111<span class="CourseTitle"> - Multinational Management</span></li>
+<li data-pcr="3.83">MGMT 199<span class="CourseTitle"> - Independent Study</span></li>
+<li data-pcr="2.09">MGMT 212<span class="CourseTitle"> - Social Entrepreneurship</span></li>
+<li data-pcr="2.65">MGMT 223<span class="CourseTitle"> - Business Strategy and Policy</span></li>
+<li data-pcr="2.17">MGMT 225<span class="CourseTitle"> - Value Creation and Value Capture in American Business History</span></li>
+<li data-pcr="3.40">MGMT 230<span class="CourseTitle"> - Entrepreneurship</span></li>
+<li data-pcr="3.00">MGMT 233<span class="CourseTitle"> - Strategies and Practices of Family-Controlled Companies</span></li>
+<li data-pcr="3.27">MGMT 234<span class="CourseTitle"> - International Comparative Management: The Challenge of Diversity and Integration</span></li>
+<li data-pcr="3.58">MGMT 237<span class="CourseTitle"> - Management of Technology</span></li>
+<li data-pcr="0.00">MGMT 241<span class="CourseTitle"> - Knowledge for Social Impact: Analyzing Current Issues &amp; Approaches</span></li>
+<li data-pcr="3.36">MGMT 247<span class="CourseTitle"> - Employment Law</span></li>
+<li data-pcr="3.08">MGMT 249<span class="CourseTitle"> - Mergers and Acquisitions</span></li>
+<li data-pcr="0.00">MGMT 273<span class="CourseTitle"> - Managing Org Change</span></li>
+<li data-pcr="3.38">MGMT 291<span class="CourseTitle"> - Negotiations</span></li>
+<li data-pcr="3.13">MGMT 292<span class="CourseTitle"> - Advanced Negotiation.</span></li>
+<li data-pcr="3.57">MGMT 353<span class="CourseTitle"> - Wharton Field Challenge</span></li>
+<li data-pcr="3.10">MGMT 611<span class="CourseTitle"> - Managing Established Enterprises</span></li>
+<li data-pcr="0.00">MGMT 612<span class="CourseTitle"> - Management of Emerging Enterprises</span></li>
+<li data-pcr="2.88">MGMT 625<span class="CourseTitle"> - Corporate Governance, Executive Compensation and the Board</span></li>
+<li data-pcr="0.00">MGMT 653<span class="CourseTitle"> - Field Application Project</span></li>
+<li data-pcr="2.19">MGMT 656<span class="CourseTitle"> - Global Immersion Program</span></li>
+<li data-pcr="2.79">MGMT 671<span class="CourseTitle"> - Executive Leadership</span></li>
+<li data-pcr="3.77">MGMT 690<span class="CourseTitle"> - Managerial Decision Making</span></li>
+<li data-pcr="2.22">MGMT 691<span class="CourseTitle"> - Negotiations</span></li>
+<li data-pcr="2.85">MGMT 692<span class="CourseTitle"> - Advanced Negotiation.</span></li>
+<li data-pcr="3.52">MGMT 701<span class="CourseTitle"> - Strategy and Competitive Advantage</span></li>
+<li data-pcr="2.14">MGMT 711<span class="CourseTitle"> - Competitive Strategy and Industrial Structure</span></li>
+<li data-pcr="0.00">MGMT 712<span class="CourseTitle"> - Managing Interfirm Alliances</span></li>
+<li data-pcr="2.17">MGMT 714<span class="CourseTitle"> - American Business History</span></li>
+<li data-pcr="3.68">MGMT 715<span class="CourseTitle"> - Political Environment of the Multinational Firm</span></li>
+<li data-pcr="2.14">MGMT 717<span class="CourseTitle"> - Deals: The Economic Structure of Transacting and Contracting</span></li>
+<li data-pcr="2.35">MGMT 721<span class="CourseTitle"> - Corporate Development: Mergers and Acquisitions</span></li>
+<li data-pcr="3.19">MGMT 731<span class="CourseTitle"> - Technology Strategy</span></li>
+<li data-pcr="2.10">MGMT 773<span class="CourseTitle"> - Managing Organizational Change</span></li>
+<li data-pcr="2.03">MGMT 782<span class="CourseTitle"> - Strategic Implementation</span></li>
+<li data-pcr="1.25">MGMT 784<span class="CourseTitle"> - Managerial Economics and Game Theory</span></li>
+<li data-pcr="0.00">MGMT 785<span class="CourseTitle"> - Learning Strategies</span></li>
+<li data-pcr="0.00">MGMT 794<span class="CourseTitle"> - Understanding Careers and Executive Labor Markets</span></li>
+<li data-pcr="3.04">MGMT 801<span class="CourseTitle"> - Entrepreneurship</span></li>
+<li data-pcr="1.14">MGMT 802<span class="CourseTitle"> - Change, Innovation &amp; Entrepreneurship</span></li>
+<li data-pcr="2.29">MGMT 804<span class="CourseTitle"> - Venture Capital and Entrepreneurial Management</span></li>
+<li data-pcr="3.29">MGMT 806<span class="CourseTitle"> - Formation and Implementation of Entrepreneurial Ventures</span></li>
+<li data-pcr="3.30">MGMT 809<span class="CourseTitle"> - Private Equity in Emerging Markets</span></li>
+<li data-pcr="2.09">MGMT 810<span class="CourseTitle"> - Social Entrepreneurship</span></li>
+<li data-pcr="3.29">MGMT 811<span class="CourseTitle"> - Entrepreneurship Through Acquisition</span></li>
+<li data-pcr="2.87">MGMT 815<span class="CourseTitle"> - Sports Business Management</span></li>
+<li data-pcr="1.40">MGMT 816<span class="CourseTitle"> - Building Human Assets in Entrepreneurial Ventures</span></li>
+<li data-pcr="2.68">MGMT 833<span class="CourseTitle"> - Strategies and Practices of Family-controlled Companies</span></li>
+<li data-pcr="2.76">MGMT 871<span class="CourseTitle"> - Multinational Business Strategy</span></li>
+<li data-pcr="3.20">MGMT 892<span class="CourseTitle"> - Advanced Study Project - Technological Innovation</span></li>
+<li data-pcr="3.36">MGMT 893<span class="CourseTitle"> - Advanced Study Project for Entrepreneurial Management</span></li>
+<li data-pcr="0.00">MGMT 925<span class="CourseTitle"> - Sem Corp Strategy</span></li>
+<li data-pcr="0.00">MGMT 935<span class="CourseTitle"> - Network Theory and Applications</span></li>
+<li data-pcr="0.00">MGMT 952<span class="CourseTitle"> - Seminar in Macro-Organizational Behavior</span></li>
+<li data-pcr="0.00">MGMT 953<span class="CourseTitle"> - Seminar on Research Methods</span></li>
+<li data-pcr="0.00">MGMT 955<span class="CourseTitle"> - Seminar in International Management</span></li>
+<li data-pcr="0.00">MGMT 960<span class="CourseTitle"> - Inst &amp; Multinational Management</span></li>
+<li data-pcr="0.00">MGMT 962<span class="CourseTitle"> - Mult Firms Glob Econ (A)</span></li>
+<li data-pcr="0.00">MGMT 963<span class="CourseTitle"> - Mult Firms Glob Econ (B)</span></li>

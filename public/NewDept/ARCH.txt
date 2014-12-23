@@ -1,45 +1,45 @@
-<li PCR="2.24">ARCH 102<span class="CourseTitle"> - Visualization I</span></li>
-<li PCR="3.56">ARCH 202<span class="CourseTitle"> - Design Fundamentals I</span></li>
-<li PCR="0.00">ARCH 312<span class="CourseTitle"> - Topics in Architecture Theory II</span></li>
-<li PCR="0.00">ARCH 314<span class="CourseTitle"> - Cosmopolitan Urbanism: Rio de Janeiro</span></li>
-<li PCR="0.00">ARCH 399<span class="CourseTitle"> - Independent Study</span></li>
-<li PCR="2.00">ARCH 401<span class="CourseTitle"> - Architecture and Landscape Design II</span></li>
-<li PCR="1.83">ARCH 402<span class="CourseTitle"> - Architecture and Landscape Design II</span></li>
-<li PCR="0.00">ARCH 432<span class="CourseTitle"> - Construction II</span></li>
-<li PCR="0.00">ARCH 434<span class="CourseTitle"> - Environmental Systems II</span></li>
-<li PCR="0.00">ARCH 436<span class="CourseTitle"> - Structures II</span></li>
-<li PCR="0.00">ARCH 490<span class="CourseTitle"> - Independent Study</span></li>
-<li PCR="0.00">ARCH 491<span class="CourseTitle"> - Senior Thesis</span></li>
-<li PCR="0.00">ARCH 499<span class="CourseTitle"> - Senior Honors Thesis</span></li>
-<li PCR="0.00">ARCH 502<span class="CourseTitle"> - Design Studio II</span></li>
-<li PCR="0.00">ARCH 512<span class="CourseTitle"> - History and Theory II</span></li>
-<li PCR="0.00">ARCH 522<span class="CourseTitle"> - Visual Studies II</span></li>
-<li PCR="0.00">ARCH 532<span class="CourseTitle"> - Construction II</span></li>
-<li PCR="0.00">ARCH 534<span class="CourseTitle"> - Environmental Systems II</span></li>
-<li PCR="0.00">ARCH 536<span class="CourseTitle"> - Structures II</span></li>
-<li PCR="0.00">ARCH 602<span class="CourseTitle"> - Design Studio IV</span></li>
-<li PCR="0.00">ARCH 632<span class="CourseTitle"> - Technology: Designated Elective</span></li>
-<li PCR="0.00">ARCH 638<span class="CourseTitle"> - Technology Special Topics</span></li>
-<li PCR="0.00">ARCH 672<span class="CourseTitle"> - Professional Practice II</span></li>
-<li PCR="0.00">ARCH 704<span class="CourseTitle"> - Advanced Design:Research Studio</span></li>
-<li PCR="0.00">ARCH 706<span class="CourseTitle"> - Independent Thesis</span></li>
-<li PCR="0.00">ARCH 708<span class="CourseTitle"> - Environmental Design Studio</span></li>
-<li PCR="2.56">ARCH 712<span class="CourseTitle"> - Topics in Architecture Theory II</span></li>
-<li PCR="0.00">ARCH 724<span class="CourseTitle"> - Technology in Design</span></li>
-<li PCR="0.00">ARCH 726<span class="CourseTitle"> - Contemporary Furniture Design</span></li>
-<li PCR="3.07">ARCH 727<span class="CourseTitle"> - Industrial Design</span></li>
-<li PCR="0.00">ARCH 728<span class="CourseTitle"> - Design of Contemporary Products</span></li>
-<li PCR="0.00">ARCH 734<span class="CourseTitle"> - Ecological Architecture - Contemporary Practices</span></li>
-<li PCR="0.00">ARCH 738<span class="CourseTitle"> - The Modern House: Technology Then and Now</span></li>
-<li PCR="0.00">ARCH 740<span class="CourseTitle"> - Formal Efficiencies</span></li>
-<li PCR="0.00">ARCH 744<span class="CourseTitle"> - Digital Fabrication</span></li>
-<li PCR="0.00">ARCH 754<span class="CourseTitle"> - Performance Design Workshop</span></li>
-<li PCR="0.00">ARCH 762<span class="CourseTitle"> - Design and Development</span></li>
-<li PCR="0.00">ARCH 765<span class="CourseTitle"> - Project Management</span></li>
-<li PCR="2.60">ARCH 768<span class="CourseTitle"> - Real Estate Development</span></li>
-<li PCR="0.00">ARCH 772<span class="CourseTitle"> - Professional Practice III</span></li>
-<li PCR="0.00">ARCH 813<span class="CourseTitle"> - Qualifying Research</span></li>
-<li PCR="0.00">ARCH 814<span class="CourseTitle"> - The Concept of an Avant-Garde</span></li>
-<li PCR="0.00">ARCH 815<span class="CourseTitle"> - Research Report</span></li>
-<li PCR="0.00">ARCH 851<span class="CourseTitle"> - Dissertation Bibliography</span></li>
-<li PCR="0.00">ARCH 852<span class="CourseTitle"> - Dissertation Proposal</span></li>
+<li data-pcr="2.24">ARCH 102<span class="CourseTitle"> - Visualization I</span></li>
+<li data-pcr="3.56">ARCH 202<span class="CourseTitle"> - Design Fundamentals I</span></li>
+<li data-pcr="0.00">ARCH 312<span class="CourseTitle"> - Topics in Architecture Theory II</span></li>
+<li data-pcr="0.00">ARCH 314<span class="CourseTitle"> - Cosmopolitan Urbanism: Rio de Janeiro</span></li>
+<li data-pcr="0.00">ARCH 399<span class="CourseTitle"> - Independent Study</span></li>
+<li data-pcr="2.00">ARCH 401<span class="CourseTitle"> - Architecture and Landscape Design II</span></li>
+<li data-pcr="1.83">ARCH 402<span class="CourseTitle"> - Architecture and Landscape Design II</span></li>
+<li data-pcr="0.00">ARCH 432<span class="CourseTitle"> - Construction II</span></li>
+<li data-pcr="0.00">ARCH 434<span class="CourseTitle"> - Environmental Systems II</span></li>
+<li data-pcr="0.00">ARCH 436<span class="CourseTitle"> - Structures II</span></li>
+<li data-pcr="0.00">ARCH 490<span class="CourseTitle"> - Independent Study</span></li>
+<li data-pcr="0.00">ARCH 491<span class="CourseTitle"> - Senior Thesis</span></li>
+<li data-pcr="0.00">ARCH 499<span class="CourseTitle"> - Senior Honors Thesis</span></li>
+<li data-pcr="0.00">ARCH 502<span class="CourseTitle"> - Design Studio II</span></li>
+<li data-pcr="0.00">ARCH 512<span class="CourseTitle"> - History and Theory II</span></li>
+<li data-pcr="0.00">ARCH 522<span class="CourseTitle"> - Visual Studies II</span></li>
+<li data-pcr="0.00">ARCH 532<span class="CourseTitle"> - Construction II</span></li>
+<li data-pcr="0.00">ARCH 534<span class="CourseTitle"> - Environmental Systems II</span></li>
+<li data-pcr="0.00">ARCH 536<span class="CourseTitle"> - Structures II</span></li>
+<li data-pcr="0.00">ARCH 602<span class="CourseTitle"> - Design Studio IV</span></li>
+<li data-pcr="0.00">ARCH 632<span class="CourseTitle"> - Technology: Designated Elective</span></li>
+<li data-pcr="0.00">ARCH 638<span class="CourseTitle"> - Technology Special Topics</span></li>
+<li data-pcr="0.00">ARCH 672<span class="CourseTitle"> - Professional Practice II</span></li>
+<li data-pcr="0.00">ARCH 704<span class="CourseTitle"> - Advanced Design:Research Studio</span></li>
+<li data-pcr="0.00">ARCH 706<span class="CourseTitle"> - Independent Thesis</span></li>
+<li data-pcr="0.00">ARCH 708<span class="CourseTitle"> - Environmental Design Studio</span></li>
+<li data-pcr="2.56">ARCH 712<span class="CourseTitle"> - Topics in Architecture Theory II</span></li>
+<li data-pcr="0.00">ARCH 724<span class="CourseTitle"> - Technology in Design</span></li>
+<li data-pcr="0.00">ARCH 726<span class="CourseTitle"> - Contemporary Furniture Design</span></li>
+<li data-pcr="3.07">ARCH 727<span class="CourseTitle"> - Industrial Design</span></li>
+<li data-pcr="0.00">ARCH 728<span class="CourseTitle"> - Design of Contemporary Products</span></li>
+<li data-pcr="0.00">ARCH 734<span class="CourseTitle"> - Ecological Architecture - Contemporary Practices</span></li>
+<li data-pcr="0.00">ARCH 738<span class="CourseTitle"> - The Modern House: Technology Then and Now</span></li>
+<li data-pcr="0.00">ARCH 740<span class="CourseTitle"> - Formal Efficiencies</span></li>
+<li data-pcr="0.00">ARCH 744<span class="CourseTitle"> - Digital Fabrication</span></li>
+<li data-pcr="0.00">ARCH 754<span class="CourseTitle"> - Performance Design Workshop</span></li>
+<li data-pcr="0.00">ARCH 762<span class="CourseTitle"> - Design and Development</span></li>
+<li data-pcr="0.00">ARCH 765<span class="CourseTitle"> - Project Management</span></li>
+<li data-pcr="2.60">ARCH 768<span class="CourseTitle"> - Real Estate Development</span></li>
+<li data-pcr="0.00">ARCH 772<span class="CourseTitle"> - Professional Practice III</span></li>
+<li data-pcr="0.00">ARCH 813<span class="CourseTitle"> - Qualifying Research</span></li>
+<li data-pcr="0.00">ARCH 814<span class="CourseTitle"> - The Concept of an Avant-Garde</span></li>
+<li data-pcr="0.00">ARCH 815<span class="CourseTitle"> - Research Report</span></li>
+<li data-pcr="0.00">ARCH 851<span class="CourseTitle"> - Dissertation Bibliography</span></li>
+<li data-pcr="0.00">ARCH 852<span class="CourseTitle"> - Dissertation Proposal</span></li>

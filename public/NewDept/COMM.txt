@@ -1,40 +1,40 @@
-<li PCR="2.15">COMM 130<span class="CourseTitle"> - Mass Media and Society</span></li>
-<li PCR="3.80">COMM 203<span class="CourseTitle"> - Media, Culture &amp; Society in Contemporary China</span></li>
-<li PCR="2.91">COMM 204<span class="CourseTitle"> - Hollywood Film Industry</span></li>
-<li PCR="2.43">COMM 210<span class="CourseTitle"> - Quantitative Research Methods in Communication</span></li>
-<li PCR="0.00">COMM 216<span class="CourseTitle"> - Big Data and Social Research</span></li>
-<li PCR="2.50">COMM 275<span class="CourseTitle"> - Communication and Persuasion</span></li>
-<li PCR="2.76">COMM 290<span class="CourseTitle"> - Collective Memory/Collective Future: Technologies, Strategies and Politics</span></li>
-<li PCR="3.23">COMM 291<span class="CourseTitle"> - Art, Communication, and Social Change</span></li>
-<li PCR="0.00">COMM 292<span class="CourseTitle"> - WARNING!  Graphic Content - Political Cartoons, Comix and the Uncensored Artistic Mind</span></li>
-<li PCR="0.00">COMM 321<span class="CourseTitle"> - Big Data and Social Research</span></li>
-<li PCR="3.58">COMM 322<span class="CourseTitle"> - History and Theory of Freedom of Expression</span></li>
-<li PCR="3.54">COMM 323<span class="CourseTitle"> - Contemporary Politics, Policy and Journalism</span></li>
-<li PCR="0.00">COMM 332<span class="CourseTitle"> - Survey Research and Design</span></li>
-<li PCR="2.11">COMM 339<span class="CourseTitle"> - Critical Perspectives in Journalism</span></li>
-<li PCR="2.82">COMM 375<span class="CourseTitle"> - Communications and Emergency Response</span></li>
-<li PCR="2.36">COMM 377<span class="CourseTitle"> - Philosophical Problems of Journalism</span></li>
-<li PCR="0.00">COMM 386<span class="CourseTitle"> - Nonprofit Communications Strategy</span></li>
-<li PCR="3.62">COMM 388<span class="CourseTitle"> - Ritual Communication</span></li>
-<li PCR="3.14">COMM 390<span class="CourseTitle"> - Politics, Media, &amp; Public Diplomacy</span></li>
-<li PCR="2.84">COMM 397<span class="CourseTitle"> - New Media and Politics</span></li>
-<li PCR="3.17">COMM 403<span class="CourseTitle"> - Comparative Political Communication</span></li>
-<li PCR="2.93">COMM 490<span class="CourseTitle"> - Special Topics in Comm: Reinventing the Media Economy: Experiments in Averting E-pocalypse.</span></li>
-<li PCR="1.86">COMM 491<span class="CourseTitle"> - Communication Internship</span></li>
-<li PCR="3.43">COMM 495<span class="CourseTitle"> - COMPS Capstone Thesis</span></li>
-<li PCR="4.00">COMM 499<span class="CourseTitle"> - Senior Honors Thesis</span></li>
-<li PCR="0.00">COMM 530<span class="CourseTitle"> - Advertising and Society</span></li>
-<li PCR="0.00">COMM 533<span class="CourseTitle"> - Privacy in Law</span></li>
-<li PCR="0.00">COMM 566<span class="CourseTitle"> - Visual Communication &amp; Digital Media Laboratory</span></li>
-<li PCR="0.00">COMM 570<span class="CourseTitle"> - Introduction to Intellectual Property Law &amp; Policy</span></li>
-<li PCR="0.00">COMM 577<span class="CourseTitle"> - Attitudes and Attitude Theory</span></li>
-<li PCR="0.00">COMM 613<span class="CourseTitle"> - Technology and Policy</span></li>
-<li PCR="0.00">COMM 615<span class="CourseTitle"> - Experimental Design and Issues in Causality</span></li>
-<li PCR="0.00">COMM 675<span class="CourseTitle"> - Message Effects</span></li>
-<li PCR="0.00">COMM 753<span class="CourseTitle"> - The Internet, State Power, and Free Expression: Media Policy Evolution in a Evolving Global Context</span></li>
-<li PCR="0.00">COMM 760<span class="CourseTitle"> - Social Constructions of Reality</span></li>
-<li PCR="0.00">COMM 857<span class="CourseTitle"> - Advanced Qualitative Research</span></li>
-<li PCR="0.00">COMM 858<span class="CourseTitle"> - Mobile Privatization and Media History</span></li>
-<li PCR="0.00">COMM 859<span class="CourseTitle"> - Performing war: The changing media coverage of violent conflicts</span></li>
-<li PCR="0.00">COMM 990<span class="CourseTitle"> - Masters Thesis</span></li>
-<li PCR="0.00">COMM 995<span class="CourseTitle"> - Dissertation</span></li>
+<li data-pcr="2.15">COMM 130<span class="CourseTitle"> - Mass Media and Society</span></li>
+<li data-pcr="3.80">COMM 203<span class="CourseTitle"> - Media, Culture &amp; Society in Contemporary China</span></li>
+<li data-pcr="2.91">COMM 204<span class="CourseTitle"> - Hollywood Film Industry</span></li>
+<li data-pcr="2.43">COMM 210<span class="CourseTitle"> - Quantitative Research Methods in Communication</span></li>
+<li data-pcr="0.00">COMM 216<span class="CourseTitle"> - Big Data and Social Research</span></li>
+<li data-pcr="2.50">COMM 275<span class="CourseTitle"> - Communication and Persuasion</span></li>
+<li data-pcr="2.76">COMM 290<span class="CourseTitle"> - Collective Memory/Collective Future: Technologies, Strategies and Politics</span></li>
+<li data-pcr="3.23">COMM 291<span class="CourseTitle"> - Art, Communication, and Social Change</span></li>
+<li data-pcr="0.00">COMM 292<span class="CourseTitle"> - WARNING!  Graphic Content - Political Cartoons, Comix and the Uncensored Artistic Mind</span></li>
+<li data-pcr="0.00">COMM 321<span class="CourseTitle"> - Big Data and Social Research</span></li>
+<li data-pcr="3.58">COMM 322<span class="CourseTitle"> - History and Theory of Freedom of Expression</span></li>
+<li data-pcr="3.54">COMM 323<span class="CourseTitle"> - Contemporary Politics, Policy and Journalism</span></li>
+<li data-pcr="0.00">COMM 332<span class="CourseTitle"> - Survey Research and Design</span></li>
+<li data-pcr="2.11">COMM 339<span class="CourseTitle"> - Critical Perspectives in Journalism</span></li>
+<li data-pcr="2.82">COMM 375<span class="CourseTitle"> - Communications and Emergency Response</span></li>
+<li data-pcr="2.36">COMM 377<span class="CourseTitle"> - Philosophical Problems of Journalism</span></li>
+<li data-pcr="0.00">COMM 386<span class="CourseTitle"> - Nonprofit Communications Strategy</span></li>
+<li data-pcr="3.62">COMM 388<span class="CourseTitle"> - Ritual Communication</span></li>
+<li data-pcr="3.14">COMM 390<span class="CourseTitle"> - Politics, Media, &amp; Public Diplomacy</span></li>
+<li data-pcr="2.84">COMM 397<span class="CourseTitle"> - New Media and Politics</span></li>
+<li data-pcr="3.17">COMM 403<span class="CourseTitle"> - Comparative Political Communication</span></li>
+<li data-pcr="2.93">COMM 490<span class="CourseTitle"> - Special Topics in Comm: Reinventing the Media Economy: Experiments in Averting E-pocalypse.</span></li>
+<li data-pcr="1.86">COMM 491<span class="CourseTitle"> - Communication Internship</span></li>
+<li data-pcr="3.43">COMM 495<span class="CourseTitle"> - COMPS Capstone Thesis</span></li>
+<li data-pcr="4.00">COMM 499<span class="CourseTitle"> - Senior Honors Thesis</span></li>
+<li data-pcr="0.00">COMM 530<span class="CourseTitle"> - Advertising and Society</span></li>
+<li data-pcr="0.00">COMM 533<span class="CourseTitle"> - Privacy in Law</span></li>
+<li data-pcr="0.00">COMM 566<span class="CourseTitle"> - Visual Communication &amp; Digital Media Laboratory</span></li>
+<li data-pcr="0.00">COMM 570<span class="CourseTitle"> - Introduction to Intellectual Property Law &amp; Policy</span></li>
+<li data-pcr="0.00">COMM 577<span class="CourseTitle"> - Attitudes and Attitude Theory</span></li>
+<li data-pcr="0.00">COMM 613<span class="CourseTitle"> - Technology and Policy</span></li>
+<li data-pcr="0.00">COMM 615<span class="CourseTitle"> - Experimental Design and Issues in Causality</span></li>
+<li data-pcr="0.00">COMM 675<span class="CourseTitle"> - Message Effects</span></li>
+<li data-pcr="0.00">COMM 753<span class="CourseTitle"> - The Internet, State Power, and Free Expression: Media Policy Evolution in a Evolving Global Context</span></li>
+<li data-pcr="0.00">COMM 760<span class="CourseTitle"> - Social Constructions of Reality</span></li>
+<li data-pcr="0.00">COMM 857<span class="CourseTitle"> - Advanced Qualitative Research</span></li>
+<li data-pcr="0.00">COMM 858<span class="CourseTitle"> - Mobile Privatization and Media History</span></li>
+<li data-pcr="0.00">COMM 859<span class="CourseTitle"> - Performing war: The changing media coverage of violent conflicts</span></li>
+<li data-pcr="0.00">COMM 990<span class="CourseTitle"> - Masters Thesis</span></li>
+<li data-pcr="0.00">COMM 995<span class="CourseTitle"> - Dissertation</span></li>

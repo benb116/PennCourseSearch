@@ -1,37 +1,37 @@
-<li PCR="0.00">SWRK 614<span class="CourseTitle"> - Foundations of Social Work Practice II</span></li>
-<li PCR="0.00">SWRK 615<span class="CourseTitle"> - Introduction to Social Work Research</span></li>
-<li PCR="0.00">SWRK 706<span class="CourseTitle"> - Policies for Children and Their Families</span></li>
-<li PCR="0.00">SWRK 710<span class="CourseTitle"> - Supervision Seminar</span></li>
-<li PCR="0.00">SWRK 711<span class="CourseTitle"> - Contemporary Social Policy</span></li>
-<li PCR="0.00">SWRK 713<span class="CourseTitle"> - Understanding Social Change: Issues of Race and Gender</span></li>
-<li PCR="0.00">SWRK 714<span class="CourseTitle"> - Advanced Clinical Social Work Practice II</span></li>
-<li PCR="0.00">SWRK 718<span class="CourseTitle"> - Advanced Macro Social Work Practice II</span></li>
-<li PCR="0.00">SWRK 722<span class="CourseTitle"> - Practice with Children and Adolescence</span></li>
-<li PCR="0.00">SWRK 724<span class="CourseTitle"> - Developmental Disabilities</span></li>
-<li PCR="0.00">SWRK 727<span class="CourseTitle"> - Practice with Families</span></li>
-<li PCR="0.00">SWRK 729<span class="CourseTitle"> - Social Statistics</span></li>
-<li PCR="0.00">SWRK 730<span class="CourseTitle"> - Community Mapping</span></li>
-<li PCR="0.00">SWRK 732<span class="CourseTitle"> - Integrative Seminar in Child Welfare</span></li>
-<li PCR="0.00">SWRK 738<span class="CourseTitle"> - Anxiety and Depression</span></li>
-<li PCR="0.00">SWRK 744<span class="CourseTitle"> - Direct Practice Research</span></li>
-<li PCR="0.00">SWRK 746<span class="CourseTitle"> - Political Social Work</span></li>
-<li PCR="0.00">SWRK 748<span class="CourseTitle"> - Microfinance and Women&#39;s Empowerment in India</span></li>
-<li PCR="0.00">SWRK 756<span class="CourseTitle"> - Human Sexuality</span></li>
-<li PCR="0.00">SWRK 759<span class="CourseTitle"> - Substance Abuse Interventions</span></li>
-<li PCR="0.00">SWRK 760<span class="CourseTitle"> - Mental Health Diagnostics</span></li>
-<li PCR="0.00">SWRK 763<span class="CourseTitle"> - Immigration: Policy &amp; Practice</span></li>
-<li PCR="0.00">SWRK 769<span class="CourseTitle"> - Aging: The Intersection of Policy and Practice</span></li>
-<li PCR="0.00">SWRK 774<span class="CourseTitle"> - Program Evaluation</span></li>
-<li PCR="0.00">SWRK 778<span class="CourseTitle"> - Dialectical Behavioral Therapy</span></li>
-<li PCR="0.00">SWRK 780<span class="CourseTitle"> - Policy and "Difference" in Postmodernity</span></li>
-<li PCR="0.00">SWRK 781<span class="CourseTitle"> - Qualitative Research</span></li>
-<li PCR="0.00">SWRK 782<span class="CourseTitle"> - Introduction to Mental Health Practice with U.S.  Veterans</span></li>
-<li PCR="0.00">SWRK 783<span class="CourseTitle"> - Advanced Mental Health Practice with U.S.  Veterans</span></li>
-<li PCR="0.00">SWRK 785<span class="CourseTitle"> - Criminal Justice Policies: Implications for Social Work</span></li>
-<li PCR="0.00">SWRK 792<span class="CourseTitle"> - Psychodynamic Theory</span></li>
-<li PCR="3.78">SWRK 793<span class="CourseTitle"> - Global Health and Health Policy</span></li>
-<li PCR="0.00">SWRK 798<span class="CourseTitle"> - Advanced Topics</span></li>
-<li PCR="0.00">SWRK 811<span class="CourseTitle"> - Social Theory</span></li>
-<li PCR="0.00">SWRK 855<span class="CourseTitle"> - Advanced Research Methods</span></li>
-<li PCR="0.00">SWRK 861<span class="CourseTitle"> - Policy Analysis</span></li>
-<li PCR="0.00">SWRK 901<span class="CourseTitle"> - Proseminar</span></li>
+<li data-pcr="0.00">SWRK 614<span class="CourseTitle"> - Foundations of Social Work Practice II</span></li>
+<li data-pcr="0.00">SWRK 615<span class="CourseTitle"> - Introduction to Social Work Research</span></li>
+<li data-pcr="0.00">SWRK 706<span class="CourseTitle"> - Policies for Children and Their Families</span></li>
+<li data-pcr="0.00">SWRK 710<span class="CourseTitle"> - Supervision Seminar</span></li>
+<li data-pcr="0.00">SWRK 711<span class="CourseTitle"> - Contemporary Social Policy</span></li>
+<li data-pcr="0.00">SWRK 713<span class="CourseTitle"> - Understanding Social Change: Issues of Race and Gender</span></li>
+<li data-pcr="0.00">SWRK 714<span class="CourseTitle"> - Advanced Clinical Social Work Practice II</span></li>
+<li data-pcr="0.00">SWRK 718<span class="CourseTitle"> - Advanced Macro Social Work Practice II</span></li>
+<li data-pcr="0.00">SWRK 722<span class="CourseTitle"> - Practice with Children and Adolescence</span></li>
+<li data-pcr="0.00">SWRK 724<span class="CourseTitle"> - Developmental Disabilities</span></li>
+<li data-pcr="0.00">SWRK 727<span class="CourseTitle"> - Practice with Families</span></li>
+<li data-pcr="0.00">SWRK 729<span class="CourseTitle"> - Social Statistics</span></li>
+<li data-pcr="0.00">SWRK 730<span class="CourseTitle"> - Community Mapping</span></li>
+<li data-pcr="0.00">SWRK 732<span class="CourseTitle"> - Integrative Seminar in Child Welfare</span></li>
+<li data-pcr="0.00">SWRK 738<span class="CourseTitle"> - Anxiety and Depression</span></li>
+<li data-pcr="0.00">SWRK 744<span class="CourseTitle"> - Direct Practice Research</span></li>
+<li data-pcr="0.00">SWRK 746<span class="CourseTitle"> - Political Social Work</span></li>
+<li data-pcr="0.00">SWRK 748<span class="CourseTitle"> - Microfinance and Women&#39;s Empowerment in India</span></li>
+<li data-pcr="0.00">SWRK 756<span class="CourseTitle"> - Human Sexuality</span></li>
+<li data-pcr="0.00">SWRK 759<span class="CourseTitle"> - Substance Abuse Interventions</span></li>
+<li data-pcr="0.00">SWRK 760<span class="CourseTitle"> - Mental Health Diagnostics</span></li>
+<li data-pcr="0.00">SWRK 763<span class="CourseTitle"> - Immigration: Policy &amp; Practice</span></li>
+<li data-pcr="0.00">SWRK 769<span class="CourseTitle"> - Aging: The Intersection of Policy and Practice</span></li>
+<li data-pcr="0.00">SWRK 774<span class="CourseTitle"> - Program Evaluation</span></li>
+<li data-pcr="0.00">SWRK 778<span class="CourseTitle"> - Dialectical Behavioral Therapy</span></li>
+<li data-pcr="0.00">SWRK 780<span class="CourseTitle"> - Policy and "Difference" in Postmodernity</span></li>
+<li data-pcr="0.00">SWRK 781<span class="CourseTitle"> - Qualitative Research</span></li>
+<li data-pcr="0.00">SWRK 782<span class="CourseTitle"> - Introduction to Mental Health Practice with U.S.  Veterans</span></li>
+<li data-pcr="0.00">SWRK 783<span class="CourseTitle"> - Advanced Mental Health Practice with U.S.  Veterans</span></li>
+<li data-pcr="0.00">SWRK 785<span class="CourseTitle"> - Criminal Justice Policies: Implications for Social Work</span></li>
+<li data-pcr="0.00">SWRK 792<span class="CourseTitle"> - Psychodynamic Theory</span></li>
+<li data-pcr="3.78">SWRK 793<span class="CourseTitle"> - Global Health and Health Policy</span></li>
+<li data-pcr="0.00">SWRK 798<span class="CourseTitle"> - Advanced Topics</span></li>
+<li data-pcr="0.00">SWRK 811<span class="CourseTitle"> - Social Theory</span></li>
+<li data-pcr="0.00">SWRK 855<span class="CourseTitle"> - Advanced Research Methods</span></li>
+<li data-pcr="0.00">SWRK 861<span class="CourseTitle"> - Policy Analysis</span></li>
+<li data-pcr="0.00">SWRK 901<span class="CourseTitle"> - Proseminar</span></li>
