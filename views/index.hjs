@@ -21,7 +21,9 @@
                 <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses...">
                 <span style="margin-left:1em;" class="OpenSec">&nbsp&nbsp&nbsp&nbsp&nbsp</span><span> = Open </span><span class="ClosedSec">&nbsp&nbsp&nbsp&nbsp&nbsp</span><span> = Closed </span><span id="LoadingInfo" style="opacity:0;">Loading...</span>
     		</form>
-    		<span>Toggle course titles</span><span>Clear All</span><span>Download Schedule</span>
+            <div id="MenuButtons">
+        		<span>Toggle course titles</span><span>Clear All</span><span>Download Schedule</span><span>Recolor</span>
+            </div>
 		</div>
         <div id="BottomResults">
         	<div id="CourseList"></div>

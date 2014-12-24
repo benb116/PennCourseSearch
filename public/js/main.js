@@ -1,11 +1,19 @@
  $(document).ready(function() {
+	// The delay function that prevents immediate requests
 	var delay = (function(){
 	  var timer = 0;
 	  return function(callback, ms){
 		clearTimeout (timer);
 		timer = setTimeout(callback, ms);
 	  };
-	})(); // The delay function that prevents immediate requests
+	})();
+
+	//+ Jonas Raoni Soares Silva
+	//@ http://jsfromhell.com/array/shuffle [v1.0]
+	function shuffle(o){ //v1.0
+	    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+	    return o;
+	};
 
 	LoadingSum = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
 
@@ -21,6 +29,8 @@
 	});
 
 	TitleHidden = true;
+	colorPalette = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#ecf0f1','#2ecc71','#95a5a6','#FF73FD','#e67e22','#73F1FF','#CA75FF'];
+
 	$('#Top span').click(function() {
 		if ($(this).html() == 'Toggle course titles') {
 			$('.CourseTitle').toggle();
@@ -44,6 +54,19 @@
 			  }
 			});	
 		};
+		if ($(this).html() == 'Recolor') {
+			newcolorPalette = shuffle(colorPalette);
+			LoadingSum += 1;
+			LoadingIndicate()
+			$.get("/Sched?addRem=blank&courseID=blank") // Make the request
+			.done(function(data) {
+				SpitSched(data)
+			})
+			.always(function() {
+				LoadingSum -= 1;
+				LoadingIndicate()
+			});
+		}
 	});
 
 
@@ -151,6 +174,7 @@ function searchDesc(desc) {
 	$.get("/Search?searchType=descSearch&courseID="+desc+"&term="+termSelect) // Make the request
 	.done(function(data) {
 		$('#CourseList').html(data); // Put the course number list in #CourseList
+		if (TitleHidden == false) {$('.CourseTitle').toggle();}
 		$('#CourseList li').click(function() { // If a course is clicked
 			$('#CSearch').val($(this).html().split("<")[0]); // Change the search box to match
 			$('#SectionInfo').empty();
@@ -229,6 +253,7 @@ function addToSched(sec) { // Getting info about a section
 	});
 }
 function removeFromSched(sec) {
+	// Determine the secname by checking when a character is no longer a number (which means the character is the meetDay of the block id)
 	for (var i = 7; i < sec.length; i++) {
 		if (parseFloat(sec[i]) != sec[i]) {
 			secname = sec.substr(0, i);
@@ -247,101 +272,101 @@ function removeFromSched(sec) {
 	});
 }
 function SpitSched(courseSched) {
-	$('#Schedule').empty();
+	$('#Schedule').empty(); // Clear
 	$('#TimeCol').empty();
 
+	// Set initial values
 	var weekdays = ['M', 'T', 'W', 'R', 'F'];
-	var colorPalette = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#ecf0f1','#2ecc71','#95a5a6','#FF73FD','#e67e22','#73F1FF','#CA75FF'];
-   	var startHour = 10;
-   	var endHour = 18;
-   	var percentWidth = 20;
-	incSun = 0
-	incSat = 0
+   	var startHour = 10; // start at 10
+   	var endHour = 18; // end at 6pm
+   	var percentWidth = 20; // five day default
+	incSun = 0; // no weekends
+	incSat = 0;
 
    	for (var sec in courseSched) {
-   		if (courseSched[sec].meetHour <= startHour) {
-   			startHour = courseSched[sec].meetHour
+   		if (courseSched[sec].meetHour <= startHour) { // If there are classes earlier than the default start
+   			startHour = courseSched[sec].meetHour // push back the earliest hour
    		}
-   		if (courseSched[sec].meetHour+courseSched[sec].HourLength >= endHour) {
+   		if (courseSched[sec].meetHour+courseSched[sec].HourLength >= endHour) { // Push back latest hour if necessary
    			endHour = courseSched[sec].meetHour+courseSched[sec].HourLength
    		}
    		for (var day in courseSched[sec].meetDay) {
    			var letterDay = courseSched[sec].meetDay[day]
-   			if (letterDay == 'U') {
+   			if (letterDay == 'U') { // If there are sunday classes
    				incSun = 1;
    			}
-   			if (letterDay == 'S') {
+   			if (letterDay == 'S') { // If there are saturday classes
    				incSat = 1;	
    			}
    		}
    	}
 
-   	if (incSun == 1) {weekdays.unshift('U')}
+   	if (incSun == 1) {weekdays.unshift('U')} // Update weekdays array if necessary
 	if (incSat == 1) {weekdays.push('S')}
 
-   	var percentWidth = 100 / (5 + incSun + incSat)
+   	var percentWidth = 100 / (5 + incSun + incSat) // Update the block width if necessary
 
- 	var halfScale = 100 / (endHour - startHour + 1);
+ 	var halfScale = 100 / (endHour - startHour + 1); // This defines the scale to be used throughout the scheduling process
+ 	// + 1 keeps the height inside the box
 
-   	for (var i = 0; i <= (endHour - startHour); i++) {
-   		toppos = (i) * halfScale + 2.5;
-   		hourtext = Math.round(i+startHour)
-   		if (hourtext > 12) {hourtext -= 12}
-	   	$('#TimeCol').append('<div class="TimeBlock" style="top:'+toppos+'%">'+hourtext+':00</div>');
-	   	$('#Schedule').append('<hr width="100%"style="top:'+toppos+'%" >')
+ 	// Make the lines and time labels
+   	for (var i = 0; i <= (endHour - startHour); i++) { // for each hour
+   		toppos = (i) * halfScale + 2.5; // each height value is linearly spaced with an offset
+   		hourtext = Math.round(i+startHour) // If startHour is not an integer, make it pretty
+   		if (hourtext > 12) {hourtext -= 12} // no 24-hour time
+	   	$('#TimeCol').append('<div class="TimeBlock" style="top:'+toppos+'%">'+hourtext+':00</div>'); // add time label
+	   	$('#Schedule').append('<hr width="100%"style="top:'+toppos+'%" >') // add time line
    	};
+
+   	// Define the color map
    	var colorMap = {};
    	var colorinc = 0;
    	for (var sec in courseSched) {
-   		// var colorInd = Math.floor(Math.random() * colorPalette.length)
-   		// var colAdd = colorPalette[colorInd]; // Get random color
-   		// colorPalette.splice(colorInd, 1);
-   		console.log(colorPalette[colorinc])
-   		colorMap[courseSched[sec].fullCourseName] = colorPalette[colorinc];
+   		colorMap[courseSched[sec].fullCourseName] = colorPalette[colorinc]; // assign each section a color
    		colorinc += 1;
    	}
-   	console.log(colorMap)
+
+   	// Add the blocks
    	for (var sec in courseSched) {
-   		for (var day in courseSched[sec].meetDay) {
-   			var letterDay = courseSched[sec].meetDay[day]
+   		for (var day in courseSched[sec].meetDay) { // some sections have multiple meeting times and days
+   			var letterDay = courseSched[sec].meetDay[day] // On which day does this meeting take place?
    			for (var possDay in weekdays) {
    				if (weekdays[possDay] == letterDay) {
-   					var blockleft = possDay*percentWidth; { break }
+   					var blockleft = possDay*percentWidth; { break } // determine left spacing
    				}
    			}
-	   		var blocktop = (courseSched[sec].meetHour - startHour) * halfScale + 4;
+	   		var blocktop = (courseSched[sec].meetHour - startHour) * halfScale + 4; // determine top spacing based on time from startHour (offset for prettiness)
 	   		var blockheight = courseSched[sec].HourLength * halfScale;
 	   		var blockname = courseSched[sec].fullCourseName
 	   		var meetRoom = courseSched[sec].meetRoom;
-	   		var thiscol = colorMap[courseSched[sec].fullCourseName];
+	   		var thiscol = colorMap[courseSched[sec].fullCourseName]; // Get the color
 	   		$('#Schedule').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;width:'+percentWidth+'%;height:'+blockheight+'%;background-color:'+thiscol+'"><div class="CloseX">x</div>'+blockname+'<br>'+meetRoom+'</div>');
    		}
    	}
 
-   	$('.CloseX').click(function(e) { // If a course is clicked
-		removeFromSched($(this).parent().attr('id'));
+   	$('.CloseX').click(function(e) { // If an X is clicked
+		removeFromSched($(this).parent().attr('id')); // Get rid of the section
 		e.stopPropagation();
 	});
 	$('.SchedBlock')
 	.mouseover(function() {
-		$(this).find('.CloseX').css('opacity', '1');
+		$(this).find('.CloseX').css('opacity', '1'); // Show the X
 	})
 	.mouseout(function() {
-		$(this).find('.CloseX').css('opacity', '0');
+		$(this).find('.CloseX').css('opacity', '0'); // Hide the X
 	})
   	.click(function() { // If a course is clicked
 		sec = $(this).attr('id');
+		// Determine the secname by checking when a character is no longer a number (which means the character is the meetDay of the block id)
 		for (var i = 7; i < sec.length; i++) {
 			if (parseFloat(sec[i]) != sec[i]) {
 				secname = sec.substr(0, i);
 				{ break }
 			}
 		};
-		console.log(secname)
-		// var secname = $(this).attr('id').slice(0,10)
+
 		var cnum = secname.slice(0,-3);
 		var dept = secname.slice(0,-6);
-		console.log(cnum)
 		$('#CSearch').val(secname); // Change the search box to match
 		getSectionInfo(secname);
 		getSectionNumbers(cnum);
@@ -350,7 +375,6 @@ function SpitSched(courseSched) {
 }
 
 function LoadingIndicate() {
-	// console.log(LoadingSum)
 	if (LoadingSum > 0) {
 		$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
 	} else {
