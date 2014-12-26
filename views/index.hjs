@@ -4,7 +4,7 @@
 		<title>PennCourseScheduler</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="/css/index.css">
-		<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans|Istok+Web|Sniglet|Open+Sans'>
+		<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans'>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script type="text/javascript" src="/js/html2canvas.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
@@ -32,9 +32,10 @@
         		<div id="SectionInfo"></div>
         	</div>
         	<div id="InfoPanel">
-        		<div id="TimeCol" style="position:relative;"></div>
-                <div id="Schedule" style="position:relative;"></div>
-                
+                <div id="SchedGraph">
+            		<div id="TimeCol" style="position:relative;"></div>
+                    <div id="Schedule" style="position:relative;"></div>
+                </div>
 
         	</div>
         </div>

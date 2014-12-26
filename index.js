@@ -122,7 +122,7 @@ app.get('/Search', function(req, res) {
 
 // Get previously scheduled sections
 SchedCourses = {};
-myPennkey = 'bernsb';
+myPennkey = config.Pennkey;
 console.time('DB Time')
 db.Students.find({Pennkey: myPennkey}, { Sched1: 1}, function(err, doc) {
 	try {
@@ -261,21 +261,21 @@ function parseSectionList(JSONString) {
       	if (StatusClass == "OpenSec") {var OpenClose = 'Open'} else {var OpenClose = 'Closed'};
 
 		if (entry['recitations'] != false) { // If it has recitations
-			var AsscList = '<br>Associated Recitations: <ul>';
+			var AsscList = '<br><span class="AsscButton">Associated Recitations</span><ul class="AsscText">';
 			for(var key in entry.recitations) {
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</span></li>'
 			};
 			AsscList += '</ul>';
 
 		} else if (entry['labs'] != false) { // If it has labs
-			var AsscList = '<br>Associated Labs: <ul>';
+			var AsscList = '<br><span class="AsscButton">Associated Labs</span><ul class="AsscText">';
 			for(var key in entry.labs) {
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</span></li>'
 			};
 			AsscList += '</ul>';
 
 		} else if (entry['lectures'] != false) { // If it has lectures
-			var AsscList = '<br>Associated Lectures: <ul>';
+			var AsscList = '<br><span class="AsscButton">Associated Lectures</span><ul class="AsscText">';
 			for(var key in entry.lectures) {
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</span></li>'
 			};

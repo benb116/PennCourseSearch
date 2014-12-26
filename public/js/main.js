@@ -46,7 +46,7 @@
 			SpitSched()
 		}
 		if ($(this).html() == 'Download Schedule') {
-			html2canvas($('#InfoPanel'), {
+			html2canvas($('#SchedGraph'), {
 			  onrendered: function(canvas) {
 			    var image = new Image();
 			    image.src = canvas.toDataURL("image/png");
@@ -222,8 +222,10 @@ function getSectionInfo(sec) {
 		$('.DescButton').click(function() { // If a course is clicked
 			$('#SectionInfo p').toggle();
 		});
+		$('.AsscButton').click(function() { // If a course is clicked
+			$('#SectionInfo ul').toggle();
+		});
 		$('#SectionInfo span:nth-child(1)').click(function() { // If a section is clicked
-			
 			var secname = $(this).next().html().replace(/ /g, ""); // Format the section name for searching
 			addToSched(secname); // Search for section info			
 		});
@@ -283,7 +285,9 @@ function SpitSched(courseSched) {
 	incSun = 0; // no weekends
 	incSat = 0;
 
-   	for (var sec in courseSched) {
+	console.log(Object.keys(courseSched).length)
+
+	for (var sec in courseSched) {
    		if (courseSched[sec].meetHour <= startHour) { // If there are classes earlier than the default start
    			startHour = courseSched[sec].meetHour // push back the earliest hour
    		}
@@ -310,13 +314,15 @@ function SpitSched(courseSched) {
  	// + 1 keeps the height inside the box
 
  	// Make the lines and time labels
-   	for (var i = 0; i <= (endHour - startHour); i++) { // for each hour
-   		toppos = (i) * halfScale + 2.5; // each height value is linearly spaced with an offset
-   		hourtext = Math.round(i+startHour) // If startHour is not an integer, make it pretty
-   		if (hourtext > 12) {hourtext -= 12} // no 24-hour time
-	   	$('#TimeCol').append('<div class="TimeBlock" style="top:'+toppos+'%">'+hourtext+':00</div>'); // add time label
-	   	$('#Schedule').append('<hr width="100%"style="top:'+toppos+'%" >') // add time line
-   	};
+	if (Object.keys(courseSched).length > 0){
+	   	for (var i = 0; i <= (endHour - startHour); i++) { // for each hour
+	   		toppos = (i) * halfScale + 2.5; // each height value is linearly spaced with an offset
+	   		hourtext = Math.round(i+startHour) // If startHour is not an integer, make it pretty
+	   		if (hourtext > 12) {hourtext -= 12} // no 24-hour time
+		   	$('#TimeCol').append('<div class="TimeBlock" style="top:'+toppos+'%">'+hourtext+':00</div>'); // add time label
+		   	$('#Schedule').append('<hr width="100%"style="top:'+toppos+'%" >') // add time line
+	   	};
+    }
 
    	// Define the color map
    	var colorMap = {};
