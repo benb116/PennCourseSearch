@@ -1,25 +1,22 @@
 {
   "name": "PennCourseScheduler",
   "version": "0.1.0",
-  "description": "A better way to make schedules",
+  "description": "A barebones web app designed to help Penn students find classes and make schedules",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
+    "colors": "^1.0.3",
     "express": "^3.4.8",
-    "mongojs": "^0.18.0"
+    "mongojs": "^0.18.0",
+    "request": "^2.51.0"
   },
   "engines": {
     "node": "0.10.x"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ]
+    "url":  "https://github.com/benb116/PennCourseSearch"
+  }
 }

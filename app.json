@@ -1,7 +1,5 @@
 {
-  "name": "Node.js Getting Started",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/heroku/node-js-getting-started",
-  "logo": "http://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["node", "express", "static"]
+  "name": "PennCourseSearch",
+  "description": "A barebones web app designed to help Penn students find classes and make schedules",
+  "repository": "https://github.com/benb116/PennCourseSearch",
 }

@@ -1,36 +1,9 @@
-# node-js-getting-started
+# PennCourseSearch
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+Fed up with the bloated, inefficient, ugly excuse for an online portal that is Penn InTouch, I decided to make a cleaner and simpler way for Quakers to find classes and make schedules. While this is not a full replacement for Penn InTouch, it acts as an improvement of the "Course Search" and "Mock Schedules" features.
 
-This application support the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+Students can search departments, courses, and sections as well as descriptions and (soon) instructors. All of the data comes from the [Penn OpenData API](https://esb.isc-seo.upenn.edu/8091/documentation/) and [PennCourseReview API](http://pennlabs.org/docs/pcr.html). The server sorts and returns the requested information in preformatted HTML (this probably is not the most efficient method, but oh well). Schedules are also created using OpenData information and the image is made using client-side JS.
 
-## Running Locally
+The server is written using NodeJS and the app is currently hosted on Heroku.
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
-
-```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
-$ npm install
-$ npm start
-```
-
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
-
-## Documentation
-
-For more information about using Node.js on Heroku, see these Dev Center articles:
-
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+If you have questions, ideas, bug reports, or if you'd like to suggest a new subtitle, let me know.
