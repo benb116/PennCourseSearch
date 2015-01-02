@@ -1,4 +1,5 @@
 body {width: 100%; height: 100%; text-align: center; margin: 0; background-color: #E6E6E6; 
+	font-family: 'Helvetica';
 	font-family: 'Open Sans', 'sans-serif'; 
 	min-width: 950px;}
 #Top {height: 5em;}
@@ -43,7 +44,7 @@ ul {list-style-type: none; padding: 0; margin: 0;}
 	display: inline-block;
 	vertical-align: top;
 	min-height: 300px;}
-#TimeCol {width: 5%; min-width: 40px;}
+#TimeCol {width: 5%; min-width: 40px; }
 #Schedule {width: 90%;}
 .SchedBlock {
 	display: table-cell; 
@@ -54,12 +55,12 @@ ul {list-style-type: none; padding: 0; margin: 0;}
 	color: black;
 	box-sizing: border-box;
 	overflow-y: hidden;}
-.TimeBlock, hr {position: relative; position: absolute; text-align: center;}
-.TimeBlock {width: 5%;}
-.CloseX {position: absolute; top: 0; left: 0; display: block; width: 15px; height: 15px; color: #ADADAD; opacity: 0; 
-	-webkit-transition: opacity .15s ease-in-out; transition: opacity .15s ease-in-out;
-	-webkit-transition: color .15s ease-in-out; transition: color .15s ease-in-out;}
-.CloseX:hover {color: black;}
+.TimeBlock, hr {position: relative; 
+	position: absolute;
+	text-align: center;}
+.TimeBlock {width: 5%; margin-right: 0;}
+.CloseX {position: absolute; top: 0; left: 0; display: block; width: 15px; height: 15px; color: black; opacity: 0; 
+	-webkit-transition: opacity .15s ease-in-out; transition: opacity .15s ease-in-out;}
 
 input[type="text"] { 
 	width: 30em; margin-bottom: 0.5em;

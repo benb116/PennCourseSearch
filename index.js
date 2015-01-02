@@ -15,12 +15,12 @@ process.env.PWD = process.cwd()
 
 // Connect to database
 var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
-    db = mongojs.connect(uri, ["Students"]);
+		db = mongojs.connect(uri, ["Students"]);
 
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
-  console.log("Node app is running. Better go catch it.".green)
-  console.log("Search ".yellow + "Add ".cyan + "Remove ".magenta + "Spit ".blue + "Error ".red)
+	console.log("Node app is running. Better go catch it.".green)
+	console.log("Search ".yellow + "Add ".cyan + "Remove ".magenta + "Spit ".blue + "Error ".red)
 })
 
 // Rotating subtitles
@@ -32,13 +32,12 @@ subtitles = [	"Cause PennInTouch sucks.",
 				"Faster than you can say 'Wawa run.'"];
 // Handle main page requests
 app.get('/', function(req, res) {
-
-  thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
-  console.log(thissub)
-  return res.render('index', { // Send page
-    title: 'Penn Course Search',
-    subtitle: thissub
-  });
+	thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
+	console.log(thissub)
+	return res.render('index', { // Send page
+		title: 'Penn Course Search',
+		subtitle: thissub
+	});
 })
 
 // This request manager is for spitting the department lists. They are saved for faster responses
@@ -85,15 +84,25 @@ app.get('/PCRSpitRev', function(req, res) {
 
 // Manage search requests
 app.get('/Search', function(req, res) {
-	var courseIDSearch = req.query.courseID;
-	console.log(courseIDSearch.yellow);
+	var searchParam = req.query.searchParam;
+	console.log(searchParam.yellow);
 	var searchType = req.query.searchType;
 	var termSelect = req.query.term;
 	if (searchType == 'descSearch') { // If it's a description search
 		console.time('  Request Time'); // Start the timer
-		request({
-		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?description='+courseIDSearch+'&number_of_results_per_page=200&term='+termSelect,
-		  method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
+	    request({
+			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?description='+searchParam+'&number_of_results_per_page=200',
+			method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
+		}, function(error, response, body) {
+			console.timeEnd('  Request Time');
+			var searchResponse = parseDeptList(body) // Parse the coursenumber response
+			return res.send(searchResponse); // return correct info
+		});
+	} else if (searchType == 'instSearch') { // If it's a description search
+		console.time('  Request Time'); // Start the timer
+	    request({
+			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?instructor='+searchParam+'&number_of_results_per_page=200',
+			method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
 		}, function(error, response, body) {
 			console.timeEnd('  Request Time');
 			var searchResponse = parseDeptList(body) // Parse the coursenumber response
@@ -101,9 +110,9 @@ app.get('/Search', function(req, res) {
 		});
 	} else {
 		console.time('  Request Time'); // Start the timer
-		request({
-		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseIDSearch+'&number_of_results_per_page=200&term='+termSelect,
-		  method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
+	    request({
+			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+searchParam+'&number_of_results_per_page=200',
+			method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
 		}, function(error, response, body) {
 			console.timeEnd('  Request Time');
 			try {
@@ -126,7 +135,7 @@ myPennkey = config.Pennkey;
 console.time('DB Time')
 db.Students.find({Pennkey: myPennkey}, { Sched1: 1}, function(err, doc) {
 	try {
-	SchedCourses = doc[0].Sched1;
+		SchedCourses = doc[0].Sched1;
 	} catch(error) {
 		db.Students.insert({Pennkey: myPennkey});
 		db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database	
@@ -140,9 +149,9 @@ app.get('/Sched', function(req, res) {
 	var courseID = req.query.courseID;
 	var termSelect = req.query.term;
 	if (addRem == 'add') { // If we need to add, then we get meeting info for the section
-		request({
-		  uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID+"&term="+termSelect,
-		  method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
+	  request({
+			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID+"&term="+termSelect,
+			method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
 		}, function(error, response, body) {
 			resJSON = getSchedInfo(body); // Format the response
 			console.log('Sched Added: '.cyan)
@@ -177,27 +186,28 @@ app.get('/Sched', function(req, res) {
 
 function parseDeptList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
+	console.log(Res)
 	var coursesList = [];
 	for(var key in Res.result_data) { // Iterate through each course
-      	var courseListName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
-      	if (coursesList.indexOf('<li>'+courseListName+'<span class="CourseTitle"> - '+courseTitle+'</span></li>') == -1) { // If it's not already in the list
-      		var courseTitle = Res.result_data[key].course_title;
-      		coursesList.push('<li>'+courseListName+'<span class="CourseTitle"> - '+courseTitle+'</span></li>'); // Add and format
-      	};
-    }
+		var courseListName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
+		if (coursesList.indexOf('<li>'+courseListName+'<span class="CourseTitle"> - '+courseTitle+'</span></li>') == -1) { // If it's not already in the list
+			var courseTitle = Res.result_data[key].course_title;
+			coursesList.push('<li>'+courseListName+'<span class="CourseTitle"> - '+courseTitle+'</span></li>'); // Add and format
+		};
+	}
 	return coursesList;
 }
 
 function getTimeInfo(JSONObj) { // A function to retrieve and format meeting times
 	OCStatus = JSONObj.course_status;
-  	if (OCStatus == "O") {
-  		var StatusClass = 'OpenSec' // If section is open, add class open
-  	} else if (OCStatus == "C") {
-  		var StatusClass = 'ClosedSec' // If section is closed, add class closed
-  	} else {
-  		var StatusClass = 'ErrorSec' // Otherwise make it gray
-  	};
-  	var TimeInfo = [];
+	if (OCStatus == "O") {
+		var StatusClass = 'OpenSec' // If section is open, add class open
+	} else if (OCStatus == "C") {
+		var StatusClass = 'ClosedSec' // If section is closed, add class closed
+	} else {
+		var StatusClass = 'ErrorSec' // Otherwise make it gray
+	};
+	var TimeInfo = [];
 	try { // Not all sections have time info
 		for(var meeting in JSONObj.meetings) { // Some sections have multiple meeting forms (I'm looking at you PHYS151)
 			var StartTime = JSONObj.meetings[meeting].start_time.split(" ")[0]; // Get start time
@@ -221,18 +231,18 @@ function parseCourseList(JSONString) {
 	var courseTitle = Res.result_data[0].course_title;
 	var sectionsList = '<span>'+courseTitle+'</span>' // Give the list a title
 	for(var key in Res.result_data) {
-      	var SectionName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number+' '+Res.result_data[key].section_number;
-      	var TimeInfoArray = getTimeInfo(Res.result_data[key]); // Get meeting times for a section
-      	var StatusClass = TimeInfoArray[0];
-      	var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
-      	if(typeof TimeInfoArray[1][1] !== 'undefined'){TimeInfo += ' ...';}; // If there are multiple meeting times
-      	if(typeof TimeInfo === 'undefined'){TimeInfo = '';};
+		var SectionName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number+' '+Res.result_data[key].section_number;
+		var TimeInfoArray = getTimeInfo(Res.result_data[key]); // Get meeting times for a section
+		var StatusClass = TimeInfoArray[0];
+		var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
+		if(typeof TimeInfoArray[1][1] !== 'undefined'){TimeInfo += ' ...';}; // If there are multiple meeting times
+		if(typeof TimeInfo === 'undefined'){TimeInfo = '';};
 		if (sectionsList.indexOf(SectionName) == -1) { // If it's not already in the list
-      		sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+SectionName+TimeInfo+'</span></li>'; // Add and format
-      	};
-    }
-    if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'
-    return sectionsList;
+			sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+SectionName+TimeInfo+'</span></li>'; // Add and format
+		};
+	}
+	if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'
+	return sectionsList;
 }
 
 function parseSectionList(JSONString) {
@@ -248,17 +258,17 @@ function parseSectionList(JSONString) {
 		}
 		var Desc = entry.course_description;
 		var TimeInfoArray = getTimeInfo(entry);
-      	var StatusClass = TimeInfoArray[0];
-      	var meetArray = TimeInfoArray[1];
-      	var TimeInfo = '';
-      	var prereq = entry.prerequisite_notes;
-      	if (prereq == "") {prereq = "none"}
-  		var termsOffered = entry.course_terms_offered;
-      	for(var listing in meetArray) {
-      		TimeInfo += meetArray[listing].split("-")[1] + '<br>';
-      	}
+		var StatusClass = TimeInfoArray[0];
+		var meetArray = TimeInfoArray[1];
+		var TimeInfo = '';
+		var prereq = entry.prerequisite_notes;
+		if (prereq == "") {prereq = "none"}
 
-      	if (StatusClass == "OpenSec") {var OpenClose = 'Open'} else {var OpenClose = 'Closed'};
+		var termsOffered = entry.course_terms_offered;
+		for(var listing in meetArray) {
+			TimeInfo += meetArray[listing].split("-")[1] + '<br>';
+		}
+		if (StatusClass == "OpenSec") {var OpenClose = 'Open'} else {var OpenClose = 'Closed'};
 
 		if (entry['recitations'] != false) { // If it has recitations
 			var AsscList = '<br><span class="AsscButton">Associated Recitations</span><ul class="AsscText">';
@@ -285,7 +295,7 @@ function parseSectionList(JSONString) {
 			AsscList = '';
 		};
 
-		return "<span>&nbsp + &nbsp</span><span>" + FullID + "</span> - " + Title + Instructor +  "<br><br><span class='DescButton'>Description</span><br><p class='DescText'>" + Desc + "</p><br>Status: " + OpenClose + "<br><br>"+termsOffered+"<br><br>Prerequisites: " + prereq + "<br><br>" + TimeInfo + AsscList; // Format the whole response
+		return "<span>&nbsp + &nbsp</span><span>" + FullID + "</span> - " + Title + Instructor +	"<br><br><span class='DescButton'>Description</span><br><p class='DescText'>" + Desc + "</p><br>Status: " + OpenClose + "<br><br>"+termsOffered+"<br><br>Prerequisites: " + prereq + "<br><br>" + TimeInfo + AsscList; // Format the whole response
 	}
  	catch(err) {
 		return 'No Results';
@@ -308,20 +318,20 @@ function getSchedInfo(JSONString) {
 				var MeetDays = entry.meetings[meeti].meeting_days;
 				var OpenClose = entry.course_status_normalized;
 				try {
-				var Building = entry.meetings[meeti].building_code;
-				var Room = entry.meetings[meeti].room_number;
+					var Building = entry.meetings[meeti].building_code;
+					var Room = entry.meetings[meeti].room_number;
 				} catch(err) {
 					var Building = "";
 					var Room = "";
 				}
 				var FullID = SectionID.replace(/ /g, "")+MeetDays+StartTime.toString().replace(/\./g, "");
 				resJSON[FullID] = {'fullCourseName': SectionName,
-		    		'HourLength': halfLength,
-		    		'meetDay': MeetDays,
-		    		'meetHour': StartTime,
-		    		'meetRoom': Building+' '+Room
-	    		};
-	    	}
+						'HourLength': halfLength,
+						'meetDay': MeetDays,
+						'meetHour': StartTime,
+						'meetRoom': Building+' '+Room
+					};
+				}
 		}
 		catch(err) {
 			console.log(("Error getting times: "+err).red)
