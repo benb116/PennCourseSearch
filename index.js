@@ -86,49 +86,35 @@ app.get('/PCRSpitRev', function(req, res) {
 
 // Manage search requests
 app.get('/Search', function(req, res) {
-	var searchParam = req.query.searchParam;
+	var searchParam = req.query.searchParam; // The search terms
 	console.log(searchParam.yellow);
-	var searchType = req.query.searchType;
-	var termSelect = req.query.term;
-	if (searchType == 'descSearch') { // If it's a description search
-		console.time('  Request Time'); // Start the timer
-	    request({
-			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?description='+searchParam+'&number_of_results_per_page=200',
-			method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
-		}, function(error, response, body) {
-			console.timeEnd('  Request Time');
-			var searchResponse = parseDeptList(body) // Parse the coursenumber response
-			return res.send(searchResponse); // return correct info
-		});
-	} else if (searchType == 'instSearch') { // If it's a description search
-		console.time('  Request Time'); // Start the timer
-	    request({
-			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?instructor='+searchParam+'&number_of_results_per_page=200',
-			method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
-		}, function(error, response, body) {
-			console.timeEnd('  Request Time');
-			var searchResponse = parseDeptList(body) // Parse the coursenumber response
-			return res.send(searchResponse); // return correct info
-		});
-	} else {
-		console.time('  Request Time'); // Start the timer
-	    request({
-			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+searchParam+'&number_of_results_per_page=200',
-			method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
-		}, function(error, response, body) {
-			console.timeEnd('  Request Time');
-			try {
-				if (searchType == 'deptSearch'){ // This will only receive requests if we are checking the API
-					var searchResponse = parseDeptList(body) // Parse the dept response
-				} else if (searchType == 'numbSearch') {
-					var searchResponse = parseCourseList(body) // Parse the num response
-				} else if (searchType == 'sectSearch') {
-					var searchResponse = parseSectionList(body) // Parse the sec response
-				} else {var searchResponse = ''}
-			} catch(err) {var searchResponse = 'No results :('}
-			return res.send(searchResponse); // return correct info
-		});
-	};
+	var searchType = req.query.searchType; // Course ID, Keyword, or Instructor
+	var resultType = req.query.resultType; // Course numbers, section numbers, section info
+	var instructFilter = req.query.instFilter;
+
+	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200'
+
+	if (searchType == 'courseIDSearch') {var baseURL = baseURL + '&course_id='+searchParam};
+	if (searchType == 'keywordSearch') {var baseURL = baseURL + '&description='+searchParam};
+	if (searchType == 'instSearch') {var baseURL = baseURL + '&instructor='+searchParam};
+	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter};
+
+	console.time('  Request Time'); // Start the timer
+    request({
+		uri: baseURL,
+		method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
+	}, function(error, response, body) {
+		console.timeEnd('  Request Time');
+		if (resultType == 'deptSearch'){ // This will only receive requests if we are checking the API
+			var searchResponse = parseDeptList(body) // Parse the dept response
+		} else if (resultType == 'numbSearch') {
+			var searchResponse = parseCourseList(body) // Parse the num response
+		} else if (resultType == 'sectSearch') {
+			var searchResponse = parseSectionList(body) // Parse the sec response
+		} else {var searchResponse = ''};
+		return res.send(searchResponse); // return correct info
+	});
+
 });
 
 // Get previously scheduled sections
@@ -152,7 +138,7 @@ app.get('/Sched', function(req, res) {
 	var termSelect = req.query.term;
 	if (addRem == 'add') { // If we need to add, then we get meeting info for the section
 	  request({
-			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID+"&term="+termSelect,
+			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
 			method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
 		}, function(error, response, body) {
 			resJSON = getSchedInfo(body); // Format the response
@@ -188,7 +174,6 @@ app.get('/Sched', function(req, res) {
 
 function parseDeptList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
-	console.log(Res)
 	var coursesList = [];
 	for(var key in Res.result_data) { // Iterate through each course
 		var courseListName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number

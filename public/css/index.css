@@ -21,7 +21,9 @@ h1 {margin-top: 1em;}
 	font-size: 12px;}
 
 #CourseList {min-width: 120px; max-width: 300px; text-align: left; overflow-y: scroll;}
-#CourseList li {padding: 0 2em 0 2em;}
+#CourseList li {padding: 0 2em 0 2em;
+	-webkit-transition: text-indent .15s ease-in-out; transition: text-indent .15s ease-in-out;}
+#CourseList li:hover {text-indent: 0.5em;}
 #SectionList, #SectionInfo {width: 350px; text-align: left; overflow-y: scroll; box-sizing: border-box; padding-left: 0.5em; padding-right: 0.5em;}
 #SectionList {height: 35%;}
 #SectionInfo {padding-top: 2%; height: 65%;}

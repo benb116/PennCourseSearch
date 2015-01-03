@@ -16,7 +16,7 @@
             <form onkeypress="return event.keyCode != 13;">
     			<select id="searchSelect">
                     <option selected="selected" value="courseIDSearch">Course ID</option>
-                    <option value="descSearch">Keywords</option>
+                    <option value="keywordSearch">Keywords</option>
                     <option value="instSearch">Instructor</option>
                 </select>
                 <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses...">
