@@ -218,7 +218,7 @@ function getSectionInfo(sec) {
 function addToSched(sec) { // Getting info about a section
 	LoadingSum += 1;
 	LoadingIndicate();
-	$.get("/Sched?addRem=add&courseID="+sec+"&term="+termSelect) // Make the request
+	$.get("/Sched?addRem=add&courseID="+sec) // Make the request
 	.done(function(data) {
 		SpitSched(data)
 	})

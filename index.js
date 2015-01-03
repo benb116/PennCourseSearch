@@ -68,9 +68,11 @@ app.get('/PCRSpitID', function(req, res) {
 // This request manager is for spitting the PCR reviews. They are saved for faster responses
 app.get('/PCRSpitRev', function(req, res) {
 	var courseID = req.query.courseID;
+	console.time('  Request Time'); // Start the timer
 	request({
 		uri: 'http://api.penncoursereview.com/v1/courses/'+courseID+'/reviews?token='+config.PCRToken // Get preformatted results
 	}, function(error, response, body) {
+		console.timeEnd('  Request Time');
 		try {
 			var Res = JSON.parse(body); // Convert to JSON object
 			cQ = Res.result.values[Res.result.values.length - 1].ratings.rCourseQuality
@@ -311,7 +313,7 @@ function getSchedInfo(JSONString) {
 		var SectionID = entry.section_id_normalized.replace(/-/g, ""); // Format name
 		var resJSON = { };
 		try { // Not all sections have time info
-			for (var meeti in entry.meetings) {
+			for(var meeti in entry.meetings) {
 				var StartTime = (entry.meetings[meeti].start_hour_24) + (entry.meetings[meeti].start_minutes)/60;
 				var EndTime = (entry.meetings[meeti].end_hour_24) + (entry.meetings[meeti].end_minutes)/60;
 				var halfLength = EndTime - StartTime;
