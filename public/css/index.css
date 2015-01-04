@@ -1,8 +1,22 @@
-body {width: 100%; height: 100%; text-align: center; margin: 0; background-color: #E6E6E6; 
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(/css/OpenSans.ttf) format('truetype');
+}
+
+body {width: 100%; 
+	/*height: 100%; */
+	text-align: center; 
+	margin: 0; 
+	background-color: #E6E6E6; 
 	font-family: 'Helvetica';
 	font-family: 'Open Sans'; 
-	min-width: 950px;}
-#Top {height: 5em; font-family: 'Open Sans', 'sans-serif';}
+	min-width: 1000px;}
+#Top {
+	height: 5em; 
+	font-family: 'Open Sans', 'sans-serif';
+}
 
 #MenuButtons > span {margin: 0 1em 0 1em; cursor: pointer;}
 #MenuButtons > span:hover {text-decoration: underline;}
@@ -23,7 +37,7 @@ h1 {margin-top: 1em;}
 #CourseList {min-width: 120px; max-width: 300px; text-align: left; overflow-y: scroll;}
 #CourseList li {padding: 0 2em 0 2em;
 	-webkit-transition: text-indent .15s ease-in-out; transition: text-indent .15s ease-in-out;}
-#CourseList li:hover {text-indent: 0.5em;}
+/*#CourseList li:hover {text-indent: 0.5em;}*/
 #SectionList, #SectionInfo {width: 350px; text-align: left; overflow-y: scroll; box-sizing: border-box; padding-left: 0.5em; padding-right: 0.5em;}
 #SectionList {height: 35%;}
 #SectionInfo {padding-top: 2%; height: 65%;}
@@ -37,9 +51,9 @@ ul {list-style-type: none; padding: 0; margin: 0;}
 .CourseTitle {display: none;}
 #SectionInfo p {margin: 0;}
 .DescButton:hover, .AsscButton:hover {font-weight: bolder;}
-.DescText, .AsscText {display: none;}
+.AsscText {display: none;}
 
-#SchedGraph {height: calc(100vh - 16em); overflow: scroll; padding-left: 2em; padding-right: 2em; font-size: 12px;}
+#SchedGraph {height: calc(100vh - 16em); overflow: hidden; padding-left: 2em; padding-right: 2em; font-size: 12px;}
 #SchedGraph span {margin: 1em; cursor: pointer;}
 #TimeCol, #Schedule {background-color: white;
 	height: 80%;
@@ -72,3 +86,10 @@ input[type="text"] {
 	padding:0.4em; 
 	background-color: #f5f5f5; 
 }
+
+/* Let's get this party started */
+::-webkit-scrollbar {width: 5px;} 
+/* Track */
+::-webkit-scrollbar-track {background: white;} 
+/* Handle */
+::-webkit-scrollbar-thumb {background: #95a5a6;}

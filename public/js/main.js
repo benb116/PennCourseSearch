@@ -69,65 +69,72 @@ $(document).ready(function () {
 		}
 	});
 
+	$('#searchSelect').change(function () {
+        initiateSearch();
+    });
+
  	$('#CSearch').on('input', function(){ // When the search terms change
 		delay(function(){ // Don't check instantaneously
-			var searchTerms = $('#CSearch').val(); // Get raw search
-			try {
-				if (searchTerms != "" && searchTerms != 'favicon.ico' && searchTerms != 'blank') { // Initial filtering
-					// Format search terms for server request
-					splitTerms = searchTerms.replace(/ /g, "").replace(/-/g, ""); // Replace spaces and dashes
-
-					//If the user enters everything without spaces or dashes
-					if (parseFloat(splitTerms[2]) == splitTerms[2]) { // If the third character is a number (e.g. BE100)
-						splitTerms = splitTerms.substr(0, 2)+'/'+splitTerms.substr(2); // Splice the search query with a slash after the deptartment
-
-						if (parseFloat(splitTerms[6]) == splitTerms[6]) { // Then, if the sixth character is a number (e.g. BE100001)
-							splitTerms = splitTerms.substr(0, 6)+'/'+splitTerms.substr(6); // Splice the search query with a slash after the course number
-						}
-					} else if (parseFloat(splitTerms[3]) == splitTerms[3]) { // If the fourth character is a number (e.g. CIS110)
-						splitTerms = splitTerms.substr(0, 3)+'/'+splitTerms.substr(3); // Splice the search query with a slash after the deptartment
-
-						if (parseFloat(splitTerms[7]) == splitTerms[7]) { // Then, if the seventh character is a number (e.g. CIS110001)
-							splitTerms = splitTerms.substr(0, 7)+'/'+splitTerms.substr(7); // Splice the search query with a slash after the course number
-						}
-					} else if (parseFloat(splitTerms[4]) == splitTerms[4]) { // If the fifth character is a number (e.g. MEAM110)
-						splitTerms = splitTerms.substr(0, 4)+'/'+splitTerms.substr(4); // Splice the search query with a slash after the deptartment
-
-						if (parseFloat(splitTerms[8]) == splitTerms[8]) { // Then, if the eighth character is a number (e.g. MEAM110001)
-							splitTerms = splitTerms.substr(0, 8)+'/'+splitTerms.substr(8); // Splice the search query with a slash after the course number
-						}
-					};
-					// By now the search terms should be 'DEPT/NUM/SEC/' although NUM/ and SEC/ may not be included
-					var deptSearch = splitTerms.split("/")[0]; // Get deptartment
-					var numbSearch = splitTerms.split("/")[1]; // Get course number
-					var sectSearch = splitTerms.split("/")[2]; // Get section number
-					if(typeof numbSearch === 'undefined'){var numbSearch = '';};
-					if(typeof sectSearch === 'undefined'){var sectSearch = '';};
-
-					getCourseNumbers(splitTerms, TitleHidden);
-					if (numbSearch.length == 3) {
-						getSectionNumbers(deptSearch+numbSearch, 'all')
-					} else { // If there is no course number, clear the section list and info panel
-						$('#SectionList').empty();
-					};
-					if (sectSearch.length == 3) {
-						getSectionInfo(deptSearch+numbSearch+sectSearch)
-					} else { // If there is no course number, clear the section list and info panel
-						$('#SectionInfo').empty();
-					};
-					
-				} else if (searchTerms != "" ) { // If there are no good search terms, clear everything
-					$('#CourseList').empty();
-					$('#SectionList').empty();
-					$('#SectionInfo').empty();
-				}
-			} 
-			catch(err) {console.log('No Results '+ err);}
-
+			initiateSearch();
 		}, 600);
 	});
 
 });
+
+function initiateSearch() {
+	var searchTerms = $('#CSearch').val(); // Get raw search
+	try {
+		if (searchTerms != "" && searchTerms != 'favicon.ico' && searchTerms != 'blank') { // Initial filtering
+			// Format search terms for server request
+			splitTerms = searchTerms.replace(/ /g, "").replace(/-/g, ""); // Replace spaces and dashes
+
+			//If the user enters everything without spaces or dashes
+			if (parseFloat(splitTerms[2]) == splitTerms[2]) { // If the third character is a number (e.g. BE100)
+				splitTerms = splitTerms.substr(0, 2)+'/'+splitTerms.substr(2); // Splice the search query with a slash after the deptartment
+
+				if (parseFloat(splitTerms[6]) == splitTerms[6]) { // Then, if the sixth character is a number (e.g. BE100001)
+					splitTerms = splitTerms.substr(0, 6)+'/'+splitTerms.substr(6); // Splice the search query with a slash after the course number
+				}
+			} else if (parseFloat(splitTerms[3]) == splitTerms[3]) { // If the fourth character is a number (e.g. CIS110)
+				splitTerms = splitTerms.substr(0, 3)+'/'+splitTerms.substr(3); // Splice the search query with a slash after the deptartment
+
+				if (parseFloat(splitTerms[7]) == splitTerms[7]) { // Then, if the seventh character is a number (e.g. CIS110001)
+					splitTerms = splitTerms.substr(0, 7)+'/'+splitTerms.substr(7); // Splice the search query with a slash after the course number
+				}
+			} else if (parseFloat(splitTerms[4]) == splitTerms[4]) { // If the fifth character is a number (e.g. MEAM110)
+				splitTerms = splitTerms.substr(0, 4)+'/'+splitTerms.substr(4); // Splice the search query with a slash after the deptartment
+
+				if (parseFloat(splitTerms[8]) == splitTerms[8]) { // Then, if the eighth character is a number (e.g. MEAM110001)
+					splitTerms = splitTerms.substr(0, 8)+'/'+splitTerms.substr(8); // Splice the search query with a slash after the course number
+				}
+			};
+			// By now the search terms should be 'DEPT/NUM/SEC/' although NUM/ and SEC/ may not be included
+			var deptSearch = splitTerms.split("/")[0]; // Get deptartment
+			var numbSearch = splitTerms.split("/")[1]; // Get course number
+			var sectSearch = splitTerms.split("/")[2]; // Get section number
+			if(typeof numbSearch === 'undefined'){var numbSearch = '';};
+			if(typeof sectSearch === 'undefined'){var sectSearch = '';};
+
+			getCourseNumbers(splitTerms, TitleHidden);
+			if (numbSearch.length == 3) {
+				getSectionNumbers(deptSearch+numbSearch, 'all')
+			} else { // If there is no course number, clear the section list and info panel
+				$('#SectionList').empty();
+			};
+			if (sectSearch.length == 3) {
+				getSectionInfo(deptSearch+numbSearch+sectSearch)
+			} else { // If there is no course number, clear the section list and info panel
+				$('#SectionInfo').empty();
+			};
+			
+		} else if (searchTerms != "" ) { // If there are no good search terms, clear everything
+			$('#CourseList').empty();
+			$('#SectionList').empty();
+			$('#SectionInfo').empty();
+		}
+	} 
+	catch(err) {console.log('No Results '+ err);}
+}
 
 function getCourseNumbers(search, TitleHidden) { // Getting info about courses in a department
 	var searchSelect = $('#searchSelect').val();

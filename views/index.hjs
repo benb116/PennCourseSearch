@@ -4,7 +4,6 @@
 		<title>PennCourseScheduler</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="/css/index.css">
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script type="text/javascript" src="/js/html2canvas.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
@@ -19,7 +18,7 @@
                     <option value="keywordSearch">Keywords</option>
                     <option value="instSearch">Instructor</option>
                 </select>
-                <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses...">
+                <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses..." autofocus="autofocus">
                 <span style="margin-left:1em;" class="OpenSec">&nbsp&nbsp&nbsp&nbsp&nbsp</span><span> = Open </span><span class="ClosedSec">&nbsp&nbsp&nbsp&nbsp&nbsp</span><span> = Closed </span><span id="LoadingInfo" style="opacity:0;">Loading...</span>
     		</form>
             <div id="MenuButtons">

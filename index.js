@@ -90,13 +90,14 @@ app.get('/Search', function(req, res) {
 	console.log(searchParam.yellow);
 	var searchType = req.query.searchType; // Course ID, Keyword, or Instructor
 	var resultType = req.query.resultType; // Course numbers, section numbers, section info
-	var instructFilter = req.query.instFilter;
+	var instructFilter = req.query.instFilter; // Is there an instructor filter?
 
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200'
 
 	if (searchType == 'courseIDSearch') {var baseURL = baseURL + '&course_id='+searchParam};
 	if (searchType == 'keywordSearch') {var baseURL = baseURL + '&description='+searchParam};
 	if (searchType == 'instSearch') {var baseURL = baseURL + '&instructor='+searchParam};
+	// If we are checking a course and only want to see the sections taught by a specific instructore:
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter};
 
 	console.time('  Request Time'); // Start the timer
@@ -104,13 +105,16 @@ app.get('/Search', function(req, res) {
 		uri: baseURL,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
 	}, function(error, response, body) {
+		if (error) {
+			return console.error('Request failed:', error);
+		}
 		console.timeEnd('  Request Time');
 		if (resultType == 'deptSearch'){ // This will only receive requests if we are checking the API
 			var searchResponse = parseDeptList(body) // Parse the dept response
 		} else if (resultType == 'numbSearch') {
-			var searchResponse = parseCourseList(body) // Parse the num response
+			var searchResponse = parseCourseList(body) // Parse the numb response
 		} else if (resultType == 'sectSearch') {
-			var searchResponse = parseSectionList(body) // Parse the sec response
+			var searchResponse = parseSectionList(body) // Parse the sect response
 		} else {var searchResponse = ''};
 		return res.send(searchResponse); // return correct info
 	});
@@ -182,6 +186,7 @@ function parseDeptList(JSONString) {
 			coursesList.push('<li>'+courseListName+'<span class="CourseTitle"> - '+courseTitle+'</span></li>'); // Add and format
 		};
 	}
+	if (coursesList.length <= 0) {var coursesList = ['No Results :(']}
 	return coursesList;
 }
 
