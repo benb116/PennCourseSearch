@@ -27,9 +27,9 @@ app.listen(process.env.PORT || 3000, function(){
 subtitles = [	"Cause PennInTouch sucks.", 
 				"You can press the back button, but you don't even need to.",
 				"Invented by Benjamin Franklin in 1793.",
-				"Multi-page functionality. One page simplicity.",
 				"Focus on your classes, not your schedule.",
-				"Faster than you can say 'Wawa run.'"];
+				"Faster than you can say 'Wawa run.'",
+				"Classes sine PennCourseSearch vanae."];
 // Handle main page requests
 app.get('/', function(req, res) {
 	thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
@@ -87,8 +87,9 @@ app.get('/PCRSpitRev', function(req, res) {
 // Manage search requests
 app.get('/Search', function(req, res) {
 	var searchParam = req.query.searchParam; // The search terms
-	console.log(searchParam.yellow);
 	var searchType = req.query.searchType; // Course ID, Keyword, or Instructor
+	console.log((searchType + ': ' + searchParam).yellow);
+
 	var resultType = req.query.resultType; // Course numbers, section numbers, section info
 	var instructFilter = req.query.instFilter; // Is there an instructor filter?
 
@@ -147,8 +148,7 @@ app.get('/Sched', function(req, res) {
 		}, function(error, response, body) {
 			resJSON = getSchedInfo(body); // Format the response
 			console.log('Sched Added: '.cyan)
-			for (var i = 0; i < Object.keys(resJSON).length; i++) { // Compile a list of courses
-				var JSONSecID = Object.keys(resJSON)[i]
+			for (var JSONSecID in resJSON) { // Compile a list of courses
 				SchedCourses[JSONSecID] = resJSON[JSONSecID];
 				console.log(JSONSecID.cyan)
 			};
