@@ -1,10 +1,10 @@
 // Initial configuration
-var path = require('path');
+var path 	= require('path');
 var express = require('express')
-var app = express();
+var app 	= express();
 var request = require("request");
 var mongojs = require("mongojs");
-var colors = require('colors');
+var colors 	= require('colors');
 
 try {
 	var config = require('./config.js');
@@ -12,12 +12,10 @@ try {
 	var config = {};
 	config['requestAB'] = process.env.REQUESTAB;
 	config['requestAT'] = process.env.REQUESTAT;
-
-	config['PCRToken'] = process.env.PCRTOKEN;
-
+	config['PCRToken'] 	= process.env.PCRTOKEN;
 	config['MongoUser'] = process.env.MONGOUSER;
 	config['MongoPass'] = process.env.MONGOPASS;
-	config['MongoURI'] = process.env.MONGOURI;
+	config['MongoURI'] 	= process.env.MONGOURI;
 }
 
 // Set paths and errors
@@ -109,15 +107,15 @@ app.get('/Search', function(req, res) {
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200'
 
 	if (searchType == 'courseIDSearch') {var baseURL = baseURL + '&course_id='+searchParam};
-	if (searchType == 'keywordSearch') {var baseURL = baseURL + '&description='+searchParam};
-	if (searchType == 'instSearch') {var baseURL = baseURL + '&instructor='+searchParam};
+	if (searchType == 'keywordSearch') 	{var baseURL = baseURL + '&description='+searchParam};
+	if (searchType == 'instSearch') 	{var baseURL = baseURL + '&instructor='+searchParam};
 	// If we are checking a course and only want to see the sections taught by a specific instructore:
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter};
 
 	console.time('  Request Time'); // Start the timer
     request({
 		uri: baseURL,
-		method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
+		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
 	}, function(error, response, body) {
 		if (error) {
 			return console.error('Request failed:', error);
@@ -137,7 +135,7 @@ app.get('/Search', function(req, res) {
 
 // Get previously scheduled sections
 SchedCourses = {};
-myPennkey = config.Pennkey;
+myPennkey = 'bernsb';
 console.time('DB Time')
 db.Students.find({Pennkey: myPennkey}, { Sched1: 1}, function(err, doc) {
 	try {
@@ -155,9 +153,9 @@ app.get('/Sched', function(req, res) {
 	var courseID = req.query.courseID;
 	var termSelect = req.query.term;
 	if (addRem == 'add') { // If we need to add, then we get meeting info for the section
-	  request({
+		request({
 			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
-			method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
+			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
 		}, function(error, response, body) {
 			resJSON = getSchedInfo(body); // Format the response
 			console.log('Sched Added: '.cyan)
@@ -186,7 +184,6 @@ app.get('/Sched', function(req, res) {
 	else {
 		return res.send(SchedCourses); // On a blank request
 	}
-
 });
 
 function parseDeptList(JSONString) {
@@ -254,24 +251,24 @@ function parseSectionList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON Object
 	var entry = Res.result_data[0];
 	try {
-		var Title = entry.course_title;
-		var FullID = entry.section_id_normalized.replace(/-/g, " "); // Format name
+		var Title 	= entry.course_title;
+		var FullID 	= entry.section_id_normalized.replace(/-/g, " "); // Format name
 		try {
 			var Instructor = "<br><br>Instructor: " + entry.instructors[0].name;
 		} catch(err) {
 			var Instructor = "";
 		}
-		var Desc = entry.course_description;
-		var TimeInfoArray = getTimeInfo(entry);
-		var StatusClass = TimeInfoArray[0];
-		var meetArray = TimeInfoArray[1];
-		var TimeInfo = '';
-		var prereq = entry.prerequisite_notes;
+		var Desc 			= entry.course_description;
+		var TimeInfoArray 	= getTimeInfo(entry);
+		var StatusClass 	= TimeInfoArray[0];
+		var meetArray 		= TimeInfoArray[1];
+		var TimeInfo 		= '';
+		var prereq 			= entry.prerequisite_notes;
 		if (prereq == "") {prereq = "none"}
+		var termsOffered 	= entry.course_terms_offered;
 
-		var termsOffered = entry.course_terms_offered;
 		for(var listing in meetArray) {
-			TimeInfo += meetArray[listing].split("-")[1] + '<br>';
+			TimeInfo 		+= meetArray[listing].split("-")[1] + '<br>';
 		}
 		if (StatusClass == "OpenSec") {var OpenClose = 'Open'} else {var OpenClose = 'Closed'};
 
@@ -313,21 +310,21 @@ function getSchedInfo(JSONString) {
 	try {
 		var SectionName = entry.section_id_normalized.replace(/ /g, "").replace(/-/g, " "); // Format name
 		console.log(SectionName)
-		var SectionID = entry.section_id_normalized.replace(/-/g, ""); // Format name
-		var resJSON = { };
+		var SectionID 	= entry.section_id_normalized.replace(/-/g, ""); // Format name
+		var resJSON 	= { };
 		try { // Not all sections have time info
 			for(var meeti in entry.meetings) {
-				var StartTime = (entry.meetings[meeti].start_hour_24) + (entry.meetings[meeti].start_minutes)/60;
-				var EndTime = (entry.meetings[meeti].end_hour_24) + (entry.meetings[meeti].end_minutes)/60;
-				var halfLength = EndTime - StartTime;
-				var MeetDays = entry.meetings[meeti].meeting_days;
-				var OpenClose = entry.course_status_normalized;
+				var StartTime 	= (entry.meetings[meeti].start_hour_24) + (entry.meetings[meeti].start_minutes)/60;
+				var EndTime 	= (entry.meetings[meeti].end_hour_24) + (entry.meetings[meeti].end_minutes)/60;
+				var halfLength 	= EndTime - StartTime;
+				var MeetDays 	= entry.meetings[meeti].meeting_days;
+				var OpenClose 	= entry.course_status_normalized;
 				try {
-					var Building = entry.meetings[meeti].building_code;
-					var Room = entry.meetings[meeti].room_number;
+					var Building 	= entry.meetings[meeti].building_code;
+					var Room 		= entry.meetings[meeti].room_number;
 				} catch(err) {
-					var Building = "";
-					var Room = "";
+					var Building 	= "";
+					var Room 		= "";
 				}
 				var FullID = SectionID.replace(/ /g, "")+MeetDays+StartTime.toString().replace(/\./g, "");
 				resJSON[FullID] = {'fullCourseName': SectionName,

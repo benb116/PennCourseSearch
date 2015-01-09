@@ -329,11 +329,11 @@ function SpitSched(courseSched) {
  					var blockleft = possDay*percentWidth; { break } // determine left spacing
  				}
  			}
-	 		var blocktop = (courseSched[sec].meetHour - startHour) * halfScale + 4; // determine top spacing based on time from startHour (offset for prettiness)
+	 		var blocktop 	= (courseSched[sec].meetHour - startHour) * halfScale + 4; // determine top spacing based on time from startHour (offset for prettiness)
 	 		var blockheight = courseSched[sec].HourLength * halfScale;
-	 		var blockname = courseSched[sec].fullCourseName
-	 		var meetRoom = courseSched[sec].meetRoom;
-	 		var thiscol = colorMap[courseSched[sec].fullCourseName]; // Get the color
+	 		var blockname 	= courseSched[sec].fullCourseName
+	 		var meetRoom 	= courseSched[sec].meetRoom;
+	 		var thiscol 	= colorMap[courseSched[sec].fullCourseName]; // Get the color
 			if(typeof thiscol === 'undefined'){thiscol = '#E6E6E6';};
 	
 	 		$('#Schedule').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;width:'+percentWidth+'%;height:'+blockheight+'%;background-color:'+thiscol+'"><div class="CloseX">x</div>'+blockname+'<br>'+meetRoom+'</div>');
