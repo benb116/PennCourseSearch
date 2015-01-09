@@ -1,11 +1,24 @@
 // Initial configuration
-var config = require('./config')
 var path = require('path');
 var express = require('express')
 var app = express();
 var request = require("request");
 var mongojs = require("mongojs");
 var colors = require('colors');
+
+try {
+	var config = require('./config.js');
+} catch(err) {
+	var config = {};
+	config['requestAB'] = process.env.REQUESTAB;
+	config['requestAT'] = process.env.REQUESTAT;
+
+	config['PCRToken'] = process.env.PCRTOKEN;
+
+	config['MongoUser'] = process.env.MONGOUSER;
+	config['MongoPass'] = process.env.MONGOPASS;
+	config['MongoURI'] = process.env.MONGOURI;
+}
 
 // Set paths and errors
 app.set('views', path.join(__dirname, 'views'));
@@ -144,7 +157,7 @@ app.get('/Sched', function(req, res) {
 	if (addRem == 'add') { // If we need to add, then we get meeting info for the section
 	  request({
 			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
-			method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
+			method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
 		}, function(error, response, body) {
 			resJSON = getSchedInfo(body); // Format the response
 			console.log('Sched Added: '.cyan)
