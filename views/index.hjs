@@ -17,6 +17,7 @@
                     <option selected="selected" value="courseIDSearch">Course ID</option>
                     <option value="keywordSearch">Keywords</option>
                     <option value="instSearch">Instructor</option>
+                    <option value="CRSSearch">Writing Sem</option>
                 </select>
                 <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses..." autofocus="autofocus">
                 <span style="margin-left:1em;" class="OpenSec">&nbsp&nbsp&nbsp&nbsp&nbsp</span><span> = Open </span><span class="ClosedSec">&nbsp&nbsp&nbsp&nbsp&nbsp</span><span> = Closed </span><span id="LoadingInfo" style="opacity:0;">Loading...</span>

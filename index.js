@@ -1,5 +1,5 @@
 // Initial configuration
-var config = require('./config')
+// var config = require('./config')
 var path = require('path');
 var express = require('express')
 var app = express();
@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 process.env.PWD = process.cwd()
 
 // Connect to database
-var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
+var uri = 'mongodb://'+process.env.MONGOUSER+':'+process.env.MONGOPASS+'@'+process.env.MONGOURI+'/pcs1',
 		db = mongojs.connect(uri, ["Students"]);
 
 // Start the server
@@ -54,7 +54,7 @@ app.get('/Spit', function(req, res) {
 app.get('/PCRSpitID', function(req, res) {
 	var courseID = req.query.courseID;
 	request({
-		uri: 'http://api.penncoursereview.com/v1/coursehistories/'+courseID+'?token='+config.PCRToken // Get preformatted results
+		uri: 'http://api.penncoursereview.com/v1/coursehistories/'+courseID+'?token='+process.env.PCRTOKEN // Get preformatted results
 	}, function(error, response, body) {
 		try {
 			var Res = JSON.parse(body); // Convert to JSON object
@@ -70,7 +70,7 @@ app.get('/PCRSpitRev', function(req, res) {
 	var courseID = req.query.courseID;
 	console.time('  Request Time'); // Start the timer
 	request({
-		uri: 'http://api.penncoursereview.com/v1/courses/'+courseID+'/reviews?token='+config.PCRToken // Get preformatted results
+		uri: 'http://api.penncoursereview.com/v1/courses/'+courseID+'/reviews?token='+process.env.PCRTOKEN // Get preformatted results
 	}, function(error, response, body) {
 		console.timeEnd('  Request Time');
 		try {
@@ -98,13 +98,14 @@ app.get('/Search', function(req, res) {
 	if (searchType == 'courseIDSearch') {var baseURL = baseURL + '&course_id='+searchParam};
 	if (searchType == 'keywordSearch') {var baseURL = baseURL + '&description='+searchParam};
 	if (searchType == 'instSearch') {var baseURL = baseURL + '&instructor='+searchParam};
+	if (searchType == 'CRSSearch') {var baseURL = baseURL + '&program=CRS'};
 	// If we are checking a course and only want to see the sections taught by a specific instructore:
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter};
-
+	
 	console.time('  Request Time'); // Start the timer
     request({
 		uri: baseURL,
-		method: "GET",headers: {"Authorization-Bearer": config.requestAB,"Authorization-Token": config.requestAT},
+		method: "GET",headers: {"Authorization-Bearer": process.env.REQUESTAB, "Authorization-Token": process.env.REQUESTAT},
 	}, function(error, response, body) {
 		if (error) {
 			return console.error('Request failed:', error);
@@ -124,7 +125,7 @@ app.get('/Search', function(req, res) {
 
 // Get previously scheduled sections
 SchedCourses = {};
-myPennkey = config.Pennkey;
+myPennkey = 'bernsb';
 console.time('DB Time')
 db.Students.find({Pennkey: myPennkey}, { Sched1: 1}, function(err, doc) {
 	try {
@@ -142,10 +143,11 @@ app.get('/Sched', function(req, res) {
 	var courseID = req.query.courseID;
 	var termSelect = req.query.term;
 	if (addRem == 'add') { // If we need to add, then we get meeting info for the section
-	  request({
+		request({
 			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
-			method: "GET",headers: {"Authorization-Bearer": "***REMOVED***","Authorization-Token": "***REMOVED***"},
+			method: "GET",headers: {"Authorization-Bearer": process.env.REQUESTAB, "Authorization-Token": process.env.REQUESTAT},
 		}, function(error, response, body) {
+			console.log(body)
 			resJSON = getSchedInfo(body); // Format the response
 			console.log('Sched Added: '.cyan)
 			for (var JSONSecID in resJSON) { // Compile a list of courses

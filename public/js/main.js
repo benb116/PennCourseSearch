@@ -58,7 +58,7 @@ $(document).ready(function () {
 			newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
 			LoadingSum += 1;
 			LoadingIndicate()
-			$.get("/Sched?addRem=blank&courseID=blank") // Make the request
+			$.get('/Sched?addRem=blank&courseID=blank') // Make the request
 			.done(function(data) {
 				SpitSched(data)
 			})
@@ -164,11 +164,13 @@ function getCourseNumbers(search, TitleHidden) { // Getting info about courses i
 	.done(function(data) {
 		$('#CourseList').html(data); // Put the course number list in #CourseList
 		if (TitleHidden == false) {$('.CourseTitle').toggle();}
+
 		$( "#CourseList li" ).each(function( index ) {
 			PCR = $(this).data('pcr');
 			pcrFrac = PCR / 4;
 			$(this).css('background-color', 'rgba(45, 160, 240, '+pcrFrac*pcrFrac+')')
 		});
+		
 		$('#CourseList li').click(function() { // If a course is clicked
 			$('#SectionInfo').empty();
 			var courseName = $(this).html().split("<")[0].replace(/ /g, " "); // Format the course name for searching
