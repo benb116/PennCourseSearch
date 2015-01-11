@@ -162,7 +162,6 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter};
 
 	if (searchType == 'courseIDSearch' && resultType == 'deptSearch') {
-		console.log('yes')
 		fs.readFile('./NewDept/'+searchParam.toUpperCase()+'.txt', function (err, data) {
 			return res.send(data)
 		});

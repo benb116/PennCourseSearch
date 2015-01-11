@@ -177,7 +177,6 @@ exports.color = function (message) {
     };
 };
 
-// Custom email checker
 exports.isPenn = function (message) {
     if (!message) { message = 'Invalid format.'; }
     return function (form, field, callback) {
