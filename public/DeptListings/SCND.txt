@@ -1,2 +1,0 @@
-<li PCR="">SCND 104<span class="CourseTitle"> - Intermediate Swedish II</span></li>
-<li PCR="">SCND 504<span class="CourseTitle"> - Intermediate Swedish II</span></li>

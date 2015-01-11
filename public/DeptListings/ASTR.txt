@@ -1,4 +1,0 @@
-<li PCR="">ASTR 001<span class="CourseTitle"> - A Survey of the Universe</span></li>
-<li PCR="">ASTR 006<span class="CourseTitle"> - The Solar System, Exoplanets, and Life</span></li>
-<li PCR="">ASTR 012<span class="CourseTitle"> - Introduction to Astrophysics II</span></li>
-<li PCR="">ASTR 392<span class="CourseTitle"> - Life and Death of Stars</span></li>

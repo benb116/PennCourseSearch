@@ -1,4 +1,0 @@
-<li PCR="">DORT 681<span class="CourseTitle"> - Adjunctive Orthodontics</span></li>
-<li PCR="">DORT 753<span class="CourseTitle"> - Orthodontics II</span></li>
-<li PCR="">DORT 788<span class="CourseTitle"> - P and I Clinic</span></li>
-<li PCR="">DORT 803<span class="CourseTitle"> - Adjunctive Orthodontics</span></li>

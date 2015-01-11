@@ -9,6 +9,9 @@
         <script type="text/javascript" src="/js/main.js"></script>
 	</head>
     <body>
+        <div id="MenuBar">
+            {{ user }}
+        </div>
         <div id="Top">
     	    <h1>{{ title }}</h1>
     	    <span>{{ subtitle }}</span>

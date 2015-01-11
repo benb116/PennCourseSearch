@@ -13,6 +13,15 @@ body {width: 100%;
 	font-family: 'Helvetica';
 	font-family: 'Open Sans'; 
 	min-width: 1000px;}
+#MenuBar {
+	height: 2em; width: 9em;
+	position: absolute;
+	top: 0; right: 0;
+	background-color: #3498db;
+	color: white;
+	line-height: 2em;
+	border-bottom-left-radius: 1.5em;
+}
 #Top {
 	height: 5em; 
 	font-family: 'Open Sans', 'sans-serif';

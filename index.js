@@ -38,17 +38,9 @@ app.use(stormpath.init(app, {
   secretKey:    config.STORMPATH_SECRET_KEY,
   application:  config.STORMPATH_URL,
   enableAccountVerification: true,
-  enableForgotPassword: true
+  enableForgotPassword: true,
+  sessionDuration: 1000 * 60 * 60 * 24, // Make sessions expire after one day
 }));
-
-function createGroups() {
-  var groupsToCreate = ['admins', 'users'];
-  for (var i = 0; i < groupsToCreate.length; i++) {
-    app.get('stormpathApplication').createGroup({ name: groupsToCreate[i] }, function(err, group) {
-      console.log('Created new group:', group);
-    });
-  }
-};
 
 // Connect to database
 var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
@@ -71,7 +63,6 @@ subtitles = [	"Cause PennInTouch sucks.",
 // Handle main page requests
 app.get('/', stormpath.loginRequired, function(req, res) {
 	thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
-	console.log(thissub)
 	return res.render('index', { // Send page
 		title: 'Penn Course Search',
 		subtitle: thissub,
@@ -321,7 +312,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 
 	var SchedCourses = {};
 	var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
-	console.time('DB Time')
+	// console.time('DB Time')
 	db.Students.find({Pennkey: myPennkey}, { Sched1: 1}, function(err, doc) { // Try to access the database
 		try {
 			SchedCourses = doc[0].Sched1; // Get previously scheduled courses
@@ -329,7 +320,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			db.Students.insert({Pennkey: myPennkey});
 			db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database	
 		}
-		console.timeEnd('DB Time')
+		// console.timeEnd('DB Time')
 
 		var addRem = req.query.addRem; // Are we adding, removing, or clearing?
 		var courseID = req.query.courseID;

@@ -1,6 +1,0 @@
-<li PCR="">LATN 102<span class="CourseTitle"> - Elementary Latin II</span></li>
-<li PCR="">LATN 204<span class="CourseTitle"> - Introduction to Latin Poetry</span></li>
-<li PCR="">LATN 309<span class="CourseTitle"> - Topics in Latin Literature</span></li>
-<li PCR="">LATN 540<span class="CourseTitle"> - The Latin Text: Language and Style</span></li>
-<li PCR="">LATN 600<span class="CourseTitle"> - Graduate Latin Seminar</span></li>
-<li PCR="">LATN 609<span class="CourseTitle"> - Problems in Ancient History</span></li>

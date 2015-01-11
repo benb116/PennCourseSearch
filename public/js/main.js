@@ -46,6 +46,7 @@ $(document).ready(function () {
 			SpitSched()
 		}
 		if ($(this).html() == 'Download Schedule') {
+			console.log('cs')
 			html2canvas($('#SchedGraph'), { // Convert the div to a canvas
 				onrendered: function(canvas) {
 					var image = new Image();

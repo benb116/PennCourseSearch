@@ -1,7 +1,0 @@
-<li PCR="">GCB 493<span class="CourseTitle"> - Epigen of Health&amp;Disease</span></li>
-<li PCR="">GCB 527<span class="CourseTitle"> - Genetics For Comp Bio</span></li>
-<li PCR="">GCB 535<span class="CourseTitle"> - Introduction to Bioinformatics</span></li>
-<li PCR="">GCB 537<span class="CourseTitle"> - Advanced Computational Biology</span></li>
-<li PCR="">GCB 699<span class="CourseTitle"> - Lab Rotation</span></li>
-<li PCR="">GCB 752<span class="CourseTitle"> - Genomics</span></li>
-<li PCR="">GCB 899<span class="CourseTitle"> - Predissertation Research</span></li>

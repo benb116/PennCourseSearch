@@ -1,3 +1,0 @@
-<li PCR="">GUJR 403<span class="CourseTitle"> - Beginning Gujarati Part II</span></li>
-<li PCR="">GUJR 423<span class="CourseTitle"> - Intermediate Gujarati Part II</span></li>
-<li PCR="">GUJR 442<span class="CourseTitle"> - Advanced Gujarati</span></li>
