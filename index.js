@@ -1,14 +1,15 @@
 // Initial configuration
-var path 	= require('path');
-var express = require('express')
-var app 	= express();
-var request = require("request");
-var mongojs = require("mongojs");
-var colors 	= require('colors');
+var path 		= require('path');
+var express 	= require('express')
+var stormpath 	= require('express-stormpath');
+var request 	= require("request");
+var mongojs 	= require("mongojs");
+var colors 		= require('colors');
+var fs 			= require('fs');
 
 try {
 	var config = require('./config.js');
-} catch(err) {
+} catch(err) { // If there is no config file
 	var config = {};
 	config['requestAB'] = process.env.REQUESTAB;
 	config['requestAT'] = process.env.REQUESTAT;
@@ -16,13 +17,38 @@ try {
 	config['MongoUser'] = process.env.MONGOUSER;
 	config['MongoPass'] = process.env.MONGOPASS;
 	config['MongoURI'] 	= process.env.MONGOURI;
+	config['STORMPATH_API_KEY_ID'] 		= process.env.STORMPATH_API_KEY_ID;
+	config['STORMPATH_API_KEY_SECRET'] 	= process.env.STORMPATH_API_KEY_SECRET;
+	config['STORMPATH_SECRET_KEY'] 		= process.env.STORMPATH_SECRET_KEY;
+	config['STORMPATH_URL'] 			= process.env.STORMPATH_URL;
 }
 
-// Set paths and errors
+var app = express();
+
+// Set paths
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 app.use(express.static(path.join(__dirname, 'public')));
 process.env.PWD = process.cwd()
+
+// Set up stormpath
+app.use(stormpath.init(app, {
+  apiKeyId:     config.STORMPATH_API_KEY_ID,
+  apiKeySecret: config.STORMPATH_API_KEY_SECRET,
+  secretKey:    config.STORMPATH_SECRET_KEY,
+  application:  config.STORMPATH_URL,
+  enableAccountVerification: true,
+  enableForgotPassword: true
+}));
+
+function createGroups() {
+  var groupsToCreate = ['admins', 'users'];
+  for (var i = 0; i < groupsToCreate.length; i++) {
+    app.get('stormpathApplication').createGroup({ name: groupsToCreate[i] }, function(err, group) {
+      console.log('Created new group:', group);
+    });
+  }
+};
 
 // Connect to database
 var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
@@ -41,35 +67,70 @@ subtitles = [	"Cause PennInTouch sucks.",
 				"Focus on your classes, not your schedule.",
 				"Faster than you can say 'Wawa run.'",
 				"Classes sine PennCourseSearch vanae."];
+
 // Handle main page requests
-app.get('/', function(req, res) {
+app.get('/', stormpath.loginRequired, function(req, res) {
 	thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 	console.log(thissub)
 	return res.render('index', { // Send page
 		title: 'Penn Course Search',
-		subtitle: thissub
+		subtitle: thissub,
+		user: req.user.email.split('@')[0]
 	});
 })
 
 // This request manager is for spitting the department lists. They are saved for faster responses
-app.get('/Spit', function(req, res) {
+app.get('/Spit', stormpath.groupsRequired(['admins']), function(req, res) {
 	var thedept = req.query.dept;
+	console.log(('List Spit: '+thedept).blue)
 	request({
-		uri: 'http://localhost:3000/Search?searchType=deptSearch&courseID=' + thedept // Get preformatted results
+		uri: 'http://localhost:3000/Search?searchType=courseIDSearch&resultType=spitSearch&searchParam='+thedept // Get preformatted results
 	}, function(error, response, body) {
-		return res.render('new', {text: body});
-		console.log(('List Spit: '+thedept).blue)
+		fs.writeFile('./New/'+thedept+'.txt', body, function (err) {
+			if (err) throw err;
+			console.log('It\'s saved!');
+		});
+		return res.send('done')
 	});
 });
+
+function parseJSONList(JSONString) {
+	var inJSON = JSON.parse(JSONString); // Convert to JSON object
+	var resp = {};
+	for(var key in inJSON.result_data) {
+		var courseID 	= inJSON.result_data[key].course_department+ ' ' +inJSON.result_data[key].course_number; // Get course dept and number
+		var courseTitle = inJSON.result_data[key].course_title;
+		var dashedName 	= inJSON.result_data[key].course_department + '-' + inJSON.result_data[key].course_number
+		console.log(dashedName)
+		PCRRev = 0;
+
+		request({
+			uri: 'http://localhost:3000/PCRSpitID?courseID=' + dashedName // Get preformatted results
+		}, function(error, response, body) {
+			if (body != '0000') {
+				request({
+					uri: 'http://localhost:3000/PCRSpitRev?courseID=' + body // Get preformatted results
+				}, function(error, response, body) {
+					PCRRev = body;
+				});
+			}
+		});
+		console.log(PCRRev)
+		resp[courseID] = {'title': courseTitle, 'PCRRev': PCRRev}
+	}
+	console.log(resp)
+	return resp;
+}
+
 // This request manager is for spitting the PCR Course ID's. They are saved for faster responses
-app.get('/PCRSpitID', function(req, res) {
+app.get('/PCRSpitID', stormpath.groupsRequired(['admins']), function(req, res) {
 	var courseID = req.query.courseID;
+	// console.log(('PCR ID Spit: '+courseID).blue)
 	request({
 		uri: 'http://api.penncoursereview.com/v1/coursehistories/'+courseID+'?token='+config.PCRToken // Get preformatted results
 	}, function(error, response, body) {
 		try {
 			var Res = JSON.parse(body); // Convert to JSON object
-			console.log(('PCR ID Spit: '+courseID).blue)
 			return res.send((Res.result.courses[Res.result.courses.length - 1].id).toString())
 		} catch(err) {
 			return res.send('0000')
@@ -77,17 +138,15 @@ app.get('/PCRSpitID', function(req, res) {
 	});
 });
 // This request manager is for spitting the PCR reviews. They are saved for faster responses
-app.get('/PCRSpitRev', function(req, res) {
+app.get('/PCRSpitRev', stormpath.groupsRequired(['admins']), function(req, res) {
 	var courseID = req.query.courseID;
-	console.time('  Request Time'); // Start the timer
+	// console.log(('PCR Rev Spit: '+courseID).blue)
 	request({
 		uri: 'http://api.penncoursereview.com/v1/courses/'+courseID+'/reviews?token='+config.PCRToken // Get preformatted results
 	}, function(error, response, body) {
-		console.timeEnd('  Request Time');
 		try {
 			var Res = JSON.parse(body); // Convert to JSON object
 			cQ = Res.result.values[Res.result.values.length - 1].ratings.rCourseQuality
-			console.log(('PCR Rev Spit: '+courseID).blue)
 			return res.send(cQ.toString())
 		} catch(err) {
 			return res.send(err)
@@ -96,13 +155,12 @@ app.get('/PCRSpitRev', function(req, res) {
 });
 
 // Manage search requests
-app.get('/Search', function(req, res) {
-	var searchParam = req.query.searchParam; // The search terms
-	var searchType = req.query.searchType; // Course ID, Keyword, or Instructor
+app.get('/Search', stormpath.loginRequired, function(req, res) {
+	var searchParam 	= req.query.searchParam; // The search terms
+	var searchType 		= req.query.searchType; // Course ID, Keyword, or Instructor
+	var resultType 		= req.query.resultType; // Course numbers, section numbers, section info
+	var instructFilter 	= req.query.instFilter; // Is there an instructor filter?
 	console.log((searchType + ': ' + searchParam).yellow);
-
-	var resultType = req.query.resultType; // Course numbers, section numbers, section info
-	var instructFilter = req.query.instFilter; // Is there an instructor filter?
 
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200'
 
@@ -112,77 +170,32 @@ app.get('/Search', function(req, res) {
 	// If we are checking a course and only want to see the sections taught by a specific instructore:
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter};
 
-	console.time('  Request Time'); // Start the timer
-    request({
-		uri: baseURL,
-		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
-	}, function(error, response, body) {
-		if (error) {
-			return console.error('Request failed:', error);
-		}
-		console.timeEnd('  Request Time');
-		if (resultType == 'deptSearch'){ // This will only receive requests if we are checking the API
-			var searchResponse = parseDeptList(body) // Parse the dept response
-		} else if (resultType == 'numbSearch') {
-			var searchResponse = parseCourseList(body) // Parse the numb response
-		} else if (resultType == 'sectSearch') {
-			var searchResponse = parseSectionList(body) // Parse the sect response
-		} else {var searchResponse = ''};
-		return res.send(searchResponse); // return correct info
-	});
-
-});
-
-// Get previously scheduled sections
-SchedCourses = {};
-myPennkey = 'bernsb';
-console.time('DB Time')
-db.Students.find({Pennkey: myPennkey}, { Sched1: 1}, function(err, doc) {
-	try {
-		SchedCourses = doc[0].Sched1;
-	} catch(error) {
-		db.Students.insert({Pennkey: myPennkey});
-		db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database	
-	}
-	console.timeEnd('DB Time')
-});
-
-// Manage scheduling requests
-app.get('/Sched', function(req, res) {
-	var addRem = req.query.addRem; // Are we adding, removing, or clearing?
-	var courseID = req.query.courseID;
-	var termSelect = req.query.term;
-	if (addRem == 'add') { // If we need to add, then we get meeting info for the section
-		request({
-			uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
+	if (searchType == 'courseIDSearch' && resultType == 'deptSearch') {
+		console.log('yes')
+		fs.readFile('./NewDept/'+searchParam.toUpperCase()+'.txt', function (err, data) {
+			return res.send(data)
+		});
+	} else {
+		console.time('  Request Time'); // Start the timer
+	    request({
+			uri: baseURL,
 			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
 		}, function(error, response, body) {
-			resJSON = getSchedInfo(body); // Format the response
-			console.log('Sched Added: '.cyan)
-			for (var JSONSecID in resJSON) { // Compile a list of courses
-				SchedCourses[JSONSecID] = resJSON[JSONSecID];
-				console.log(JSONSecID.cyan)
-			};
-			db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
-			return res.send(SchedCourses);
-		});
-	} else if (addRem == 'rem') { // If we need to remove
-		console.log('Sched Removed: '.magenta)
-		for (meetsec in SchedCourses) {
-			if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) { // Find all meeting times of a given course
-				delete SchedCourses[meetsec];
-				console.log(courseID.magenta)
+			if (error) {
+				return console.error('Request failed:', error);
 			}
-		}
-		db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
-		return res.send(SchedCourses);
-	} else if (addRem == 'clear') { // Clear all
-		SchedCourses = {};
-		db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
-		console.log('Sched Cleared'.magenta)
-	}
-	else {
-		return res.send(SchedCourses); // On a blank request
+			console.timeEnd('  Request Time');
+			if 			(resultType == 'deptSearch'){ // This will only receive requests if we are checking the API
+				var searchResponse = parseDeptList(body) // Parse the dept response
+			} else if 	(resultType == 'numbSearch') {
+				var searchResponse = parseCourseList(body) // Parse the numb response
+			} else if 	(resultType == 'sectSearch') {
+				var searchResponse = parseSectionList(body) // Parse the sect response
+			} else if 	(resultType == 'spitSearch') {
+				var searchResponse = parseJSONList(body) // Parse the sect response
+			} else {var searchResponse = ''};
+			return res.send(searchResponse); // return correct info
+		});
 	}
 });
 
@@ -199,7 +212,6 @@ function parseDeptList(JSONString) {
 	if (coursesList.length <= 0) {var coursesList = ['No Results :(']}
 	return coursesList;
 }
-
 function getTimeInfo(JSONObj) { // A function to retrieve and format meeting times
 	OCStatus = JSONObj.course_status;
 	if (OCStatus == "O") {
@@ -303,6 +315,59 @@ function parseSectionList(JSONString) {
 		return 'No Results';
 	}
 }
+
+// Manage scheduling requests
+app.get('/Sched', stormpath.loginRequired, function(req, res) {
+
+	var SchedCourses = {};
+	var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
+	console.time('DB Time')
+	db.Students.find({Pennkey: myPennkey}, { Sched1: 1}, function(err, doc) { // Try to access the database
+		try {
+			SchedCourses = doc[0].Sched1; // Get previously scheduled courses
+		} catch(error) { // If there is no previous schedule
+			db.Students.insert({Pennkey: myPennkey});
+			db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database	
+		}
+		console.timeEnd('DB Time')
+
+		var addRem = req.query.addRem; // Are we adding, removing, or clearing?
+		var courseID = req.query.courseID;
+		if (addRem == 'add') { // If we need to add, then we get meeting info for the section
+			request({
+				uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
+				method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
+			}, function(error, response, body) {
+				resJSON = getSchedInfo(body); // Format the response
+				console.log('Sched Added: '.cyan)
+				for (var JSONSecID in resJSON) { // Compile a list of courses
+					SchedCourses[JSONSecID] = resJSON[JSONSecID];
+					console.log(JSONSecID.cyan)
+				};
+				db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
+				return res.send(SchedCourses);
+			});
+		} else if (addRem == 'rem') { // If we need to remove
+			console.log('Sched Removed: '.magenta)
+			for (meetsec in SchedCourses) {
+				if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) { // Find all meeting times of a given course
+					delete SchedCourses[meetsec];
+					console.log(courseID.magenta)
+				}
+			}
+			db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
+			return res.send(SchedCourses);
+		} else if (addRem == 'clear') { // Clear all
+			SchedCourses = {};
+			db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
+			console.log('Sched Cleared'.magenta)
+		}
+		else {
+			return res.send(SchedCourses); // On a blank request
+		}
+
+	});
+});
 
 function getSchedInfo(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON Object

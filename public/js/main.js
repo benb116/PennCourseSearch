@@ -152,11 +152,7 @@ function formatCourseID(searchTerms) {
 
 function getCourseNumbers(search, TitleHidden) { // Getting info about courses in a department
 	var searchSelect = $('#searchSelect').val();
-	if (searchSelect == 'courseIDSearch') {
-		var searchURL = '/NewDept/'+search.split("/")[0].toUpperCase()+'.txt';
-	} else {
-		var searchURL = '/Search?searchType='+searchSelect+'&resultType=deptSearch&searchParam='+search;
-	}
+	var searchURL = '/Search?searchType='+searchSelect+'&resultType=deptSearch&searchParam='+search;
 
 	LoadingSum += 1;
 	LoadingIndicate();

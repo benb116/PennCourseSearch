@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "colors": "^1.0.3",
-    "express": "^3.4.8",
+    "express": "^3.19.0",
+    "express-stormpath": "^0.6.0",
+    "fs": "0.0.2",
     "mongojs": "^0.18.0",
     "request": "^2.51.0"
   },
@@ -17,6 +19,6 @@
   },
   "repository": {
     "type": "git",
-    "url":  "https://github.com/benb116/PennCourseSearch"
+    "url": "https://github.com/benb116/PennCourseSearch"
   }
 }
