@@ -37,8 +37,8 @@ app.use(stormpath.init(app, {
   apiKeySecret: config.STORMPATH_API_KEY_SECRET,
   secretKey:    config.STORMPATH_SECRET_KEY,
   application:  config.STORMPATH_URL,
-  enableAccountVerification: true,
-  enableForgotPassword: true,
+  enableAccountVerification: 	true,
+  enableForgotPassword: 		true,
   sessionDuration: 1000 * 60 * 60 * 24, // Make sessions expire after one day
 }));
 

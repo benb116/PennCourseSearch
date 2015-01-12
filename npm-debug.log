@@ -1,0 +1,611 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.35
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/Users/Ben/Dropbox/Developer/PennCourseSearch',
+5 verbose install   [ 'colors',
+5 verbose install     'express',
+5 verbose install     'express-stormpath',
+5 verbose install     'fs',
+5 verbose install     'mongojs',
+5 verbose install     'request' ] ]
+6 info preinstall PennCourseScheduler@0.1.0
+7 warn package.json fs@0.0.2 fs is also the name of a node core module.
+8 warn package.json fs@0.0.2 No description
+9 warn package.json fs@0.0.2 No repository field.
+10 warn package.json fs@0.0.2 No README data
+11 warn package.json path@0.4.9 path is also the name of a node core module.
+12 warn package.json path@0.4.9 No README data
+13 verbose readDependencies using package.json deps
+14 verbose already installed skipping colors@^1.0.3 /Users/Ben/Dropbox/Developer/PennCourseSearch
+15 verbose already installed skipping express@^3.19.0 /Users/Ben/Dropbox/Developer/PennCourseSearch
+16 verbose already installed skipping express-stormpath@^0.6.0 /Users/Ben/Dropbox/Developer/PennCourseSearch
+17 verbose already installed skipping fs@0.0.2 /Users/Ben/Dropbox/Developer/PennCourseSearch
+18 verbose already installed skipping mongojs@^0.18.0 /Users/Ben/Dropbox/Developer/PennCourseSearch
+19 verbose already installed skipping request@^2.51.0 /Users/Ben/Dropbox/Developer/PennCourseSearch
+20 silly resolved []
+21 info build /Users/Ben/Dropbox/Developer/PennCourseSearch
+22 verbose linkStuff [ false, false, false, '/Users/Ben/Dropbox/Developer' ]
+23 info linkStuff PennCourseScheduler@0.1.0
+24 verbose linkBins PennCourseScheduler@0.1.0
+25 verbose linkMans PennCourseScheduler@0.1.0
+26 verbose rebuildBundles PennCourseScheduler@0.1.0
+27 verbose rebuildBundles [ '.DS_Store',
+27 verbose rebuildBundles   '.bin',
+27 verbose rebuildBundles   'colors',
+27 verbose rebuildBundles   'express',
+27 verbose rebuildBundles   'express-stormpath',
+27 verbose rebuildBundles   'fs',
+27 verbose rebuildBundles   'handlebars',
+27 verbose rebuildBundles   'hjs',
+27 verbose rebuildBundles   'mongodb',
+27 verbose rebuildBundles   'mongojs',
+27 verbose rebuildBundles   'npm',
+27 verbose rebuildBundles   'path',
+27 verbose rebuildBundles   'request' ]
+28 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/handlebars
+29 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/handlebars
+30 info preinstall handlebars@2.0.0
+31 verbose linkStuff [ false,
+31 verbose linkStuff   false,
+31 verbose linkStuff   false,
+31 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules' ]
+32 info linkStuff handlebars@2.0.0
+33 verbose linkBins handlebars@2.0.0
+34 verbose link bins [ { handlebars: 'bin/handlebars' },
+34 verbose link bins   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/.bin',
+34 verbose link bins   false ]
+35 verbose linkMans handlebars@2.0.0
+36 verbose rebuildBundles handlebars@2.0.0
+37 verbose rebuildBundles [ '.bin', 'optimist', 'uglify-js' ]
+38 info install handlebars@2.0.0
+39 info postinstall handlebars@2.0.0
+40 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/hjs
+41 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/hjs
+42 info preinstall hjs@0.0.6
+43 verbose linkStuff [ false,
+43 verbose linkStuff   false,
+43 verbose linkStuff   false,
+43 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules' ]
+44 info linkStuff hjs@0.0.6
+45 verbose linkBins hjs@0.0.6
+46 verbose linkMans hjs@0.0.6
+47 verbose rebuildBundles hjs@0.0.6
+48 verbose rebuildBundles [ '.bin', 'hogan.js' ]
+49 info install hjs@0.0.6
+50 info postinstall hjs@0.0.6
+51 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/mongodb
+52 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/mongodb
+53 info preinstall mongodb@1.4.23
+54 verbose linkStuff [ false,
+54 verbose linkStuff   false,
+54 verbose linkStuff   false,
+54 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules' ]
+55 info linkStuff mongodb@1.4.23
+56 verbose linkBins mongodb@1.4.23
+57 verbose linkMans mongodb@1.4.23
+58 verbose rebuildBundles mongodb@1.4.23
+59 verbose rebuildBundles [ 'bson', 'kerberos', 'readable-stream' ]
+60 info install mongodb@1.4.23
+61 info postinstall mongodb@1.4.23
+62 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm
+63 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm
+64 info preinstall npm@2.1.18
+65 verbose linkStuff [ false,
+65 verbose linkStuff   false,
+65 verbose linkStuff   false,
+65 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules' ]
+66 info linkStuff npm@2.1.18
+67 warn prefer global npm@2.1.18 should be installed with -g
+68 verbose linkBins npm@2.1.18
+69 verbose link bins [ { npm: './bin/npm-cli.js' },
+69 verbose link bins   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/.bin',
+69 verbose link bins   false ]
+70 verbose linkMans npm@2.1.18
+71 verbose rebuildBundles npm@2.1.18
+72 verbose rebuildBundles [ '.bin',
+72 verbose rebuildBundles   'abbrev',
+72 verbose rebuildBundles   'ansi',
+72 verbose rebuildBundles   'ansicolors',
+72 verbose rebuildBundles   'ansistyles',
+72 verbose rebuildBundles   'archy',
+72 verbose rebuildBundles   'async-some',
+72 verbose rebuildBundles   'block-stream',
+72 verbose rebuildBundles   'char-spinner',
+72 verbose rebuildBundles   'child-process-close',
+72 verbose rebuildBundles   'chmodr',
+72 verbose rebuildBundles   'chownr',
+72 verbose rebuildBundles   'cmd-shim',
+72 verbose rebuildBundles   'columnify',
+72 verbose rebuildBundles   'config-chain',
+72 verbose rebuildBundles   'dezalgo',
+72 verbose rebuildBundles   'editor',
+72 verbose rebuildBundles   'fs-vacuum',
+72 verbose rebuildBundles   'fs-write-stream-atomic',
+72 verbose rebuildBundles   'fstream',
+72 verbose rebuildBundles   'fstream-npm',
+72 verbose rebuildBundles   'github-url-from-git',
+72 verbose rebuildBundles   'github-url-from-username-repo',
+72 verbose rebuildBundles   'glob',
+72 verbose rebuildBundles   'graceful-fs',
+72 verbose rebuildBundles   'inflight',
+72 verbose rebuildBundles   'inherits',
+72 verbose rebuildBundles   'ini',
+72 verbose rebuildBundles   'init-package-json',
+72 verbose rebuildBundles   'lockfile',
+72 verbose rebuildBundles   'lru-cache',
+72 verbose rebuildBundles   'minimatch',
+72 verbose rebuildBundles   'mkdirp',
+72 verbose rebuildBundles   'node-gyp',
+72 verbose rebuildBundles   'nopt',
+72 verbose rebuildBundles   'normalize-git-url',
+72 verbose rebuildBundles   'normalize-package-data',
+72 verbose rebuildBundles   'npm-cache-filename',
+72 verbose rebuildBundles   'npm-install-checks',
+72 verbose rebuildBundles   'npm-package-arg',
+72 verbose rebuildBundles   'npm-registry-client',
+72 verbose rebuildBundles   'npm-user-validate',
+72 verbose rebuildBundles   'npmlog',
+72 verbose rebuildBundles   'once',
+72 verbose rebuildBundles   'opener',
+72 verbose rebuildBundles   'osenv',
+72 verbose rebuildBundles   'path-is-inside',
+72 verbose rebuildBundles   'read',
+72 verbose rebuildBundles   'read-installed',
+72 verbose rebuildBundles   'read-package-json',
+72 verbose rebuildBundles   'readable-stream',
+72 verbose rebuildBundles   'realize-package-specifier',
+72 verbose rebuildBundles   'request',
+72 verbose rebuildBundles   'retry',
+72 verbose rebuildBundles   'rimraf',
+72 verbose rebuildBundles   'semver',
+72 verbose rebuildBundles   'sha',
+72 verbose rebuildBundles   'slide',
+72 verbose rebuildBundles   'sorted-object',
+72 verbose rebuildBundles   'tar',
+72 verbose rebuildBundles   'text-table',
+72 verbose rebuildBundles   'uid-number',
+72 verbose rebuildBundles   'which',
+72 verbose rebuildBundles   'wrappy',
+72 verbose rebuildBundles   'write-file-atomic' ]
+73 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/abbrev
+74 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/abbrev
+75 info preinstall abbrev@1.0.5
+76 verbose linkStuff [ false,
+76 verbose linkStuff   false,
+76 verbose linkStuff   false,
+76 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+77 info linkStuff abbrev@1.0.5
+78 verbose linkBins abbrev@1.0.5
+79 verbose linkMans abbrev@1.0.5
+80 verbose rebuildBundles abbrev@1.0.5
+81 info install abbrev@1.0.5
+82 info postinstall abbrev@1.0.5
+83 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/ansi
+84 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/ansi
+85 info preinstall ansi@0.3.0
+86 verbose linkStuff [ false,
+86 verbose linkStuff   false,
+86 verbose linkStuff   false,
+86 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+87 info linkStuff ansi@0.3.0
+88 verbose linkBins ansi@0.3.0
+89 verbose linkMans ansi@0.3.0
+90 verbose rebuildBundles ansi@0.3.0
+91 info install ansi@0.3.0
+92 info postinstall ansi@0.3.0
+93 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/ansicolors
+94 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/ansicolors
+95 info preinstall ansicolors@0.3.2
+96 verbose linkStuff [ false,
+96 verbose linkStuff   false,
+96 verbose linkStuff   false,
+96 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+97 info linkStuff ansicolors@0.3.2
+98 verbose linkBins ansicolors@0.3.2
+99 verbose linkMans ansicolors@0.3.2
+100 verbose rebuildBundles ansicolors@0.3.2
+101 info install ansicolors@0.3.2
+102 info postinstall ansicolors@0.3.2
+103 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/ansistyles
+104 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/ansistyles
+105 info preinstall ansistyles@0.1.3
+106 verbose linkStuff [ false,
+106 verbose linkStuff   false,
+106 verbose linkStuff   false,
+106 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+107 info linkStuff ansistyles@0.1.3
+108 verbose linkBins ansistyles@0.1.3
+109 verbose linkMans ansistyles@0.1.3
+110 verbose rebuildBundles ansistyles@0.1.3
+111 info install ansistyles@0.1.3
+112 info postinstall ansistyles@0.1.3
+113 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/archy
+114 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/archy
+115 info preinstall archy@1.0.0
+116 verbose linkStuff [ false,
+116 verbose linkStuff   false,
+116 verbose linkStuff   false,
+116 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+117 info linkStuff archy@1.0.0
+118 verbose linkBins archy@1.0.0
+119 verbose linkMans archy@1.0.0
+120 verbose rebuildBundles archy@1.0.0
+121 info install archy@1.0.0
+122 info postinstall archy@1.0.0
+123 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/async-some
+124 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/async-some
+125 info preinstall async-some@1.0.1
+126 verbose linkStuff [ false,
+126 verbose linkStuff   false,
+126 verbose linkStuff   false,
+126 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+127 info linkStuff async-some@1.0.1
+128 verbose linkBins async-some@1.0.1
+129 verbose linkMans async-some@1.0.1
+130 verbose rebuildBundles async-some@1.0.1
+131 info install async-some@1.0.1
+132 info postinstall async-some@1.0.1
+133 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/block-stream
+134 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/block-stream
+135 info preinstall block-stream@0.0.7
+136 verbose linkStuff [ false,
+136 verbose linkStuff   false,
+136 verbose linkStuff   false,
+136 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+137 info linkStuff block-stream@0.0.7
+138 verbose linkBins block-stream@0.0.7
+139 verbose linkMans block-stream@0.0.7
+140 verbose rebuildBundles block-stream@0.0.7
+141 info install block-stream@0.0.7
+142 info postinstall block-stream@0.0.7
+143 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/char-spinner
+144 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/char-spinner
+145 info preinstall char-spinner@1.0.1
+146 verbose linkStuff [ false,
+146 verbose linkStuff   false,
+146 verbose linkStuff   false,
+146 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+147 info linkStuff char-spinner@1.0.1
+148 verbose linkBins char-spinner@1.0.1
+149 verbose linkMans char-spinner@1.0.1
+150 verbose rebuildBundles char-spinner@1.0.1
+151 info install char-spinner@1.0.1
+152 info postinstall char-spinner@1.0.1
+153 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/child-process-close
+154 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/child-process-close
+155 info preinstall child-process-close@0.1.1
+156 verbose linkStuff [ false,
+156 verbose linkStuff   false,
+156 verbose linkStuff   false,
+156 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+157 info linkStuff child-process-close@0.1.1
+158 verbose linkBins child-process-close@0.1.1
+159 verbose linkMans child-process-close@0.1.1
+160 verbose rebuildBundles child-process-close@0.1.1
+161 info install child-process-close@0.1.1
+162 info postinstall child-process-close@0.1.1
+163 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/chmodr
+164 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/chmodr
+165 info preinstall chmodr@0.1.0
+166 verbose linkStuff [ false,
+166 verbose linkStuff   false,
+166 verbose linkStuff   false,
+166 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+167 info linkStuff chmodr@0.1.0
+168 verbose linkBins chmodr@0.1.0
+169 verbose linkMans chmodr@0.1.0
+170 verbose rebuildBundles chmodr@0.1.0
+171 info install chmodr@0.1.0
+172 info postinstall chmodr@0.1.0
+173 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/chownr
+174 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/chownr
+175 info preinstall chownr@0.0.1
+176 verbose linkStuff [ false,
+176 verbose linkStuff   false,
+176 verbose linkStuff   false,
+176 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+177 info linkStuff chownr@0.0.1
+178 verbose linkBins chownr@0.0.1
+179 verbose linkMans chownr@0.0.1
+180 verbose rebuildBundles chownr@0.0.1
+181 info install chownr@0.0.1
+182 info postinstall chownr@0.0.1
+183 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/cmd-shim
+184 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/cmd-shim
+185 info preinstall cmd-shim@2.0.1
+186 verbose linkStuff [ false,
+186 verbose linkStuff   false,
+186 verbose linkStuff   false,
+186 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+187 info linkStuff cmd-shim@2.0.1
+188 verbose linkBins cmd-shim@2.0.1
+189 verbose linkMans cmd-shim@2.0.1
+190 verbose rebuildBundles cmd-shim@2.0.1
+191 info install cmd-shim@2.0.1
+192 info postinstall cmd-shim@2.0.1
+193 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/columnify
+194 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/columnify
+195 info preinstall columnify@1.3.2
+196 verbose linkStuff [ false,
+196 verbose linkStuff   false,
+196 verbose linkStuff   false,
+196 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+197 info linkStuff columnify@1.3.2
+198 verbose linkBins columnify@1.3.2
+199 verbose linkMans columnify@1.3.2
+200 verbose rebuildBundles columnify@1.3.2
+201 verbose rebuildBundles [ 'strip-ansi', 'wcwidth' ]
+202 info install columnify@1.3.2
+203 info postinstall columnify@1.3.2
+204 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/config-chain
+205 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/config-chain
+206 info preinstall config-chain@1.1.8
+207 verbose linkStuff [ false,
+207 verbose linkStuff   false,
+207 verbose linkStuff   false,
+207 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+208 info linkStuff config-chain@1.1.8
+209 verbose linkBins config-chain@1.1.8
+210 verbose linkMans config-chain@1.1.8
+211 verbose rebuildBundles config-chain@1.1.8
+212 verbose rebuildBundles [ 'proto-list' ]
+213 info install config-chain@1.1.8
+214 info postinstall config-chain@1.1.8
+215 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/dezalgo
+216 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/dezalgo
+217 info preinstall dezalgo@1.0.1
+218 verbose linkStuff [ false,
+218 verbose linkStuff   false,
+218 verbose linkStuff   false,
+218 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+219 info linkStuff dezalgo@1.0.1
+220 verbose linkBins dezalgo@1.0.1
+221 verbose linkMans dezalgo@1.0.1
+222 verbose rebuildBundles dezalgo@1.0.1
+223 verbose rebuildBundles [ 'asap' ]
+224 info install dezalgo@1.0.1
+225 info postinstall dezalgo@1.0.1
+226 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/editor
+227 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/editor
+228 info preinstall editor@0.1.0
+229 verbose linkStuff [ false,
+229 verbose linkStuff   false,
+229 verbose linkStuff   false,
+229 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+230 info linkStuff editor@0.1.0
+231 verbose linkBins editor@0.1.0
+232 verbose linkMans editor@0.1.0
+233 verbose rebuildBundles editor@0.1.0
+234 info install editor@0.1.0
+235 info postinstall editor@0.1.0
+236 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/fs-vacuum
+237 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/fs-vacuum
+238 info preinstall fs-vacuum@1.2.5
+239 verbose linkStuff [ false,
+239 verbose linkStuff   false,
+239 verbose linkStuff   false,
+239 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+240 info linkStuff fs-vacuum@1.2.5
+241 verbose linkBins fs-vacuum@1.2.5
+242 verbose linkMans fs-vacuum@1.2.5
+243 verbose rebuildBundles fs-vacuum@1.2.5
+244 info install fs-vacuum@1.2.5
+245 info postinstall fs-vacuum@1.2.5
+246 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/fs-write-stream-atomic
+247 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/fs-write-stream-atomic
+248 info preinstall fs-write-stream-atomic@1.0.2
+249 verbose linkStuff [ false,
+249 verbose linkStuff   false,
+249 verbose linkStuff   false,
+249 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+250 info linkStuff fs-write-stream-atomic@1.0.2
+251 verbose linkBins fs-write-stream-atomic@1.0.2
+252 verbose linkMans fs-write-stream-atomic@1.0.2
+253 verbose rebuildBundles fs-write-stream-atomic@1.0.2
+254 info install fs-write-stream-atomic@1.0.2
+255 info postinstall fs-write-stream-atomic@1.0.2
+256 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/fstream
+257 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/fstream
+258 info preinstall fstream@1.0.3
+259 verbose linkStuff [ false,
+259 verbose linkStuff   false,
+259 verbose linkStuff   false,
+259 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+260 info linkStuff fstream@1.0.3
+261 verbose linkBins fstream@1.0.3
+262 verbose linkMans fstream@1.0.3
+263 verbose rebuildBundles fstream@1.0.3
+264 info install fstream@1.0.3
+265 info postinstall fstream@1.0.3
+266 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/fstream-npm
+267 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/fstream-npm
+268 info preinstall fstream-npm@1.0.1
+269 verbose linkStuff [ false,
+269 verbose linkStuff   false,
+269 verbose linkStuff   false,
+269 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+270 info linkStuff fstream-npm@1.0.1
+271 verbose linkBins fstream-npm@1.0.1
+272 verbose linkMans fstream-npm@1.0.1
+273 verbose rebuildBundles fstream-npm@1.0.1
+274 verbose rebuildBundles [ 'fstream-ignore' ]
+275 info install fstream-npm@1.0.1
+276 info postinstall fstream-npm@1.0.1
+277 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/github-url-from-git
+278 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/github-url-from-git
+279 info preinstall github-url-from-git@1.4.0
+280 verbose linkStuff [ false,
+280 verbose linkStuff   false,
+280 verbose linkStuff   false,
+280 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+281 info linkStuff github-url-from-git@1.4.0
+282 verbose linkBins github-url-from-git@1.4.0
+283 verbose linkMans github-url-from-git@1.4.0
+284 verbose rebuildBundles github-url-from-git@1.4.0
+285 info install github-url-from-git@1.4.0
+286 info postinstall github-url-from-git@1.4.0
+287 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/github-url-from-username-repo
+288 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/github-url-from-username-repo
+289 info preinstall github-url-from-username-repo@1.0.2
+290 verbose linkStuff [ false,
+290 verbose linkStuff   false,
+290 verbose linkStuff   false,
+290 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+291 info linkStuff github-url-from-username-repo@1.0.2
+292 verbose linkBins github-url-from-username-repo@1.0.2
+293 verbose linkMans github-url-from-username-repo@1.0.2
+294 verbose rebuildBundles github-url-from-username-repo@1.0.2
+295 info install github-url-from-username-repo@1.0.2
+296 info postinstall github-url-from-username-repo@1.0.2
+297 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/glob
+298 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/glob
+299 info preinstall glob@4.3.2
+300 verbose linkStuff [ false,
+300 verbose linkStuff   false,
+300 verbose linkStuff   false,
+300 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+301 info linkStuff glob@4.3.2
+302 verbose linkBins glob@4.3.2
+303 verbose linkMans glob@4.3.2
+304 verbose rebuildBundles glob@4.3.2
+305 info install glob@4.3.2
+306 info postinstall glob@4.3.2
+307 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/graceful-fs
+308 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/graceful-fs
+309 info preinstall graceful-fs@3.0.5
+310 verbose linkStuff [ false,
+310 verbose linkStuff   false,
+310 verbose linkStuff   false,
+310 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+311 info linkStuff graceful-fs@3.0.5
+312 verbose linkBins graceful-fs@3.0.5
+313 verbose linkMans graceful-fs@3.0.5
+314 verbose rebuildBundles graceful-fs@3.0.5
+315 info install graceful-fs@3.0.5
+316 info postinstall graceful-fs@3.0.5
+317 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/inflight
+318 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/inflight
+319 info preinstall inflight@1.0.4
+320 verbose linkStuff [ false,
+320 verbose linkStuff   false,
+320 verbose linkStuff   false,
+320 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+321 info linkStuff inflight@1.0.4
+322 verbose linkBins inflight@1.0.4
+323 verbose linkMans inflight@1.0.4
+324 verbose rebuildBundles inflight@1.0.4
+325 info install inflight@1.0.4
+326 info postinstall inflight@1.0.4
+327 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/inherits
+328 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/inherits
+329 info preinstall inherits@2.0.1
+330 verbose linkStuff [ false,
+330 verbose linkStuff   false,
+330 verbose linkStuff   false,
+330 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+331 info linkStuff inherits@2.0.1
+332 verbose linkBins inherits@2.0.1
+333 verbose linkMans inherits@2.0.1
+334 verbose rebuildBundles inherits@2.0.1
+335 info install inherits@2.0.1
+336 info postinstall inherits@2.0.1
+337 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/ini
+338 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/ini
+339 info preinstall ini@1.3.2
+340 verbose linkStuff [ false,
+340 verbose linkStuff   false,
+340 verbose linkStuff   false,
+340 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+341 info linkStuff ini@1.3.2
+342 verbose linkBins ini@1.3.2
+343 verbose linkMans ini@1.3.2
+344 verbose rebuildBundles ini@1.3.2
+345 info install ini@1.3.2
+346 info postinstall ini@1.3.2
+347 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/init-package-json
+348 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/init-package-json
+349 info preinstall init-package-json@1.1.3
+350 verbose linkStuff [ false,
+350 verbose linkStuff   false,
+350 verbose linkStuff   false,
+350 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+351 info linkStuff init-package-json@1.1.3
+352 verbose linkBins init-package-json@1.1.3
+353 verbose linkMans init-package-json@1.1.3
+354 verbose rebuildBundles init-package-json@1.1.3
+355 verbose rebuildBundles [ 'promzard' ]
+356 info install init-package-json@1.1.3
+357 info postinstall init-package-json@1.1.3
+358 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/lockfile
+359 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/lockfile
+360 info preinstall lockfile@1.0.0
+361 verbose linkStuff [ false,
+361 verbose linkStuff   false,
+361 verbose linkStuff   false,
+361 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+362 info linkStuff lockfile@1.0.0
+363 verbose linkBins lockfile@1.0.0
+364 verbose linkMans lockfile@1.0.0
+365 verbose rebuildBundles lockfile@1.0.0
+366 info install lockfile@1.0.0
+367 info postinstall lockfile@1.0.0
+368 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/lru-cache
+369 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/lru-cache
+370 info preinstall lru-cache@2.5.0
+371 verbose linkStuff [ false,
+371 verbose linkStuff   false,
+371 verbose linkStuff   false,
+371 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+372 info linkStuff lru-cache@2.5.0
+373 verbose linkBins lru-cache@2.5.0
+374 verbose linkMans lru-cache@2.5.0
+375 verbose rebuildBundles lru-cache@2.5.0
+376 info install lru-cache@2.5.0
+377 info postinstall lru-cache@2.5.0
+378 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/minimatch
+379 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/minimatch
+380 info preinstall minimatch@2.0.1
+381 verbose linkStuff [ false,
+381 verbose linkStuff   false,
+381 verbose linkStuff   false,
+381 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+382 info linkStuff minimatch@2.0.1
+383 verbose linkBins minimatch@2.0.1
+384 verbose linkMans minimatch@2.0.1
+385 verbose rebuildBundles minimatch@2.0.1
+386 verbose rebuildBundles [ 'brace-expansion' ]
+387 info install minimatch@2.0.1
+388 info postinstall minimatch@2.0.1
+389 verbose rebuild bundle /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/mkdirp
+390 info build /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/mkdirp
+391 info preinstall mkdirp@0.5.0
+392 verbose linkStuff [ false,
+392 verbose linkStuff   false,
+392 verbose linkStuff   false,
+392 verbose linkStuff   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules' ]
+393 info linkStuff mkdirp@0.5.0
+394 verbose linkBins mkdirp@0.5.0
+395 verbose link bins [ { mkdirp: 'bin/cmd.js' },
+395 verbose link bins   '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/.bin',
+395 verbose link bins   false ]
+396 verbose linkMans mkdirp@0.5.0
+397 verbose rebuildBundles mkdirp@0.5.0
+398 verbose rebuildBundles [ 'minimist' ]
+399 error Error: EACCES, unlink '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/.bin/mkdirp'
+399 error  { [Error: EACCES, unlink '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/.bin/mkdirp']
+399 error   errno: 3,
+399 error   code: 'EACCES',
+399 error   path: '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/.bin/mkdirp' }
+400 error Please try running this command again as root/Administrator.
+401 error System Darwin 14.0.0
+402 error command "node" "/usr/local/bin/npm" "install"
+403 error cwd /Users/Ben/Dropbox/Developer/PennCourseSearch
+404 error node -v v0.10.35
+405 error npm -v 1.4.28
+406 error path /Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/.bin/mkdirp
+407 error code EACCES
+408 error errno 3
+409 error stack Error: EACCES, unlink '/Users/Ben/Dropbox/Developer/PennCourseSearch/node_modules/npm/node_modules/.bin/mkdirp'
+410 verbose exit [ 3, true ]

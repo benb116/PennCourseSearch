@@ -1,4 +1,11 @@
 $(document).ready(function () {
+	$('#clearTool').tooltipster({
+		trigger: 'click',
+		position: 'bottom',
+		interactive: 'true',
+		content: $('<span onclick="clearSched()">Confirm</span>')
+	});
+
 	// The delay function that prevents immediate requests
 	var delay = (function(){
 		var timer = 0;
@@ -36,17 +43,7 @@ $(document).ready(function () {
 			$('.CourseTitle').toggle();
 			TitleHidden = !TitleHidden;
 		}
-		if ($(this).html() == 'Clear All') {
-			LoadingSum += 1;
-			$.get("/Sched?addRem=clear") // Send a clear request
-			.always(function() {
-				LoadingSum -= 1;
-				LoadingIndicate()
-			});
-			SpitSched()
-		}
 		if ($(this).html() == 'Download Schedule') {
-			console.log('cs')
 			html2canvas($('#SchedGraph'), { // Convert the div to a canvas
 				onrendered: function(canvas) {
 					var image = new Image();
@@ -127,7 +124,6 @@ function initiateSearch() {
 
 function formatCourseID(searchTerms) {
 	splitTerms = searchTerms.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
-	console.log(splitTerms)
 	//If the user enters everything without spaces or dashes
 	if (parseFloat(splitTerms[2]) == splitTerms[2]) { // If the third character is a number (e.g. BE100)
 		splitTerms = splitTerms.substr(0, 2)+'/'+splitTerms.substr(2); // Splice the search query with a slash after the deptartment
@@ -261,6 +257,18 @@ function removeFromSched(sec) {
 		LoadingIndicate()
 	});
 }
+
+function clearSched () {
+	LoadingSum += 1;
+	$.get("/Sched?addRem=clear") // Send a clear request
+	.always(function() {
+		LoadingSum -= 1;
+		LoadingIndicate()
+	});
+	SpitSched()
+	$('.tooltip').tooltipster('hide');
+}
+
 function SpitSched(courseSched) {
 	$('#Schedule').empty(); // Clear
 	$('#TimeCol').empty();
@@ -299,7 +307,7 @@ function SpitSched(courseSched) {
  	// + 1 keeps the height inside the box
 
  	// Make the lines and time labels
-	if (Object.keys(courseSched).length > 0){
+	if (!($.isEmptyObject(courseSched))){
 	 	for (var i = 0; i <= (endHour - startHour); i++) { // for each hour
 	 		toppos = (i) * halfScale + 2.5; // each height value is linearly spaced with an offset
 	 		hourtext = Math.round(i+startHour) // If startHour is not an integer, make it pretty

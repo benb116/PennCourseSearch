@@ -4,8 +4,10 @@
 		<title>PennCourseScheduler</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="/css/index.css">
+        <link rel="stylesheet" type="text/css" href="/css/tooltipster.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript" src="/js/html2canvas.js"></script>
+        <script type="text/javascript" src="/js/jquery.tooltipster.min.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
 	</head>
     <body>
@@ -25,7 +27,7 @@
                 <span style="margin-left:1em;" class="OpenSec">&nbsp&nbsp&nbsp&nbsp&nbsp</span><span> = Open </span><span class="ClosedSec">&nbsp&nbsp&nbsp&nbsp&nbsp</span><span> = Closed </span><span id="LoadingInfo" style="opacity:0;">Loading...</span>
     		</form>
             <div id="MenuButtons">
-        		<span>Toggle course titles</span><span>Clear All</span><span>Download Schedule</span><span>Recolor</span>
+        		<span>Toggle course titles</span><span id="clearTool" class="tooltip">Clear All</span><span>Download Schedule</span><span>Recolor</span>
             </div>
 		</div>
         <div id="BottomResults">
