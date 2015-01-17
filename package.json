@@ -2,9 +2,9 @@
   "name": "PennCourseScheduler",
   "version": "0.1.0",
   "description": "A barebones web app designed to help Penn students find classes and make schedules",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "colors": "^1.0.3",
