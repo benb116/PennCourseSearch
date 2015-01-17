@@ -9,12 +9,12 @@ body {width: 100%;
 	/*height: 100%; */
 	text-align: center; 
 	margin: 0; 
-	background-color: #E6E6E6; 
+	background-color: #F2F2F2; 
 	font-family: 'Helvetica';
 	font-family: 'Open Sans'; 
 	min-width: 1000px;}
 #MenuBar {
-	height: 2em; width: 9em;
+	height: 2em; width: 12em;
 	position: absolute;
 	top: 0; right: 0;
 	background-color: #3498db;
@@ -22,6 +22,7 @@ body {width: 100%;
 	line-height: 2em;
 	border-bottom-left-radius: 1.5em;
 }
+#MenuBar > a {	text-decoration: none; color: white; margin-right: 2em;}
 #Top {
 	height: 5em; 
 	font-family: 'Open Sans', 'sans-serif';
@@ -45,7 +46,7 @@ h1 {margin-top: 1em; margin-bottom: 0;}
 	background-color: white;
 	font-size: 11px;}
 
-#CourseList {min-width: 100px; max-width: 300px; text-align: left; overflow-y: scroll;}
+#CourseList {min-width: 120px; max-width: 300px; text-align: left; overflow-y: scroll;}
 #CourseList li {padding: 0 2em 0 2em;
 	-webkit-transition: text-indent .15s ease-in-out; transition: text-indent .15s ease-in-out;}
 /*#CourseList li:hover {text-indent: 0.5em;}*/
@@ -59,6 +60,7 @@ ul {list-style-type: none; padding: 0; margin: 0;}
 .OpenSec {background-color: #47EA4C;}
 .ClosedSec {background-color: #F73B3B;}
 .ErrorSec {background-color: #E6E6E6;}
+.PCRSec {background-color: #3498db;}
 .CourseTitle {display: none;}
 #SectionInfo p {margin: 0;}
 .AsscButton:hover {font-weight: bolder;}
@@ -105,3 +107,13 @@ input[type="text"] {
 ::-webkit-scrollbar-track {background: white;} 
 /* Handle */
 ::-webkit-scrollbar-thumb {background: #95a5a6;}
+
+.loader{
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  margin: 0 auto .2em;
+  margin-left: 2em;
+  display: inline-block;
+  vertical-align: middle;
+}
