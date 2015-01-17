@@ -158,9 +158,11 @@ function getCourseNumbers(search, TitleHidden) { // Getting info about courses i
 	LoadingIndicate();
 	$.get(searchURL) // Make the request
 	.done(function(data) {
+		JSONRes = JSON.parse(data);
+		console.log(JSONRes)
 		var allHTML = '';
-		for(var course in data) {
-			allHTML += '<li>'+data[course].courseListName+'<span class="CourseTitle"> - '+data[course].courseTitle+'</span></li>'
+		for(var course in JSONRes) {
+			allHTML += '<li>'+JSONRes[course].courseListName+'<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>'
 		}
 		$('#CourseList').html(allHTML); // Put the course number list in #CourseList
 		if (TitleHidden == false) {$('.CourseTitle').toggle();}
@@ -281,10 +283,7 @@ function Stars(addRem, CID) {
 					for(var section in sections) {
 						console.log(sections[section])
 					    var starClass = 'fa fa-star'
-						var newHTML = '<li><span>&nbsp + &nbsp</span><span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[section].SectionName+sections[section].TimeInfo+'</span><i class="'+starClass+'" style="float:right;"></i></li>'
-						
-						if 
-
+						allHTML = '<li><span>&nbsp + &nbsp</span><span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[section].SectionName+sections[section].TimeInfo+'</span><i class="'+starClass+'" style="float:right;"></i></li>'
 						$('#SectionList').append(allHTML); // Put the course number list in  #SectionList		
 			
 						$('#SectionList span:nth-child(1)').click(function() { // If a section is clicked
@@ -355,7 +354,7 @@ function removeFromSched(sec) {
 	});
 }
 
-function clearSched() {
+function clearSched () {
 	LoadingSum += 1;
 	$.get("/Sched?addRem=clear") // Send a clear request
 	.always(function() {

@@ -243,7 +243,6 @@ function parseCourseList(JSONString) {
 
 		sectionsList[SectionName] = {'SectionName': SectionName, 'StatusClass': StatusClass, 'TimeInfo': TimeInfo, 'NoSpace': sectionNameNoSpace}
 	}
-	console.log(sectionsList)
 	return sectionsList;
 }
 
