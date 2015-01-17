@@ -241,8 +241,9 @@ function parseCourseList(JSONString) {
 		var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
 		if(typeof TimeInfoArray[1][1] !== 'undefined'){TimeInfo += ' ...';}; // If there are multiple meeting times
 		if(typeof TimeInfo === 'undefined'){TimeInfo = '';};
+		var starClass = 'fa fa-star-o';
 		if (sectionsList.indexOf(SectionName) == -1) { // If it's not already in the list
-			sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+SectionName+TimeInfo+'</span></li>'; // Add and format
+			sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+SectionName+TimeInfo+'</span><i class="'+starClass+'" style="float:right;"></i></li>'; // Add and format
 		};
 	}
 	if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'
@@ -305,6 +306,41 @@ function parseSectionList(JSONString) {
 		return 'No Results';
 	}
 }
+
+app.get('/Star', stormpath.loginRequired, function(req, res) {
+	var StarredCourses = [];
+	var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
+	// console.time('DB Time')
+	db.Students.find({Pennkey: myPennkey}, { StarList: 1}, function(err, doc) { // Try to access the database
+		try {
+			StarredCourses = doc[0].StarList; // Get previously starred courses
+		} catch(error) { // If there is no previous starlist
+			db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database	
+		}
+		var addRem = req.query.addRem; // Are we adding, removing, or clearing?
+		var courseID = req.query.courseID;
+		if (addRem == 'add') { // If we need to add, then we get meeting info for the section
+			console.log('add'+courseID)
+			var index = StarredCourses.indexOf(courseID);
+			if (index == -1) {
+				StarredCourses.push(courseID);
+				console.log(courseID.cyan)
+			}
+		} else if (addRem == 'rem') { // If we need to remove
+			var index = StarredCourses.indexOf(courseID);
+			if (index > -1) {
+			    StarredCourses.splice(index, 1);
+			}
+		} else if (addRem == 'clear') { // Clear all
+			var StarredCourses = [];
+		}
+		console.log(StarredCourses)
+
+		db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database
+
+		return res.send(StarredCourses)
+	});
+});
 
 // Manage scheduling requests
 app.get('/Sched', stormpath.loginRequired, function(req, res) {

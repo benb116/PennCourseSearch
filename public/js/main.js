@@ -65,6 +65,9 @@ $(document).ready(function () {
 				LoadingIndicate()
 			});
 		}
+		if ($(this).html() == 'Show Stars') {
+			Stars('blank', 'blank')
+		}
 	});
 
 	$('#searchSelect').change(function () { // If the user changes from one type of search to another, search again with the new method
@@ -193,6 +196,19 @@ function getSectionNumbers(cnum, instFilter) { // Getting info about sections in
 			var secname = $(this).html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
 			getSectionInfo(secname); // Search for section info
 		});
+		$('#SectionList i').click(function() {
+			var isStarred = $(this).attr('class');
+			console.log(isStarred == 'fa fa-star')
+			if (isStarred == 'fa fa-star-o') {
+				Stars('add', $(this).prev().html().split("-")[0].replace(/ /g, ""));
+				$(this).toggleClass('fa-star');
+				$(this).toggleClass('fa-star-o');
+			} else if (isStarred == 'fa fa-star') {
+				Stars('rem', $(this).prev().html().split("-")[0].replace(/ /g, ""));
+				$(this).toggleClass('fa-star');
+				$(this).toggleClass('fa-star-o');
+			}
+		});
 	})
 	.always(function() {
 		LoadingSum -= 1;
@@ -226,6 +242,22 @@ function getSectionInfo(sec) {
 		LoadingIndicate()
 	});
 }
+
+function Stars(addRem, CID) {
+	LoadingSum += 1; 
+	LoadingIndicate()
+	$.get("/Star?addRem="+addRem+"&courseID="+CID) // Make the request which will simply spit back the current Starlist
+	.done(function(data) {
+		for(var star in data) {
+			console.log(data[star])
+		}
+	})
+	.always(function() {
+		LoadingSum -= 1;
+		LoadingIndicate()
+	});
+}
+
 function addToSched(sec) { // Getting info about a section
 	LoadingSum += 1;
 	LoadingIndicate();

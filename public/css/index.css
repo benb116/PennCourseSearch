@@ -46,13 +46,13 @@ h1 {margin-top: 1em; margin-bottom: 0;}
 	background-color: white;
 	font-size: 11px;}
 
-#CourseList {min-width: 120px; max-width: 300px; text-align: left; overflow-y: scroll;}
+#CourseList {min-width: 110px; max-width: 300px; text-align: left; overflow-y: scroll;}
 #CourseList li {padding: 0 2em 0 2em;
 	-webkit-transition: text-indent .15s ease-in-out; transition: text-indent .15s ease-in-out;}
 /*#CourseList li:hover {text-indent: 0.5em;}*/
-#SectionList, #SectionInfo {width: 300px; text-align: left; overflow-y: scroll; box-sizing: border-box; padding-left: 0.5em; padding-right: 0.5em;}
-#SectionList {height: 35%;}
-#SectionInfo {padding-top: 2%; height: 65%;}
+#SectionList, #SectionInfo {width: 260px; text-align: left; overflow-y: scroll; box-sizing: border-box; padding-left: 0.5em; padding-right: 0.5em;}
+#SectionList {height: 45%;}
+#SectionInfo {padding-top: 2%; height: 55%;}
 ul {list-style-type: none; padding: 0; margin: 0;}
 #SectionList li {padding-left: 0.0em;}
 #CourseList li, #SectionList li span, #SectionInfo span {cursor: pointer;}
@@ -63,13 +63,12 @@ ul {list-style-type: none; padding: 0; margin: 0;}
 .PCRSec {background-color: #3498db;}
 .CourseTitle {display: none;}
 #SectionInfo p {margin: 0;}
-.AsscButton:hover {font-weight: bolder;}
-.AsscText {display: none;}
 
-#SchedGraph {height: calc(100vh - 16em); overflow: hidden; padding-left: 2em; padding-right: 2em; font-size: 12px; min-width: 500px;}
+#SchedGraph {height: 100%; overflow: hidden; padding-left: 2em; padding-right: 2em; font-size: 12px; min-width: 500px;}
+#InfoPanel {height: calc(100vh - 25em); padding-left: 2em; padding-right: 2em; font-size: 12px; min-width: 500px;}
 #SchedGraph span {margin: 1em; cursor: pointer;}
 #TimeCol, #Schedule {background-color: white;
-	height: 80%;
+	height: 100%;
 	margin: 0 auto;
 	display: inline-block;
 	vertical-align: top;
