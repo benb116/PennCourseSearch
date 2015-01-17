@@ -3,7 +3,7 @@ $(document).ready(function () {
 		trigger: 'click',
 		position: 'bottom',
 		interactive: 'true',
-		content: $('<span onclick="clearSched()">Confirm</span>')
+		content: $('<span onclick="ClearSched()">Confirm</span>')
 	});
 
 	// The delay function that prevents immediate requests
@@ -44,13 +44,7 @@ $(document).ready(function () {
 			TitleHidden = !TitleHidden;
 		}
 		if ($(this).html() == 'Download Schedule') {
-			html2canvas($('#SchedGraph'), { // Convert the div to a canvas
-				onrendered: function(canvas) {
-					var image = new Image();
-					image.src = canvas.toDataURL("image/png"); // Convert the canvas to png
-					window.open(image.src, '_blank'); // Open in new tab
-				}
-			});	
+			
 		};
 		if ($(this).html() == 'Recolor') {
 			newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
@@ -68,18 +62,18 @@ $(document).ready(function () {
 	});
 
 	$('#searchSelect').change(function () { // If the user changes from one type of search to another, search again with the new method
-        initiateSearch();
+        InitiateSearch();
     });
 
  	$('#CSearch').on('input', function(){ // When the search terms change
 		delay(function(){ // Don't check instantaneously
-			initiateSearch();
+			InitiateSearch();
 		}, 600);
 	});
 
 });
 
-function initiateSearch() {
+function InitiateSearch() {
 	var searchTerms = $('#CSearch').val(); // Get raw search
 	try {
 		if (searchTerms != "" && searchTerms != 'favicon.ico' && searchTerms != 'blank') { // Initial filtering
@@ -87,7 +81,7 @@ function initiateSearch() {
 			var searchSelect = $('#searchSelect').val();
 			if (searchSelect == 'courseIDSearch') {
 				// Format search terms for server request
-				var splitTerms = formatCourseID(searchTerms);
+				var splitTerms = FormatCourseID(searchTerms);
 				// By now the search terms should be 'DEPT/NUM/SEC/' although NUM/ and SEC/ may not be included
 				var deptSearch = splitTerms.split("/")[0]; // Get deptartment
 				var numbSearch = splitTerms.split("/")[1]; // Get course number
@@ -100,14 +94,14 @@ function initiateSearch() {
 				var sectSearch = ''; // Get section number
 			}
 			
-			getCourseNumbers(deptSearch, TitleHidden);
+			GetCourseNumbers(deptSearch, TitleHidden);
 			if (numbSearch.length == 3) {
-				getSectionNumbers(deptSearch+numbSearch, 'all')
+				GetSectionNumbers(deptSearch+numbSearch, 'all')
 			} else { // If there is no course number, clear the section list and info panel
 				$('#SectionList').empty();
 			};
 			if (sectSearch.length == 3) {
-				getSectionInfo(deptSearch+numbSearch+sectSearch)
+				GetSectionInfo(deptSearch+numbSearch+sectSearch)
 			} else { // If there is no course number, clear the section list and info panel
 				$('#SectionInfo').empty();
 			};
@@ -122,7 +116,7 @@ function initiateSearch() {
 	catch(err) {console.log('No Results '+ err);}
 }
 
-function formatCourseID(searchTerms) {
+function FormatCourseID(searchTerms) {
 	splitTerms = searchTerms.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
 	//If the user enters everything without spaces or dashes
 	if (parseFloat(splitTerms[2]) == splitTerms[2]) { // If the third character is a number (e.g. BE100)
@@ -147,7 +141,7 @@ function formatCourseID(searchTerms) {
 	return splitTerms;
 }
 
-function getCourseNumbers(search, TitleHidden) { // Getting info about courses in a department
+function GetCourseNumbers(search, TitleHidden) { // Getting info about courses in a department
 	var searchSelect = $('#searchSelect').val();
 	var searchURL = '/Search?searchType='+searchSelect+'&resultType=deptSearch&searchParam='+search;
 
@@ -170,7 +164,7 @@ function getCourseNumbers(search, TitleHidden) { // Getting info about courses i
 			if (searchSelect == 'instSearch') {var instFilter = search}
 
 			$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
-			getSectionNumbers(courseName, instFilter); // Search for sections
+			GetSectionNumbers(courseName, instFilter); // Search for sections
 		});
 	})
 	.always(function() {
@@ -179,7 +173,7 @@ function getCourseNumbers(search, TitleHidden) { // Getting info about courses i
 	});
 }
 
-function getSectionNumbers(cnum, instFilter) { // Getting info about sections in a department
+function GetSectionNumbers(cnum, instFilter) { // Getting info about sections in a department
 	LoadingSum += 1;
 	LoadingIndicate();
 	$.get("/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter) // Make the request
@@ -187,11 +181,11 @@ function getSectionNumbers(cnum, instFilter) { // Getting info about sections in
 		$('#SectionList').html(data); // Put the section list in #SectionList
 		$('#SectionList span:nth-child(1)').click(function() { // If a section is clicked
 			var secname = $(this).next().next().html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
-			addToSched(secname); // Search for section info			
+			AddToSched(secname); // Search for section info			
 		});
 		$('#SectionList span:nth-child(3)').click(function() { // If a section is clicked
 			var secname = $(this).html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
-			getSectionInfo(secname); // Search for section info
+			GetSectionInfo(secname); // Search for section info
 		});
 	})
 	.always(function() {
@@ -199,7 +193,7 @@ function getSectionNumbers(cnum, instFilter) { // Getting info about sections in
 		LoadingIndicate()
 	});
 }
-function getSectionInfo(sec) {
+function GetSectionInfo(sec) {
 	LoadingSum += 1;
 	LoadingIndicate();
 	$.get("/Search?searchType=courseIDSearch&resultType=sectSearch&searchParam="+sec) // Make the request
@@ -213,12 +207,12 @@ function getSectionInfo(sec) {
 		});
 		$('#SectionInfo span:nth-child(1)').click(function() { // If a section is clicked
 			var secname = $(this).next().html().replace(/ /g, ""); // Format the section name for searching
-			addToSched(secname); // Search for section info			
+			AddToSched(secname); // Search for section info			
 		});
 		$('#SectionInfo span:nth-child(2)').not("#SectionInfo > span:nth-child(2)").click(function() { // If a course is clicked
 			var courseName = $(this).html().replace(/ /g, " "); // Format the course name for searching
 			$('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
-			getSectionInfo(courseName); // Search for sections
+			GetSectionInfo(courseName); // Search for sections
 		});
 	})
 	.always(function() {
@@ -226,7 +220,7 @@ function getSectionInfo(sec) {
 		LoadingIndicate()
 	});
 }
-function addToSched(sec) { // Getting info about a section
+function AddToSched(sec) { // Getting info about a section
 	LoadingSum += 1;
 	LoadingIndicate();
 	$.get("/Sched?addRem=add&courseID="+sec) // Make the request
@@ -238,7 +232,7 @@ function addToSched(sec) { // Getting info about a section
 		LoadingIndicate()
 	});
 }
-function removeFromSched(sec) {
+function RemoveFromSched(sec) {
 	// Determine the secname by checking when a character is no longer a number (which means the character is the meetDay of the block id)
 	for (var i = 7; i < sec.length; i++) {
 		if (parseFloat(sec[i]) != sec[i]) {
@@ -258,7 +252,7 @@ function removeFromSched(sec) {
 	});
 }
 
-function clearSched () {
+function ClearSched () {
 	LoadingSum += 1;
 	$.get("/Sched?addRem=clear") // Send a clear request
 	.always(function() {
@@ -346,7 +340,7 @@ function SpitSched(courseSched) {
  	}
 
  	$('.CloseX').click(function(e) { // If an X is clicked
-		removeFromSched($(this).parent().attr('id')); // Get rid of the section
+		RemoveFromSched($(this).parent().attr('id')); // Get rid of the section
 		e.stopPropagation();
 	});
 	$('.SchedBlock')
@@ -369,10 +363,20 @@ function SpitSched(courseSched) {
 		var cnum = secname.slice(0,-3);
 		var dept = secname.slice(0,-6);
 
-		getSectionInfo(secname);
-		getSectionNumbers(cnum, 'all');
-		getCourseNumbers(dept, TitleHidden)
+		GetSectionInfo(secname);
+		GetSectionNumbers(cnum, 'all');
+		GetCourseNumbers(dept, TitleHidden)
 	});
+}
+
+function DownloadSchedule() {
+	html2canvas($('#SchedGraph'), { // Convert the div to a canvas
+		onrendered: function(canvas) {
+			var image = new Image();
+			image.src = canvas.toDataURL("image/png"); // Convert the canvas to png
+			window.open(image.src, '_blank'); // Open in new tab
+		}
+	});	
 }
 
 function LoadingIndicate() {

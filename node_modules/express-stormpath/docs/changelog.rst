@@ -7,6 +7,36 @@ Change Log
 All library changes, in descending order.
 
 
+Version 0.6.2
+-------------
+
+**Released on January 13, 2015.**
+
+- Fixing issue with the login page template when the
+  ``stormpathEnableRegistration`` setting is disabled.  It now no longer renders
+  a "Create Account" link when this option is disabled.
+
+
+Version 0.6.1
+-------------
+
+**Released on January 12, 2015.**
+
+- Adding integration tests, yey!
+- Fixing broken Travis CI badge in the README.
+- Refactoring the way our settings are initialized into their own little
+  Javascript file.
+- Renaming ``stormpathIDSiteVerificationFailedView`` ->
+  ``stormpathIdSiteVerificationFailedView`` to be consistent with naming
+  conventions.
+- Adding a new option, ``stormpathDebug`` (*which defaults to false*), that
+  allows users to enable extra debugging on the console.  This makes figuring
+  out what's going on a lot simpler for developers.
+- Adding all sorts of custom debugging messages to make working with the library
+  easier.
+- Using the winston library for logging across the library.
+
+
 Version 0.6.0
 -------------
 
