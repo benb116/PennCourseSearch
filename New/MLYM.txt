@@ -1,0 +1,14 @@
+{
+  "MLYM 409": {
+    "courseListName": "MLYM 409",
+    "courseTitle": "Beginning Malayalam Part II"
+  },
+  "MLYM 429": {
+    "courseListName": "MLYM 429",
+    "courseTitle": "Intermediate Malayalam Part II"
+  },
+  "MLYM 448": {
+    "courseListName": "MLYM 448",
+    "courseTitle": "Advanced Malayalam"
+  }
+}

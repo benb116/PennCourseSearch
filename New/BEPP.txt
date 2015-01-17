@@ -1,0 +1,182 @@
+{
+  "BEPP 201": {
+    "courseListName": "BEPP 201",
+    "courseTitle": "Introduction to Business Economics and Public Policy."
+  },
+  "BEPP 203": {
+    "courseListName": "BEPP 203",
+    "courseTitle": "Business in the Global Political Environment."
+  },
+  "BEPP 206": {
+    "courseListName": "BEPP 206",
+    "courseTitle": "Urban Public Policy and Private Economic Development."
+  },
+  "BEPP 208": {
+    "courseListName": "BEPP 208",
+    "courseTitle": "Housing Markets"
+  },
+  "BEPP 210": {
+    "courseListName": "BEPP 210",
+    "courseTitle": "Firms, Markets and Public Policy."
+  },
+  "BEPP 212": {
+    "courseListName": "BEPP 212",
+    "courseTitle": "Economic Analysis of Law."
+  },
+  "BEPP 214": {
+    "courseListName": "BEPP 214",
+    "courseTitle": "Nonprofit Sector: Economic Challenges and Strategic Responses."
+  },
+  "BEPP 233": {
+    "courseListName": "BEPP 233",
+    "courseTitle": "Consumers, Firms and Markets in Developing Countries"
+  },
+  "BEPP 236": {
+    "courseListName": "BEPP 236",
+    "courseTitle": "International Housing Comparisons"
+  },
+  "BEPP 250": {
+    "courseListName": "BEPP 250",
+    "courseTitle": "Managerial Economics"
+  },
+  "BEPP 261": {
+    "courseListName": "BEPP 261",
+    "courseTitle": "Risk Analysis and Environmental Management"
+  },
+  "BEPP 262": {
+    "courseListName": "BEPP 262",
+    "courseTitle": "Environmental & Energy Economics and Policy"
+  },
+  "BEPP 263": {
+    "courseListName": "BEPP 263",
+    "courseTitle": "Environmental & Energy Economics and Policy"
+  },
+  "BEPP 284": {
+    "courseListName": "BEPP 284",
+    "courseTitle": "Managerial Economics & Game Theory (formerly BPUB 284)"
+  },
+  "BEPP 289": {
+    "courseListName": "BEPP 289",
+    "courseTitle": "Nations, Politics, and Market"
+  },
+  "BEPP 305": {
+    "courseListName": "BEPP 305",
+    "courseTitle": "Risk Management."
+  },
+  "BEPP 322": {
+    "courseListName": "BEPP 322",
+    "courseTitle": "Business Insurance and Estate Planning."
+  },
+  "BEPP 452": {
+    "courseListName": "BEPP 452",
+    "courseTitle": "Fundamentals of Actuarial Science I."
+  },
+  "BEPP 454": {
+    "courseListName": "BEPP 454",
+    "courseTitle": "Applied Statistical Methods for Actuaries."
+  },
+  "BEPP 708": {
+    "courseListName": "BEPP 708",
+    "courseTitle": "Housing Markets"
+  },
+  "BEPP 710": {
+    "courseListName": "BEPP 710",
+    "courseTitle": "Firms, Markets and Public Policy."
+  },
+  "BEPP 761": {
+    "courseListName": "BEPP 761",
+    "courseTitle": "Risk Analysis and Environmental Management."
+  },
+  "BEPP 762": {
+    "courseListName": "BEPP 762",
+    "courseTitle": "Energy Markets & Policy."
+  },
+  "BEPP 763": {
+    "courseListName": "BEPP 763",
+    "courseTitle": "Energy Markets & Policy"
+  },
+  "BEPP 770": {
+    "courseListName": "BEPP 770",
+    "courseTitle": "Introduction to Business Economics and Public Policy."
+  },
+  "BEPP 772": {
+    "courseListName": "BEPP 772",
+    "courseTitle": "Urban Public Policy and Private Economic Development."
+  },
+  "BEPP 789": {
+    "courseListName": "BEPP 789",
+    "courseTitle": "Nations, Politics, and Markets."
+  },
+  "BEPP 805": {
+    "courseListName": "BEPP 805",
+    "courseTitle": "Risk Management."
+  },
+  "BEPP 812": {
+    "courseListName": "BEPP 812",
+    "courseTitle": "Markets for Pure Risk."
+  },
+  "BEPP 823": {
+    "courseListName": "BEPP 823",
+    "courseTitle": "Business Insurance and Estate Planning."
+  },
+  "BEPP 852": {
+    "courseListName": "BEPP 852",
+    "courseTitle": "Fund of Actuarial Sci II (formerly INSR 852)"
+  },
+  "BEPP 854": {
+    "courseListName": "BEPP 854",
+    "courseTitle": "Appl Stat Methd For Actu (formerly INSR 854)"
+  },
+  "BEPP 900": {
+    "courseListName": "BEPP 900",
+    "courseTitle": "Research Seminar."
+  },
+  "BEPP 904": {
+    "courseListName": "BEPP 904",
+    "courseTitle": "EXPERIMENTAL ECONOMICS"
+  },
+  "BEPP 911": {
+    "courseListName": "BEPP 911",
+    "courseTitle": "Empirical Public Policy"
+  },
+  "BEPP 931": {
+    "courseListName": "BEPP 931",
+    "courseTitle": "Numerical Methods in Economics"
+  },
+  "BEPP 932": {
+    "courseListName": "BEPP 932",
+    "courseTitle": "Contract Theory and Applications"
+  },
+  "BEPP 934": {
+    "courseListName": "BEPP 934",
+    "courseTitle": "Economics of Risk and Time"
+  },
+  "BEPP 941": {
+    "courseListName": "BEPP 941",
+    "courseTitle": "Development Economics"
+  },
+  "BEPP 950": {
+    "courseListName": "BEPP 950",
+    "courseTitle": "Managerial Economics (formerly BPUB 950)"
+  },
+  "BEPP 961": {
+    "courseListName": "BEPP 961",
+    "courseTitle": "Risk Analysis and Environmental Management"
+  },
+  "BEPP 962": {
+    "courseListName": "BEPP 962",
+    "courseTitle": "Applied Economics Seminar"
+  },
+  "BEPP 971": {
+    "courseListName": "BEPP 971",
+    "courseTitle": "Market Design"
+  },
+  "BEPP 987": {
+    "courseListName": "BEPP 987",
+    "courseTitle": "Industrial Organization and Competition Policy"
+  },
+  "BEPP 995": {
+    "courseListName": "BEPP 995",
+    "courseTitle": "Dissertation"
+  }
+}

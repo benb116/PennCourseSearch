@@ -1,0 +1,110 @@
+{
+  "GRMN 101": {
+    "courseListName": "GRMN 101",
+    "courseTitle": "Elementary German I"
+  },
+  "GRMN 102": {
+    "courseListName": "GRMN 102",
+    "courseTitle": "Elementary German II"
+  },
+  "GRMN 103": {
+    "courseListName": "GRMN 103",
+    "courseTitle": "Intermediate German I"
+  },
+  "GRMN 104": {
+    "courseListName": "GRMN 104",
+    "courseTitle": "Intermediate German II"
+  },
+  "GRMN 107": {
+    "courseListName": "GRMN 107",
+    "courseTitle": "Accelerated Intermediate German"
+  },
+  "GRMN 180": {
+    "courseListName": "GRMN 180",
+    "courseTitle": "German in Residence"
+  },
+  "GRMN 203": {
+    "courseListName": "GRMN 203",
+    "courseTitle": "TEXTS AND CONTEXTS."
+  },
+  "GRMN 220": {
+    "courseListName": "GRMN 220",
+    "courseTitle": "Business German: A Micro Perspective"
+  },
+  "GRMN 253": {
+    "courseListName": "GRMN 253",
+    "courseTitle": "Freud: The Invention of Psychoanalysis"
+  },
+  "GRMN 256": {
+    "courseListName": "GRMN 256",
+    "courseTitle": "The Devil's Pact in Literature, Music and Film"
+  },
+  "GRMN 264": {
+    "courseListName": "GRMN 264",
+    "courseTitle": "Translating Cultures: Literature on and in Translation"
+  },
+  "GRMN 301": {
+    "courseListName": "GRMN 301",
+    "courseTitle": "Handschrift-Hypertext: Deutsche Medien"
+  },
+  "GRMN 364": {
+    "courseListName": "GRMN 364",
+    "courseTitle": "Topics vary annually.  The topic for Spring 2015 is: Unhuman Encounters"
+  },
+  "GRMN 403": {
+    "courseListName": "GRMN 403",
+    "courseTitle": "Senior Colloquium."
+  },
+  "GRMN 501": {
+    "courseListName": "GRMN 501",
+    "courseTitle": "Elementary German I"
+  },
+  "GRMN 502": {
+    "courseListName": "GRMN 502",
+    "courseTitle": "Elementary German II"
+  },
+  "GRMN 506": {
+    "courseListName": "GRMN 506",
+    "courseTitle": "Texts and Contexts"
+  },
+  "GRMN 509": {
+    "courseListName": "GRMN 509",
+    "courseTitle": "Gtfd Von Strsbrg"
+  },
+  "GRMN 514": {
+    "courseListName": "GRMN 514",
+    "courseTitle": "Accelerated Intermd Grmn"
+  },
+  "GRMN 516": {
+    "courseListName": "GRMN 516",
+    "courseTitle": "Teaching Methods"
+  },
+  "GRMN 527": {
+    "courseListName": "GRMN 527",
+    "courseTitle": "Philosophy & Psychoanalysis: Freud and the Interpretation of Culture"
+  },
+  "GRMN 532": {
+    "courseListName": "GRMN 532",
+    "courseTitle": "German Literature 18th Century to Present"
+  },
+  "GRMN 555": {
+    "courseListName": "GRMN 555",
+    "courseTitle": "Topics in Dutch Studies"
+  },
+  "GRMN 580": {
+    "courseListName": "GRMN 580",
+    "courseTitle": "Topics In Aesthetics"
+  },
+  "GRMN 581": {
+    "courseListName": "GRMN 581",
+    "courseTitle": "Topics in Jewish-German Culture"
+  },
+  "GRMN 678": {
+    "courseListName": "GRMN 678",
+    "courseTitle": "Realism: Literature and Theory"
+  },
+  "GRMN 684": {
+    "courseListName": "GRMN 684",
+    "courseTitle": "Topics in Philosophy.  Title for Spring 2015: After Idealism: Political thought in Germany from Weber to Habermas."
+  }
+}

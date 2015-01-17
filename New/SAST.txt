@@ -1,0 +1,166 @@
+{
+  "SAST 001": {
+    "courseListName": "SAST 001",
+    "courseTitle": "Introduction to Modern India"
+  },
+  "SAST 003": {
+    "courseListName": "SAST 003",
+    "courseTitle": "History, Culture,and Religion in Early India"
+  },
+  "SAST 004": {
+    "courseListName": "SAST 004",
+    "courseTitle": "India's Literature: Love, War, Wisdom and Humor"
+  },
+  "SAST 105": {
+    "courseListName": "SAST 105",
+    "courseTitle": "Beginning Tabla II"
+  },
+  "SAST 107": {
+    "courseListName": "SAST 107",
+    "courseTitle": "Beginning Sitar II"
+  },
+  "SAST 109": {
+    "courseListName": "SAST 109",
+    "courseTitle": "Intermediate Sitar II"
+  },
+  "SAST 116": {
+    "courseListName": "SAST 116",
+    "courseTitle": "Music Cultures of North India and Pakistan"
+  },
+  "SAST 124": {
+    "courseListName": "SAST 124",
+    "courseTitle": "Narrative Across Cultures"
+  },
+  "SAST 142": {
+    "courseListName": "SAST 142",
+    "courseTitle": "Introduction to Buddhism"
+  },
+  "SAST 165": {
+    "courseListName": "SAST 165",
+    "courseTitle": "Masala Matters"
+  },
+  "SAST 170": {
+    "courseListName": "SAST 170",
+    "courseTitle": "Psychology of Asian Americans"
+  },
+  "SAST 217": {
+    "courseListName": "SAST 217",
+    "courseTitle": "CU In India - Topics Course"
+  },
+  "SAST 227": {
+    "courseListName": "SAST 227",
+    "courseTitle": "The Hindi Nation and its Fragments"
+  },
+  "SAST 249": {
+    "courseListName": "SAST 249",
+    "courseTitle": "Re-enchanting Modernity: A Guide to Sufism in South Asia"
+  },
+  "SAST 250": {
+    "courseListName": "SAST 250",
+    "courseTitle": "History of Hinduism"
+  },
+  "SAST 252": {
+    "courseListName": "SAST 252",
+    "courseTitle": "Music of South and Southeast Asia"
+  },
+  "SAST 265": {
+    "courseListName": "SAST 265",
+    "courseTitle": "Indian Folklore"
+  },
+  "SAST 270": {
+    "courseListName": "SAST 270",
+    "courseTitle": "The Agrarian Question in Asia: A Chapter in the History of Economic Thought"
+  },
+  "SAST 296": {
+    "courseListName": "SAST 296",
+    "courseTitle": "Tpcs Social Dvlpmt India"
+  },
+  "SAST 312": {
+    "courseListName": "SAST 312",
+    "courseTitle": "20th Century South Asian Art"
+  },
+  "SAST 323": {
+    "courseListName": "SAST 323",
+    "courseTitle": "Topics In Postcolonial Literature"
+  },
+  "SAST 324": {
+    "courseListName": "SAST 324",
+    "courseTitle": "Sanskrit Literature and Poetry"
+  },
+  "SAST 350": {
+    "courseListName": "SAST 350",
+    "courseTitle": "Themes in Indian Philosophy"
+  },
+  "SAST 406": {
+    "courseListName": "SAST 406",
+    "courseTitle": "Beginning Pashtu Part II"
+  },
+  "SAST 408": {
+    "courseListName": "SAST 408",
+    "courseTitle": "Beginning Kannada Part II"
+  },
+  "SAST 411": {
+    "courseListName": "SAST 411",
+    "courseTitle": "Beginning Marathi Part II"
+  },
+  "SAST 413": {
+    "courseListName": "SAST 413",
+    "courseTitle": "Intermediate Marathi Part II"
+  },
+  "SAST 426": {
+    "courseListName": "SAST 426",
+    "courseTitle": "Intermediate Pashtu Part II"
+  },
+  "SAST 428": {
+    "courseListName": "SAST 428",
+    "courseTitle": "Intermediate Kannada Part II"
+  },
+  "SAST 446": {
+    "courseListName": "SAST 446",
+    "courseTitle": "Advanced Pashto Readings"
+  },
+  "SAST 447": {
+    "courseListName": "SAST 447",
+    "courseTitle": "Advanced Kannada: Selected Topics"
+  },
+  "SAST 505": {
+    "courseListName": "SAST 505",
+    "courseTitle": "Topics in Indian Art"
+  },
+  "SAST 517": {
+    "courseListName": "SAST 517",
+    "courseTitle": "CU In India - Topics Course"
+  },
+  "SAST 527": {
+    "courseListName": "SAST 527",
+    "courseTitle": "The Hindi Nation and its Fragments"
+  },
+  "SAST 541": {
+    "courseListName": "SAST 541",
+    "courseTitle": "Islam & Religious Image"
+  },
+  "SAST 550": {
+    "courseListName": "SAST 550",
+    "courseTitle": "History of Hinduism"
+  },
+  "SAST 565": {
+    "courseListName": "SAST 565",
+    "courseTitle": "Indian Folklore"
+  },
+  "SAST 570": {
+    "courseListName": "SAST 570",
+    "courseTitle": "The Agrarian Question in Asia: A Chapter in the History of Economic Thought"
+  },
+  "SAST 624": {
+    "courseListName": "SAST 624",
+    "courseTitle": "Sanskrit Literature and Poetry"
+  },
+  "SAST 650": {
+    "courseListName": "SAST 650",
+    "courseTitle": "Themes in Indian Philosophy"
+  },
+  "SAST 710": {
+    "courseListName": "SAST 710",
+    "courseTitle": "Seminar Classical Indian Studies"
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "SOCI 001": {
+    "courseListName": "SOCI 001",
+    "courseTitle": "Introduction to Sociology"
+  },
+  "SOCI 003": {
+    "courseListName": "SOCI 003",
+    "courseTitle": "Deviance and Social Control"
+  },
+  "SOCI 006": {
+    "courseListName": "SOCI 006",
+    "courseTitle": "Race and Ethnic Relations"
+  },
+  "SOCI 010": {
+    "courseListName": "SOCI 010",
+    "courseTitle": "Social Stratification"
+  },
+  "SOCI 011": {
+    "courseListName": "SOCI 011",
+    "courseTitle": "Urban Sociology"
+  },
+  "SOCI 033": {
+    "courseListName": "SOCI 033",
+    "courseTitle": "Technology & Society"
+  },
+  "SOCI 100": {
+    "courseListName": "SOCI 100",
+    "courseTitle": "Introduction to Sociological Research"
+  },
+  "SOCI 101": {
+    "courseListName": "SOCI 101",
+    "courseTitle": "Bioethics"
+  },
+  "SOCI 105": {
+    "courseListName": "SOCI 105",
+    "courseTitle": "Indus Rel & Hum Res Mgmt"
+  },
+  "SOCI 110": {
+    "courseListName": "SOCI 110",
+    "courseTitle": "The Rich and The Poor"
+  },
+  "SOCI 111": {
+    "courseListName": "SOCI 111",
+    "courseTitle": "Health of Populations"
+  },
+  "SOCI 120": {
+    "courseListName": "SOCI 120",
+    "courseTitle": "Social Statistics"
+  },
+  "SOCI 122": {
+    "courseListName": "SOCI 122",
+    "courseTitle": "The Sociology of Gender"
+  },
+  "SOCI 126": {
+    "courseListName": "SOCI 126",
+    "courseTitle": "Contemporary Sociological Theory"
+  },
+  "SOCI 130": {
+    "courseListName": "SOCI 130",
+    "courseTitle": "Special Topics in Sociology"
+  },
+  "SOCI 134": {
+    "courseListName": "SOCI 134",
+    "courseTitle": "Health and Social Policy"
+  },
+  "SOCI 135": {
+    "courseListName": "SOCI 135",
+    "courseTitle": "Law and Society"
+  },
+  "SOCI 137": {
+    "courseListName": "SOCI 137",
+    "courseTitle": "The Sociology of Media and Popular Culture"
+  },
+  "SOCI 154": {
+    "courseListName": "SOCI 154",
+    "courseTitle": "Afro-Latinos in the U.S."
+  },
+  "SOCI 200": {
+    "courseListName": "SOCI 200",
+    "courseTitle": "Criminal Justice"
+  },
+  "SOCI 222": {
+    "courseListName": "SOCI 222",
+    "courseTitle": "Field Methods of Sociological Research"
+  },
+  "SOCI 230": {
+    "courseListName": "SOCI 230",
+    "courseTitle": "Special Topics in Sociology"
+  },
+  "SOCI 231": {
+    "courseListName": "SOCI 231",
+    "courseTitle": "Special Topics in Sociology"
+  },
+  "SOCI 235": {
+    "courseListName": "SOCI 235",
+    "courseTitle": "Law and Social Change"
+  },
+  "SOCI 238": {
+    "courseListName": "SOCI 238",
+    "courseTitle": "Media Culture & Society in Contemporary China"
+  },
+  "SOCI 254": {
+    "courseListName": "SOCI 254",
+    "courseTitle": "Cities, Suburbs, Regions"
+  },
+  "SOCI 270": {
+    "courseListName": "SOCI 270",
+    "courseTitle": "The Immigrant City"
+  },
+  "SOCI 275": {
+    "courseListName": "SOCI 275",
+    "courseTitle": "Medical Sociology"
+  },
+  "SOCI 277": {
+    "courseListName": "SOCI 277",
+    "courseTitle": "Mental Illness"
+  },
+  "SOCI 322": {
+    "courseListName": "SOCI 322",
+    "courseTitle": "Advanced Topics in Gender and Sexuality Studies"
+  },
+  "SOCI 425": {
+    "courseListName": "SOCI 425",
+    "courseTitle": "Latin American Topics"
+  },
+  "SOCI 430": {
+    "courseListName": "SOCI 430",
+    "courseTitle": "Advanced Topics in Sociology"
+  },
+  "SOCI 438": {
+    "courseListName": "SOCI 438",
+    "courseTitle": "SOCIAL SCIENCE STUDIO: IMMIGRANTS MAKE THE CITY"
+  },
+  "SOCI 460": {
+    "courseListName": "SOCI 460",
+    "courseTitle": "Advanced Topics in Africana Studies"
+  },
+  "SOCI 488": {
+    "courseListName": "SOCI 488",
+    "courseTitle": "Culture, Sexuality and Global Health"
+  },
+  "SOCI 530": {
+    "courseListName": "SOCI 530",
+    "courseTitle": "Advanced Selected Topics"
+  },
+  "SOCI 536": {
+    "courseListName": "SOCI 536",
+    "courseTitle": "Quantitative Methods in Sociology II"
+  },
+  "SOCI 553": {
+    "courseListName": "SOCI 553",
+    "courseTitle": "Field Methods in Qualitative Research"
+  },
+  "SOCI 561": {
+    "courseListName": "SOCI 561",
+    "courseTitle": "Class Cultures and Historical Change"
+  },
+  "SOCI 570": {
+    "courseListName": "SOCI 570",
+    "courseTitle": "VISUALIZING W.  E.  B.  DUBOIS"
+  },
+  "SOCI 596": {
+    "courseListName": "SOCI 596",
+    "courseTitle": "Sociology of Education"
+  },
+  "SOCI 601": {
+    "courseListName": "SOCI 601",
+    "courseTitle": "Contemporary Social Theory"
+  },
+  "SOCI 604": {
+    "courseListName": "SOCI 604",
+    "courseTitle": "Methodology of Social Research"
+  },
+  "SOCI 649": {
+    "courseListName": "SOCI 649",
+    "courseTitle": "A Course on Elites"
+  },
+  "SOCI 660": {
+    "courseListName": "SOCI 660",
+    "courseTitle": "Advanced Topics in Africana Studies"
+  },
+  "SOCI 677": {
+    "courseListName": "SOCI 677",
+    "courseTitle": "International Migration"
+  },
+  "SOCI 690": {
+    "courseListName": "SOCI 690",
+    "courseTitle": "Sociology Writing Workshop I"
+  },
+  "SOCI 691": {
+    "courseListName": "SOCI 691",
+    "courseTitle": "Sociology Writing Workshop II"
+  },
+  "SOCI 699": {
+    "courseListName": "SOCI 699",
+    "courseTitle": "Cluster Workshop"
+  },
+  "SOCI 731": {
+    "courseListName": "SOCI 731",
+    "courseTitle": "Advanced Demographic Methods"
+  },
+  "SOCI 796": {
+    "courseListName": "SOCI 796",
+    "courseTitle": "Demographic, Economic, and Social Interrelations"
+  }
+}

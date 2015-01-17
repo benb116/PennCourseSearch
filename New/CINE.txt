@@ -1,0 +1,166 @@
+{
+  "CINE 024": {
+    "courseListName": "CINE 024",
+    "courseTitle": "Introduction to American and British Film and Media"
+  },
+  "CINE 061": {
+    "courseListName": "CINE 061",
+    "courseTitle": "Video I"
+  },
+  "CINE 062": {
+    "courseListName": "CINE 062",
+    "courseTitle": "Video II"
+  },
+  "CINE 065": {
+    "courseListName": "CINE 065",
+    "courseTitle": "Cinema Production"
+  },
+  "CINE 070": {
+    "courseListName": "CINE 070",
+    "courseTitle": "Film Sound: History, Aesthetics & Subversion"
+  },
+  "CINE 075": {
+    "courseListName": "CINE 075",
+    "courseTitle": "Image and Sound Editing"
+  },
+  "CINE 085": {
+    "courseListName": "CINE 085",
+    "courseTitle": "Medicine in Lit and Film"
+  },
+  "CINE 101": {
+    "courseListName": "CINE 101",
+    "courseTitle": "World Film History to 1945"
+  },
+  "CINE 102": {
+    "courseListName": "CINE 102",
+    "courseTitle": "World Film History, 1945-present"
+  },
+  "CINE 103": {
+    "courseListName": "CINE 103",
+    "courseTitle": "Introduction to Film Theory"
+  },
+  "CINE 112": {
+    "courseListName": "CINE 112",
+    "courseTitle": "Study of a Theme"
+  },
+  "CINE 116": {
+    "courseListName": "CINE 116",
+    "courseTitle": "Screenwriting Workshop"
+  },
+  "CINE 118": {
+    "courseListName": "CINE 118",
+    "courseTitle": "Iranian Cinema: Gender, Politics, Religion"
+  },
+  "CINE 125": {
+    "courseListName": "CINE 125",
+    "courseTitle": "Adultery Novel"
+  },
+  "CINE 130": {
+    "courseListName": "CINE 130",
+    "courseTitle": "Advanced Screenwriting"
+  },
+  "CINE 131": {
+    "courseListName": "CINE 131",
+    "courseTitle": "Intro Light, Set,Costume"
+  },
+  "CINE 165": {
+    "courseListName": "CINE 165",
+    "courseTitle": "Russian and East European Film After WWII"
+  },
+  "CINE 180": {
+    "courseListName": "CINE 180",
+    "courseTitle": "Film Culture in Residence"
+  },
+  "CINE 202": {
+    "courseListName": "CINE 202",
+    "courseTitle": "Topics in Film Studies"
+  },
+  "CINE 206": {
+    "courseListName": "CINE 206",
+    "courseTitle": "Italian History on Screen"
+  },
+  "CINE 217": {
+    "courseListName": "CINE 217",
+    "courseTitle": "Survey of Ital Theater"
+  },
+  "CINE 220": {
+    "courseListName": "CINE 220",
+    "courseTitle": "20th Century Chinese Literature & Film"
+  },
+  "CINE 266": {
+    "courseListName": "CINE 266",
+    "courseTitle": "Topics Law & Literature"
+  },
+  "CINE 271": {
+    "courseListName": "CINE 271",
+    "courseTitle": "American Musical Theatre"
+  },
+  "CINE 275": {
+    "courseListName": "CINE 275",
+    "courseTitle": "Russian History in Film"
+  },
+  "CINE 278": {
+    "courseListName": "CINE 278",
+    "courseTitle": "Tpcs Digital/New Media"
+  },
+  "CINE 282": {
+    "courseListName": "CINE 282",
+    "courseTitle": "Native American Lit&Film"
+  },
+  "CINE 285": {
+    "courseListName": "CINE 285",
+    "courseTitle": "Art and Business of Film"
+  },
+  "CINE 289": {
+    "courseListName": "CINE 289",
+    "courseTitle": "Mixed Media Animation"
+  },
+  "CINE 292": {
+    "courseListName": "CINE 292",
+    "courseTitle": "Study of an Auter"
+  },
+  "CINE 295": {
+    "courseListName": "CINE 295",
+    "courseTitle": "Topics in Cultural Studies"
+  },
+  "CINE 300": {
+    "courseListName": "CINE 300",
+    "courseTitle": "Topics in Italian History, Literature, and Culture"
+  },
+  "CINE 352": {
+    "courseListName": "CINE 352",
+    "courseTitle": "Devil's Pact Literature and Film"
+  },
+  "CINE 386": {
+    "courseListName": "CINE 386",
+    "courseTitle": "Paris in Film"
+  },
+  "CINE 388": {
+    "courseListName": "CINE 388",
+    "courseTitle": "Tpcs: Span/Ltam Cinema"
+  },
+  "CINE 392": {
+    "courseListName": "CINE 392",
+    "courseTitle": "Topics in Cinema Studies"
+  },
+  "CINE 430": {
+    "courseListName": "CINE 430",
+    "courseTitle": "Ethnic Conflict in Film"
+  },
+  "CINE 440": {
+    "courseListName": "CINE 440",
+    "courseTitle": "20th Century American Cinema"
+  },
+  "CINE 492": {
+    "courseListName": "CINE 492",
+    "courseTitle": "American Film Festivals"
+  },
+  "CINE 500": {
+    "courseListName": "CINE 500",
+    "courseTitle": "MLA Seminars in Cinema"
+  },
+  "CINE 694": {
+    "courseListName": "CINE 694",
+    "courseTitle": "Mexican Cinema"
+  }
+}

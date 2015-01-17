@@ -1,0 +1,46 @@
+{
+  "BSTA 621": {
+    "courseListName": "BSTA 621",
+    "courseTitle": "Statisical Inference I"
+  },
+  "BSTA 631": {
+    "courseListName": "BSTA 631",
+    "courseTitle": "Statistical Methods and Data Analysis II"
+  },
+  "BSTA 651": {
+    "courseListName": "BSTA 651",
+    "courseTitle": "Introduction to Linear Models and Generalized Linear Models"
+  },
+  "BSTA 656": {
+    "courseListName": "BSTA 656",
+    "courseTitle": "Longitudinal Data Analys"
+  },
+  "BSTA 657": {
+    "courseListName": "BSTA 657",
+    "courseTitle": "Design of Biomed Stud  I"
+  },
+  "BSTA 658": {
+    "courseListName": "BSTA 658",
+    "courseTitle": "Design of Biomed Stud II"
+  },
+  "BSTA 788": {
+    "courseListName": "BSTA 788",
+    "courseTitle": "Functional Data Analysis"
+  },
+  "BSTA 820": {
+    "courseListName": "BSTA 820",
+    "courseTitle": "Statistical Inference III"
+  },
+  "BSTA 920": {
+    "courseListName": "BSTA 920",
+    "courseTitle": "Tutorial: Research"
+  },
+  "BSTA 995": {
+    "courseListName": "BSTA 995",
+    "courseTitle": "Dissertation"
+  },
+  "BSTA 999": {
+    "courseListName": "BSTA 999",
+    "courseTitle": "Independent Study"
+  }
+}

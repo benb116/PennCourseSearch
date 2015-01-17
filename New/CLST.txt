@@ -1,0 +1,106 @@
+{
+  "CLST 027": {
+    "courseListName": "CLST 027",
+    "courseTitle": "Ancient Rome"
+  },
+  "CLST 029": {
+    "courseListName": "CLST 029",
+    "courseTitle": "ROME & AMERICA"
+  },
+  "CLST 100": {
+    "courseListName": "CLST 100",
+    "courseTitle": "Greek & Roman Mythology"
+  },
+  "CLST 103": {
+    "courseListName": "CLST 103",
+    "courseTitle": "History of Ancient Philosophy"
+  },
+  "CLST 117": {
+    "courseListName": "CLST 117",
+    "courseTitle": "Pericean Athens"
+  },
+  "CLST 123": {
+    "courseListName": "CLST 123",
+    "courseTitle": "Great Discoveries in Archaeology"
+  },
+  "CLST 146": {
+    "courseListName": "CLST 146",
+    "courseTitle": "Ancient Mediterranean Empires"
+  },
+  "CLST 211": {
+    "courseListName": "CLST 211",
+    "courseTitle": "Ancient Moral Philosophy"
+  },
+  "CLST 268": {
+    "courseListName": "CLST 268",
+    "courseTitle": "LIVING WORLD IN ARCHAEOLOGICAL SCIENCE"
+  },
+  "CLST 275": {
+    "courseListName": "CLST 275",
+    "courseTitle": "Introduction to Greek Archaeology"
+  },
+  "CLST 308": {
+    "courseListName": "CLST 308",
+    "courseTitle": "Visions of Rome in Art, Literature, and Cinema"
+  },
+  "CLST 310": {
+    "courseListName": "CLST 310",
+    "courseTitle": "Ancient and Modern Constitution Making"
+  },
+  "CLST 324": {
+    "courseListName": "CLST 324",
+    "courseTitle": "Age of Caesar"
+  },
+  "CLST 328": {
+    "courseListName": "CLST 328",
+    "courseTitle": "Topography and Monuments of Ancient Rome"
+  },
+  "CLST 329": {
+    "courseListName": "CLST 329",
+    "courseTitle": "Topics in Classicism and Literature"
+  },
+  "CLST 402": {
+    "courseListName": "CLST 402",
+    "courseTitle": "Post-Baccalaureate Studies in Greek"
+  },
+  "CLST 403": {
+    "courseListName": "CLST 403",
+    "courseTitle": "Post-Baccalaureate Studies in Latin"
+  },
+  "CLST 427": {
+    "courseListName": "CLST 427",
+    "courseTitle": "Roman Sculpture"
+  },
+  "CLST 512": {
+    "courseListName": "CLST 512",
+    "courseTitle": "Petrography of Cultural Materials"
+  },
+  "CLST 517": {
+    "courseListName": "CLST 517",
+    "courseTitle": "Mla Proseminar"
+  },
+  "CLST 521": {
+    "courseListName": "CLST 521",
+    "courseTitle": "Proseminar in Classical Art"
+  },
+  "CLST 533": {
+    "courseListName": "CLST 533",
+    "courseTitle": "Topog & Mon of Anc Rome"
+  },
+  "CLST 568": {
+    "courseListName": "CLST 568",
+    "courseTitle": "Lvng Wrld in Arch Sci"
+  },
+  "CLST 611": {
+    "courseListName": "CLST 611",
+    "courseTitle": "Greek Epigraphy"
+  },
+  "CLST 698": {
+    "courseListName": "CLST 698",
+    "courseTitle": "Prospectus Workshop"
+  },
+  "CLST 705": {
+    "courseListName": "CLST 705",
+    "courseTitle": "ETHNOARCHAEOLOGY GREECE"
+  }
+}

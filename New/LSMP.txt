@@ -1,0 +1,6 @@
+{
+  "LSMP 421": {
+    "courseListName": "LSMP 421",
+    "courseTitle": "Lsmp Capstone"
+  }
+}

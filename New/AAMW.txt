@@ -1,0 +1,62 @@
+{
+  "AAMW 401": {
+    "courseListName": "AAMW 401",
+    "courseTitle": "Introduction to Greek Archaeology"
+  },
+  "AAMW 427": {
+    "courseListName": "AAMW 427",
+    "courseTitle": "Roman Sculpture"
+  },
+  "AAMW 435": {
+    "courseListName": "AAMW 435",
+    "courseTitle": "Medieval Islamica art & Architecture"
+  },
+  "AAMW 509": {
+    "courseListName": "AAMW 509",
+    "courseTitle": "Curatorial Seminar"
+  },
+  "AAMW 512": {
+    "courseListName": "AAMW 512",
+    "courseTitle": "Petrography of Cultural Materials"
+  },
+  "AAMW 520": {
+    "courseListName": "AAMW 520",
+    "courseTitle": "Topics in Aegean Bronze Age"
+  },
+  "AAMW 525": {
+    "courseListName": "AAMW 525",
+    "courseTitle": "Topics in Greek and Roman Art"
+  },
+  "AAMW 533": {
+    "courseListName": "AAMW 533",
+    "courseTitle": "Topography and Monuments of Ancient Rome"
+  },
+  "AAMW 556": {
+    "courseListName": "AAMW 556",
+    "courseTitle": "Practicum: Archaeological Field Methods"
+  },
+  "AAMW 611": {
+    "courseListName": "AAMW 611",
+    "courseTitle": "Greek Epigraphy"
+  },
+  "AAMW 621": {
+    "courseListName": "AAMW 621",
+    "courseTitle": "Greek Vase Painting"
+  },
+  "AAMW 633": {
+    "courseListName": "AAMW 633",
+    "courseTitle": "Eastern Medieval Architecture"
+  },
+  "AAMW 705": {
+    "courseListName": "AAMW 705",
+    "courseTitle": "ETHNOARCHAEOLOGY: GREECE"
+  },
+  "AAMW 723": {
+    "courseListName": "AAMW 723",
+    "courseTitle": "Topics in the Art of the Ancient Near East"
+  },
+  "AAMW 738": {
+    "courseListName": "AAMW 738",
+    "courseTitle": "Topics in Islamic Archaeology"
+  }
+}

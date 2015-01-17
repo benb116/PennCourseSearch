@@ -1,0 +1,18 @@
+{
+  "DORT 681": {
+    "courseListName": "DORT 681",
+    "courseTitle": "Adjunctive Orthodontics"
+  },
+  "DORT 753": {
+    "courseListName": "DORT 753",
+    "courseTitle": "Orthodontics II"
+  },
+  "DORT 788": {
+    "courseListName": "DORT 788",
+    "courseTitle": "P and I Clinic"
+  },
+  "DORT 803": {
+    "courseListName": "DORT 803",
+    "courseTitle": "Adjunctive Orthodontics"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "TAML 407": {
+    "courseListName": "TAML 407",
+    "courseTitle": "Beginning Tamil Part II"
+  },
+  "TAML 427": {
+    "courseListName": "TAML 427",
+    "courseTitle": "Intermediate Tamil Part II"
+  },
+  "TAML 446": {
+    "courseListName": "TAML 446",
+    "courseTitle": "Advanced Tamil"
+  },
+  "TAML 489": {
+    "courseListName": "TAML 489",
+    "courseTitle": "Readings Classical Tamil"
+  }
+}

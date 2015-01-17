@@ -1,0 +1,22 @@
+{
+  "INTR 101": {
+    "courseListName": "INTR 101",
+    "courseTitle": "Transnational Issues in Global Politics"
+  },
+  "INTR 250": {
+    "courseListName": "INTR 250",
+    "courseTitle": "Political Risk Analysis"
+  },
+  "INTR 290": {
+    "courseListName": "INTR 290",
+    "courseTitle": "Topics in International Relations"
+  },
+  "INTR 350": {
+    "courseListName": "INTR 350",
+    "courseTitle": "Research Methods/Practice in IR"
+  },
+  "INTR 391": {
+    "courseListName": "INTR 391",
+    "courseTitle": "Senior Seminar For Thesis Research"
+  }
+}

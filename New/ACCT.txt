@@ -1,0 +1,66 @@
+{
+  "ACCT 101": {
+    "courseListName": "ACCT 101",
+    "courseTitle": "Principles of Accounting I"
+  },
+  "ACCT 102": {
+    "courseListName": "ACCT 102",
+    "courseTitle": "Managerial Accounting"
+  },
+  "ACCT 202": {
+    "courseListName": "ACCT 202",
+    "courseTitle": "Financial Accounting II"
+  },
+  "ACCT 203": {
+    "courseListName": "ACCT 203",
+    "courseTitle": "Cost Accounting"
+  },
+  "ACCT 242": {
+    "courseListName": "ACCT 242",
+    "courseTitle": "Financial Statements: Analysis & Reporting Incentives"
+  },
+  "ACCT 297": {
+    "courseListName": "ACCT 297",
+    "courseTitle": "Taxes and Business Strategy"
+  },
+  "ACCT 613": {
+    "courseListName": "ACCT 613",
+    "courseTitle": "Fundamentals of Financial and Managerial Accounting"
+  },
+  "ACCT 703": {
+    "courseListName": "ACCT 703",
+    "courseTitle": "Cost Accounting"
+  },
+  "ACCT 706": {
+    "courseListName": "ACCT 706",
+    "courseTitle": "Cost Management"
+  },
+  "ACCT 742": {
+    "courseListName": "ACCT 742",
+    "courseTitle": "Problems in Financial Reporting"
+  },
+  "ACCT 747": {
+    "courseListName": "ACCT 747",
+    "courseTitle": "Financial Statement and Disclosure Analysis(X)"
+  },
+  "ACCT 897": {
+    "courseListName": "ACCT 897",
+    "courseTitle": "Taxes and Business Strategy"
+  },
+  "ACCT 920": {
+    "courseListName": "ACCT 920",
+    "courseTitle": "Fundamental Empirical Accounting Research"
+  },
+  "ACCT 921": {
+    "courseListName": "ACCT 921",
+    "courseTitle": "Empirical Research Application I"
+  },
+  "ACCT 922": {
+    "courseListName": "ACCT 922",
+    "courseTitle": "Empirical Research Application II"
+  },
+  "ACCT 991": {
+    "courseListName": "ACCT 991",
+    "courseTitle": "Seminar Colloquium"
+  }
+}

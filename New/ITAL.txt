@@ -1,0 +1,70 @@
+{
+  "ITAL 101": {
+    "courseListName": "ITAL 101",
+    "courseTitle": "Italian Survival Kit: The Language and Culture of getting around in Italy"
+  },
+  "ITAL 110": {
+    "courseListName": "ITAL 110",
+    "courseTitle": "Elementary Italian I"
+  },
+  "ITAL 112": {
+    "courseListName": "ITAL 112",
+    "courseTitle": "Accelerated Elementary Italian"
+  },
+  "ITAL 120": {
+    "courseListName": "ITAL 120",
+    "courseTitle": "Elementary Italian II"
+  },
+  "ITAL 140": {
+    "courseListName": "ITAL 140",
+    "courseTitle": "Intermediate Italian II"
+  },
+  "ITAL 201": {
+    "courseListName": "ITAL 201",
+    "courseTitle": "Advanced Italian I"
+  },
+  "ITAL 202": {
+    "courseListName": "ITAL 202",
+    "courseTitle": "Advanced Italian II"
+  },
+  "ITAL 203": {
+    "courseListName": "ITAL 203",
+    "courseTitle": "Introduction to Italian Literature and Culture"
+  },
+  "ITAL 204": {
+    "courseListName": "ITAL 204",
+    "courseTitle": "Italian History on Screen: How Movies Tell the Story of Italy"
+  },
+  "ITAL 217": {
+    "courseListName": "ITAL 217",
+    "courseTitle": "Survey of Ital Theater"
+  },
+  "ITAL 230": {
+    "courseListName": "ITAL 230",
+    "courseTitle": "Topics in European Hist"
+  },
+  "ITAL 300": {
+    "courseListName": "ITAL 300",
+    "courseTitle": "Topics in Italian History, Literature, and Culture"
+  },
+  "ITAL 318": {
+    "courseListName": "ITAL 318",
+    "courseTitle": "Ital Hist 1789-Present"
+  },
+  "ITAL 333": {
+    "courseListName": "ITAL 333",
+    "courseTitle": "Dante's Divine Comedy"
+  },
+  "ITAL 540": {
+    "courseListName": "ITAL 540",
+    "courseTitle": "Topics: Renaissance Culture"
+  },
+  "ITAL 581": {
+    "courseListName": "ITAL 581",
+    "courseTitle": "Modrn/Contemp Ital Cltr"
+  },
+  "ITAL 690": {
+    "courseListName": "ITAL 690",
+    "courseTitle": "Applied Linguistics"
+  }
+}

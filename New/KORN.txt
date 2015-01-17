@@ -1,0 +1,34 @@
+{
+  "KORN 012": {
+    "courseListName": "KORN 012",
+    "courseTitle": "Elementary Korean II"
+  },
+  "KORN 112": {
+    "courseListName": "KORN 112",
+    "courseTitle": "Intermediate Korean II"
+  },
+  "KORN 132": {
+    "courseListName": "KORN 132",
+    "courseTitle": "Korean for Heritage Speakers II"
+  },
+  "KORN 212": {
+    "courseListName": "KORN 212",
+    "courseTitle": "Advanced Korean II"
+  },
+  "KORN 312": {
+    "courseListName": "KORN 312",
+    "courseTitle": "Current Korean Media II"
+  },
+  "KORN 381": {
+    "courseListName": "KORN 381",
+    "courseTitle": "Business Korean I"
+  },
+  "KORN 432": {
+    "courseListName": "KORN 432",
+    "courseTitle": "Advanced Readings Modern Korean II"
+  },
+  "KORN 482": {
+    "courseListName": "KORN 482",
+    "courseTitle": "Advanced Business Korean II"
+  }
+}

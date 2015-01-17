@@ -1,0 +1,42 @@
+{
+  "INTL BBB": {
+    "courseListName": "INTL BBB",
+    "courseTitle": "Univ Sao Paulo"
+  },
+  "INTL BBH": {
+    "courseListName": "INTL BBH",
+    "courseTitle": "Sa Budapest Hungary Math"
+  },
+  "INTL BDF": {
+    "courseListName": "INTL BDF",
+    "courseTitle": "Cardiff University"
+  },
+  "INTL BEK": {
+    "courseListName": "INTL BEK",
+    "courseTitle": "Sit Ecuador: Dpl"
+  },
+  "INTL BGD": {
+    "courseListName": "INTL BGD",
+    "courseTitle": "Inp Grenoble"
+  },
+  "INTL BLU": {
+    "courseListName": "INTL BLU",
+    "courseTitle": "Luiss Guido Carli PPE"
+  },
+  "INTL BRN": {
+    "courseListName": "INTL BRN",
+    "courseTitle": "Study Abroad Ciee Sao Pa"
+  },
+  "INTL BRZ": {
+    "courseListName": "INTL BRZ",
+    "courseTitle": "Study Abroad Ciee Rio"
+  },
+  "INTL BSL": {
+    "courseListName": "INTL BSL",
+    "courseTitle": "Isle - Sri Lanka"
+  },
+  "INTL BZN": {
+    "courseListName": "INTL BZN",
+    "courseTitle": "Study Abroad Ciee Tanzan"
+  }
+}

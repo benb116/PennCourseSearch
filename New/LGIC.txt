@@ -1,0 +1,10 @@
+{
+  "LGIC 010": {
+    "courseListName": "LGIC 010",
+    "courseTitle": "Ideas in Logic and Computation"
+  },
+  "LGIC 220": {
+    "courseListName": "LGIC 220",
+    "courseTitle": "Applied Mathematics of Information and Computation II"
+  }
+}

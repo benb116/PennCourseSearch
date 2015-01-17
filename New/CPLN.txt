@@ -1,0 +1,146 @@
+{
+  "CPLN 300": {
+    "courseListName": "CPLN 300",
+    "courseTitle": "The Making of Modern Paris"
+  },
+  "CPLN 399": {
+    "courseListName": "CPLN 399",
+    "courseTitle": "Independent Study (Undergraduate)"
+  },
+  "CPLN 504": {
+    "courseListName": "CPLN 504",
+    "courseTitle": "Site Planning"
+  },
+  "CPLN 505": {
+    "courseListName": "CPLN 505",
+    "courseTitle": "Planning by Numbers"
+  },
+  "CPLN 506": {
+    "courseListName": "CPLN 506",
+    "courseTitle": "Negotiation and Conflict Resolution"
+  },
+  "CPLN 507": {
+    "courseListName": "CPLN 507",
+    "courseTitle": "Urban Design Research Methods"
+  },
+  "CPLN 528": {
+    "courseListName": "CPLN 528",
+    "courseTitle": "Research Seminar 21st Century Urbanism"
+  },
+  "CPLN 600": {
+    "courseListName": "CPLN 600",
+    "courseTitle": "Planning Workshop"
+  },
+  "CPLN 620": {
+    "courseListName": "CPLN 620",
+    "courseTitle": "Techniques of Urban Economic Development"
+  },
+  "CPLN 622": {
+    "courseListName": "CPLN 622",
+    "courseTitle": "Community Development and Public Health"
+  },
+  "CPLN 623": {
+    "courseListName": "CPLN 623",
+    "courseTitle": "Global Urban Poverty"
+  },
+  "CPLN 624": {
+    "courseListName": "CPLN 624",
+    "courseTitle": "Metro Labor Markets"
+  },
+  "CPLN 626": {
+    "courseListName": "CPLN 626",
+    "courseTitle": "Global Urban Poverty / International Urban Development"
+  },
+  "CPLN 630": {
+    "courseListName": "CPLN 630",
+    "courseTitle": "Innovations in Growth Management"
+  },
+  "CPLN 631": {
+    "courseListName": "CPLN 631",
+    "courseTitle": "Planning for Land Conservation"
+  },
+  "CPLN 632": {
+    "courseListName": "CPLN 632",
+    "courseTitle": "Modeling Geographic Space"
+  },
+  "CPLN 633": {
+    "courseListName": "CPLN 633",
+    "courseTitle": "Ecological Principles for Planners"
+  },
+  "CPLN 641": {
+    "courseListName": "CPLN 641",
+    "courseTitle": "Progressive Development"
+  },
+  "CPLN 643": {
+    "courseListName": "CPLN 643",
+    "courseTitle": "Design and Development"
+  },
+  "CPLN 655": {
+    "courseListName": "CPLN 655",
+    "courseTitle": "Multimodal Transport"
+  },
+  "CPLN 673": {
+    "courseListName": "CPLN 673",
+    "courseTitle": "Contemporary Urbanism"
+  },
+  "CPLN 675": {
+    "courseListName": "CPLN 675",
+    "courseTitle": "Land Use and Environmental Modeling"
+  },
+  "CPLN 680": {
+    "courseListName": "CPLN 680",
+    "courseTitle": "Advanced Topics in GIS"
+  },
+  "CPLN 689": {
+    "courseListName": "CPLN 689",
+    "courseTitle": "Urban Policy Analysis"
+  },
+  "CPLN 701": {
+    "courseListName": "CPLN 701",
+    "courseTitle": "Planning Studio"
+  },
+  "CPLN 702": {
+    "courseListName": "CPLN 702",
+    "courseTitle": "Planning Studio"
+  },
+  "CPLN 703": {
+    "courseListName": "CPLN 703",
+    "courseTitle": "Planning Studio"
+  },
+  "CPLN 704": {
+    "courseListName": "CPLN 704",
+    "courseTitle": "Planning Studio"
+  },
+  "CPLN 705": {
+    "courseListName": "CPLN 705",
+    "courseTitle": "Planning Studio"
+  },
+  "CPLN 706": {
+    "courseListName": "CPLN 706",
+    "courseTitle": "Planning Studio"
+  },
+  "CPLN 707": {
+    "courseListName": "CPLN 707",
+    "courseTitle": "Planning Studio"
+  },
+  "CPLN 730": {
+    "courseListName": "CPLN 730",
+    "courseTitle": "Sustainable Cities"
+  },
+  "CPLN 750": {
+    "courseListName": "CPLN 750",
+    "courseTitle": "Advance Transportation Seminar, Air Transportation Systems Planning"
+  },
+  "CPLN 796": {
+    "courseListName": "CPLN 796",
+    "courseTitle": "Professional Project"
+  },
+  "CPLN 800": {
+    "courseListName": "CPLN 800",
+    "courseTitle": "Doctoral Seminar"
+  },
+  "CPLN 999": {
+    "courseListName": "CPLN 999",
+    "courseTitle": "Independent Study and Research"
+  }
+}

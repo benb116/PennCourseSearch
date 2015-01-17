@@ -1,0 +1,94 @@
+{
+  "HSOC 003": {
+    "courseListName": "HSOC 003",
+    "courseTitle": "Technology and Society"
+  },
+  "HSOC 010": {
+    "courseListName": "HSOC 010",
+    "courseTitle": "Health and Societies"
+  },
+  "HSOC 100": {
+    "courseListName": "HSOC 100",
+    "courseTitle": "Introduction to Sociological Research"
+  },
+  "HSOC 102": {
+    "courseListName": "HSOC 102",
+    "courseTitle": "Bioethics"
+  },
+  "HSOC 110": {
+    "courseListName": "HSOC 110",
+    "courseTitle": "Science and Literature"
+  },
+  "HSOC 111": {
+    "courseListName": "HSOC 111",
+    "courseTitle": "Health of Populations."
+  },
+  "HSOC 145": {
+    "courseListName": "HSOC 145",
+    "courseTitle": "Comparative Medicine"
+  },
+  "HSOC 152": {
+    "courseListName": "HSOC 152",
+    "courseTitle": "Technology and Medicine in Modern America"
+  },
+  "HSOC 202": {
+    "courseListName": "HSOC 202",
+    "courseTitle": "The Scientific Revolution"
+  },
+  "HSOC 216": {
+    "courseListName": "HSOC 216",
+    "courseTitle": "Women and Health"
+  },
+  "HSOC 231": {
+    "courseListName": "HSOC 231",
+    "courseTitle": "Insect Epidemiology Pests, Pollinators and Disease Vectors"
+  },
+  "HSOC 238": {
+    "courseListName": "HSOC 238",
+    "courseTitle": "Introduction to Medical Anthropology"
+  },
+  "HSOC 241": {
+    "courseListName": "HSOC 241",
+    "courseTitle": "Stem Cells: Science and Society"
+  },
+  "HSOC 259": {
+    "courseListName": "HSOC 259",
+    "courseTitle": "Intr Comple & Altern Med"
+  },
+  "HSOC 275": {
+    "courseListName": "HSOC 275",
+    "courseTitle": "Medical Sociology"
+  },
+  "HSOC 277": {
+    "courseListName": "HSOC 277",
+    "courseTitle": "Mental Illness"
+  },
+  "HSOC 302": {
+    "courseListName": "HSOC 302",
+    "courseTitle": "Stem Cell Science in Schools: History, Ethics, and Education"
+  },
+  "HSOC 335": {
+    "courseListName": "HSOC 335",
+    "courseTitle": "Healthy Schools"
+  },
+  "HSOC 406": {
+    "courseListName": "HSOC 406",
+    "courseTitle": "Comm Based Envir Health."
+  },
+  "HSOC 407": {
+    "courseListName": "HSOC 407",
+    "courseTitle": "Urban Environments: Prevention of Tobacco Smoking in Adolescents"
+  },
+  "HSOC 420": {
+    "courseListName": "HSOC 420",
+    "courseTitle": "Research Seminar"
+  },
+  "HSOC 436": {
+    "courseListName": "HSOC 436",
+    "courseTitle": "Biopiracy: Medicinal Plants and Global Power"
+  },
+  "HSOC 454": {
+    "courseListName": "HSOC 454",
+    "courseTitle": "Military Medicine and Technology"
+  }
+}

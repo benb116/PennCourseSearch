@@ -1,0 +1,82 @@
+{
+  "EPID 518": {
+    "courseListName": "EPID 518",
+    "courseTitle": "Geography & Public Health"
+  },
+  "EPID 532": {
+    "courseListName": "EPID 532",
+    "courseTitle": "Database Management for Clinical Epidemiology"
+  },
+  "EPID 550": {
+    "courseListName": "EPID 550",
+    "courseTitle": "Clinical Economics and Clinical Decision Making"
+  },
+  "EPID 560": {
+    "courseListName": "EPID 560",
+    "courseTitle": "Issues in Research Protocol Development"
+  },
+  "EPID 570": {
+    "courseListName": "EPID 570",
+    "courseTitle": "Critical Appraisal of the Medical Literature"
+  },
+  "EPID 575": {
+    "courseListName": "EPID 575",
+    "courseTitle": "Introduction to Genetic Epidemiology"
+  },
+  "EPID 624": {
+    "courseListName": "EPID 624",
+    "courseTitle": "Methods in PCOR"
+  },
+  "EPID 630": {
+    "courseListName": "EPID 630",
+    "courseTitle": "Clinical Trials"
+  },
+  "EPID 640": {
+    "courseListName": "EPID 640",
+    "courseTitle": "Advanced Topics in Epidemiology"
+  },
+  "EPID 648": {
+    "courseListName": "EPID 648",
+    "courseTitle": "Introduction to Pharmacoepidemiology I"
+  },
+  "EPID 658": {
+    "courseListName": "EPID 658",
+    "courseTitle": "Gastroenterology EPI"
+  },
+  "EPID 664": {
+    "courseListName": "EPID 664",
+    "courseTitle": "Methods in Neurologic Clinical Epidemiology"
+  },
+  "EPID 666": {
+    "courseListName": "EPID 666",
+    "courseTitle": "Pharmacoepidemiology Research Methods"
+  },
+  "EPID 700": {
+    "courseListName": "EPID 700",
+    "courseTitle": "Doctoral Seminar in Epidemiology"
+  },
+  "EPID 710": {
+    "courseListName": "EPID 710",
+    "courseTitle": "Research Design Consultation"
+  },
+  "EPID 802": {
+    "courseListName": "EPID 802",
+    "courseTitle": "Funds of Biostat in Prac"
+  },
+  "EPID 803": {
+    "courseListName": "EPID 803",
+    "courseTitle": "Biostat in Practice/Basc"
+  },
+  "EPID 806": {
+    "courseListName": "EPID 806",
+    "courseTitle": "Crit App of the Med Lit"
+  },
+  "EPID 813": {
+    "courseListName": "EPID 813",
+    "courseTitle": "Biostatistics in Practice Lab"
+  },
+  "EPID 995": {
+    "courseListName": "EPID 995",
+    "courseTitle": "Dissertation"
+  }
+}

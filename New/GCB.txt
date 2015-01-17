@@ -1,0 +1,34 @@
+{
+  "GCB 493": {
+    "courseListName": "GCB 493",
+    "courseTitle": "Epigen of Health&Disease"
+  },
+  "GCB 527": {
+    "courseListName": "GCB 527",
+    "courseTitle": "Genetics For Comp Bio"
+  },
+  "GCB 535": {
+    "courseListName": "GCB 535",
+    "courseTitle": "Introduction to Bioinformatics"
+  },
+  "GCB 537": {
+    "courseListName": "GCB 537",
+    "courseTitle": "Advanced Computational Biology"
+  },
+  "GCB 699": {
+    "courseListName": "GCB 699",
+    "courseTitle": "Lab Rotation"
+  },
+  "GCB 752": {
+    "courseListName": "GCB 752",
+    "courseTitle": "Genomics"
+  },
+  "GCB 899": {
+    "courseListName": "GCB 899",
+    "courseTitle": "Predissertation Research"
+  },
+  "GCB 990": {
+    "courseListName": "GCB 990",
+    "courseTitle": "Master's Research"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "HIND 401": {
+    "courseListName": "HIND 401",
+    "courseTitle": "Beginning Hindi-Urdu Part II"
+  },
+  "HIND 421": {
+    "courseListName": "HIND 421",
+    "courseTitle": "Intermediate Hindi Part II"
+  },
+  "HIND 430": {
+    "courseListName": "HIND 430",
+    "courseTitle": "Advanced Hindi"
+  }
+}

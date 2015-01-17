@@ -1,0 +1,314 @@
+{
+  "HIST 023": {
+    "courseListName": "HIST 023",
+    "courseTitle": "Intro to Middle East"
+  },
+  "HIST 027": {
+    "courseListName": "HIST 027",
+    "courseTitle": "Ancient Rome"
+  },
+  "HIST 031": {
+    "courseListName": "HIST 031",
+    "courseTitle": "Making and Breaking European Hegemony"
+  },
+  "HIST 035": {
+    "courseListName": "HIST 035",
+    "courseTitle": "Biology and Society"
+  },
+  "HIST 038": {
+    "courseListName": "HIST 038",
+    "courseTitle": "Early American Literature"
+  },
+  "HIST 040": {
+    "courseListName": "HIST 040",
+    "courseTitle": "Early Modern Europe, 1450-1750"
+  },
+  "HIST 055": {
+    "courseListName": "HIST 055",
+    "courseTitle": "Reading the Classics"
+  },
+  "HIST 071": {
+    "courseListName": "HIST 071",
+    "courseTitle": "Latin American Survey 1782-Present"
+  },
+  "HIST 075": {
+    "courseListName": "HIST 075",
+    "courseTitle": "Africa to 1800"
+  },
+  "HIST 086": {
+    "courseListName": "HIST 086",
+    "courseTitle": "History, Culture, Religion in Early India"
+  },
+  "HIST 089": {
+    "courseListName": "HIST 089",
+    "courseTitle": "Tpcs in South Asian Hist"
+  },
+  "HIST 091": {
+    "courseListName": "HIST 091",
+    "courseTitle": "Modern Japanese History"
+  },
+  "HIST 098": {
+    "courseListName": "HIST 098",
+    "courseTitle": "Introduction to Korean Civilization"
+  },
+  "HIST 104": {
+    "courseListName": "HIST 104",
+    "courseTitle": "Freshman Seminar: America after 1800"
+  },
+  "HIST 106": {
+    "courseListName": "HIST 106",
+    "courseTitle": "Freshman Seminar: The World After 1800"
+  },
+  "HIST 107": {
+    "courseListName": "HIST 107",
+    "courseTitle": "Comparative Capitalist Systems"
+  },
+  "HIST 108": {
+    "courseListName": "HIST 108",
+    "courseTitle": "American Origins"
+  },
+  "HIST 110": {
+    "courseListName": "HIST 110",
+    "courseTitle": "Wonders of the Ancient World"
+  },
+  "HIST 117": {
+    "courseListName": "HIST 117",
+    "courseTitle": "Science & Literature"
+  },
+  "HIST 130": {
+    "courseListName": "HIST 130",
+    "courseTitle": "History of Globalization"
+  },
+  "HIST 141": {
+    "courseListName": "HIST 141",
+    "courseTitle": "Jews in the Modern World"
+  },
+  "HIST 146": {
+    "courseListName": "HIST 146",
+    "courseTitle": "Comparative Medicine"
+  },
+  "HIST 153": {
+    "courseListName": "HIST 153",
+    "courseTitle": "Transformation of Urban America: From the Mid-Twentieth Century to the Present"
+  },
+  "HIST 155": {
+    "courseListName": "HIST 155",
+    "courseTitle": "Introduction to Asian American History"
+  },
+  "HIST 161": {
+    "courseListName": "HIST 161",
+    "courseTitle": "American Capitalism"
+  },
+  "HIST 164": {
+    "courseListName": "HIST 164",
+    "courseTitle": "Recent American History"
+  },
+  "HIST 167": {
+    "courseListName": "HIST 167",
+    "courseTitle": "Latino History"
+  },
+  "HIST 169": {
+    "courseListName": "HIST 169",
+    "courseTitle": "History of American Law Since 1877"
+  },
+  "HIST 171": {
+    "courseListName": "HIST 171",
+    "courseTitle": "The American South 1860-Present"
+  },
+  "HIST 173": {
+    "courseListName": "HIST 173",
+    "courseTitle": "Faculty-Student Collaborative Action Seminar in Urban University-Community Relations"
+  },
+  "HIST 175": {
+    "courseListName": "HIST 175",
+    "courseTitle": "Society and Culture in Brazil"
+  },
+  "HIST 177": {
+    "courseListName": "HIST 177",
+    "courseTitle": "Afro-American History 1876 to Present"
+  },
+  "HIST 201": {
+    "courseListName": "HIST 201",
+    "courseTitle": "Major Seminar in History: Europe Before 1800"
+  },
+  "HIST 202": {
+    "courseListName": "HIST 202",
+    "courseTitle": "Major Seminar in History: Europe After 1800"
+  },
+  "HIST 203": {
+    "courseListName": "HIST 203",
+    "courseTitle": "Major Seminar in History: America Before 1800"
+  },
+  "HIST 204": {
+    "courseListName": "HIST 204",
+    "courseTitle": "Major Seminar in History: America After 1800"
+  },
+  "HIST 206": {
+    "courseListName": "HIST 206",
+    "courseTitle": "Major Seminar of the World after 1800"
+  },
+  "HIST 210": {
+    "courseListName": "HIST 210",
+    "courseTitle": "The City"
+  },
+  "HIST 212": {
+    "courseListName": "HIST 212",
+    "courseTitle": "Europe after 1800: Advanced Benjamin Franklin Seminar"
+  },
+  "HIST 219": {
+    "courseListName": "HIST 219",
+    "courseTitle": "Medieval Russia: Origins of Russian Cultural Identity"
+  },
+  "HIST 230": {
+    "courseListName": "HIST 230",
+    "courseTitle": "Topics in European History"
+  },
+  "HIST 231": {
+    "courseListName": "HIST 231",
+    "courseTitle": "Topics in US History"
+  },
+  "HIST 232": {
+    "courseListName": "HIST 232",
+    "courseTitle": "World History: Africa or the Middle East"
+  },
+  "HIST 233": {
+    "courseListName": "HIST 233",
+    "courseTitle": "World History: East Asia or Latin America"
+  },
+  "HIST 253": {
+    "courseListName": "HIST 253",
+    "courseTitle": "Freud: The Invention of Psychoanalysis"
+  },
+  "HIST 270": {
+    "courseListName": "HIST 270",
+    "courseTitle": "The Agrarian Question in Asia: A Chapter in the History of Economic Thought"
+  },
+  "HIST 312": {
+    "courseListName": "HIST 312",
+    "courseTitle": "Britain's Century of Revolution"
+  },
+  "HIST 318": {
+    "courseListName": "HIST 318",
+    "courseTitle": "Italian History from Napoleon to Berlusconi"
+  },
+  "HIST 343": {
+    "courseListName": "HIST 343",
+    "courseTitle": "Nineteenth Century European Intellectual History"
+  },
+  "HIST 345": {
+    "courseListName": "HIST 345",
+    "courseTitle": "Sinners, Sex and Slaves: Race and Sex in Early America"
+  },
+  "HIST 349": {
+    "courseListName": "HIST 349",
+    "courseTitle": "History of Sexuality in the U.S."
+  },
+  "HIST 372": {
+    "courseListName": "HIST 372",
+    "courseTitle": "The History of Foreign Aid to Africa"
+  },
+  "HIST 373": {
+    "courseListName": "HIST 373",
+    "courseTitle": "America in the 1960s"
+  },
+  "HIST 394": {
+    "courseListName": "HIST 394",
+    "courseTitle": "US and China 1912-2012"
+  },
+  "HIST 398": {
+    "courseListName": "HIST 398",
+    "courseTitle": "Junior Honors in History"
+  },
+  "HIST 411": {
+    "courseListName": "HIST 411",
+    "courseTitle": "Introduction to Written Culture, 14th - 18th Centuries"
+  },
+  "HIST 412": {
+    "courseListName": "HIST 412",
+    "courseTitle": "Topics in World History"
+  },
+  "HIST 416": {
+    "courseListName": "HIST 416",
+    "courseTitle": "European Intellectual History in the 18th Century"
+  },
+  "HIST 421": {
+    "courseListName": "HIST 421",
+    "courseTitle": "Europe and the World since 1914"
+  },
+  "HIST 431": {
+    "courseListName": "HIST 431",
+    "courseTitle": "A World at War: World War II in Europe and Asia"
+  },
+  "HIST 451": {
+    "courseListName": "HIST 451",
+    "courseTitle": "The U.S. and the World since 1898"
+  },
+  "HIST 455": {
+    "courseListName": "HIST 455",
+    "courseTitle": "Topics in American History"
+  },
+  "HIST 528": {
+    "courseListName": "HIST 528",
+    "courseTitle": "Amer Vernacular Architec"
+  },
+  "HIST 531": {
+    "courseListName": "HIST 531",
+    "courseTitle": "Theory and Methods in Oral History"
+  },
+  "HIST 560": {
+    "courseListName": "HIST 560",
+    "courseTitle": "History of Women in America"
+  },
+  "HIST 570": {
+    "courseListName": "HIST 570",
+    "courseTitle": "Agrarian Quest in Asia"
+  },
+  "HIST 574": {
+    "courseListName": "HIST 574",
+    "courseTitle": "Intro To Bibliography"
+  },
+  "HIST 608": {
+    "courseListName": "HIST 608",
+    "courseTitle": "Proseminar in Urban Studies"
+  },
+  "HIST 610": {
+    "courseListName": "HIST 610",
+    "courseTitle": "Topics in American History"
+  },
+  "HIST 619": {
+    "courseListName": "HIST 619",
+    "courseTitle": "East/West Mediev Europe"
+  },
+  "HIST 620": {
+    "courseListName": "HIST 620",
+    "courseTitle": "Topics in European History"
+  },
+  "HIST 630": {
+    "courseListName": "HIST 630",
+    "courseTitle": "Topics in Asian History"
+  },
+  "HIST 641": {
+    "courseListName": "HIST 641",
+    "courseTitle": "Social Origins of the Russian Revolution"
+  },
+  "HIST 650": {
+    "courseListName": "HIST 650",
+    "courseTitle": "Topics in African History"
+  },
+  "HIST 670": {
+    "courseListName": "HIST 670",
+    "courseTitle": "Topics in Trans Regional History"
+  },
+  "HIST 700": {
+    "courseListName": "HIST 700",
+    "courseTitle": "Proseminar in History"
+  },
+  "HIST 740": {
+    "courseListName": "HIST 740",
+    "courseTitle": "Research Seminar in Middle Eastern History"
+  },
+  "HIST 770": {
+    "courseListName": "HIST 770",
+    "courseTitle": "Res Sem: Transregional"
+  }
+}

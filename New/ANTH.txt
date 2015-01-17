@@ -1,0 +1,230 @@
+{
+  "ANTH 001": {
+    "courseListName": "ANTH 001",
+    "courseTitle": "Introduction to Archaeology"
+  },
+  "ANTH 002": {
+    "courseListName": "ANTH 002",
+    "courseTitle": "The Anthropological Study of Culture"
+  },
+  "ANTH 003": {
+    "courseListName": "ANTH 003",
+    "courseTitle": "Introduction to Human Evolution"
+  },
+  "ANTH 004": {
+    "courseListName": "ANTH 004",
+    "courseTitle": "The Modern World and Its Cultural Background"
+  },
+  "ANTH 005": {
+    "courseListName": "ANTH 005",
+    "courseTitle": "Great Transformations"
+  },
+  "ANTH 022": {
+    "courseListName": "ANTH 022",
+    "courseTitle": "World Music and Cultures"
+  },
+  "ANTH 048": {
+    "courseListName": "ANTH 048",
+    "courseTitle": "Ancient Threads: Textiles in Anthropology and Archaeology"
+  },
+  "ANTH 086": {
+    "courseListName": "ANTH 086",
+    "courseTitle": "Desire and Demand: Culture and Consumption in the Global Marketplace"
+  },
+  "ANTH 105": {
+    "courseListName": "ANTH 105",
+    "courseTitle": "Human Adaptation"
+  },
+  "ANTH 122": {
+    "courseListName": "ANTH 122",
+    "courseTitle": "Becoming Human"
+  },
+  "ANTH 127": {
+    "courseListName": "ANTH 127",
+    "courseTitle": "Great Discoveries in Archaeology"
+  },
+  "ANTH 129": {
+    "courseListName": "ANTH 129",
+    "courseTitle": "Themes Jewish Tradition"
+  },
+  "ANTH 138": {
+    "courseListName": "ANTH 138",
+    "courseTitle": "The Political Economy of Contemporary China"
+  },
+  "ANTH 143": {
+    "courseListName": "ANTH 143",
+    "courseTitle": "Being Human: Biology, Culture & Human Diversity"
+  },
+  "ANTH 149": {
+    "courseListName": "ANTH 149",
+    "courseTitle": "Intro to Native American and Indigenous Studies"
+  },
+  "ANTH 157": {
+    "courseListName": "ANTH 157",
+    "courseTitle": "Anthropology and the World's Fairs"
+  },
+  "ANTH 158": {
+    "courseListName": "ANTH 158",
+    "courseTitle": "The Neolithic Revolution"
+  },
+  "ANTH 218": {
+    "courseListName": "ANTH 218",
+    "courseTitle": "Globalizing East Asia"
+  },
+  "ANTH 220": {
+    "courseListName": "ANTH 220",
+    "courseTitle": "Archaeology Laboratory Field Project"
+  },
+  "ANTH 237": {
+    "courseListName": "ANTH 237",
+    "courseTitle": "Foraging and Hunting in Human Evolution"
+  },
+  "ANTH 238": {
+    "courseListName": "ANTH 238",
+    "courseTitle": "Introduction to Medical Anthropology"
+  },
+  "ANTH 242": {
+    "courseListName": "ANTH 242",
+    "courseTitle": "Music of South and Southeast Asia"
+  },
+  "ANTH 249": {
+    "courseListName": "ANTH 249",
+    "courseTitle": "Evolutionary Medicine"
+  },
+  "ANTH 252": {
+    "courseListName": "ANTH 252",
+    "courseTitle": "Food Habits in Philadelphia Communities: Exploring Eating and Changing Food Habits in Philadelphia Middle Schools"
+  },
+  "ANTH 254": {
+    "courseListName": "ANTH 254",
+    "courseTitle": "Archaeology of the Inca"
+  },
+  "ANTH 260": {
+    "courseListName": "ANTH 260",
+    "courseTitle": "Cultures of Science and Technology"
+  },
+  "ANTH 267": {
+    "courseListName": "ANTH 267",
+    "courseTitle": "Living World in Archaeological Science"
+  },
+  "ANTH 268": {
+    "courseListName": "ANTH 268",
+    "courseTitle": "Anthropology of Museums"
+  },
+  "ANTH 276": {
+    "courseListName": "ANTH 276",
+    "courseTitle": "An Ethnographic Approach to Urban Athletics and Human Movement"
+  },
+  "ANTH 282": {
+    "courseListName": "ANTH 282",
+    "courseTitle": "Native American Literature"
+  },
+  "ANTH 285": {
+    "courseListName": "ANTH 285",
+    "courseTitle": "Ancient Japanese Civilization"
+  },
+  "ANTH 347": {
+    "courseListName": "ANTH 347",
+    "courseTitle": "Anthropology of Corporations"
+  },
+  "ANTH 386": {
+    "courseListName": "ANTH 386",
+    "courseTitle": "Desire and Demand II"
+  },
+  "ANTH 394": {
+    "courseListName": "ANTH 394",
+    "courseTitle": "NGOs and Humanitarianism"
+  },
+  "ANTH 409": {
+    "courseListName": "ANTH 409",
+    "courseTitle": "Native American Spirituality, Health, and Contemporary Concerns"
+  },
+  "ANTH 415": {
+    "courseListName": "ANTH 415",
+    "courseTitle": "Archaeology of Animals"
+  },
+  "ANTH 420": {
+    "courseListName": "ANTH 420",
+    "courseTitle": "Nations, Nationalism & Politics"
+  },
+  "ANTH 426": {
+    "courseListName": "ANTH 426",
+    "courseTitle": "Anthropology and Public Health"
+  },
+  "ANTH 451": {
+    "courseListName": "ANTH 451",
+    "courseTitle": "Historical Archaeology"
+  },
+  "ANTH 488": {
+    "courseListName": "ANTH 488",
+    "courseTitle": "Culture, Sexuality and Global Health"
+  },
+  "ANTH 514": {
+    "courseListName": "ANTH 514",
+    "courseTitle": "Petrography of Cultural Materials"
+  },
+  "ANTH 516": {
+    "courseListName": "ANTH 516",
+    "courseTitle": "Public Interest Workshop"
+  },
+  "ANTH 527": {
+    "courseListName": "ANTH 527",
+    "courseTitle": "Cultural Heritage and Conflict"
+  },
+  "ANTH 538": {
+    "courseListName": "ANTH 538",
+    "courseTitle": "The Political Economy of Contemporary China"
+  },
+  "ANTH 547": {
+    "courseListName": "ANTH 547",
+    "courseTitle": "Anthropology & Education"
+  },
+  "ANTH 556": {
+    "courseListName": "ANTH 556",
+    "courseTitle": "Practicum in Archaeological Field Methods and Problems"
+  },
+  "ANTH 561": {
+    "courseListName": "ANTH 561",
+    "courseTitle": "Global Food Security"
+  },
+  "ANTH 567": {
+    "courseListName": "ANTH 567",
+    "courseTitle": "Living World in Archaeological Science"
+  },
+  "ANTH 603": {
+    "courseListName": "ANTH 603",
+    "courseTitle": "Language in Culture and Society"
+  },
+  "ANTH 617": {
+    "courseListName": "ANTH 617",
+    "courseTitle": "Contemporary Approaches to the Study of Culture and Society"
+  },
+  "ANTH 643": {
+    "courseListName": "ANTH 643",
+    "courseTitle": "Globalization And Its Historical Significance"
+  },
+  "ANTH 694": {
+    "courseListName": "ANTH 694",
+    "courseTitle": "NGOs and Humanitarianism"
+  },
+  "ANTH 709": {
+    "courseListName": "ANTH 709",
+    "courseTitle": "Current Research in Paleoanthropology"
+  },
+  "ANTH 720": {
+    "courseListName": "ANTH 720",
+    "courseTitle": "Archaeology Laboratory Field Project"
+  },
+  "ANTH 723": {
+    "courseListName": "ANTH 723",
+    "courseTitle": "Topics in the Art of the Ancient Near East"
+  },
+  "ANTH 730": {
+    "courseListName": "ANTH 730",
+    "courseTitle": "Readings & Research In Linguistic Anthropology"
+  },
+  "ANTH 751": {
+    "courseListName": "ANTH 751",
+    "courseTitle": "Historical Archaeology"
+  }
+}

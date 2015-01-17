@@ -1,0 +1,30 @@
+{
+  "SLAV 165": {
+    "courseListName": "SLAV 165",
+    "courseTitle": "Russian and East European Film After WWII"
+  },
+  "SLAV 501": {
+    "courseListName": "SLAV 501",
+    "courseTitle": "Elementary Polish I"
+  },
+  "SLAV 506": {
+    "courseListName": "SLAV 506",
+    "courseTitle": "Polish for Heritage Speakers II"
+  },
+  "SLAV 517": {
+    "courseListName": "SLAV 517",
+    "courseTitle": "Medieval Russia: Origins of Russian Cultural Identity"
+  },
+  "SLAV 590": {
+    "courseListName": "SLAV 590",
+    "courseTitle": "Elementary Ukrainian I"
+  },
+  "SLAV 619": {
+    "courseListName": "SLAV 619",
+    "courseTitle": "East & West in Medieval Europe: Bohemia as Center in the Age of the Luxemburgs"
+  },
+  "SLAV 683": {
+    "courseListName": "SLAV 683",
+    "courseTitle": "Topics in Comparative Literature and Theory"
+  }
+}

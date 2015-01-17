@@ -1,0 +1,90 @@
+{
+  "CBE 160": {
+    "courseListName": "CBE 160",
+    "courseTitle": "Introduction to Chemical Engineering"
+  },
+  "CBE 231": {
+    "courseListName": "CBE 231",
+    "courseTitle": "Thermodynamics of Fluids"
+  },
+  "CBE 351": {
+    "courseListName": "CBE 351",
+    "courseTitle": "Heat and Mass Transport"
+  },
+  "CBE 371": {
+    "courseListName": "CBE 371",
+    "courseTitle": "Separation Processes"
+  },
+  "CBE 375": {
+    "courseListName": "CBE 375",
+    "courseTitle": "Engineering and the Environment"
+  },
+  "CBE 459": {
+    "courseListName": "CBE 459",
+    "courseTitle": "Product and Process Design Projects"
+  },
+  "CBE 460": {
+    "courseListName": "CBE 460",
+    "courseTitle": "Chemical Process Control"
+  },
+  "CBE 480": {
+    "courseListName": "CBE 480",
+    "courseTitle": "Laboratory in Biotechnology and Genetic Engineering"
+  },
+  "CBE 535": {
+    "courseListName": "CBE 535",
+    "courseTitle": "Interfacial Phenomena."
+  },
+  "CBE 540": {
+    "courseListName": "CBE 540",
+    "courseTitle": "Biomolecular and Cellular Engineering"
+  },
+  "CBE 541": {
+    "courseListName": "CBE 541",
+    "courseTitle": "Engineering and Biological Principles in Cancer"
+  },
+  "CBE 543": {
+    "courseListName": "CBE 543",
+    "courseTitle": "Sust Dev/Water Res Sys"
+  },
+  "CBE 545": {
+    "courseListName": "CBE 545",
+    "courseTitle": "Electrochemical Energy Conversion and Storage."
+  },
+  "CBE 546": {
+    "courseListName": "CBE 546",
+    "courseTitle": "Fundamentals of Industrial Catalytic Processes"
+  },
+  "CBE 557": {
+    "courseListName": "CBE 557",
+    "courseTitle": "Stem Cells, Proteomics and Drug Delivery - Soft Matter Fundamentals"
+  },
+  "CBE 562": {
+    "courseListName": "CBE 562",
+    "courseTitle": "Drug Discovery and Development"
+  },
+  "CBE 564": {
+    "courseListName": "CBE 564",
+    "courseTitle": "Drug Delivery."
+  },
+  "CBE 597": {
+    "courseListName": "CBE 597",
+    "courseTitle": "Master's Thesis Research"
+  },
+  "CBE 602": {
+    "courseListName": "CBE 602",
+    "courseTitle": "Statistical Mechanics of Liquids"
+  },
+  "CBE 641": {
+    "courseListName": "CBE 641",
+    "courseTitle": "Transport Processes II (Nanoscale Transport)"
+  },
+  "CBE 990": {
+    "courseListName": "CBE 990",
+    "courseTitle": "Masters Thesis"
+  },
+  "CBE 995": {
+    "courseListName": "CBE 995",
+    "courseTitle": "Dissertation"
+  }
+}

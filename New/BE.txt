@@ -1,0 +1,142 @@
+{
+  "BE 099": {
+    "courseListName": "BE 099",
+    "courseTitle": "Independent Study in Bioengineering"
+  },
+  "BE 101": {
+    "courseListName": "BE 101",
+    "courseTitle": "Introduction to Bioengineering II"
+  },
+  "BE 220": {
+    "courseListName": "BE 220",
+    "courseTitle": "Biomaterials"
+  },
+  "BE 225": {
+    "courseListName": "BE 225",
+    "courseTitle": "Technology and Engineering in Medicine"
+  },
+  "BE 301": {
+    "courseListName": "BE 301",
+    "courseTitle": "Bioengineering Signals and Systems"
+  },
+  "BE 305": {
+    "courseListName": "BE 305",
+    "courseTitle": "Engineering Principles of Human Physiology"
+  },
+  "BE 310": {
+    "courseListName": "BE 310",
+    "courseTitle": "Bioengineering Lab IV"
+  },
+  "BE 350": {
+    "courseListName": "BE 350",
+    "courseTitle": "Transport Processes in Living Systems"
+  },
+  "BE 400": {
+    "courseListName": "BE 400",
+    "courseTitle": "Preceptorship in Clinical Bioengineering"
+  },
+  "BE 470": {
+    "courseListName": "BE 470",
+    "courseTitle": "Medical Devices"
+  },
+  "BE 480": {
+    "courseListName": "BE 480",
+    "courseTitle": "Introduction to Biomedical Imaging"
+  },
+  "BE 490": {
+    "courseListName": "BE 490",
+    "courseTitle": "Research in Bioengineering"
+  },
+  "BE 492": {
+    "courseListName": "BE 492",
+    "courseTitle": "Research in Biomedical Science"
+  },
+  "BE 496": {
+    "courseListName": "BE 496",
+    "courseTitle": "Senior Design Project"
+  },
+  "BE 497": {
+    "courseListName": "BE 497",
+    "courseTitle": "Senior Thesis in Biomedical Science"
+  },
+  "BE 498": {
+    "courseListName": "BE 498",
+    "courseTitle": "Senior Thesis in Biomedical Science"
+  },
+  "BE 502": {
+    "courseListName": "BE 502",
+    "courseTitle": "From Biomedical Science to the Marketplace"
+  },
+  "BE 504": {
+    "courseListName": "BE 504",
+    "courseTitle": "Biological Data Science II: Data Mini ng Principles for Epigenomics"
+  },
+  "BE 510": {
+    "courseListName": "BE 510",
+    "courseTitle": "Biomechanics and Biotransport"
+  },
+  "BE 521": {
+    "courseListName": "BE 521",
+    "courseTitle": "Brain-Computer Interfaces"
+  },
+  "BE 530": {
+    "courseListName": "BE 530",
+    "courseTitle": "Theoretical Neuroscience."
+  },
+  "BE 537": {
+    "courseListName": "BE 537",
+    "courseTitle": "Biomedical Image Analysis"
+  },
+  "BE 540": {
+    "courseListName": "BE 540",
+    "courseTitle": "Biomolecular and Cellular Engineering"
+  },
+  "BE 541": {
+    "courseListName": "BE 541",
+    "courseTitle": "Engineering and Biological Principles in Cancer"
+  },
+  "BE 546": {
+    "courseListName": "BE 546",
+    "courseTitle": "Fundamental Techniques of Imaging I"
+  },
+  "BE 547": {
+    "courseListName": "BE 547",
+    "courseTitle": "Fundamental Techniques of Imaging 2"
+  },
+  "BE 553": {
+    "courseListName": "BE 553",
+    "courseTitle": "Principles, Methods, and Applications of Tissue Engineering"
+  },
+  "BE 558": {
+    "courseListName": "BE 558",
+    "courseTitle": "Principles of Biological Fabrication"
+  },
+  "BE 562": {
+    "courseListName": "BE 562",
+    "courseTitle": "Drug Discovery & Development."
+  },
+  "BE 581": {
+    "courseListName": "BE 581",
+    "courseTitle": "Techniques of Magnetic Resonance Imaging"
+  },
+  "BE 608": {
+    "courseListName": "BE 608",
+    "courseTitle": "Translational Therapeuti"
+  },
+  "BE 699": {
+    "courseListName": "BE 699",
+    "courseTitle": "Bioengineering Seminar"
+  },
+  "BE 990": {
+    "courseListName": "BE 990",
+    "courseTitle": "Masters Thesis"
+  },
+  "BE 995": {
+    "courseListName": "BE 995",
+    "courseTitle": "Doctoral Dissertation Status"
+  },
+  "BE 999": {
+    "courseListName": "BE 999",
+    "courseTitle": "Thesis/Dissertation Research"
+  }
+}

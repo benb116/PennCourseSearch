@@ -1,0 +1,30 @@
+{
+  "PRTG 114": {
+    "courseListName": "PRTG 114",
+    "courseTitle": "Portuguese for Spanish Speakers"
+  },
+  "PRTG 120": {
+    "courseListName": "PRTG 120",
+    "courseTitle": "Elementary Portuguese II"
+  },
+  "PRTG 134": {
+    "courseListName": "PRTG 134",
+    "courseTitle": "Intermediate Portuguese: Accelerated"
+  },
+  "PRTG 140": {
+    "courseListName": "PRTG 140",
+    "courseTitle": "Intermediate Portuguese II"
+  },
+  "PRTG 202": {
+    "courseListName": "PRTG 202",
+    "courseTitle": "Advanced Portuguese"
+  },
+  "PRTG 221": {
+    "courseListName": "PRTG 221",
+    "courseTitle": "Topics in Brazilian Culture"
+  },
+  "PRTG 240": {
+    "courseListName": "PRTG 240",
+    "courseTitle": "Topics in Brazilian Culture"
+  }
+}

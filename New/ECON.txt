@@ -1,0 +1,162 @@
+{
+  "ECON 001": {
+    "courseListName": "ECON 001",
+    "courseTitle": "Introduction to Micro Economics"
+  },
+  "ECON 002": {
+    "courseListName": "ECON 002",
+    "courseTitle": "Introductory Economics: Macro"
+  },
+  "ECON 013": {
+    "courseListName": "ECON 013",
+    "courseTitle": "Strategic Reasoning"
+  },
+  "ECON 014": {
+    "courseListName": "ECON 014",
+    "courseTitle": "American Capitalism"
+  },
+  "ECON 028": {
+    "courseListName": "ECON 028",
+    "courseTitle": "Globalization, Regional Blocks and Sustainable Development"
+  },
+  "ECON 039": {
+    "courseListName": "ECON 039",
+    "courseTitle": "Economics and Financing of Health Care Delivery"
+  },
+  "ECON 050": {
+    "courseListName": "ECON 050",
+    "courseTitle": "International Economics"
+  },
+  "ECON 101": {
+    "courseListName": "ECON 101",
+    "courseTitle": "Intermediate Microeconomics"
+  },
+  "ECON 102": {
+    "courseListName": "ECON 102",
+    "courseTitle": "Intermediate Macroeconomics"
+  },
+  "ECON 103": {
+    "courseListName": "ECON 103",
+    "courseTitle": "Statistics for Economists"
+  },
+  "ECON 104": {
+    "courseListName": "ECON 104",
+    "courseTitle": "Econometrics"
+  },
+  "ECON 211": {
+    "courseListName": "ECON 211",
+    "courseTitle": "Social Choice Theory"
+  },
+  "ECON 212": {
+    "courseListName": "ECON 212",
+    "courseTitle": "Game Theory"
+  },
+  "ECON 221": {
+    "courseListName": "ECON 221",
+    "courseTitle": "Econometric Forecasting"
+  },
+  "ECON 222": {
+    "courseListName": "ECON 222",
+    "courseTitle": "Advanced Econometric Techniques and Applications"
+  },
+  "ECON 233": {
+    "courseListName": "ECON 233",
+    "courseTitle": "Labor Economics"
+  },
+  "ECON 234": {
+    "courseListName": "ECON 234",
+    "courseTitle": "Law and Economics"
+  },
+  "ECON 235": {
+    "courseListName": "ECON 235",
+    "courseTitle": "Industrial Organization"
+  },
+  "ECON 242": {
+    "courseListName": "ECON 242",
+    "courseTitle": "Topics in Macroeconomics"
+  },
+  "ECON 246": {
+    "courseListName": "ECON 246",
+    "courseTitle": "Money and Banking"
+  },
+  "ECON 251": {
+    "courseListName": "ECON 251",
+    "courseTitle": "International Trade"
+  },
+  "ECON 300": {
+    "courseListName": "ECON 300",
+    "courseTitle": "Honors Seminar"
+  },
+  "ECON 682": {
+    "courseListName": "ECON 682",
+    "courseTitle": "Game Theory and Applications."
+  },
+  "ECON 702": {
+    "courseListName": "ECON 702",
+    "courseTitle": "Macroeconomic Theory I"
+  },
+  "ECON 704": {
+    "courseListName": "ECON 704",
+    "courseTitle": "Macroeconomic Theory II"
+  },
+  "ECON 706": {
+    "courseListName": "ECON 706",
+    "courseTitle": "Econometrics II: Methods & Models"
+  },
+  "ECON 708": {
+    "courseListName": "ECON 708",
+    "courseTitle": "The Economics of Agency, Information, and Incentives"
+  },
+  "ECON 712": {
+    "courseListName": "ECON 712",
+    "courseTitle": "Topics in Advanced Economic Theory and Mathematical Economics"
+  },
+  "ECON 719": {
+    "courseListName": "ECON 719",
+    "courseTitle": "Economic Theory"
+  },
+  "ECON 722": {
+    "courseListName": "ECON 722",
+    "courseTitle": "Econometrics IV: Advanced Techniques of Time-Series Econometrics"
+  },
+  "ECON 729": {
+    "courseListName": "ECON 729",
+    "courseTitle": "Econometrics"
+  },
+  "ECON 739": {
+    "courseListName": "ECON 739",
+    "courseTitle": "International Economics"
+  },
+  "ECON 749": {
+    "courseListName": "ECON 749",
+    "courseTitle": "Monetary Economics"
+  },
+  "ECON 751": {
+    "courseListName": "ECON 751",
+    "courseTitle": "Public Economics II"
+  },
+  "ECON 759": {
+    "courseListName": "ECON 759",
+    "courseTitle": "Political Economy"
+  },
+  "ECON 769": {
+    "courseListName": "ECON 769",
+    "courseTitle": "Economic Development Workshop"
+  },
+  "ECON 779": {
+    "courseListName": "ECON 779",
+    "courseTitle": "Comparative Economic Systems"
+  },
+  "ECON 789": {
+    "courseListName": "ECON 789",
+    "courseTitle": "Applied Microeconomics Workshop"
+  },
+  "ECON 792": {
+    "courseListName": "ECON 792",
+    "courseTitle": "Economics of Labor I"
+  },
+  "ECON 799": {
+    "courseListName": "ECON 799",
+    "courseTitle": "Empirical Microeconomics"
+  }
+}

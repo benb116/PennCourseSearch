@@ -1,0 +1,22 @@
+{
+  "NSCI 100": {
+    "courseListName": "NSCI 100",
+    "courseTitle": "Naval Science Drill"
+  },
+  "NSCI 102": {
+    "courseListName": "NSCI 102",
+    "courseTitle": "Seapower and Maritime Affairs"
+  },
+  "NSCI 202": {
+    "courseListName": "NSCI 202",
+    "courseTitle": "Navigation I"
+  },
+  "NSCI 302": {
+    "courseListName": "NSCI 302",
+    "courseTitle": "Weapons"
+  },
+  "NSCI 402": {
+    "courseListName": "NSCI 402",
+    "courseTitle": "Leadership and Ethics"
+  }
+}

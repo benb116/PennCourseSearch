@@ -1,0 +1,118 @@
+{
+  "LING 001": {
+    "courseListName": "LING 001",
+    "courseTitle": "Introduction to Linguistics"
+  },
+  "LING 057": {
+    "courseListName": "LING 057",
+    "courseTitle": "The Evolution of Language"
+  },
+  "LING 071": {
+    "courseListName": "LING 071",
+    "courseTitle": "American Sign Language I"
+  },
+  "LING 072": {
+    "courseListName": "LING 072",
+    "courseTitle": "American Sign Language II"
+  },
+  "LING 073": {
+    "courseListName": "LING 073",
+    "courseTitle": "American Sign Language III"
+  },
+  "LING 074": {
+    "courseListName": "LING 074",
+    "courseTitle": "American Sign Language IV"
+  },
+  "LING 077": {
+    "courseListName": "LING 077",
+    "courseTitle": "ASL/Deaf Studies - ABCS"
+  },
+  "LING 078": {
+    "courseListName": "LING 078",
+    "courseTitle": "Deaf Culture"
+  },
+  "LING 082": {
+    "courseListName": "LING 082",
+    "courseTitle": "Beginning Irish Gaelic II"
+  },
+  "LING 084": {
+    "courseListName": "LING 084",
+    "courseTitle": "Intermediate Irish Gaelic II"
+  },
+  "LING 086": {
+    "courseListName": "LING 086",
+    "courseTitle": "Advanced Irish Gaelic II"
+  },
+  "LING 102": {
+    "courseListName": "LING 102",
+    "courseTitle": "Introduction to Sociolinguistics"
+  },
+  "LING 229": {
+    "courseListName": "LING 229",
+    "courseTitle": "Fr Dans Monde/Fr in Wrld"
+  },
+  "LING 230": {
+    "courseListName": "LING 230",
+    "courseTitle": "Sound Structure of Language"
+  },
+  "LING 247": {
+    "courseListName": "LING 247",
+    "courseTitle": "Structure of American Sign Language"
+  },
+  "LING 302": {
+    "courseListName": "LING 302",
+    "courseTitle": "Linguistic Field Methods"
+  },
+  "LING 405": {
+    "courseListName": "LING 405",
+    "courseTitle": "Morphology Theory II"
+  },
+  "LING 502": {
+    "courseListName": "LING 502",
+    "courseTitle": "Linguistic Field Methods"
+  },
+  "LING 503": {
+    "courseListName": "LING 503",
+    "courseTitle": "Sound Structure of Language"
+  },
+  "LING 521": {
+    "courseListName": "LING 521",
+    "courseTitle": "Introduction to Phonetics II"
+  },
+  "LING 531": {
+    "courseListName": "LING 531",
+    "courseTitle": "Phonology II"
+  },
+  "LING 551": {
+    "courseListName": "LING 551",
+    "courseTitle": "Syntax II"
+  },
+  "LING 570": {
+    "courseListName": "LING 570",
+    "courseTitle": "Developmental Psycholinguistics"
+  },
+  "LING 581": {
+    "courseListName": "LING 581",
+    "courseTitle": "Semantics II"
+  },
+  "LING 603": {
+    "courseListName": "LING 603",
+    "courseTitle": "Topics in Phonology"
+  },
+  "LING 608": {
+    "courseListName": "LING 608",
+    "courseTitle": "Topics in Semantics and Pragmatics"
+  },
+  "LING 630": {
+    "courseListName": "LING 630",
+    "courseTitle": "Seminar in Morphology"
+  },
+  "LING 650": {
+    "courseListName": "LING 650",
+    "courseTitle": "Topics in Natural-Language Syntax"
+  },
+  "LING 670": {
+    "courseListName": "LING 670",
+    "courseTitle": "Topics in the Cultural Evolution of Language"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "NANO 597": {
+    "courseListName": "NANO 597",
+    "courseTitle": "Master's Thesis Research"
+  },
+  "NANO 599": {
+    "courseListName": "NANO 599",
+    "courseTitle": "Master's Independent Study"
+  }
+}

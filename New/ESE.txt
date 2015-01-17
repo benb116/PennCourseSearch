@@ -1,0 +1,190 @@
+{
+  "ESE 170": {
+    "courseListName": "ESE 170",
+    "courseTitle": "Principles of Digital Design"
+  },
+  "ESE 171": {
+    "courseListName": "ESE 171",
+    "courseTitle": "Principles of Digital Design Lab"
+  },
+  "ESE 224": {
+    "courseListName": "ESE 224",
+    "courseTitle": "Signal and Information Processing"
+  },
+  "ESE 250": {
+    "courseListName": "ESE 250",
+    "courseTitle": "Digital Audio Basics"
+  },
+  "ESE 290": {
+    "courseListName": "ESE 290",
+    "courseTitle": "Introduction to Electrical and Systems Engineering Research Methodology"
+  },
+  "ESE 291": {
+    "courseListName": "ESE 291",
+    "courseTitle": "Introduction to Electical and Systems Engineering Research and Design"
+  },
+  "ESE 301": {
+    "courseListName": "ESE 301",
+    "courseTitle": "Engineering Probability"
+  },
+  "ESE 302": {
+    "courseListName": "ESE 302",
+    "courseTitle": "Engineering Applications of Statistics"
+  },
+  "ESE 304": {
+    "courseListName": "ESE 304",
+    "courseTitle": "Optimization of Systems"
+  },
+  "ESE 310": {
+    "courseListName": "ESE 310",
+    "courseTitle": "Electric and Magnetic Fields I"
+  },
+  "ESE 319": {
+    "courseListName": "ESE 319",
+    "courseTitle": "Fundamentals of Solid-State Circuits"
+  },
+  "ESE 350": {
+    "courseListName": "ESE 350",
+    "courseTitle": "Embedded Systems/Microcontroller Laboratory"
+  },
+  "ESE 360": {
+    "courseListName": "ESE 360",
+    "courseTitle": "Introduction to Environmental Systems"
+  },
+  "ESE 400": {
+    "courseListName": "ESE 400",
+    "courseTitle": "Engineering Economics"
+  },
+  "ESE 406": {
+    "courseListName": "ESE 406",
+    "courseTitle": "Control of Systems"
+  },
+  "ESE 418": {
+    "courseListName": "ESE 418",
+    "courseTitle": "Electrical Energy Storage Systems"
+  },
+  "ESE 444": {
+    "courseListName": "ESE 444",
+    "courseTitle": "Project Management"
+  },
+  "ESE 451": {
+    "courseListName": "ESE 451",
+    "courseTitle": "Senior Design Project II - EE and SSE"
+  },
+  "ESE 501": {
+    "courseListName": "ESE 501",
+    "courseTitle": "Networking - Theory and Fundamentals"
+  },
+  "ESE 502": {
+    "courseListName": "ESE 502",
+    "courseTitle": "Introduction to Spatial Analysis"
+  },
+  "ESE 505": {
+    "courseListName": "ESE 505",
+    "courseTitle": "Control of Systems"
+  },
+  "ESE 518": {
+    "courseListName": "ESE 518",
+    "courseTitle": "Batt & Super-Cap Systems"
+  },
+  "ESE 519": {
+    "courseListName": "ESE 519",
+    "courseTitle": "Real-Time Embedded Systems"
+  },
+  "ESE 521": {
+    "courseListName": "ESE 521",
+    "courseTitle": "The Physics of Solid State Energy Devices"
+  },
+  "ESE 529": {
+    "courseListName": "ESE 529",
+    "courseTitle": "Introduction to MEMS and NEMS"
+  },
+  "ESE 535": {
+    "courseListName": "ESE 535",
+    "courseTitle": "Electronic Design Automation"
+  },
+  "ESE 540": {
+    "courseListName": "ESE 540",
+    "courseTitle": "Engineering Economics"
+  },
+  "ESE 544": {
+    "courseListName": "ESE 544",
+    "courseTitle": "Project Management"
+  },
+  "ESE 550": {
+    "courseListName": "ESE 550",
+    "courseTitle": "Logistics and Transportation Systems"
+  },
+  "ESE 560": {
+    "courseListName": "ESE 560",
+    "courseTitle": "Sustainable Development of Water Resource Systems"
+  },
+  "ESE 567": {
+    "courseListName": "ESE 567",
+    "courseTitle": "Risk Analysis and Environmental Management"
+  },
+  "ESE 570": {
+    "courseListName": "ESE 570",
+    "courseTitle": "Digital Integrated Circuits and VLSI-Fundamentals"
+  },
+  "ESE 576": {
+    "courseListName": "ESE 576",
+    "courseTitle": "Digital Communication Systems"
+  },
+  "ESE 578": {
+    "courseListName": "ESE 578",
+    "courseTitle": "RFIC (Radio Frequency Integrated Circuit) Design"
+  },
+  "ESE 590": {
+    "courseListName": "ESE 590",
+    "courseTitle": "Systems Methodology"
+  },
+  "ESE 597": {
+    "courseListName": "ESE 597",
+    "courseTitle": "Master's Thesis"
+  },
+  "ESE 599": {
+    "courseListName": "ESE 599",
+    "courseTitle": "Independent Study for Master's credit"
+  },
+  "ESE 603": {
+    "courseListName": "ESE 603",
+    "courseTitle": "Simulation Modeling and Analysis"
+  },
+  "ESE 605": {
+    "courseListName": "ESE 605",
+    "courseTitle": "Modern Convex Optimization"
+  },
+  "ESE 650": {
+    "courseListName": "ESE 650",
+    "courseTitle": "Learning in Robotics"
+  },
+  "ESE 674": {
+    "courseListName": "ESE 674",
+    "courseTitle": "Information Theory"
+  },
+  "ESE 680": {
+    "courseListName": "ESE 680",
+    "courseTitle": "Special Topics in Electrical and Systems Engineering"
+  },
+  "ESE 895": {
+    "courseListName": "ESE 895",
+    "courseTitle": "Teaching Practicum"
+  },
+  "ESE 899": {
+    "courseListName": "ESE 899",
+    "courseTitle": "Independent Study for PhD credit"
+  },
+  "ESE 990": {
+    "courseListName": "ESE 990",
+    "courseTitle": "Masters Thesis"
+  },
+  "ESE 995": {
+    "courseListName": "ESE 995",
+    "courseTitle": "Dissertation"
+  },
+  "ESE 999": {
+    "courseListName": "ESE 999",
+    "courseTitle": "Thesis/Disseratation Research"
+  }
+}

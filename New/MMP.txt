@@ -1,0 +1,26 @@
+{
+  "MMP 502": {
+    "courseListName": "MMP 502",
+    "courseTitle": "Med Physics Ethics & Reg"
+  },
+  "MMP 506": {
+    "courseListName": "MMP 506",
+    "courseTitle": "Physics-Radiation Therap"
+  },
+  "MMP 512": {
+    "courseListName": "MMP 512",
+    "courseTitle": "Radiation Biology"
+  },
+  "MMP 526": {
+    "courseListName": "MMP 526",
+    "courseTitle": "Intro Practicum II"
+  },
+  "MMP 532": {
+    "courseListName": "MMP 532",
+    "courseTitle": "Clinical Practicum II"
+  },
+  "MMP 533": {
+    "courseListName": "MMP 533",
+    "courseTitle": "Clinical Practicum III"
+  }
+}

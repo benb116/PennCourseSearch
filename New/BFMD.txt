@@ -1,0 +1,6 @@
+{
+  "BFMD 073": {
+    "courseListName": "BFMD 073",
+    "courseTitle": "Infectious Diseases"
+  }
+}

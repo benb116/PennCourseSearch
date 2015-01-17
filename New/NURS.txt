@@ -1,0 +1,98 @@
+{
+  "NURS 065": {
+    "courseListName": "NURS 065",
+    "courseTitle": "Fundamentals of Nutrition"
+  },
+  "NURS 102": {
+    "courseListName": "NURS 102",
+    "courseTitle": "Situating the Practice of Nursing"
+  },
+  "NURS 112": {
+    "courseListName": "NURS 112",
+    "courseTitle": "Nutrition: Science & Applications"
+  },
+  "NURS 131": {
+    "courseListName": "NURS 131",
+    "courseTitle": "Human Anatomy and Physiology - Part A"
+  },
+  "NURS 134": {
+    "courseListName": "NURS 134",
+    "courseTitle": "Health and Social Policy"
+  },
+  "NURS 163": {
+    "courseListName": "NURS 163",
+    "courseTitle": "Integrated Anatomy, Physiology, and Physical Assessment I"
+  },
+  "NURS 165": {
+    "courseListName": "NURS 165",
+    "courseTitle": "Integrated Pathophysiology, Pharmacology, and Therapeutics"
+  },
+  "NURS 215": {
+    "courseListName": "NURS 215",
+    "courseTitle": "Nursing of Women and Infants"
+  },
+  "NURS 225": {
+    "courseListName": "NURS 225",
+    "courseTitle": "Pediatric Nursing"
+  },
+  "NURS 235": {
+    "courseListName": "NURS 235",
+    "courseTitle": "Psychiatric Nursing"
+  },
+  "NURS 245": {
+    "courseListName": "NURS 245",
+    "courseTitle": "Nursing of Young and Middle Aged Adults"
+  },
+  "NURS 255": {
+    "courseListName": "NURS 255",
+    "courseTitle": "Nursing of Older Adults"
+  },
+  "NURS 297": {
+    "courseListName": "NURS 297",
+    "courseTitle": "Bsn Clinical Remediation"
+  },
+  "NURS 303": {
+    "courseListName": "NURS 303",
+    "courseTitle": "Contemporary Issues in Human Sexuality and Health"
+  },
+  "NURS 304": {
+    "courseListName": "NURS 304",
+    "courseTitle": "Contemporary Issues in Global Women's Health"
+  },
+  "NURS 312": {
+    "courseListName": "NURS 312",
+    "courseTitle": "Nutritional Aspects of Disease"
+  },
+  "NURS 313": {
+    "courseListName": "NURS 313",
+    "courseTitle": "Obesity and Society"
+  },
+  "NURS 316": {
+    "courseListName": "NURS 316",
+    "courseTitle": "International Nutrition: Political Economy of World Hunger"
+  },
+  "NURS 319": {
+    "courseListName": "NURS 319",
+    "courseTitle": "Etiology and Treatment of Contemporary Chronic Diseases in America: Focus on Obesity and Cancer"
+  },
+  "NURS 330": {
+    "courseListName": "NURS 330",
+    "courseTitle": "Theoretical Foundations of Health Care Ethics"
+  },
+  "NURS 332": {
+    "courseListName": "NURS 332",
+    "courseTitle": "Forensic Science I"
+  },
+  "NURS 333": {
+    "courseListName": "NURS 333",
+    "courseTitle": "Victimology"
+  },
+  "NURS 334": {
+    "courseListName": "NURS 334",
+    "courseTitle": "Public Policy and the Nation's Health"
+  },
+  "NURS 356": {
+    "courseListName": "NURS 356",
+    "courseTitle": "Case Study: Culture of Birth"
+  }
+}

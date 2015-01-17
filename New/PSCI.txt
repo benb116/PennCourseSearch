@@ -1,0 +1,202 @@
+{
+  "PSCI 110": {
+    "courseListName": "PSCI 110",
+    "courseTitle": "Introduction to Comparative Politics"
+  },
+  "PSCI 116": {
+    "courseListName": "PSCI 116",
+    "courseTitle": "Political Change in the \"Third World\""
+  },
+  "PSCI 130": {
+    "courseListName": "PSCI 130",
+    "courseTitle": "Introduction to American Politics"
+  },
+  "PSCI 131": {
+    "courseListName": "PSCI 131",
+    "courseTitle": "American Foreign Policy"
+  },
+  "PSCI 136": {
+    "courseListName": "PSCI 136",
+    "courseTitle": "Urban Politics in the United States"
+  },
+  "PSCI 138": {
+    "courseListName": "PSCI 138",
+    "courseTitle": "Policymaking in the US"
+  },
+  "PSCI 150": {
+    "courseListName": "PSCI 150",
+    "courseTitle": "Introduction to International Relations"
+  },
+  "PSCI 151": {
+    "courseListName": "PSCI 151",
+    "courseTitle": "International Security"
+  },
+  "PSCI 152": {
+    "courseListName": "PSCI 152",
+    "courseTitle": "International Political Economy"
+  },
+  "PSCI 153": {
+    "courseListName": "PSCI 153",
+    "courseTitle": "International Law & Institutions"
+  },
+  "PSCI 181": {
+    "courseListName": "PSCI 181",
+    "courseTitle": "Modern Political Thought"
+  },
+  "PSCI 182": {
+    "courseListName": "PSCI 182",
+    "courseTitle": "Contemporary Political Thought"
+  },
+  "PSCI 198": {
+    "courseListName": "PSCI 198",
+    "courseTitle": "Selected Topics in Political Science"
+  },
+  "PSCI 210": {
+    "courseListName": "PSCI 210",
+    "courseTitle": "Contemporary African Politics"
+  },
+  "PSCI 215": {
+    "courseListName": "PSCI 215",
+    "courseTitle": "The European Union"
+  },
+  "PSCI 228": {
+    "courseListName": "PSCI 228",
+    "courseTitle": "S.Korea/Global Economy"
+  },
+  "PSCI 231": {
+    "courseListName": "PSCI 231",
+    "courseTitle": "Race and Ethnic Politics"
+  },
+  "PSCI 241": {
+    "courseListName": "PSCI 241",
+    "courseTitle": "Polarization"
+  },
+  "PSCI 253": {
+    "courseListName": "PSCI 253",
+    "courseTitle": "International Politics of the Middle East"
+  },
+  "PSCI 255": {
+    "courseListName": "PSCI 255",
+    "courseTitle": "The Causes of War & Peace"
+  },
+  "PSCI 258": {
+    "courseListName": "PSCI 258",
+    "courseTitle": "Human Rights"
+  },
+  "PSCI 259": {
+    "courseListName": "PSCI 259",
+    "courseTitle": "Chinese Foreign Policy"
+  },
+  "PSCI 272": {
+    "courseListName": "PSCI 272",
+    "courseTitle": "American Constitutional Law II"
+  },
+  "PSCI 330": {
+    "courseListName": "PSCI 330",
+    "courseTitle": "Politics,Power, and Policymaking in Washington"
+  },
+  "PSCI 332": {
+    "courseListName": "PSCI 332",
+    "courseTitle": "Discourse & American Politics"
+  },
+  "PSCI 334": {
+    "courseListName": "PSCI 334",
+    "courseTitle": "Emergency Response"
+  },
+  "PSCI 335": {
+    "courseListName": "PSCI 335",
+    "courseTitle": "Healthy Schools"
+  },
+  "PSCI 336": {
+    "courseListName": "PSCI 336",
+    "courseTitle": "Congress, Elections and American Democracy"
+  },
+  "PSCI 338": {
+    "courseListName": "PSCI 338",
+    "courseTitle": "Statistical Methods PSCI"
+  },
+  "PSCI 395": {
+    "courseListName": "PSCI 395",
+    "courseTitle": "Power Sharing in Deeply Divided Places - BFS"
+  },
+  "PSCI 398": {
+    "courseListName": "PSCI 398",
+    "courseTitle": "Selected Topics in Political Science"
+  },
+  "PSCI 410": {
+    "courseListName": "PSCI 410",
+    "courseTitle": "Compar Pol Communication"
+  },
+  "PSCI 418": {
+    "courseListName": "PSCI 418",
+    "courseTitle": "Evolution, Politics and Computer Simulation"
+  },
+  "PSCI 433": {
+    "courseListName": "PSCI 433",
+    "courseTitle": "Social Movements"
+  },
+  "PSCI 434": {
+    "courseListName": "PSCI 434",
+    "courseTitle": "Advanced Topics in American Politics"
+  },
+  "PSCI 437": {
+    "courseListName": "PSCI 437",
+    "courseTitle": "Race & Criminal Justice"
+  },
+  "PSCI 441": {
+    "courseListName": "PSCI 441",
+    "courseTitle": "Theory Practice&Purpose"
+  },
+  "PSCI 452": {
+    "courseListName": "PSCI 452",
+    "courseTitle": "Civil Wars"
+  },
+  "PSCI 498": {
+    "courseListName": "PSCI 498",
+    "courseTitle": "Selected Topics in Political Science"
+  },
+  "PSCI 554": {
+    "courseListName": "PSCI 554",
+    "courseTitle": "Politics of Global Environment"
+  },
+  "PSCI 558": {
+    "courseListName": "PSCI 558",
+    "courseTitle": "Human Rights"
+  },
+  "PSCI 598": {
+    "courseListName": "PSCI 598",
+    "courseTitle": "Selected Topics"
+  },
+  "PSCI 618": {
+    "courseListName": "PSCI 618",
+    "courseTitle": "International Political Economy"
+  },
+  "PSCI 631": {
+    "courseListName": "PSCI 631",
+    "courseTitle": "American Political Development"
+  },
+  "PSCI 635": {
+    "courseListName": "PSCI 635",
+    "courseTitle": "Exp Design & Iss Causal"
+  },
+  "PSCI 637": {
+    "courseListName": "PSCI 637",
+    "courseTitle": "Survey American Institut"
+  },
+  "PSCI 638": {
+    "courseListName": "PSCI 638",
+    "courseTitle": "Race & Criminal Justice"
+  },
+  "PSCI 655": {
+    "courseListName": "PSCI 655",
+    "courseTitle": "Democracy in Comparative Perspective"
+  },
+  "PSCI 684": {
+    "courseListName": "PSCI 684",
+    "courseTitle": "After Idealism"
+  },
+  "PSCI 697": {
+    "courseListName": "PSCI 697",
+    "courseTitle": "Stat Analy for PSCI 2."
+  }
+}

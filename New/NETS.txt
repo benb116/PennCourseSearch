@@ -1,0 +1,14 @@
+{
+  "NETS 150": {
+    "courseListName": "NETS 150",
+    "courseTitle": "Market and Social Systems on the Internet"
+  },
+  "NETS 312": {
+    "courseListName": "NETS 312",
+    "courseTitle": "Theory of Networks"
+  },
+  "NETS 412": {
+    "courseListName": "NETS 412",
+    "courseTitle": "Algorithmic Game Theory"
+  }
+}

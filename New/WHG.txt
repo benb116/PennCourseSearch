@@ -1,0 +1,14 @@
+{
+  "WHG 632": {
+    "courseListName": "WHG 632",
+    "courseTitle": "Intl Exch Paris"
+  },
+  "WHG 647": {
+    "courseListName": "WHG 647",
+    "courseTitle": "Univ Adolfo Ibanez"
+  },
+  "WHG 648": {
+    "courseListName": "WHG 648",
+    "courseTitle": "Int'l Exch Hkust"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "CIT 590": {
+    "courseListName": "CIT 590",
+    "courseTitle": "Programming Languages and Techniques."
+  },
+  "CIT 594": {
+    "courseListName": "CIT 594",
+    "courseTitle": "Programming Languages and Techniques II"
+  },
+  "CIT 595": {
+    "courseListName": "CIT 595",
+    "courseTitle": "Digital System Organization and Design"
+  },
+  "CIT 596": {
+    "courseListName": "CIT 596",
+    "courseTitle": "Theory of Computation"
+  },
+  "CIT 597": {
+    "courseListName": "CIT 597",
+    "courseTitle": "Programming Languages and Techniques III"
+  }
+}

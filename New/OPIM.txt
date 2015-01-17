@@ -1,0 +1,170 @@
+{
+  "OPIM 101": {
+    "courseListName": "OPIM 101",
+    "courseTitle": "An Introduction to Operations and Information Management"
+  },
+  "OPIM 210": {
+    "courseListName": "OPIM 210",
+    "courseTitle": "Management Information Systems"
+  },
+  "OPIM 220": {
+    "courseListName": "OPIM 220",
+    "courseTitle": "Introduction to Operations Management"
+  },
+  "OPIM 224": {
+    "courseListName": "OPIM 224",
+    "courseTitle": "Service Operations: Models and Applications"
+  },
+  "OPIM 240": {
+    "courseListName": "OPIM 240",
+    "courseTitle": "Gamification for Business"
+  },
+  "OPIM 261": {
+    "courseListName": "OPIM 261",
+    "courseTitle": "Risk Analysis and Environmental Management"
+  },
+  "OPIM 263": {
+    "courseListName": "OPIM 263",
+    "courseTitle": "Environmental & Energy Economics and Policy"
+  },
+  "OPIM 290": {
+    "courseListName": "OPIM 290",
+    "courseTitle": "Decision Processes"
+  },
+  "OPIM 291": {
+    "courseListName": "OPIM 291",
+    "courseTitle": "Negotiations"
+  },
+  "OPIM 292": {
+    "courseListName": "OPIM 292",
+    "courseTitle": "Adv Topics Negotiation."
+  },
+  "OPIM 311": {
+    "courseListName": "OPIM 311",
+    "courseTitle": "Business Computer Languages"
+  },
+  "OPIM 314": {
+    "courseListName": "OPIM 314",
+    "courseTitle": "Enabling Technologies"
+  },
+  "OPIM 319": {
+    "courseListName": "OPIM 319",
+    "courseTitle": "Advanced Decision Systems: Evolutionary Computation"
+  },
+  "OPIM 353": {
+    "courseListName": "OPIM 353",
+    "courseTitle": "Math Mdlng Appl in Fnce"
+  },
+  "OPIM 397": {
+    "courseListName": "OPIM 397",
+    "courseTitle": "Retail Supply Chain Management"
+  },
+  "OPIM 415": {
+    "courseListName": "OPIM 415",
+    "courseTitle": "Product Design"
+  },
+  "OPIM 612": {
+    "courseListName": "OPIM 612",
+    "courseTitle": "Business Analytics"
+  },
+  "OPIM 613": {
+    "courseListName": "OPIM 613",
+    "courseTitle": "Managing the Productive Core of the Firm: Information and Business Transformation"
+  },
+  "OPIM 614": {
+    "courseListName": "OPIM 614",
+    "courseTitle": "Innovation"
+  },
+  "OPIM 615": {
+    "courseListName": "OPIM 615",
+    "courseTitle": "Operations Strategy"
+  },
+  "OPIM 652": {
+    "courseListName": "OPIM 652",
+    "courseTitle": "Advanced Management Science: Models and Applications"
+  },
+  "OPIM 653": {
+    "courseListName": "OPIM 653",
+    "courseTitle": "Mathematical Modeling and its Application in Finance"
+  },
+  "OPIM 654": {
+    "courseListName": "OPIM 654",
+    "courseTitle": "Product Design and Development"
+  },
+  "OPIM 658": {
+    "courseListName": "OPIM 658",
+    "courseTitle": "Service Operations Management"
+  },
+  "OPIM 662": {
+    "courseListName": "OPIM 662",
+    "courseTitle": "Enabling Technologies"
+  },
+  "OPIM 690": {
+    "courseListName": "OPIM 690",
+    "courseTitle": "Managerial Decision Making"
+  },
+  "OPIM 691": {
+    "courseListName": "OPIM 691",
+    "courseTitle": "Negotiations"
+  },
+  "OPIM 692": {
+    "courseListName": "OPIM 692",
+    "courseTitle": "Advanced Topics Negotiation"
+  },
+  "OPIM 693": {
+    "courseListName": "OPIM 693",
+    "courseTitle": "Influence"
+  },
+  "OPIM 697": {
+    "courseListName": "OPIM 697",
+    "courseTitle": "Retail Supply Chain Management"
+  },
+  "OPIM 761": {
+    "courseListName": "OPIM 761",
+    "courseTitle": "Risk Analysis and Environmental Management"
+  },
+  "OPIM 762": {
+    "courseListName": "OPIM 762",
+    "courseTitle": "Environmental Sustainability and Value Creation"
+  },
+  "OPIM 763": {
+    "courseListName": "OPIM 763",
+    "courseTitle": "Energy Markets & Policy"
+  },
+  "OPIM 900": {
+    "courseListName": "OPIM 900",
+    "courseTitle": "Foundations of Decision Processes"
+  },
+  "OPIM 904": {
+    "courseListName": "OPIM 904",
+    "courseTitle": "Experimental Economics"
+  },
+  "OPIM 913": {
+    "courseListName": "OPIM 913",
+    "courseTitle": "Advanced Linear Programming"
+  },
+  "OPIM 915": {
+    "courseListName": "OPIM 915",
+    "courseTitle": "Advanced Graph Theory"
+  },
+  "OPIM 931": {
+    "courseListName": "OPIM 931",
+    "courseTitle": "Stochastic Processes ll"
+  },
+  "OPIM 932": {
+    "courseListName": "OPIM 932",
+    "courseTitle": "Queuing Theory"
+  },
+  "OPIM 941": {
+    "courseListName": "OPIM 941",
+    "courseTitle": "Distribution Systems Seminar"
+  },
+  "OPIM 955": {
+    "courseListName": "OPIM 955",
+    "courseTitle": "Research Seminar in Information Systems"
+  },
+  "OPIM 992": {
+    "courseListName": "OPIM 992",
+    "courseTitle": "Conflict Mgmt Seminar"
+  }
+}

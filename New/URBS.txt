@@ -1,0 +1,186 @@
+{
+  "URBS 018": {
+    "courseListName": "URBS 018",
+    "courseTitle": "Freshman seminar."
+  },
+  "URBS 104": {
+    "courseListName": "URBS 104",
+    "courseTitle": "Transformation of Urban America: From the Mid-Twentieth Century to the Present"
+  },
+  "URBS 112": {
+    "courseListName": "URBS 112",
+    "courseTitle": "Urban Sociology"
+  },
+  "URBS 136": {
+    "courseListName": "URBS 136",
+    "courseTitle": "Urban Politics in the United States"
+  },
+  "URBS 167": {
+    "courseListName": "URBS 167",
+    "courseTitle": "THE NEW AFRICAN DIASPORA: AFRICAN IMMIGRANT LIVES IN WEST PHILADELPHIA"
+  },
+  "URBS 178": {
+    "courseListName": "URBS 178",
+    "courseTitle": "Faculty-Student Collaborative Action Seminar in Urban University-Community Relations"
+  },
+  "URBS 200": {
+    "courseListName": "URBS 200",
+    "courseTitle": "Urban Research Methods"
+  },
+  "URBS 201": {
+    "courseListName": "URBS 201",
+    "courseTitle": "Urban Health Systems"
+  },
+  "URBS 202": {
+    "courseListName": "URBS 202",
+    "courseTitle": "Urban Education"
+  },
+  "URBS 205": {
+    "courseListName": "URBS 205",
+    "courseTitle": "People and Design"
+  },
+  "URBS 206": {
+    "courseListName": "URBS 206",
+    "courseTitle": "Public Environment of Cities: An Introduction to the Urban Landscape"
+  },
+  "URBS 207": {
+    "courseListName": "URBS 207",
+    "courseTitle": "Asian American Communities"
+  },
+  "URBS 210": {
+    "courseListName": "URBS 210",
+    "courseTitle": "The City"
+  },
+  "URBS 213": {
+    "courseListName": "URBS 213",
+    "courseTitle": "Urban Ethnography"
+  },
+  "URBS 215": {
+    "courseListName": "URBS 215",
+    "courseTitle": "Topics in Asian American Sociology"
+  },
+  "URBS 216": {
+    "courseListName": "URBS 216",
+    "courseTitle": "Social Entrepreneurship"
+  },
+  "URBS 217": {
+    "courseListName": "URBS 217",
+    "courseTitle": "America in the 1960's"
+  },
+  "URBS 219": {
+    "courseListName": "URBS 219",
+    "courseTitle": "The Heart of Social Change"
+  },
+  "URBS 250": {
+    "courseListName": "URBS 250",
+    "courseTitle": "Urban Public Policy: Philadelphia -- A Case Study"
+  },
+  "URBS 252": {
+    "courseListName": "URBS 252",
+    "courseTitle": "Urban Journalism"
+  },
+  "URBS 253": {
+    "courseListName": "URBS 253",
+    "courseTitle": "Cities, Suburbs, Regions"
+  },
+  "URBS 259": {
+    "courseListName": "URBS 259",
+    "courseTitle": "Post Industrial City: Media City -- New Lifestyles, New Forms"
+  },
+  "URBS 270": {
+    "courseListName": "URBS 270",
+    "courseTitle": "The Immigrant City"
+  },
+  "URBS 273": {
+    "courseListName": "URBS 273",
+    "courseTitle": "Advanced Non-Fiction Writing"
+  },
+  "URBS 280": {
+    "courseListName": "URBS 280",
+    "courseTitle": "Neighborhood Dynamics of Crime"
+  },
+  "URBS 300": {
+    "courseListName": "URBS 300",
+    "courseTitle": "Fieldwork Seminar"
+  },
+  "URBS 305": {
+    "courseListName": "URBS 305",
+    "courseTitle": "Franklin Community Seminar"
+  },
+  "URBS 322": {
+    "courseListName": "URBS 322",
+    "courseTitle": "The Big Picture: Mural Arts in Philadelphia"
+  },
+  "URBS 323": {
+    "courseListName": "URBS 323",
+    "courseTitle": "Tutoring in Urban Public Schools: Theory and Practice"
+  },
+  "URBS 352": {
+    "courseListName": "URBS 352",
+    "courseTitle": "Food Habits in Philadelphia Communities: Exploring Eating and Changing Food Habits in Philadelphia Middle Schools"
+  },
+  "URBS 401": {
+    "courseListName": "URBS 401",
+    "courseTitle": "URBAN STUDIES HONORS"
+  },
+  "URBS 404": {
+    "courseListName": "URBS 404",
+    "courseTitle": "Philanthropy & The City"
+  },
+  "URBS 405": {
+    "courseListName": "URBS 405",
+    "courseTitle": "Religion, Social Justice & Urban Development"
+  },
+  "URBS 417": {
+    "courseListName": "URBS 417",
+    "courseTitle": "Cities and Sustainability"
+  },
+  "URBS 428": {
+    "courseListName": "URBS 428",
+    "courseTitle": "Research Seminar in 21st Century Urbanism"
+  },
+  "URBS 438": {
+    "courseListName": "URBS 438",
+    "courseTitle": "SOCIAL SCIENCE STUDIO: IMMIGRANTS MAKE THE CITY"
+  },
+  "URBS 448": {
+    "courseListName": "URBS 448",
+    "courseTitle": "Neighborhood Displacement & Community Power"
+  },
+  "URBS 450": {
+    "courseListName": "URBS 450",
+    "courseTitle": "Urban Redevelopment"
+  },
+  "URBS 460": {
+    "courseListName": "URBS 460",
+    "courseTitle": "School Reform and Public Policy"
+  },
+  "URBS 476": {
+    "courseListName": "URBS 476",
+    "courseTitle": "BANKERS, ACTIVISTS, & GOVNT: THE MAKING OF URBAN HOUSING POLICY IN AMERICA"
+  },
+  "URBS 506": {
+    "courseListName": "URBS 506",
+    "courseTitle": "Public Environment of Cities: An Introduction to the Urban Landscape"
+  },
+  "URBS 513": {
+    "courseListName": "URBS 513",
+    "courseTitle": "Urban Ethnography"
+  },
+  "URBS 516": {
+    "courseListName": "URBS 516",
+    "courseTitle": "Public Interest Workshop"
+  },
+  "URBS 524": {
+    "courseListName": "URBS 524",
+    "courseTitle": "Metro Labor Markets"
+  },
+  "URBS 547": {
+    "courseListName": "URBS 547",
+    "courseTitle": "Anthropology & Education"
+  },
+  "URBS 608": {
+    "courseListName": "URBS 608",
+    "courseTitle": "Proseminar in Urban Studies"
+  }
+}

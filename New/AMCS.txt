@@ -1,0 +1,14 @@
+{
+  "AMCS 525": {
+    "courseListName": "AMCS 525",
+    "courseTitle": "Partial Dif Equations"
+  },
+  "AMCS 602": {
+    "courseListName": "AMCS 602",
+    "courseTitle": "Algebraic Techniques for Applied Mathematics and Computational Science, I."
+  },
+  "AMCS 609": {
+    "courseListName": "AMCS 609",
+    "courseTitle": "Analysis"
+  }
+}

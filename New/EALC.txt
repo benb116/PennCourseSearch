@@ -1,0 +1,170 @@
+{
+  "EALC 002": {
+    "courseListName": "EALC 002",
+    "courseTitle": "Introduction to Japanese Civilization"
+  },
+  "EALC 013": {
+    "courseListName": "EALC 013",
+    "courseTitle": "Art and Civilization in East Asia"
+  },
+  "EALC 015": {
+    "courseListName": "EALC 015",
+    "courseTitle": "Introduction to Buddhism"
+  },
+  "EALC 018": {
+    "courseListName": "EALC 018",
+    "courseTitle": "Globalizing East Asia"
+  },
+  "EALC 038": {
+    "courseListName": "EALC 038",
+    "courseTitle": "Topics East Asian Religions"
+  },
+  "EALC 044": {
+    "courseListName": "EALC 044",
+    "courseTitle": "US and China 1912-2012"
+  },
+  "EALC 069": {
+    "courseListName": "EALC 069",
+    "courseTitle": "Japanese Popular Culture"
+  },
+  "EALC 071": {
+    "courseListName": "EALC 071",
+    "courseTitle": "Modern Japanese History"
+  },
+  "EALC 080": {
+    "courseListName": "EALC 080",
+    "courseTitle": "Introduction to Korean Civilization"
+  },
+  "EALC 116": {
+    "courseListName": "EALC 116",
+    "courseTitle": "East Asian Gardens"
+  },
+  "EALC 125": {
+    "courseListName": "EALC 125",
+    "courseTitle": "Cultural Chinas: 20th Century Chinese Literature and Film"
+  },
+  "EALC 126": {
+    "courseListName": "EALC 126",
+    "courseTitle": "Topics Chinese Iterature"
+  },
+  "EALC 131": {
+    "courseListName": "EALC 131",
+    "courseTitle": "Introduction to Classical Chinese Thought"
+  },
+  "EALC 138": {
+    "courseListName": "EALC 138",
+    "courseTitle": "Political Economy of Contemporary China"
+  },
+  "EALC 141": {
+    "courseListName": "EALC 141",
+    "courseTitle": "Topics in Asian History"
+  },
+  "EALC 175": {
+    "courseListName": "EALC 175",
+    "courseTitle": "Ancient Japanese CIV"
+  },
+  "EALC 193": {
+    "courseListName": "EALC 193",
+    "courseTitle": "S.Korea/Global Economy"
+  },
+  "EALC 222": {
+    "courseListName": "EALC 222",
+    "courseTitle": "1st Year Classical Chin II"
+  },
+  "EALC 230": {
+    "courseListName": "EALC 230",
+    "courseTitle": "Gender and Religion in China"
+  },
+  "EALC 232": {
+    "courseListName": "EALC 232",
+    "courseTitle": "Cultural Memory in Contemporary China"
+  },
+  "EALC 242": {
+    "courseListName": "EALC 242",
+    "courseTitle": "Medicine and Healing in China"
+  },
+  "EALC 254": {
+    "courseListName": "EALC 254",
+    "courseTitle": "War and Literature in Japan: Tales of the Heike"
+  },
+  "EALC 259": {
+    "courseListName": "EALC 259",
+    "courseTitle": "Gender and Sexuality in Japan"
+  },
+  "EALC 291": {
+    "courseListName": "EALC 291",
+    "courseTitle": "Archaeology of Central Asia"
+  },
+  "EALC 442": {
+    "courseListName": "EALC 442",
+    "courseTitle": "History of China"
+  },
+  "EALC 516": {
+    "courseListName": "EALC 516",
+    "courseTitle": "East Asian Gardens"
+  },
+  "EALC 525": {
+    "courseListName": "EALC 525",
+    "courseTitle": "Cultural Chinas: 20th Century Chinese Literature and Film"
+  },
+  "EALC 531": {
+    "courseListName": "EALC 531",
+    "courseTitle": "Introduction to Classical Chinese Thought"
+  },
+  "EALC 538": {
+    "courseListName": "EALC 538",
+    "courseTitle": "Political Economy of Contemporary China"
+  },
+  "EALC 622": {
+    "courseListName": "EALC 622",
+    "courseTitle": "1st Year Classical Chin II"
+  },
+  "EALC 630": {
+    "courseListName": "EALC 630",
+    "courseTitle": "Gender and Religion in China"
+  },
+  "EALC 632": {
+    "courseListName": "EALC 632",
+    "courseTitle": "Cultural Memory in Contemporary China"
+  },
+  "EALC 642": {
+    "courseListName": "EALC 642",
+    "courseTitle": "Medicine and Healing in China"
+  },
+  "EALC 654": {
+    "courseListName": "EALC 654",
+    "courseTitle": "Tales of the Heike"
+  },
+  "EALC 659": {
+    "courseListName": "EALC 659",
+    "courseTitle": "Gender and Sexuality in Japan"
+  },
+  "EALC 691": {
+    "courseListName": "EALC 691",
+    "courseTitle": "Archaeology of Central Asia"
+  },
+  "EALC 720": {
+    "courseListName": "EALC 720",
+    "courseTitle": "Topics in Chinese Studies"
+  },
+  "EALC 722": {
+    "courseListName": "EALC 722",
+    "courseTitle": "Adv Classical Chinese II"
+  },
+  "EALC 735": {
+    "courseListName": "EALC 735",
+    "courseTitle": "Chinese Palaeography"
+  },
+  "EALC 749": {
+    "courseListName": "EALC 749",
+    "courseTitle": "Japanese for Sinologists"
+  },
+  "EALC 774": {
+    "courseListName": "EALC 774",
+    "courseTitle": "Readings Modern Japan History"
+  },
+  "EALC 990": {
+    "courseListName": "EALC 990",
+    "courseTitle": "Masters Thesis"
+  }
+}

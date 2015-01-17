@@ -1,0 +1,18 @@
+{
+  "COLL 135": {
+    "courseListName": "COLL 135",
+    "courseTitle": "The Art of Speaking"
+  },
+  "COLL 221": {
+    "courseListName": "COLL 221",
+    "courseTitle": "Perspectives in French Literature - World Literatures Course"
+  },
+  "COLL 223": {
+    "courseListName": "COLL 223",
+    "courseTitle": "Perspectives in Spanish American Literature I - World Literatures Course"
+  },
+  "COLL 228": {
+    "courseListName": "COLL 228",
+    "courseTitle": "World Literatures"
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "PSYC 001": {
+    "courseListName": "PSYC 001",
+    "courseTitle": "Introduction to Experimental Psychology"
+  },
+  "PSYC 070": {
+    "courseListName": "PSYC 070",
+    "courseTitle": "Psychology of Food"
+  },
+  "PSYC 109": {
+    "courseListName": "PSYC 109",
+    "courseTitle": "Introduction to Brain and Behavior"
+  },
+  "PSYC 111": {
+    "courseListName": "PSYC 111",
+    "courseTitle": "Perception"
+  },
+  "PSYC 121": {
+    "courseListName": "PSYC 121",
+    "courseTitle": "Learning and Memory"
+  },
+  "PSYC 149": {
+    "courseListName": "PSYC 149",
+    "courseTitle": "Cognitive Neuroscience"
+  },
+  "PSYC 160": {
+    "courseListName": "PSYC 160",
+    "courseTitle": "Personality and Individual Differences"
+  },
+  "PSYC 162": {
+    "courseListName": "PSYC 162",
+    "courseTitle": "Abnormal Psychology"
+  },
+  "PSYC 170": {
+    "courseListName": "PSYC 170",
+    "courseTitle": "Social Psychology"
+  },
+  "PSYC 225": {
+    "courseListName": "PSYC 225",
+    "courseTitle": "Drugs, Brain, and Mind"
+  },
+  "PSYC 235": {
+    "courseListName": "PSYC 235",
+    "courseTitle": "Psychology of Language"
+  },
+  "PSYC 239": {
+    "courseListName": "PSYC 239",
+    "courseTitle": "Neuroendocrinology"
+  },
+  "PSYC 247": {
+    "courseListName": "PSYC 247",
+    "courseTitle": "Neuroscience and Society"
+  },
+  "PSYC 253": {
+    "courseListName": "PSYC 253",
+    "courseTitle": "Judgment and Decisions"
+  },
+  "PSYC 265": {
+    "courseListName": "PSYC 265",
+    "courseTitle": "Behavioral Economics and Psychology"
+  },
+  "PSYC 266": {
+    "courseListName": "PSYC 266",
+    "courseTitle": "Introduction to Positive Psychology"
+  },
+  "PSYC 280": {
+    "courseListName": "PSYC 280",
+    "courseTitle": "Developmental Psychology"
+  },
+  "PSYC 281": {
+    "courseListName": "PSYC 281",
+    "courseTitle": "Cognitive Development"
+  },
+  "PSYC 362": {
+    "courseListName": "PSYC 362",
+    "courseTitle": "Research Experience in Abnormal Psychology"
+  },
+  "PSYC 370": {
+    "courseListName": "PSYC 370",
+    "courseTitle": "Research Experience in Social Psychology"
+  },
+  "PSYC 400": {
+    "courseListName": "PSYC 400",
+    "courseTitle": "Senior Honors Seminar in Psychology"
+  },
+  "PSYC 417": {
+    "courseListName": "PSYC 417",
+    "courseTitle": "Seminar in Perception: Visual Processing"
+  },
+  "PSYC 429": {
+    "courseListName": "PSYC 429",
+    "courseTitle": "Seminar Human Memory"
+  },
+  "PSYC 435": {
+    "courseListName": "PSYC 435",
+    "courseTitle": "Psycholinguistics"
+  },
+  "PSYC 440": {
+    "courseListName": "PSYC 440",
+    "courseTitle": "Sleep and Sleep Disorder"
+  },
+  "PSYC 449": {
+    "courseListName": "PSYC 449",
+    "courseTitle": "Seminar in Cognitive Neuroscience"
+  },
+  "PSYC 462": {
+    "courseListName": "PSYC 462",
+    "courseTitle": "Seminar in Abnormal Psychology"
+  },
+  "PSYC 470": {
+    "courseListName": "PSYC 470",
+    "courseTitle": "Seminar in Social Psychology"
+  },
+  "PSYC 472": {
+    "courseListName": "PSYC 472",
+    "courseTitle": "Behavioral Biology of Women"
+  },
+  "PSYC 473": {
+    "courseListName": "PSYC 473",
+    "courseTitle": "Neuroeconomics"
+  },
+  "PSYC 474": {
+    "courseListName": "PSYC 474",
+    "courseTitle": "Cultural Psychology"
+  },
+  "PSYC 479": {
+    "courseListName": "PSYC 479",
+    "courseTitle": "Neural Systems and Behavior"
+  },
+  "PSYC 480": {
+    "courseListName": "PSYC 480",
+    "courseTitle": "Seminar in Developmental Psychology"
+  },
+  "PSYC 539": {
+    "courseListName": "PSYC 539",
+    "courseTitle": "Theoretical and Computational Neuroscience"
+  },
+  "PSYC 549": {
+    "courseListName": "PSYC 549",
+    "courseTitle": "Neuroscience and Society"
+  },
+  "PSYC 600": {
+    "courseListName": "PSYC 600",
+    "courseTitle": "Proseminar in General Psychology"
+  },
+  "PSYC 609": {
+    "courseListName": "PSYC 609",
+    "courseTitle": "Systems and Integrative Neuroscience"
+  },
+  "PSYC 612": {
+    "courseListName": "PSYC 612",
+    "courseTitle": "Introduction to Nonparametric Methods and Log-linear Models"
+  },
+  "PSYC 671": {
+    "courseListName": "PSYC 671",
+    "courseTitle": "Violence: A Clinical Neuroscience Approach"
+  },
+  "PSYC 698": {
+    "courseListName": "PSYC 698",
+    "courseTitle": "Laboratory Rotation."
+  },
+  "PSYC 704": {
+    "courseListName": "PSYC 704",
+    "courseTitle": "Research Methods and Statistical Procedures for Social and Clinical Sciences"
+  },
+  "PSYC 709": {
+    "courseListName": "PSYC 709",
+    "courseTitle": "Special Topics in Clinical Psychology"
+  },
+  "PSYC 739": {
+    "courseListName": "PSYC 739",
+    "courseTitle": "Special Topics in Perception"
+  },
+  "PSYC 771": {
+    "courseListName": "PSYC 771",
+    "courseTitle": "Topics in Primate Behav"
+  },
+  "PSYC 815": {
+    "courseListName": "PSYC 815",
+    "courseTitle": "Introductory Practicum"
+  },
+  "PSYC 820": {
+    "courseListName": "PSYC 820",
+    "courseTitle": "Advanced Practicum"
+  }
+}

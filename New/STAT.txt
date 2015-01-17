@@ -1,0 +1,106 @@
+{
+  "STAT 101": {
+    "courseListName": "STAT 101",
+    "courseTitle": "Introductory Business Statistics"
+  },
+  "STAT 102": {
+    "courseListName": "STAT 102",
+    "courseTitle": "Introductory Business Statistics"
+  },
+  "STAT 111": {
+    "courseListName": "STAT 111",
+    "courseTitle": "Introductory Statistics"
+  },
+  "STAT 112": {
+    "courseListName": "STAT 112",
+    "courseTitle": "Introductory Statistics"
+  },
+  "STAT 430": {
+    "courseListName": "STAT 430",
+    "courseTitle": "Probability"
+  },
+  "STAT 431": {
+    "courseListName": "STAT 431",
+    "courseTitle": "Statistical Inference"
+  },
+  "STAT 432": {
+    "courseListName": "STAT 432",
+    "courseTitle": "Mathematical Statistics"
+  },
+  "STAT 433": {
+    "courseListName": "STAT 433",
+    "courseTitle": "Stochastic Processes"
+  },
+  "STAT 452": {
+    "courseListName": "STAT 452",
+    "courseTitle": "Fundamentals of Actuarial Science II"
+  },
+  "STAT 454": {
+    "courseListName": "STAT 454",
+    "courseTitle": "Applied Statistical Methods for Actuaries"
+  },
+  "STAT 471": {
+    "courseListName": "STAT 471",
+    "courseTitle": "Intermediate Statistics"
+  },
+  "STAT 474": {
+    "courseListName": "STAT 474",
+    "courseTitle": "Modern Regression for the Social, Behavioral and Biological Sciences"
+  },
+  "STAT 476": {
+    "courseListName": "STAT 476",
+    "courseTitle": "Applied Probability Models in Marketing"
+  },
+  "STAT 501": {
+    "courseListName": "STAT 501",
+    "courseTitle": "Introduction to Nonparametric Methods and Log-linear Models"
+  },
+  "STAT 512": {
+    "courseListName": "STAT 512",
+    "courseTitle": "Mathematical Statistics"
+  },
+  "STAT 521": {
+    "courseListName": "STAT 521",
+    "courseTitle": "Applied Econometrics II"
+  },
+  "STAT 531": {
+    "courseListName": "STAT 531",
+    "courseTitle": "Stochastic Processes"
+  },
+  "STAT 542": {
+    "courseListName": "STAT 542",
+    "courseTitle": "Bayesian Methods and Computation"
+  },
+  "STAT 551": {
+    "courseListName": "STAT 551",
+    "courseTitle": "Introduction to Linear Statistical Models"
+  },
+  "STAT 552": {
+    "courseListName": "STAT 552",
+    "courseTitle": "Advanced Topics in Mathematical Statistics"
+  },
+  "STAT 622": {
+    "courseListName": "STAT 622",
+    "courseTitle": "Statistical Modeling"
+  },
+  "STAT 701": {
+    "courseListName": "STAT 701",
+    "courseTitle": "Advanced Statistics for Management"
+  },
+  "STAT 852": {
+    "courseListName": "STAT 852",
+    "courseTitle": "Fundamentals of Actuarial Science II"
+  },
+  "STAT 854": {
+    "courseListName": "STAT 854",
+    "courseTitle": "Applied Statistical Methods for Actuaries"
+  },
+  "STAT 974": {
+    "courseListName": "STAT 974",
+    "courseTitle": "Modern Regression for the Social, Behavioral and Biological Sciences"
+  },
+  "STAT 991": {
+    "courseListName": "STAT 991",
+    "courseTitle": "Seminar in Advanced Application of Statistics"
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "ARTH 100": {
+    "courseListName": "ARTH 100",
+    "courseTitle": "Freshman Seminar"
+  },
+  "ARTH 102": {
+    "courseListName": "ARTH 102",
+    "courseTitle": "Renaissance to Contemporary: Introduction to Western Art, 1400 to the Present"
+  },
+  "ARTH 103": {
+    "courseListName": "ARTH 103",
+    "courseTitle": "Art and Civilization in East Asia"
+  },
+  "ARTH 105": {
+    "courseListName": "ARTH 105",
+    "courseTitle": "Wonders of the Ancient World"
+  },
+  "ARTH 107": {
+    "courseListName": "ARTH 107",
+    "courseTitle": "Introduction to Film Theory"
+  },
+  "ARTH 108": {
+    "courseListName": "ARTH 108",
+    "courseTitle": "World Film History to 1945"
+  },
+  "ARTH 109": {
+    "courseListName": "ARTH 109",
+    "courseTitle": "World Film History '45 to Present"
+  },
+  "ARTH 219": {
+    "courseListName": "ARTH 219",
+    "courseTitle": "African Architecture"
+  },
+  "ARTH 221": {
+    "courseListName": "ARTH 221",
+    "courseTitle": "Greek Vase Painting"
+  },
+  "ARTH 233": {
+    "courseListName": "ARTH 233",
+    "courseTitle": "Eastern Medieval Architecture"
+  },
+  "ARTH 268": {
+    "courseListName": "ARTH 268",
+    "courseTitle": "Death and the City"
+  },
+  "ARTH 275": {
+    "courseListName": "ARTH 275",
+    "courseTitle": "Revolution to Realism: European Art, 1770-1870"
+  },
+  "ARTH 281": {
+    "courseListName": "ARTH 281",
+    "courseTitle": "Modern Architecture,1900-Present"
+  },
+  "ARTH 288": {
+    "courseListName": "ARTH 288",
+    "courseTitle": "Modern Design"
+  },
+  "ARTH 289": {
+    "courseListName": "ARTH 289",
+    "courseTitle": "Topics: Film Studies"
+  },
+  "ARTH 292": {
+    "courseListName": "ARTH 292",
+    "courseTitle": "Topics in Digital/New Media"
+  },
+  "ARTH 293": {
+    "courseListName": "ARTH 293",
+    "courseTitle": "Topics in Cultural Studies"
+  },
+  "ARTH 294": {
+    "courseListName": "ARTH 294",
+    "courseTitle": "Art Now"
+  },
+  "ARTH 312": {
+    "courseListName": "ARTH 312",
+    "courseTitle": "Topics in Indian Art"
+  },
+  "ARTH 388": {
+    "courseListName": "ARTH 388",
+    "courseTitle": "Topics in Modern and Contemporary Art"
+  },
+  "ARTH 389": {
+    "courseListName": "ARTH 389",
+    "courseTitle": "Topics in Film Studies"
+  },
+  "ARTH 427": {
+    "courseListName": "ARTH 427",
+    "courseTitle": "Roman Sculpture"
+  },
+  "ARTH 435": {
+    "courseListName": "ARTH 435",
+    "courseTitle": "Medieval Islamic Art & Architecture"
+  },
+  "ARTH 501": {
+    "courseListName": "ARTH 501",
+    "courseTitle": "Curatorial Seminar"
+  },
+  "ARTH 511": {
+    "courseListName": "ARTH 511",
+    "courseTitle": "Topics in Indian Art"
+  },
+  "ARTH 520": {
+    "courseListName": "ARTH 520",
+    "courseTitle": "Topics in Aegean Bronze Age"
+  },
+  "ARTH 525": {
+    "courseListName": "ARTH 525",
+    "courseTitle": "Topics in Greek and Roman Art"
+  },
+  "ARTH 550": {
+    "courseListName": "ARTH 550",
+    "courseTitle": "Topics in Southern Renaissance Art"
+  },
+  "ARTH 585": {
+    "courseListName": "ARTH 585",
+    "courseTitle": "Topics in 19th Century Art"
+  },
+  "ARTH 595": {
+    "courseListName": "ARTH 595",
+    "courseTitle": "Contemporary Art and Classical Myth"
+  },
+  "ARTH 619": {
+    "courseListName": "ARTH 619",
+    "courseTitle": "African Architecture"
+  },
+  "ARTH 621": {
+    "courseListName": "ARTH 621",
+    "courseTitle": "Greek Vase Painting"
+  },
+  "ARTH 633": {
+    "courseListName": "ARTH 633",
+    "courseTitle": "Eastern Medieval Architecture"
+  },
+  "ARTH 675": {
+    "courseListName": "ARTH 675",
+    "courseTitle": "Revolution to Realism: European Art, 1770-1870"
+  },
+  "ARTH 681": {
+    "courseListName": "ARTH 681",
+    "courseTitle": "Modern Architecture,1900-Present"
+  },
+  "ARTH 694": {
+    "courseListName": "ARTH 694",
+    "courseTitle": "Art Now"
+  },
+  "ARTH 714": {
+    "courseListName": "ARTH 714",
+    "courseTitle": "Topics in East Asian Art"
+  },
+  "ARTH 723": {
+    "courseListName": "ARTH 723",
+    "courseTitle": "Topics in the Art of the Ancient Near East"
+  },
+  "ARTH 738": {
+    "courseListName": "ARTH 738",
+    "courseTitle": "Topics in Islamic Archaeology"
+  },
+  "ARTH 740": {
+    "courseListName": "ARTH 740",
+    "courseTitle": "Topics in Medieval Art"
+  },
+  "ARTH 775": {
+    "courseListName": "ARTH 775",
+    "courseTitle": "Topics in 19th Century European Art"
+  },
+  "ARTH 783": {
+    "courseListName": "ARTH 783",
+    "courseTitle": "Topics in Comparative Art History"
+  },
+  "ARTH 794": {
+    "courseListName": "ARTH 794",
+    "courseTitle": "Topics in Contemporary Art"
+  },
+  "ARTH 990": {
+    "courseListName": "ARTH 990",
+    "courseTitle": "Masters Thesis"
+  }
+}

@@ -71,11 +71,11 @@ app.get('/', stormpath.loginRequired, function(req, res) {
 })
 
 // This request manager is for spitting the department lists. They are saved for faster responses
-app.get('/Spit', stormpath.groupsRequired(['admins']), function(req, res) {
+app.get('/Spit', function(req, res) {
 	var thedept = req.query.dept;
 	console.log(('List Spit: '+thedept).blue)
 	request({
-		uri: 'http://localhost:3000/Search?searchType=courseIDSearch&resultType=spitSearch&searchParam='+thedept // Get preformatted results
+		uri: 'http://localhost:3000/Search?searchType=courseIDSearch&resultType=deptSearch&searchParam='+thedept // Get preformatted results
 	}, function(error, response, body) {
 		fs.writeFile('./New/'+thedept+'.txt', body, function (err) {
 			if (err) throw err;
@@ -114,7 +114,7 @@ function parseJSONList(JSONString) {
 }
 
 // This request manager is for spitting the PCR Course ID's. They are saved for faster responses
-app.get('/PCRSpitID', stormpath.groupsRequired(['admins']), function(req, res) {
+app.get('/PCRSpitID', function(req, res) {
 	var courseID = req.query.courseID;
 	// console.log(('PCR ID Spit: '+courseID).blue)
 	request({
@@ -129,7 +129,7 @@ app.get('/PCRSpitID', stormpath.groupsRequired(['admins']), function(req, res) {
 	});
 });
 // This request manager is for spitting the PCR reviews. They are saved for faster responses
-app.get('/PCRSpitRev', stormpath.groupsRequired(['admins']), function(req, res) {
+app.get('/PCRSpitRev', function(req, res) {
 	var courseID = req.query.courseID;
 	// console.log(('PCR Rev Spit: '+courseID).blue)
 	request({
@@ -146,7 +146,7 @@ app.get('/PCRSpitRev', stormpath.groupsRequired(['admins']), function(req, res) 
 });
 
 // Manage search requests
-app.get('/Search', stormpath.loginRequired, function(req, res) {
+app.get('/Search', function(req, res) {
 	var searchParam 	= req.query.searchParam; // The search terms
 	var searchType 		= req.query.searchType; // Course ID, Keyword, or Instructor
 	var resultType 		= req.query.resultType; // Course numbers, section numbers, section info
@@ -162,7 +162,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter};
 
 	if (searchType == 'courseIDSearch' && resultType == 'deptSearch') {
-		fs.readFile('./NewDept/'+searchParam.toUpperCase()+'.txt', function (err, data) {
+		fs.readFile('./New/'+searchParam.toUpperCase()+'.txt', function (err, data) {
 			return res.send(data)
 		});
 	} else {
@@ -191,15 +191,13 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 
 function parseDeptList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
-	var coursesList = [];
+	var coursesList = {};
 	for(var key in Res.result_data) { // Iterate through each course
 		var courseListName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
-		if (coursesList.indexOf('<li>'+courseListName+'<span class="CourseTitle"> - '+courseTitle+'</span></li>') == -1) { // If it's not already in the list
-			var courseTitle = Res.result_data[key].course_title;
-			coursesList.push('<li>'+courseListName+'<span class="CourseTitle"> - '+courseTitle+'</span></li>'); // Add and format
-		};
+		var courseTitle = Res.result_data[key].course_title;
+
+		coursesList[courseListName] = {'courseListName': courseListName, 'courseTitle': courseTitle}
 	}
-	if (coursesList.length <= 0) {var coursesList = ['No Results :(']}
 	return coursesList;
 }
 function getTimeInfo(JSONObj) { // A function to retrieve and format meeting times
@@ -233,31 +231,35 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 function parseCourseList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var courseTitle = Res.result_data[0].course_title;
-	var sectionsList = '<span>'+courseTitle+'</span>' // Give the list a title
+	var sectionsList = {};
 	for(var key in Res.result_data) {
 		var SectionName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number+' '+Res.result_data[key].section_number;
+		var sectionNameNoSpace = SectionName.replace(/ /g, "");
 		var TimeInfoArray = getTimeInfo(Res.result_data[key]); // Get meeting times for a section
 		var StatusClass = TimeInfoArray[0];
 		var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
 		if(typeof TimeInfoArray[1][1] !== 'undefined'){TimeInfo += ' ...';}; // If there are multiple meeting times
 		if(typeof TimeInfo === 'undefined'){TimeInfo = '';};
-		var starClass = 'fa fa-star-o';
-		if (sectionsList.indexOf(SectionName) == -1) { // If it's not already in the list
-			sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+SectionName+TimeInfo+'</span><i class="'+starClass+'" style="float:right;"></i></li>'; // Add and format
-		};
+
+		sectionsList[SectionName] = {'SectionName': SectionName, 'StatusClass': StatusClass, 'TimeInfo': TimeInfo, 'NoSpace': sectionNameNoSpace}
+
+		// if (sectionsList.indexOf(SectionName) == -1) { // If it's not already in the list
+		// 	sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+SectionName+TimeInfo+'</span><i class="'+starClass+'" style="float:right;"></i></li>'; // Add and format
+		// };
 	}
-	if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'
+	// if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'
 	return sectionsList;
 }
 
 function parseSectionList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON Object
 	var entry = Res.result_data[0];
+	var sectionInfo = {};
 	try {
 		var Title 	= entry.course_title;
 		var FullID 	= entry.section_id_normalized.replace(/-/g, " "); // Format name
 		try {
-			var Instructor = "<br><br>Instructor: " + entry.instructors[0].name;
+			var Instructor = entry.instructors[0].name;
 		} catch(err) {
 			var Instructor = "";
 		}
@@ -300,7 +302,18 @@ function parseSectionList(JSONString) {
 			AsscList = '';
 		};
 
-		return "<span>&nbsp + &nbsp</span><span>" + FullID + "</span> - " + Title + Instructor +	"<br><br><span class='DescButton'>Description</span><br><p class='DescText'>" + Desc + "</p><br>Status: " + OpenClose + "<br><br>"+termsOffered+"<br><br>Prerequisites: " + prereq + "<br><br>" + TimeInfo + AsscList; // Format the whole response
+		sectionInfo = {
+			'FullID': FullID, 
+			'Title': Title, 
+			'Instructor': Instructor, 
+			'Description': Desc, 
+			'OpenClose': OpenClose, 
+			'termsOffered': termsOffered, 
+			'Prerequisites': prereq, 
+			'TimeInfo': TimeInfo, 
+			'AssociatedSections': AsscList
+		}
+		return sectionInfo
 	}
  	catch(err) {
 		return 'No Results';
@@ -308,7 +321,7 @@ function parseSectionList(JSONString) {
 }
 
 app.get('/Star', stormpath.loginRequired, function(req, res) {
-	var StarredCourses = [];
+	var StarredCourses = {};
 	var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
 	// console.time('DB Time')
 	db.Students.find({Pennkey: myPennkey}, { StarList: 1}, function(err, doc) { // Try to access the database
@@ -334,7 +347,6 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 		} else if (addRem == 'clear') { // Clear all
 			var StarredCourses = [];
 		}
-		console.log(StarredCourses)
 
 		db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database
 

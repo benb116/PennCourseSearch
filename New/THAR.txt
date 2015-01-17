@@ -1,0 +1,58 @@
+{
+  "THAR 102": {
+    "courseListName": "THAR 102",
+    "courseTitle": "THEATRE ARTS 102: THEATRE, HISTORY, & CULTURE II: Romantics, Realists and Revolutionaries"
+  },
+  "THAR 114": {
+    "courseListName": "THAR 114",
+    "courseTitle": "Playwriting Workshop"
+  },
+  "THAR 120": {
+    "courseListName": "THAR 120",
+    "courseTitle": "Introduction to Acting"
+  },
+  "THAR 125": {
+    "courseListName": "THAR 125",
+    "courseTitle": "The Play: Structure, Style, Meaning"
+  },
+  "THAR 130": {
+    "courseListName": "THAR 130",
+    "courseTitle": "Introduction to Light, Set, and Costume Design"
+  },
+  "THAR 133": {
+    "courseListName": "THAR 133",
+    "courseTitle": "Concepts of Stage Design"
+  },
+  "THAR 171": {
+    "courseListName": "THAR 171",
+    "courseTitle": "Movement for the Actor"
+  },
+  "THAR 250": {
+    "courseListName": "THAR 250",
+    "courseTitle": "Theatre Workshop"
+  },
+  "THAR 271": {
+    "courseListName": "THAR 271",
+    "courseTitle": "American Musical Theatre"
+  },
+  "THAR 274": {
+    "courseListName": "THAR 274",
+    "courseTitle": "Dramaturgy"
+  },
+  "THAR 275": {
+    "courseListName": "THAR 275",
+    "courseTitle": "Advanced Topics in Theatre"
+  },
+  "THAR 320": {
+    "courseListName": "THAR 320",
+    "courseTitle": "Scene Study"
+  },
+  "THAR 350": {
+    "courseListName": "THAR 350",
+    "courseTitle": "Rehearsal and Performance"
+  },
+  "THAR 999": {
+    "courseListName": "THAR 999",
+    "courseTitle": "Graduate Level Independent Study"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "REAL 204": {
+    "courseListName": "REAL 204",
+    "courseTitle": "Real Estate Law"
+  },
+  "REAL 206": {
+    "courseListName": "REAL 206",
+    "courseTitle": "Urban Public Policy & Private Economic Development"
+  },
+  "REAL 208": {
+    "courseListName": "REAL 208",
+    "courseTitle": "Housing Markets"
+  },
+  "REAL 209": {
+    "courseListName": "REAL 209",
+    "courseTitle": "Real Estate Investment: Analysis and Financing"
+  },
+  "REAL 215": {
+    "courseListName": "REAL 215",
+    "courseTitle": "Urban Real Estate Economics"
+  },
+  "REAL 236": {
+    "courseListName": "REAL 236",
+    "courseTitle": "International Housing Comparisons"
+  },
+  "REAL 240": {
+    "courseListName": "REAL 240",
+    "courseTitle": "Advanced Real Estate Investment and Analysis"
+  },
+  "REAL 321": {
+    "courseListName": "REAL 321",
+    "courseTitle": "Real Estate Development, (see REAL 821)"
+  },
+  "REAL 708": {
+    "courseListName": "REAL 708",
+    "courseTitle": "Housing Markets"
+  },
+  "REAL 721": {
+    "courseListName": "REAL 721",
+    "courseTitle": "Real Estate Investment: Analysis and Financing"
+  },
+  "REAL 723": {
+    "courseListName": "REAL 723",
+    "courseTitle": "INTRODUCTION TO REAL ESTATE"
+  },
+  "REAL 724": {
+    "courseListName": "REAL 724",
+    "courseTitle": "Urban Real Estate Economics"
+  },
+  "REAL 772": {
+    "courseListName": "REAL 772",
+    "courseTitle": "Urban Public Policy & Private Economic Development"
+  },
+  "REAL 804": {
+    "courseListName": "REAL 804",
+    "courseTitle": "Real Estate Law"
+  },
+  "REAL 821": {
+    "courseListName": "REAL 821",
+    "courseTitle": "Real Estate Development"
+  },
+  "REAL 840": {
+    "courseListName": "REAL 840",
+    "courseTitle": "Advanced Real Estate Investment and Analysis"
+  },
+  "REAL 946": {
+    "courseListName": "REAL 946",
+    "courseTitle": "Advanced Topics in Urban Econonomics"
+  }
+}
