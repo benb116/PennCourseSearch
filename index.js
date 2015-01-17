@@ -242,12 +242,8 @@ function parseCourseList(JSONString) {
 		if(typeof TimeInfo === 'undefined'){TimeInfo = '';};
 
 		sectionsList[SectionName] = {'SectionName': SectionName, 'StatusClass': StatusClass, 'TimeInfo': TimeInfo, 'NoSpace': sectionNameNoSpace}
-
-		// if (sectionsList.indexOf(SectionName) == -1) { // If it's not already in the list
-		// 	sectionsList += '<li><span>&nbsp + &nbsp</span><span class="'+StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+SectionName+TimeInfo+'</span><i class="'+starClass+'" style="float:right;"></i></li>'; // Add and format
-		// };
 	}
-	// if (sectionsList == "") {sectionsList = "No results"}; // If there's nothing, return 'No results'
+	console.log(sectionsList)
 	return sectionsList;
 }
 
