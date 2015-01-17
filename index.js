@@ -77,7 +77,7 @@ app.get('/Spit', function(req, res) {
 	request({
 		uri: 'http://localhost:3000/Search?searchType=courseIDSearch&resultType=deptSearch&searchParam='+thedept // Get preformatted results
 	}, function(error, response, body) {
-		fs.writeFile('./New/'+thedept+'.txt', body, function (err) {
+		fs.writeFile('./New/'+thedept+'.json', body, function (err) {
 			if (err) throw err;
 			console.log('It\'s saved!');
 		});
@@ -162,8 +162,8 @@ app.get('/Search', function(req, res) {
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter};
 
 	if (searchType == 'courseIDSearch' && resultType == 'deptSearch') {
-		fs.readFile('./New/'+searchParam.toUpperCase()+'.txt', function (err, data) {
-			return res.send(data)
+		fs.readFile('./New/'+searchParam.toUpperCase()+'.json', function (err, data) {
+			return res.send(JSON.parse(data))
 		});
 	} else {
 		console.time('  Request Time'); // Start the timer
