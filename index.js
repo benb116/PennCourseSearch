@@ -85,7 +85,7 @@ app.get('/Spit', stormpath.groupsRequired(['admins']), function(req, res) {
 	});
 });
 
-function ParseJSONList(JSONString) {
+function parseJSONList(JSONString) {
 	var inJSON = JSON.parse(JSONString); // Convert to JSON object
 	var resp = {};
 	for(var key in inJSON.result_data) {
@@ -176,20 +176,20 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 			}
 			console.timeEnd('  Request Time');
 			if 			(resultType == 'deptSearch'){ // This will only receive requests if we are checking the API
-				var searchResponse = ParseDeptList(body) // Parse the dept response
+				var searchResponse = parseDeptList(body) // Parse the dept response
 			} else if 	(resultType == 'numbSearch') {
-				var searchResponse = ParseCourseList(body) // Parse the numb response
+				var searchResponse = parseCourseList(body) // Parse the numb response
 			} else if 	(resultType == 'sectSearch') {
-				var searchResponse = ParseSectionList(body) // Parse the sect response
+				var searchResponse = parseSectionList(body) // Parse the sect response
 			} else if 	(resultType == 'spitSearch') {
-				var searchResponse = ParseJSONList(body) // Parse the sect response
+				var searchResponse = parseJSONList(body) // Parse the sect response
 			} else {var searchResponse = ''};
 			return res.send(searchResponse); // return correct info
 		});
 	}
 });
 
-function ParseDeptList(JSONString) {
+function parseDeptList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var coursesList = [];
 	for(var key in Res.result_data) { // Iterate through each course
@@ -202,7 +202,7 @@ function ParseDeptList(JSONString) {
 	if (coursesList.length <= 0) {var coursesList = ['No Results :(']}
 	return coursesList;
 }
-function GetTimeInfo(JSONObj) { // A function to retrieve and format meeting times
+function getTimeInfo(JSONObj) { // A function to retrieve and format meeting times
 	OCStatus = JSONObj.course_status;
 	if (OCStatus == "O") {
 		var StatusClass = 'OpenSec' // If section is open, add class open
@@ -230,13 +230,13 @@ function GetTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 	return [StatusClass, TimeInfo];
 }
 
-function ParseCourseList(JSONString) {
+function parseCourseList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var courseTitle = Res.result_data[0].course_title;
 	var sectionsList = '<span>'+courseTitle+'</span>' // Give the list a title
 	for(var key in Res.result_data) {
 		var SectionName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number+' '+Res.result_data[key].section_number;
-		var TimeInfoArray = GetTimeInfo(Res.result_data[key]); // Get meeting times for a section
+		var TimeInfoArray = getTimeInfo(Res.result_data[key]); // Get meeting times for a section
 		var StatusClass = TimeInfoArray[0];
 		var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
 		if(typeof TimeInfoArray[1][1] !== 'undefined'){TimeInfo += ' ...';}; // If there are multiple meeting times
@@ -249,7 +249,7 @@ function ParseCourseList(JSONString) {
 	return sectionsList;
 }
 
-function ParseSectionList(JSONString) {
+function parseSectionList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON Object
 	var entry = Res.result_data[0];
 	try {
@@ -261,7 +261,7 @@ function ParseSectionList(JSONString) {
 			var Instructor = "";
 		}
 		var Desc 			= entry.course_description;
-		var TimeInfoArray 	= GetTimeInfo(entry);
+		var TimeInfoArray 	= getTimeInfo(entry);
 		var StatusClass 	= TimeInfoArray[0];
 		var meetArray 		= TimeInfoArray[1];
 		var TimeInfo 		= '';
@@ -328,7 +328,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 				uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
 				method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
 			}, function(error, response, body) {
-				resJSON = GetSchedInfo(body); // Format the response
+				resJSON = getSchedInfo(body); // Format the response
 				console.log('Sched Added: '.cyan)
 				for (var JSONSecID in resJSON) { // Compile a list of courses
 					SchedCourses[JSONSecID] = resJSON[JSONSecID];
@@ -359,7 +359,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 	});
 });
 
-function GetSchedInfo(JSONString) {
+function getSchedInfo(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON Object
 	var entry = Res.result_data[0];
 	try {

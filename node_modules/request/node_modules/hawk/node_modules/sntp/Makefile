@@ -1,9 +1,11 @@
 test:
-	@node node_modules/lab/bin/lab
+	@./node_modules/.bin/lab
 test-cov: 
-	@node node_modules/lab/bin/lab -t 100 -m 3000
+	@./node_modules/.bin/lab -r threshold -t 100
 test-cov-html:
-	@node node_modules/lab/bin/lab -r html -o coverage.html
+	@./node_modules/.bin/lab -r html -o coverage.html
+complexity:
+	@./node_modules/.bin/cr -o complexity.md -f markdown lib
 
-.PHONY: test test-cov test-cov-html
+.PHONY: test test-cov test-cov-html complexity
 
