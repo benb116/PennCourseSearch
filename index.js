@@ -396,6 +396,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			SchedCourses = {};
 			db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
 			console.log('Sched Cleared'.magenta)
+			return res.send(SchedCourses)
 		}
 		else {
 			return res.send(SchedCourses); // On a blank request
