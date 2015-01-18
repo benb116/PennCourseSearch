@@ -49,7 +49,7 @@ var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
 	console.log("Node app is running. Better go catch it.".green)
-	console.log("Search ".yellow + "Add ".cyan + "Remove ".magenta + "Spit ".blue + "Error ".red)
+	console.log("Search ".yellow + "Sched ".magenta + "Spit ".blue + "Error ".red + "Star ".cyan)
 })
 
 // Rotating subtitles
@@ -328,18 +328,20 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 		var addRem = req.query.addRem; // Are we adding, removing, or clearing?
 		var courseID = req.query.courseID;
 		if (addRem == 'add') { // If we need to add, then we get meeting info for the section
-			console.log('add'+courseID)
+			console.log(('Star: '+ courseID).cyan)
 			var index = StarredCourses.indexOf(courseID);
 			if (index == -1) {
 				StarredCourses.push(courseID);
 				console.log(courseID.cyan)
 			}
 		} else if (addRem == 'rem') { // If we need to remove
+			console.log(('Unstar: '+ courseID).cyan)
 			var index = StarredCourses.indexOf(courseID);
 			if (index > -1) {
 			    StarredCourses.splice(index, 1);
 			}
 		} else if (addRem == 'clear') { // Clear all
+			console.log(('Clear star: '+ courseID).cyan)
 			var StarredCourses = [];
 		}
 
@@ -372,10 +374,10 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 				method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
 			}, function(error, response, body) {
 				resJSON = getSchedInfo(body); // Format the response
-				console.log('Sched Added: '.cyan)
+				console.log('Sched Added: '.magenta)
 				for (var JSONSecID in resJSON) { // Compile a list of courses
 					SchedCourses[JSONSecID] = resJSON[JSONSecID];
-					console.log(JSONSecID.cyan)
+					console.log(JSONSecID.magenta)
 				};
 				db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
 				return res.send(SchedCourses);
