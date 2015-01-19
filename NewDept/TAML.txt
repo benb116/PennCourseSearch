@@ -1,4 +1,0 @@
-<li data-pcr="3.50">TAML 407<span class="CourseTitle"> - Beginning Tamil Part II</span></li>
-<li data-pcr="0.00">TAML 427<span class="CourseTitle"> - Intermediate Tamil Part II</span></li>
-<li data-pcr="3.25">TAML 446<span class="CourseTitle"> - Advanced Tamil</span></li>
-<li data-pcr="3.67">TAML 489<span class="CourseTitle"> - Readings Classical Tamil</span></li>

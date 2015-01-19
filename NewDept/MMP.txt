@@ -1,7 +1,0 @@
-<li data-pcr="3.36">MMP 502<span class="CourseTitle"> - Med Physics Ethics &amp; Reg</span></li>
-<li data-pcr="0.00">MMP 506<span class="CourseTitle"> - Physics-Radiation Therap</span></li>
-<li data-pcr="2.53">MMP 512<span class="CourseTitle"> - Radiation Biology</span></li>
-<li data-pcr="2.17">MMP 526<span class="CourseTitle"> - Intro Practicum II</span></li>
-<li data-pcr="0.00">MMP 531<span class="CourseTitle"> - Mmp Clinical Practicum I</span></li>
-<li data-pcr="0.00">MMP 532<span class="CourseTitle"> - Clinical Practicum II</span></li>
-<li data-pcr="3.14">MMP 533<span class="CourseTitle"> - Clinical Practicum III</span></li>

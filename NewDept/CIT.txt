@@ -1,4 +1,0 @@
-<li data-pcr="3.20">CIT 590<span class="CourseTitle"> - Programming Languages and Techniques.</span></li>
-<li data-pcr="3.41">CIT 594<span class="CourseTitle"> - Programming Languages and Techniques II</span></li>
-<li data-pcr="2.00">CIT 595<span class="CourseTitle"> - Digital System Organization and Design</span></li>
-<li data-pcr="2.62">CIT 596<span class="CourseTitle"> - Theory of Computation</span></li>

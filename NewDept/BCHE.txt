@@ -1,3 +1,0 @@
-<li data-pcr="0.00">BCHE 299<span class="CourseTitle"> - Undergraduate Research Projects</span></li>
-<li data-pcr="0.00">BCHE 300<span class="CourseTitle"> - Senior Research Projects</span></li>
-<li data-pcr="2.30">BCHE 404<span class="CourseTitle"> - Biochemistry Laboratory</span></li>

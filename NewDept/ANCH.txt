@@ -1,7 +1,0 @@
-<li data-pcr="2.95">ANCH 027<span class="CourseTitle"> - Ancient Rome</span></li>
-<li data-pcr="2.10">ANCH 046<span class="CourseTitle"> - Myths and Religions of the Ancient World</span></li>
-<li data-pcr="0.00">ANCH 117<span class="CourseTitle"> - Periclean Athens</span></li>
-<li data-pcr="2.50">ANCH 118<span class="CourseTitle"> - The Seven Wonders: History of the Ancient Near East and Greece</span></li>
-<li data-pcr="3.38">ANCH 146<span class="CourseTitle"> - Ancient Mediterranean Empires</span></li>
-<li data-pcr="3.58">ANCH 323<span class="CourseTitle"> - Greek World After Alexander the Great</span></li>
-<li data-pcr="0.00">ANCH 611<span class="CourseTitle"> - Greek Epigraphy</span></li>

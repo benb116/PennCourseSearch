@@ -1,7 +1,0 @@
-<li data-pcr="3.16">ASAM 003<span class="CourseTitle"> - Introduction to Asian American History</span></li>
-<li data-pcr="2.83">ASAM 170<span class="CourseTitle"> - Asian American Psychology</span></li>
-<li data-pcr="3.08">ASAM 201<span class="CourseTitle"> - Topics in Asian American Sociology</span></li>
-<li data-pcr="3.00">ASAM 202<span class="CourseTitle"> - Topics in Asian American Literature</span></li>
-<li data-pcr="3.67">ASAM 203<span class="CourseTitle"> - Topics in Asian American History</span></li>
-<li data-pcr="2.88">ASAM 205<span class="CourseTitle"> - Asian American Communities</span></li>
-<li data-pcr="2.40">ASAM 590<span class="CourseTitle"> - Sociology of Education</span></li>

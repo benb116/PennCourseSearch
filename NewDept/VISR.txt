@@ -1,2 +1,0 @@
-<li data-pcr="0.00">VISR 699<span class="CourseTitle"> - Independent Study</span></li>
-<li data-pcr="0.00">VISR 799<span class="CourseTitle"> - Independent Study</span></li>

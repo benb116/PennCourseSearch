@@ -1,3 +1,0 @@
-<li data-pcr="0.00">HSSC 508<span class="CourseTitle"> - Knowledge in Motion</span></li>
-<li data-pcr="2.27">HSSC 588<span class="CourseTitle"> - Humanmities Beyond the Human</span></li>
-<li data-pcr="0.00">HSSC 665<span class="CourseTitle"> - Research Seminar im the History of Medicine</span></li>

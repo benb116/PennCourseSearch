@@ -71,13 +71,15 @@ app.get('/', stormpath.loginRequired, function(req, res) {
 })
 
 // This request manager is for spitting the department lists. They are saved for faster responses
-app.get('/Spit', function(req, res) {
+app.get('/Spit', stormpath.groupsRequired(['admins']), function(req, res) {
 	var thedept = req.query.dept;
 	console.log(('List Spit: '+thedept).blue)
 	request({
 		uri: 'http://localhost:3000/Search?searchType=courseIDSearch&resultType=deptSearch&searchParam='+thedept // Get preformatted results
 	}, function(error, response, body) {
-		fs.writeFile('./New/'+thedept+'.json', body, function (err) {
+
+		var out = parseJSONList(body)
+		fs.writeFile('./New/'+thedept+'.json', JSON.stringify(out), function (err) {
 			if (err) throw err;
 			console.log('It\'s saved!');
 		});
@@ -87,12 +89,10 @@ app.get('/Spit', function(req, res) {
 
 function parseJSONList(JSONString) {
 	var inJSON = JSON.parse(JSONString); // Convert to JSON object
-	var resp = {};
-	for(var key in inJSON.result_data) {
-		var courseID 	= inJSON.result_data[key].course_department+ ' ' +inJSON.result_data[key].course_number; // Get course dept and number
-		var courseTitle = inJSON.result_data[key].course_title;
-		var dashedName 	= inJSON.result_data[key].course_department + '-' + inJSON.result_data[key].course_number
-		console.log(dashedName)
+	var lastKey = inJSON[Object.keys(inJSON).pop()].courseListName;
+	console.log(lastKey)
+	for(var key in inJSON) {
+		var dashedName 	= inJSON[key].courseListName.replace(/ /g, "-");
 		PCRRev = 0;
 
 		request({
@@ -103,18 +103,20 @@ function parseJSONList(JSONString) {
 					uri: 'http://localhost:3000/PCRSpitRev?courseID=' + body // Get preformatted results
 				}, function(error, response, body) {
 					PCRRev = body;
+					inJSON[key].PCRVal = PCRRev;
+					console.log(PCRRev)
+					if (key == lastKey) {
+						console.log(inJSON)
+						return inJSON;
+					}
 				});
 			}
 		});
-		console.log(PCRRev)
-		resp[courseID] = {'title': courseTitle, 'PCRRev': PCRRev}
 	}
-	console.log(resp)
-	return resp;
 }
 
 // This request manager is for spitting the PCR Course ID's. They are saved for faster responses
-app.get('/PCRSpitID', function(req, res) {
+app.get('/PCRSpitID', stormpath.groupsRequired(['admins']), function(req, res) {
 	var courseID = req.query.courseID;
 	// console.log(('PCR ID Spit: '+courseID).blue)
 	request({
@@ -129,7 +131,7 @@ app.get('/PCRSpitID', function(req, res) {
 	});
 });
 // This request manager is for spitting the PCR reviews. They are saved for faster responses
-app.get('/PCRSpitRev', function(req, res) {
+app.get('/PCRSpitRev', stormpath.groupsRequired(['admins']), function(req, res) {
 	var courseID = req.query.courseID;
 	// console.log(('PCR Rev Spit: '+courseID).blue)
 	request({
@@ -146,7 +148,7 @@ app.get('/PCRSpitRev', function(req, res) {
 });
 
 // Manage search requests
-app.get('/Search', function(req, res) {
+app.get('/Search', stormpath.loginRequired, function(req, res) {
 	var searchParam 	= req.query.searchParam; // The search terms
 	var searchType 		= req.query.searchType; // Course ID, Keyword, or Instructor
 	var resultType 		= req.query.resultType; // Course numbers, section numbers, section info
@@ -315,6 +317,7 @@ function parseSectionList(JSONString) {
 	}
 }
 
+// Manage requests regarding starred courses
 app.get('/Star', stormpath.loginRequired, function(req, res) {
 	var StarredCourses = {};
 	var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
@@ -327,13 +330,11 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 		}
 		var addRem = req.query.addRem; // Are we adding, removing, or clearing?
 		var courseID = req.query.courseID;
-		if (addRem == 'add') { // If we need to add, then we get meeting info for the section
+		if (addRem == 'add') { 
 			console.log(('Star: '+ courseID).cyan)
 			var index = StarredCourses.indexOf(courseID);
-			if (index == -1) {
-				StarredCourses.push(courseID);
-				console.log(courseID.cyan)
-			}
+			if (index == -1) {StarredCourses.push(courseID);} // If the section is not already in the list
+			console.log(courseID.cyan)
 		} else if (addRem == 'rem') { // If we need to remove
 			console.log(('Unstar: '+ courseID).cyan)
 			var index = StarredCourses.indexOf(courseID);
@@ -355,6 +356,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 app.get('/Sched', stormpath.loginRequired, function(req, res) {
 
 	var SchedCourses = {};
+	var schedName = req.query.schedName;
 	var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
 	// console.time('DB Time')
 	db.Students.find({Pennkey: myPennkey}, { Sched1: 1}, function(err, doc) { // Try to access the database

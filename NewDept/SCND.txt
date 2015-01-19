@@ -1,2 +1,0 @@
-<li data-pcr="3.50">SCND 104<span class="CourseTitle"> - Intermediate Swedish II</span></li>
-<li data-pcr="3.50">SCND 504<span class="CourseTitle"> - Intermediate Swedish II</span></li>

@@ -1,1 +1,0 @@
-<li data-pcr="3.44">BFMD 073<span class="CourseTitle"> - Infectious Diseases</span></li>

@@ -1,5 +1,0 @@
-<li data-pcr="2.27">INTR 101<span class="CourseTitle"> - Transnational Issues in Global Politics</span></li>
-<li data-pcr="2.11">INTR 250<span class="CourseTitle"> - Political Risk Analysis</span></li>
-<li data-pcr="2.00">INTR 290<span class="CourseTitle"> - Topics in International Relations</span></li>
-<li data-pcr="2.67">INTR 350<span class="CourseTitle"> - Research Methods/Practice in IR</span></li>
-<li data-pcr="2.80">INTR 391<span class="CourseTitle"> - Senior Seminar For Thesis Research</span></li>

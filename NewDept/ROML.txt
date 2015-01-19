@@ -1,3 +1,0 @@
-<li data-pcr="3.50">ROML 110<span class="CourseTitle"> - Elementary Quechua I</span></li>
-<li data-pcr="0.00">ROML 120<span class="CourseTitle"> - Elementary Quechua II</span></li>
-<li data-pcr="0.00">ROML 690<span class="CourseTitle"> - Applied Linguistics and Language Teaching</span></li>

@@ -1,7 +1,0 @@
-<li data-pcr="2.63">MED 536<span class="CourseTitle"> - Pain Science &amp; Practice</span></li>
-<li data-pcr="0.00">MED 588<span class="CourseTitle"> - Adv Leader Skill Comm</span></li>
-<li data-pcr="0.00">MED 589<span class="CourseTitle"> - Mind Body Med Mind Medit</span></li>
-<li data-pcr="0.00">MED 652<span class="CourseTitle"> - Brain and Behavior</span></li>
-<li data-pcr="0.00">MED 653<span class="CourseTitle"> - Repro, Endo</span></li>
-<li data-pcr="0.00">MED 654<span class="CourseTitle"> - Endocrinology</span></li>
-<li data-pcr="0.00">MED 655<span class="CourseTitle"> - Gastrointestinal</span></li>

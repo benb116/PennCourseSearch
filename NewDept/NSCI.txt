@@ -1,5 +1,0 @@
-<li data-pcr="0.00">NSCI 100<span class="CourseTitle"> - Naval Science Drill</span></li>
-<li data-pcr="0.00">NSCI 102<span class="CourseTitle"> - Seapower and Maritime Affairs</span></li>
-<li data-pcr="0.00">NSCI 202<span class="CourseTitle"> - Navigation I</span></li>
-<li data-pcr="0.00">NSCI 302<span class="CourseTitle"> - Weapons</span></li>
-<li data-pcr="0.00">NSCI 402<span class="CourseTitle"> - Leadership and Ethics</span></li>

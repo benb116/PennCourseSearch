@@ -1,2 +1,0 @@
-<li data-pcr="0.00">NANO 597<span class="CourseTitle"> - Master&#39;s Thesis Research</span></li>
-<li data-pcr="0.00">NANO 599<span class="CourseTitle"> - Master&#39;s Independent Study</span></li>

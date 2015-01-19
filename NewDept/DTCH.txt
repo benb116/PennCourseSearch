@@ -1,4 +1,0 @@
-<li data-pcr="3.67">DTCH 104<span class="CourseTitle"> - Intermediate Dutch II</span></li>
-<li data-pcr="3.73">DTCH 230<span class="CourseTitle"> - Topics in Dutch Studies</span></li>
-<li data-pcr="3.67">DTCH 504<span class="CourseTitle"> - Intermediate Dutch II</span></li>
-<li data-pcr="0.00">DTCH 530<span class="CourseTitle"> - Topics in Dutch Studies</span></li>

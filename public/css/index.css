@@ -27,7 +27,7 @@ body {width: 100%;
 	height: 5em; 
 	font-family: 'Open Sans', 'sans-serif';
 }
-
+form {padding-left: calc(30px + 1em);}
 #MenuButtons > span {margin: 0 1em 0 1em; cursor: pointer;}
 #MenuButtons > span:hover {text-decoration: underline;}
 #LoadingInfo {margin-left: 1em;}
@@ -64,8 +64,8 @@ ul {list-style-type: none; padding: 0; margin: 0;}
 .CourseTitle {display: none;}
 #SectionInfo p {margin: 0;}
 
-#SchedGraph {height: 100%; overflow: hidden; padding-left: 2em; padding-right: 2em; font-size: 12px; min-width: 500px;}
-#InfoPanel {height: calc(100vh - 25em); padding-left: 2em; padding-right: 2em; font-size: 12px; min-width: 500px;}
+#SchedGraph {height: 80%; overflow: hidden; padding-left: 2em; padding-right: 2em; font-size: 12px; min-width: 500px;}
+#InfoPanel {height: calc(100vh - 16em); padding-left: 2em; padding-right: 2em; font-size: 12px; min-width: 500px;}
 #SchedGraph span {margin: 1em; cursor: pointer;}
 #TimeCol, #Schedule {background-color: white;
 	height: 100%;

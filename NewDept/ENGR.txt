@@ -1,3 +1,0 @@
-<li data-pcr="3.28">ENGR 105<span class="CourseTitle"> - Introduction to Scientific Computing</span></li>
-<li data-pcr="2.71">ENGR 250<span class="CourseTitle"> - Energy Systems, Resources and Technology</span></li>
-<li data-pcr="0.00">ENGR 503<span class="CourseTitle"> - Engineering in Oil, Gas and Coal, from Productin to End Use</span></li>
