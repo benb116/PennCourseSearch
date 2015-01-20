@@ -93,6 +93,7 @@ function initiateSearch() {
             if (numbSearch.length == 3) {
                 getSectionNumbers(deptSearch+numbSearch, 'all')
             } else { // If there is no course number, clear the section list and info panel
+	            $('#SectionTitle').empty();
                 $('#SectionList').empty();
             };
             if (sectSearch.length == 3) {
@@ -104,6 +105,7 @@ function initiateSearch() {
              
         } else if (searchTerms != "" ) { // If there are no good search terms, clear everything
             $('#CourseList').empty();
+            $('#SectionTitle').empty();
             $('#SectionList').empty();
             $('#SectionInfo').empty();
         }
@@ -140,8 +142,9 @@ function ClickTriggers() {
     $('body').on('click', '#CourseList li', function() { // If a course is clicked in CourseList
         $('#SectionInfo').empty();
         var courseName = $(this).html().split("<")[0].replace(/ /g, " "); // Format the course name for searching
+	    var searchSelect = $('#searchSelect').val();
         var instFilter = 'all'
-        if (searchSelect == 'instSearch') {var instFilter = search}
+        if (searchSelect == 'instSearch') {var instFilter = $('#CSearch').val()}
         getSectionNumbers(courseName, instFilter); // Search for sections
     });
 
@@ -218,11 +221,13 @@ function ClickTriggers() {
 function SendReq(url, fun, passVar) {
     LoadingSum += 1; 
     LoadingIndicate()
+    console.time('Request - ' + url)
     $.get(url) // Make the request
     .done(function(data) {
         fun(data, passVar) // Process the response and display the sched
     })
     .always(function() {
+		console.timeEnd('Request - ' + url)
         LoadingSum -= 1;
         LoadingIndicate()
     });
@@ -245,9 +250,13 @@ function getCourseNumbers(search, TitleHidden) { // Getting info about courses i
 function CourseFormat(JSONRes, passVar) {
     if (typeof JSONRes === 'string') {JSONRes = JSON.parse(JSONRes);}
     var allHTML = '';
-    for(var course in JSONRes) {
-        allHTML += '<li>'+JSONRes[course].courseListName+'<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>'
-    }
+    if (!($.isEmptyObject(JSONRes))){
+	    for(var course in JSONRes) {
+	        allHTML += '<li>'+JSONRes[course].courseListName+'<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
+	    }
+	} else {
+		allHTML = '&nbsp&nbsp&nbsp&nbsp&nbspNo Results';
+	}
     $('#CourseList').html(allHTML); // Put the course number list in #CourseList
     if (TitleHidden == false) {$('.CourseTitle').toggle();}
     $( "#CourseList li" ).each(function( index ) {
@@ -268,14 +277,19 @@ function SectionStars(sections, passvar) { // Getting info about starred section
 }
  
 function FormatSectionsList(stars, sections) {
+	// console.time('Sections')
+	console.log(sections)
     var allHTML = '';
+    // $('#SectionTitle').html(sections.CourseTitle)
     for(var section in sections) {
-        var starClass = 'fa fa-star-o';
+		var starClass = 'fa fa-star-o';
         var index = stars.indexOf(sections[section].NoSpace);
         if (index > -1) {var starClass = 'fa fa-star'} // If the section is a starred section, add the filled star
         allHTML += '<li><span>&nbsp + &nbsp</span><span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[section].SectionName+sections[section].TimeInfo+'</span><i class="'+starClass+'" style="float:right;"></i></li>'
     }
+	$('#SectionTitle').html(sections[section].CourseTitle);
     $('#SectionList').html(allHTML); // Put the course number list in  #SectionList
+    // console.timeEnd('Sections')
 }
  
 function getSectionInfo(sec) { // Get info about the specific section
@@ -284,7 +298,7 @@ function getSectionInfo(sec) { // Get info about the specific section
 }
  
 function SectionInfoFormat(data, passvar) {
-    var HTMLinfo = "<span>&nbsp + &nbsp</span><span>" + data.FullID + "</span> - " + data.Title + "<br><br>Instructor: " + data.Instructor + "<br><br><span class='DescButton'>Description</span><br><p class='DescText'>" + data.Description + "</p><br>Status: " + data.OpenClose + "<br><br>"+data.termsOffered+"<br><br>Prerequisites: " + data.Prerequisites + "<br><br>" + data.TimeInfo + data.AssociatedSections; // Format the whole response
+    var HTMLinfo = "<span>&nbsp + &nbsp</span><span>" + data.FullID + "</span> - " + data.Title + "<br><br>Instructor: " + data.Instructor + "<br><br>Description:<br><p class='DescText'>" + data.Description + "</p><br>Status: " + data.OpenClose + "<br><br>"+data.termsOffered+"<br><br>Prerequisites: " + data.Prerequisites + "<br><br>" + data.TimeInfo + data.AssociatedSections; // Format the whole response
     $('#SectionInfo').html(HTMLinfo);
 }
  
@@ -306,11 +320,13 @@ function StarHandle(data, addRem) {
 }
  
 function StarFormat(sections) {
+    var starClass = 'fa fa-star'
     for(var section in sections) {
-        var starClass = 'fa fa-star'
-        var allHTML = '<li class="starredSec"><span>&nbsp + &nbsp</span><span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[section].SectionName+sections[section].TimeInfo+'</span><i class="'+starClass+'" style="float:right;"></i></li>'
-        $('#SectionList').append(allHTML); // Put the course number list in  #SectionList       
+    	console.log(sections[section])
+    	var allHTML = '<li class="starredSec"><span>&nbsp + &nbsp</span><span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[section].SectionName+sections[section].TimeInfo+'</span><i class="'+starClass+'" style="float:right;"></i></li>'
     }
+	$('#SectionTitle').html('Starred Sections');
+    $('#SectionList').append(allHTML); // Put the course number list in  #SectionList       
 }
  
 function addToSched(sec) { // Getting info about a section

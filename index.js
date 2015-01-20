@@ -62,9 +62,10 @@ subtitles = [	"Cause PennInTouch sucks.",
 
 // Handle main page requests
 app.get('/', stormpath.loginRequired, function(req, res) {
+	console.log('Page Request: '+ req.user.email.split('@')[0])
 	thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 	return res.render('index', { // Send page
-		title: 'Penn Course Search',
+		title: 'PennCourseSearch',
 		subtitle: thissub,
 		user: req.user.email.split('@')[0]
 	});
@@ -165,6 +166,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 
 	if (searchType == 'courseIDSearch' && resultType == 'deptSearch') {
 		fs.readFile('./New/'+searchParam.toUpperCase()+'.json', function (err, data) {
+			if (err) {
+				return res.send({})
+			}
 			return res.send(JSON.parse(data))
 		});
 	} else {
@@ -197,7 +201,6 @@ function parseDeptList(JSONString) {
 	for(var key in Res.result_data) { // Iterate through each course
 		var courseListName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
 		var courseTitle = Res.result_data[key].course_title;
-
 		coursesList[courseListName] = {'courseListName': courseListName, 'courseTitle': courseTitle}
 	}
 	return coursesList;
@@ -224,7 +227,7 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 		}
 	}
 	catch(err) {
-		console.log("Error getting times".red)
+		console.log(("Error getting times" + JSONObj.section_id).red)
 		var TimeInfo = '';
 	}
 	return [StatusClass, TimeInfo];
@@ -232,18 +235,17 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 
 function parseCourseList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
-	var courseTitle = Res.result_data[0].course_title;
 	var sectionsList = {};
 	for(var key in Res.result_data) {
-		var SectionName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number+' '+Res.result_data[key].section_number;
-		var sectionNameNoSpace = SectionName.replace(/ /g, "");
+		var SectionName = Res.result_data[key].section_id_normalized.replace(/-/g, " ");
+		var sectionNameNoSpace = Res.result_data[key].section_id;
 		var TimeInfoArray = getTimeInfo(Res.result_data[key]); // Get meeting times for a section
 		var StatusClass = TimeInfoArray[0];
 		var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
 		if(typeof TimeInfoArray[1][1] !== 'undefined'){TimeInfo += ' ...';}; // If there are multiple meeting times
 		if(typeof TimeInfo === 'undefined'){TimeInfo = '';};
 
-		sectionsList[SectionName] = {'SectionName': SectionName, 'StatusClass': StatusClass, 'TimeInfo': TimeInfo, 'NoSpace': sectionNameNoSpace}
+		sectionsList[sectionNameNoSpace] = {'SectionName': SectionName, 'StatusClass': StatusClass, 'TimeInfo': TimeInfo, 'NoSpace': sectionNameNoSpace, 'CourseTitle': Res.result_data[0].course_title}
 	}
 	return sectionsList;
 }
@@ -328,19 +330,21 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 		} catch(error) { // If there is no previous starlist
 			db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database	
 		}
+
 		var addRem = req.query.addRem; // Are we adding, removing, or clearing?
 		var courseID = req.query.courseID;
+
 		if (addRem == 'add') { 
 			console.log(('Star: '+ courseID).cyan)
 			var index = StarredCourses.indexOf(courseID);
 			if (index == -1) {StarredCourses.push(courseID);} // If the section is not already in the list
 			console.log(courseID.cyan)
+
 		} else if (addRem == 'rem') { // If we need to remove
 			console.log(('Unstar: '+ courseID).cyan)
 			var index = StarredCourses.indexOf(courseID);
-			if (index > -1) {
-			    StarredCourses.splice(index, 1);
-			}
+			if (index > -1) {StarredCourses.splice(index, 1);}
+
 		} else if (addRem == 'clear') { // Clear all
 			console.log(('Clear star: '+ courseID).cyan)
 			var StarredCourses = [];
@@ -375,15 +379,18 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 				uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
 				method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
 			}, function(error, response, body) {
+
 				resJSON = getSchedInfo(body); // Format the response
 				console.log('Sched Added: '.magenta)
 				for (var JSONSecID in resJSON) { // Compile a list of courses
 					SchedCourses[JSONSecID] = resJSON[JSONSecID];
 					console.log(JSONSecID.magenta)
 				};
+
 				db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
 				return res.send(SchedCourses);
 			});
+
 		} else if (addRem == 'rem') { // If we need to remove
 			console.log('Sched Removed: '.magenta)
 			for (meetsec in SchedCourses) {
@@ -392,8 +399,10 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 					console.log(courseID.magenta)
 				}
 			}
+
 			db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
 			return res.send(SchedCourses);
+			
 		} else if (addRem == 'clear') { // Clear all
 			SchedCourses = {};
 			db.Students.update({Pennkey: myPennkey}, { $set: {Sched1: SchedCourses}, $currentDate: { lastModified: true }}); // Update the database
