@@ -1,9 +1,9 @@
-/*@font-face {
+@font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
   src: local('Open Sans'), local('OpenSans'), url(/css/OpenSans.ttf) format('truetype');
-}*/
+}
 
 body {width: 100%; 
 	/*height: 100%; */
@@ -46,13 +46,17 @@ h1 {margin-top: 1em; margin-bottom: 0;}
 	list-style-type: none;
 	margin: 0;
 	background-color: white;
-	font-size: 11px;}
+	font-size: 11px;
+	-webkit-transition: width 1s ease-in-out;
+    -moz-transition: width 1s ease-in-out;
+    -o-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;}
 
 #CourseList {min-width: 110px; max-width: 300px; text-align: left; overflow-y: scroll;}
 #CourseList li {
 	padding: 0 2em 0 2em;
 /*	-webkit-transition: text-indent .15s ease-in-out; transition: text-indent .15s ease-in-out;*/
-	text-align: center;}
+	text-align: left;}
 /*#CourseList li:hover {text-indent: 0.5em;}*/
 #Sections, #SectionInfo {width: 300px; text-align: left; overflow-y: scroll; box-sizing: border-box; padding-left: 0.5em; padding-right: 0.5em;}
 #Sections {height: 35%;}
@@ -68,8 +72,10 @@ ul {list-style-type: none; padding: 0; margin: 0;}
 .CourseTitle {display: none;}
 #SectionInfo p {margin: 0;}
 
+#FilterSearch {height: 15%;  margin-bottom: 1em; overflow: hidden; font-size: 12px; min-width: 500px; max-width: 70%; display: inline-block;}
+#FilterPanel {height: 100%; background-color: white; width: 100%; border-radius: 5px; }
 #SchedGraph {height: 80%; overflow: hidden; padding-left: 2em; padding-right: 2em; font-size: 12px; min-width: 500px; min-height: 350px;}
-#InfoPanel {height: calc(100vh - 16em); padding-left: 2em; padding-right: 2em; font-size: 12px; min-width: 500px;}
+#InfoPanel {height: calc(100vh - 16em); font-size: 12px; min-width: 500px;}
 #SchedGraph span {margin: 1em; cursor: pointer;}
 #TimeCol, #Schedule {background-color: white;
 	height: 100%;
@@ -80,7 +86,7 @@ ul {list-style-type: none; padding: 0; margin: 0;}
 #TimeCol {width: 5%; min-width: 40px; line-height: 14px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; margin-right: -3px; padding-right: 5px;}
 #Schedule {width: 90%; border-bottom-right-radius: 5px; border-top-right-radius: 5px;}
 .SchedBlock {
-	display: table-cell; 
+	display: block; 
 	vertical-align: middle;
 	position: absolute; 
 	border: 1px solid black; 
@@ -113,17 +119,6 @@ input[type="text"] {
 ::-webkit-scrollbar-track {background: white;} 
 /* Handle */
 ::-webkit-scrollbar-thumb {background: #95a5a6; border-radius: 1px;}
-/* For IE :P */
-body{
-  scrollbar-base-color: #C0C0C0;
-  scrollbar-base-color: #C0C0C0;
-  scrollbar-3dlight-color: #C0C0C0;
-  scrollbar-highlight-color: #C0C0C0;
-  scrollbar-track-color: white;
-  scrollbar-arrow-color: #C0C0C0;
-  scrollbar-shadow-color: #C0C0C0;
-  scrollbar-dark-shadow-color: #C0C0C0;
-}
 
 .loader{
   height: 30px;
@@ -134,5 +129,4 @@ body{
   display: inline-block;
   vertical-align: middle;
 }
-.fa {font-size: 14px; color: #01256e;}
-.fa-star, .fa-star-o {float:right;}
+.fa {font-size: 14px; color: #01256e}

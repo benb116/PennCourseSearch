@@ -166,10 +166,8 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 
 	if (searchType == 'courseIDSearch' && resultType == 'deptSearch') {
 		fs.readFile('./New/'+searchParam.toUpperCase()+'.json', function (err, data) {
-			if (err) {
-				return res.send({});
-			}
-			return res.send(JSON.parse(data));
+			if (err) {return res.send({});}
+			else {return res.send(JSON.parse(data));}
 		});
 	} else {
 		console.time('  Request Time'); // Start the timer
@@ -189,7 +187,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 				var searchResponse = parseSectionList(body); // Parse the sect response
 			} else if 	(resultType == 'spitSearch') {
 				var searchResponse = parseJSONList(body); // Parse the sect response
-			} else {var searchResponse = '';}
+			} else {var searchResponse = {};}
 			return res.send(searchResponse); // return correct info
 		});
 	}
@@ -205,6 +203,7 @@ function parseDeptList(JSONString) {
 	}
 	return coursesList;
 }
+
 function getTimeInfo(JSONObj) { // A function to retrieve and format meeting times
 	OCStatus = JSONObj.course_status;
 	if (OCStatus == "O") {
@@ -276,21 +275,21 @@ function parseSectionList(JSONString) {
 		}
 		if (StatusClass == "OpenSec") {var OpenClose = 'Open';} else {var OpenClose = 'Closed';}
 
-		if (entry.recitations !== false) { // If it has recitations
+		if (entry.recitations != false) { // If it has recitations
 			var AsscList = '<br><span class="AsscButton">Associated Recitations</span><ul class="AsscText">';
 			for(var key in entry.recitations) {
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</span></li>';
 			}
 			AsscList += '</ul>';
 
-		} else if (entry.labs !== false) { // If it has labs
+		} else if (entry.labs != false) { // If it has labs
 			var AsscList = '<br><span class="AsscButton">Associated Labs</span><ul class="AsscText">';
 			for(var key in entry.labs) {
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</span></li>';
 			}
 			AsscList += '</ul>';
 
-		} else if (entry.lectures !== false) { // If it has lectures
+		} else if (entry.lectures != false) { // If it has lectures
 			var AsscList = '<br><span class="AsscButton">Associated Lectures</span><ul class="AsscText">';
 			for(var key in entry.lectures) {
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</span></li>';
