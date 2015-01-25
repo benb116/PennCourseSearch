@@ -162,7 +162,7 @@ function ClickTriggers() {
         var secname = $(this).html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
         getSectionInfo(secname); // Search for section info
         var dept = secname.slice(0,-6);
-        getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
+        getCourseNumbers(dept, TitleHidden);
     });
 
     $('body').on('click', '#SectionList i', function() { // If the user clicks a star in SectionList
@@ -290,13 +290,8 @@ function FormatSectionsList(stars, sections) {
         if (index > -1) {var starClass = 'fa fa-star';} // If the section is a starred section, add the filled star
         allHTML += '<li><span>&nbsp + &nbsp</span><span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[section].SectionName+sections[section].TimeInfo+'</span><i class="'+starClass+'"></i></li>';
     }
-    if (typeof section !== 'undefined') {
-		$('#SectionTitle').html(sections[section].CourseTitle);
-	    $('#SectionList').html(allHTML); // Put the course number list in  #SectionList
-    } else {
-    	$('#SectionTitle').html('No Results');
-	    $('#SectionList').empty();
-    }
+	$('#SectionTitle').html(sections[section].CourseTitle);
+    $('#SectionList').html(allHTML); // Put the course number list in  #SectionList
     // console.timeEnd('Sections')
 }
  
@@ -306,13 +301,8 @@ function getSectionInfo(sec) { // Get info about the specific section
 }
  
 function SectionInfoFormat(data, passvar) {
-	console.log(data)
-	if (data != "No Results") {
-	    var HTMLinfo = "<span>&nbsp + &nbsp</span><span>" + data.FullID + "</span> - " + data.Title + "<br><br>Instructor: " + data.Instructor + "<br><br>Description:<br><p class='DescText'>" + data.Description + "</p><br>Status: " + data.OpenClose + "<br><br>"+data.termsOffered+"<br><br>Prerequisites: " + data.Prerequisites + "<br><br>" + data.TimeInfo + data.AssociatedSections; // Format the whole response
-	    $('#SectionInfo').html(HTMLinfo);
-	} else {
-		$('#SectionInfo').html('No Results');
-	}
+    var HTMLinfo = "<span>&nbsp + &nbsp</span><span>" + data.FullID + "</span> - " + data.Title + "<br><br>Instructor: " + data.Instructor + "<br><br>Description:<br><p class='DescText'>" + data.Description + "</p><br>Status: " + data.OpenClose + "<br><br>"+data.termsOffered+"<br><br>Prerequisites: " + data.Prerequisites + "<br><br>" + data.TimeInfo + data.AssociatedSections; // Format the whole response
+    $('#SectionInfo').html(HTMLinfo);
 }
  
 function Stars(addRem, CID) {
@@ -420,6 +410,19 @@ function SpitSched(courseSched) {
         colorMap[courseSched[sec].fullCourseName] = colorPalette[colorinc]; // assign each section a color
         colorinc += 1;
     }
+ 
+
+    var Sundays = [];
+    var Mondays = [];
+    var Tuesdays = [];
+    var Wednesdays = [];
+    var Thursdays = [];
+    var Fridays = [];
+    var Saturdays = [];
+
+    var addedMeets = {};
+
+
 
     // Add the blocks
     for (var sec in courseSched) {
@@ -437,10 +440,57 @@ function SpitSched(courseSched) {
             var meetRoom    = courseSched[sec].meetRoom;
             var thiscol     = colorMap[courseSched[sec].fullCourseName]; // Get the color
             if(typeof thiscol === 'undefined'){thiscol = '#E6E6E6';}
+
+            switch (letterDay) {
+            	case 'U': Sundays.push(sec); break;
+            	case 'M': Mondays.push(sec); break;
+            	case 'T': Tuesdays.push(sec); break;
+            	case 'W': Wednesdays.push(sec); break;
+            	case 'R': Thursdays.push(sec); break;
+            	case 'F': Fridays.push(sec); break;
+            	case 'S': Saturdays.push(sec); break;
+            }
      		
             $('#Schedule').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;width:'+percentWidth+'%;height:'+blockheight+'%;background-color:'+thiscol+'"><div class="CloseX">x</div>'+blockname+'<br>'+meetRoom+'</div>');
+        	addedMeets[sec+' '+letterDay] = letterDay;
         }
     }
+    // console.log(Thursdays)
+
+	function SideBySide(sec, day) {
+		var isHalved = false;
+		for(var addedMeet in addedMeets) {
+			console.log(addedMeet)
+		// 	if (addedMeets[addedMeet] == day) {
+				
+		// 		for (var i = 7; i < sec.length; i++) {
+		//             if (parseFloat(sec[i]) != sec[i]) {
+		//                 secname = sec.substr(0, i);
+		//                 { break; }
+		//             }
+		//         }
+		//         console.log(sec + ' is on the same day as ' + addedMeet)
+
+		//         AID = addedMeet.split(' ')[0];
+		//         BID = sec;
+		//         AStartHr = courseSched[AID].meetHour;
+		//         BStartHr = courseSched[BID].meetHour;
+		//         // console.log(AStartHr+' '+BStartHr)
+		//         AEndHr = AStartHr + courseSched[AID].HourLength;
+		//         BEndHr = BStartHr + courseSched[BID].HourLength;
+
+		//         // If the sections do NOT overlap (there are fewer conditions where this is true, so it is easier to catch them)
+		//         if ((AStartHr >= BEndHr && AEndHr >= BStartHr) || (AStartHr <= BEndHr && AEndHr <= BStartHr)) {
+		// 			var isHalved = false;
+		//         } else {
+		//         	var isHalved = true;
+		//         }
+		//         console.log([isHalved, AID])
+		// 		return [isHalved, AID];
+		// 	}
+		// 	return [false, addedMeet];
+		}
+	}
 }
 
 function detectIE() {
