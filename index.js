@@ -9,7 +9,8 @@ var fs 			= require('fs');
 
 try {
 	var config = require('./config.js');
-} catch (err) { // If there is no config file
+} catch(err) { // If there is no config file
+	console.log('No Config')
 	var config = {};
 	config.requestAB 	= process.env.REQUESTAB;
 	config.requestAT 	= process.env.REQUESTAT;
