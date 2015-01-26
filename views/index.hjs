@@ -49,6 +49,7 @@
                 <span>Download Schedule</span>
                 <span>Recolor</span>
                 <span>Show Stars</span>
+                <span>BUTTON</span>
             </div>
 		</div>
         <div id="BottomResults">
@@ -61,7 +62,7 @@
         		<div id="SectionInfo"></div>
         	</div>
         	<div id="InfoPanel">
-                <!-- <div id="FilterSearch"><div id="FilterPanel"></div></div> -->
+                <div id="FilterSearch"><div id="FilterPanel"></div></div>
                 <div id="SchedGraph">
             		<div id="TimeCol" style="position:relative;"></div>
                     <div id="Schedule" style="position:relative;"></div>

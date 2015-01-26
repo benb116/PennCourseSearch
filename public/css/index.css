@@ -1,132 +1,277 @@
 @font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(/css/OpenSans.ttf) format('truetype');
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(/css/OpenSans.ttf) format('truetype');
 }
-
-body {width: 100%; 
-	/*height: 100%; */
-	text-align: center; 
-	margin: 0; 
-	background-color: #3498db;
-	color: white; 
-	font-family: 'Helvetica';
-	font-family: 'Open Sans'; 
-	min-width: 1000px;}
+body {
+    width: 100%;
+    /*height: 100%; */
+    text-align: center;
+    margin: 0;
+    background-color: #3498db;
+    color: white;
+    font-family: 'Helvetica';
+    font-family: 'Open Sans';
+    min-width: 1000px;
+}
 #MenuBar {
-	height: 2em; width: 12em;
-	position: absolute;
-	top: 0; right: 0;
-	background-color: #F2F2F2;
-	color: black;
-	line-height: 2em;
-	border-bottom-left-radius: 1.5em;
+    height: 2em;
+    width: 12em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #F2F2F2;
+    color: black;
+    line-height: 2em;
+    border-bottom-left-radius: 1.5em;
 }
-#MenuBar > a {	text-decoration: none; color: black; margin-right: 2em;}
+#MenuBar > a {
+    text-decoration: none;
+    color: black;
+    margin-right: 2em;
+}
 #Top {
-	height: 5em; 
-	font-family: 'Open Sans', 'sans-serif';
+    height: 5em;
+    font-family: 'Open Sans', 'sans-serif';
 }
-form {padding-left: calc(30px + 1em);}
-#MenuButtons > span {margin: 0 1em 0 1em; cursor: pointer;}
-#MenuButtons > span:hover {text-decoration: underline;}
-#LoadingInfo {margin-left: 1em;}
-h1 {margin-top: 1em; margin-bottom: 0;}
-#clearTool {cursor: pointer;}
+form {
+    padding-left: calc(30px + 1em);
+}
+#MenuButtons > span {
+    margin: 0 1em 0 1em;
+    cursor: pointer;
+}
+#MenuButtons > span:hover {
+    text-decoration: underline;
+}
+#LoadingInfo {
+    margin-left: 1em;
+}
+h1 {
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+#clearTool {
+    cursor: pointer;
+}
 #BottomResults {
-	color: black;
-	position: absolute;
-	width: 100%;
-	top: 180px;
+    color: black;
+    position: absolute;
+    width: 100%;
+    top: 180px;
 }
-#CourseList, #SectionCol {
-	height: calc(100vh - 180px);
-	float: left;
-	list-style-type: none;
-	margin: 0;
-	background-color: white;
-	font-size: 11px;
-	-webkit-transition: width 1s ease-in-out;
+#CourseList,
+#SectionCol {
+    height: calc(100vh - 180px);
+    float: left;
+    list-style-type: none;
+    margin: 0;
+    background-color: white;
+    font-size: 11px;
+    -webkit-transition: width 1s ease-in-out;
     -moz-transition: width 1s ease-in-out;
     -o-transition: width 1s ease-in-out;
-    transition: width 1s ease-in-out;}
-
-#CourseList {min-width: 110px; max-width: 300px; text-align: left; overflow-y: scroll;}
+    transition: width 1s ease-in-out;
+}
+#CourseList {
+    min-width: 110px;
+    max-width: 300px;
+    text-align: left;
+    overflow-y: scroll;
+}
 #CourseList li {
-	padding: 0 2em 0 2em;
-/*	-webkit-transition: text-indent .15s ease-in-out; transition: text-indent .15s ease-in-out;*/
-	text-align: left;}
+    padding: 0 2em 0 2em;
+    /*	-webkit-transition: text-indent .15s ease-in-out; transition: text-indent .15s ease-in-out;*/
+    text-align: left;
+}
 /*#CourseList li:hover {text-indent: 0.5em;}*/
-#Sections, #SectionInfo {width: 300px; text-align: left; overflow-y: scroll; box-sizing: border-box; padding-left: 0.5em; padding-right: 0.5em;}
-#Sections {height: 35%;}
-#SectionInfo {padding-top: 2%; height: 65%;}
-ul {list-style-type: none; padding: 0; margin: 0;}
-#SectionList li {padding-left: 0;}
-#CourseList li, #SectionList li span, #SectionInfo span {cursor: pointer;}
-#CourseList li:active, #SectionList li span:active, #SectionInfo span:active {background-color: #00B3FF;}
-.OpenSec {background-color: #47EA4C;}
-.ClosedSec {background-color: #F73B3B;}
-.ErrorSec {background-color: #E6E6E6;}
-.PCRSec {background-color: #3498db;}
-.CourseTitle {display: none;}
-#SectionInfo p {margin: 0;}
 
-#FilterSearch {height: 15%;  margin-bottom: 1em; overflow: hidden; font-size: 12px; min-width: 500px; max-width: 70%; display: inline-block;}
-#FilterPanel {height: 100%; background-color: white; width: 100%; border-radius: 5px; }
-#SchedGraph {height: 80%; overflow: hidden; padding-left: 2em; padding-right: 2em; font-size: 12px; min-width: 500px; min-height: 350px;}
-#InfoPanel {height: calc(100vh - 16em); font-size: 12px; min-width: 500px;}
-#SchedGraph span {margin: 1em; cursor: pointer;}
-#TimeCol, #Schedule {background-color: white;
-	height: 100%;
-	margin: 0 auto;
-	display: inline-block;
-	vertical-align: top;
-	min-height: 300px;}
-#TimeCol {width: 5%; min-width: 40px; line-height: 14px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; margin-right: -3px; padding-right: 5px;}
-#Schedule {width: 90%; border-bottom-right-radius: 5px; border-top-right-radius: 5px;}
+#Sections,
+#SectionInfo {
+    width: 300px;
+    text-align: left;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+#Sections {
+    height: 35%;
+}
+#SectionInfo {
+    padding-top: 2%;
+    height: 65%;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+#SectionList li {
+    padding-left: 0;
+}
+#CourseList li,
+#SectionList li span,
+#SectionInfo span {
+    cursor: pointer;
+}
+#CourseList li:active,
+#SectionList li span:active,
+#SectionInfo span:active {
+    background-color: #00B3FF;
+}
+.OpenSec {
+    background-color: #47EA4C;
+}
+.ClosedSec {
+    background-color: #F73B3B;
+}
+.ErrorSec {
+    background-color: #E6E6E6;
+}
+.PCRSec {
+    background-color: #3498db;
+}
+.CourseTitle {
+    display: none;
+}
+#SectionInfo p {
+    margin: 0;
+}
+#FilterSearch {
+    height: 10%;
+    overflow: hidden;
+    padding-left: 4em;
+    padding-right: 4em;
+    font-size: 12px;
+    min-width: 500px;
+    height: 6em;
+    margin-bottom: 1em;
+    text-align: center;
+    display: none;
+}
+#FilterPanel {
+    height: 100%;
+    background-color: white;
+    width: 100%;
+    border-radius: 5px;
+}
+#SchedGraph {
+    height: 80%;
+    overflow: hidden;
+    padding-left: 2em;
+    padding-right: 2em;
+    font-size: 12px;
+    min-width: 500px;
+    min-height: 350px;
+}
+#InfoPanel {
+    height: calc(100vh - 16em);
+    font-size: 12px;
+    min-width: 500px;
+}
+#SchedGraph span {
+    margin: 1em;
+    cursor: pointer;
+}
+#TimeCol,
+#Schedule {
+    background-color: white;
+    height: 100%;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: top;
+    min-height: 300px;
+}
+#TimeCol {
+    width: 5%;
+    min-width: 40px;
+    line-height: 14px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    margin-right: -3px;
+    padding-right: 5px;
+}
+#Schedule {
+    width: 90%;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
 .SchedBlock {
-	display: block; 
-	vertical-align: middle;
-	position: absolute; 
-	border: 1px solid black; 
-	cursor: pointer; 
-	color: black;
-	box-sizing: border-box;
-	overflow-y: hidden;}
+    display: block;
+    vertical-align: middle;
+    position: absolute;
+    border: 1px solid black;
+    cursor: pointer;
+    color: black;
+    box-sizing: border-box;
+    overflow-y: hidden;
+}
 @media all and (max-width: 1050px) {
-	.SchedBlock{font-size: 11px;}
+    .SchedBlock {
+        font-size: 11px;
+    }
 }
-.TimeBlock, hr {position: relative; 
-	position: absolute;
-	text-align: right;}
-.TimeBlock {width: 40px; margin-right: 0;}
-.CloseX {position: absolute; top: 0; left: 0; display: block; width: 15px; height: 15px; color: black; opacity: 0; 
-	-webkit-transition: opacity .15s ease-in-out; transition: opacity .15s ease-in-out;}
-
-input[type="text"] { 
-	width: 30em; margin-bottom: 0.5em;
-	border-radius:2px; 
-	border: solid 1px #ccc; 
-	padding:0.4em; 
-	background-color: #f5f5f5; 
-	margin-top: 1em;
+.TimeBlock,
+hr {
+    position: relative;
+    position: absolute;
+    text-align: right;
 }
-
+.TimeBlock {
+    width: 40px;
+    margin-right: 0;
+}
+.CloseX {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 15px;
+    height: 15px;
+    color: black;
+    opacity: 0;
+    -webkit-transition: opacity .15s ease-in-out;
+    transition: opacity .15s ease-in-out;
+}
+input[type="text"] {
+    width: 30em;
+    margin-bottom: 0.5em;
+    border-radius: 2px;
+    border: solid 1px #ccc;
+    padding: 0.4em;
+    background-color: #f5f5f5;
+    margin-top: 1em;
+}
 /* Let's get this party started */
-::-webkit-scrollbar {width: 5px; height: 5px;} 
-/* Track */
-::-webkit-scrollbar-track {background: white;} 
-/* Handle */
-::-webkit-scrollbar-thumb {background: #95a5a6; border-radius: 1px;}
 
-.loader{
-  height: 30px;
-  width: 30px;
-  text-align: center;
-  margin: 0 auto .2em;
-  margin-left: 2em;
-  display: inline-block;
-  vertical-align: middle;
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
 }
-.fa {font-size: 14px; color: #01256e}
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: white;
+}
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #95a5a6;
+    border-radius: 1px;
+}
+.loader {
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    margin: 0 auto .2em;
+    margin-left: 2em;
+    display: inline-block;
+    vertical-align: middle;
+}
+.fa {
+	float: right;
+    font-size: 14px;
+    color: #01256e
+}
