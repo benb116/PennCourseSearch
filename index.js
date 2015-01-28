@@ -424,6 +424,12 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 		
 		} else if (addRem == 'name') { // If we're getting a list of the schedules
 			schedList = Object.keys(doc[0].Schedules);
+			if (schedList.length == 0) {
+				var placeholder = {};
+				placeholder['Schedules.Schedule'] = {};
+				db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
+				schedList.push('Schedule');
+			}
 			if (typeof schedName !== 'undefined') {schedList.push(schedName);}
 			return res.send(schedList);
 		} else {
