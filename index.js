@@ -92,7 +92,7 @@ function parseJSONList(JSONString) {
 	var inJSON = JSON.parse(JSONString); // Convert to JSON object
 	var lastKey = inJSON[Object.keys(inJSON).pop()].courseListName;
 	console.log(lastKey);
-	for(var key in inJSON) {
+	for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
 		var dashedName 	= inJSON[key].courseListName.replace(/ /g, "-");
 		PCRRev = 0;
 
@@ -113,7 +113,7 @@ function parseJSONList(JSONString) {
 				});
 			}
 		});
-	}
+	}}
 }
 
 // This request manager is for spitting the PCR Course ID's. They are saved for faster responses
@@ -195,11 +195,11 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 function parseDeptList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var coursesList = {};
-	for(var key in Res.result_data) { // Iterate through each course
+	for(var key in Res.result_data) { if (Res.result_data.hasOwnProperty(key)) { // Iterate through each course
 		var courseListName 	= Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
 		var courseTitle 	= Res.result_data[key].course_title;
 		coursesList[courseListName] = {'courseListName': courseListName, 'courseTitle': courseTitle};
-	}
+	}}
 	return coursesList;
 }
 
@@ -214,7 +214,7 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 	}
 	var TimeInfo = [];
 	try { // Not all sections have time info
-		for(var meeting in JSONObj.meetings) { // Some sections have multiple meeting forms (I'm looking at you PHYS151)
+		for(var meeting in JSONObj.meetings) { if (JSONObj.meetings.hasOwnProperty(meeting)) { // Some sections have multiple meeting forms (I'm looking at you PHYS151)
 			var StartTime 		= JSONObj.meetings[meeting].start_time.split(" ")[0]; // Get start time
 			var EndTime 		= JSONObj.meetings[meeting].end_time.split(" ")[0];
 
@@ -224,7 +224,7 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 			var MeetDays = JSONObj.meetings[meeting].meeting_days; // Output like MWF or TR
 			meetListInfo = ' - '+StartTime+" to "+EndTime+" on "+MeetDays;
 			TimeInfo.push(meetListInfo);
-		}
+		}}
 	}
 	catch (err) {
 		console.log(("Error getting times" + JSONObj.section_id).red);
@@ -236,7 +236,7 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 function parseCourseList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var sectionsList = {};
-	for(var key in Res.result_data) {
+	for(var key in Res.result_data) { if (Res.result_data.hasOwnProperty(key)) { 
 		var SectionName 		= Res.result_data[key].section_id_normalized.replace(/-/g, " ");
 		var sectionNameNoSpace 	= Res.result_data[key].section_id;
 		var TimeInfoArray 		= getTimeInfo(Res.result_data[key]); // Get meeting times for a section
@@ -247,7 +247,7 @@ function parseCourseList(JSONString) {
 		if(typeof TimeInfo === 'undefined')				{TimeInfo = '';}
 
 		sectionsList[sectionNameNoSpace] = {'SectionName': SectionName, 'StatusClass': StatusClass, 'TimeInfo': TimeInfo, 'NoSpace': sectionNameNoSpace, 'CourseTitle': Res.result_data[0].course_title};
-	}
+	}}
 	return sectionsList;
 }
 
@@ -279,23 +279,23 @@ function parseSectionList(JSONString) {
 
 		if (entry.recitations != false) { // If it has recitations
 			var AsscList = '<br><span class="AsscButton">Associated Recitations</span><ul class="AsscText">';
-			for(var key in entry.recitations) {
+			for(var key in entry.recitations) { if (entry.recitations.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</span></li>';
-			}
+			}}
 			AsscList += '</ul>';
 
 		} else if (entry.labs != false) { // If it has labs
 			var AsscList = '<br><span class="AsscButton">Associated Labs</span><ul class="AsscText">';
-			for(var key in entry.labs) {
+			for(var key in entry.labs) { if (entry.labs.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</span></li>';
-			}
+			}}
 			AsscList += '</ul>';
 
 		} else if (entry.lectures != false) { // If it has lectures
 			var AsscList = '<br><span class="AsscButton">Associated Lectures</span><ul class="AsscText">';
-			for(var key in entry.lectures) {
+			for(var key in entry.lectures) { if (entry.lectures.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</span></li>';
-			}
+			}}
 			AsscList += '</ul>';
 
 		} else {
@@ -392,10 +392,10 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			}, function(error, response, body) {
 
 				resJSON = getSchedInfo(body); // Format the response
-				for (var JSONSecID in resJSON) { // Compile a list of courses
+				for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
 					SchedCourses[JSONSecID] = resJSON[JSONSecID];
 					console.log((myPennkey + ' Sched Added: ' + JSONSecID).magenta);
-				}
+				}}
 				var placeholder = {};
 				placeholder['Schedules.' + schedName] = SchedCourses;
 				db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
@@ -403,11 +403,11 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			});
 
 		} else if (addRem == 'rem') { // If we need to remove
-			for (var meetsec in SchedCourses) {
+			for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
 				if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) { // Find all meeting times of a given course
 					delete SchedCourses[meetsec];
 					console.log((myPennkey + ' Sched Removed: ' + courseID).magenta);
-				}
+				}}
 			}
 
 			var placeholder = {};
@@ -448,7 +448,7 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
 		var SectionID 	= entry.section_id_normalized.replace(/-/g, ""); // Format name
 		var resJSON 	= {};
 		try { // Not all sections have time info
-			for(var meeti in entry.meetings) { // Some sections have multiple meetings
+			for(var meeti in entry.meetings) { if (entry.meetings.hasOwnProperty(meeti)) { // Some sections have multiple meetings
 				var StartTime 	= (entry.meetings[meeti].start_hour_24) + (entry.meetings[meeti].start_minutes)/60; 
 				var EndTime 	= (entry.meetings[meeti].end_hour_24) 	+ (entry.meetings[meeti].end_minutes)/60;
 				var hourLength 	= EndTime - StartTime;
@@ -471,8 +471,8 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
 									'meetDay': 			MeetDays,
 									'meetHour': 		StartTime,
 									'meetRoom': 		Building+' '+Room
-					};
-				}
+				};
+			}}
 		}
 		catch (err) {
 			console.log(("Error getting times: "+err).red);

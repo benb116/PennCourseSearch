@@ -82,9 +82,9 @@ $(document).ready(function () {
 
 function ListScheds(schedList, theindex) { // Deal with the list of schedules
     $('#schedSelect').empty();
-    for(var schedName in schedList) {
+    for(var schedName in schedList) { if (schedList.hasOwnProperty(schedName)) {
         $('#schedSelect').append('<option value="'+schedList[schedName]+'">'+schedList[schedName]+'</option>'); // Add options to the schedSelect dropdown
-    }
+    }}
     $('#schedSelect').append('<option value="createNewSched">New Schedule</option>'); // Add one more that allows for new schedules to be created
 
     if (theindex == 0) { // If this is a simple listing, set the first option as selected
@@ -287,9 +287,9 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     if ($.isEmptyObject(JSONRes)) { // If it's empty
         allHTML = '&nbsp&nbsp&nbsp&nbsp&nbspNo Results';
     } else {
-        for(var course in JSONRes) { // Add a line for each course
+        for(var course in JSONRes) { if (JSONRes.hasOwnProperty(course)) { // Add a line for each course
             allHTML += '<li>'+JSONRes[course].courseListName+'<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
-        }
+        }}
     }
     $('#CourseList').html(allHTML); // Put the course number list in #CourseList
     if (TitleHidden === false) {$('.CourseTitle').toggle();}
@@ -316,12 +316,12 @@ function FormatSectionsList(stars, sections) { // Receive section and star info 
     // console.log(sections);
     var allHTML = '';
 
-    for(var section in sections) { // Loop through the sections
+    for(var section in sections) { if (sections.hasOwnProperty(section)) { // Loop through the sections
         var starClass = 'fa fa-star-o';
         var index = stars.indexOf(sections[section].NoSpace);
         if (index > -1) {var starClass = 'fa fa-star';} // If the section is a starred section, add the filled star
         allHTML += '<li><span>&nbsp + &nbsp</span><span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[section].SectionName+sections[section].TimeInfo+'</span><i class="'+starClass+'"></i></li>';
-    }
+    }}
     if (typeof section === 'undefined') {
         $('#SectionTitle').html('No Results');
         $('#SectionList').empty();
@@ -354,10 +354,10 @@ function Stars(addRem, CID) { // Manage star requests
 function StarHandle(data, addRem) {
     if (addRem == 'show') { // If the user clicked "Show Stars"
         $('#SectionList').empty();
-        for(var sec in data) { // Request section and time info for each star
+        for(var sec in data) { if (data.hasOwnProperty(sec)) { // Request section and time info for each star
             var searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+data[sec]+"&instFilter=all";
             SendReq(searchURL, StarFormat, []);
-        }
+        }}
     } else { // Otherwise, pass through
         return data;
     }
@@ -365,10 +365,10 @@ function StarHandle(data, addRem) {
  
 function StarFormat(sections) { // Format starred section list
     var starClass = 'fa fa-star';
-    for(var section in sections) {
+    for(var section in sections) { if (sections.hasOwnProperty(section)) {
         console.log(sections[section]);
         var allHTML = '<li class="starredSec"><span>&nbsp + &nbsp</span><span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[section].SectionName+sections[section].TimeInfo+'</span><i class="'+starClass+'"></i></li>';
-    }
+    }}
     $('#SectionTitle').html('Starred Sections');
     $('#SectionList').append(allHTML); // Put the course number list in  #SectionList       
 }
@@ -409,7 +409,7 @@ function SpitSched(courseSched) {
     incSun = 0; // no weekends
     incSat = 0;
  
-    for (var sec in courseSched) {
+    for (var sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
         if (courseSched[sec].meetHour <= startHour) { // If there are classes earlier than the default start
             startHour = courseSched[sec].meetHour; // push back the earliest hour
         }
@@ -425,7 +425,7 @@ function SpitSched(courseSched) {
                 incSat = 1; 
             }
         }
-    }
+    }}
  
     if (incSun == 1) {weekdays.unshift('U');} // Update weekdays array if necessary
     if (incSat == 1) {weekdays.push('S');}
@@ -448,16 +448,16 @@ function SpitSched(courseSched) {
     // Define the color map
     var colorMap = {};
     var colorinc = 0;
-    for (var sec in courseSched) {
+    for (var sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
         colorMap[courseSched[sec].fullCourseName] = colorPalette[colorinc]; // assign each section a color
         colorinc += 1;
-    }
+    }}
 
     // Add the blocks
-    for (var sec in courseSched) {
-        for (var day in courseSched[sec].meetDay) { // some sections have multiple meeting times and days
+    for (var sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
+        for (var day in courseSched[sec].meetDay) {  if (courseSched[sec].meetDay.hasOwnProperty(day)) { // some sections have multiple meeting times and days
             var letterDay = courseSched[sec].meetDay[day]; // On which day does this meeting take place?
-            for (var possDay in weekdays) {
+            for (var possDay in weekdays) { 
                 if (weekdays[possDay] == letterDay) {
                     var blockleft = possDay*percentWidth; { break; } // determine left spacing
                 }
@@ -470,8 +470,8 @@ function SpitSched(courseSched) {
             if(typeof thiscol === 'undefined'){thiscol = '#E6E6E6';}
             
             $('#Schedule').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;width:'+percentWidth+'%;height:'+blockheight+'%;background-color:'+thiscol+'"><div class="CloseX">x</div>'+blockname+'<br>'+meetRoom+'</div>');
-        }
-    }
+        }}
+    }}
 }
 
 function detectIE() {
