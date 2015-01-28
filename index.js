@@ -11,12 +11,12 @@ try {
 	var config = require('./config.js');
 } catch (err) { // If there is no config file
 	var config = {};
-	config.requestAB 	= process.env.REQUESTAB;
-	config.requestAT 	= process.env.REQUESTAT;
-	config.PCRToken 	= process.env.PCRTOKEN;
-	config.MongoUser 	= process.env.MONGOUSER;
-	config.MongoPass 	= process.env.MONGOPASS;
-	config.MongoURI 	= process.env.MONGOURI;
+	config.requestAB 				= process.env.REQUESTAB;
+	config.requestAT 				= process.env.REQUESTAT;
+	config.PCRToken 				= process.env.PCRTOKEN;
+	config.MongoUser 				= process.env.MONGOUSER;
+	config.MongoPass 				= process.env.MONGOPASS;
+	config.MongoURI 				= process.env.MONGOURI;
 	config.STORMPATH_API_KEY_ID 	= process.env.STORMPATH_API_KEY_ID;
 	config.STORMPATH_API_KEY_SECRET = process.env.STORMPATH_API_KEY_SECRET;
 	config.STORMPATH_SECRET_KEY 	= process.env.STORMPATH_SECRET_KEY;
@@ -39,7 +39,7 @@ app.use(stormpath.init(app, {
   application:  config.STORMPATH_URL,
   enableAccountVerification: 	true,
   enableForgotPassword: 		true,
-  sessionDuration: 1000 * 60 * 60 * 24, // Make sessions expire after one day
+  sessionDuration: 				1000 * 60 * 60 * 24, // Make sessions expire after one day
 }));
 
 // Connect to database
@@ -196,8 +196,8 @@ function parseDeptList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var coursesList = {};
 	for(var key in Res.result_data) { // Iterate through each course
-		var courseListName = Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
-		var courseTitle = Res.result_data[key].course_title;
+		var courseListName 	= Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
+		var courseTitle 	= Res.result_data[key].course_title;
 		coursesList[courseListName] = {'courseListName': courseListName, 'courseTitle': courseTitle};
 	}
 	return coursesList;
@@ -215,10 +215,12 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 	var TimeInfo = [];
 	try { // Not all sections have time info
 		for(var meeting in JSONObj.meetings) { // Some sections have multiple meeting forms (I'm looking at you PHYS151)
-			var StartTime = JSONObj.meetings[meeting].start_time.split(" ")[0]; // Get start time
-			if (StartTime[0] == '0') {StartTime = StartTime.slice(1);} // If it's 08:00, make it 8:00
-			var EndTime = JSONObj.meetings[meeting].end_time.split(" ")[0];
-			if (EndTime[0] == '0') {EndTime = EndTime.slice(1);}
+			var StartTime 		= JSONObj.meetings[meeting].start_time.split(" ")[0]; // Get start time
+			var EndTime 		= JSONObj.meetings[meeting].end_time.split(" ")[0];
+
+			if (StartTime[0] == '0') 	{StartTime = StartTime.slice(1);} // If it's 08:00, make it 8:00
+			if (EndTime[0] == '0')		{EndTime = EndTime.slice(1);}
+
 			var MeetDays = JSONObj.meetings[meeting].meeting_days; // Output like MWF or TR
 			meetListInfo = ' - '+StartTime+" to "+EndTime+" on "+MeetDays;
 			TimeInfo.push(meetListInfo);
@@ -235,13 +237,14 @@ function parseCourseList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var sectionsList = {};
 	for(var key in Res.result_data) {
-		var SectionName = Res.result_data[key].section_id_normalized.replace(/-/g, " ");
-		var sectionNameNoSpace = Res.result_data[key].section_id;
-		var TimeInfoArray = getTimeInfo(Res.result_data[key]); // Get meeting times for a section
-		var StatusClass = TimeInfoArray[0];
-		var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
-		if(typeof TimeInfoArray[1][1] !== 'undefined'){TimeInfo += ' ...';} // If there are multiple meeting times
-		if(typeof TimeInfo === 'undefined'){TimeInfo = '';}
+		var SectionName 		= Res.result_data[key].section_id_normalized.replace(/-/g, " ");
+		var sectionNameNoSpace 	= Res.result_data[key].section_id;
+		var TimeInfoArray 		= getTimeInfo(Res.result_data[key]); // Get meeting times for a section
+		var StatusClass 		= TimeInfoArray[0];
+		var TimeInfo 			= TimeInfoArray[1][0]; // Get the first meeting slot
+		
+		if(typeof TimeInfoArray[1][1] !== 'undefined')	{TimeInfo += ' ...';} // If there are multiple meeting times
+		if(typeof TimeInfo === 'undefined')				{TimeInfo = '';}
 
 		sectionsList[sectionNameNoSpace] = {'SectionName': SectionName, 'StatusClass': StatusClass, 'TimeInfo': TimeInfo, 'NoSpace': sectionNameNoSpace, 'CourseTitle': Res.result_data[0].course_title};
 	}
@@ -253,12 +256,12 @@ function parseSectionList(JSONString) {
 	var entry = Res.result_data[0];
 	var sectionInfo = {};
 	try {
-		var Title 	= entry.course_title;
-		var FullID 	= entry.section_id_normalized.replace(/-/g, " "); // Format name
+		var Title 			= entry.course_title;
+		var FullID 			= entry.section_id_normalized.replace(/-/g, " "); // Format name
 		try {
-			var Instructor = entry.instructors[0].name;
+			var Instructor 	= entry.instructors[0].name;
 		} catch (err) {
-			var Instructor = "";
+			var Instructor 	= "";
 		}
 		var Desc 			= entry.course_description;
 		var TimeInfoArray 	= getTimeInfo(entry);
@@ -319,8 +322,8 @@ function parseSectionList(JSONString) {
 
 // Manage requests regarding starred courses
 app.get('/Star', stormpath.loginRequired, function(req, res) {
-	var StarredCourses = {};
-	var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
+	var StarredCourses 	= {};
+	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 	// console.time('DB Time')
 	db.Students.find({Pennkey: myPennkey}, { StarList: 1}, function(err, doc) { // Try to access the database
 		try {
@@ -333,13 +336,12 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 		var courseID = req.query.courseID;
 
 		if (addRem == 'add') { 
-			console.log(('Star: '+ courseID).cyan);
+			console.log((myPennkey + ' Star: '+ courseID).cyan);
 			var index = StarredCourses.indexOf(courseID);
 			if (index == -1) {StarredCourses.push(courseID);} // If the section is not already in the list
-			console.log((myPennkey + ' ' + courseID).cyan);
 
 		} else if (addRem == 'rem') { // If we need to remove
-			console.log(('Unstar: '+ courseID).cyan);
+			console.log((myPennkey + ' Unstar: '+ courseID).cyan);
 			var index = StarredCourses.indexOf(courseID);
 			if (index > -1) {StarredCourses.splice(index, 1);}
 
@@ -357,19 +359,21 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 // Manage scheduling requests
 app.get('/Sched', stormpath.loginRequired, function(req, res) {
 
-	var SchedCourses = {};
-	var schedName = req.query.schedName;
-	var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
+	var SchedCourses 	= {};
+	var schedName 		= req.query.schedName;
+	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
 	db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
 		try {
-			SchedCourses = doc[0].Schedules[schedName]; // Get previously scheduled courses
+			if (typeof schedName !== 'undefined') {
+				SchedCourses = doc[0].Schedules[schedName]; // Get previously scheduled courses
+			}
 		} catch(err) {
-			db.Students.update({Pennkey: myPennkey}, { $set: {Schedules: {}}, $currentDate: { lastModified: true }}); // Update the database
+			db.Students.update({Pennkey: myPennkey}, { $set: {Schedules: {}}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
 		}
-		if (typeof SchedCourses === 'undefined') {
+		if (typeof SchedCourses === 'undefined') { // If there is no schedule of that name
 			var placeholder = {};
-			placeholder['Schedules.' + schedName] = {};
+			placeholder['Schedules.' + schedName] = {}; // Make one
 			db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
 			SchedCourses = {};
 		}
@@ -417,8 +421,12 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
 			console.log((myPennkey + ' Sched Cleared').magenta);
 			return res.send(SchedCourses);
-		}
-		else {
+		
+		} else if (addRem == 'name') { // If we're getting a list of the schedules
+			schedList = Object.keys(doc[0].Schedules);
+			if (typeof schedName !== 'undefined') {schedList.push(schedName);}
+			return res.send(schedList);
+		} else {
 			return res.send(SchedCourses); // On a blank request
 		}
 
@@ -430,13 +438,12 @@ function getSchedInfo(JSONString) {
 	var entry = Res.result_data[0];
 	try {
 		var SectionName = entry.section_id_normalized.replace(/ /g, "").replace(/-/g, " "); // Format name
-		console.log(SectionName);
 		var SectionID 	= entry.section_id_normalized.replace(/-/g, ""); // Format name
 		var resJSON 	= { };
 		try { // Not all sections have time info
 			for(var meeti in entry.meetings) {
 				var StartTime 	= (entry.meetings[meeti].start_hour_24) + (entry.meetings[meeti].start_minutes)/60;
-				var EndTime 	= (entry.meetings[meeti].end_hour_24) + (entry.meetings[meeti].end_minutes)/60;
+				var EndTime 	= (entry.meetings[meeti].end_hour_24) 	+ (entry.meetings[meeti].end_minutes)/60;
 				var halfLength 	= EndTime - StartTime;
 				var MeetDays 	= entry.meetings[meeti].meeting_days;
 				var OpenClose 	= entry.course_status_normalized;
@@ -448,11 +455,11 @@ function getSchedInfo(JSONString) {
 					var Room 		= "";
 				}
 				var FullID = SectionID.replace(/ /g, "")+MeetDays+StartTime.toString().replace(/\./g, "");
-				resJSON[FullID] = {'fullCourseName': SectionName,
-						'HourLength': halfLength,
-						'meetDay': MeetDays,
-						'meetHour': StartTime,
-						'meetRoom': Building+' '+Room
+				resJSON[FullID] = {	'fullCourseName': 	SectionName,
+									'HourLength': 		halfLength,
+									'meetDay': 			MeetDays,
+									'meetHour': 		StartTime,
+									'meetRoom': 		Building+' '+Room
 					};
 				}
 		}

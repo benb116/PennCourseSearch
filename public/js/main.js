@@ -3,7 +3,7 @@ $(document).ready(function () {
         trigger: 'click',
         position: 'bottom',
         interactive: 'true',
-        content: $('<span onclick="clearSched()">Confirm</span>')
+        content: $('<span onclick="clearSched($("#schedSelect").val())">Confirm</span>')
     });
 
     if (detectIE()) {
@@ -25,19 +25,17 @@ $(document).ready(function () {
         for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
         return o;
     }
- 
-    LoadingSum = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
-    TitleHidden = true; // Are the titles of courses in #Courselist hidden or not
-    colorPalette = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#ecf0f1','#2ecc71','#95a5a6','#FF73FD','#e67e22','#73F1FF','#CA75FF'];
 
-    var schedURL = "/Sched?addRem=blank&courseID=blank&schedName=Sched1"; // Make the request
-    SendReq(schedURL, SpitSched, []);
+    // Global variables
+    LoadingSum      = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
+    TitleHidden     = true; // Are the titles of courses in #Courselist hidden or not
+    colorPalette    = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#ecf0f1','#2ecc71','#95a5a6','#FF73FD','#e67e22','#73F1FF','#CA75FF'];
+
+
+    var schedURL = "/Sched?addRem=name&courseID=blank"; // Make the request
+    SendReq(schedURL, ListScheds, 0);
  
     $('#Top span').click(function() { // If the user clicks a top button
-        if ($(this).html() == 'Toggle course titles') {
-            $('.CourseTitle').toggle();
-            TitleHidden = !TitleHidden;
-        }
         if ($(this).html() == 'Download Schedule') {
             html2canvas($('#SchedGraph'), { // Convert the div to a canvas
                 onrendered: function(canvas) {
@@ -49,14 +47,9 @@ $(document).ready(function () {
         }
         if ($(this).html() == 'Recolor') {
             newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
-            var schedURL = "/Sched?addRem=blank&courseID=blank&schedName=Sched1"; // Make the request
+            var schedName = $('#schedSelect').val();
+            var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName; // Make the request
             SendReq(schedURL, SpitSched, []);
-        }
-        if ($(this).html() == 'Show Stars') {
-            Stars('show', 'blank');
-        }
-        if ($(this).html() == 'BUTTON') {
-            $('#FilterSearch').slideToggle(200);
         }
     });
  
@@ -64,6 +57,18 @@ $(document).ready(function () {
  
     $('#searchSelect').change(function () { // If the user changes from one type of search to another, search again with the new method
         initiateSearch();
+    });
+    $('#schedSelect').change(function () {
+        var schedName = $('#schedSelect').val();
+        if (schedName == 'createNewSched') {
+            var schedName = prompt('Please enter a name for your new schedule.');
+            console.log(schedName)
+            var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
+            SendReq(schedURL, ListScheds, -2);
+        } else {
+            var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName; // Make the request
+            SendReq(schedURL, SpitSched, []);
+        }
     });
  
     $('#CSearch').on('input', function(){ // When the search terms change
@@ -73,6 +78,24 @@ $(document).ready(function () {
     });
  
 });
+
+function ListScheds(schedList, theindex) {
+    console.log(theindex)
+    $('#schedSelect').empty();
+    for(var schedName in schedList) {
+        $('#schedSelect').append('<option value="'+schedList[schedName]+'">'+schedList[schedName]+'</option>')
+    }
+    $('#schedSelect').append('<option value="createNewSched">New Schedule</option>')
+    if (theindex == 0) {
+        var schedNameReq = schedList[0];
+    } else {
+        var schedNameReq = schedList[schedList.length - 1];
+    }
+    console.log(schedNameReq)
+    var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedNameReq; // Make the request
+    SendReq(schedURL, SpitSched, []);
+    $('#schedSelect option[value="'+schedNameReq+'"]').attr("selected","selected");
+}
  
 function initiateSearch() {
     var searchTerms = $('#CSearch').val(); // Get raw search
@@ -83,19 +106,23 @@ function initiateSearch() {
             if (searchSelect == 'courseIDSearch') {
                 // Format search terms for server request
                 var splitTerms = formatCourseID(searchTerms);
+
                 // By now the search terms should be 'DEPT/NUM/SEC/' although NUM/ and SEC/ may not be included
                 var deptSearch = splitTerms.split("/")[0]; // Get deptartment
                 var numbSearch = splitTerms.split("/")[1]; // Get course number
                 var sectSearch = splitTerms.split("/")[2]; // Get section number
                 if(typeof numbSearch === 'undefined'){var numbSearch = '';}
                 if(typeof sectSearch === 'undefined'){var sectSearch = '';}
+
             } else {
                 var deptSearch = searchTerms;
                 var numbSearch = ''; // Get course number
                 var sectSearch = ''; // Get section number
             }
+
             var searchSelect = $('#searchSelect').val();
             getCourseNumbers(deptSearch, searchSelect, TitleHidden);
+
             if (numbSearch.length == 3) {
                 getSectionNumbers(deptSearch+numbSearch, 'all');
             } else { // If there is no course number, clear the section list and info panel
@@ -107,7 +134,6 @@ function initiateSearch() {
             } else { // If there is no course number, clear the section list and info panel
                 $('#SectionInfo').empty();
             }
-             
              
         } else if (searchTerms != "" ) { // If there are no good search terms, clear everything
             $('#CourseList').empty();
@@ -156,7 +182,8 @@ function ClickTriggers() {
 
     $('body').on('click', '#SectionList span:nth-child(1)', function() { // If a section is clicked in SectionList
         var secname = $(this).next().next().html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
-        addToSched(secname);
+        var schedName = $('#schedSelect').val();
+        addToSched(secname, schedName);
     });
 
     $('body').on('click', '#SectionList span:nth-child(3)', function() { // If a section is clicked
@@ -186,7 +213,8 @@ function ClickTriggers() {
 
     $('body').on('click', '#SectionInfo span:nth-child(1)', function() { // If the section is added
         var secname = $(this).next().html().replace(/ /g, ""); // Format the section name for scheduling
-        addToSched(secname); // Search for section info         
+        var schedName = $('#schedSelect').val();
+        addToSched(secname, schedName); // Search for section info         
     });
 
     $('body').on('click', '.AsscText span:nth-child(2)', function() { // If an Assc Sec is clicked
@@ -195,7 +223,8 @@ function ClickTriggers() {
     });
 
     $('body').on('click', '.CloseX', function(e) { // If an X is clicked
-        removeFromSched($(this).parent().attr('id')); // Get rid of the section
+        var schedName = $('#schedSelect').val();
+        removeFromSched($(this).parent().attr('id'), schedName); // Get rid of the section
         e.stopPropagation();
     });
     $('body').on('mouseover', '.SchedBlock', function() {
@@ -342,12 +371,12 @@ function StarFormat(sections) {
     $('#SectionList').append(allHTML); // Put the course number list in  #SectionList       
 }
  
-function addToSched(sec) { // Getting info about a section
-    var schedURL = "/Sched?addRem=add&schedName=Sched1&courseID="+sec; // Make the request
+function addToSched(sec, schedName) { // Getting info about a section
+    var schedURL = "/Sched?addRem=add&schedName="+schedName+"&courseID="+sec; // Make the request
     SendReq(schedURL, SpitSched, []);
 }
  
-function removeFromSched(sec) {
+function removeFromSched(sec, schedName) {
     // Determine the secname by checking when a character is no longer a number (which means the character is the meetDay of the block id)
     for (var i = 7; i < sec.length; i++) {
         if (parseFloat(sec[i]) != sec[i]) {
@@ -355,12 +384,12 @@ function removeFromSched(sec) {
             { break; }
         }
     }
-    var schedURL = "/Sched?addRem=rem&schedName=Sched1&courseID="+secname;
+    var schedURL = "/Sched?addRem=rem&schedName="+schedName+"&courseID="+secname;
     SendReq(schedURL, SpitSched, []);
 }
  
-function clearSched () {
-    schedURL = "/Sched?addRem=clear&schedName=Sched1";
+function clearSched(schedName) {
+    schedURL = "/Sched?addRem=clear&schedName="+schedName;
     SendReq(schedURL, SpitSched, []);
     $('.tooltip').tooltipster('hide');
 }

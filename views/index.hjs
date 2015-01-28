@@ -41,16 +41,19 @@
                         </path>
                     </svg>
                 </div>
-
+                <select id="schedSelect">
+                    
+                </select>
     		</form>
             <div id="MenuButtons">
-        		<span>Toggle course titles</span>
+        		<span onclick="$('.CourseTitle').toggle();TitleHidden = !TitleHidden;">Toggle course titles</span>
                 <span id="clearTool" class="tooltip">Clear All</span>
                 <span>Download Schedule</span>
                 <span>Recolor</span>
-                <span>Show Stars</span>
-                <span>BUTTON</span>
+                <span onclick="Stars('show', 'blank');">Show Stars</span>
+                <span onclick="$('#FilterSearch').slideToggle(200);">Filter</span>
             </div>
+
 		</div>
         <div id="BottomResults">
         	<div id="CourseList"></div>
@@ -62,7 +65,12 @@
         		<div id="SectionInfo"></div>
         	</div>
         	<div id="InfoPanel">
-                <div id="FilterSearch"><div id="FilterPanel"></div></div>
+                <div id="FilterSearch"><div id="FilterPanel">
+                    <div class="FilterBlock"></div>
+                    <div class="FilterBlock"></div>
+                    <div class="FilterBlock"></div>
+                    <div class="FilterBlock"></div>
+                </div></div>
                 <div id="SchedGraph">
             		<div id="TimeCol" style="position:relative;"></div>
                     <div id="Schedule" style="position:relative;"></div>

@@ -157,6 +157,14 @@ ul {
     width: 100%;
     border-radius: 5px;
 }
+.FilterBlock {
+	height: 49%; width: 49%; display: inline-block;
+	/*background-color: black; */
+	box-sizing: border-box;
+	border: 0;
+	line-height: 49%;
+}
+.FilterPanel:nth-child(0) {background-color: black;}
 #SchedGraph {
     height: 80%;
     overflow: hidden;
