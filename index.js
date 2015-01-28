@@ -62,7 +62,7 @@ subtitles = [	"Cause PennInTouch sucks.",
 
 // Handle main page requests
 app.get('/', stormpath.loginRequired, function(req, res) {
-	console.log('Page Request: '+ req.user.email.split('@')[0]);
+	console.log(req.user.email.split('@')[0] + ': Page Request');
 	thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 	return res.render('index', { // Send page
 		title: 'PennCourseSearch',
@@ -364,12 +364,13 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
 	db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
-		try {
-			if (typeof schedName !== 'undefined') {
-				SchedCourses = doc[0].Schedules[schedName]; // Get previously scheduled courses
-			}
-		} catch(err) {
+
+		if (typeof doc[0].Schedules === 'undefined') {
 			db.Students.update({Pennkey: myPennkey}, { $set: {Schedules: {}}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
+			doc[0].Schedules = {};
+		}
+		if (typeof schedName !== 'undefined') {
+			SchedCourses = doc[0].Schedules[schedName]; // Get previously scheduled courses
 		}
 		if (typeof SchedCourses === 'undefined') { // If there is no schedule of that name
 			var placeholder = {};
@@ -439,18 +440,18 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 	});
 });
 
-function getSchedInfo(JSONString) {
+function getSchedInfo(JSONString) { // Get the properties required to schedule the section
 	var Res = JSON.parse(JSONString); // Convert to JSON Object
 	var entry = Res.result_data[0];
 	try {
 		var SectionName = entry.section_id_normalized.replace(/ /g, "").replace(/-/g, " "); // Format name
 		var SectionID 	= entry.section_id_normalized.replace(/-/g, ""); // Format name
-		var resJSON 	= { };
+		var resJSON 	= {};
 		try { // Not all sections have time info
-			for(var meeti in entry.meetings) {
-				var StartTime 	= (entry.meetings[meeti].start_hour_24) + (entry.meetings[meeti].start_minutes)/60;
+			for(var meeti in entry.meetings) { // Some sections have multiple meetings
+				var StartTime 	= (entry.meetings[meeti].start_hour_24) + (entry.meetings[meeti].start_minutes)/60; 
 				var EndTime 	= (entry.meetings[meeti].end_hour_24) 	+ (entry.meetings[meeti].end_minutes)/60;
-				var halfLength 	= EndTime - StartTime;
+				var hourLength 	= EndTime - StartTime;
 				var MeetDays 	= entry.meetings[meeti].meeting_days;
 				var OpenClose 	= entry.course_status_normalized;
 				try {
@@ -460,9 +461,13 @@ function getSchedInfo(JSONString) {
 					var Building 	= "";
 					var Room 		= "";
 				}
+
+				// Full ID will have sectionID+MeetDays+StartTime
+				// This is necessary for classes like PHYS151, which has times: M@13, TR@9, AND R@18
 				var FullID = SectionID.replace(/ /g, "")+MeetDays+StartTime.toString().replace(/\./g, "");
+
 				resJSON[FullID] = {	'fullCourseName': 	SectionName,
-									'HourLength': 		halfLength,
+									'HourLength': 		hourLength,
 									'meetDay': 			MeetDays,
 									'meetHour': 		StartTime,
 									'meetRoom': 		Building+' '+Room

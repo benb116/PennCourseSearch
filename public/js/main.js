@@ -29,7 +29,7 @@ $(document).ready(function () {
     // Global variables
     LoadingSum      = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
     TitleHidden     = true; // Are the titles of courses in #Courselist hidden or not
-    colorPalette    = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#ecf0f1','#2ecc71','#95a5a6','#FF73FD','#e67e22','#73F1FF','#CA75FF'];
+    colorPalette    = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#ecf0f1','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF'];
 
 
     var schedURL = "/Sched?addRem=name&courseID=blank"; // Make the request
@@ -62,9 +62,10 @@ $(document).ready(function () {
         var schedName = $('#schedSelect').val();
         if (schedName == 'createNewSched') {
             var schedName = prompt('Please enter a name for your new schedule.');
-            console.log(schedName)
-            var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
-            SendReq(schedURL, ListScheds, -2);
+            if (schedName != '') {
+                var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
+                SendReq(schedURL, ListScheds, -2);
+            }
         } else {
             var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName; // Make the request
             SendReq(schedURL, SpitSched, []);
@@ -79,25 +80,25 @@ $(document).ready(function () {
  
 });
 
-function ListScheds(schedList, theindex) {
-    console.log(theindex)
+function ListScheds(schedList, theindex) { // Deal with the list of schedules
     $('#schedSelect').empty();
     for(var schedName in schedList) {
-        $('#schedSelect').append('<option value="'+schedList[schedName]+'">'+schedList[schedName]+'</option>')
+        $('#schedSelect').append('<option value="'+schedList[schedName]+'">'+schedList[schedName]+'</option>'); // Add options to the schedSelect dropdown
     }
-    $('#schedSelect').append('<option value="createNewSched">New Schedule</option>')
-    if (theindex == 0) {
+    $('#schedSelect').append('<option value="createNewSched">New Schedule</option>'); // Add one more that allows for new schedules to be created
+
+    if (theindex == 0) { // If this is a simple listing, set the first option as selected
         var schedNameReq = schedList[0];
-    } else {
+    } else { // If we just created a new schedule, set that as the default
         var schedNameReq = schedList[schedList.length - 1];
     }
-    console.log(schedNameReq)
-    var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedNameReq; // Make the request
-    SendReq(schedURL, SpitSched, []);
     $('#schedSelect option[value="'+schedNameReq+'"]').attr("selected","selected");
+
+    var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedNameReq; // Get the schedule
+    SendReq(schedURL, SpitSched, []);
 }
  
-function initiateSearch() {
+function initiateSearch() { // Deal with search terms
     var searchTerms = $('#CSearch').val(); // Get raw search
     try {
         if (searchTerms != "" && searchTerms != 'favicon.ico' && searchTerms != 'blank') { // Initial filtering
@@ -115,12 +116,12 @@ function initiateSearch() {
                 if(typeof sectSearch === 'undefined'){var sectSearch = '';}
 
             } else {
-                var deptSearch = searchTerms;
+                var deptSearch = searchTerms; // Not really a department search but it will go to getCourseNumbers
                 var numbSearch = ''; // Get course number
                 var sectSearch = ''; // Get section number
             }
 
-            var searchSelect = $('#searchSelect').val();
+            var searchSelect = $('#searchSelect').val(); // CID, keyword, instructor?
             getCourseNumbers(deptSearch, searchSelect, TitleHidden);
 
             if (numbSearch.length == 3) {
@@ -147,7 +148,7 @@ function initiateSearch() {
  
 function formatCourseID(searchTerms) {
     splitTerms = searchTerms.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
-    //If the user enters everything without spaces or dashes
+
     if (parseFloat(splitTerms[2]) == splitTerms[2]) { // If the third character is a number (e.g. BE100)
         splitTerms = splitTerms.substr(0, 2)+'/'+splitTerms.substr(2); // Splice the search query with a slash after the deptartment
  
@@ -258,7 +259,7 @@ function SendReq(url, fun, passVar) {
     // console.time('Request - ' + url);
     $.get(url) // Make the request
     .done(function(data) {
-        fun(data, passVar); // Process the response and display the sched
+        fun(data, passVar); // Process the response
     })
     .always(function() {
         // console.timeEnd('Request - ' + url);
@@ -280,52 +281,53 @@ function getCourseNumbers(search, searchSelect, TitleHidden) { // Getting info a
     SendReq(searchURL, CourseFormat, []) // Send results to CourseFormat
 }
  
-function CourseFormat(JSONRes, passVar) {
-    if (typeof JSONRes === 'string') {JSONRes = JSON.parse(JSONRes);}
+function CourseFormat(JSONRes, passVar) { // Get course number info and display it
+    if (typeof JSONRes === 'string') {JSONRes = JSON.parse(JSONRes);} // JSONify the input
     var allHTML = '';
-    if (!($.isEmptyObject(JSONRes))){
-        for(var course in JSONRes) {
+    if ($.isEmptyObject(JSONRes)) { // If it's empty
+        allHTML = '&nbsp&nbsp&nbsp&nbsp&nbspNo Results';
+    } else {
+        for(var course in JSONRes) { // Add a line for each course
             allHTML += '<li>'+JSONRes[course].courseListName+'<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
         }
-    } else {
-        allHTML = '&nbsp&nbsp&nbsp&nbsp&nbspNo Results';
     }
     $('#CourseList').html(allHTML); // Put the course number list in #CourseList
     if (TitleHidden === false) {$('.CourseTitle').toggle();}
-    $( "#CourseList li" ).each(function( index ) {
+
+    /*$( "#CourseList li" ).each(function( index ) {
         PCR = $(this).data('pcr');
         pcrFrac = PCR / 4;
         $(this).css('background-color', 'rgba(45, 160, 240, '+pcrFrac*pcrFrac+')');
-    });
+    });*/
 }
  
 function getSectionNumbers(cnum, instFilter) { // Getting info about sections in a department
     searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter;
-    SendReq(searchURL, SectionStars, []);
+    SendReq(searchURL, SectionStars, []); // Pass it to SectionStars to determine if each section is starred
 }
  
 function SectionStars(sections, passvar) { // Getting info about starred sections
     searchURL = "/Star?addRem=blank&courseID=blank";
-    SendReq(searchURL, FormatSectionsList, sections);
+    SendReq(searchURL, FormatSectionsList, sections); // Format
 }
  
-function FormatSectionsList(stars, sections) {
+function FormatSectionsList(stars, sections) { // Receive section and star info and display them
     // console.time('Sections')
     // console.log(sections);
     var allHTML = '';
-    // $('#SectionTitle').html(sections.CourseTitle)
-    for(var section in sections) {
+
+    for(var section in sections) { // Loop through the sections
         var starClass = 'fa fa-star-o';
         var index = stars.indexOf(sections[section].NoSpace);
         if (index > -1) {var starClass = 'fa fa-star';} // If the section is a starred section, add the filled star
         allHTML += '<li><span>&nbsp + &nbsp</span><span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[section].SectionName+sections[section].TimeInfo+'</span><i class="'+starClass+'"></i></li>';
     }
-    if (typeof section !== 'undefined') {
-        $('#SectionTitle').html(sections[section].CourseTitle);
-        $('#SectionList').html(allHTML); // Put the course number list in  #SectionList
-    } else {
+    if (typeof section === 'undefined') {
         $('#SectionTitle').html('No Results');
         $('#SectionList').empty();
+    } else {
+        $('#SectionTitle').html(sections[section].CourseTitle);
+        $('#SectionList').html(allHTML); // Put the course number list in  #SectionList
     }
     // console.timeEnd('Sections')
 }
@@ -335,16 +337,16 @@ function getSectionInfo(sec) { // Get info about the specific section
     SendReq(searchURL, SectionInfoFormat, []);
 }
  
-function SectionInfoFormat(data, passvar) {
-    if (data != "No Results") {
+function SectionInfoFormat(data, passvar) { // Receive section specific info and display
+    if (data == "No Results") {
+        $('#SectionInfo').html('No Results');        
+    } else {
         var HTMLinfo = "<span>&nbsp + &nbsp</span><span>" + data.FullID + "</span> - " + data.Title + "<br><br>Instructor: " + data.Instructor + "<br><br>Description:<br><p class='DescText'>" + data.Description + "</p><br>Status: " + data.OpenClose + "<br><br>"+data.termsOffered+"<br><br>Prerequisites: " + data.Prerequisites + "<br><br>" + data.TimeInfo + data.AssociatedSections; // Format the whole response
         $('#SectionInfo').html(HTMLinfo);
-    } else {
-        $('#SectionInfo').html('No Results');
     }
 }
  
-function Stars(addRem, CID) {
+function Stars(addRem, CID) { // Manage star requests
     var searchURL = "/Star?addRem="+addRem+"&courseID="+CID;
     SendReq(searchURL, StarHandle, addRem);
 }
@@ -352,16 +354,16 @@ function Stars(addRem, CID) {
 function StarHandle(data, addRem) {
     if (addRem == 'show') { // If the user clicked "Show Stars"
         $('#SectionList').empty();
-        for(var sec in data) {
+        for(var sec in data) { // Request section and time info for each star
             var searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+data[sec]+"&instFilter=all";
             SendReq(searchURL, StarFormat, []);
         }
-    } else {
+    } else { // Otherwise, pass through
         return data;
     }
 }
  
-function StarFormat(sections) {
+function StarFormat(sections) { // Format starred section list
     var starClass = 'fa fa-star';
     for(var section in sections) {
         console.log(sections[section]);
@@ -378,6 +380,7 @@ function addToSched(sec, schedName) { // Getting info about a section
  
 function removeFromSched(sec, schedName) {
     // Determine the secname by checking when a character is no longer a number (which means the character is the meetDay of the block id)
+    // This gets all meet times of a section, including if there are more than one
     for (var i = 7; i < sec.length; i++) {
         if (parseFloat(sec[i]) != sec[i]) {
             secname = sec.substr(0, i);
@@ -400,9 +403,9 @@ function SpitSched(courseSched) {
  
     // Set initial values
     var weekdays = ['M', 'T', 'W', 'R', 'F'];
-        var startHour = 10; // start at 10
-        var endHour = 18; // end at 6pm
-        var percentWidth = 20; // five day default
+    var startHour = 10; // start at 10
+    var endHour = 18; // end at 6pm
+    var percentWidth = 20; // five day default
     incSun = 0; // no weekends
     incSat = 0;
  

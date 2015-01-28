@@ -164,7 +164,6 @@ ul {
 	border: 0;
 	line-height: 49%;
 }
-.FilterPanel:nth-child(0) {background-color: black;}
 #SchedGraph {
     height: 80%;
     overflow: hidden;
