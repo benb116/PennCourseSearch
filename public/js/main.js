@@ -3,7 +3,7 @@ $(document).ready(function () {
         trigger: 'click',
         position: 'bottom',
         interactive: 'true',
-        content: $('<span onclick="clearSched($("#schedSelect").val())">Confirm</span>')
+        content: $('<span onclick="clearSched();">Confirm</span>')
     });
 
     if (detectIE()) {
@@ -391,7 +391,8 @@ function removeFromSched(sec, schedName) {
     SendReq(schedURL, SpitSched, []);
 }
  
-function clearSched(schedName) {
+function clearSched() {
+    var schedName = $("#schedSelect").val();
     schedURL = "/Sched?addRem=clear&schedName="+schedName;
     SendReq(schedURL, SpitSched, []);
     $('.tooltip').tooltipster('hide');

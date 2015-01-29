@@ -157,9 +157,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200';
 
-	if (searchType == 'courseIDSearch') {var baseURL = baseURL + '&course_id='+searchParam;}
-	if (searchType == 'keywordSearch') 	{var baseURL = baseURL + '&description='+searchParam;}
-	if (searchType == 'instSearch') 	{var baseURL = baseURL + '&instructor='+searchParam;}
+	if (searchType == 'courseIDSearch') {var baseURL = baseURL + '&course_id='	+ searchParam;}
+	if (searchType == 'keywordSearch') 	{var baseURL = baseURL + '&description='+ searchParam;}
+	if (searchType == 'instSearch') 	{var baseURL = baseURL + '&instructor='	+ searchParam;}
 	// If we are checking a course and only want to see the sections taught by a specific instructore:
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
 
@@ -364,7 +364,14 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
 	db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
-
+		if (err) {
+			console.log(err)
+		}
+		console.log(doc[0])
+		if (typeof doc[0] === 'undefined') {
+			db.Students.save({'Pennkey': myPennkey, 'StarList': []});
+			doc[0] = {};
+		}
 		if (typeof doc[0].Schedules === 'undefined') {
 			db.Students.update({Pennkey: myPennkey}, { $set: {Schedules: {}}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
 			doc[0].Schedules = {};
