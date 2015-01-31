@@ -28,6 +28,9 @@
                 <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses..." autofocus="autofocus">
                 <span style="margin-left:1em;" class="OpenSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Open </span><span class="ClosedSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Closed </span>
                 
+                <select id="schedSelect">
+                    
+                </select>
                 <div class="loader" id="LoadingInfo" title="1">
                     <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
                         <path fill="#FFF" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
@@ -41,17 +44,23 @@
                         </path>
                     </svg>
                 </div>
-                <select id="schedSelect">
-                    
-                </select>
     		</form>
             <div id="MenuButtons">
-        		<span onclick="$('.CourseTitle').toggle();TitleHidden = !TitleHidden;">Toggle course titles</span>
-                <span id="clearTool" class="tooltip">Clear All</span>
-                <span>Download Schedule</span>
-                <span>Recolor</span>
-                <span onclick="Stars('show', 'blank');">Show Stars</span>
-                <span onclick="$('#FilterSearch').slideToggle(200);">Filter</span>
+                <ul>
+                  <li>
+                    Schedule <i class="fa fa-caret-down"></i>
+                    <ul>
+                      <li>Download</li>
+                      <li id="ClearAllBtn">Clear</li>
+                      <li id="NewSchedBtn">New</li>
+                      <li>Recolor</li>
+                      <li id="DeleteSchedBtn">Delete</li>
+                    </ul>
+                  </li>
+                  <!-- <li onclick="$('.CourseTitle').toggle();TitleHidden = !TitleHidden;"><span>Course Titles</span></li> -->
+                  <li onclick="Stars('show', 'blank');"><span>Show Stars</span></li>
+                  <li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li>
+                </ul>
             </div>
 
 		</div>

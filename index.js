@@ -364,10 +364,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
 	db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
-		if (err) {
-			console.log(err)
-		}
-		console.log(doc[0])
 		if (typeof doc[0] === 'undefined') {
 			db.Students.save({'Pennkey': myPennkey, 'StarList': []});
 			doc[0] = {};
@@ -430,6 +426,16 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			console.log((myPennkey + ' Sched Cleared').magenta);
 			return res.send(SchedCourses);
 		
+		} else if (addRem == 'del') { // Clear all
+			console.log('del')
+			delete doc[0].Schedules[schedName];
+			if(Object.getOwnPropertyNames(doc[0].Schedules).length === 0){
+				doc[0].Schedules['Schedule'] = {};
+			}
+			db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
+			schedList = Object.keys(doc[0].Schedules);
+			return res.send(schedList);
+		
 		} else if (addRem == 'name') { // If we're getting a list of the schedules
 			schedList = Object.keys(doc[0].Schedules);
 			if (schedList.length == 0) {
@@ -438,7 +444,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 				db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
 				schedList.push('Schedule');
 			}
-			if (typeof schedName !== 'undefined') {schedList.push(schedName);}
+			if (typeof schedName !== 'undefined' && schedList.indexOf(schedName) == -1 && schedName != 'null') {schedList.push(schedName);}
 			return res.send(schedList);
 		} else {
 			return res.send(SchedCourses); // On a blank request

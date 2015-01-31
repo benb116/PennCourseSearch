@@ -1,11 +1,4 @@
 $(document).ready(function () {
-    $('#clearTool').tooltipster({
-        trigger: 'click',
-        position: 'bottom',
-        interactive: 'true',
-        content: $('<span onclick="clearSched();">Confirm</span>')
-    });
-
     if (detectIE()) {
         $('#LoadingInfo').html('Loading ...')
     }
@@ -35,8 +28,13 @@ $(document).ready(function () {
     var schedURL = "/Sched?addRem=name&courseID=blank"; // Make the request
     SendReq(schedURL, ListScheds, 0);
  
-    $('#Top span').click(function() { // If the user clicks a top button
-        if ($(this).html() == 'Download Schedule') {
+    $('#MenuButtons li ul').mouseout(function() {
+        $('#ClearAllBtn').html('Clear');
+        $('#DeleteSchedBtn').html('Delete');
+    });
+
+    $('#MenuButtons li ul li').click(function() { // If the user clicks a Schedule button
+        if ($(this).html() == 'Download') {
             html2canvas($('#SchedGraph'), { // Convert the div to a canvas
                 onrendered: function(canvas) {
                     var image = new Image();
@@ -45,6 +43,37 @@ $(document).ready(function () {
                 }
             }); 
         }
+
+        if ($(this).html() != 'Clear') {
+            if ($(this).html() == 'Confirm Clear') {
+                clearSched();
+            }
+            $('#ClearAllBtn').html('Clear');
+            // $('#ClearAllBtn').css('background', '#555');
+        } else {
+            $('#ClearAllBtn').html('Confirm Clear');
+            // $('#ClearAllBtn').css('background', '#e74c3c');
+        }
+
+        if ($(this).html() == 'New') {
+            var schedName = prompt('Please enter a name for your new schedule.');
+            if (schedName != '' && schedName !== null) {
+                var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
+                SendReq(schedURL, ListScheds, -2);
+            }
+        }
+
+        if ($(this).html() != 'Delete') {
+            if ($(this).html() == 'Confirm Delete') {
+                deleteSched();
+            }
+            $('#DeleteSchedBtn').html('Delete');
+            // $('#DeleteSchedBtn').css('background', '#555');
+        } else {
+            $('#DeleteSchedBtn').html('Confirm Delete');
+            // $('#DeleteSchedBtn').css('background', '#e74c3c');
+        }
+
         if ($(this).html() == 'Recolor') {
             newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
             var schedName = $('#schedSelect').val();
@@ -60,16 +89,8 @@ $(document).ready(function () {
     });
     $('#schedSelect').change(function () {
         var schedName = $('#schedSelect').val();
-        if (schedName == 'createNewSched') {
-            var schedName = prompt('Please enter a name for your new schedule.');
-            if (schedName != '') {
-                var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
-                SendReq(schedURL, ListScheds, -2);
-            }
-        } else {
-            var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName; // Make the request
-            SendReq(schedURL, SpitSched, []);
-        }
+        var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName; // Make the request
+        SendReq(schedURL, SpitSched, []);
     });
  
     $('#CSearch').on('input', function(){ // When the search terms change
@@ -85,7 +106,6 @@ function ListScheds(schedList, theindex) { // Deal with the list of schedules
     for(var schedName in schedList) { if (schedList.hasOwnProperty(schedName)) {
         $('#schedSelect').append('<option value="'+schedList[schedName]+'">'+schedList[schedName]+'</option>'); // Add options to the schedSelect dropdown
     }}
-    $('#schedSelect').append('<option value="createNewSched">New Schedule</option>'); // Add one more that allows for new schedules to be created
 
     if (theindex == 0) { // If this is a simple listing, set the first option as selected
         var schedNameReq = schedList[0];
@@ -395,7 +415,12 @@ function clearSched() {
     var schedName = $("#schedSelect").val();
     schedURL = "/Sched?addRem=clear&schedName="+schedName;
     SendReq(schedURL, SpitSched, []);
-    $('.tooltip').tooltipster('hide');
+}
+
+function deleteSched() {
+    var schedName = $("#schedSelect").val();
+    schedURL = "/Sched?addRem=del&schedName="+schedName;
+    SendReq(schedURL, ListScheds, 0);
 }
  
 function SpitSched(courseSched) {
