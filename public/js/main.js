@@ -44,36 +44,45 @@ $(document).ready(function () {
             }); 
         }
 
-        if ($(this).html() != 'Clear') {
-            if ($(this).html() == 'Confirm Clear') {
-                clearSched();
-            }
-            $('#ClearAllBtn').html('Clear');
-            // $('#ClearAllBtn').css('background', '#555');
-        } else {
-            $('#ClearAllBtn').html('Confirm Clear');
-            // $('#ClearAllBtn').css('background', '#e74c3c');
-        }
-
         if ($(this).html() == 'New') {
             var schedName = prompt('Please enter a name for your new schedule.');
             if (schedName != '' && schedName !== null) {
                 var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
                 SendReq(schedURL, ListScheds, -2);
             }
+        } 
+
+        if ($(this).html() == 'Clear') {
+            swal({   
+                title: "Are you sure you want to clear your whole schedule?",   
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Yes",   
+                closeOnConfirm: false }, 
+            function(){   
+                clearSched();
+
+            });
         }
 
-        if ($(this).html() != 'Delete') {
-            if ($(this).html() == 'Confirm Delete') {
+        if ($(this).html() == 'Delete') {
+            swal({   
+                title: "Are you sure you want to delete this schedule?",   
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Yes",   
+                closeOnConfirm: false }, 
+            function(){   
                 deleteSched();
-            }
-            $('#DeleteSchedBtn').html('Delete');
-            // $('#DeleteSchedBtn').css('background', '#555');
-        } else {
-            $('#DeleteSchedBtn').html('Confirm Delete');
-            // $('#DeleteSchedBtn').css('background', '#e74c3c');
+                swal({
+                    title: "Your schedule has been deleted.",   
+                    type: "success",   
+                    timer: 3000
+                }); 
+            });
         }
-
         if ($(this).html() == 'Recolor') {
             newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
             var schedName = $('#schedSelect').val();
@@ -495,7 +504,7 @@ function SpitSched(courseSched) {
             var thiscol     = colorMap[courseSched[sec].fullCourseName]; // Get the color
             if(typeof thiscol === 'undefined'){thiscol = '#E6E6E6';}
             
-            $('#Schedule').append('<div class="SchedBlock" id="'+sec+'" style="top:'+blocktop+'%;left:'+blockleft+'%;width:'+percentWidth+'%;height:'+blockheight+'%;background-color:'+thiscol+'"><div class="CloseX">x</div>'+blockname+'<br>'+meetRoom+'</div>');
+            $('#Schedule').append('<div class="SchedBlock" id="'+courseSched[sec].fullCourseName.replace(/ /g, "") + weekdays[possDay]+ courseSched[sec].meetHour + '" style="top:'+blocktop+'%;left:'+blockleft+'%;width:'+percentWidth+'%;height:'+blockheight+'%;background-color:'+thiscol+'"><div class="CloseX">x</div>'+blockname+'<br>'+meetRoom+'</div>');
         }}
     }}
 }

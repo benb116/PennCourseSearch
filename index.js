@@ -175,7 +175,8 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
 		}, function(error, response, body) {
 			if (error) {
-				return console.error('Request failed:', error);
+				console.error('Request failed:', error);
+				return res.send('PCSERROR: request failed');
 			}
 			console.timeEnd((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 			if 			(resultType == 'deptSearch'){ // This will only receive requests if we are checking the API
@@ -427,7 +428,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			return res.send(SchedCourses);
 		
 		} else if (addRem == 'del') { // Clear all
-			console.log('del')
 			delete doc[0].Schedules[schedName];
 			if(Object.getOwnPropertyNames(doc[0].Schedules).length === 0){
 				doc[0].Schedules['Schedule'] = {};
