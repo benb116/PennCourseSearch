@@ -279,21 +279,21 @@ function parseSectionList(JSONString) {
 		if (StatusClass == "OpenSec") {var OpenClose = 'Open';} else {var OpenClose = 'Closed';}
 
 		if (entry.recitations != false) { // If it has recitations
-			var AsscList = '<br><span class="AsscButton">Associated Recitations</span><ul class="AsscText">';
+			var AsscList = '<br>Associated Recitations<ul class="AsscText">';
 			for(var key in entry.recitations) { if (entry.recitations.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</span></li>';
 			}}
 			AsscList += '</ul>';
 
 		} else if (entry.labs != false) { // If it has labs
-			var AsscList = '<br><span class="AsscButton">Associated Labs</span><ul class="AsscText">';
+			var AsscList = '<br>Associated Labs<ul class="AsscText">';
 			for(var key in entry.labs) { if (entry.labs.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</span></li>';
 			}}
 			AsscList += '</ul>';
 
 		} else if (entry.lectures != false) { // If it has lectures
-			var AsscList = '<br><span class="AsscButton">Associated Lectures</span><ul class="AsscText">';
+			var AsscList = '<br>Associated Lectures<ul class="AsscText">';
 			for(var key in entry.lectures) { if (entry.lectures.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</span></li>';
 			}}
@@ -365,7 +365,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
 	db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
-		if (typeof doc[0] === 'undefined') {
+		if (typeof doc === 'undefined') {
 			db.Students.save({'Pennkey': myPennkey, 'StarList': []});
 			doc[0] = {};
 		}

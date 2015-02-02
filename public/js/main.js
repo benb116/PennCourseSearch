@@ -62,7 +62,11 @@ $(document).ready(function () {
                 closeOnConfirm: false }, 
             function(){   
                 clearSched();
-
+                swal({
+                    title: "Your schedule has been cleared.",   
+                    type: "success",   
+                    timer: 1000
+                }); 
             });
         }
 
@@ -79,7 +83,7 @@ $(document).ready(function () {
                 swal({
                     title: "Your schedule has been deleted.",   
                     type: "success",   
-                    timer: 3000
+                    timer: 1000
                 }); 
             });
         }
@@ -439,7 +443,7 @@ function SpitSched(courseSched) {
     // Set initial values
     var weekdays = ['M', 'T', 'W', 'R', 'F'];
     var startHour = 10; // start at 10
-    var endHour = 18; // end at 6pm
+    var endHour = 17; // end at 5pm
     var percentWidth = 20; // five day default
     incSun = 0; // no weekends
     incSat = 0;
