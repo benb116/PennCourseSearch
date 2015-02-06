@@ -308,7 +308,7 @@ input[type="text"] {
     display: inline-block;
     margin-right: -4px;
     position: relative;
-    padding: 10px 25px;
+    padding: 5px 25px;
     cursor: pointer;
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
@@ -326,7 +326,7 @@ input[type="text"] {
 #MenuButtons ul li ul {
     padding: 0;
     position: absolute;
-    top: 42px;
+    top: 32px;
     left: 0;
       /*width: 120px;*/
     box-shadow: none;
