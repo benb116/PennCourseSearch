@@ -342,7 +342,6 @@ function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about s
 }
  
 function SectionStars(sections, passvar) { // Getting info about starred sections
-    console.log(sections)
     searchURL = "/Star?addRem=blank&courseID=blank";
     SendReq(searchURL, FormatSectionsList, sections[0]); // Format
 
@@ -419,9 +418,8 @@ function StarHandle(data, addRem) {
  
 function StarFormat(sections) { // Format starred section list
     var starClass = 'fa fa-star';
-    for(var section in sections) { if (sections.hasOwnProperty(section)) {
-        console.log(sections[section]);
-        var allHTML = '<li class="starredSec"><span>&nbsp + &nbsp</span><span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[section].SectionName+sections[section].TimeInfo+'</span><i class="'+starClass+'"></i></li>';
+    for(var section in sections[0]) { if (sections[0].hasOwnProperty(section)) {
+        var allHTML = '<li class="starredSec"><span>&nbsp + &nbsp</span><span class="'+sections[0][section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[0][section].SectionName+sections[0][section].TimeInfo+'</span><i class="'+starClass+'"></i></li>';
     }}
     $('#SectionTitle').html('Starred Sections');
     $('#SectionList').append(allHTML); // Put the course number list in  #SectionList       
