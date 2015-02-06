@@ -2,6 +2,8 @@ $(document).ready(function () {
     if (detectIE()) {
         $('#LoadingInfo').html('Loading ...')
     }
+
+    $('a[rel*=leanModal]').leanModal({ top : 70, closeButton: ".modal_close" }); // Define modal close button
  
     // The delay function that prevents immediate requests
     var delay = (function(){
@@ -157,16 +159,15 @@ function initiateSearch() { // Deal with search terms
             var searchSelect = $('#searchSelect').val(); // CID, keyword, instructor?
             getCourseNumbers(deptSearch, searchSelect, TitleHidden);
 
-            if (numbSearch.length == 3) {
-                getSectionNumbers(deptSearch+numbSearch, 'all');
-            } else { // If there is no course number, clear the section list and info panel
-                $('#SectionTitle').empty();
-                $('#SectionList').empty();
-            }
             if (sectSearch.length == 3) {
                 getSectionInfo(deptSearch+numbSearch+sectSearch);
             } else { // If there is no course number, clear the section list and info panel
-                $('#SectionInfo').empty();
+                if (numbSearch.length == 3) {
+                    getSectionNumbers(deptSearch+numbSearch, 'all');
+                } else { // If there is no course number, clear the section list and info panel
+                    $('#SectionTitle').empty();
+                    $('#SectionList').empty();
+                }
             }
              
         } else if (searchTerms != "" ) { // If there are no good search terms, clear everything
@@ -224,7 +225,7 @@ function ClickTriggers() {
         var secname = $(this).html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
         getSectionInfo(secname); // Search for section info
         var dept = secname.slice(0,-6);
-        getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
+        // getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
     });
 
     $('body').on('click', '#SectionList i', function() { // If the user clicks a star in SectionList
@@ -278,8 +279,8 @@ function ClickTriggers() {
         }
         var cnum = secname.slice(0,-3);
         var dept = secname.slice(0,-6);
+        getSectionNumbers(cnum, 'all', 'suppress');
         getSectionInfo(secname);
-        getSectionNumbers(cnum, 'all');
         getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
     });
 }
@@ -334,14 +335,25 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     });*/
 }
  
-function getSectionNumbers(cnum, instFilter) { // Getting info about sections in a department
+function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department
     searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter;
-    SendReq(searchURL, SectionStars, []); // Pass it to SectionStars to determine if each section is starred
+    // if (!suppress) {suppress = 0;}
+    SendReq(searchURL, SectionStars, suppress); // Pass it to SectionStars to determine if each section is starred
 }
  
 function SectionStars(sections, passvar) { // Getting info about starred sections
+    console.log(sections)
     searchURL = "/Star?addRem=blank&courseID=blank";
-    SendReq(searchURL, FormatSectionsList, sections); // Format
+    SendReq(searchURL, FormatSectionsList, sections[0]); // Format
+
+    if (!passvar) {
+        sections[1].FullID = sections[1].CourseID;
+        delete sections[1].Instructor;
+        delete sections[1].OpenClose;
+        delete sections[1].TimeInfo;
+        delete sections[1].AssociatedSections;
+        SectionInfoFormat(sections[1]);
+    }
 }
  
 function FormatSectionsList(stars, sections) { // Receive section and star info and display them
@@ -374,7 +386,16 @@ function SectionInfoFormat(data, passvar) { // Receive section specific info and
     if (data == "No Results") {
         $('#SectionInfo').html('No Results');        
     } else {
-        var HTMLinfo = "<span>&nbsp + &nbsp</span><span>" + data.FullID + "</span> - " + data.Title + "<br><br>Instructor: " + data.Instructor + "<br><br>Description:<br><p class='DescText'>" + data.Description + "</p><br>Status: " + data.OpenClose + "<br><br>"+data.termsOffered+"<br><br>Prerequisites: " + data.Prerequisites + "<br><br>" + data.TimeInfo + data.AssociatedSections; // Format the whole response
+        var HTMLinfo = "<span>&nbsp + &nbsp</span>";
+        if (data.FullID)            {HTMLinfo += "<span>" + data.FullID + "</span> "}; // Format the whole response
+        if (data.Title)             {HTMLinfo += "- " + data.Title + "<br><br>"}
+        if (data.Instructor)        {HTMLinfo += "Instructor: " + data.Instructor + "<br><br>"}
+        if (data.Description)       {HTMLinfo += "Description:<br><p class='DescText'>" + data.Description + "</p><br>"}
+        if (data.OpenClose)         {HTMLinfo += "Status: " + data.OpenClose + "<br><br>"}
+        if (data.termsOffered)      {HTMLinfo += data.termsOffered + "<br><br>"}
+        if (data.Prerequisites)     {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br><br>"}
+        if (data.TimeInfo)          {HTMLinfo += data.TimeInfo}
+        if (data.AssociatedSections){HTMLinfo += data.AssociatedSections}
         $('#SectionInfo').html(HTMLinfo);
     }
 }
@@ -482,6 +503,8 @@ function SpitSched(courseSched) {
             $('#TimeCol').append('<div class="TimeBlock" style="top:'+toppos+'%">'+hourtext+':00</div>'); // add time label
             $('#Schedule').append('<hr width="100%"style="top:'+toppos+'%" >'); // add time line
         }
+    } else {
+        $('#Schedule').html('<span>Click a section\'s + icon to add it to the schedule</span>'); // Clear
     }
  
     // Define the color map

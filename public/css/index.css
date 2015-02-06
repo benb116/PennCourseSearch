@@ -71,8 +71,6 @@ h1 {
     background-color: white;
     font-size: 11px;
     -webkit-transition: width 1s ease-in-out;
-    -moz-transition: width 1s ease-in-out;
-    -o-transition: width 1s ease-in-out;
     transition: width 1s ease-in-out;
 }
 #CourseList {
@@ -86,11 +84,9 @@ h1 {
 #SectionCol {border-top-right-radius: 5px;}
 #CourseList li {
     padding: 0 2em 0 3em;
-    /*	-webkit-transition: text-indent .15s ease-in-out; transition: text-indent .15s ease-in-out;*/
     text-align: left;
     text-indent: -1em;
 }
-/*#CourseList li:hover {text-indent: 0.5em;}*/
 
 #Sections,
 #SectionInfo {
@@ -101,11 +97,11 @@ h1 {
 #Sections {
     height: 35%; display: block;
     border-top-right-radius: 5px;
+    overflow-y: hidden;
 }
 #SectionList {
     height: calc(100% - 1em);
-    overflow-y: scroll;
-    padding-right: 0.5em;}
+    overflow-y: scroll;}
 #SectionInfo {
     height: 65%;
     overflow-y: scroll;
@@ -119,7 +115,7 @@ ul {
     margin: 0;
 }
 #SectionList li {
-    padding-left: 0;
+    padding-right: 0.5em;
 }
 #CourseList li,
 #SectionList li span:nth-child(1), 
@@ -168,11 +164,11 @@ ul {
     border-radius: 5px;
 }
 .FilterBlock {
-	height: 49%; width: 49%; display: inline-block;
-	/*background-color: black; */
-	box-sizing: border-box;
-	border: 0;
-	line-height: 49%;
+    height: 49%; width: 49%; display: inline-block;
+    /*background-color: black; */
+    box-sizing: border-box;
+    border: 0;
+    line-height: 49%;
 }
 #SchedGraph {
     height: 80%;
@@ -200,6 +196,9 @@ ul {
     display: inline-block;
     vertical-align: top;
     min-height: 300px;
+}
+#Schedule > span {
+    margin-top: 50%;
 }
 #TimeCol {
     width: 5%;
@@ -249,11 +248,13 @@ hr {
     height: 15px;
     color: black;
     opacity: 0;
+    filter: alpha(opacity=0);
     -webkit-transition: opacity .15s ease-in-out;
     transition: opacity .15s ease-in-out;
 }
 input[type="text"] {
     width: 30em;
+    font-size: .75em;
     margin-bottom: 0.5em;
     border-radius: 5px;
     border: solid 1px #ccc;
@@ -288,7 +289,7 @@ input[type="text"] {
     vertical-align: middle;
 }
 .fa-star, .fa-star-o {
-	float: right;
+    float: right;
     font-size: 14px;
     color: #01256e;
 }
@@ -310,9 +311,6 @@ input[type="text"] {
     padding: 10px 25px;
     cursor: pointer;
     -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -ms-transition: all 0.2s;
-    -o-transition: all 0.2s;
     transition: all 0.2s;
 }
 
@@ -331,11 +329,10 @@ input[type="text"] {
     top: 42px;
     left: 0;
       /*width: 120px;*/
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
     display: none;
     opacity: 0;
+    filter: alpha(opacity=0);
     visibility: hidden;
     -webkit-transiton: opacity 0.2s;
     -moz-transition: opacity 0.2s;
@@ -363,5 +360,6 @@ input[type="text"] {
 #MenuButtons ul li:hover ul {
     display: block;
     opacity: 1;
+    filter: alpha(opacity=100);
     visibility: visible;
 }

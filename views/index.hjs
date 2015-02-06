@@ -11,6 +11,7 @@
         <script type="text/javascript" src="/js/html2canvas.js"></script>
         <script type="text/javascript" src="/js/jquery.tooltipster.min.js"></script>
         <script type="text/javascript" src="/js/sweet-alert.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.leanModal.min.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
 	</head>
     <body>
@@ -64,7 +65,11 @@
                   <li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li>
                 </ul>
             </div>
-
+            <!-- <div id="CreditModal" class="Modal">
+                <h2>Credits</h2>
+                <div></div>
+                <a class="modal_close" style="display:block;">Close</a>
+            </div> -->
 		</div>
         <div id="BottomResults">
         	<div id="CourseList"></div>

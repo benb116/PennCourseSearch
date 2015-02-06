@@ -249,7 +249,9 @@ function parseCourseList(JSONString) {
 
 		sectionsList[sectionNameNoSpace] = {'SectionName': SectionName, 'StatusClass': StatusClass, 'TimeInfo': TimeInfo, 'NoSpace': sectionNameNoSpace, 'CourseTitle': Res.result_data[0].course_title};
 	}}
-	return sectionsList;
+	courseInfo = parseSectionList(JSONString);
+
+	return [sectionsList, courseInfo];
 }
 
 function parseSectionList(JSONString) {
@@ -259,6 +261,8 @@ function parseSectionList(JSONString) {
 	try {
 		var Title 			= entry.course_title;
 		var FullID 			= entry.section_id_normalized.replace(/-/g, " "); // Format name
+		var CourseID 		= entry.section_id_normalized.split('-')[0] + ' ' + entry.section_id_normalized.split('-')[1];
+		console.log(FullID)
 		try {
 			var Instructor 	= entry.instructors[0].name;
 		} catch (err) {
@@ -305,6 +309,7 @@ function parseSectionList(JSONString) {
 
 		sectionInfo = {
 			'FullID': FullID, 
+			'CourseID': CourseID,
 			'Title': Title, 
 			'Instructor': Instructor, 
 			'Description': Desc, 
@@ -413,7 +418,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 					console.log((myPennkey + ' Sched Removed: ' + courseID).magenta);
 				}}
 			}
-
 			var placeholder = {};
 			placeholder['Schedules.' + schedName] = SchedCourses;
 			db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
