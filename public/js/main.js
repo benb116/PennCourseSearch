@@ -3,6 +3,12 @@ $(document).ready(function () {
         $('#LoadingInfo').html('Loading ...')
     }
 
+    // $('#NewSchedBtn').tooltipster({
+    //     content: $('<span><strong>This text is in bold case !</strong></span>'),
+    //     position: 'right',
+    //     trigger: 'click'
+    // });
+
     $('a[rel*=leanModal]').leanModal({ top : 70, closeButton: ".modal_close" }); // Define modal close button
  
     // The delay function that prevents immediate requests
@@ -29,11 +35,6 @@ $(document).ready(function () {
 
     var schedURL = "/Sched?addRem=name&courseID=blank"; // Make the request
     SendReq(schedURL, ListScheds, 0);
- 
-    $('#MenuButtons li ul').mouseout(function() {
-        $('#ClearAllBtn').html('Clear');
-        $('#DeleteSchedBtn').html('Delete');
-    });
 
     $('#MenuButtons li ul li').click(function() { // If the user clicks a Schedule button
         if ($(this).html() == 'Download') {
@@ -47,12 +48,20 @@ $(document).ready(function () {
         }
 
         if ($(this).html() == 'New') {
-            var schedName = prompt('Please enter a name for your new schedule.');
-            if (schedName != '' && schedName !== null) {
-                var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
-                SendReq(schedURL, ListScheds, -2);
-            }
-        } 
+            $(this).html('<input id="newSchedName" type="text" name="schedName" autocomplete="off" placeholder="Name of schedule" autofocus="autofocus">');
+            $("#newSchedName").keyup(function(event){
+                if(event.keyCode == 13){
+                    var schedName = $("#newSchedName").val();
+                    if (schedName != '' && schedName !== null) {
+                        var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
+                        SendReq(schedURL, ListScheds, -2);
+                    }
+                    $('#NewSchedBtn').html('New');
+                }
+            });
+        } else {
+            $('#NewSchedBtn').html('New');
+        }
 
         if ($(this).html() == 'Clear') {
             swal({   
@@ -162,12 +171,13 @@ function initiateSearch() { // Deal with search terms
             if (sectSearch.length == 3) {
                 getSectionInfo(deptSearch+numbSearch+sectSearch);
             } else { // If there is no course number, clear the section list and info panel
-                if (numbSearch.length == 3) {
-                    getSectionNumbers(deptSearch+numbSearch, 'all');
-                } else { // If there is no course number, clear the section list and info panel
-                    $('#SectionTitle').empty();
-                    $('#SectionList').empty();
-                }
+                
+            }
+            if (numbSearch.length == 3) {
+                getSectionNumbers(deptSearch+numbSearch, 'all', sectSearch.length);
+            } else { // If there is no course number, clear the section list and info panel
+                $('#SectionTitle').empty();
+                $('#SectionList').empty();
             }
              
         } else if (searchTerms != "" ) { // If there are no good search terms, clear everything
@@ -225,7 +235,7 @@ function ClickTriggers() {
         var secname = $(this).html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
         getSectionInfo(secname); // Search for section info
         var dept = secname.slice(0,-6);
-        // getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
+        getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
     });
 
     $('body').on('click', '#SectionList i', function() { // If the user clicks a star in SectionList
@@ -356,8 +366,6 @@ function SectionStars(sections, passvar) { // Getting info about starred section
 }
  
 function FormatSectionsList(stars, sections) { // Receive section and star info and display them
-    // console.time('Sections')
-    // console.log(sections);
     var allHTML = '';
 
     for(var section in sections) { if (sections.hasOwnProperty(section)) { // Loop through the sections
@@ -373,7 +381,7 @@ function FormatSectionsList(stars, sections) { // Receive section and star info 
         $('#SectionTitle').html(sections[section].CourseTitle);
         $('#SectionList').html(allHTML); // Put the course number list in  #SectionList
     }
-    // console.timeEnd('Sections')
+    
 }
  
 function getSectionInfo(sec) { // Get info about the specific section
