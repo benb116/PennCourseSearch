@@ -1,59 +1,8 @@
-set depts to paragraphs of (do shell script "ls /Users/Ben/Dropbox/Developer/PennCourseSearch/public/DeptListings/ | cut -d '.' -f 1")
+set deptlist to {"AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANAT", "ANCH", "ANEL", "ANTH", "ARAB", "ARCH", "ARTH", "ASAM", "ASTR", "BCHE", "BE", "BENG", "BEPP", "BFMD", "BIBB", "BIOE", "BIOL", "BIOM", "BMB", "BSTA", "CAMB", "CBE", "CHEM", "CHIN", "CINE", "CIS", "CIT", "CLST", "COGS", "COLL", "COML", "COMM", "CPLN", "CRIM", "DEMG", "DORT", "DOSP", "DPED", "DRST", "DTCH", "DYNM", "EALC", "EAS", "ECON", "EDUC", "EEUR", "ENGL", "ENGR", "ENM", "ENVS", "EPID", "ESE", "FNAR", "FNCE", "FOLK", "FREN", "FRSM", "GAFL", "GAS", "GCB", "GEOL", "GREK", "GRMN", "GSWS", "GUJR", "HCMG", "HEBR", "HIND", "HIST", "HPR", "HSOC", "HSPV", "HSSC", "IMUN", "INTG", "INTL", "INTR", "IPD", "ITAL", "JPAN", "JWST", "KORN", "LALS", "LARP", "LATN", "LAW", "LGIC", "LGST", "LING", "LSMP", "MAPP", "MATH", "MEAM", "MED", "MGEC", "MGMT", "MKTG", "MLA", "MLYM", "MMP", "MSCI", "MSE", "MSSP", "MTR", "MUSA", "MUSC", "NANO", "NELC", "NETS", "NGG", "NPLD", "NSCI", "NURS", "OPIM", "PERS", "PHIL", "PHRM", "PHYS", "PPE", "PRTG", "PSCI", "PSYC", "PUBH", "PUNJ", "REAL", "RELS", "ROML", "RUSS", "SAST", "SCND", "SKRT", "SLAV", "SOCI", "SPAN", "STAT", "STSC", "SWRK", "TAML", "TCOM", "TELU", "THAR", "TURK", "URBS", "URDU", "VCSN", "VCSP", "VIPR", "VISR", "VLST", "VMED", "WH", "WHCP", "WHG", "WRIT", "YDSH"}
 
-repeat with dept in depts
+repeat with x from 120 to (count of deptlist)
+	set dept to item x of deptlist
+	do shell script "curl http://localhost:3000/PCRSpitRev?dept=" & dept
 	
-	set courses to (do shell script "cat /Users/Ben/Desktop/DeptListings/" & dept & ".txt | cut -d '-' -f 1")
-	do shell script "echo " & courses & " >  /Users/Ben/Desktop/DeptListings/" & dept & ".txt"
-	
-end repeat
-
-repeat with x from 1 to count of depts
-	set dept to item x of depts
-	set courses to paragraphs of (do shell script "cat /Users/Ben/Desktop/DeptListings/" & dept & ".txt")
-	
-	repeat with course in courses
-		log course
-		set CID to (do shell script "curl http://localhost:3000/PCRSpitID?courseID=" & course)
-		do shell script "echo " & course & " : " & CID & " >> /Users/Ben/Desktop/PCR-Rankings/" & dept & ".txt"
-		delay 0.05
-	end repeat
-end repeat
-
-repeat with x from 1 to count of depts
-	set dept to item x of depts
-	set courses to paragraphs of (do shell script "cat /Users/Ben/Desktop/PCR-Rankings2/" & dept & ".txt")
-	
-	repeat with course in courses
-		log course
-		set CID to do shell script "echo " & course & " | cut -d ':' -f 2 | cut -d ' ' -f 2"
-		log CID
-		if CID is not equal to "0000" then
-			set rev to (do shell script "curl http://localhost:3000/PCRSpitRev?courseID=" & CID)
-			do shell script "echo " & course & " : " & rev & " >> /Users/Ben/Desktop/PCR-Rankings2/" & dept & ".txt"
-		end if
-		delay 0.05
-	end repeat
-end repeat
-
-repeat with x from 1 to count of depts
-	set dept to item x of depts
-	set courses to paragraphs of (do shell script "cat /Users/Ben/Dropbox/Developer/PennCourseSearch/public/DeptListings/" & dept & ".txt")
-	
-	repeat with course in courses
-		set courseID to (do shell script "echo " & quoted form of course & "  | cut -d '>' -f 2 | cut -d '<' -f 1")
-		log courseID
-		try
-			set courseLine to (do shell script "cat /Users/Ben/Desktop/PCR-Rankings2/" & dept & ".txt | grep ' " & (second word of courseID) & " :'")
-			set PCR to (do shell script "echo " & courseLine & " | cut -d ':' -f 3 | cut -d ' ' -f 2")
-		on error
-			set PCR to "0.00"
-		end try
-		log courseLine
-		set firstl to (characters 1 thru 9 of course) as string
-		set secondl to (characters 10 thru -1 of course) as string
-		set fullLine to firstl & PCR & secondl
-		log fullLine
-		do shell script "echo " & quoted form of fullLine & " >> /Users/Ben/Desktop/FinalDept/" & dept & ".txt"
-		delay 0.1
-	end repeat
+	delay 0.5
 end repeat

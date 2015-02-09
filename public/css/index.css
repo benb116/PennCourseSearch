@@ -39,13 +39,6 @@ form {
     padding-left: calc(30px + 1em);
 }
 #schedSelect {margin-left: 1em;}
-#MenuButtons > span {
-    margin: 0 1em 0 1em;
-    cursor: pointer;
-}
-#MenuButtons > span:hover {
-    text-decoration: underline;
-}
 #LoadingInfo {
     margin-left: 1em;
 }
@@ -85,9 +78,8 @@ h1 {
 #CourseList li {
     padding: 0 2em 0 3em;
     text-align: left;
-    text-indent: -1em;
+    text-indent: -2em;
 }
-
 #Sections,
 #SectionInfo {
     width: 300px;

@@ -72,79 +72,113 @@ app.get('/', stormpath.loginRequired, function(req, res) {
 });
 
 // This request manager is for spitting the department lists. They are saved for faster responses
-app.get('/Spit', stormpath.groupsRequired(['admins']), function(req, res) {
+app.get('/Spit', function(req, res) {
 	var thedept = req.query.dept;
 	console.log(('List Spit: '+thedept).blue);
-	request({
-		uri: 'http://localhost:3000/Search?searchType=courseIDSearch&resultType=deptSearch&searchParam='+thedept // Get preformatted results
-	}, function(error, response, body) {
 
-		var out = parseJSONList(body);
-		fs.writeFile('./New/'+thedept+'.json', JSON.stringify(out), function (err) {
-			if (err) throw err;
-			console.log('It\'s saved!');
-		});
+	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200&course_id='+thedept
+	// If we are checking a course and only want to see the sections taught by a specific instructore:
+
+    request({
+		uri: baseURL,
+		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
+		}, function(error, response, body) {
+			// console.log(body)
+			var inJSON = JSON.parse(body).result_data; // Convert to JSON object
+			// console.log(inJSON)
+			// var lastKey = inJSON[Object.keys(inJSON).pop()].courseListName;
+			// console.log(lastKey);
+			var resp = {};
+			for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
+				// console.log(inJSON[key])
+				var spacedName = inJSON[key].section_id_normalized.replace('-', " ").split('-')[0];
+				var thetitle = inJSON[key].course_title;
+				resp[spacedName] = {'courseListName': spacedName, 'courseTitle': thetitle};
+				if (key == inJSON.length - 1) {
+					fs.writeFile('./2015A/'+thedept+'.json', JSON.stringify(resp), function (err) {
+						// if (err) throw err;
+						console.log('It\'s saved!');
+					});
+				}
+			}}			
 		return res.send('done');
 	});
+	
 });
 
-function parseJSONList(JSONString) {
-	var inJSON = JSON.parse(JSONString); // Convert to JSON object
-	var lastKey = inJSON[Object.keys(inJSON).pop()].courseListName;
-	console.log(lastKey);
-	for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
-		var dashedName 	= inJSON[key].courseListName.replace(/ /g, "-");
-		PCRRev = 0;
 
-		request({
-			uri: 'http://localhost:3000/PCRSpitID?courseID=' + dashedName // Get preformatted results
-		}, function(error, response, body) {
-			if (body != '0000') {
-				request({
-					uri: 'http://localhost:3000/PCRSpitRev?courseID=' + body // Get preformatted results
-				}, function(error, response, body) {
-					PCRRev = body;
-					inJSON[key].PCRVal = PCRRev;
-					console.log(PCRRev);
-					if (key == lastKey) {
-						console.log(inJSON);
-						return inJSON;
-					}
-				});
+app.get('/Match', function(req, res) {
+	var thedept = req.query.dept;
+	var dept = JSON.parse(fs.readFileSync('./2015A/'+thedept+'.json', 'utf8'));
+	var deptrev = JSON.parse(fs.readFileSync('./2015ARev/'+thedept+'.json', 'utf8'));
+	for (var course in dept) {
+		if (typeof deptrev[course] !== 'undefined') {
+			sum = 0;
+			for (var i = 0; i < deptrev[course].length; i++) {
+				sum += Number(deptrev[course][i].Rating)
+			};
+			if (deptrev[course].length != 0) {
+				dept[course].PCR = Math.floor(100*sum/deptrev[course].length)/100;
 			}
-		});
-	}}
-}
-
-// This request manager is for spitting the PCR Course ID's. They are saved for faster responses
-app.get('/PCRSpitID', stormpath.groupsRequired(['admins']), function(req, res) { 
-	var courseID = req.query.courseID;
-	// console.log(('PCR ID Spit: '+courseID).blue)
-	request({
-		uri: 'http://api.penncoursereview.com/v1/coursehistories/'+courseID+'?token='+config.PCRToken // Get preformatted results
-	}, function(error, response, body) {
-		try {
-			var Res = JSON.parse(body); // Convert to JSON object
-			return res.send((Res.result.courses[Res.result.courses.length - 1].id).toString());
-		} catch(err) {
-			return res.send('0000');
 		}
+	}
+	// console.log(dept)
+	fs.writeFile('./2015A/'+thedept+'.json', JSON.stringify(dept), function (err) {
+		console.log('Matched: '+thedept);
 	});
+	return res.send('')
+	
 });
+
+
 // This request manager is for spitting the PCR reviews. They are saved for faster responses
-app.get('/PCRSpitRev', stormpath.groupsRequired(['admins']), function(req, res) { 
-	var courseID = req.query.courseID;
-	// console.log(('PCR Rev Spit: '+courseID).blue)
+app.get('/PCRSpitRev', function(req, res) { 
+	var thedept = req.query.dept;
+	console.log(('PCR Rev Spit: '+thedept).blue)
 	request({
-		uri: 'http://api.penncoursereview.com/v1/courses/'+courseID+'/reviews?token='+config.PCRToken // Get preformatted results
+		uri: 'http://api.penncoursereview.com/v1/depts/'+thedept+'/reviews?token='+config.PCRToken // Get preformatted results
 	}, function(error, response, body) {
-		try {
-			var Res = JSON.parse(body); // Convert to JSON object
-			cQ = Res.result.values[Res.result.values.length - 1].ratings.rCourseQuality;
-			return res.send(cQ.toString());
-		} catch(err) {
-			return res.send(err);
-		}
+		console.log('Received'.blue)
+		var deptReviews = JSON.parse(body).result.values;
+
+		var resp = {};
+		for(var rev in deptReviews) {
+			var sectionIDs = deptReviews[rev].section.aliases;
+				for(var alias in sectionIDs) {
+					if (sectionIDs[alias].split('-')[0] == thedept) {
+						var course = sectionIDs[alias].replace('-', " ").split('-')[0];
+						var reviewID = deptReviews[rev].section.id.split('-')[0];
+						var instructorID = deptReviews[rev].instructor.id;
+						var PCRRating = deptReviews[rev].ratings.rCourseQuality;
+						
+						if (!(resp.hasOwnProperty(course))) {
+							resp[course] = [{'revID': 0}];
+						}
+						oldestID = Number(resp[course][0].revID);
+						if (reviewID > oldestID) {
+							resp[course] = [{
+								'InstID': instructorID,
+								'revID': reviewID,
+								'Rating': PCRRating
+							}];
+						} else if (reviewID == oldestID) {
+							resp[course].push({
+								'InstID': instructorID,
+								'revID': reviewID,
+								'Rating': PCRRating
+							});
+						}
+					}
+				}
+				if (rev == Object.keys(deptReviews).length - 1) {
+					fs.writeFile('./2015ARev/'+thedept+'.json', JSON.stringify(resp), function (err) {
+						// if (err) throw err;
+						console.log('It\'s saved!');
+					});
+				}
+			}
+
+		return res.send('done');
 	});
 });
 
@@ -156,15 +190,17 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	var instructFilter 	= req.query.instFilter; // Is there an instructor filter?
 
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200';
+	if (searchParam == '') {return}
 
 	if (searchType == 'courseIDSearch') {var baseURL = baseURL + '&course_id='	+ searchParam;}
 	if (searchType == 'keywordSearch') 	{var baseURL = baseURL + '&description='+ searchParam;}
 	if (searchType == 'instSearch') 	{var baseURL = baseURL + '&instructor='	+ searchParam;}
+
 	// If we are checking a course and only want to see the sections taught by a specific instructore:
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
 
 	if (searchType == 'courseIDSearch' && resultType == 'deptSearch') {
-		fs.readFile('./New/'+searchParam.toUpperCase()+'.json', function (err, data) {
+		fs.readFile('./2015A/'+searchParam.toUpperCase()+'.json', function (err, data) {
 			if (err) {return res.send({});}
 			else {return res.send(JSON.parse(data));}
 		});
@@ -185,8 +221,6 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 				var searchResponse = parseCourseList(body); // Parse the numb response
 			} else if 	(resultType == 'sectSearch') {
 				var searchResponse = parseSectionList(body); // Parse the sect response
-			} else if 	(resultType == 'spitSearch') {
-				var searchResponse = parseJSONList(body); // Parse the sect response
 			} else {var searchResponse = {};}
 			return res.send(searchResponse); // return correct info
 		});
@@ -262,7 +296,6 @@ function parseSectionList(JSONString) {
 		var Title 			= entry.course_title;
 		var FullID 			= entry.section_id_normalized.replace(/-/g, " "); // Format name
 		var CourseID 		= entry.section_id_normalized.split('-')[0] + ' ' + entry.section_id_normalized.split('-')[1];
-		console.log(FullID)
 		try {
 			var Instructor 	= entry.instructors[0].name;
 		} catch (err) {
@@ -370,7 +403,8 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
 	db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
-		if (typeof doc === 'undefined') {
+		console.log(err)
+		if (typeof doc === 'undefined' || typeof doc === null || err != null) {
 			db.Students.save({'Pennkey': myPennkey, 'StarList': []});
 			doc[0] = {};
 		}

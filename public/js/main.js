@@ -218,7 +218,8 @@ function formatCourseID(searchTerms) {
 function ClickTriggers() {
     $('body').on('click', '#CourseList li', function() { // If a course is clicked in CourseList
         $('#SectionInfo').empty();
-        var courseName = $(this).html().split("<")[0].replace(/ /g, " "); // Format the course name for searching
+        var courseName = $(this).find('.courseNumber').html(); // Format the course name for searching
+        console.log(courseName)
         var searchSelect = $('#searchSelect').val();
         var instFilter = 'all';
         if (searchSelect == 'instSearch') {var instFilter = $('#CSearch').val();}
@@ -332,17 +333,18 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
         allHTML = '&nbsp&nbsp&nbsp&nbsp&nbspNo Results';
     } else {
         for(var course in JSONRes) { if (JSONRes.hasOwnProperty(course)) { // Add a line for each course
-            allHTML += '<li>'+JSONRes[course].courseListName+'<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
+            pcrFrac = Number(JSONRes[course].PCR) / 4;
+            allHTML += '<li><span class="PCR" style="background-color:rgba(45, 160, 240, '+pcrFrac*pcrFrac+')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;<span class="courseNumber">'+JSONRes[course].courseListName+'</span><span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
         }}
     }
     $('#CourseList').html(allHTML); // Put the course number list in #CourseList
     if (TitleHidden === false) {$('.CourseTitle').toggle();}
 
-    /*$( "#CourseList li" ).each(function( index ) {
+    $( "#CourseList li" ).each(function( index ) {
         PCR = $(this).data('pcr');
         pcrFrac = PCR / 4;
         $(this).css('background-color', 'rgba(45, 160, 240, '+pcrFrac*pcrFrac+')');
-    });*/
+    });
 }
  
 function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department
