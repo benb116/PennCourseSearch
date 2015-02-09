@@ -48,19 +48,11 @@ $(document).ready(function () {
         }
 
         if ($(this).html() == 'New') {
-            $(this).html('<input id="newSchedName" type="text" name="schedName" autocomplete="off" placeholder="Name of schedule" autofocus="autofocus">');
-            $("#newSchedName").keyup(function(event){
-                if(event.keyCode == 13){
-                    var schedName = $("#newSchedName").val();
-                    if (schedName != '' && schedName !== null) {
-                        var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
-                        SendReq(schedURL, ListScheds, -2);
-                    }
-                    $('#NewSchedBtn').html('New');
-                }
-            });
-        } else {
-            $('#NewSchedBtn').html('New');
+            var schedName = prompt('Please enter a name for your new schedule.');
+            if (schedName != '' && schedName !== null) {
+                var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
+                SendReq(schedURL, ListScheds, -2);
+            }
         }
 
         if ($(this).html() == 'Clear') {

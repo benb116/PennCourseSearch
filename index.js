@@ -53,11 +53,11 @@ app.listen(process.env.PORT || 3000, function(){
 });
 
 // Rotating subtitles
-subtitles = [	"Cause PennInTouch sucks.", 
+subtitles = [	"Cause PennInTouch sucks", 
 				"You can press the back button, but you don't even need to.",
-				"Invented by Benjamin Franklin in 1793.",
+				"Invented by Benjamin Franklin in 1793",
 				"Focus on your classes, not your schedule.",
-				"Faster than you can say 'Wawa run.'",
+				"Faster than you can say 'Wawa run'",
 				"Classes sine PennCourseSearch vanae."];
 
 // Handle main page requests
@@ -403,7 +403,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
 	db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
-		console.log(err)
 		if (typeof doc === 'undefined' || typeof doc === null || err != null) {
 			db.Students.save({'Pennkey': myPennkey, 'StarList': []});
 			doc[0] = {};
