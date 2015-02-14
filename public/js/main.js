@@ -10,7 +10,7 @@ $(document).ready(function () {
     // });
 
     $('a[rel*=leanModal]').leanModal({ top : 70, closeButton: ".modal_close" }); // Define modal close button
- 
+
     // The delay function that prevents immediate requests
     var delay = (function(){
         var timer = 0;

@@ -12,10 +12,12 @@
         <script type="text/javascript" src="/js/jquery.tooltipster.min.js"></script>
         <script type="text/javascript" src="/js/sweet-alert.min.js"></script>
         <script type="text/javascript" src="/js/jquery.leanModal.min.js"></script>
+        <script src='https://platform.venmo.com/sdk.js'></script>
         <script type="text/javascript" src="/js/main.js"></script>
 	</head>
     <body>
         <div id="MenuBar">
+            <a rel="leanModal" href="#ModalWindow">About</a>
             <a href="/logout">Logout</a>
             {{ user }}
         </div>
@@ -31,9 +33,8 @@
                 <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses..." autofocus="autofocus">
                 <span style="margin-left:1em;" class="OpenSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Open </span><span class="ClosedSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Closed </span>
                 
-                <select id="schedSelect">
-                    
-                </select>
+                <select id="schedSelect"></select>
+
                 <div class="loader" id="LoadingInfo" title="1">
                     <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
                         <path fill="#FFF" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
@@ -65,11 +66,17 @@
                   <li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li>
                 </ul>
             </div>
-            <!-- <div id="CreditModal" class="Modal">
-                <h2>Credits</h2>
-                <div></div>
-                <a class="modal_close" style="display:block;">Close</a>
-            </div> -->
+            <div id="ModalWindow" class="Modal">
+                <h2>About PennCourseSearch</h2>
+                <p>PennCourseSearch is a cleaner and simpler way for Quakers to find classes and make schedules. While this is not a full replacement for Penn InTouch, it acts as an improvement of the "Course Search" and "Mock Schedules" features. Search across departments, courses, and sections and refine searches by specific criteria. All of the data comes from the Penn OpenData API and PennCourseReview API.</p>
+                <h2>How do I search for courses?</h2>
+                <p>Just enter a course in the search box. Then you can click on the results to see more in-depth information about different sections. If you want to filter the results, click on the filter button and change your options. You can also choose to search by course description or instructor in the menu bar.</p>
+                <h2>How do I change my schedule?</h2>
+                <p>To add a section to your schedule, click on its '+' icon. To remove a course, mouse over it and click the 'X' in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
+                <br>
+                <span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a class="venmo-pay-button" data-recipient-id="1397129314566144218"></a>
+                <a class="modal_close"><i class="fa fa-times"></i></a>
+            </div>
 		</div>
         <div id="BottomResults">
         	<div id="CourseList"></div>

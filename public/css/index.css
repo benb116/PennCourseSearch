@@ -17,7 +17,7 @@ body {
 }
 #MenuBar {
     height: 2em;
-    width: 12em;
+    width: 18em;
     position: absolute;
     top: 0;
     right: 0;
@@ -149,6 +149,7 @@ ul {
     text-align: center;
     display: none;
 }
+
 #FilterPanel {
     height: 100%;
     background-color: white;
@@ -160,8 +161,16 @@ ul {
     /*background-color: black; */
     box-sizing: border-box;
     border: 0;
-    line-height: 49%;
+    text-align: left; text-indent: 2em; 
+    vertical-align: middle;
+    line-height: 3em; 
+    overflow: hidden;     
 }
+.FilterBlock > input {
+    margin-left: 1em; margin-right: .5em;
+}
+.FilterBlock:nth-child(1) > input:nth-child(1) {margin-left: 0;}
+
 #SchedGraph {
     height: 80%;
     overflow: hidden;
@@ -351,7 +360,9 @@ form > input[type="text"] {
 #MenuButtons ul li ul li:hover {
     background: #666;
 }
-
+#MenuButtons ul li ul li:nth-child(5):hover{
+    background-color: #c0392b;
+}
 #MenuButtons ul li:hover ul {
     display: block;
     opacity: 1;
@@ -359,14 +370,29 @@ form > input[type="text"] {
     visibility: visible;
 }
 
-.FilterBlock {
-    text-align: left; text-indent: 2em; width: 49%; height: 50%; line-height: 50%;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 3em; 
-    overflow: hidden;     
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
 }
-.FilterBlock > input {
-    margin-left: 1em; margin-right: .5em;
+.Modal {
+    padding: 10px;
+    width: 60%; height: 80%;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    display: none;
 }
-.FilterBlock:nth-child(1) > input:nth-child(1) {margin-left: 0;}
+.Modal a {color: black; text-decoration: none;}
+.Modal h2 {line-height: 0.5em;}
+.Modal p {text-align: left; padding-left: 2em; padding-right: 2em; text-indent: 2em; line-height: 1.5em;}
+.Modal span {display: block; margin-bottom: .5em;}
+.modal_close {
+    position: absolute;
+    top: 10px; left: 15px;
+    cursor: pointer;}

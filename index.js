@@ -208,7 +208,6 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	if (typeof includeOpen === 'undefined') {includeOpen = ''} else {includeOpen = '&open=true'}
 
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200'+reqFilter+proFilter+actFilter+includeOpen;
-	console.log(baseURL)
 
 	if (searchType == 'courseIDSearch') {var baseURL = baseURL + '&course_id='	+ searchParam;}
 	if (searchType == 'keywordSearch') 	{var baseURL = baseURL + '&description='+ searchParam;}
@@ -217,7 +216,6 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	// If we are checking a course and only want to see the sections taught by a specific instructore:
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
 
-	console.log(proFilter)
 	if (searchType == 'courseIDSearch' && resultType == 'deptSearch' && reqFilter == '' && proFilter == '' && actFilter == '' && includeOpen == '') {
 		fs.readFile('./2015A/'+searchParam.toUpperCase()+'.json', function (err, data) {
 			if (err) {return res.send({});}
