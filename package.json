@@ -7,7 +7,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "colors": "^1.0.3",
     "express": "^3.19.0",
     "express-stormpath": "^0.6.0",
     "fs": "0.0.2",
@@ -15,7 +14,7 @@
     "request": "^2.51.0"
   },
   "engines": {
-    "node": "0.10.x"
+    "node": "0.12.x"
   },
   "repository": {
     "type": "git",

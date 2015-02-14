@@ -44,7 +44,7 @@ app.use(stormpath.init(app, {
 
 // Connect to database
 var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
-		db = mongojs.connect(uri, ["Students"]);
+		db = mongojs.connect(uri, ["Students", "Cours"]);
 
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
@@ -95,6 +95,14 @@ app.get('/Spit', function(req, res) {
 				var thetitle = inJSON[key].course_title;
 				resp[spacedName] = {'courseListName': spacedName, 'courseTitle': thetitle};
 				if (key == inJSON.length - 1) {
+
+					// db.Courses2015A.find({Dept: thedept}, function(err, doc) { // Try to access the database
+					// 	if (doc == []) {
+					// 		db.Courses2015A.save({'Dept': thedept});
+					// 	}
+					// 	db.Courses2015A.update({Dept: thedept}, { $set: {Courses: resp}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
+					// });
+
 					fs.writeFile('./2015A/'+thedept+'.json', JSON.stringify(resp), function (err) {
 						// if (err) throw err;
 						console.log('It\'s saved!');
@@ -188,9 +196,19 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	var searchType 		= req.query.searchType; // Course ID, Keyword, or Instructor
 	var resultType 		= req.query.resultType; // Course numbers, section numbers, section info
 	var instructFilter 	= req.query.instFilter; // Is there an instructor filter?
+	var reqFilter 		= req.query.reqParam;
+	var proFilter		= req.query.proParam;
+	var actFilter		= req.query.actParam;
+	var includeOpen		= req.query.openAllow;
+	var includeClosed	= req.query.closedAllow;
 
-	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200';
-	if (searchParam == '') {return}
+	if (typeof reqFilter === 'undefined') {reqFilter = ''} else {reqFilter = '&fulfills_requirement='+reqFilter}
+	if (typeof proFilter === 'undefined') {proFilter = ''} else {proFilter = '&program='+proFilter}
+	if (typeof actFilter === 'undefined') {actFilter = ''} else {actFilter = '&activity='+actFilter}
+	if (typeof includeOpen === 'undefined') {includeOpen = ''} else {includeOpen = '&open=true'}
+
+	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200'+reqFilter+proFilter+actFilter+includeOpen;
+	console.log(baseURL)
 
 	if (searchType == 'courseIDSearch') {var baseURL = baseURL + '&course_id='	+ searchParam;}
 	if (searchType == 'keywordSearch') 	{var baseURL = baseURL + '&description='+ searchParam;}
@@ -199,7 +217,8 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	// If we are checking a course and only want to see the sections taught by a specific instructore:
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
 
-	if (searchType == 'courseIDSearch' && resultType == 'deptSearch') {
+	console.log(proFilter)
+	if (searchType == 'courseIDSearch' && resultType == 'deptSearch' && reqFilter == '' && proFilter == '' && actFilter == '' && includeOpen == '') {
 		fs.readFile('./2015A/'+searchParam.toUpperCase()+'.json', function (err, data) {
 			if (err) {return res.send({});}
 			else {return res.send(JSON.parse(data));}

@@ -100,7 +100,7 @@ $(document).ready(function () {
  
     ClickTriggers(); // This defines all of the click handlers (see below)
  
-    $('#searchSelect').change(function () { // If the user changes from one type of search to another, search again with the new method
+    $('#searchSelect, #openCheck, #closedCheck, #actFilter, #reqFilter, #proFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
         initiateSearch();
     });
     $('#schedSelect').change(function () {
@@ -137,7 +137,7 @@ function ListScheds(schedList, theindex) { // Deal with the list of schedules
 function initiateSearch() { // Deal with search terms
     var searchTerms = $('#CSearch').val(); // Get raw search
     try {
-        if (searchTerms != "" && searchTerms != 'favicon.ico' && searchTerms != 'blank') { // Initial filtering
+        if (searchTerms != 'favicon.ico' && searchTerms != 'blank') { // Initial filtering
              
             var searchSelect = $('#searchSelect').val();
             if (searchSelect == 'courseIDSearch') {
@@ -206,12 +206,12 @@ function formatCourseID(searchTerms) {
     }
     return splitTerms;
 }
+
  
 function ClickTriggers() {
     $('body').on('click', '#CourseList li', function() { // If a course is clicked in CourseList
         $('#SectionInfo').empty();
         var courseName = $(this).find('.courseNumber').html(); // Format the course name for searching
-        console.log(courseName)
         var searchSelect = $('#searchSelect').val();
         var instFilter = 'all';
         if (searchSelect == 'instSearch') {var instFilter = $('#CSearch').val();}
@@ -314,7 +314,15 @@ function LoadingIndicate() {
 }
  
 function getCourseNumbers(search, searchSelect, TitleHidden) { // Getting info about courses in a department
-    var searchURL = '/Search?searchType='+searchSelect+'&resultType=deptSearch&searchParam='+search;
+    var requireFilter = '&reqParam=' + $('#reqFilter').val();
+    if (requireFilter == '&reqParam=noFilter') {requireFilter = ''}
+    var programFilter = '&proParam=' + $('#proFilter').val();
+    if (programFilter == '&proParam=noFilter') {programFilter = ''}
+    var activityFilter = '&actParam=' + $('#actFilter').val();
+    if (activityFilter == '&actParam=noFilter') {activityFilter = ''}
+    if ($('#closedCheck').is(':checked')) {searchOpen = ''} else {searchOpen = '&openAllow=true'}
+
+    var searchURL = '/Search?searchType='+searchSelect+'&resultType=deptSearch&searchParam='+search+requireFilter+programFilter+activityFilter+searchOpen;
     SendReq(searchURL, CourseFormat, []) // Send results to CourseFormat
 }
  
@@ -340,7 +348,11 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
 }
  
 function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department
-    searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter;
+    var activityFilter = '&actParam=' + $('#actFilter').val();
+    if (activityFilter == '&actParam=noFilter') {activityFilter = ''}
+    if ($('#closedCheck').is(':checked')) {searchOpen = ''} else {searchOpen = '&openAllow=true'}
+
+    searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter+activityFilter+searchOpen;
     // if (!suppress) {suppress = 0;}
     SendReq(searchURL, SectionStars, suppress); // Pass it to SectionStars to determine if each section is starred
 }
