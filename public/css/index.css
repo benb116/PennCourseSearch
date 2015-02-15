@@ -387,6 +387,7 @@ form > input[type="text"] {
     color: black;
     border-radius: 5px;
     display: none;
+    overflow-y: scroll;
 }
 .Modal a {color: black; text-decoration: none;}
 .Modal h2 {line-height: 0.5em;}

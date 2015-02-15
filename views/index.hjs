@@ -128,7 +128,7 @@
                     <div class="FilterBlock">
                         <select id="proFilter">
                             <option value="noFilter">Filter by program</option>
-                            <option value="MSL">ABCSCourses</option>
+                            <option value="MSL">ABCS Courses</option>
                             <option value="BFS">Ben Franklin Seminars</option>
                             <option value="CGS">College of Liberal &amp; Professional Studies</option>
                             <option value="CRS">Critical Writing Seminars</option>

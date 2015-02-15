@@ -99,10 +99,7 @@ $(document).ready(function () {
     });
  
     ClickTriggers(); // This defines all of the click handlers (see below)
- 
-    $('#searchSelect, #openCheck, #closedCheck, #actFilter, #reqFilter, #proFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
-        initiateSearch();
-    });
+
     $('#schedSelect').change(function () {
         var schedName = $('#schedSelect').val();
         var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName; // Make the request
@@ -140,7 +137,7 @@ function initiateSearch() { // Deal with search terms
         if (searchTerms != 'favicon.ico' && searchTerms != 'blank') { // Initial filtering
              
             var searchSelect = $('#searchSelect').val();
-            if (searchSelect == 'courseIDSearch') {
+            if (!(searchSelect == 'keywordSearch' || searchSelect == 'instSearch')) {
                 // Format search terms for server request
                 var splitTerms = formatCourseID(searchTerms);
 
@@ -314,16 +311,19 @@ function LoadingIndicate() {
 }
  
 function getCourseNumbers(search, searchSelect, TitleHidden) { // Getting info about courses in a department
+    console.log(search)
     var requireFilter = '&reqParam=' + $('#reqFilter').val();
     if (requireFilter == '&reqParam=noFilter') {requireFilter = ''}
     var programFilter = '&proParam=' + $('#proFilter').val();
     if (programFilter == '&proParam=noFilter') {programFilter = ''}
     var activityFilter = '&actParam=' + $('#actFilter').val();
     if (activityFilter == '&actParam=noFilter') {activityFilter = ''}
-    if ($('#closedCheck').is(':checked')) {searchOpen = ''} else {searchOpen = '&openAllow=true'}
 
-    var searchURL = '/Search?searchType='+searchSelect+'&resultType=deptSearch&searchParam='+search+requireFilter+programFilter+activityFilter+searchOpen;
+    var searchURL = '/Search?searchType='+searchSelect+'&resultType=deptSearch&searchParam='+search+requireFilter+programFilter+activityFilter;
     SendReq(searchURL, CourseFormat, []) // Send results to CourseFormat
+    $('#searchSelect, #reqFilter, #proFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
+        getCourseNumbers(search, searchSelect, TitleHidden)
+    });
 }
  
 function CourseFormat(JSONRes, passVar) { // Get course number info and display it
@@ -353,8 +353,11 @@ function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about s
     if ($('#closedCheck').is(':checked')) {searchOpen = ''} else {searchOpen = '&openAllow=true'}
 
     searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter+activityFilter+searchOpen;
-    // if (!suppress) {suppress = 0;}
+
     SendReq(searchURL, SectionStars, suppress); // Pass it to SectionStars to determine if each section is starred
+    $('#searchSelect, #openCheck, #closedCheck, #actFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
+        getSectionNumbers(cnum, instFilter, suppress)
+    });
 }
  
 function SectionStars(sections, passvar) { // Getting info about starred sections
