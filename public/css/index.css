@@ -369,6 +369,10 @@ form > input[type="text"] {
     filter: alpha(opacity=100);
     visibility: visible;
 }
+#MenuButtons a {
+    text-decoration: none;
+    color: white;
+}
 
 #lean_overlay {
     position: fixed;
@@ -382,13 +386,16 @@ form > input[type="text"] {
 }
 .Modal {
     padding: 10px;
-    width: 60%; height: 80%;
     background-color: white;
     color: black;
+    width: 60%; 
     border-radius: 5px;
     display: none;
     overflow-y: scroll;
 }
+
+#ModalWindow {height: 80%;}
+#SchedModal {height: 60%;}
 .Modal a {color: black; text-decoration: none;}
 .Modal h2 {line-height: 0.5em;}
 .Modal p {text-align: left; padding-left: 2em; padding-right: 2em; text-indent: 2em; line-height: 1.5em;}
@@ -397,3 +404,8 @@ form > input[type="text"] {
     position: absolute;
     top: 10px; left: 15px;
     cursor: pointer;}
+
+#SchedImage {
+    width: 100%;
+    margin: 1em auto;
+}

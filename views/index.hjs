@@ -6,13 +6,13 @@
         <link rel="stylesheet" type="text/css" href="/css/tooltipster.css"/>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="/css/sweet-alert.css">
+        <link rel="stylesheet" type="text/css" href="/css/venmo.css">
         <link rel="stylesheet" type="text/css" href="/css/index.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript" src="/js/html2canvas.js"></script>
         <script type="text/javascript" src="/js/jquery.tooltipster.min.js"></script>
         <script type="text/javascript" src="/js/sweet-alert.min.js"></script>
         <script type="text/javascript" src="/js/jquery.leanModal.min.js"></script>
-        <script src='https://platform.venmo.com/sdk.js'></script>
         <script type="text/javascript" src="/js/main.js"></script>
 	</head>
     <body>
@@ -54,7 +54,7 @@
                   <li>
                     Schedule <i class="fa fa-caret-down"></i>
                     <ul>
-                      <li>Download</li>
+                      <a rel="leanModal" href="#SchedModal"><li>Download</li></a>
                       <li id="ClearAllBtn">Clear</li>
                       <li id="NewSchedBtn">New</li>
                       <li>Recolor</li>
@@ -74,7 +74,11 @@
                 <h2>How do I change my schedule?</h2>
                 <p>To add a section to your schedule, click on its '+' icon. To remove a course, mouse over it and click the 'X' in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
                 <br>
-                <span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a class="venmo-pay-button" data-recipient-id="1397129314566144218"></a>
+                <span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a href={{ paymentNote }} target="_blank"><span class="logo"></span><span class="label">Venmo Me</span></a>
+                <a class="modal_close"><i class="fa fa-times"></i></a>
+            </div>
+            <div id="SchedModal" class="Modal">
+                <img id="SchedImage" src="">
                 <a class="modal_close"><i class="fa fa-times"></i></a>
             </div>
 		</div>

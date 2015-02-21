@@ -41,8 +41,10 @@ $(document).ready(function () {
             html2canvas($('#SchedGraph'), { // Convert the div to a canvas
                 onrendered: function(canvas) {
                     var image = new Image();
+                    console.log(canvas.toDataURL("image/png"))
                     image.src = canvas.toDataURL("image/png"); // Convert the canvas to png
-                    window.open(image.src, '_blank'); // Open in new tab
+                    // window.open(image.src, '_blank'); // Open in new tab
+                    $('#SchedImage').attr('src', canvas.toDataURL("image/png"))
                 }
             }); 
         }
@@ -311,7 +313,6 @@ function LoadingIndicate() {
 }
  
 function getCourseNumbers(search, searchSelect, TitleHidden) { // Getting info about courses in a department
-    console.log(search)
     var requireFilter = '&reqParam=' + $('#reqFilter').val();
     if (requireFilter == '&reqParam=noFilter') {requireFilter = ''}
     var programFilter = '&proParam=' + $('#proFilter').val();

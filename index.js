@@ -39,7 +39,7 @@ app.use(stormpath.init(app, {
   application:  config.STORMPATH_URL,
   enableAccountVerification: 	true,
   enableForgotPassword: 		true,
-  sessionDuration: 				1000 * 60 * 60 * 24, // Make sessions expire after one day
+  sessionDuration: 				1000 * 60 * 60 * 24 * 7, // Make sessions expire after one week
 }));
 
 // Connect to database
@@ -60,14 +60,23 @@ subtitles = [	"Cause PennInTouch sucks",
 				"Faster than you can say 'Wawa run'",
 				"Classes sine PennCourseSearch vanae."];
 
+paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenVBernstein&amount=1&share=f&audience=friends&note=";
+paymentNotes = ["PennCourseSearch%20rocks%20my%20socks!",
+				"That%20high%20quality%20PCS%20jawn",
+				"The%20power%20of%20Christ%20compelled%20me.",
+				"That%20time...%20under%20the%20button..."];
+
 // Handle main page requests
 app.get('/', stormpath.loginRequired, function(req, res) {
 	console.log(req.user.email.split('@')[0] + ': Page Request');
 	thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
+	fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]
+
 	return res.render('index', { // Send page
 		title: 'PennCourseSearch',
 		subtitle: thissub,
-		user: req.user.email.split('@')[0]
+		user: req.user.email.split('@')[0],
+		paymentNote: fullPaymentNote
 	});
 });
 
@@ -420,7 +429,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
 	db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
-		if (typeof doc === 'undefined' || typeof doc === null || err != null) {
+		if (typeof doc === 'undefined' || typeof doc === null || err != null || doc.length == 0) {
 			db.Students.save({'Pennkey': myPennkey, 'StarList': []});
 			doc[0] = {};
 		}
