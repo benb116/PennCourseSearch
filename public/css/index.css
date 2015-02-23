@@ -35,20 +35,14 @@ body {
     height: 5em;
     font-family: 'Open Sans', 'sans-serif';
 }
-form {
-    padding-left: calc(30px + 1em);
-}
-#schedSelect {margin-left: 1em;}
-#LoadingInfo {
-    margin-left: 1em;
-}
+form {padding-left: calc(30px + 1em);}
+#schedSelect,
+#LoadingInfo {margin-left: 1em;}
 h1 {
     margin-top: 1em;
     margin-bottom: 0;
 }
-#clearTool {
-    cursor: pointer;
-}
+
 #BottomResults {
     color: black;
     position: absolute;
@@ -67,7 +61,7 @@ h1 {
     transition: width 1s ease-in-out;
 }
 #CourseList {
-    min-width: 110px;
+    min-width: 120px;
     max-width: 250px;
     margin-left: 2.5%;
     text-align: left;
@@ -76,9 +70,9 @@ h1 {
 }
 #SectionCol {border-top-right-radius: 5px;}
 #CourseList li {
-    padding: 0 2em 0 3em;
+    padding: 0 2em 0 4em;
     text-align: left;
-    text-indent: -2em;
+    text-indent: -3em;
 }
 #Sections,
 #SectionInfo {
@@ -112,31 +106,17 @@ ul {
 #CourseList li,
 #SectionList li span:nth-child(1), 
 #SectionList li span:nth-child(3),
-#SectionInfo span {
-    cursor: pointer;
-}
-#CourseList li:active,
-#SectionList li span:active {
-    background-color: #00B3FF;
-}
-.OpenSec {
-    background-color: #47EA4C;
-}
-.ClosedSec {
-    background-color: #F73B3B;
-}
-.ErrorSec {
-    background-color: #E6E6E6;
-}
-.PCRSec {
-    background-color: #3498db;
-}
-.CourseTitle {
-    display: none;
-}
-#SectionInfo p {
-    margin: 0;
-}
+#SectionInfo span {cursor: pointer;}
+#CourseList li:active, 
+#SectionList li span:active {background-color: #00B3FF;}
+.OpenSec {background-color: #47EA4C;}
+.ClosedSec {background-color: #F73B3B;}
+.ErrorSec {background-color: #E6E6E6;}
+.PCRSec {background-color: #3498db;}
+.CourseTitle {display: none;}
+#SectionInfo p {margin: 0;}
+
+/*Filter*/
 #FilterSearch {
     height: 10%;
     overflow: hidden;
@@ -149,7 +129,6 @@ ul {
     text-align: center;
     display: none;
 }
-
 #FilterPanel {
     height: 100%;
     background-color: white;
@@ -166,11 +145,10 @@ ul {
     line-height: 3em; 
     overflow: hidden;     
 }
-.FilterBlock > input {
-    margin-left: 1em; margin-right: .5em;
-}
+.FilterBlock > input {margin-left: 1em; margin-right: .5em;}
 .FilterBlock:nth-child(1) > input:nth-child(1) {margin-left: 0;}
 
+/*Schedule*/
 #SchedGraph {
     height: 80%;
     overflow: hidden;
@@ -216,6 +194,15 @@ ul {
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
 }
+.TimeBlock, hr {
+    position: relative;
+    position: absolute;
+    text-align: right;
+}
+.TimeBlock {
+    width: 40px;
+    margin-right: 0;
+}
 .SchedBlock {
     display: block;
     vertical-align: middle;
@@ -227,19 +214,10 @@ ul {
     overflow-y: hidden;
 }
 @media all and (max-width: 1050px) {
-    .SchedBlock {
-        font-size: 11px;
-    }
+    .SchedBlock {font-size: 11px;}
 }
-.TimeBlock,
-hr {
-    position: relative;
-    position: absolute;
-    text-align: right;
-}
-.TimeBlock {
-    width: 40px;
-    margin-right: 0;
+@media all and (min-width: 1281px) and (max-width: 1700px) {
+    .SchedBlock {font-size: 14px;}
 }
 .CloseX {
     position: absolute;
@@ -266,23 +244,17 @@ form > input[type="text"] {
     background-color: #f5f5f5;
 }
 
-/* Let's get this party started */
-
+/* Scrollbar*/
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
 }
-/* Track */
-
-::-webkit-scrollbar-track {
-    background: white;
-}
-/* Handle */
-
+::-webkit-scrollbar-track {background: white;}
 ::-webkit-scrollbar-thumb {
     background: #95a5a6;
     border-radius: 1px;
 }
+
 .loader {
     height: 30px;
     width: 30px;
@@ -298,6 +270,7 @@ form > input[type="text"] {
     color: #01256e;
 }
 
+/*Menubar*/
 /*http://cssdeck.com/labs/another-simple-css3-dropdown-menu*/
 #MenuButtons ul {
     z-index: 99;
@@ -374,6 +347,7 @@ form > input[type="text"] {
     color: white;
 }
 
+/*Modal*/
 #lean_overlay {
     position: fixed;
     z-index:100;

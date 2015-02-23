@@ -425,7 +425,6 @@ function SectionInfoFormat(data, passvar) { // Receive section specific info and
  
 function Stars(addRem, CID) { // Manage star requests
     sessionStorage.lastReq = 'Stars';
-    console.log(sessionStorage)
     sessionStorage.lastPar = JSON.stringify([addRem, CID]);
 
     var searchURL = "/Star?addRem="+addRem+"&courseID="+CID;
@@ -440,6 +439,10 @@ function StarHandle(data, addRem) {
             var searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+data[sec]+"&instFilter=all";
             SendReq(searchURL, StarFormat, []);
         }}
+        if (typeof sec === 'undefined') {
+            $('#SectionTitle').html('No starred sections');
+            $('#SectionList').empty();
+        }
     } else { // Otherwise, pass through
         return data;
     }

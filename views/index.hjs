@@ -9,12 +9,11 @@
         <link rel="stylesheet" type="text/css" href="/css/venmo.css">
         <link rel="stylesheet" type="text/css" href="/css/index.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script async id="github-bjs"  src="//buttons.github.io/buttons.js"></script>
         <script type="text/javascript" src="/js/html2canvas.js"></script>
         <script type="text/javascript" src="/js/jquery.tooltipster.min.js"></script>
         <script type="text/javascript" src="/js/sweet-alert.min.js"></script>
         <script type="text/javascript" src="/js/jquery.leanModal.min.js"></script>
-        <!-- Place this tag right after the last button or just before your close body tag. -->
-        <script type="text/javascript" src="//buttons.github.io/buttons.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
 	</head>
     <body>
@@ -27,7 +26,8 @@
     	   <h1>{{ title }}</h1>
     	   <span>{{ subtitle }}</span>
             <form onkeypress="return event.keyCode != 13;">
-    			<select id="searchSelect">
+                <span>Search by:</span>
+    			<select id="searchSelect" style="margin-right:1em;">
                     <option selected="selected" value="courseIDSearch">Course ID</option>
                     <option value="keywordSearch">Keywords</option>
                     <option value="instSearch">Instructor</option>
