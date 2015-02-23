@@ -60,11 +60,11 @@ subtitles = [	"Cause PennInTouch sucks",
 				"Faster than you can say 'Wawa run'",
 				"Classes sine PennCourseSearch vanae."];
 
-paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenVBernstein&amount=1&share=f&audience=friends&note=";
+paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";
 paymentNotes = ["PennCourseSearch%20rocks%20my%20socks!",
 				"That%20high%20quality%20PCS%20jawn",
 				"The%20power%20of%20Christ%20compelled%20me.",
-				"That%20time...%20under%20the%20button..."];
+				"Donation%20to%20PennInTouch%20Sucks,%20Inc."];
 
 // Handle main page requests
 app.get('/', stormpath.loginRequired, function(req, res) {

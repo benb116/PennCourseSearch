@@ -389,11 +389,10 @@ form > input[type="text"] {
     background-color: white;
     color: black;
     width: 60%; 
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     display: none;
     overflow-y: scroll;
 }
-
 #ModalWindow {height: 80%;}
 #SchedModal {height: 60%;}
 .Modal a {color: black; text-decoration: none;}
@@ -403,8 +402,12 @@ form > input[type="text"] {
 .modal_close {
     position: absolute;
     top: 10px; left: 15px;
-    cursor: pointer;}
-
+    cursor: pointer;
+}
+.ModalHalf {
+    display: inline-block; width: 49%;
+    vertical-align: top;
+}
 #SchedImage {
     width: 100%;
     margin: 1em auto;

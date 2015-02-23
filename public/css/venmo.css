@@ -4,13 +4,13 @@
   border-radius: 4px 0px 0px 4px;
   border: 1px #3f94d0 solid;
   position: absolute;
-  left: calc(50% - 60px);
+  left: calc(25% - 60px);
   width: 30px;
-  height: 33px;
+  height: 24px;
   background-color: #3f94d0;
   background-position: 50%;
   background-size: 14px;
-  background-image: url("https://platform.venmo.com/public/images/venmo_v_white.png");
+  background-image: url("/css/venmo.png");
   background-repeat: no-repeat;
 }
 .label {
@@ -20,15 +20,15 @@
   border: 1px #3f94d0 solid;
   border-left: 0;
   position: absolute;
-  left: calc(50% - 30px);
-  padding: 0px 5px;
+  left: calc(25% - 30px);
+  padding: 0px 4px;
   width: 90px;
-  height: 33px;
+  height: 24px;
   text-align: center;
   color: #283036;
   font-weight: 400;
   font-size: 16px;
-  line-height: 33px;
+  line-height: 24px;
   background: #ffffff;
   color: #3f94d0;
 }
