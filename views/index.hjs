@@ -14,7 +14,7 @@
         <script type="text/javascript" src="/js/sweet-alert.min.js"></script>
         <script type="text/javascript" src="/js/jquery.leanModal.min.js"></script>
         <!-- Place this tag right after the last button or just before your close body tag. -->
-<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+        <script type="text/javascript" src="//buttons.github.io/buttons.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
 	</head>
     <body>

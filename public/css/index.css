@@ -324,7 +324,7 @@ form > input[type="text"] {
 }
 
 #MenuButtons ul li:active {
-    background: #444;
+    background: #333;
 }
 
 #MenuButtons ul li ul {

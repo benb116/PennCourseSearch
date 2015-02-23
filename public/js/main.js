@@ -3,12 +3,6 @@ $(document).ready(function () {
         $('#LoadingInfo').html('Loading ...')
     }
 
-    // $('#NewSchedBtn').tooltipster({
-    //     content: $('<span><strong>This text is in bold case !</strong></span>'),
-    //     position: 'right',
-    //     trigger: 'click'
-    // });
-
     $('a[rel*=leanModal]').leanModal({ top : 70, closeButton: ".modal_close" }); // Define modal close button
 
     // The delay function that prevents immediate requests
@@ -30,8 +24,12 @@ $(document).ready(function () {
     // Global variables
     LoadingSum      = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
     TitleHidden     = true; // Are the titles of courses in #Courselist hidden or not
-    colorPalette    = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#ecf0f1','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF'];
-
+    if (sessionStorage.colorPalette) {
+        var colorPalette = JSON.parse(sessionStorage.colorPalette);
+    } else {
+        var colorPalette    = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#ecf0f1','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF'];
+        sessionStorage.colorPalette = JSON.stringify(colorPalette);
+    }
 
     var schedURL = "/Sched?addRem=name&courseID=blank"; // Make the request
     SendReq(schedURL, ListScheds, 0);
@@ -94,9 +92,11 @@ $(document).ready(function () {
         }
         if ($(this).html() == 'Recolor') {
             newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
-            var schedName = $('#schedSelect').val();
-            var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName; // Make the request
-            SendReq(schedURL, SpitSched, []);
+            sessionStorage.colorPalette = JSON.stringify(colorPalette);
+            // var schedName = $('#schedSelect').val();
+            // var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName; // Make the request
+            // SendReq(schedURL, SpitSched, []);
+            SpitSched(JSON.parse(sessionStorage.currentSched));
         }
     });
  
@@ -106,6 +106,12 @@ $(document).ready(function () {
         var schedName = $('#schedSelect').val();
         var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName; // Make the request
         SendReq(schedURL, SpitSched, []);
+    });
+
+    $('#searchSelect, #reqFilter, #proFilter, #openCheck, #closedCheck, #actFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
+        console.log(sessionStorage.lastReq)
+        console.log(sessionStorage.lastPar)
+        window[sessionStorage.lastReq].apply(this, JSON.parse(sessionStorage.lastPar))
     });
  
     $('#CSearch').on('input', function(){ // When the search terms change
@@ -158,19 +164,16 @@ function initiateSearch() { // Deal with search terms
 
             var searchSelect = $('#searchSelect').val(); // CID, keyword, instructor?
             getCourseNumbers(deptSearch, searchSelect, TitleHidden);
-
-            if (sectSearch.length == 3) {
-                getSectionInfo(deptSearch+numbSearch+sectSearch);
-            } else { // If there is no course number, clear the section list and info panel
-                
-            }
             if (numbSearch.length == 3) {
                 getSectionNumbers(deptSearch+numbSearch, 'all', sectSearch.length);
             } else { // If there is no course number, clear the section list and info panel
                 $('#SectionTitle').empty();
                 $('#SectionList').empty();
             }
-             
+            if (sectSearch.length == 3) {
+                getSectionInfo(deptSearch+numbSearch+sectSearch);
+            } 
+
         } else if (searchTerms != "" ) { // If there are no good search terms, clear everything
             $('#CourseList').empty();
             $('#SectionTitle').empty();
@@ -281,9 +284,9 @@ function ClickTriggers() {
         }
         var cnum = secname.slice(0,-3);
         var dept = secname.slice(0,-6);
+        getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
         getSectionNumbers(cnum, 'all', 'suppress');
         getSectionInfo(secname);
-        getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
     });
 }
 
@@ -320,11 +323,13 @@ function getCourseNumbers(search, searchSelect, TitleHidden) { // Getting info a
     var activityFilter = '&actParam=' + $('#actFilter').val();
     if (activityFilter == '&actParam=noFilter') {activityFilter = ''}
 
+    sessionStorage.lastReq = 'getCourseNumbers';
+    console.log(sessionStorage)
+    sessionStorage.lastPar = JSON.stringify([search, searchSelect, TitleHidden]);
+
     var searchURL = '/Search?searchType='+searchSelect+'&resultType=deptSearch&searchParam='+search+requireFilter+programFilter+activityFilter;
     SendReq(searchURL, CourseFormat, []) // Send results to CourseFormat
-    $('#searchSelect, #reqFilter, #proFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
-        getCourseNumbers(search, searchSelect, TitleHidden)
-    });
+
 }
  
 function CourseFormat(JSONRes, passVar) { // Get course number info and display it
@@ -353,12 +358,13 @@ function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about s
     if (activityFilter == '&actParam=noFilter') {activityFilter = ''}
     if ($('#closedCheck').is(':checked')) {searchOpen = ''} else {searchOpen = '&openAllow=true'}
 
-    searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter+activityFilter+searchOpen;
+    sessionStorage.lastReq = 'getSectionNumbers';
+    console.log(sessionStorage)
+    sessionStorage.lastPar = JSON.stringify([cnum, instFilter, suppress]);
 
+    searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter+activityFilter+searchOpen;
     SendReq(searchURL, SectionStars, suppress); // Pass it to SectionStars to determine if each section is starred
-    $('#searchSelect, #openCheck, #closedCheck, #actFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
-        getSectionNumbers(cnum, instFilter, suppress)
-    });
+
 }
  
 function SectionStars(sections, passvar) { // Getting info about starred sections
@@ -418,8 +424,13 @@ function SectionInfoFormat(data, passvar) { // Receive section specific info and
 }
  
 function Stars(addRem, CID) { // Manage star requests
+    sessionStorage.lastReq = 'Stars';
+    console.log(sessionStorage)
+    sessionStorage.lastPar = JSON.stringify([addRem, CID]);
+
     var searchURL = "/Star?addRem="+addRem+"&courseID="+CID;
     SendReq(searchURL, StarHandle, addRem);
+    
 }
  
 function StarHandle(data, addRem) {
@@ -526,8 +537,9 @@ function SpitSched(courseSched) {
     // Define the color map
     var colorMap = {};
     var colorinc = 0;
+    var colorPal = JSON.parse(sessionStorage.colorPalette)
     for (var sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
-        colorMap[courseSched[sec].fullCourseName] = colorPalette[colorinc]; // assign each section a color
+        colorMap[courseSched[sec].fullCourseName] = colorPal[colorinc]; // assign each section a color
         colorinc += 1;
     }}
 
@@ -550,6 +562,8 @@ function SpitSched(courseSched) {
             $('#Schedule').append('<div class="SchedBlock" id="'+courseSched[sec].fullCourseName.replace(/ /g, "") + weekdays[possDay]+ courseSched[sec].meetHour + '" style="top:'+blocktop+'%;left:'+blockleft+'%;width:'+percentWidth+'%;height:'+blockheight+'%;background-color:'+thiscol+'"><div class="CloseX">x</div>'+blockname+'<br>'+meetRoom+'</div>');
         }}
     }}
+
+    sessionStorage.currentSched = JSON.stringify(courseSched);
 }
 
 function detectIE() {

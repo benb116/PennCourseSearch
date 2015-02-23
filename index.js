@@ -64,7 +64,8 @@ paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&s
 paymentNotes = ["PennCourseSearch%20rocks%20my%20socks!",
 				"That%20high%20quality%20PCS%20jawn",
 				"The%20power%20of%20Christ%20compelled%20me.",
-				"Donation%20to%20PennInTouch%20Sucks,%20Inc."];
+				"Donation%20to%20PennInTouch%20Sucks,%20Inc.",
+				"For%20your%20next%20trip%20to%20Wawa"];
 
 // Handle main page requests
 app.get('/', stormpath.loginRequired, function(req, res) {
