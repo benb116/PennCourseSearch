@@ -212,9 +212,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	var includeOpen		= req.query.openAllow;
 	var includeClosed	= req.query.closedAllow;
 
-	if (typeof reqFilter === 'undefined') {reqFilter = ''} else {reqFilter = '&fulfills_requirement='+reqFilter}
-	if (typeof proFilter === 'undefined') {proFilter = ''} else {proFilter = '&program='+proFilter}
-	if (typeof actFilter === 'undefined') {actFilter = ''} else {actFilter = '&activity='+actFilter}
+	if (typeof reqFilter === 'undefined') 	{reqFilter = ''} else {reqFilter = '&fulfills_requirement='+reqFilter}
+	if (typeof proFilter === 'undefined') 	{proFilter = ''} else {proFilter = '&program='+proFilter}
+	if (typeof actFilter === 'undefined') 	{actFilter = ''} else {actFilter = '&activity='+actFilter}
 	if (typeof includeOpen === 'undefined') {includeOpen = ''} else {includeOpen = '&open=true'}
 
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200'+reqFilter+proFilter+actFilter+includeOpen;
@@ -541,7 +541,7 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
 
 				// Full ID will have sectionID+MeetDays+StartTime
 				// This is necessary for classes like PHYS151, which has times: M@13, TR@9, AND R@18
-				var FullID = SectionID.replace(/ /g, "")+MeetDays+StartTime.toString().replace(/\./g, "");
+				var FullID = SectionID.replace(/ /g, "")+MeetDays+StartTime.toString().replace(".", "");
 
 				resJSON[FullID] = {	'fullCourseName': 	SectionName,
 									'HourLength': 		hourLength,

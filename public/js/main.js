@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    if (detectIE()) {
+    if (detectIE()) { // IE doesn't do animated SVG's
         $('#LoadingInfo').html('Loading ...')
     }
 
@@ -316,15 +316,14 @@ function LoadingIndicate() {
 }
  
 function getCourseNumbers(search, searchSelect, TitleHidden) { // Getting info about courses in a department
-    var requireFilter = '&reqParam=' + $('#reqFilter').val();
-    if (requireFilter == '&reqParam=noFilter') {requireFilter = ''}
-    var programFilter = '&proParam=' + $('#proFilter').val();
-    if (programFilter == '&proParam=noFilter') {programFilter = ''}
-    var activityFilter = '&actParam=' + $('#actFilter').val();
-    if (activityFilter == '&actParam=noFilter') {activityFilter = ''}
+    var requireFilter   = '&reqParam=' + $('#reqFilter').val();
+    var programFilter   = '&proParam=' + $('#proFilter').val();
+    var activityFilter  = '&actParam=' + $('#actFilter').val();
+    if (requireFilter   == '&reqParam=noFilter')    {requireFilter = ''}
+    if (programFilter   == '&proParam=noFilter')    {programFilter = ''}
+    if (activityFilter  == '&actParam=noFilter')    {activityFilter = ''}
 
     sessionStorage.lastReq = 'getCourseNumbers';
-    console.log(sessionStorage)
     sessionStorage.lastPar = JSON.stringify([search, searchSelect, TitleHidden]);
 
     var searchURL = '/Search?searchType='+searchSelect+'&resultType=deptSearch&searchParam='+search+requireFilter+programFilter+activityFilter;
@@ -359,7 +358,6 @@ function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about s
     if ($('#closedCheck').is(':checked')) {searchOpen = ''} else {searchOpen = '&openAllow=true'}
 
     sessionStorage.lastReq = 'getSectionNumbers';
-    console.log(sessionStorage)
     sessionStorage.lastPar = JSON.stringify([cnum, instFilter, suppress]);
 
     searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter+activityFilter+searchOpen;
@@ -370,8 +368,10 @@ function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about s
 function SectionStars(sections, passvar) { // Getting info about starred sections
     searchURL = "/Star?addRem=blank&courseID=blank";
     SendReq(searchURL, FormatSectionsList, sections[0]); // Format
-
-    if (!passvar) {
+    console.log(sections)
+    // If there is no specific section specified in the search, the SectionInfo should not display section-specific info, only course-specific info
+    // The suppress passvar is passed in as the number of characters in 'sectsearch' (i.e. MEAM101 -> 0, MEAM101001 -> 3)
+    if (!passvar) { 
         sections[1].FullID = sections[1].CourseID;
         delete sections[1].Instructor;
         delete sections[1].OpenClose;
@@ -561,12 +561,53 @@ function SpitSched(courseSched) {
             var meetRoom    = courseSched[sec].meetRoom;
             var thiscol     = colorMap[courseSched[sec].fullCourseName]; // Get the color
             if(typeof thiscol === 'undefined'){thiscol = '#E6E6E6';}
-            
-            $('#Schedule').append('<div class="SchedBlock" id="'+courseSched[sec].fullCourseName.replace(/ /g, "") + weekdays[possDay]+ courseSched[sec].meetHour + '" style="top:'+blocktop+'%;left:'+blockleft+'%;width:'+percentWidth+'%;height:'+blockheight+'%;background-color:'+thiscol+'"><div class="CloseX">x</div>'+blockname+'<br>'+meetRoom+'</div>');
+            var newid = (courseSched[sec].fullCourseName.replace(/ /g, "") + weekdays[possDay]+ courseSched[sec].meetHour).replace(".", "");
+
+            $('#Schedule').append('<div class="SchedBlock ' + sec + ' ' + weekdays[possDay] + '" id="'+ newid + // Each block has three classes: SchedBlock, The courseSched entry, and the weekday. Each block has a unique ID
+                '" style="top:'+blocktop+
+                '%;left:'+blockleft+
+                '%;width:'+percentWidth+
+                '%;height:'+blockheight+
+                '%;background-color:'+thiscol+
+                '"><div class="CloseX">x</div>'+blockname+'<br>'+meetRoom+'</div>');
+
+            $('.SchedBlock').each(function(i) { // Check through each previously added meettime
+                var oldMeetFull = $(this).attr('class').split(' ')[1]; // Get the courseSched key (so we can get the meetHour and HourLength values)
+                var oldMeetDay = $(this).attr('class').split(' ')[2]; // Don't compare blocks on different days cause they can't overlap anyway
+                if (oldMeetFull != sec && oldMeetDay == weekdays[possDay]) { // If we aren't comparing to a section to itself :P
+
+                    if (twoOverlap(courseSched[oldMeetFull], courseSched[sec])) { // Check if they overlap
+                        var oldBlockWidth = $(this).outerWidth() * 100 / $('#Schedule').outerWidth();
+                        $(this).css('width', (oldBlockWidth / 2) + '%'); // Resize old block
+
+                        $('#'+newid).css('width', (oldBlockWidth / 2) + '%'); // Resize new block
+                        var newleft = ($('#'+newid).offset().left - $('#Schedule').offset().left) * 100 / $('#Schedule').outerWidth(); // Get shift in terms of percentage, not pixels
+                        $('#'+newid).css('left', newleft + (oldBlockWidth / 2) + '%') // Shift new block
+                    }
+                }
+            });
         }}
     }}
 
     sessionStorage.currentSched = JSON.stringify(courseSched);
+}
+
+function twoOverlap (block1, block2) {
+    // Thank you to Stack Overflow user BC. for the function this is based on.
+    // http://stackoverflow.com/questions/5419134/how-to-detect-if-two-divs-touch-with-jquery
+    var y1 = block1.meetHour;
+    var h1 = block1.HourLength;
+    var b1 = y1 + h1;
+    
+    var y2 = block2.meetHour;
+    var h2 = block2.HourLength;
+    var b2 = y2 + h2;
+
+    // This checks if the top of block 2 is lower down (higher value) than the bottom of block 1...
+    // or if the top of block 1 is lower down (higher value) than the bottom of block 2.
+    // In this case, they are not overlapping, so return false
+    if (b1 <= y2 || y1 >= b2) return false;
+    return true;
 }
 
 function detectIE() {
