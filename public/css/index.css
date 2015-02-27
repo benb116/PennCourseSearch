@@ -203,6 +203,7 @@ ul {
     width: 40px;
     margin-right: 0;
 }
+.DayName {display: inline-block; height: 30px; line-height: 30px;}
 .SchedBlock {
     display: block;
     vertical-align: middle;

@@ -368,7 +368,6 @@ function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about s
 function SectionStars(sections, passvar) { // Getting info about starred sections
     searchURL = "/Star?addRem=blank&courseID=blank";
     SendReq(searchURL, FormatSectionsList, sections[0]); // Format
-    console.log(sections)
     // If there is no specific section specified in the search, the SectionInfo should not display section-specific info, only course-specific info
     // The suppress passvar is passed in as the number of characters in 'sectsearch' (i.e. MEAM101 -> 0, MEAM101001 -> 3)
     if (!passvar) { 
@@ -493,6 +492,7 @@ function SpitSched(courseSched) {
  
     // Set initial values
     var weekdays = ['M', 'T', 'W', 'R', 'F'];
+    var fullWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     var startHour = 10; // start at 10
     var endHour = 17; // end at 5pm
     var percentWidth = 20; // five day default
@@ -517,21 +517,25 @@ function SpitSched(courseSched) {
         }
     }}
  
-    if (incSun == 1) {weekdays.unshift('U');} // Update weekdays array if necessary
-    if (incSat == 1) {weekdays.push('S');}
+    if (incSun == 1) {weekdays.unshift('U'); fullWeekdays.unshift('Sunday')} // Update weekdays array if necessary
+    if (incSat == 1) {weekdays.push('S'); fullWeekdays.push('Saturday')}
  
     var percentWidth = 100 / (5 + incSun + incSat); // Update the block width if necessary
-    var halfScale = 100 / (endHour - startHour + 1); // This defines the scale to be used throughout the scheduling process
+    var halfScale = 95 / (endHour - startHour + 1); // This defines the scale to be used throughout the scheduling process
     // + 1 keeps the height inside the box
  
     // Make the lines and time labels
     if (!($.isEmptyObject(courseSched))){
         for (var i = 0; i <= (endHour - startHour); i++) { // for each hour
-            toppos = (i) * halfScale + 2.5; // each height value is linearly spaced with an offset
+            toppos = (i) * halfScale + 7.5; // each height value is linearly spaced with an offset
             hourtext = Math.round(i+startHour); // If startHour is not an integer, make it pretty
             if (hourtext > 12) {hourtext -= 12;} // no 24-hour time
             $('#TimeCol').append('<div class="TimeBlock" style="top:'+toppos+'%">'+hourtext+':00</div>'); // add time label
             $('#Schedule').append('<hr width="100%"style="top:'+toppos+'%" >'); // add time line
+        }    
+        for (var daynum in weekdays) {
+            console.log(weekdays[daynum])
+            $('#Schedule').append('<div class="DayName" style="width:'+ percentWidth +'%;">'+fullWeekdays[daynum]+'</div>')
         }
     } else {
         $('#Schedule').html('<span>Click a section\'s + icon to add it to the schedule</span>'); // Clear
@@ -555,7 +559,7 @@ function SpitSched(courseSched) {
                     var blockleft = possDay*percentWidth; { break; } // determine left spacing
                 }
             }
-            var blocktop    = (courseSched[sec].meetHour - startHour) * halfScale + 4; // determine top spacing based on time from startHour (offset for prettiness)
+            var blocktop    = (courseSched[sec].meetHour - startHour) * halfScale + 9; // determine top spacing based on time from startHour (offset for prettiness)
             var blockheight = courseSched[sec].HourLength * halfScale;
             var blockname   = courseSched[sec].fullCourseName
             var meetRoom    = courseSched[sec].meetRoom;
