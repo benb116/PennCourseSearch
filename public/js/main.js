@@ -109,8 +109,6 @@ $(document).ready(function () {
     });
 
     $('#searchSelect, #reqFilter, #proFilter, #openCheck, #closedCheck, #actFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
-        console.log(sessionStorage.lastReq)
-        console.log(sessionStorage.lastPar)
         window[sessionStorage.lastReq].apply(this, JSON.parse(sessionStorage.lastPar))
     });
  
@@ -534,7 +532,6 @@ function SpitSched(courseSched) {
             $('#Schedule').append('<hr width="100%"style="top:'+toppos+'%" >'); // add time line
         }    
         for (var daynum in weekdays) {
-            console.log(weekdays[daynum])
             $('#Schedule').append('<div class="DayName" style="width:'+ percentWidth +'%;">'+fullWeekdays[daynum]+'</div>')
         }
     } else {

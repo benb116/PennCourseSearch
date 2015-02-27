@@ -53,19 +53,21 @@ app.listen(process.env.PORT || 3000, function(){
 });
 
 // Rotating subtitles
-subtitles = [	"Cause PennInTouch sucks", 
+var subtitles = ["Cause PennInTouch sucks", 
 				"You can press the back button, but you don't even need to.",
 				"Invented by Benjamin Franklin in 1793",
 				"Focus on your classes, not your schedule.",
 				"Faster than you can say 'Wawa run'",
 				"Classes sine PennCourseSearch vanae."];
 
-paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";
-paymentNotes = ["PennCourseSearch%20rocks%20my%20socks!",
-				"That%20high%20quality%20PCS%20jawn",
-				"The%20power%20of%20Christ%20compelled%20me.",
-				"Donation%20to%20PennInTouch%20Sucks,%20Inc.",
-				"For%20your%20next%20trip%20to%20Wawa"];
+var paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";
+var paymentNotes = ["PennCourseSearch%20rocks%20my%20socks!",
+					"That%20high%20quality%20PCS%20jawn",
+					"The%20power%20of%20Christ%20compelled%20me.",
+					"Donation%20to%20PennInTouch%20Sucks,%20Inc.",
+					"For%20your%20next%20trip%20to%20Wawa"];
+
+var currentTerm = '2015C';
 
 // Handle main page requests
 app.get('/', stormpath.loginRequired, function(req, res) {
@@ -86,7 +88,7 @@ app.get('/Spit', function(req, res) {
 	var thedept = req.query.dept;
 	console.log(('List Spit: '+thedept).blue);
 
-	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200&course_id='+thedept
+	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200&term='+currentTerm+'&course_id='+thedept
 	// If we are checking a course and only want to see the sections taught by a specific instructore:
 
     request({
@@ -113,7 +115,7 @@ app.get('/Spit', function(req, res) {
 					// 	db.Courses2015A.update({Dept: thedept}, { $set: {Courses: resp}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
 					// });
 
-					fs.writeFile('./2015A/'+thedept+'.json', JSON.stringify(resp), function (err) {
+					fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) {
 						// if (err) throw err;
 						console.log('It\'s saved!');
 					});
@@ -127,7 +129,7 @@ app.get('/Spit', function(req, res) {
 
 app.get('/Match', function(req, res) {
 	var thedept = req.query.dept;
-	var dept = JSON.parse(fs.readFileSync('./2015A/'+thedept+'.json', 'utf8'));
+	var dept = JSON.parse(fs.readFileSync('./'+currentTerm+'/'+thedept+'.json', 'utf8'));
 	var deptrev = JSON.parse(fs.readFileSync('./2015ARev/'+thedept+'.json', 'utf8'));
 	for (var course in dept) {
 		if (typeof deptrev[course] !== 'undefined') {
@@ -141,7 +143,7 @@ app.get('/Match', function(req, res) {
 		}
 	}
 	// console.log(dept)
-	fs.writeFile('./2015A/'+thedept+'.json', JSON.stringify(dept), function (err) {
+	fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(dept), function (err) {
 		console.log('Matched: '+thedept);
 	});
 	return res.send('')
@@ -212,12 +214,12 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	var includeOpen		= req.query.openAllow;
 	var includeClosed	= req.query.closedAllow;
 
-	if (typeof reqFilter === 'undefined') 	{reqFilter = ''} else {reqFilter = '&fulfills_requirement='+reqFilter}
-	if (typeof proFilter === 'undefined') 	{proFilter = ''} else {proFilter = '&program='+proFilter}
-	if (typeof actFilter === 'undefined') 	{actFilter = ''} else {actFilter = '&activity='+actFilter}
-	if (typeof includeOpen === 'undefined') {includeOpen = ''} else {includeOpen = '&open=true'}
+	if (typeof reqFilter 	=== 'undefined') {reqFilter 	= ''} else {reqFilter 	= '&fulfills_requirement='+reqFilter}
+	if (typeof proFilter 	=== 'undefined') {proFilter 	= ''} else {proFilter 	= '&program='+proFilter}
+	if (typeof actFilter 	=== 'undefined') {actFilter 	= ''} else {actFilter 	= '&activity='+actFilter}
+	if (typeof includeOpen	=== 'undefined') {includeOpen 	= ''} else {includeOpen = '&open=true'}
 
-	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200'+reqFilter+proFilter+actFilter+includeOpen;
+	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200&term='+currentTerm+reqFilter+proFilter+actFilter+includeOpen;
 
 	if (searchType == 'courseIDSearch') {var baseURL = baseURL + '&course_id='	+ searchParam;}
 	if (searchType == 'keywordSearch') 	{var baseURL = baseURL + '&description='+ searchParam;}
@@ -227,7 +229,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
 
 	if (searchType == 'courseIDSearch' && resultType == 'deptSearch' && reqFilter == '' && proFilter == '' && actFilter == '' && includeOpen == '') {
-		fs.readFile('./2015A/'+searchParam.toUpperCase()+'.json', function (err, data) {
+		fs.readFile('./'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
 			if (err) {return res.send({});}
 			else {return res.send(JSON.parse(data));}
 		});
@@ -391,7 +393,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 	var StarredCourses 	= {};
 	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 	// console.time('DB Time')
-	db.Students.find({Pennkey: myPennkey}, { StarList: 1}, function(err, doc) { // Try to access the database
+	db.Students.find({Pennkey: myPennkey}, {StarList: 1}, function(err, doc) { // Try to access the database
 		try {
 			StarredCourses = doc[0].StarList; // Get previously starred courses
 		} catch (error) { // If there is no previous starlist
@@ -456,7 +458,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 		var courseID = req.query.courseID;
 		if (addRem == 'add') { // If we need to add, then we get meeting info for the section
 			request({
-				uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?course_id='+courseID,
+				uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
 				method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
 			}, function(error, response, body) {
 
