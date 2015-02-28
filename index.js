@@ -86,9 +86,8 @@ app.get('/', stormpath.loginRequired, function(req, res) {
 // This request manager is for spitting the department lists. They are saved for faster responses
 app.get('/Spit', function(req, res) {
 	var thedept = req.query.dept;
-	console.log(('List Spit: '+thedept).blue);
 
-	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200&term='+currentTerm+'&course_id='+thedept
+	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept
 	// If we are checking a course and only want to see the sections taught by a specific instructore:
 
     request({
@@ -103,7 +102,7 @@ app.get('/Spit', function(req, res) {
 			var resp = {};
 			for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
 				// console.log(inJSON[key])
-				var spacedName = inJSON[key].section_id_normalized.replace('-', " ").split('-')[0];
+				var spacedName = inJSON[key].section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' ');
 				var thetitle = inJSON[key].course_title;
 				resp[spacedName] = {'courseListName': spacedName, 'courseTitle': thetitle};
 				if (key == inJSON.length - 1) {
@@ -116,12 +115,11 @@ app.get('/Spit', function(req, res) {
 					// });
 
 					fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) {
-						// if (err) throw err;
-						console.log('It\'s saved!');
+						console.log(('List Spit: '+thedept).blue);
 					});
 				}
 			}}			
-		return res.send('done');
+		return res.send('Spat');
 	});
 	
 });
@@ -142,11 +140,10 @@ app.get('/Match', function(req, res) {
 			}
 		}
 	}
-	// console.log(dept)
 	fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(dept), function (err) {
 		console.log('Matched: '+thedept);
 	});
-	return res.send('')
+	return res.send('Matched')
 	
 });
 

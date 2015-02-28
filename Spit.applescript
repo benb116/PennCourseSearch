@@ -3,6 +3,6 @@ set deptlist to {"AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANAT", "ANCH",
 repeat with x from 1 to (count of deptlist)
 	set dept to item x of deptlist
 	do shell script "curl http://localhost:3000/Spit?dept=" & dept
-	
+	do shell script "curl http://localhost:3000/Match?dept=" & dept
 	delay 0.5
 end repeat
