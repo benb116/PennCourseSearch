@@ -57,10 +57,10 @@
                     Schedule <i class="fa fa-caret-down"></i>
                     <ul>
                       <a rel="leanModal" href="#SchedModal"><li>Download</li></a>
-                      <li id="ClearAllBtn">Clear</li>
-                      <li id="NewSchedBtn">New</li>
-                      <!-- <li id="DupSchedBtn">Duplicate</li> -->
                       <li>Recolor</li>
+                      <li id="NewSchedBtn">New</li>
+                      <li id="DupSchedBtn">Duplicate</li>
+                      <li id="ClearAllBtn">Clear</li>
                       <li id="DeleteSchedBtn">Delete</li>
                     </ul>
                   </li>

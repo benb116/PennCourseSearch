@@ -492,7 +492,25 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
 			console.log((myPennkey + ' Sched Cleared').magenta);
 			return res.send(SchedCourses);
-		
+
+		} else if (addRem == 'dup') { // Duplicate a schedule
+			while (Object.keys(doc[0].Schedules).indexOf(schedName) != -1) {
+				var lastchar = schedName.split(' ')[schedName.split(' ').length - 1];
+				if (isNaN(lastchar)) {
+					schedName += ' 2'
+				} else {
+					schedName = schedName.slice(0, -1) + (parseInt(lastchar) + 1);
+				}
+			}
+			var placeholder = {};
+			placeholder['Schedules.' + schedName] = SchedCourses;
+			db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }});
+
+			schedList = Object.keys(doc[0].Schedules);
+			schedList.push(schedName);
+			console.log((myPennkey + ' Sched duplicated'))
+			return res.send(schedList);
+
 		} else if (addRem == 'del') { // Clear all
 			delete doc[0].Schedules[schedName];
 			if(Object.getOwnPropertyNames(doc[0].Schedules).length === 0){
@@ -500,6 +518,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			}
 			db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
 			schedList = Object.keys(doc[0].Schedules);
+			console.log((myPennkey + ' Sched deleted.'))
 			return res.send(schedList);
 		
 		} else if (addRem == 'name') { // If we're getting a list of the schedules

@@ -39,7 +39,6 @@ $(document).ready(function () {
             html2canvas($('#SchedGraph'), { // Convert the div to a canvas
                 onrendered: function(canvas) {
                     var image = new Image();
-                    console.log(canvas.toDataURL("image/png"))
                     image.src = canvas.toDataURL("image/png"); // Convert the canvas to png
                     // window.open(image.src, '_blank'); // Open in new tab
                     $('#SchedImage').attr('src', canvas.toDataURL("image/png"))
@@ -48,7 +47,10 @@ $(document).ready(function () {
         }
 
         if ($(this).html() == 'New') {
-            var schedName = prompt('Please enter a name for your new schedule.');
+            var schedName = prompt('Please enter a name for your new schedule.');            
+            while (sessionStorage.schedList.indexOf(schedName) != -1) {
+                var schedName = prompt('Please enter a unique name for your new schedule.');
+            }
             if (schedName != '' && schedName !== null) {
                 var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
                 SendReq(schedURL, ListScheds, -2);
@@ -59,6 +61,11 @@ $(document).ready(function () {
             var schedName = $("#schedSelect").val();
             var schedURL = "/Sched?addRem=dup&courseID=blank&schedName="+schedName; // Make the request
             SendReq(schedURL, ListScheds, -2);
+            swal({
+                title: "Schedule duplicated.",   
+                type: "success",   
+                timer: 1000
+            });
         }
 
         if ($(this).html() == 'Clear') {
@@ -99,9 +106,6 @@ $(document).ready(function () {
         if ($(this).html() == 'Recolor') {
             newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
             sessionStorage.colorPalette = JSON.stringify(colorPalette);
-            // var schedName = $('#schedSelect').val();
-            // var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName; // Make the request
-            // SendReq(schedURL, SpitSched, []);
             SpitSched(JSON.parse(sessionStorage.currentSched));
         }
     });
@@ -114,8 +118,12 @@ $(document).ready(function () {
         SendReq(schedURL, SpitSched, []);
     });
 
-    $('#searchSelect, #reqFilter, #proFilter, #openCheck, #closedCheck, #actFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
+    $('#reqFilter, #proFilter, #openCheck, #closedCheck, #actFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
         window[sessionStorage.lastReq].apply(this, JSON.parse(sessionStorage.lastPar))
+    });
+
+    $('#searchSelect').change(function () {
+        initiateSearch();
     });
  
     $('#CSearch').on('input', function(){ // When the search terms change
@@ -139,6 +147,7 @@ function ListScheds(schedList, theindex) { // Deal with the list of schedules
     }
     $('#schedSelect option[value="'+schedNameReq+'"]').attr("selected","selected");
 
+    sessionStorage.schedList = schedList;
     var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedNameReq; // Get the schedule
     SendReq(schedURL, SpitSched, []);
 }
@@ -412,9 +421,10 @@ function SectionInfoFormat(data, passvar) { // Receive section specific info and
     if (data == "No Results") {
         $('#SectionInfo').html('No Results');        
     } else {
-        var HTMLinfo = "<span>&nbsp + &nbsp</span>";
-        if (data.FullID)            {HTMLinfo += "<span>" + data.FullID + "</span> "}; // Format the whole response
-        if (data.Title)             {HTMLinfo += "- " + data.Title + "<br><br>"}
+        var HTMLinfo = "";
+        if (data.Instructor)        {HTMLinfo += "<span>&nbsp + &nbsp</span>"}
+        if (data.FullID)            {HTMLinfo += "<span>" + data.FullID + "</span>"} // Format the whole response
+        if (data.Title)             {HTMLinfo += " - " + data.Title + "<br><br>"}
         if (data.Instructor)        {HTMLinfo += "Instructor: " + data.Instructor + "<br><br>"}
         if (data.Description)       {HTMLinfo += "Description:<br><p class='DescText'>" + data.Description + "</p><br>"}
         if (data.OpenClose)         {HTMLinfo += "Status: " + data.OpenClose + "<br><br>"}
