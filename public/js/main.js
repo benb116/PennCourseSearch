@@ -55,6 +55,12 @@ $(document).ready(function () {
             }
         }
 
+        if ($(this).html() == 'Duplicate') {
+            var schedName = $("#schedSelect").val();
+            var schedURL = "/Sched?addRem=dup&courseID=blank&schedName="+schedName; // Make the request
+            SendReq(schedURL, ListScheds, -2);
+        }
+
         if ($(this).html() == 'Clear') {
             swal({   
                 title: "Are you sure you want to clear your whole schedule?",   
