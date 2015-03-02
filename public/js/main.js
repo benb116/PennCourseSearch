@@ -47,8 +47,10 @@ $(document).ready(function () {
         }
 
         if ($(this).html() == 'New') {
-            var schedName = prompt('Please enter a name for your new schedule.');            
-            while (sessionStorage.schedList.indexOf(schedName) != -1) {
+            var schedName = prompt('Please enter a name for your new schedule.'); 
+            while (JSON.parse(sessionStorage.schedList).indexOf(schedName) != -1) {
+                console.log(JSON.parse(sessionStorage.schedList).indexOf(schedName))
+                // {break}
                 var schedName = prompt('Please enter a unique name for your new schedule.');
             }
             if (schedName != '' && schedName !== null) {
@@ -147,7 +149,7 @@ function ListScheds(schedList, theindex) { // Deal with the list of schedules
     }
     $('#schedSelect option[value="'+schedNameReq+'"]').attr("selected","selected");
 
-    sessionStorage.schedList = schedList;
+    sessionStorage.schedList = JSON.stringify(schedList);
     var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedNameReq; // Get the schedule
     SendReq(schedURL, SpitSched, []);
 }
@@ -508,17 +510,17 @@ function SpitSched(courseSched) {
     var weekdays = ['M', 'T', 'W', 'R', 'F'];
     var fullWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     var startHour = 10; // start at 10
-    var endHour = 17; // end at 5pm
+    var endHour = 15; // end at 5pm
     var percentWidth = 20; // five day default
     incSun = 0; // no weekends
     incSat = 0;
  
     for (var sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
         if (courseSched[sec].meetHour <= startHour) { // If there are classes earlier than the default start
-            startHour = courseSched[sec].meetHour; // push back the earliest hour
+            startHour = Math.floor(courseSched[sec].meetHour); // push back the earliest hour
         }
         if (courseSched[sec].meetHour+courseSched[sec].HourLength >= endHour) { // Push back latest hour if necessary
-            endHour = courseSched[sec].meetHour+courseSched[sec].HourLength;
+            endHour = Math.ceil(courseSched[sec].meetHour+courseSched[sec].HourLength);
         }
         for (var day in courseSched[sec].meetDay) {
             var letterDay = courseSched[sec].meetDay[day];

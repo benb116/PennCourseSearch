@@ -228,6 +228,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		console.time((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 		db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
 			console.timeEnd((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
+			if (typeof doc[0] === 'undefined') {doc[0].Courses = 'No results'}
 			return res.send(doc[0].Courses)
 		});
 
@@ -457,10 +458,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			SchedCourses = {};
 		}
 
-		// console.log(doc[0].Schedules)
-		// console.log(schedName)
-		// console.log(SchedCourses)
-
 		var addRem = req.query.addRem; // Are we adding, removing, or clearing?
 		var courseID = req.query.courseID;
 		if (addRem == 'add') { // If we need to add, then we get meeting info for the section
@@ -515,7 +512,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 
 			schedList = Object.keys(doc[0].Schedules);
 			schedList.push(schedName);
-			console.log((myPennkey + ' Sched duplicated'))
+			console.log((myPennkey + ' Sched duplicated').magenta)
 			return res.send(schedList);
 
 		} else if (addRem == 'del') { // Delete

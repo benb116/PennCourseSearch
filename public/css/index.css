@@ -9,7 +9,7 @@ body {
     /*height: 100%; */
     text-align: center;
     margin: 0;
-    background-color: #3498db;
+    background-color: #1f8dd6;
     color: white;
     font-family: 'Helvetica';
     font-family: 'Open Sans';
@@ -112,7 +112,7 @@ ul {
 .OpenSec {background-color: #47EA4C;}
 .ClosedSec {background-color: #F73B3B;}
 .ErrorSec {background-color: #E6E6E6;}
-.PCRSec {background-color: #3498db;}
+.PCRSec {background-color: #1f8dd6;}
 .CourseTitle {display: none;}
 #SectionInfo p {margin: 0;}
 
