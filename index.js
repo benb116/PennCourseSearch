@@ -228,8 +228,11 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		console.time((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 		db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
 			console.timeEnd((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
-			if (typeof doc[0] === 'undefined') {doc[0].Courses = 'No results'}
-			return res.send(doc[0].Courses)
+			try {
+				return res.send(doc[0].Courses);
+			} catch(err) {
+				return res.send({});
+			}
 		});
 
 		// fs.readFile('./'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {

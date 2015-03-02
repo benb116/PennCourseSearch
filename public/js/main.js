@@ -510,7 +510,7 @@ function SpitSched(courseSched) {
     var weekdays = ['M', 'T', 'W', 'R', 'F'];
     var fullWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     var startHour = 10; // start at 10
-    var endHour = 15; // end at 5pm
+    var endHour = 15; // end at 3pm
     var percentWidth = 20; // five day default
     incSun = 0; // no weekends
     incSat = 0;
