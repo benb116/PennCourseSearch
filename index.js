@@ -6,7 +6,6 @@ var request 	= require("request");
 var mongojs 	= require("mongojs");
 var colors 		= require('colors');
 var fs 			= require('fs');
-var ua 			= require('universal-analytics');
 
 // I don't want to host a config file on github. When running locally, the app has access to a local config file.
 // On Heroku, there is no config file so I use environment variables instead
@@ -48,6 +47,8 @@ app.use(stormpath.init(app, {
 // Connect to database
 var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
 		db = mongojs.connect(uri, ["Students", "Courses2015C"]);
+
+var ua 			= require('universal-analytics');
 
 var visitor = ua('UA-49014722-4');
 
