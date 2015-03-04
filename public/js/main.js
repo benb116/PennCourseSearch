@@ -187,7 +187,9 @@ function initiateSearch() { // Deal with search terms
             }
             if (sectSearch.length == 3) {
                 getSectionInfo(deptSearch+numbSearch+sectSearch);
-            } 
+            } else {
+                $('#SectionInfo').empty();
+            }
 
         } else if (searchTerms != "" ) { // If there are no good search terms, clear everything
             $('#CourseList').empty();

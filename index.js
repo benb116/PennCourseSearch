@@ -35,13 +35,13 @@ process.env.PWD = process.cwd();
 
 // Set up stormpath
 app.use(stormpath.init(app, {
-  apiKeyId:     config.STORMPATH_API_KEY_ID,
-  apiKeySecret: config.STORMPATH_API_KEY_SECRET,
-  secretKey:    config.STORMPATH_SECRET_KEY,
-  application:  config.STORMPATH_URL,
-  enableAccountVerification: 	true,
-  enableForgotPassword: 		true,
-  sessionDuration: 				1000 * 60 * 60 * 24 * 7, // Make sessions expire after one week
+	apiKeyId:     config.STORMPATH_API_KEY_ID,
+	apiKeySecret: config.STORMPATH_API_KEY_SECRET,
+	secretKey:    config.STORMPATH_SECRET_KEY,
+	application:  config.STORMPATH_URL,
+	enableAccountVerification: 	true,
+	enableForgotPassword: 		true,
+	sessionDuration: 				1000 * 60 * 60 * 24 * 7, // Make sessions expire after one week
 }));
 
 // Connect to database
@@ -72,17 +72,21 @@ var paymentNotes = ["PennCourseSearch%20rocks%20my%20socks!",
 var currentTerm = '2015C';
 
 // Handle main page requests
-app.get('/', stormpath.loginRequired, function(req, res) {
-	console.log(req.user.email.split('@')[0] + ' Page Request');
-	thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
-	fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
+app.get('/', function(req, res) {
+	if (!req.user) {
+		return res.render('welcome');
+	} else {
+		console.log(req.user.email.split('@')[0] + ' Page Request');
+		thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
+		fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
 
-	return res.render('index', { // Send page
-		title: 'PennCourseSearch',
-		subtitle: thissub,
-		user: req.user.email.split('@')[0],
-		paymentNote: fullPaymentNote
-	});
+		return res.render('index', { // Send page
+			title: 'PennCourseSearch',
+			subtitle: thissub,
+			user: req.user.email.split('@')[0],
+			paymentNote: fullPaymentNote
+		});
+	}
 });
 
 // This request manager is for spitting the department lists. They are saved for faster responses.
@@ -181,11 +185,11 @@ app.get('/Match', function(req, res) {
 			}
 		}
 	}
-	db.collection('Courses2015C').find({Dept: thedept}, function(err, doc) { // Try to access the database
+	db.collection('Courses'+currentTerm).find({Dept: thedept}, function(err, doc) { // Try to access the database
 		if (doc.length == 0) {
-			db.collection('Courses2015C').save({'Dept': thedept});
+			db.collection('Courses'+currentTerm).save({'Dept': thedept});
 		}
-		db.collection('Courses2015C').update({Dept: thedept}, { $set: {Courses: dept}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
+		db.collection('Courses'+currentTerm).update({Dept: thedept}, { $set: {Courses: dept}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
 	});
 
 	// fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(dept), function (err) { // Overwrite the old spit data with the new spit data
