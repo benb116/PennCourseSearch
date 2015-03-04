@@ -208,6 +208,7 @@ a.pure-button-primary {
 .content-head-ribbon {
     color: white;
     margin-bottom: -.5em;
+    letter-spacing: 0;
 }
 
 /* This is the class used for the content sub-headers (<h3>) */
