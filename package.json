@@ -11,7 +11,8 @@
     "express-stormpath": "^0.6.0",
     "fs": "0.0.2",
     "mongojs": "^0.18.0",
-    "request": "^2.51.0"
+    "request": "^2.51.0",
+    "universal-analytics": "^0.3.6"
   },
   "engines": {
     "node": "0.12.x"
