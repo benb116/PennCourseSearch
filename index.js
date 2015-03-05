@@ -6,11 +6,12 @@ var request 	= require("request");
 var mongojs 	= require("mongojs");
 var colors 		= require('colors');
 var fs 			= require('fs');
-var ua 			= require('universal-analytics');
 
 // I don't want to host a config file on github. When running locally, the app has access to a local config file.
 // On Heroku, there is no config file so I use environment variables instead
-if (process.env.REQUESTAB) {
+try {
+	var config = require('./config.js');
+} catch (err) { // If there is no config file
 	var config = {};
 	config.requestAB 				= process.env.REQUESTAB;
 	config.requestAT 				= process.env.REQUESTAT;
@@ -22,8 +23,6 @@ if (process.env.REQUESTAB) {
 	config.STORMPATH_API_KEY_SECRET = process.env.STORMPATH_API_KEY_SECRET;
 	config.STORMPATH_SECRET_KEY 	= process.env.STORMPATH_SECRET_KEY;
 	config.STORMPATH_URL 			= process.env.STORMPATH_URL;
-} else { // If there is no config file
-	var config = require('./config.js');
 }
 
 var app = express();
@@ -48,8 +47,6 @@ app.use(stormpath.init(app, {
 // Connect to database
 var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
 		db = mongojs.connect(uri, ["Students", "Courses2015C"]);
-
-var visitor = ua('UA-49014722-4');
 
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
@@ -77,20 +74,16 @@ var currentTerm = '2015C';
 // Handle main page requests
 app.get('/', function(req, res) {
 	if (!req.user) {
-		visitor.pageview("/welcome", "Home").send()
 		return res.render('welcome');
 	} else {
-		var userPennkey = req.user.email.split('@')[0];
-		console.log(userPennkey + ' Page Request');
-		visitor.pageview("/", "Main").send();
-		// visitor.event("Page Request", "Homepage", userPennkey).send();
+		console.log(req.user.email.split('@')[0] + ' Page Request');
 		thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 		fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
 
 		return res.render('index', { // Send page
 			title: 'PennCourseSearch',
 			subtitle: thissub,
-			user: userPennkey,
+			user: req.user.email.split('@')[0],
 			paymentNote: fullPaymentNote
 		});
 	}
@@ -216,7 +209,6 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	var actFilter		= req.query.actParam;
 	var includeOpen		= req.query.openAllow;
 	var includeClosed	= req.query.closedAllow;
-	var userPennkey 	= req.user.email.split('@')[0];
 
 	// Building the request URI
 	if (typeof reqFilter 	=== 'undefined') {reqFilter 	= ''} else {reqFilter 	= '&fulfills_requirement='+reqFilter}
@@ -235,13 +227,11 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	// instructFilter is an extra parameter that allows further filtering of section results by instructor.
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
 
-	visitor.event(searchType, searchParam, userPennkey).send();
-	console.time((userPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
-
 	// Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
 	if (searchType == 'courseIDSearch' && resultType == 'deptSearch' && reqFilter == '' && proFilter == '' && actFilter == '' && includeOpen == '') {
+		console.time((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 		db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
-			console.timeEnd((userPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
+			console.timeEnd((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 			try {
 				return res.send(doc[0].Courses);
 			} catch(err) {
@@ -254,15 +244,16 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		// 	else {return res.send(JSON.parse(data));}
 		// });
 	} else {
+		console.time((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 	    request({
 			uri: baseURL,
 			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
 		}, function(error, response, body) {
-			console.timeEnd((userPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 			if (error) {
 				console.error('Request failed:', error);
 				return res.send('PCSERROR: request failed');
 			}
+			console.timeEnd((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 
 			// Send the raw data to the appropriate formatting function
 			if 			(resultType == 'deptSearch'){
@@ -415,35 +406,34 @@ function parseSectionList(JSONString) {
 // Manage requests regarding starred courses
 app.get('/Star', stormpath.loginRequired, function(req, res) {
 	var StarredCourses 	= {};
-	var userPennkey 	= req.user.email.split('@')[0]; // Get Pennkey
+	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 	// console.time('DB Time')
-	db.Students.find({Pennkey: userPennkey}, {StarList: 1}, function(err, doc) { // Try to access the database
+	db.Students.find({Pennkey: myPennkey}, {StarList: 1}, function(err, doc) { // Try to access the database
 		try {
 			StarredCourses = doc[0].StarList; // Get previously starred courses
 		} catch (error) { // If there is no previous starlist
-			db.Students.update({Pennkey: userPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database	
+			db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database	
 		}
 
 		var addRem = req.query.addRem; // Are we adding, removing, or clearing?
 		var courseID = req.query.courseID;
 
 		if (addRem == 'add') { 
-			console.log((userPennkey + ' Star: '+ courseID).cyan);
-			visitor.event('Star', courseID, userPennkey).send();
+			console.log((myPennkey + ' Star: '+ courseID).cyan);
 			var index = StarredCourses.indexOf(courseID);
 			if (index == -1) {StarredCourses.push(courseID);} // If the section is not already in the list
 
 		} else if (addRem == 'rem') { // If we need to remove
-			console.log((userPennkey + ' Unstar: '+ courseID).cyan);
+			console.log((myPennkey + ' Unstar: '+ courseID).cyan);
 			var index = StarredCourses.indexOf(courseID);
 			if (index > -1) {StarredCourses.splice(index, 1);}
 
 		} else if (addRem == 'clear') { // Clear all
-			console.log((userPennkey + ' Clear star: '+ courseID).cyan);
+			console.log((myPennkey + ' Clear star: '+ courseID).cyan);
 			var StarredCourses = [];
 		}
 
-		db.Students.update({Pennkey: userPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database
+		db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database
 
 		return res.send(StarredCourses);
 	});
@@ -454,15 +444,15 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 
 	var SchedCourses 	= {};
 	var schedName 		= req.query.schedName;
-	var userPennkey		= req.user.email.split('@')[0]; // Get Pennkey
+	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
-	db.Students.find({Pennkey: userPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
+	db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
 		if (typeof doc === 'undefined' || typeof doc === null || err != null || doc.length == 0) { // If there is no entry or something else went wrong
-			db.Students.save({'Pennkey': userPennkey, 'StarList': []}); // Make an entry
+			db.Students.save({'Pennkey': myPennkey, 'StarList': []}); // Make an entry
 			doc[0] = {};
 		}
 		if (typeof doc[0].Schedules === 'undefined') {
-			db.Students.update({Pennkey: userPennkey}, { $set: {Schedules: {}}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
+			db.Students.update({Pennkey: myPennkey}, { $set: {Schedules: {}}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
 			doc[0].Schedules = {};
 		}
 		if (typeof schedName !== 'undefined') {
@@ -471,7 +461,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 		if (typeof SchedCourses === 'undefined') { // If there is no schedule of that name
 			var placeholder = {};
 			placeholder['Schedules.' + schedName] = {}; // Make one
-			db.Students.update({Pennkey: userPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
+			db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
 			SchedCourses = {};
 		}
 
@@ -486,12 +476,11 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 				resJSON = getSchedInfo(body); // Format the response
 				for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
 					SchedCourses[JSONSecID] = resJSON[JSONSecID];
-					console.log((userPennkey + ' Sched Added: ' + JSONSecID).magenta);
+					console.log((myPennkey + ' Sched Added: ' + JSONSecID).magenta);
 				}}
 				var placeholder = {};
 				placeholder['Schedules.' + schedName] = SchedCourses;
-				db.Students.update({Pennkey: userPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-				visitor.event('Schedule', courseID, userPennkey).send();
+				db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
 				return res.send(SchedCourses);
 			});
 
@@ -499,20 +488,20 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
 				if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) { // Find all meeting times of a given course
 					delete SchedCourses[meetsec];
-					console.log((userPennkey + ' Sched Removed: ' + courseID).magenta);
+					console.log((myPennkey + ' Sched Removed: ' + courseID).magenta);
 				}}
 			}
 			var placeholder = {};
 			placeholder['Schedules.' + schedName] = SchedCourses;
-			db.Students.update({Pennkey: userPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
+			db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
 			return res.send(SchedCourses);
 			
 		} else if (addRem == 'clear') { // Clear all
 			SchedCourses = {};
 			var placeholder = {};
 			placeholder['Schedules.' + schedName] = SchedCourses;
-			db.Students.update({Pennkey: userPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-			console.log((userPennkey + ' Sched Cleared').magenta);
+			db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
+			console.log((myPennkey + ' Sched Cleared').magenta);
 			return res.send(SchedCourses);
 
 		} else if (addRem == 'dup') { // Duplicate a schedule
@@ -526,11 +515,11 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			}
 			var placeholder = {};
 			placeholder['Schedules.' + schedName] = SchedCourses;
-			db.Students.update({Pennkey: userPennkey}, { $set: placeholder, $currentDate: { lastModified: true }});
+			db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }});
 
 			schedList = Object.keys(doc[0].Schedules);
 			schedList.push(schedName);
-			console.log((userPennkey + ' Sched duplicated').magenta)
+			console.log((myPennkey + ' Sched duplicated').magenta)
 			return res.send(schedList);
 
 		} else if (addRem == 'del') { // Delete
@@ -538,9 +527,9 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			if(Object.getOwnPropertyNames(doc[0].Schedules).length === 0){
 				doc[0].Schedules['Schedule'] = {};
 			}
-			db.Students.update({Pennkey: userPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
+			db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
 			schedList = Object.keys(doc[0].Schedules);
-			console.log((userPennkey + ' Sched deleted.'))
+			console.log((myPennkey + ' Sched deleted.'))
 			return res.send(schedList);
 		
 		} else if (addRem == 'name') { // If we're getting a list of the schedules
@@ -548,7 +537,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			if (schedList.length == 0) {
 				var placeholder = {};
 				placeholder['Schedules.Schedule'] = {};
-				db.Students.update({Pennkey: userPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
+				db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
 				schedList.push('Schedule');
 			}
 			if (typeof schedName !== 'undefined' && schedList.indexOf(schedName) == -1 && schedName != 'null') {schedList.push(schedName);}
