@@ -6,6 +6,7 @@ var request 	= require("request");
 var mongojs 	= require("mongojs");
 var colors 		= require('colors');
 var fs 			= require('fs');
+var NA 			= require("nodealytics");
 
 // I don't want to host a config file on github. When running locally, the app has access to a local config file.
 // On Heroku, there is no config file so I use environment variables instead
@@ -48,6 +49,8 @@ app.use(stormpath.init(app, {
 var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
 		db = mongojs.connect(uri, ["Students", "Courses2015C"]);
 
+NA.initialize('UA-49014722-4', 'penncoursesearch.com');
+
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
 	console.log("Node app is running. Better go catch it.".green);
@@ -74,12 +77,14 @@ var currentTerm = '2015C';
 // Handle main page requests
 app.get('/', function(req, res) {
 	if (!req.user) {
+		NA.trackPage('Welcome', '/welcome', function (err, resp) {});
 		return res.render('welcome');
 	} else {
 		console.log(req.user.email.split('@')[0] + ' Page Request');
 		thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 		fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
-
+		
+		NA.trackPage('Home', '/', function (err, resp) {});
 		return res.render('index', { // Send page
 			title: 'PennCourseSearch',
 			subtitle: thissub,
@@ -226,6 +231,8 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	// However, clicking on one of those courses will show all sections, including those not taught by the instructor.
 	// instructFilter is an extra parameter that allows further filtering of section results by instructor.
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
+
+	if (searchParam != '') { NA.trackEvent(searchType, searchParam, function (err, resp) {});};
 
 	// Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
 	if (searchType == 'courseIDSearch' && resultType == 'deptSearch' && reqFilter == '' && proFilter == '' && actFilter == '' && includeOpen == '') {
@@ -420,6 +427,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 
 		if (addRem == 'add') { 
 			console.log((myPennkey + ' Star: '+ courseID).cyan);
+			NA.trackEvent('Star', courseID, function (err, resp) {});
 			var index = StarredCourses.indexOf(courseID);
 			if (index == -1) {StarredCourses.push(courseID);} // If the section is not already in the list
 
@@ -481,6 +489,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 				var placeholder = {};
 				placeholder['Schedules.' + schedName] = SchedCourses;
 				db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
+				NA.trackEvent('Sched', courseID, function (err, resp) {});
 				return res.send(SchedCourses);
 			});
 

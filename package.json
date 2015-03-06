@@ -11,6 +11,7 @@
     "express-stormpath": "^0.6.0",
     "fs": "0.0.2",
     "mongojs": "^0.18.0",
+    "nodealytics": "0.0.6",
     "request": "^2.51.0"
   },
   "engines": {

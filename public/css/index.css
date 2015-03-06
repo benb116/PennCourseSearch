@@ -106,7 +106,7 @@ ul {
 #CourseList li,
 #SectionList li span:nth-child(1), 
 #SectionList li span:nth-child(3),
-#SectionInfo span {cursor: pointer;}
+#SectionInfo span:nth-child(1) {cursor: pointer;}
 #CourseList li:active, 
 #SectionList li span:active {background-color: #00B3FF;}
 .OpenSec {background-color: #47EA4C;}
@@ -202,6 +202,7 @@ ul {
 .TimeBlock {
     width: 40px;
     margin-right: 0;
+    right: 8px;
 }
 .DayName {display: inline-block; height: 30px; line-height: 30px;}
 .SchedBlock {
