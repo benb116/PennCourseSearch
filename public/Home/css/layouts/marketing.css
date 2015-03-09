@@ -236,6 +236,13 @@ a.pure-button-primary {
 .footer a:hover {
     text-decoration: underline;
 }
+#LogoWhite {
+    width: 100px; height: 50px;
+    background-image: url('./logo-white.svg');
+    background-position: center; background-repeat: no-repeat;
+    background-size: 100%;
+    display: inline-block;
+}
 
 .fa {font-size: 2em;}
 

@@ -33,6 +33,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 app.use(express.static(path.join(__dirname, 'public')));
 process.env.PWD = process.cwd();
+// Handle 404
+// app.use(function(req, res) {res.status(400);res.render('404.hjs');});
 
 // Set up stormpath
 app.use(stormpath.init(app, {
@@ -77,7 +79,6 @@ var currentTerm = '2015C';
 // Handle main page requests
 app.get('/', function(req, res) {
 	if (!req.user) {
-		NA.trackPage('Welcome', '/welcome', function (err, resp) {});
 		return res.render('welcome');
 	} else {
 		console.log(req.user.email.split('@')[0] + ' Page Request');
@@ -97,7 +98,7 @@ app.get('/', function(req, res) {
 // This request manager is for spitting the department lists. They are saved for faster responses.
 app.get('/Spit', function(req, res) {
 	var thedept = req.query.dept;
-	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept
+	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
 
     request({
 		uri: baseURL,
@@ -125,11 +126,11 @@ app.get('/Spit', function(req, res) {
 // This request manager is for spitting the PCR reviews. They are saved for faster responses
 app.get('/PCRSpitRev', function(req, res) { 
 	var thedept = req.query.dept;
-	console.log(('PCR Rev Spit: '+thedept).blue)
+	console.log(('PCR Rev Spit: '+thedept).blue);
 	request({
 		uri: 'http://api.penncoursereview.com/v1/depts/'+thedept+'/reviews?token='+config.PCRToken // Get raw data
 	}, function(error, response, body) {
-		console.log('Received'.blue)
+		console.log('Received'.blue);
 		var deptReviews = JSON.parse(body).result.values;
 
 		var resp = {};
@@ -183,15 +184,15 @@ app.get('/Match', function(req, res) {
 		if (typeof deptrev[course] !== 'undefined') {
 			sum = 0;
 			for (var i = 0; i < deptrev[course].length; i++) { // Go through each section in the courses PCR data and sum the values
-				sum += Number(deptrev[course][i].Rating)
-			};
-			if (deptrev[course].length != 0) {
+				sum += Number(deptrev[course][i].Rating);
+			}
+			if (deptrev[course].length !== 0) {
 				dept[course].PCR = Math.floor(100*sum/deptrev[course].length)/100; // Average the values and add to the spit data
 			}
 		}
 	}
 	db.collection('Courses'+currentTerm).find({Dept: thedept}, function(err, doc) { // Try to access the database
-		if (doc.length == 0) {
+		if (doc.length === 0) {
 			db.collection('Courses'+currentTerm).save({'Dept': thedept});
 		}
 		db.collection('Courses'+currentTerm).update({Dept: thedept}, { $set: {Courses: dept}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
@@ -200,7 +201,7 @@ app.get('/Match', function(req, res) {
 	// fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(dept), function (err) { // Overwrite the old spit data with the new spit data
 	// 	console.log('Matched: '+thedept);
 	// });
-	return res.send('Matched')
+	return res.send('Matched');
 });
 
 // Manage search requests
@@ -216,10 +217,10 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	var includeClosed	= req.query.closedAllow;
 
 	// Building the request URI
-	if (typeof reqFilter 	=== 'undefined') {reqFilter 	= ''} else {reqFilter 	= '&fulfills_requirement='+reqFilter}
-	if (typeof proFilter 	=== 'undefined') {proFilter 	= ''} else {proFilter 	= '&program='+proFilter}
-	if (typeof actFilter 	=== 'undefined') {actFilter 	= ''} else {actFilter 	= '&activity='+actFilter}
-	if (typeof includeOpen	=== 'undefined') {includeOpen 	= ''} else {includeOpen = '&open=true'}
+	if (typeof reqFilter 	=== 'undefined') {reqFilter 	= '';} else {reqFilter 	= '&fulfills_requirement='+reqFilter;}
+	if (typeof proFilter 	=== 'undefined') {proFilter 	= '';} else {proFilter 	= '&program='+proFilter;}
+	if (typeof actFilter 	=== 'undefined') {actFilter 	= '';} else {actFilter 	= '&activity='+actFilter;}
+	if (typeof includeOpen	=== 'undefined') {includeOpen 	= '';} else {includeOpen = '&open=true';}
 
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200&term='+currentTerm+reqFilter+proFilter+actFilter+includeOpen;
 
@@ -232,10 +233,15 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	// instructFilter is an extra parameter that allows further filtering of section results by instructor.
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
 
-	if (searchParam != '') { NA.trackEvent(searchType, searchParam, function (err, resp) {});};
+	if (searchParam !== '') {NA.trackEvent(searchType, searchParam, function (err, resp) {});}
 
 	// Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
-	if (searchType == 'courseIDSearch' && resultType == 'deptSearch' && reqFilter == '' && proFilter == '' && actFilter == '' && includeOpen == '') {
+	if (searchType 	== 'courseIDSearch' && 
+		resultType 	== 'deptSearch' && 
+		reqFilter 	=== '' && 
+		proFilter 	=== '' && 
+		actFilter 	=== '' && 
+		includeOpen === '') {
 		console.time((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 		db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
 			console.timeEnd((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
@@ -358,7 +364,7 @@ function parseSectionList(JSONString) {
 		var meetArray 		= TimeInfoArray[1];
 		var TimeInfo 		= '';
 		var prereq 			= entry.prerequisite_notes;
-		if (prereq == "") {prereq = "none";}
+		if (prereq === '') {prereq = "none";}
 		var termsOffered 	= entry.course_terms_offered;
 
 		for(var listing in meetArray) {
@@ -366,21 +372,21 @@ function parseSectionList(JSONString) {
 		}
 		if (StatusClass == "OpenSec") {var OpenClose = 'Open';} else {var OpenClose = 'Closed';}
 
-		if (entry.recitations != false) { // If it has recitations
+		if (entry.recitations !== false) { // If it has recitations
 			var AsscList = '<br>Associated Recitations<ul class="AsscText">';
 			for(var key in entry.recitations) { if (entry.recitations.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</span></li>';
 			}}
 			AsscList += '</ul>';
 
-		} else if (entry.labs != false) { // If it has labs
+		} else if (entry.labs !== false) { // If it has labs
 			var AsscList = '<br>Associated Labs<ul class="AsscText">';
 			for(var key in entry.labs) { if (entry.labs.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</span></li>';
 			}}
 			AsscList += '</ul>';
 
-		} else if (entry.lectures != false) { // If it has lectures
+		} else if (entry.lectures !== false) { // If it has lectures
 			var AsscList = '<br>Associated Lectures<ul class="AsscText">';
 			for(var key in entry.lectures) { if (entry.lectures.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</span></li>';
@@ -455,7 +461,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
 	db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
-		if (typeof doc === 'undefined' || typeof doc === null || err != null || doc.length == 0) { // If there is no entry or something else went wrong
+		if (typeof doc === 'undefined' || typeof doc === null || err !== null || doc.length === 0) { // If there is no entry or something else went wrong
 			db.Students.save({'Pennkey': myPennkey, 'StarList': []}); // Make an entry
 			doc[0] = {};
 		}
@@ -517,7 +523,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			while (Object.keys(doc[0].Schedules).indexOf(schedName) != -1) {
 				var lastchar = schedName.split(' ')[schedName.split(' ').length - 1];
 				if (isNaN(lastchar)) {
-					schedName += ' 2'
+					schedName += ' 2';
 				} else {
 					schedName = schedName.slice(0, -1) + (parseInt(lastchar) + 1);
 				}
@@ -528,7 +534,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 
 			schedList = Object.keys(doc[0].Schedules);
 			schedList.push(schedName);
-			console.log((myPennkey + ' Sched duplicated').magenta)
+			console.log((myPennkey + ' Sched duplicated').magenta);
 			return res.send(schedList);
 
 		} else if (addRem == 'del') { // Delete
@@ -538,12 +544,12 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			}
 			db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
 			schedList = Object.keys(doc[0].Schedules);
-			console.log((myPennkey + ' Sched deleted.'))
+			console.log((myPennkey + ' Sched deleted.'));
 			return res.send(schedList);
 		
 		} else if (addRem == 'name') { // If we're getting a list of the schedules
 			schedList = Object.keys(doc[0].Schedules);
-			if (schedList.length == 0) {
+			if (schedList.length === 0) {
 				var placeholder = {};
 				placeholder['Schedules.Schedule'] = {};
 				db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     if (detectIE()) { // IE doesn't do animated SVG's
-        $('#LoadingInfo').html('Loading ...')
+        $('#LoadingInfo').html('Loading ...');
     }
 
     $('a[rel*=leanModal]').leanModal({ top : 70, closeButton: ".modal_close" }); // Define modal close button
@@ -41,7 +41,7 @@ $(document).ready(function () {
                     var image = new Image();
                     image.src = canvas.toDataURL("image/png"); // Convert the canvas to png
                     // window.open(image.src, '_blank'); // Open in new tab
-                    $('#SchedImage').attr('src', canvas.toDataURL("image/png"))
+                    $('#SchedImage').attr('src', canvas.toDataURL("image/png"));
                 }
             }); 
         }
@@ -49,11 +49,11 @@ $(document).ready(function () {
         if ($(this).html() == 'New') {
             var schedName = prompt('Please enter a name for your new schedule.'); 
             while (JSON.parse(sessionStorage.schedList).indexOf(schedName) != -1) {
-                console.log(JSON.parse(sessionStorage.schedList).indexOf(schedName))
+                console.log(JSON.parse(sessionStorage.schedList).indexOf(schedName));
                 // {break}
                 var schedName = prompt('Please enter a unique name for your new schedule.');
             }
-            if (schedName != '' && schedName !== null) {
+            if (schedName !== '' && schedName !== null) {
                 var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
                 SendReq(schedURL, ListScheds, -2);
             }
@@ -121,7 +121,7 @@ $(document).ready(function () {
     });
 
     $('#reqFilter, #proFilter, #openCheck, #closedCheck, #actFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
-        window[sessionStorage.lastReq].apply(this, JSON.parse(sessionStorage.lastPar))
+        window[sessionStorage.lastReq].apply(this, JSON.parse(sessionStorage.lastPar));
     });
 
     $('#searchSelect').change(function () {
@@ -142,7 +142,7 @@ function ListScheds(schedList, theindex) { // Deal with the list of schedules
         $('#schedSelect').append('<option value="'+schedList[schedName]+'">'+schedList[schedName]+'</option>'); // Add options to the schedSelect dropdown
     }}
 
-    if (theindex == 0) { // If this is a simple listing, set the first option as selected
+    if (theindex === 0) { // If this is a simple listing, set the first option as selected
         var schedNameReq = schedList[0];
     } else { // If we just created a new schedule, set that as the default
         var schedNameReq = schedList[schedList.length - 1];
@@ -191,7 +191,7 @@ function initiateSearch() { // Deal with search terms
                 $('#SectionInfo').empty();
             }
 
-        } else if (searchTerms != "" ) { // If there are no good search terms, clear everything
+        } else if (searchTerms !== '' ) { // If there are no good search terms, clear everything
             $('#CourseList').empty();
             $('#SectionTitle').empty();
             $('#SectionList').empty();
@@ -336,15 +336,15 @@ function getCourseNumbers(search, searchSelect, TitleHidden) { // Getting info a
     var requireFilter   = '&reqParam=' + $('#reqFilter').val();
     var programFilter   = '&proParam=' + $('#proFilter').val();
     var activityFilter  = '&actParam=' + $('#actFilter').val();
-    if (requireFilter   == '&reqParam=noFilter')    {requireFilter = ''}
-    if (programFilter   == '&proParam=noFilter')    {programFilter = ''}
-    if (activityFilter  == '&actParam=noFilter')    {activityFilter = ''}
+    if (requireFilter   == '&reqParam=noFilter')    {requireFilter = '';}
+    if (programFilter   == '&proParam=noFilter')    {programFilter = '';}
+    if (activityFilter  == '&actParam=noFilter')    {activityFilter = '';}
 
     sessionStorage.lastReq = 'getCourseNumbers';
     sessionStorage.lastPar = JSON.stringify([search, searchSelect, TitleHidden]);
 
     var searchURL = '/Search?searchType='+searchSelect+'&resultType=deptSearch&searchParam='+search+requireFilter+programFilter+activityFilter;
-    SendReq(searchURL, CourseFormat, []) // Send results to CourseFormat
+    SendReq(searchURL, CourseFormat, []); // Send results to CourseFormat
 
 }
  
@@ -371,8 +371,8 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
  
 function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department
     var activityFilter = '&actParam=' + $('#actFilter').val();
-    if (activityFilter == '&actParam=noFilter') {activityFilter = ''}
-    if ($('#closedCheck').is(':checked')) {searchOpen = ''} else {searchOpen = '&openAllow=true'}
+    if (activityFilter == '&actParam=noFilter') {activityFilter = '';}
+    if ($('#closedCheck').is(':checked')) {searchOpen = '';} else {searchOpen = '&openAllow=true';}
 
     sessionStorage.lastReq = 'getSectionNumbers';
     sessionStorage.lastPar = JSON.stringify([cnum, instFilter, suppress]);
@@ -426,16 +426,16 @@ function SectionInfoFormat(data, passvar) { // Receive section specific info and
         $('#SectionInfo').html('No Results');        
     } else {
         var HTMLinfo = "";
-        if (data.Instructor)        {HTMLinfo += "<span>&nbsp + &nbsp</span>"}
-        if (data.FullID)            {HTMLinfo += "<span>" + data.FullID + "</span>"} // Format the whole response
-        if (data.Title)             {HTMLinfo += " - " + data.Title + "<br><br>"}
-        if (data.Instructor)        {HTMLinfo += "Instructor: " + data.Instructor + "<br><br>"}
-        if (data.Description)       {HTMLinfo += "Description:<br><p class='DescText'>" + data.Description + "</p><br>"}
-        if (data.OpenClose)         {HTMLinfo += "Status: " + data.OpenClose + "<br><br>"}
-        if (data.termsOffered)      {HTMLinfo += data.termsOffered + "<br><br>"}
-        if (data.Prerequisites)     {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br><br>"}
-        if (data.TimeInfo)          {HTMLinfo += data.TimeInfo}
-        if (data.AssociatedSections){HTMLinfo += data.AssociatedSections}
+        if (data.Instructor)        {HTMLinfo += "<span>&nbsp + &nbsp</span>";}
+        if (data.FullID)            {HTMLinfo += "<span>" + data.FullID + "</span>";} // Format the whole response
+        if (data.Title)             {HTMLinfo += " - " + data.Title + "<br><br>";}
+        if (data.Instructor)        {HTMLinfo += "Instructor: " + data.Instructor + "<br><br>";}
+        if (data.Description)       {HTMLinfo += "Description:<br><p class='DescText'>" + data.Description + "</p><br>";}
+        if (data.OpenClose)         {HTMLinfo += "Status: " + data.OpenClose + "<br><br>";}
+        if (data.termsOffered)      {HTMLinfo += data.termsOffered + "<br><br>";}
+        if (data.Prerequisites)     {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br><br>";}
+        if (data.TimeInfo)          {HTMLinfo += data.TimeInfo;}
+        if (data.AssociatedSections){HTMLinfo += data.AssociatedSections;}
         $('#SectionInfo').html(HTMLinfo);
     }
 }
@@ -510,7 +510,7 @@ function SpitSched(courseSched) {
  
     // Set initial values
     var weekdays = ['M', 'T', 'W', 'R', 'F'];
-    var fullWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    var fullWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     var startHour = 10; // start at 10
     var endHour = 15; // end at 3pm
     var percentWidth = 20; // five day default
@@ -535,8 +535,8 @@ function SpitSched(courseSched) {
         }
     }}
  
-    if (incSun == 1) {weekdays.unshift('U'); fullWeekdays.unshift('Sunday')} // Update weekdays array if necessary
-    if (incSat == 1) {weekdays.push('S'); fullWeekdays.push('Saturday')}
+    if (incSun == 1) {weekdays.unshift('U'); fullWeekdays.unshift('Sunday');} // Update weekdays array if necessary
+    if (incSat == 1) {weekdays.push('S'); fullWeekdays.push('Saturday');}
  
     var percentWidth = 100 / (5 + incSun + incSat); // Update the block width if necessary
     var halfScale = 95 / (endHour - startHour + 1); // This defines the scale to be used throughout the scheduling process
@@ -552,7 +552,7 @@ function SpitSched(courseSched) {
             $('#Schedule').append('<hr width="100%"style="top:'+toppos+'%" >'); // add time line
         }    
         for (var daynum in weekdays) {
-            $('#Schedule').append('<div class="DayName" style="width:'+ percentWidth +'%;">'+fullWeekdays[daynum]+'</div>')
+            $('#Schedule').append('<div class="DayName" style="width:'+ percentWidth +'%;">'+fullWeekdays[daynum]+'</div>');
         }
     } else {
         $('#Schedule').html('<span>Click a section\'s + icon to add it to the schedule</span>'); // Clear
@@ -561,7 +561,7 @@ function SpitSched(courseSched) {
     // Define the color map
     var colorMap = {};
     var colorinc = 0;
-    var colorPal = JSON.parse(sessionStorage.colorPalette)
+    var colorPal = JSON.parse(sessionStorage.colorPalette);
     for (var sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
         colorMap[courseSched[sec].fullCourseName] = colorPal[colorinc]; // assign each section a color
         colorinc += 1;
@@ -578,7 +578,7 @@ function SpitSched(courseSched) {
             }
             var blocktop    = (courseSched[sec].meetHour - startHour) * halfScale + 9; // determine top spacing based on time from startHour (offset for prettiness)
             var blockheight = courseSched[sec].HourLength * halfScale;
-            var blockname   = courseSched[sec].fullCourseName
+            var blockname   = courseSched[sec].fullCourseName;
             var meetRoom    = courseSched[sec].meetRoom;
             var thiscol     = colorMap[courseSched[sec].fullCourseName]; // Get the color
             if(typeof thiscol === 'undefined'){thiscol = '#E6E6E6';}
@@ -603,7 +603,7 @@ function SpitSched(courseSched) {
 
                         $('#'+newid).css('width', (oldBlockWidth / 2) + '%'); // Resize new block
                         var newleft = ($('#'+newid).offset().left - $('#Schedule').offset().left) * 100 / $('#Schedule').outerWidth(); // Get shift in terms of percentage, not pixels
-                        $('#'+newid).css('left', newleft + (oldBlockWidth / 2) + '%') // Shift new block
+                        $('#'+newid).css('left', newleft + (oldBlockWidth / 2) + '%'); // Shift new block
                     }
                 }
             });
@@ -639,6 +639,6 @@ function detectIE() {
     if (msie > 0 || trident > 0) {
         return true;
     } else {
-        return false
+        return false;
     }
 }
