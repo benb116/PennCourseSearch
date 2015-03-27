@@ -108,7 +108,9 @@ ul {
 #SectionList li span:nth-child(3),
 #SectionInfo span:nth-child(1) {cursor: pointer;}
 #CourseList li:active, 
-#SectionList li span:active {background-color: #00B3FF;}
+#SectionList li span:nth-child(3):active {background-color: #00B3FF;}
+#SectionList i:nth-child(1):active {color: #00B3FF;}
+
 .OpenSec {background-color: #47EA4C;}
 .ClosedSec {background-color: #F73B3B;}
 .ErrorSec {background-color: #E6E6E6;}

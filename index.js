@@ -44,7 +44,7 @@ app.use(stormpath.init(app, {
 	application:  config.STORMPATH_URL,
 	enableAccountVerification: 	true,
 	enableForgotPassword: 		true,
-	sessionDuration: 				1000 * 60 * 60 * 24 * 7, // Make sessions expire after one week
+	sessionDuration: 			1000 * 60 * 60 * 24 * 7, // Make sessions expire after one week
 }));
 
 // Connect to database
@@ -69,8 +69,6 @@ var subtitles = ["Cause PennInTouch sucks",
 
 var paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";
 var paymentNotes = ["PennCourseSearch%20rocks%20my%20socks!",
-					"That%20high%20quality%20PCS%20jawn",
-					"The%20power%20of%20Christ%20compelled%20me.",
 					"Donation%20to%20PennInTouch%20Sucks,%20Inc.",
 					"For%20your%20next%20trip%20to%20Wawa"];
 
@@ -85,7 +83,7 @@ app.get('/', function(req, res) {
 		thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 		fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
 		
-		NA.trackPage('Home', '/', function (err, resp) {});
+		NA.trackPage('Home', req.user.email.split('@')[0], function (err, resp) {});
 		return res.render('index', { // Send page
 			title: 'PennCourseSearch',
 			subtitle: thissub,
@@ -215,6 +213,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	var actFilter		= req.query.actParam;
 	var includeOpen		= req.query.openAllow;
 	var includeClosed	= req.query.closedAllow;
+	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
 	// Building the request URI
 	if (typeof reqFilter 	=== 'undefined') {reqFilter 	= '';} else {reqFilter 	= '&fulfills_requirement='+reqFilter;}
@@ -233,7 +232,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	// instructFilter is an extra parameter that allows further filtering of section results by instructor.
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
 
-	if (searchParam !== '') {NA.trackEvent(searchType, searchParam, function (err, resp) {});}
+	if (searchParam !== '') {NA.trackEvent(searchType, searchParam, myPennkey, function (err, resp) {});}
 
 	// Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
 	if (searchType 	== 'courseIDSearch' && 
@@ -242,9 +241,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		proFilter 	=== '' && 
 		actFilter 	=== '' && 
 		includeOpen === '') {
-		console.time((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
+		console.time((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 		db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
-			console.timeEnd((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
+			console.timeEnd((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 			try {
 				return res.send(doc[0].Courses);
 			} catch(err) {
@@ -363,8 +362,8 @@ function parseSectionList(JSONString) {
 		var StatusClass 	= TimeInfoArray[0];
 		var meetArray 		= TimeInfoArray[1];
 		var TimeInfo 		= '';
-		var prereq 			= entry.prerequisite_notes;
-		if (prereq === '') {prereq = "none";}
+		var prereq 			= entry.prerequisite_notes[0];
+		if (typeof prereq === 'undefined') {prereq = "none";}
 		var termsOffered 	= entry.course_terms_offered;
 
 		for(var listing in meetArray) {
@@ -433,7 +432,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 
 		if (addRem == 'add') { 
 			console.log((myPennkey + ' Star: '+ courseID).cyan);
-			NA.trackEvent('Star', courseID, function (err, resp) {});
+			NA.trackEvent('Star', courseID, myPennkey, function (err, resp) {});
 			var index = StarredCourses.indexOf(courseID);
 			if (index == -1) {StarredCourses.push(courseID);} // If the section is not already in the list
 
@@ -448,7 +447,6 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 		}
 
 		db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database
-
 		return res.send(StarredCourses);
 	});
 });
@@ -495,7 +493,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 				var placeholder = {};
 				placeholder['Schedules.' + schedName] = SchedCourses;
 				db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-				NA.trackEvent('Sched', courseID, function (err, resp) {});
+				NA.trackEvent('Sched', courseID, myPennkey, function (err, resp) {});
 				return res.send(SchedCourses);
 			});
 
