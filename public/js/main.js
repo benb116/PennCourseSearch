@@ -6,20 +6,11 @@ $(document).ready(function () {
     $('a[rel*=leanModal]').leanModal({ top : 70, closeButton: ".modal_close" }); // Define modal close button
 
     // The delay function that prevents immediate requests
-    var delay = (function(){
-        var timer = 0;
-        return function(callback, ms){
-        clearTimeout (timer);
-        timer = setTimeout(callback, ms);
-        };
-    })();
+    var delay = (function(){var timer = 0;return function(callback, ms){clearTimeout (timer);timer = setTimeout(callback, ms);};})();
  
     //+ Jonas Raoni Soares Silva
     //@ http://jsfromhell.com/array/shuffle [v1.0]
-    function shuffle(o){ //v1.0
-        for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-        return o;
-    }
+    function shuffle(o){ for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)return o}
 
     // Global variables
     LoadingSum      = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
@@ -27,11 +18,11 @@ $(document).ready(function () {
     if (sessionStorage.colorPalette) {
         var colorPalette = JSON.parse(sessionStorage.colorPalette);
     } else {
-        var colorPalette    = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#ecf0f1','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF'];
+        var colorPalette    = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF','#ecf0f1'];
         sessionStorage.colorPalette = JSON.stringify(colorPalette);
     }
 
-    var schedURL = "/Sched?addRem=name&courseID=blank"; // Make the request
+    var schedURL = "/Sched?addRem=name&courseID=blank"; // Make the initial schedule list request
     SendReq(schedURL, ListScheds, 0);
 
     $('#MenuButtons li ul li').click(function() { // If the user clicks a Schedule button
@@ -67,6 +58,19 @@ $(document).ready(function () {
                 type: "success",   
                 timer: 1000
             });
+        }
+
+        if ($(this).html() == 'Rename') {
+            var schedName = $("#schedSelect").val();
+            var schedRename = prompt('Please enter a name for your new schedule.'); 
+            while (JSON.parse(sessionStorage.schedList).indexOf(schedRename) != -1) {
+                // {break}
+                schedRename = prompt('Please enter a unique name for your new schedule.');
+            }
+            if (schedName !== '' && schedName !== null) {
+                var schedURL = "/Sched?addRem=ren&courseID=blank&schedName="+schedName+"&schedRename="+schedRename; // Make the request
+                SendReq(schedURL, ListScheds, -2);
+            }
         }
 
         if ($(this).html() == 'Clear') {
@@ -360,7 +364,10 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     } else {
         for(var course in JSONRes) { if (JSONRes.hasOwnProperty(course)) { // Add a line for each course
             pcrFrac = Number(JSONRes[course].PCR) / 4;
-            allHTML += '<li><span class="PCR" style="background-color:rgba(45, 160, 240, '+pcrFrac*pcrFrac+')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;<span class="courseNumber">'+JSONRes[course].courseListName+'</span><span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
+            allHTML += '<li><span class="PCR tooltip" title="'+JSONRes[course].PCR+
+            '" style="background-color:rgba(45, 160, 240, '+pcrFrac*pcrFrac+')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;'+
+            '<span class="courseNumber">'+JSONRes[course].courseListName+'</span>'+
+            '<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
         }}
     }
     $('#CourseList').html(allHTML); // Put the course number list in #CourseList
@@ -371,6 +378,7 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
         pcrFrac = PCR / 4;
         $(this).css('background-color', 'rgba(45, 160, 240, '+pcrFrac*pcrFrac+')');
     });
+    // $('.tooltip').tooltipster({ animation: 'fade', delay: 700, touchDevices: false, interactive: true, trigger: 'hover', position: 'left', offsetX: -50});
 }
  
 function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department
@@ -414,7 +422,11 @@ function FormatSectionsList(stars, sections) { // Receive section and star info 
             if (meet.substring(0, sections[section].SectionName.replace(/ /g, '').length) == sections[section].SectionName.replace(/ /g, '')) {plusCross = 'times';}
         });
 
-        allHTML += '<li id="' + sections[section].SectionName.replace(/ /g,'') + '"><i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp<span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[section].SectionName + sections[section].TimeInfo+'</span><i class="'+starClass+'"></i></li>';
+        allHTML += '<li id="' + sections[section].SectionName.replace(/ /g,'') + '">'+
+            '<i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp'+
+            '<span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
+            '<span>'+sections[section].SectionName + sections[section].TimeInfo+'</span>'+
+            '<i class="'+starClass+'"></i></li>';
     }}
     if (typeof section === 'undefined') {
         $('#SectionTitle').html('No Results');

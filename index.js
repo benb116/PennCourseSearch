@@ -456,6 +456,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 
 	var SchedCourses 	= {};
 	var schedName 		= req.query.schedName;
+	var schedRename		= req.query.schedRename;
 	var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
 	db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
@@ -519,11 +520,12 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 
 		} else if (addRem == 'dup') { // Duplicate a schedule
 			while (Object.keys(doc[0].Schedules).indexOf(schedName) != -1) {
-				var lastchar = schedName.split(' ')[schedName.split(' ').length - 1];
-				if (isNaN(lastchar)) {
+				var lastchar = schedName[schedName.length - 1];
+				console.log(lastchar)
+				if (isNaN(lastchar) || schedName[schedName.length - 2] != ' ') { // e.g. 'schedule' or 'ABC123'
 					schedName += ' 2';
-				} else {
-					schedName = schedName.slice(0, -1) + (parseInt(lastchar) + 1);
+				} else { // e.g. 'MEAM 101 2'
+					schedName = schedName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
 				}
 			}
 			var placeholder = {};
@@ -535,6 +537,14 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			console.log((myPennkey + ' Sched duplicated').magenta);
 			return res.send(schedList);
 
+		} else if (addRem == 'ren') { // Delete
+			doc[0].Schedules[schedRename] = doc[0].Schedules[schedName];
+			delete doc[0].Schedules[schedName];
+			db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
+			schedList = Object.keys(doc[0].Schedules);
+			console.log((myPennkey + ' Sched renamed.'));
+			return res.send(schedList);
+		
 		} else if (addRem == 'del') { // Delete
 			delete doc[0].Schedules[schedName];
 			if(Object.getOwnPropertyNames(doc[0].Schedules).length === 0){
