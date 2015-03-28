@@ -51,7 +51,7 @@ app.use(stormpath.init(app, {
 var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
 		db = mongojs.connect(uri, ["Students", "Courses2015C"]);
 
-NA.initialize('UA-49014722-4', 'penncoursesearch.com');
+NA.initialize('UA-49014722-4', 'www.penncoursesearch.com');
 
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
