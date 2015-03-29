@@ -6,7 +6,7 @@ var request 	= require("request");
 var mongojs 	= require("mongojs");
 var colors 		= require('colors');
 var fs 			= require('fs');
-var NA 			= require("nodealytics");
+var Keen 		= require('keen-js')
 
 // I don't want to host a config file on github. When running locally, the app has access to a local config file.
 // On Heroku, there is no config file so I use environment variables instead
@@ -51,7 +51,11 @@ app.use(stormpath.init(app, {
 var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
 		db = mongojs.connect(uri, ["Students", "Courses2015C"]);
 
-NA.initialize('UA-49014722-4', 'www.penncoursesearch.com');
+// Set up Keen Analytics
+var client = new Keen({
+    projectId: config.KeenIOID,   // String (required always)
+    writeKey: config.KeenIOWriteKey     // String (required for sending data)
+});
 
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
@@ -79,13 +83,10 @@ app.get('/', function(req, res) {
 	if (!req.user) {
 		return res.render('welcome');
 	} else {
-		// console.log(req.user.email.split('@')[0] + ' Page Request');
+		console.log(req.user.email.split('@')[0] + ' Page Request');
 		thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 		fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
 		
-		NA.trackPage('Home', req.user.email.split('@')[0], function (err, resp) {
-			console.log(req.user.email.split('@')[0] + ' Page Request');
-		});
 		return res.render('index', { // Send page
 			title: 'PennCourseSearch',
 			subtitle: thissub,
@@ -233,7 +234,18 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	// However, clicking on one of those courses will show all sections, including those not taught by the instructor.
 	// instructFilter is an extra parameter that allows further filtering of section results by instructor.
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
-
+	
+	var searchEvent = {
+		searchType: searchType,  
+		searchParam: searchParam,
+		user: myPennkey,
+		keen: {
+			timestamp: new Date().toISOString()
+		}
+	};
+	client.addEvent('Search', searchEvent, function(err, res) {
+		if (err) {console.log(err)}
+	});
 
 	// Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
 	if (searchType 	== 'courseIDSearch' && 
@@ -244,9 +256,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		includeOpen === '') {
 		console.time((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 		db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
-			if (searchParam !== '') {NA.trackEvent(searchType, searchParam, myPennkey, function (err, resp) {
-				console.timeEnd((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
-			});}
+			console.timeEnd((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 			try {
 				return res.send(doc[0].Courses);
 			} catch(err) {
@@ -259,7 +269,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		// 	else {return res.send(JSON.parse(data));}
 		// });
 	} else {
-		console.time((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
+		console.time((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 	    request({
 			uri: baseURL,
 			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
@@ -268,9 +278,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 				console.error('Request failed:', error);
 				return res.send('PCSERROR: request failed');
 			}
-			if (searchParam !== '') {NA.trackEvent(searchType, searchParam, myPennkey, function (err, resp) {
-				console.timeEnd((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
-			});}
+			console.timeEnd((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 
 			// Send the raw data to the appropriate formatting function
 			if 			(resultType == 'deptSearch'){
@@ -436,12 +444,19 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 		var courseID = req.query.courseID;
 
 		if (addRem == 'add') { 
-			
-			NA.trackEvent('Star', courseID, myPennkey, function (err, resp) {
-				console.log((myPennkey + ' Star: '+ courseID).cyan);
-			});
+			console.log((myPennkey + ' Star: '+ courseID).cyan);
 			var index = StarredCourses.indexOf(courseID);
 			if (index == -1) {StarredCourses.push(courseID);} // If the section is not already in the list
+				var starEvent = {
+					starCourse: courseID,
+					user: myPennkey,
+					keen: {
+						timestamp: new Date().toISOString()
+					}
+				};
+				client.addEvent('Star', starEvent, function(err, res) {
+					if (err) {console.log(err)}
+				});
 
 		} else if (addRem == 'rem') { // If we need to remove
 			console.log((myPennkey + ' Unstar: '+ courseID).cyan);
@@ -496,14 +511,21 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 				resJSON = getSchedInfo(body); // Format the response
 				for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
 					SchedCourses[JSONSecID] = resJSON[JSONSecID];
-					
+					console.log((myPennkey + ' Sched Added: ' + JSONSecID).magenta);
 				}}
+				var schedEvent = {
+					schedCourse: courseID,
+					user: myPennkey,
+					keen: {
+						timestamp: new Date().toISOString()
+					}
+				};
+				client.addEvent('Sched', schedEvent, function(err, res) {
+					if (err) {console.log(err)}
+				});
 				var placeholder = {};
 				placeholder['Schedules.' + schedName] = SchedCourses;
 				db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-				NA.trackEvent('Sched', courseID, myPennkey, function (err, resp) {
-					console.log((myPennkey + ' Sched Added: ' + courseID).magenta);
-				});
 				return res.send(SchedCourses);
 			});
 

@@ -1,0 +1,17 @@
+.bowerrc
+.DS_Store
+.git*
+*.log
+*.md
+*.yml
+.tmp*
+.awspublish-*
+
+bower.json
+gulpfile.js
+karma.conf.js
+
+bower_components
+docs
+dist
+test
