@@ -6,7 +6,7 @@ var request 	= require("request");
 var mongojs 	= require("mongojs");
 var colors 		= require('colors');
 var fs 			= require('fs');
-var Keen 		= require('keen-js')
+var Keen 		= require('keen-js');
 
 // I don't want to host a config file on github. When running locally, the app has access to a local config file.
 // On Heroku, there is no config file so I use environment variables instead
@@ -24,6 +24,8 @@ try {
 	config.STORMPATH_API_KEY_SECRET = process.env.STORMPATH_API_KEY_SECRET;
 	config.STORMPATH_SECRET_KEY 	= process.env.STORMPATH_SECRET_KEY;
 	config.STORMPATH_URL 			= process.env.STORMPATH_URL;
+	config.KeenIOID					= process.env.KEENIOID;
+	config.KeenIOWriteKey			= process.env.KEENIOWRITEKEY;
 }
 
 var app = express();
@@ -244,7 +246,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		}
 	};
 	client.addEvent('Search', searchEvent, function(err, res) {
-		if (err) {console.log(err)}
+		if (err) {console.log(err);}
 	});
 
 	// Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
@@ -259,7 +261,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 			console.timeEnd((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 			try {
 				return res.send(doc[0].Courses);
-			} catch(err) {
+			} catch (err) {
 				return res.send({});
 			}
 		});
@@ -455,7 +457,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 					}
 				};
 				client.addEvent('Star', starEvent, function(err, res) {
-					if (err) {console.log(err)}
+					if (err) {console.log(err);}
 				});
 
 		} else if (addRem == 'rem') { // If we need to remove
@@ -521,7 +523,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 					}
 				};
 				client.addEvent('Sched', schedEvent, function(err, res) {
-					if (err) {console.log(err)}
+					if (err) {console.log(err);}
 				});
 				var placeholder = {};
 				placeholder['Schedules.' + schedName] = SchedCourses;
@@ -552,7 +554,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 		} else if (addRem == 'dup') { // Duplicate a schedule
 			while (Object.keys(doc[0].Schedules).indexOf(schedName) != -1) {
 				var lastchar = schedName[schedName.length - 1];
-				console.log(lastchar)
 				if (isNaN(lastchar) || schedName[schedName.length - 2] != ' ') { // e.g. 'schedule' or 'ABC123'
 					schedName += ' 2';
 				} else { // e.g. 'MEAM 101 2'
