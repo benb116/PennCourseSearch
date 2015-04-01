@@ -490,7 +490,6 @@ function StarHandle(data, addRem) {
 function StarFormat(sections) { // Format starred section list
     var starClass = 'fa fa-star';
     var allHTML = '';
-    console.log(sections)
     for(var section in sections[0]) { if (sections[0].hasOwnProperty(section)) {
         var plusCross = 'plus';
         var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) { return el.fullCourseName.replace(/ /g, ''); });

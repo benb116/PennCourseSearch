@@ -24,8 +24,8 @@ try {
 	config.STORMPATH_API_KEY_SECRET = process.env.STORMPATH_API_KEY_SECRET;
 	config.STORMPATH_SECRET_KEY 	= process.env.STORMPATH_SECRET_KEY;
 	config.STORMPATH_URL 			= process.env.STORMPATH_URL;
-	config.KeenIOID					= process.env.KEENIOID;
-	config.KeenIOWriteKey			= process.env.KEENIOWRITEKEY;
+	config.KeenIOID					= process.env.KEEN_PROJECT_ID;
+	config.KeenIOWriteKey			= process.env.KEEN_WRITE_KEY;
 }
 
 var app = express();

@@ -6,4 +6,11 @@ Students can search departments, courses, and sections as well as descriptions a
 
 The server is written using NodeJS and the app is currently hosted on Heroku.
 
+Specific files you may be interested in:
+
+* [Server JS](https://github.com/benb116/PennCourseSearch/blob/master/index.js)
+* [Client JS](https://github.com/benb116/PennCourseSearch/blob/master/public/js/main.js)
+* [CSS](https://github.com/benb116/PennCourseSearch/blob/master/public/css/index.css)
+* [HTML Template](https://github.com/benb116/PennCourseSearch/blob/master/views/index.hjs)
+
 If you have questions, ideas, bug reports, or if you'd like to suggest a new subtitle, let me know.
