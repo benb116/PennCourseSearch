@@ -10,8 +10,10 @@ $(document).ready(function () {
  
     //+ Jonas Raoni Soares Silva
     //@ http://jsfromhell.com/array/shuffle [v1.0]
-    function shuffle(o){ for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)return o}
-
+    shuffle = function(v){
+        for(var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
+        return v;
+    };
     // Global variables
     LoadingSum      = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
     TitleHidden     = true; // Are the titles of courses in #Courselist hidden or not
@@ -110,6 +112,7 @@ $(document).ready(function () {
         }
         if ($(this).html() == 'Recolor') {
             newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
+            console.log(newcolorPalette)
             sessionStorage.colorPalette = JSON.stringify(colorPalette);
             SpitSched(JSON.parse(sessionStorage.currentSched));
         }
@@ -457,6 +460,7 @@ function SectionInfoFormat(data, passvar) { // Receive section specific info and
         if (data.termsOffered)      {HTMLinfo += data.termsOffered + "<br><br>";}
         if (data.Prerequisites)     {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br><br>";}
         if (data.TimeInfo)          {HTMLinfo += data.TimeInfo;}
+        console.log(data.AssociatedSections)
         if (data.AssociatedSections){HTMLinfo += data.AssociatedSections;}
         $('#SectionInfo').html(HTMLinfo);
     }

@@ -271,7 +271,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		// 	else {return res.send(JSON.parse(data));}
 		// });
 	} else {
-		console.time((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
+		console.time((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 	    request({
 			uri: baseURL,
 			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
@@ -280,7 +280,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 				console.error('Request failed:', error);
 				return res.send('PCSERROR: request failed');
 			}
-			console.timeEnd((req.user.email.split('@')[0] + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
+			console.timeEnd((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 
 			// Send the raw data to the appropriate formatting function
 			if 			(resultType == 'deptSearch'){
@@ -322,8 +322,8 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 			var StartTime 		= JSONObj.meetings[meeting].start_time.split(" ")[0]; // Get start time
 			var EndTime 		= JSONObj.meetings[meeting].end_time.split(" ")[0];
 
-			if (StartTime[0] == '0') 	{StartTime = StartTime.slice(1);} // If it's 08:00, make it 8:00
-			if (EndTime[0] == '0')		{EndTime = EndTime.slice(1);}
+			if (StartTime[0] 	== '0') {StartTime = StartTime.slice(1);} // If it's 08:00, make it 8:00
+			if (EndTime[0] 		== '0')	{EndTime = EndTime.slice(1);}
 
 			var MeetDays = JSONObj.meetings[meeting].meeting_days; // Output like MWF or TR
 			meetListInfo = ' - '+StartTime+" to "+EndTime+" on "+MeetDays;
@@ -386,21 +386,22 @@ function parseSectionList(JSONString) {
 		}
 		if (StatusClass == "OpenSec") {var OpenClose = 'Open';} else {var OpenClose = 'Closed';}
 
-		if (entry.recitations !== false) { // If it has recitations
+		console.log(entry.recitations.length)
+		if (entry.recitations.length !== 0) { // If it has recitations
 			var AsscList = '<br>Associated Recitations<ul class="AsscText">';
 			for(var key in entry.recitations) { if (entry.recitations.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</span></li>';
 			}}
 			AsscList += '</ul>';
 
-		} else if (entry.labs !== false) { // If it has labs
+		} else if (entry.labs.length !== 0) { // If it has labs
 			var AsscList = '<br>Associated Labs<ul class="AsscText">';
 			for(var key in entry.labs) { if (entry.labs.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</span></li>';
 			}}
 			AsscList += '</ul>';
 
-		} else if (entry.lectures !== false) { // If it has lectures
+		} else if (entry.lectures.length !== 0) { // If it has lectures
 			var AsscList = '<br>Associated Lectures<ul class="AsscText">';
 			for(var key in entry.lectures) { if (entry.lectures.hasOwnProperty(key)) { 
 				AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</span></li>';
