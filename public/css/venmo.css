@@ -4,7 +4,7 @@
   border-radius: 4px 0px 0px 4px;
   border: 1px #3f94d0 solid;
   position: absolute;
-  left: calc(25% - 60px);
+  left: calc(16% - 30px);
   width: 30px;
   height: 24px;
   background-color: #3f94d0;
@@ -20,7 +20,7 @@
   border: 1px #3f94d0 solid;
   border-left: 0;
   position: absolute;
-  left: calc(25% - 30px);
+  left: calc(16%);
   padding: 0px 4px;
   width: 100px;
   height: 24px;

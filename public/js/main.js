@@ -367,7 +367,7 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     } else {
         for(var course in JSONRes) { if (JSONRes.hasOwnProperty(course)) { // Add a line for each course
             pcrFrac = Number(JSONRes[course].PCR) / 4;
-            allHTML += '<li><span class="PCR tooltip" title="'+JSONRes[course].PCR+
+            allHTML += '<li><span class="PCR tooltip" title="PCR: '+JSONRes[course].PCR+
             '" style="background-color:rgba(45, 160, 240, '+pcrFrac*pcrFrac+')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;'+
             '<span class="courseNumber">'+JSONRes[course].courseListName+'</span>'+
             '<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
@@ -381,7 +381,7 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
         pcrFrac = PCR / 4;
         $(this).css('background-color', 'rgba(45, 160, 240, '+pcrFrac*pcrFrac+')');
     });
-    // $('.tooltip').tooltipster({ animation: 'fade', delay: 700, touchDevices: false, interactive: true, trigger: 'hover', position: 'left', offsetX: -50});
+    $('.tooltip').tooltipster({ animation: 'fade', delay: 700, touchDevices: false, interactive: true, trigger: 'hover', position: 'right'});
 }
  
 function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department

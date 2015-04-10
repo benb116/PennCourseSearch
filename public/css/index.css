@@ -382,8 +382,8 @@ form > input[type="text"] {
     top: 10px; left: 15px;
     cursor: pointer;
 }
-.ModalHalf {
-    display: inline-block; width: 49%;
+.ModalThird {
+    display: inline-block; width: 30%;
     vertical-align: top;
 }
 #SchedImage {
