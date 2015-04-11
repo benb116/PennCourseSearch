@@ -11,7 +11,7 @@ var Keen 		= require('keen-js');
 // I don't want to host a config file on github. When running locally, the app has access to a local config file.
 // On Heroku, there is no config file so I use environment variables instead
 try {
-	var config = require('./PCSconfig.js');
+	var config = require('./config.js');
 } catch (err) { // If there is no config file
 	var config = {};
 	config.requestAB 				= process.env.REQUESTAB;
