@@ -85,7 +85,7 @@ app.get('/', function(req, res) {
 	if (!req.user) { // If the user is not logged in
 		return res.render('welcome');
 	} else {
-		console.log(req.user.email.split('@')[0] + ' Page Request');
+		// console.log(req.user.email.split('@')[0] + ' Page Request');
 		thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 		fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
 		
