@@ -256,9 +256,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		actFilter 	=== '' && 
 		includeOpen === '') {
 
-		// console.time((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
+		console.time(('DB: ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 		db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
-			// console.timeEnd((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
+			console.timeEnd(('DB: ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 			try {
 				return res.send(doc[0].Courses);
 			} catch (err) {
@@ -267,7 +267,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		});
 		
 	} else {
-		// console.time((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
+		console.time(('API: ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 	    request({
 			uri: baseURL,
 			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
@@ -276,7 +276,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 				console.error('Request failed:', error);
 				return res.send('PCSERROR: request failed');
 			}
-			// console.timeEnd((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
+			console.timeEnd(('API: ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 
 			// Send the raw data to the appropriate formatting function
 			if 			(resultType == 'deptSearch'){
