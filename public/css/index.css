@@ -63,6 +63,7 @@ h1 {
 #CourseList {
     min-width: 120px;
     max-width: 250px;
+    /*padding-top: 1em;*/
     margin-left: 2.5%;
     text-align: left;
     overflow-y: scroll;

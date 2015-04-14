@@ -99,7 +99,7 @@ app.get('/', function(req, res) {
 });
 
 // This request manager is for spitting the department lists. They are saved for faster responses.
-app.get('/Spit', function(req, res) {
+app.get('/Spit', stormpath.loginRequired, function(req, res) {
 	var thedept = req.query.dept;
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
 
@@ -127,7 +127,7 @@ app.get('/Spit', function(req, res) {
 });
 
 // This request manager is for spitting the PCR reviews. They are saved for faster responses
-app.get('/PCRSpitRev', function(req, res) { 
+app.get('/PCRSpitRev', stormpath.loginRequired, function(req, res) { 
 	var thedept = req.query.dept;
 	console.log(('PCR Rev Spit: '+thedept).blue);
 	request({
@@ -179,7 +179,7 @@ app.get('/PCRSpitRev', function(req, res) {
 });
 
 // This request manager adds the PCR data from PCRSpitRev to the data from Spit
-app.get('/Match', function(req, res) {
+app.get('/Match', stormpath.loginRequired, function(req, res) {
 	var thedept = req.query.dept;
 	var dept = JSON.parse(fs.readFileSync('./'+currentTerm+'/'+thedept+'.json', 'utf8')); // Get spit data
 	var deptrev = JSON.parse(fs.readFileSync('./2015ARev/'+thedept+'.json', 'utf8')); // Get PCR data
@@ -256,9 +256,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		actFilter 	=== '' && 
 		includeOpen === '') {
 
-		console.time(('DB: ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
+		// console.time(('DB: ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 		db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
-			console.timeEnd(('DB: ' + searchType + ': ' + searchParam+'  Request Time').yellow);
+			// console.timeEnd(('DB: ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 			try {
 				return res.send(doc[0].Courses);
 			} catch (err) {
@@ -267,7 +267,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		});
 		
 	} else {
-		console.time(('API: ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
+		// console.time(('API: ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 	    request({
 			uri: baseURL,
 			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
@@ -276,7 +276,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 				console.error('Request failed:', error);
 				return res.send('PCSERROR: request failed');
 			}
-			console.timeEnd(('API: ' + searchType + ': ' + searchParam+'  Request Time').yellow);
+			// console.timeEnd(('API: ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 
 			// Send the raw data to the appropriate formatting function
 			if 			(resultType == 'deptSearch'){
