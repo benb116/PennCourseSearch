@@ -82,10 +82,10 @@ var currentTerm = '2015C';
 
 // Handle main page requests
 app.get('/', function(req, res) {
-	if (!req.user) {
+	if (!req.user) { // If the user is not logged in
 		return res.render('welcome');
 	} else {
-		console.log(req.user.email.split('@')[0] + ' Page Request');
+		// console.log(req.user.email.split('@')[0] + ' Page Request');
 		thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 		fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
 		
@@ -99,7 +99,7 @@ app.get('/', function(req, res) {
 });
 
 // This request manager is for spitting the department lists. They are saved for faster responses.
-app.get('/Spit', function(req, res) {
+app.get('/Spit', stormpath.loginRequired, function(req, res) {
 	var thedept = req.query.dept;
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
 
@@ -127,7 +127,7 @@ app.get('/Spit', function(req, res) {
 });
 
 // This request manager is for spitting the PCR reviews. They are saved for faster responses
-app.get('/PCRSpitRev', function(req, res) { 
+app.get('/PCRSpitRev', stormpath.loginRequired, function(req, res) { 
 	var thedept = req.query.dept;
 	console.log(('PCR Rev Spit: '+thedept).blue);
 	request({
@@ -179,7 +179,7 @@ app.get('/PCRSpitRev', function(req, res) {
 });
 
 // This request manager adds the PCR data from PCRSpitRev to the data from Spit
-app.get('/Match', function(req, res) {
+app.get('/Match', stormpath.loginRequired, function(req, res) {
 	var thedept = req.query.dept;
 	var dept = JSON.parse(fs.readFileSync('./'+currentTerm+'/'+thedept+'.json', 'utf8')); // Get spit data
 	var deptrev = JSON.parse(fs.readFileSync('./2015ARev/'+thedept+'.json', 'utf8')); // Get PCR data
@@ -237,6 +237,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 	// instructFilter is an extra parameter that allows further filtering of section results by instructor.
 	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
 	
+	// Keen.io logging
 	var searchEvent = {
 		searchType: searchType,  
 		searchParam: searchParam,
@@ -245,9 +246,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 			timestamp: new Date().toISOString()
 		}
 	};
-	client.addEvent('Search', searchEvent, function(err, res) {
-		if (err) {console.log(err);}
-	});
+	client.addEvent('Search', searchEvent, function(err, res) {if (err) {console.log(err);}});
 
 	// Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
 	if (searchType 	== 'courseIDSearch' && 
@@ -256,22 +255,19 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 		proFilter 	=== '' && 
 		actFilter 	=== '' && 
 		includeOpen === '') {
-		console.time((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
+
+		// console.time(('DB: ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 		db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
-			console.timeEnd((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
+			// console.timeEnd(('DB: ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 			try {
 				return res.send(doc[0].Courses);
 			} catch (err) {
 				return res.send({});
 			}
 		});
-
-		// fs.readFile('./'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
-		// 	if (err) {return res.send({});}
-		// 	else {return res.send(JSON.parse(data));}
-		// });
+		
 	} else {
-		console.time((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
+		// console.time(('API: ' + searchType + ': ' + searchParam+'  Request Time').yellow); // Start the timer
 	    request({
 			uri: baseURL,
 			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
@@ -280,7 +276,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 				console.error('Request failed:', error);
 				return res.send('PCSERROR: request failed');
 			}
-			console.timeEnd((myPennkey + ' ' + searchType + ': ' + searchParam+'  Request Time').yellow);
+			// console.timeEnd(('API: ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 
 			// Send the raw data to the appropriate formatting function
 			if 			(resultType == 'deptSearch'){
@@ -331,7 +327,7 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 		}}
 	}
 	catch (err) {
-		console.log(("Error getting times" + JSONObj.section_id).red);
+		// console.log(("Error getting times" + JSONObj.section_id).red);
 		var TimeInfo = '';
 	}
 	return [StatusClass, TimeInfo];
@@ -386,7 +382,6 @@ function parseSectionList(JSONString) {
 		}
 		if (StatusClass == "OpenSec") {var OpenClose = 'Open';} else {var OpenClose = 'Closed';}
 
-		console.log(entry.recitations.length)
 		if (entry.recitations.length !== 0) { // If it has recitations
 			var AsscList = '<br>Associated Recitations<ul class="AsscText">';
 			for(var key in entry.recitations) { if (entry.recitations.hasOwnProperty(key)) { 
@@ -447,7 +442,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 		var courseID = req.query.courseID;
 
 		if (addRem == 'add') { 
-			console.log((myPennkey + ' Star: '+ courseID).cyan);
+			// console.log((myPennkey + ' Star: '+ courseID).cyan);
 			var index = StarredCourses.indexOf(courseID);
 			if (index == -1) {StarredCourses.push(courseID);} // If the section is not already in the list
 				var starEvent = {
@@ -462,12 +457,12 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 				});
 
 		} else if (addRem == 'rem') { // If we need to remove
-			console.log((myPennkey + ' Unstar: '+ courseID).cyan);
+			// console.log((myPennkey + ' Unstar: '+ courseID).cyan);
 			var index = StarredCourses.indexOf(courseID);
 			if (index > -1) {StarredCourses.splice(index, 1);}
 
 		} else if (addRem == 'clear') { // Clear all
-			console.log((myPennkey + ' Clear star: '+ courseID).cyan);
+			// console.log((myPennkey + ' Clear star: '+ courseID).cyan);
 			var StarredCourses = [];
 		}
 
@@ -514,7 +509,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 				resJSON = getSchedInfo(body); // Format the response
 				for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
 					SchedCourses[JSONSecID] = resJSON[JSONSecID];
-					console.log((myPennkey + ' Sched Added: ' + JSONSecID).magenta);
+					// console.log((myPennkey + ' Sched Added: ' + JSONSecID).magenta);
 				}}
 				var schedEvent = {
 					schedCourse: courseID,
@@ -536,7 +531,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
 				if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) { // Find all meeting times of a given course
 					delete SchedCourses[meetsec];
-					console.log((myPennkey + ' Sched Removed: ' + courseID).magenta);
+					// console.log((myPennkey + ' Sched Removed: ' + courseID).magenta);
 				}}
 			}
 			var placeholder = {};
@@ -549,7 +544,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			var placeholder = {};
 			placeholder['Schedules.' + schedName] = SchedCourses;
 			db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-			console.log((myPennkey + ' Sched Cleared').magenta);
+			// console.log((myPennkey + ' Sched Cleared').magenta);
 			return res.send(SchedCourses);
 
 		} else if (addRem == 'dup') { // Duplicate a schedule
@@ -567,7 +562,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 
 			schedList = Object.keys(doc[0].Schedules);
 			schedList.push(schedName);
-			console.log((myPennkey + ' Sched duplicated').magenta);
+			// console.log((myPennkey + ' Sched duplicated').magenta);
 			return res.send(schedList);
 
 		} else if (addRem == 'ren') { // Delete
@@ -575,7 +570,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			delete doc[0].Schedules[schedName];
 			db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
 			schedList = Object.keys(doc[0].Schedules);
-			console.log((myPennkey + ' Sched renamed.'));
+			// console.log((myPennkey + ' Sched renamed.'));
 			return res.send(schedList);
 		
 		} else if (addRem == 'del') { // Delete
@@ -585,7 +580,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 			}
 			db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
 			schedList = Object.keys(doc[0].Schedules);
-			console.log((myPennkey + ' Sched deleted.'));
+			// console.log((myPennkey + ' Sched deleted.'));
 			return res.send(schedList);
 		
 		} else if (addRem == 'name') { // If we're getting a list of the schedules

@@ -136,7 +136,10 @@ $(document).ready(function () {
  
     $('#CSearch').on('input', function(){ // When the search terms change
         delay(function(){ // Don't check instantaneously
-            initiateSearch();
+            var searchTerms = $('#CSearch').val(); // Get raw search
+            if (searchTerms != '') {
+                initiateSearch();                
+            }
         }, 500);
     });
  
@@ -365,13 +368,15 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     if ($.isEmptyObject(JSONRes)) { // If it's empty
         allHTML = '&nbsp&nbsp&nbsp&nbsp&nbspNo Results';
     } else {
+        allHTML = '<ul>';
         for(var course in JSONRes) { if (JSONRes.hasOwnProperty(course)) { // Add a line for each course
             pcrFrac = Number(JSONRes[course].PCR) / 4;
-            allHTML += '<li><span class="PCR tooltip" title="'+JSONRes[course].PCR+
+            allHTML += '<li><span class="PCR tooltip" title="PCR: '+JSONRes[course].PCR+
             '" style="background-color:rgba(45, 160, 240, '+pcrFrac*pcrFrac+')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;'+
             '<span class="courseNumber">'+JSONRes[course].courseListName+'</span>'+
             '<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
         }}
+        allHTML += '</ul>';
     }
     $('#CourseList').html(allHTML); // Put the course number list in #CourseList
     if (TitleHidden === false) {$('.CourseTitle').toggle();}
@@ -381,7 +386,7 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
         pcrFrac = PCR / 4;
         $(this).css('background-color', 'rgba(45, 160, 240, '+pcrFrac*pcrFrac+')');
     });
-    // $('.tooltip').tooltipster({ animation: 'fade', delay: 700, touchDevices: false, interactive: true, trigger: 'hover', position: 'left', offsetX: -50});
+    $('.tooltip').tooltipster({ animation: 'fade', delay: 700, touchDevices: false, interactive: true, trigger: 'hover', position: 'right'});
 }
  
 function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department
@@ -413,7 +418,7 @@ function SectionStars(sections, passvar) { // Getting info about starred section
 }
  
 function FormatSectionsList(stars, sections) { // Receive section and star info and display them
-    var allHTML = '';
+    var allHTML = '<ul>';
     for(var section in sections) { if (sections.hasOwnProperty(section)) { // Loop through the sections
         var starClass = 'fa fa-star-o';
         var plusCross = 'plus';
@@ -431,6 +436,7 @@ function FormatSectionsList(stars, sections) { // Receive section and star info 
             '<span>'+sections[section].SectionName + sections[section].TimeInfo+'</span>'+
             '<i class="'+starClass+'"></i></li>';
     }}
+    allHTML += '</ul>';
     if (typeof section === 'undefined') {
         $('#SectionTitle').html('No Results');
         $('#SectionList').empty();
@@ -460,7 +466,6 @@ function SectionInfoFormat(data, passvar) { // Receive section specific info and
         if (data.termsOffered)      {HTMLinfo += data.termsOffered + "<br><br>";}
         if (data.Prerequisites)     {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br><br>";}
         if (data.TimeInfo)          {HTMLinfo += data.TimeInfo;}
-        console.log(data.AssociatedSections)
         if (data.AssociatedSections){HTMLinfo += data.AssociatedSections;}
         $('#SectionInfo').html(HTMLinfo);
     }

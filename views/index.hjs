@@ -45,7 +45,7 @@
                 <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses..." autofocus="autofocus">
                 <span style="margin-left:1em;" class="OpenSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Open </span><span class="ClosedSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Closed </span>
                 
-                <select id="schedSelect"></select>
+                <span style="margin-left:2em;">Schedule:</span><select id="schedSelect"></select>
 
                 <div class="loader" id="LoadingInfo" title="1">
                     <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
@@ -75,7 +75,7 @@
                       <li id="DeleteSchedBtn">Delete</li>
                     </ul>
                   </li>
-                  <li onclick="$('.CourseTitle').toggle();TitleHidden = !TitleHidden;"><span>Course Titles</span></li>
+                  <li onclick="$('.CourseTitle').toggle();TitleHidden = !TitleHidden;"><span>Show Titles</span></li>
                   <li onclick="Stars('show', 'blank');"><span>Show Stars</span></li>
                   <li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li>
                 </ul>
@@ -88,10 +88,14 @@
                 <h2>How do I change my schedule?</h2>
                 <p>To add a section to your schedule, click on its '+' icon. To remove a course, mouse over it and click the 'X' in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
                 <br>
-                <div class="ModalHalf">
+                <div class="ModalThird">
                     <span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a href={{ paymentNote }} target="_blank"><span class="logo"></span><span class="label">Venmo Me</span></a>
                 </div>
-                <div class="ModalHalf">
+                <div class="ModalThird">
+                    <span>Questions or comments?</span>
+                    <a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
+                </div>
+                 <div class="ModalThird">
                     <span>Want to see all of PCS's code?</span>
                     <a class="github-button" href="https://github.com/benb116/PennCourseSearch" data-style="mega" style="cursor:pointer;">View on Github</a>
                 </div>
