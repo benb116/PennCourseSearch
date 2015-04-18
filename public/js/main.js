@@ -136,7 +136,10 @@ $(document).ready(function () {
  
     $('#CSearch').on('input', function(){ // When the search terms change
         delay(function(){ // Don't check instantaneously
-            initiateSearch();
+            var searchTerms = $('#CSearch').val(); // Get raw search
+            if (searchTerms != '') {
+                initiateSearch();                
+            }
         }, 500);
     });
  
