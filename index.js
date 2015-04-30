@@ -228,14 +228,14 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200&term='+currentTerm+reqFilter+proFilter+actFilter+includeOpen;
 
-	if (searchType == 'courseIDSearch') {var baseURL = baseURL + '&course_id='	+ searchParam;}
-	if (searchType == 'keywordSearch') 	{var baseURL = baseURL + '&description='+ searchParam;}
-	if (searchType == 'instSearch') 	{var baseURL = baseURL + '&instructor='	+ searchParam;}
+	if (searchType == 'courseIDSearch') {baseURL = baseURL + '&course_id='	+ searchParam;}
+	if (searchType == 'keywordSearch') 	{baseURL = baseURL + '&description='+ searchParam;}
+	if (searchType == 'instSearch') 	{baseURL = baseURL + '&instructor='	+ searchParam;}
 
 	// If we are searching by a certain instructor, the course numbers will be filtered because of searchType 'instSearch'. 
 	// However, clicking on one of those courses will show all sections, including those not taught by the instructor.
 	// instructFilter is an extra parameter that allows further filtering of section results by instructor.
-	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {var baseURL = baseURL + '&instructor='+instructFilter;}
+	if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {baseURL = baseURL + '&instructor='+instructFilter;}
 	
 	// Keen.io logging
 	var searchEvent = {
@@ -279,13 +279,14 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 			// console.timeEnd(('API: ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 
 			// Send the raw data to the appropriate formatting function
+      var searchResponse;
 			if 			(resultType == 'deptSearch'){
-				var searchResponse = parseDeptList(body); // Parse the dept response
+				searchResponse = parseDeptList(body); // Parse the dept response
 			} else if 	(resultType == 'numbSearch') {
-				var searchResponse = parseCourseList(body); // Parse the numb response
+				searchResponse = parseCourseList(body); // Parse the numb response
 			} else if 	(resultType == 'sectSearch') {
-				var searchResponse = parseSectionList(body); // Parse the sect response
-			} else {var searchResponse = {};}
+				searchResponse = parseSectionList(body); // Parse the sect response
+			} else {searchResponse = {};}
 			return res.send(searchResponse); // return correct info
 		});
 	}
@@ -305,12 +306,13 @@ function parseDeptList(JSONString) {
 
 function getTimeInfo(JSONObj) { // A function to retrieve and format meeting times
 	OCStatus = JSONObj.course_status;
+  var StatusClass;
 	if (OCStatus == "O") {
-		var StatusClass = 'OpenSec'; // If section is open, add class open
+		StatusClass = 'OpenSec'; // If section is open, add class open
 	} else if (OCStatus == "C") {
-		var StatusClass = 'ClosedSec'; // If section is closed, add class closed
+		StatusClass = 'ClosedSec'; // If section is closed, add class closed
 	} else {
-		var StatusClass = 'ErrorSec'; // Otherwise make it gray
+		StatusClass = 'ErrorSec'; // Otherwise make it gray
 	}
 	var TimeInfo = [];
 	try { // Not all sections have time info
@@ -380,7 +382,12 @@ function parseSectionList(JSONString) {
 		for(var listing in meetArray) {
 			TimeInfo 		+= meetArray[listing].split("-")[1] + '<br>';
 		}
-		if (StatusClass == "OpenSec") {var OpenClose = 'Open';} else {var OpenClose = 'Closed';}
+    var OpenClose;
+		if (StatusClass == "OpenSec") {
+      OpenClose = 'Open';
+    } else {
+      OpenClose = 'Closed';
+    }
 
 		if (entry.recitations.length !== 0) { // If it has recitations
 			var AsscList = '<br>Associated Recitations<ul class="AsscText">';
