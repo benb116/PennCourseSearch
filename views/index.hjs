@@ -26,7 +26,7 @@
             ga('send', 'pageview');
         </script>
 	</head>
-    <body>
+    <body style="background-color:{{ color }};">
         <div id="MenuBar">
             <a rel="leanModal" href="#ModalWindow">About</a>
             <a href="/logout">Logout</a>
@@ -42,8 +42,10 @@
                     <option value="keywordSearch">Keywords</option>
                     <option value="instSearch">Instructor</option>
                 </select>
+
                 <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses..." autofocus="autofocus">
-                <span style="margin-left:1em;" class="OpenSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Open </span><span class="ClosedSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Closed </span>
+
+                <!-- <span style="margin-left:1em;" class="OpenSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Open </span><span class="ClosedSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Closed </span> -->
                 
                 <span style="margin-left:2em;">Schedule:</span><select id="schedSelect"></select>
 
@@ -110,7 +112,7 @@
         	<div id="CourseList"></div>
         	<div id="SectionCol">
         		<div id="Sections">
-                    <span id="SectionTitle"></span>
+                    <span id="CourseTitle"></span>
                     <div id="SectionList"></div>
                 </div>
         		<div id="SectionInfo"></div>

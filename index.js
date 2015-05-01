@@ -88,12 +88,15 @@ app.get('/', function(req, res) {
 		// console.log(req.user.email.split('@')[0] + ' Page Request');
 		thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 		fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
-		
+		backColor = '3498db';
+		// if (Math.random() > .5) {backColor = 'e74c3c';}
+
 		return res.render('index', { // Send page
 			title: 'PennCourseSearch',
 			subtitle: thissub,
 			user: req.user.email.split('@')[0],
-			paymentNote: fullPaymentNote
+			paymentNote: fullPaymentNote,
+			color: '#'+backColor
 		});
 	}
 });
@@ -279,7 +282,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 			// console.timeEnd(('API: ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 
 			// Send the raw data to the appropriate formatting function
-      var searchResponse;
+      		var searchResponse;
 			if 			(resultType == 'deptSearch'){
 				searchResponse = parseDeptList(body); // Parse the dept response
 			} else if 	(resultType == 'numbSearch') {

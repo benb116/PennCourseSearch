@@ -16,7 +16,7 @@ $(document).ready(function () {
     };
     // Global variables
     LoadingSum      = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
-    TitleHidden     = true; // Are the titles of courses in #Courselist hidden or not
+    TitleHidden     = false; // Are the titles of courses in #Courselist hidden or not
     if (sessionStorage.colorPalette) {
         var colorPalette = JSON.parse(sessionStorage.colorPalette);
     } else {
@@ -438,10 +438,10 @@ function FormatSectionsList(stars, sections) { // Receive section and star info 
     }}
     allHTML += '</ul>';
     if (typeof section === 'undefined') {
-        $('#SectionTitle').html('No Results');
+        $('#CourseTitle').html('No Results');
         $('#SectionList').empty();
     } else {
-        $('#SectionTitle').html(sections[section].CourseTitle);
+        $('#CourseTitle').html(sections[section].CourseTitle);
         $('#SectionList').html(allHTML); // Put the course number list in  #SectionList
     }
     
@@ -454,18 +454,18 @@ function getSectionInfo(sec) { // Get info about the specific section
  
 function SectionInfoFormat(data, passvar) { // Receive section specific info and display
     if (data == "No Results") {
-        $('#SectionInfo').html('No Results');        
+        $('#SectionInfo').html('No Results'); 
     } else {
         var HTMLinfo = "";
-        if (data.Instructor)        {HTMLinfo += "<span>&nbsp + &nbsp</span>";}
+        // if (data.Instructor)        {HTMLinfo += "<span>&nbsp + &nbsp</span>";}
         if (data.FullID)            {HTMLinfo += "<span>" + data.FullID + "</span>";} // Format the whole response
         if (data.Title)             {HTMLinfo += " - " + data.Title + "<br><br>";}
         if (data.Instructor)        {HTMLinfo += "Instructor: " + data.Instructor + "<br><br>";}
-        if (data.Description)       {HTMLinfo += "Description:<br><p class='DescText'>" + data.Description + "</p><br>";}
+        if (data.TimeInfo)          {HTMLinfo += data.TimeInfo + "<br>";}
+        if (data.Description)       {HTMLinfo += "Description:<br>" + data.Description + "<br>";}
         if (data.OpenClose)         {HTMLinfo += "Status: " + data.OpenClose + "<br><br>";}
         if (data.termsOffered)      {HTMLinfo += data.termsOffered + "<br><br>";}
-        if (data.Prerequisites)     {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br><br>";}
-        if (data.TimeInfo)          {HTMLinfo += data.TimeInfo;}
+        if (data.Prerequisites)     {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br>";}
         if (data.AssociatedSections){HTMLinfo += data.AssociatedSections;}
         $('#SectionInfo').html(HTMLinfo);
     }
