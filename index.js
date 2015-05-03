@@ -7,7 +7,6 @@ var mongojs 	= require("mongojs");
 var colors 		= require('colors');
 var fs 			= require('fs');
 var Keen 		= require('keen-js');
-var PushBullet 	= require('pushbullet');
 
 // I don't want to host a config file on github. When running locally, the app has access to a local config file.
 // On Heroku, there is no config file so I use environment variables instead
@@ -27,7 +26,6 @@ try {
 	config.STORMPATH_URL 			= process.env.STORMPATH_URL;
 	config.KeenIOID					= process.env.KEEN_PROJECT_ID;
 	config.KeenIOWriteKey			= process.env.KEEN_WRITE_KEY;
-	config.PushBulletAuth			= process.env.PUSHBULLETAUTH;
 }
 
 var app = express();
@@ -37,7 +35,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 app.use(express.static(path.join(__dirname, 'public')));
 process.env.PWD = process.cwd();
+// Handle 404
+// app.use(function(req, res) {res.status(400);res.render('404.hjs');});
 
+// Set up stormpath
 app.use(stormpath.init(app, {
 	apiKeyId:     config.STORMPATH_API_KEY_ID,
 	apiKeySecret: config.STORMPATH_API_KEY_SECRET,
@@ -58,21 +59,10 @@ var client = new Keen({
     writeKey: config.KeenIOWriteKey     // String (required for sending data)
 });
 
-// Initialize PushBullet
-var pusher = new PushBullet(config.PushBulletAuth);
-// Get first deviceID
-var pushDeviceID;
-pusher.devices(function(error, response) {
-	pushDeviceID = response.devices[0].iden; 
-});
-
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
 	console.log("Node app is running. Better go catch it.".green);
 	console.log("Search ".yellow + "Sched ".magenta + "Spit ".blue + "Error ".red + "Star ".cyan);
-	if (typeof process.env.PUSHBULLETAUTH !== 'undefined') { // Don't send notifications when testing locally
-		pusher.note(pushDeviceID, 'Server Restart');
-	}
 });
 
 // Rotating subtitles
@@ -95,6 +85,7 @@ app.get('/', function(req, res) {
 	if (!req.user) { // If the user is not logged in
 		return res.render('welcome');
 	} else {
+		// console.log(req.user.email.split('@')[0] + ' Page Request');
 		thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 		fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
 		backColor = '3498db';
