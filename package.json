@@ -12,7 +12,7 @@
     "fs": "0.0.2",
     "keen-js": "^3.2.4",
     "mongojs": "^0.18.0",
-    "nodealytics": "0.0.6",
+    "pushbullet": "^1.4.3",
     "request": "^2.51.0"
   },
   "engines": {
