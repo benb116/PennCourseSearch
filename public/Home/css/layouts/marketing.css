@@ -260,7 +260,7 @@ a.pure-button-primary {
 }
 #InfoPanel {
     height: calc(100vh - 16em);
-    font-size: 12px;
+    font-size: 10px;
     min-width: 500px;
 }
 #SchedGraph span {
@@ -313,12 +313,6 @@ a.pure-button-primary {
     color: black;
     box-sizing: border-box;
     overflow-y: hidden;
-}
-@media all and (max-width: 1050px) {
-    .SchedBlock {font-size: 11px;}
-}
-@media all and (min-width: 1281px) and (max-width: 1700px) {
-    .SchedBlock {font-size: 14px;}
 }
 .CloseX {
     position: absolute;
