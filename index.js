@@ -50,7 +50,7 @@ app.use(stormpath.init(app, {
 
 // Connect to database
 var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
-		db = mongojs.connect(uri, ["Students", "Courses2015C"]);
+		db = mongojs.connect(uri, ["Students", "Courses2015C", "Reviews"]);
 
 // Set up Keen Analytics
 var client = new Keen({
@@ -108,115 +108,6 @@ app.get('/', function(req, res) {
 			color: '#'+backColor
 		});
 	}
-});
-
-// This request manager is for spitting the department lists. They are saved for faster responses.
-app.get('/Spit', stormpath.loginRequired, function(req, res) {
-	var thedept = req.query.dept;
-	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
-
-    request({
-		uri: baseURL,
-		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
-		}, function(error, response, body) {
-			var inJSON = JSON.parse(body).result_data; // Convert to JSON object
-		
-			var resp = {};
-			for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) { // For each section that comes up
-
-				var spacedName = inJSON[key].section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' '); // Get course name (e.g. CIS 120)
-				var thetitle = inJSON[key].course_title; // Get title
-				resp[spacedName] = {'courseListName': spacedName, 'courseTitle': thetitle};
-				if (key == inJSON.length - 1) { // At the end of the list
-					fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) { // Write JSON to file
-						console.log(('List Spit: '+thedept).blue);
-					});
-				}
-			}}			
-		return res.send('Spat');
-	});
-	
-});
-
-// This request manager is for spitting the PCR reviews. They are saved for faster responses
-app.get('/PCRSpitRev', stormpath.loginRequired, function(req, res) { 
-	var thedept = req.query.dept;
-	console.log(('PCR Rev Spit: '+thedept).blue);
-	request({
-		uri: 'http://api.penncoursereview.com/v1/depts/'+thedept+'/reviews?token='+config.PCRToken // Get raw data
-	}, function(error, response, body) {
-		console.log('Received'.blue);
-		var deptReviews = JSON.parse(body).result.values;
-
-		var resp = {};
-		for(var rev in deptReviews) { // Iterate through each review
-			var sectionIDs = deptReviews[rev].section.aliases;
-			for(var alias in sectionIDs) {
-				if (sectionIDs[alias].split('-')[0] == thedept) { // 
-					var course = sectionIDs[alias].replace('-', " ").split('-')[0];
-					var reviewID = deptReviews[rev].section.id.split('-')[0];
-					var instructorID = deptReviews[rev].instructor.id;
-					var PCRRating = deptReviews[rev].ratings.rCourseQuality;
-					
-					// Put the data in the 'resp' JSON Object
-					if (!(resp.hasOwnProperty(course))) {
-						resp[course] = [{'revID': 0}];
-					}
-					oldestID = Number(resp[course][0].revID);
-					if (reviewID > oldestID) { // We only want the most recent reviews, so a new review ID should overwrite all previous review values
-						resp[course] = [{
-							'InstID': instructorID,
-							'revID': reviewID,
-							'Rating': PCRRating
-						}];
-					} else if (reviewID == oldestID) { // If there are multiple values from the same review ID, we want to keep them all to average later
-						resp[course].push({
-							'InstID': instructorID,
-							'revID': reviewID,
-							'Rating': PCRRating
-						});
-					}
-				}
-			}
-			if (rev == Object.keys(deptReviews).length - 1) {
-				fs.writeFile('./2015ARev/'+thedept+'.json', JSON.stringify(resp), function (err) {
-					// if (err) throw err;
-					console.log('It\'s saved!');
-				});
-			}
-		}
-
-		return res.send('done');
-	});
-});
-
-// This request manager adds the PCR data from PCRSpitRev to the data from Spit
-app.get('/Match', stormpath.loginRequired, function(req, res) {
-	var thedept = req.query.dept;
-	var dept = JSON.parse(fs.readFileSync('./'+currentTerm+'/'+thedept+'.json', 'utf8')); // Get spit data
-	var deptrev = JSON.parse(fs.readFileSync('./2015ARev/'+thedept+'.json', 'utf8')); // Get PCR data
-	for (var course in dept) { // Go through each course
-		if (typeof deptrev[course] !== 'undefined') {
-			sum = 0;
-			for (var i = 0; i < deptrev[course].length; i++) { // Go through each section in the courses PCR data and sum the values
-				sum += Number(deptrev[course][i].Rating);
-			}
-			if (deptrev[course].length !== 0) {
-				dept[course].PCR = Math.floor(100*sum/deptrev[course].length)/100; // Average the values and add to the spit data
-			}
-		}
-	}
-	db.collection('Courses'+currentTerm).find({Dept: thedept}, function(err, doc) { // Try to access the database
-		if (doc.length === 0) {
-			db.collection('Courses'+currentTerm).save({'Dept': thedept});
-		}
-		db.collection('Courses'+currentTerm).update({Dept: thedept}, { $set: {Courses: dept}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
-	});
-
-	// fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(dept), function (err) { // Overwrite the old spit data with the new spit data
-	// 	console.log('Matched: '+thedept);
-	// });
-	return res.send('Matched');
 });
 
 // Manage search requests
@@ -292,8 +183,8 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 
 			// Send the raw data to the appropriate formatting function
       		var searchResponse;
-			if 			(resultType == 'deptSearch'){
-				searchResponse = parseDeptList(body); // Parse the dept response
+			if (resultType == 'deptSearch'){
+				searchResponse = parseDeptList(body);
 			} else if 	(resultType == 'numbSearch') {
 				searchResponse = parseCourseList(body); // Parse the numb response
 			} else if 	(resultType == 'sectSearch') {

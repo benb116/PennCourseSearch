@@ -112,7 +112,6 @@ $(document).ready(function () {
         }
         if ($(this).html() == 'Recolor') {
             newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
-            console.log(newcolorPalette)
             sessionStorage.colorPalette = JSON.stringify(colorPalette);
             SpitSched(JSON.parse(sessionStorage.currentSched));
         }
@@ -131,7 +130,10 @@ $(document).ready(function () {
     });
 
     $('#searchSelect').change(function () {
-        initiateSearch();
+        var searchTerms = $('#CSearch').val(); // Get raw search
+        if (searchTerms != '') {
+            initiateSearch();
+        }
     });
  
     $('#CSearch').on('input', function(){ // When the search terms change
