@@ -342,9 +342,9 @@ function SendReq(url, fun, passVar) {
  
 function LoadingIndicate() {
     if (LoadingSum > 0) {
-        $('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+        $('#LoadingInfo').css('display', 'inline-block'); // Display the loading indicator
     } else {
-        $('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
+        $('#LoadingInfo').css('display', 'none'); // Display the loading indicator
     }
 }
  

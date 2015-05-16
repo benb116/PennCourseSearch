@@ -9,8 +9,8 @@ var fs 			= require('fs');
 var Keen 		= require('keen-js');
 var PushBullet 	= require('pushbullet');
 
-// I don't want to host a config file on github. When running locally, the app has access to a local config file.
-// On Heroku, there is no config file so I use environment variables instead
+// I don't want to host a config file on Github. When running locally, the app has access to a local config file.
+// On Heroku/DigitalOcean, there is no config file so I use environment variables instead
 try {
 	var config = require('./config.js');
 } catch (err) { // If there is no config file
@@ -209,7 +209,7 @@ function parseDeptList(JSONString) {
 
 function getTimeInfo(JSONObj) { // A function to retrieve and format meeting times
 	OCStatus = JSONObj.course_status;
-  var StatusClass;
+	var StatusClass;
 	if (OCStatus == "O") {
 		StatusClass = 'OpenSec'; // If section is open, add class open
 	} else if (OCStatus == "C") {
