@@ -259,14 +259,14 @@ function ClickTriggers() {
         }
     });
 
-    $('body').on('click', '#SectionList span:nth-child(3)', function() { // If a section is clicked
+    $('body').on('click', '#SectionList span:nth-child(4)', function() { // If a section is clicked
         var secname = $(this).html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
         getSectionInfo(secname); // Search for section info
         var dept = secname.slice(0,-6);
         getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
     });
 
-    $('body').on('click', '#SectionList i:nth-child(4)', function() { // If the user clicks a star in SectionList
+    $('body').on('click', '#SectionList i:nth-child(5)', function() { // If the user clicks a star in SectionList
         var isStarred = $(this).attr('class'); // Determine whether the section is starred
         if (isStarred == 'fa fa-star-o') {addRem = 'add';} 
         else if (isStarred == 'fa fa-star') {addRem = 'rem';}
@@ -372,11 +372,11 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     } else {
         allHTML = '<ul>';
         for(var course in JSONRes) { if (JSONRes.hasOwnProperty(course)) { // Add a line for each course
-            pcrFrac = Number(JSONRes[course].PCR) / 4;
-            allHTML += '<li><span class="PCR tooltip" title="PCR: '+JSONRes[course].PCR+
-            '" style="background-color:rgba(45, 160, 240, '+pcrFrac*pcrFrac+')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;'+
-            '<span class="courseNumber">'+JSONRes[course].courseListName+'</span>'+
-            '<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
+            pcrFrac = 0;
+            allHTML += '<li id="'+JSONRes[course].courseListName.replace(' ', '-')+'">'+'<span class="PCR" style="background-color:rgba(45, 160, 240, '+pcrFrac*pcrFrac+')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;'+
+                '<span class="courseNumber">'+JSONRes[course].courseListName+'</span>'+
+                '<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
+
         }}
         allHTML += '</ul>';
     }
@@ -384,11 +384,33 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     if (TitleHidden === false) {$('.CourseTitle').toggle();}
 
     $( "#CourseList li" ).each(function( index ) {
-        PCR = $(this).data('pcr');
-        pcrFrac = PCR / 4;
-        $(this).css('background-color', 'rgba(45, 160, 240, '+pcrFrac*pcrFrac+')');
+        if (index < 25) {
+            ApplyPCR($(this).attr('id'))
+        }
     });
-    $('.tooltip').tooltipster({ animation: 'fade', delay: 700, touchDevices: false, interactive: true, trigger: 'hover', position: 'right'});
+}
+
+function ApplyPCR(element, inst) {
+    LoadingSum += 1; 
+    LoadingIndicate();
+    var courseID = element.split('-')[0] + '-' + element.split('-')[1]
+    baseURL = '/Review?courseID=' + courseID;
+    if (inst) {baseURL += '&instName=' + inst}
+    $.get(baseURL) // Make the request
+    .done(function(data) {
+        try {
+            pcrFrac = data.cQ / 4;
+        } catch(err) {
+            pcrFrac = 0;
+        }
+        $('#'+element).find('.PCR').css('background-color', 'rgba(45, 160, 240, '+Math.pow(pcrFrac, 5)*5+')');
+        
+        if(!isNaN(data.cQ)) {$('#'+element).find('.PCR').html(data.cQ);}
+    })
+    .always(function() {
+        LoadingSum -= 1;
+        LoadingIndicate();
+    });
 }
  
 function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department
@@ -432,13 +454,15 @@ function FormatSectionsList(stars, sections) { // Receive section and star info 
             if (meet.substring(0, sections[section].SectionName.replace(/ /g, '').length) == sections[section].SectionName.replace(/ /g, '')) {plusCross = 'times';}
         });
 
-        allHTML += '<li id="' + sections[section].SectionName.replace(/ /g,'') + '">'+
+        allHTML += '<li id="' + sections[section].SectionName.replace(/ /g,'-') + '">'+
             '<i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp'+
             '<span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
+            '<span class="PCR">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
             '<span>'+sections[section].SectionName + sections[section].TimeInfo+'</span>'+
             '<i class="'+starClass+'"></i></li>';
     }}
     allHTML += '</ul>';
+
     if (typeof section === 'undefined') {
         $('#CourseTitle').html('No Results');
         $('#SectionList').empty();
@@ -446,7 +470,9 @@ function FormatSectionsList(stars, sections) { // Receive section and star info 
         $('#CourseTitle').html(sections[section].CourseTitle);
         $('#SectionList').html(allHTML); // Put the course number list in  #SectionList
     }
-    
+    for (var sec in sections) {
+        ApplyPCR(sections[sec].SectionName.replace(/ /g,'-'), sections[sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'))
+    }    
 }
  
 function getSectionInfo(sec) { // Get info about the specific section

@@ -201,6 +201,7 @@ ul {
 .ClosedSec {background-color: #F73B3B;}
 .ErrorSec {background-color: #E6E6E6;}
 .PCRSec {background-color: #1f8dd6;}
+.PCR {color: white; width: 3em; height: 1.5em;}
 .CourseTitle {display: none;} /* Overriden by 'TitleHidden' in JS */
 .fa-star, .fa-star-o {
     float: right;

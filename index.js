@@ -49,8 +49,7 @@ app.use(stormpath.init(app, {
 }));
 
 // Connect to database
-var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
-		db = mongojs.connect(uri, ["Students", "Courses2015C", "Reviews"]);
+var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', db = mongojs.connect(uri, ["Students", "Courses2015C", "NewReviews"]);
 
 // Set up Keen Analytics
 var client = new Keen({
@@ -243,16 +242,28 @@ function parseCourseList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var sectionsList = {};
 	for(var key in Res.result_data) { if (Res.result_data.hasOwnProperty(key)) { 
-		var SectionName 		= Res.result_data[key].section_id_normalized.replace(/-/g, " ");
+		var SectionName 		= Res.result_data[key].section_id_normalized.replace(/ /g, "").replace(/-/g, " ");
 		var sectionNameNoSpace 	= Res.result_data[key].section_id;
 		var TimeInfoArray 		= getTimeInfo(Res.result_data[key]); // Get meeting times for a section
 		var StatusClass 		= TimeInfoArray[0];
 		var TimeInfo 			= TimeInfoArray[1][0]; // Get the first meeting slot
+		try {
+			var SectionInst			= Res.result_data[key].instructors[0].name;
+		} catch(err) {
+			SectionInst = '';
+		}
 		
 		if(typeof TimeInfoArray[1][1] !== 'undefined')	{TimeInfo += ' ...';} // If there are multiple meeting times
 		if(typeof TimeInfo === 'undefined')				{TimeInfo = '';}
 
-		sectionsList[sectionNameNoSpace] = {'SectionName': SectionName, 'StatusClass': StatusClass, 'TimeInfo': TimeInfo, 'NoSpace': sectionNameNoSpace, 'CourseTitle': Res.result_data[0].course_title};
+		sectionsList[sectionNameNoSpace] = {
+			'SectionName': SectionName, 
+			'StatusClass': StatusClass, 
+			'TimeInfo': TimeInfo, 
+			'NoSpace': sectionNameNoSpace, 
+			'CourseTitle': Res.result_data[0].course_title,
+			'SectionInst': SectionInst
+		};
 	}}
 	courseInfo = parseSectionList(JSONString);
 
@@ -335,6 +346,37 @@ function parseSectionList(JSONString) {
 		return 'No Results';
 	}
 }
+
+app.get('/Review', stormpath.loginRequired, function(req, res) {
+	var courseID = req.query.courseID;
+	var thedept = courseID.split("-")[0];
+	var instName = req.query.instName;
+	try {
+		db.collection('NewReviews').find({Dept: thedept}, function(err, doc) {
+			var reviews = doc[0].Reviews[courseID.replace(/-/g, ' ')];
+			if (typeof instName === 'undefined') {
+				if (typeof reviews !== 'undefined') {
+					return res.send(reviews.Total);
+				} else {
+					return res.send(0)
+				}
+			} else {
+				for (var inst in reviews) {
+					if (inst.indexOf(instName.toUpperCase()) > -1) {
+						return res.send(reviews[inst]);
+					}
+				}
+				// if (typeof reviews !== 'undefined') {
+				// 	return res.send(reviews.Total);
+				// } else {
+					return res.send(0)
+				// }
+			}
+		});
+	} catch(err) {
+		return res.send(0)
+	}
+});
 
 // Manage requests regarding starred courses
 app.get('/Star', stormpath.loginRequired, function(req, res) {
