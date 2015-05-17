@@ -354,24 +354,16 @@ app.get('/Review', stormpath.loginRequired, function(req, res) {
 	try {
 		db.collection('NewReviews').find({Dept: thedept}, function(err, doc) {
 			var reviews = doc[0].Reviews[courseID.replace(/-/g, ' ')];
+
+			if (typeof reviews === 'undefined') {return res.send({})}
 			if (typeof instName === 'undefined') {
-				if (typeof reviews !== 'undefined') {
-					return res.send(reviews.Total);
-				} else {
-					return res.send(0)
-				}
+				if (typeof reviews !== 'undefined') {return res.send(reviews.Total);}
 			} else {
 				for (var inst in reviews) {
-					if (inst.indexOf(instName.toUpperCase()) > -1) {
-						return res.send(reviews[inst]);
-					}
+					if (inst.indexOf(instName.toUpperCase()) > -1) {return res.send(reviews[inst]);}
 				}
-				// if (typeof reviews !== 'undefined') {
-				// 	return res.send(reviews.Total);
-				// } else {
-					return res.send(0)
-				// }
 			}
+			return res.send(0)
 		});
 	} catch(err) {
 		return res.send(0)
