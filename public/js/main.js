@@ -384,9 +384,7 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     if (TitleHidden === false) {$('.CourseTitle').toggle();}
 
     $( "#CourseList li" ).each(function( index ) {
-        if (index < 25) {
-            ApplyPCR($(this).attr('id'))
-        }
+        ApplyPCR($(this).attr('id'))
     });
 }
 
