@@ -18,13 +18,11 @@ var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI
 		db = mongojs.connect(uri, ["Students", "Courses2015C", "Reviews"]);
 
 var currentTerm = '2015C';
-var deptList = ["AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANCH", "ANEL", "ANTH", "ARAB", "ARCH", "ARTH", "ASAM", "ASTR", "BCHE", "BE", "BENG", "BEPP", "BFMD", "BIBB", "BIOE", "BIOL", "BMB", "BSTA", "CAMB", "CBE", "CHEM", "CHIN", "CINE", "CIS", "CIT", "CLST", "COGS", "COLL", "COML", "COMM", "CPLN", "CRIM", "DEMG", "DTCH", "DYNM", "EALC", "EAS", "ECON", "EDUC", "EEUR", "ENGL", "ENGR", "ENM", "ENVS", "EPID", "ESE", "FNAR", "FNCE", "FOLK", "FREN", "FRSM", "GAFL", "GAS", "GCB", "GEOL", "GREK", "GRMN", "GSWS", "GUJR", "HCMG", "HEBR", "HIND", "HIST", "HPR", "HSOC", "HSPV", "HSSC", "IMUN", "INTG", "INTR", "IPD", "ITAL", "JPAN", "JWST", "KORN", "LALS", "LARP", "LATN", "LAW", "LGIC", "LGST", "LING", "LSMP", "MAPP", "MATH", "MEAM", "MED", "MGEC", "MGMT", "MKTG", "MLA", "MLYM", "MMP", "MSCI", "MSE", "MSSP", "MUSC", "NANO", "NELC", "NETS", "NGG", "NPLD", "NURS", "OPIM", "PERS", "PHIL", "PHRM", "PHYS", "PPE", "PRTG", "PSCI", "PSYC", "PUBH", "PUNJ", "REAL", "RELS", "ROML", "RUSS", "SAST", "SCND", "SKRT", "SLAV", "SOCI", "SPAN", "STAT", "STSC", "SWRK", "TAML", "TCOM", "TELU", "THAR", "TURK", "URBS", "URDU", "VIPR", "VLST", "WH", "WHCP", "WRIT", "YDSH"];
+var deptList = ["AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANCH", "ANEL", "ANTH", "ARAB", "ARCH", "ARTH", "ASAM", "ASTR", "BCHE", "BE", "BENG", "BEPP", "BFMD", "BIBB", "BIOE", "BIOL", "BMB", "BSTA", "CAMB", "CBE", "CHEM", "CHIN", "CINE", "CIS", "CIT", "CLST", "COGS", "COLL", "COML", "COMM", "CPLN", "CRIM", "DEMG", "DTCH", "DYNM", "EALC", "EAS", "ECON", "EDUC", "EEUR", "ENGL", "ENGR", "ENM", "ENVS", "ESE", "FNAR", "FNCE", "FOLK", "FREN", "FRSM", "GAFL", "GAS", "GCB", "GEOL", "GREK", "GRMN", "GSWS", "GUJR", "HCMG", "HEBR", "HIND", "HIST", "HPR", "HSOC", "HSPV", "HSSC", "IMUN", "INTG", "INTR", "IPD", "ITAL", "JPAN", "JWST", "KORN", "LALS", "LARP", "LATN", "LAW", "LGIC", "LGST", "LING", "LSMP", "MATH", "MEAM", "MED", "MGEC", "MGMT", "MKTG", "MLA", "MLYM", "MMP", "MSCI", "MSE", "MSSP", "MUSC", "NANO", "NELC", "NETS", "NGG", "NPLD", "NURS", "OPIM", "PERS", "PHIL", "PHRM", "PHYS", "PPE", "PRTG", "PSCI", "PSYC", "PUBH", "PUNJ", "REAL", "RELS", "ROML", "RUSS", "SAST", "SCND", "SKRT", "SLAV", "SOCI", "SPAN", "STAT", "STSC", "SWRK", "TAML", "TCOM", "TELU", "THAR", "TURK", "URBS", "URDU", "VIPR", "VLST", "WH", "WHCP", "WRIT", "YDSH"];
 
-// Get Reviews by dept
-// for (var deptnum in deptList) { if (deptnum < 3) {
-var index = 0;
-PullRegistrar(index);
-// PullReview(index);
+var index = Number(process.argv[2]);
+PullReview(index);
+return 'Done';
 
 function PullRegistrar(index) {
 	var thedept = deptList[index];
@@ -41,11 +39,13 @@ function PullRegistrar(index) {
 			for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) { // For each section that comes up
 
 				var spacedName = inJSON[key].section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' '); // Get course name (e.g. CIS 120)
-				var thetitle = inJSON[key].course_title; // Get title
-				resp[spacedName] = {'courseListName': spacedName, 'courseTitle': thetitle};
+				resp[spacedName] = {
+					'courseListName': spacedName, 
+					'courseTitle': inJSON[key].course_title
+				};
 				if (key == inJSON.length - 1) { // At the end of the list
 					fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) { // Write JSON to file
-						console.log(('List Spit: '+thedept));
+						console.log(('List Spit: '+index));
 					});
 				}
 			}}			
@@ -66,52 +66,101 @@ function PullReview(index) {
 		for(var rev in deptReviews) { // Iterate through each review
 			var sectionIDs = deptReviews[rev].section.aliases;
 			for(var alias in sectionIDs) {
-				if (sectionIDs[alias].split('-')[0] == thedept) { // 
-					var course = sectionIDs[alias].replace('-', " ").split('-')[0];
-					var reviewID = deptReviews[rev].section.id.split('-')[0];
-					var instructorID = deptReviews[rev].instructor.id;
-					var PCRRating = deptReviews[rev].ratings.rCourseQuality;
-					
-					// Put the data in the 'resp' JSON Object
-					if (!(resp.hasOwnProperty(course))) {
-						resp[course] = [{'revID': 0}];
+				if (sectionIDs[alias].split('-')[0] == thedept) { // Only create an entry for the course in this department
+					// Get data
+					var courseID = sectionIDs[alias].split('-')[0] + ' ' + sectionIDs[alias].split('-')[1];
+					var instID = deptReviews[rev].instructor.id;
+					// var instName = deptReviews[rev].instructor.name;
+					var courseQual = Number(deptReviews[rev].ratings.rCourseQuality);
+					var courseDiff = Number(deptReviews[rev].ratings.rDifficulty);
+					var courseInst = Number(deptReviews[rev].ratings.rInstructorQuality);
+
+					/* This JSON has the following form (using MEAM 101 as an example)
+	
+					{
+						"MEAM 101": {
+							"1234-Fiene": [
+								{"cQ": 4, "cD": 3.9, "cI": 4},
+								{"cQ": 3.9, "cD": 4, "cI": 3.9}
+							],
+							"4321-Wabiszewski": [
+								{"cQ": 4, "cD": 3.9, "cI": 4}
+							]
+						}
 					}
-					oldestID = Number(resp[course][0].revID);
-					if (reviewID > oldestID) { // We only want the most recent reviews, so a new review ID should overwrite all previous review values
-						resp[course] = [{
-							'InstID': instructorID,
-							'revID': reviewID,
-							'Rating': PCRRating
-						}];
-					} else if (reviewID == oldestID) { // If there are multiple values from the same review ID, we want to keep them all to average later
-						resp[course].push({
-							'InstID': instructorID,
-							'revID': reviewID,
-							'Rating': PCRRating
-						});
-					}
+
+					*/
+
+					if (typeof resp[courseID] === 'undefined') {resp[courseID] = {};}
+					if (typeof resp[courseID][instID] === 'undefined') {resp[courseID][instID] = [];}
+					var entry = resp[courseID][instID];
+					entry.push({
+						'cQ': courseQual,
+						'cD': courseDiff,
+						'cI': courseInst
+					});
 				}
 			}
-			if (rev == Object.keys(deptReviews).length - 1) {
-				// fs.writeFile('./2015ARev/'+thedept+'.json', JSON.stringify(resp), function (err) {
-				// 	if (err) throw err;
-				// 	console.log('It\'s saved!');
-					
-				// });
-
-				db.collection('Reviews').find({Dept: thedept}, function(err, doc) { // Try to access the database
-					if (doc.length === 0) {
-						db.collection('Reviews').save({'Dept': thedept, 'Courses': {}});
-					}
-					db.collection('Reviews').update({Dept: thedept}, { $set: {Courses: resp}, $currentDate: { lastModified: true }}, function(err, doc) {
-						console.log('It\'s saved!' + thedept);
-						index++;
-						PullReview(index);
-					}); // Add a schedules block if there is none
-				});
-			}
 		}
+		// This part computes average values and replaces the full data
+		for (var course in resp) {
+			courseSumQ = 0;
+			courseSumD = 0;
+			courseSumI = 0;
+			for (var inst in resp[course]) {
+				instSumQ = 0;
+				instSumD = 0;
+				instSumI = 0;
+				for (var review in resp[course][inst]) {
+					instSumQ += resp[course][inst][review].cQ;
+					instSumD += resp[course][inst][review].cD;
+					instSumI += resp[course][inst][review].cI;
+				}
+				// Get average ratings for each instructor for a given class
+				instAvgQual = Math.round(100 * instSumQ / resp[course][inst].length)/100;
+				instAvgDiff = Math.round(100 * instSumD / resp[course][inst].length)/100;
+				instAvgInst = Math.round(100 * instSumI / resp[course][inst].length)/100;
+				resp[course][inst] = {
+					'cQ': instAvgQual,
+					'cD': instAvgDiff,
+					'cI': instAvgInst
+				};
+				courseSumQ += instAvgQual;
+				courseSumD += instAvgDiff;
+				courseSumI += instAvgInst;
+			}
+			// Get average of average instructor ratings for a given class
+			courseAvgQual = Math.round(100 * courseSumQ / Object.keys(resp[course]).length)/100;
+			courseAvgDiff = Math.round(100 * courseSumD / Object.keys(resp[course]).length)/100;
+			courseAvgInst = Math.round(100 * courseSumI / Object.keys(resp[course]).length)/100;
+			resp[course]['Total']  = {
+				'cQ': courseAvgQual,
+				'cD': courseAvgDiff,
+				'cI': courseAvgInst
+			};
+		}
+		fs.writeFile('./2015ARevRaw/'+thedept+'.json', JSON.stringify(resp), function (err) {
+			console.log('It\'s saved! '+ index);
+			UploadToDB('2015ARevRaw', 'NewReviews', index);
+			index++;
+			PullReview(index);
+		});
 	});
+	return 0;
+}
+
+function UploadToDB(folder, thedb, index) {
+	var thedept = deptList[index];
+	var rawJSON = JSON.parse(fs.readFileSync('./'+folder+'/'+thedept+'.json', 'utf8')); // Get spit data
+	db.collection(thedb).find({Dept: thedept}, function(err, doc) { // Try to access the database
+		if (doc.length === 0) {
+			db.collection(thedb).save({'Dept': thedept, 'Reviews': {}});
+		}
+		db.collection(thedb).update({Dept: thedept}, { $set: {Reviews: rawJSON}, $currentDate: { lastModified: true }}, function(err, doc) {
+			console.log('It\'s saved! ' + thedept);
+		}); // Add a schedules block if there is none
+	});
+	return 0;
 }
 
 function Match(index) {
