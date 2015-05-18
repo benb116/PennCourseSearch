@@ -7,9 +7,10 @@ var mongojs 	= require("mongojs");
 var colors 		= require('colors');
 var fs 			= require('fs');
 var Keen 		= require('keen-js');
+var PushBullet 	= require('pushbullet');
 
-// I don't want to host a config file on github. When running locally, the app has access to a local config file.
-// On Heroku, there is no config file so I use environment variables instead
+// I don't want to host a config file on Github. When running locally, the app has access to a local config file.
+// On Heroku/DigitalOcean, there is no config file so I use environment variables instead
 try {
 	var config = require('./config.js');
 } catch (err) { // If there is no config file
@@ -26,6 +27,7 @@ try {
 	config.STORMPATH_URL 			= process.env.STORMPATH_URL;
 	config.KeenIOID					= process.env.KEEN_PROJECT_ID;
 	config.KeenIOWriteKey			= process.env.KEEN_WRITE_KEY;
+	config.PushBulletAuth			= process.env.PUSHBULLETAUTH;
 }
 
 var app = express();
@@ -35,10 +37,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 app.use(express.static(path.join(__dirname, 'public')));
 process.env.PWD = process.cwd();
-// Handle 404
-// app.use(function(req, res) {res.status(400);res.render('404.hjs');});
 
-// Set up stormpath
 app.use(stormpath.init(app, {
 	apiKeyId:     config.STORMPATH_API_KEY_ID,
 	apiKeySecret: config.STORMPATH_API_KEY_SECRET,
@@ -50,8 +49,7 @@ app.use(stormpath.init(app, {
 }));
 
 // Connect to database
-var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
-		db = mongojs.connect(uri, ["Students", "Courses2015C"]);
+var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', db = mongojs.connect(uri, ["Students", "Courses2015C", "NewReviews"]);
 
 // Set up Keen Analytics
 var client = new Keen({
@@ -59,10 +57,21 @@ var client = new Keen({
     writeKey: config.KeenIOWriteKey     // String (required for sending data)
 });
 
+// Initialize PushBullet
+var pusher = new PushBullet(config.PushBulletAuth);
+// Get first deviceID
+var pushDeviceID;
+pusher.devices(function(error, response) {
+	pushDeviceID = response.devices[0].iden; 
+});
+
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
 	console.log("Node app is running. Better go catch it.".green);
 	console.log("Search ".yellow + "Sched ".magenta + "Spit ".blue + "Error ".red + "Star ".cyan);
+	if (typeof process.env.PUSHBULLETAUTH !== 'undefined') { // Don't send notifications when testing locally
+		pusher.note(pushDeviceID, 'Server Restart');
+	}
 });
 
 // Rotating subtitles
@@ -85,126 +94,19 @@ app.get('/', function(req, res) {
 	if (!req.user) { // If the user is not logged in
 		return res.render('welcome');
 	} else {
-		// console.log(req.user.email.split('@')[0] + ' Page Request');
 		thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
 		fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
-		
+		backColor = '3498db';
+		// if (Math.random() > .5) {backColor = 'e74c3c';}
+
 		return res.render('index', { // Send page
 			title: 'PennCourseSearch',
 			subtitle: thissub,
 			user: req.user.email.split('@')[0],
-			paymentNote: fullPaymentNote
+			paymentNote: fullPaymentNote,
+			color: '#'+backColor
 		});
 	}
-});
-
-// This request manager is for spitting the department lists. They are saved for faster responses.
-app.get('/Spit', stormpath.loginRequired, function(req, res) {
-	var thedept = req.query.dept;
-	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
-
-    request({
-		uri: baseURL,
-		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
-		}, function(error, response, body) {
-			var inJSON = JSON.parse(body).result_data; // Convert to JSON object
-		
-			var resp = {};
-			for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) { // For each section that comes up
-
-				var spacedName = inJSON[key].section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' '); // Get course name (e.g. CIS 120)
-				var thetitle = inJSON[key].course_title; // Get title
-				resp[spacedName] = {'courseListName': spacedName, 'courseTitle': thetitle};
-				if (key == inJSON.length - 1) { // At the end of the list
-					fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) { // Write JSON to file
-						console.log(('List Spit: '+thedept).blue);
-					});
-				}
-			}}			
-		return res.send('Spat');
-	});
-	
-});
-
-// This request manager is for spitting the PCR reviews. They are saved for faster responses
-app.get('/PCRSpitRev', stormpath.loginRequired, function(req, res) { 
-	var thedept = req.query.dept;
-	console.log(('PCR Rev Spit: '+thedept).blue);
-	request({
-		uri: 'http://api.penncoursereview.com/v1/depts/'+thedept+'/reviews?token='+config.PCRToken // Get raw data
-	}, function(error, response, body) {
-		console.log('Received'.blue);
-		var deptReviews = JSON.parse(body).result.values;
-
-		var resp = {};
-		for(var rev in deptReviews) { // Iterate through each review
-			var sectionIDs = deptReviews[rev].section.aliases;
-			for(var alias in sectionIDs) {
-				if (sectionIDs[alias].split('-')[0] == thedept) { // 
-					var course = sectionIDs[alias].replace('-', " ").split('-')[0];
-					var reviewID = deptReviews[rev].section.id.split('-')[0];
-					var instructorID = deptReviews[rev].instructor.id;
-					var PCRRating = deptReviews[rev].ratings.rCourseQuality;
-					
-					// Put the data in the 'resp' JSON Object
-					if (!(resp.hasOwnProperty(course))) {
-						resp[course] = [{'revID': 0}];
-					}
-					oldestID = Number(resp[course][0].revID);
-					if (reviewID > oldestID) { // We only want the most recent reviews, so a new review ID should overwrite all previous review values
-						resp[course] = [{
-							'InstID': instructorID,
-							'revID': reviewID,
-							'Rating': PCRRating
-						}];
-					} else if (reviewID == oldestID) { // If there are multiple values from the same review ID, we want to keep them all to average later
-						resp[course].push({
-							'InstID': instructorID,
-							'revID': reviewID,
-							'Rating': PCRRating
-						});
-					}
-				}
-			}
-			if (rev == Object.keys(deptReviews).length - 1) {
-				fs.writeFile('./2015ARev/'+thedept+'.json', JSON.stringify(resp), function (err) {
-					// if (err) throw err;
-					console.log('It\'s saved!');
-				});
-			}
-		}
-
-		return res.send('done');
-	});
-});
-
-// This request manager adds the PCR data from PCRSpitRev to the data from Spit
-app.get('/Match', stormpath.loginRequired, function(req, res) {
-	var thedept = req.query.dept;
-	var dept = JSON.parse(fs.readFileSync('./'+currentTerm+'/'+thedept+'.json', 'utf8')); // Get spit data
-	var deptrev = JSON.parse(fs.readFileSync('./2015ARev/'+thedept+'.json', 'utf8')); // Get PCR data
-	for (var course in dept) { // Go through each course
-		if (typeof deptrev[course] !== 'undefined') {
-			sum = 0;
-			for (var i = 0; i < deptrev[course].length; i++) { // Go through each section in the courses PCR data and sum the values
-				sum += Number(deptrev[course][i].Rating);
-			}
-			if (deptrev[course].length !== 0) {
-				dept[course].PCR = Math.floor(100*sum/deptrev[course].length)/100; // Average the values and add to the spit data
-			}
-		}
-	}
-	db.collection('Courses'+currentTerm).find({Dept: thedept}, function(err, doc) { // Try to access the database
-		if (doc.length === 0) {
-			db.collection('Courses'+currentTerm).save({'Dept': thedept});
-		}
-		db.collection('Courses'+currentTerm).update({Dept: thedept}, { $set: {Courses: dept}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
-	});
-
-	// fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(dept), function (err) { // Overwrite the old spit data with the new spit data
-	// 	console.log('Matched: '+thedept);
-	// });
-	return res.send('Matched');
 });
 
 // Manage search requests
@@ -279,9 +181,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 			// console.timeEnd(('API: ' + searchType + ': ' + searchParam+'  Request Time').yellow);
 
 			// Send the raw data to the appropriate formatting function
-      var searchResponse;
-			if 			(resultType == 'deptSearch'){
-				searchResponse = parseDeptList(body); // Parse the dept response
+      		var searchResponse;
+			if (resultType == 'deptSearch'){
+				searchResponse = parseDeptList(body);
 			} else if 	(resultType == 'numbSearch') {
 				searchResponse = parseCourseList(body); // Parse the numb response
 			} else if 	(resultType == 'sectSearch') {
@@ -306,7 +208,7 @@ function parseDeptList(JSONString) {
 
 function getTimeInfo(JSONObj) { // A function to retrieve and format meeting times
 	OCStatus = JSONObj.course_status;
-  var StatusClass;
+	var StatusClass;
 	if (OCStatus == "O") {
 		StatusClass = 'OpenSec'; // If section is open, add class open
 	} else if (OCStatus == "C") {
@@ -340,16 +242,28 @@ function parseCourseList(JSONString) {
 	var Res = JSON.parse(JSONString); // Convert to JSON object
 	var sectionsList = {};
 	for(var key in Res.result_data) { if (Res.result_data.hasOwnProperty(key)) { 
-		var SectionName 		= Res.result_data[key].section_id_normalized.replace(/-/g, " ");
+		var SectionName 		= Res.result_data[key].section_id_normalized.replace(/ /g, "").replace(/-/g, " ");
 		var sectionNameNoSpace 	= Res.result_data[key].section_id;
 		var TimeInfoArray 		= getTimeInfo(Res.result_data[key]); // Get meeting times for a section
 		var StatusClass 		= TimeInfoArray[0];
 		var TimeInfo 			= TimeInfoArray[1][0]; // Get the first meeting slot
+		try {
+			var SectionInst			= Res.result_data[key].instructors[0].name;
+		} catch(err) {
+			SectionInst = '';
+		}
 		
 		if(typeof TimeInfoArray[1][1] !== 'undefined')	{TimeInfo += ' ...';} // If there are multiple meeting times
 		if(typeof TimeInfo === 'undefined')				{TimeInfo = '';}
 
-		sectionsList[sectionNameNoSpace] = {'SectionName': SectionName, 'StatusClass': StatusClass, 'TimeInfo': TimeInfo, 'NoSpace': sectionNameNoSpace, 'CourseTitle': Res.result_data[0].course_title};
+		sectionsList[sectionNameNoSpace] = {
+			'SectionName': SectionName, 
+			'StatusClass': StatusClass, 
+			'TimeInfo': TimeInfo, 
+			'NoSpace': sectionNameNoSpace, 
+			'CourseTitle': Res.result_data[0].course_title,
+			'SectionInst': SectionInst
+		};
 	}}
 	courseInfo = parseSectionList(JSONString);
 
@@ -432,6 +346,29 @@ function parseSectionList(JSONString) {
 		return 'No Results';
 	}
 }
+
+app.get('/Review', stormpath.loginRequired, function(req, res) {
+	var courseID = req.query.courseID;
+	var thedept = courseID.split("-")[0];
+	var instName = req.query.instName;
+	try {
+		db.collection('NewReviews').find({Dept: thedept}, function(err, doc) {
+			var reviews = doc[0].Reviews[courseID.replace(/-/g, ' ')];
+
+			if (typeof reviews === 'undefined') {return res.send({})}
+			if (typeof instName === 'undefined') {
+				if (typeof reviews !== 'undefined') {return res.send(reviews.Total);}
+			} else {
+				for (var inst in reviews) {
+					if (inst.indexOf(instName.toUpperCase()) > -1) {return res.send(reviews[inst]);}
+				}
+			}
+			return res.send(0)
+		});
+	} catch(err) {
+		return res.send(0)
+	}
+});
 
 // Manage requests regarding starred courses
 app.get('/Star', stormpath.loginRequired, function(req, res) {

@@ -16,7 +16,7 @@ $(document).ready(function () {
     };
     // Global variables
     LoadingSum      = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
-    TitleHidden     = true; // Are the titles of courses in #Courselist hidden or not
+    TitleHidden     = false; // Are the titles of courses in #Courselist hidden or not
     if (sessionStorage.colorPalette) {
         var colorPalette = JSON.parse(sessionStorage.colorPalette);
     } else {
@@ -112,7 +112,6 @@ $(document).ready(function () {
         }
         if ($(this).html() == 'Recolor') {
             newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
-            console.log(newcolorPalette)
             sessionStorage.colorPalette = JSON.stringify(colorPalette);
             SpitSched(JSON.parse(sessionStorage.currentSched));
         }
@@ -131,7 +130,10 @@ $(document).ready(function () {
     });
 
     $('#searchSelect').change(function () {
-        initiateSearch();
+        var searchTerms = $('#CSearch').val(); // Get raw search
+        if (searchTerms != '') {
+            initiateSearch();
+        }
     });
  
     $('#CSearch').on('input', function(){ // When the search terms change
@@ -246,7 +248,7 @@ function ClickTriggers() {
         getSectionNumbers(courseName, instFilter); // Search for sections
     });
 
-    $('body').on('click', '#SectionList i:nth-child(1)', function() { // If a section is clicked in SectionList
+    $('body').on('click', '#SectionList i:nth-child(1)', function() { // If a section's add/drop button is clicked in SectionList
         var secname = $(this).next().next().html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
         var schedName = $('#schedSelect').val();
 
@@ -257,14 +259,14 @@ function ClickTriggers() {
         }
     });
 
-    $('body').on('click', '#SectionList span:nth-child(3)', function() { // If a section is clicked
+    $('body').on('click', '#SectionList span:nth-child(4)', function() { // If a section name is clicked
         var secname = $(this).html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
         getSectionInfo(secname); // Search for section info
-        var dept = secname.slice(0,-6);
-        getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
+        // var dept = secname.slice(0,-6);
+        // getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
     });
 
-    $('body').on('click', '#SectionList i:nth-child(4)', function() { // If the user clicks a star in SectionList
+    $('body').on('click', '#SectionList i:nth-child(5)', function() { // If the user clicks a star in SectionList
         var isStarred = $(this).attr('class'); // Determine whether the section is starred
         if (isStarred == 'fa fa-star-o') {addRem = 'add';} 
         else if (isStarred == 'fa fa-star') {addRem = 'rem';}
@@ -340,9 +342,9 @@ function SendReq(url, fun, passVar) {
  
 function LoadingIndicate() {
     if (LoadingSum > 0) {
-        $('#LoadingInfo').css('opacity', '1'); // Display the loading indicator
+        $('#LoadingInfo').css('display', 'inline-block'); // Display the loading indicator
     } else {
-        $('#LoadingInfo').css('opacity', '0'); // Display the loading indicator
+        $('#LoadingInfo').css('display', 'none'); // Display the loading indicator
     }
 }
  
@@ -370,11 +372,11 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     } else {
         allHTML = '<ul>';
         for(var course in JSONRes) { if (JSONRes.hasOwnProperty(course)) { // Add a line for each course
-            pcrFrac = Number(JSONRes[course].PCR) / 4;
-            allHTML += '<li><span class="PCR tooltip" title="PCR: '+JSONRes[course].PCR+
-            '" style="background-color:rgba(45, 160, 240, '+pcrFrac*pcrFrac+')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;'+
-            '<span class="courseNumber">'+JSONRes[course].courseListName+'</span>'+
-            '<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
+            pcrFrac = 0;
+            allHTML += '<li id="'+JSONRes[course].courseListName.replace(' ', '-')+'">'+'<span class="PCR" style="background-color:rgba(45, 160, 240, '+pcrFrac*pcrFrac+')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;'+
+                '<span class="courseNumber">'+JSONRes[course].courseListName+'</span>'+
+                '<span class="CourseTitle"> - '+JSONRes[course].courseTitle+'</span></li>';
+
         }}
         allHTML += '</ul>';
     }
@@ -382,11 +384,40 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     if (TitleHidden === false) {$('.CourseTitle').toggle();}
 
     $( "#CourseList li" ).each(function( index ) {
-        PCR = $(this).data('pcr');
-        pcrFrac = PCR / 4;
-        $(this).css('background-color', 'rgba(45, 160, 240, '+pcrFrac*pcrFrac+')');
+        ApplyPCR($(this).attr('id'))
     });
-    $('.tooltip').tooltipster({ animation: 'fade', delay: 700, touchDevices: false, interactive: true, trigger: 'hover', position: 'right'});
+}
+
+function ApplyPCR(element, inst) {
+    LoadingSum += 1; 
+    LoadingIndicate();
+    var courseID = element.split('-')[0] + '-' + element.split('-')[1]
+    baseURL = '/Review?courseID=' + courseID;
+    if (inst) {baseURL += '&instName=' + inst}
+    $.get(baseURL) // Make the request
+    .done(function(data) {
+        try {
+            pcrFrac = data.cQ / 4;
+        } catch(err) {
+            pcrFrac = 0;
+        }
+        $('#'+element).find('.PCR').css('background-color', 'rgba(45, 160, 240, '+Math.pow(pcrFrac, 5)*5+')');
+        
+        if(!isNaN(data.cQ)) {
+            cQStr = data.cQ.toString() 
+            if (cQStr.length == 1) {cQStr += '.';}
+            while (cQStr.length < 4) {
+                cQStr += '0';
+            }
+            $('#'+element).find('.PCR').html(data.cQ);
+        } else {
+            $('#'+element).find('.PCR').html('0.00');
+        }
+    })
+    .always(function() {
+        LoadingSum -= 1;
+        LoadingIndicate();
+    });
 }
  
 function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department
@@ -430,21 +461,25 @@ function FormatSectionsList(stars, sections) { // Receive section and star info 
             if (meet.substring(0, sections[section].SectionName.replace(/ /g, '').length) == sections[section].SectionName.replace(/ /g, '')) {plusCross = 'times';}
         });
 
-        allHTML += '<li id="' + sections[section].SectionName.replace(/ /g,'') + '">'+
+        allHTML += '<li id="' + sections[section].SectionName.replace(/ /g,'-') + '">'+
             '<i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp'+
             '<span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
+            '<span class="PCR">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
             '<span>'+sections[section].SectionName + sections[section].TimeInfo+'</span>'+
             '<i class="'+starClass+'"></i></li>';
     }}
     allHTML += '</ul>';
+
     if (typeof section === 'undefined') {
-        $('#SectionTitle').html('No Results');
+        $('#CourseTitle').html('No Results');
         $('#SectionList').empty();
     } else {
-        $('#SectionTitle').html(sections[section].CourseTitle);
+        $('#CourseTitle').html(sections[section].CourseTitle);
         $('#SectionList').html(allHTML); // Put the course number list in  #SectionList
     }
-    
+    for (var sec in sections) {
+        ApplyPCR(sections[sec].SectionName.replace(/ /g,'-'), sections[sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'))
+    }    
 }
  
 function getSectionInfo(sec) { // Get info about the specific section
@@ -454,18 +489,18 @@ function getSectionInfo(sec) { // Get info about the specific section
  
 function SectionInfoFormat(data, passvar) { // Receive section specific info and display
     if (data == "No Results") {
-        $('#SectionInfo').html('No Results');        
+        $('#SectionInfo').html('No Results'); 
     } else {
         var HTMLinfo = "";
-        if (data.Instructor)        {HTMLinfo += "<span>&nbsp + &nbsp</span>";}
+        // if (data.Instructor)        {HTMLinfo += "<span>&nbsp + &nbsp</span>";}
         if (data.FullID)            {HTMLinfo += "<span>" + data.FullID + "</span>";} // Format the whole response
         if (data.Title)             {HTMLinfo += " - " + data.Title + "<br><br>";}
         if (data.Instructor)        {HTMLinfo += "Instructor: " + data.Instructor + "<br><br>";}
-        if (data.Description)       {HTMLinfo += "Description:<br><p class='DescText'>" + data.Description + "</p><br>";}
+        if (data.TimeInfo)          {HTMLinfo += data.TimeInfo + "<br>";}
+        if (data.Description)       {HTMLinfo += "Description:<br>" + data.Description + "<br>";}
         if (data.OpenClose)         {HTMLinfo += "Status: " + data.OpenClose + "<br><br>";}
         if (data.termsOffered)      {HTMLinfo += data.termsOffered + "<br><br>";}
-        if (data.Prerequisites)     {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br><br>";}
-        if (data.TimeInfo)          {HTMLinfo += data.TimeInfo;}
+        if (data.Prerequisites)     {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br>";}
         if (data.AssociatedSections){HTMLinfo += data.AssociatedSections;}
         $('#SectionInfo').html(HTMLinfo);
     }
@@ -505,10 +540,18 @@ function StarFormat(sections) { // Format starred section list
         schedSecList.some(function(meet) {
             if (meet.substring(0, sections[0].NoSpace) == section) {plusCross = 'times';}
         });
-        allHTML += '<li id="' + section + '" class="starredSec"><i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp<span class="'+sections[1].OpenClose+'Sec">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[1].FullID + ' - ' + sections[1].TimeInfo.split('<')[0]+'</span><i class="'+starClass+'"></i></li>';
+        allHTML += '<li id="' + sections[0][section].SectionName.replace(/ /g,'-') + '">'+
+            '<i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp'+
+            '<span class="'+sections[0][section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
+            '<span class="PCR">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
+            '<span>'+sections[0][section].SectionName + sections[0][section].TimeInfo+'</span>'+
+            '<i class="'+starClass+'"></i></li>';
     }}
     $('#SectionTitle').html('Starred Sections');
-    $('#SectionList').append(allHTML); // Put the course number list in  #SectionList       
+    $('#SectionList').append(allHTML); // Put the course number list in  #SectionList     
+    for (var sec in sections[0]) {
+        ApplyPCR(sections[0][sec].SectionName.replace(/ /g,'-'), sections[0][sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'))
+    }  
 }
  
 function addToSched(sec, schedName) { // Getting info about a section
