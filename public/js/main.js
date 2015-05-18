@@ -248,7 +248,7 @@ function ClickTriggers() {
         getSectionNumbers(courseName, instFilter); // Search for sections
     });
 
-    $('body').on('click', '#SectionList i:nth-child(1)', function() { // If a section is clicked in SectionList
+    $('body').on('click', '#SectionList i:nth-child(1)', function() { // If a section's add/drop button is clicked in SectionList
         var secname = $(this).next().next().html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
         var schedName = $('#schedSelect').val();
 
@@ -259,11 +259,11 @@ function ClickTriggers() {
         }
     });
 
-    $('body').on('click', '#SectionList span:nth-child(4)', function() { // If a section is clicked
+    $('body').on('click', '#SectionList span:nth-child(4)', function() { // If a section name is clicked
         var secname = $(this).html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
         getSectionInfo(secname); // Search for section info
-        var dept = secname.slice(0,-6);
-        getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
+        // var dept = secname.slice(0,-6);
+        // getCourseNumbers(dept, 'courseIDSearch', TitleHidden);
     });
 
     $('body').on('click', '#SectionList i:nth-child(5)', function() { // If the user clicks a star in SectionList
@@ -403,7 +403,16 @@ function ApplyPCR(element, inst) {
         }
         $('#'+element).find('.PCR').css('background-color', 'rgba(45, 160, 240, '+Math.pow(pcrFrac, 5)*5+')');
         
-        if(!isNaN(data.cQ)) {$('#'+element).find('.PCR').html(data.cQ);}
+        if(!isNaN(data.cQ)) {
+            cQStr = data.cQ.toString() 
+            if (cQStr.length == 1) {cQStr += '.';}
+            while (cQStr.length < 4) {
+                cQStr += '0';
+            }
+            $('#'+element).find('.PCR').html(data.cQ);
+        } else {
+            $('#'+element).find('.PCR').html('0.00');
+        }
     })
     .always(function() {
         LoadingSum -= 1;
@@ -531,10 +540,18 @@ function StarFormat(sections) { // Format starred section list
         schedSecList.some(function(meet) {
             if (meet.substring(0, sections[0].NoSpace) == section) {plusCross = 'times';}
         });
-        allHTML += '<li id="' + section + '" class="starredSec"><i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp<span class="'+sections[1].OpenClose+'Sec">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;<span>'+sections[1].FullID + ' - ' + sections[1].TimeInfo.split('<')[0]+'</span><i class="'+starClass+'"></i></li>';
+        allHTML += '<li id="' + sections[0][section].SectionName.replace(/ /g,'-') + '">'+
+            '<i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp'+
+            '<span class="'+sections[0][section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
+            '<span class="PCR">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
+            '<span>'+sections[0][section].SectionName + sections[0][section].TimeInfo+'</span>'+
+            '<i class="'+starClass+'"></i></li>';
     }}
     $('#SectionTitle').html('Starred Sections');
-    $('#SectionList').append(allHTML); // Put the course number list in  #SectionList       
+    $('#SectionList').append(allHTML); // Put the course number list in  #SectionList     
+    for (var sec in sections[0]) {
+        ApplyPCR(sections[0][sec].SectionName.replace(/ /g,'-'), sections[0][sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'))
+    }  
 }
  
 function addToSched(sec, schedName) { // Getting info about a section
