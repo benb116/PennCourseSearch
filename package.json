@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "colors": "^1.1.0",
-    "express": "^3.19.0",
-    "express-stormpath": "^0.6.0",
+    "express": "^3.20.3",
+    "express-stormpath": "^0.6.9",
     "fs": "0.0.2",
     "keen-js": "^3.2.4",
     "mongojs": "^0.18.0",

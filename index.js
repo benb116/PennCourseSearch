@@ -51,8 +51,8 @@ app.use(stormpath.init(app, {
 }));
 
 // Connect to database
-var uri = 'mongodb://' + config.mongouser + ':' + config.mongopass + '@' + config.mongouri + '/pcs1';
-var db = mongojs.connect(uri, ["students", "courses2015c", "newreviews"]);
+var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', db = mongojs.connect(uri, ["Students", "Courses2015C", "NewReviews"]);
+
 
 // Set up Keen Analytics
 var client = new Keen({
@@ -402,24 +402,23 @@ function parseSectionList(JSONString) {
   }
 }
 
-app.get('/review', stormpath.loginrequired, function(req, res) {
+app.get('/Review', stormpath.loginRequired, function(req, res) {
   var courseid = req.query.courseid;
   var thedept = courseid.split("-")[0];
   var instname = req.query.instname;
   try {
-    db.collection('newreviews').find({dept: thedept}, function(err, doc) {
-      var reviews = doc[0].reviews[courseid.replace(/-/g, ' ')];
-
+    db.collection('NewReviews').find({Dept: thedept}, function(err, doc) {
+      var reviews = doc[0].Reviews[courseid.replace(/-/g, ' ')];
       if (typeof reviews === 'undefined') {
         return res.send({});
       }
       if (typeof instname === 'undefined') {
         if (typeof reviews !== 'undefined') {
-          return res.send(reviews.total);
+          return res.send(reviews.Total);
         }
       } else {
         for (var inst in reviews) {
-          if (inst.indexof(instname.touppercase()) > -1) {
+          if (inst.indexOf(instname.toUpperCase()) > -1) {
             return res.send(reviews[inst]);
           }
         }

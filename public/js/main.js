@@ -392,8 +392,8 @@ function ApplyPCR(element, inst) {
     LoadingSum += 1; 
     LoadingIndicate();
     var courseID = element.split('-')[0] + '-' + element.split('-')[1]
-    baseURL = '/Review?courseID=' + courseID;
-    if (inst) {baseURL += '&instName=' + inst}
+    baseURL = '/Review?courseid=' + courseID;
+    if (inst) {baseURL += '&instname=' + inst}
     $.get(baseURL) // Make the request
     .done(function(data) {
         try {
