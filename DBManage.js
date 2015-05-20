@@ -1,8 +1,9 @@
-var fs 			= require('fs');
+var fs = require('fs');
 var request = require("request");
 var mongojs = require("mongojs");
+var config;
 try {
-	var config = require('./config.js');
+	config = require('./config.js');
 } catch (err) { // If there is no config file
 	config = {};
 	config.requestAB 	= process.env.REQUESTAB;
