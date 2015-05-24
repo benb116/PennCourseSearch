@@ -195,7 +195,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
     db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
       try {
 	       return res.send(doc[0].Courses);
-      } catch (err) {
+      } catch (error) {
 	       return res.send({});
       }
     });
@@ -409,10 +409,11 @@ app.get('/NewReview', stormpath.loginRequired, function(req, res) {
   var thedept = req.query.dept;
   try {
     db.collection('NewReviews').find({Dept: thedept}, function(err, doc) {
+      var reviews;
       if (doc[0]) {
-        var reviews = doc[0].Reviews;
+        reviews = doc[0].Reviews;
       } else {
-        var reviews = {};
+        reviews = {};
       }
       
       return res.send(reviews);
@@ -521,6 +522,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 
     var addRem = req.query.addRem; // Are we adding, removing, or clearing?
     var courseID = req.query.courseID;
+    var placeholder = {};
     if (addRem == 'add') { // If we need to add, then we get meeting info for the section
       request({
       	uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
@@ -542,7 +544,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
       	client.addEvent('Sched', schedEvent, function(err, res) {
           if (err) {console.log(err);}
       	});
-      	var placeholder = {};
       	placeholder['Schedules.' + schedName] = SchedCourses;
       	db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
       	return res.send(SchedCourses);
@@ -555,14 +556,12 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
           // console.log((myPennkey + ' Sched Removed: ' + courseID).magenta);
       	}}
 			        }
-      var placeholder = {};
       placeholder['Schedules.' + schedName] = SchedCourses;
       db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
       return res.send(SchedCourses);
       
     } else if (addRem == 'clear') { // Clear all
       SchedCourses = {};
-      var placeholder = {};
       placeholder['Schedules.' + schedName] = SchedCourses;
       db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
       // console.log((myPennkey + ' Sched Cleared').magenta);
@@ -577,7 +576,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
           schedName = schedName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
         }
       }
-      var placeholder = {};
       placeholder['Schedules.' + schedName] = SchedCourses;
       db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }});
 
@@ -597,7 +595,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
     } else if (addRem == 'del') { // Delete
       delete doc[0].Schedules[schedName];
       if(Object.getOwnPropertyNames(doc[0].Schedules).length === 0){
-        doc[0].Schedules['Schedule'] = {};
+        doc[0].Schedules.Schedule = {};
       }
       db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
       schedList = Object.keys(doc[0].Schedules);
@@ -607,7 +605,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
     } else if (addRem == 'name') { // If we're getting a list of the schedules
       schedList = Object.keys(doc[0].Schedules);
       if (schedList.length === 0) {
-        var placeholder = {};
         placeholder['Schedules.Schedule'] = {};
         db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
         schedList.push('Schedule');

@@ -29,6 +29,8 @@ $(document).ready(function () {
   SendReq(schedURL, ListScheds, 0);
 
   $('#MenuButtons li ul li').click(function() { // If the user clicks a Schedule button
+    var schedName, schedURL;
+
     if ($(this).html() == 'Download') {
       html2canvas($('#SchedGraph'), { // Convert the div to a canvas
         onrendered: function(canvas) {
@@ -41,20 +43,20 @@ $(document).ready(function () {
     }
 
     if ($(this).html() == 'New') {
-      var schedName = prompt('Please enter a name for your new schedule.'); 
+      schedName = prompt('Please enter a name for your new schedule.'); 
       while (JSON.parse(sessionStorage.schedList).indexOf(schedName) != -1) {
         // {break}
         schedName = prompt('Please enter a unique name for your new schedule.');
       }
       if (schedName !== '' && schedName !== null) {
-        var schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
+        schedURL = "/Sched?addRem=name&courseID=blank&schedName="+schedName; // Make the request
         SendReq(schedURL, ListScheds, -2);
       }
     }
 
     if ($(this).html() == 'Duplicate') {
-      var schedName = $("#schedSelect").val();
-      var schedURL = "/Sched?addRem=dup&courseID=blank&schedName="+schedName; // Make the request
+      schedName = $("#schedSelect").val();
+      schedURL = "/Sched?addRem=dup&courseID=blank&schedName="+schedName; // Make the request
       SendReq(schedURL, ListScheds, -2);
       swal({
         title: "Schedule duplicated.",   
@@ -64,14 +66,14 @@ $(document).ready(function () {
     }
 
     if ($(this).html() == 'Rename') {
-      var schedName = $("#schedSelect").val();
-      var schedRename = prompt('Please enter a name for your new schedule.'); 
+      schedName = $("#schedSelect").val();
+      schedRename = prompt('Please enter a name for your new schedule.'); 
       while (JSON.parse(sessionStorage.schedList).indexOf(schedRename) != -1) {
         // {break}
         schedRename = prompt('Please enter a unique name for your new schedule.');
       }
       if (schedName !== '' && schedName !== null) {
-        var schedURL = "/Sched?addRem=ren&courseID=blank&schedName="+schedName+"&schedRename="+schedRename; // Make the request
+        schedURL = "/Sched?addRem=ren&courseID=blank&schedName="+schedName+"&schedRename="+schedRename; // Make the request
         SendReq(schedURL, ListScheds, -2);
       }
     }
@@ -414,8 +416,8 @@ function RetrievePCR(courseID, instName) {
         LoadingSum -= 1;
         LoadingIndicate();
       });
-    } catch(err) {
-      console.log(err)
+    } catch(error) {
+      console.log(error);
     }
   } else {
     ApplyPCR(courseID, instName);
@@ -501,7 +503,9 @@ function FormatSectionsList(stars, sections) { // Receive section and star info 
     var index = stars.indexOf(sections[section].NoSpace);
     if (index > -1) {starClass = 'fa fa-star';} // If the section is a starred section, add the filled star
     
-    var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) { return el.fullCourseName.replace(/ /g, ''); });
+    var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) { 
+      return el.fullCourseName.replace(/ /g, ''); 
+    });
 
     schedSecList.some(function(meet) {
       if (meet.substring(0, sections[section].SectionName.replace(/ /g, '').length) == sections[section].SectionName.replace(/ /g, '')) {plusCross = 'times';}
@@ -596,7 +600,7 @@ function StarFormat(sections) { // Format starred section list
   $('#SectionTitle').html('Starred Sections');
   $('#SectionList').append(allHTML); // Put the course number list in  #SectionList  
   for (var sec in sections[0]) {
-    ApplyPCR(sections[0][sec].SectionName.replace(/ /g,'-'), sections[0][sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'));
+    RetrievePCR(sections[0][sec].SectionName.replace(/ /g,'-'), sections[0][sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'));
   }  
 }
  
@@ -657,14 +661,16 @@ function SpitSched(courseSched) {
   incSun = 0; // no weekends
   incSat = 0;
  
-  for (var sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
+  var sec, day;
+
+  for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
     if (courseSched[sec].meetHour <= startHour) { // If there are classes earlier than the default start
       startHour = Math.floor(courseSched[sec].meetHour); // push back the earliest hour
     }
     if (courseSched[sec].meetHour+courseSched[sec].HourLength >= endHour) { // Push back latest hour if necessary
       endHour = Math.ceil(courseSched[sec].meetHour+courseSched[sec].HourLength);
     }
-    for (var day in courseSched[sec].meetDay) {
+    for (day in courseSched[sec].meetDay) {
       var letterDay = courseSched[sec].meetDay[day];
       if (letterDay == 'U') { // If there are sunday classes
         incSun = 1;
@@ -708,12 +714,13 @@ function SpitSched(courseSched) {
   }}
 
   // Add the blocks
-  for (var sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
-    for (var day in courseSched[sec].meetDay) {  if (courseSched[sec].meetDay.hasOwnProperty(day)) { // some sections have multiple meeting times and days
-      var letterDay = courseSched[sec].meetDay[day]; // On which day does this meeting take place?
+  for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
+    for (day in courseSched[sec].meetDay) {  if (courseSched[sec].meetDay.hasOwnProperty(day)) { // some sections have multiple meeting times and days
+      var meetLetterDay = courseSched[sec].meetDay[day]; // On which day does this meeting take place?
+      var blockleft;
       for (var possDay in weekdays) { 
-        if (weekdays[possDay] == letterDay) {
-          var blockleft = possDay*percentWidth; { break; } // determine left spacing
+        if (weekdays[possDay] == meetLetterDay) {
+          blockleft = possDay*percentWidth; { break; } // determine left spacing
         }
       }
       var blocktop  = (courseSched[sec].meetHour - startHour) * halfScale + 9; // determine top spacing based on time from startHour (offset for prettiness)
