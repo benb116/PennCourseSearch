@@ -81,7 +81,6 @@
                       <li id="DeleteSchedBtn">Delete</li>
                     </ul>
                   </li>
-                  <li onclick="$('.CourseTitle').toggle();TitleHidden = !TitleHidden;"><span>Show Titles</span></li>
                   <li onclick="Stars('show', 'blank');"><span>Show Stars</span></li>
                   <li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li>
                 </ul>
@@ -117,7 +116,7 @@
         	<div id="SectionCol">
         		<div id="Sections">
                     <span id="CourseTitle"></span>
-                    <div id="SectionList"></div>
+                    <div id="SectionList"><ul></ul></div>
                 </div>
         		<div id="SectionInfo"></div>
         	</div>
