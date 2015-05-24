@@ -16,19 +16,19 @@ try {
   config = require('./config.js');
 } catch (err) { // If there is no config file
   config = {};
-  config.requestAB 				= process.env.REQUESTAB;
-  config.requestAT 				= process.env.REQUESTAT;
-  config.PCRToken 				= process.env.PCRTOKEN;
-  config.MongoUser 				= process.env.MONGOUSER;
-  config.MongoPass 				= process.env.MONGOPASS;
-  config.MongoURI 				= process.env.MONGOURI;
-  config.STORMPATH_API_KEY_ID 	= process.env.STORMPATH_API_KEY_ID;
+  config.requestAB = process.env.REQUESTAB;
+  config.requestAT = process.env.REQUESTAT;
+  config.PCRToken = process.env.PCRTOKEN;
+  config.MongoUser = process.env.MONGOUSER;
+  config.MongoPass = process.env.MONGOPASS;
+  config.MongoURI = process.env.MONGOURI;
+  config.STORMPATH_API_KEY_ID = process.env.STORMPATH_API_KEY_ID;
   config.STORMPATH_API_KEY_SECRET = process.env.STORMPATH_API_KEY_SECRET;
-  config.STORMPATH_SECRET_KEY 	= process.env.STORMPATH_SECRET_KEY;
-  config.STORMPATH_URL 			= process.env.STORMPATH_URL;
-  config.KeenIOID					= process.env.KEEN_PROJECT_ID;
-  config.KeenIOWriteKey			= process.env.KEEN_WRITE_KEY;
-  config.PushBulletAuth			= process.env.PUSHBULLETAUTH;
+  config.STORMPATH_SECRET_KEY = process.env.STORMPATH_SECRET_KEY;
+  config.STORMPATH_URL = process.env.STORMPATH_URL;
+  config.KeenIOID	= process.env.KEEN_PROJECT_ID;
+  config.KeenIOWriteKey	= process.env.KEEN_WRITE_KEY;
+  config.PushBulletAuth	= process.env.PUSHBULLETAUTH;
 }
 
 var app = express();
@@ -36,6 +36,7 @@ var app = express();
 // Set paths
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
+// app.use(express.compress());
 app.use(express.static(path.join(__dirname, 'public')));
 process.env.PWD = process.cwd();
 
@@ -52,7 +53,6 @@ app.use(stormpath.init(app, {
 
 // Connect to database
 var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', db = mongojs.connect(uri, ["Students", "Courses2015C", "NewReviews"]);
-
 
 // Set up Keen Analytics
 var client = new Keen({
@@ -327,7 +327,7 @@ function parseSectionList(JSONString) {
     var Title = entry.course_title;
     var FullID = entry.section_id_normalized.replace(/-/g, " "); // Format name
     var CourseID = entry.section_id_normalized.split('-')[0] + ' ' + entry.section_id_normalized.split('-')[1];
-    var Instructor
+    var Instructor;
     try {
       Instructor = entry.instructors[0].name;
     } catch (err) {
@@ -404,6 +404,23 @@ function parseSectionList(JSONString) {
     return 'No Results';
   }
 }
+
+app.get('/NewReview', stormpath.loginRequired, function(req, res) {
+  var thedept = req.query.dept;
+  try {
+    db.collection('NewReviews').find({Dept: thedept}, function(err, doc) {
+      if (doc[0]) {
+        var reviews = doc[0].Reviews;
+      } else {
+        var reviews = {};
+      }
+      
+      return res.send(reviews);
+    });
+  } catch(err) {
+    return res.send(err);
+  }
+});
 
 app.get('/Review', stormpath.loginRequired, function(req, res) {
   var courseid = req.query.courseid;
@@ -505,7 +522,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
     var addRem = req.query.addRem; // Are we adding, removing, or clearing?
     var courseID = req.query.courseID;
     if (addRem == 'add') { // If we need to add, then we get meeting info for the section
-      console.log(courseID)
       request({
       	uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
       	method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},

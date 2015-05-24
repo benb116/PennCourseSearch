@@ -17,10 +17,11 @@ $(document).ready(function () {
   // Global variables
   LoadingSum    = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
   TitleHidden  = false; // Are the titles of courses in #Courselist hidden or not
+  var colorPalette;
   if (sessionStorage.colorPalette) {
-    var colorPalette = JSON.parse(sessionStorage.colorPalette);
+    colorPalette = JSON.parse(sessionStorage.colorPalette);
   } else {
-    var colorPalette  = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF','#ecf0f1'];
+    colorPalette  = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF','#ecf0f1'];
     sessionStorage.colorPalette = JSON.stringify(colorPalette);
   }
 
@@ -131,7 +132,7 @@ $(document).ready(function () {
 
   $('#searchSelect').change(function () {
     var searchTerms = $('#CSearch').val(); // Get raw search
-    if (searchTerms != '') {
+    if (searchTerms !== '') {
       initiateSearch();
     }
   });
@@ -139,7 +140,7 @@ $(document).ready(function () {
   $('#CSearch').on('input', function(){ // When the search terms change
     delay(function(){ // Don't check instantaneously
       var searchTerms = $('#CSearch').val(); // Get raw search
-      if (searchTerms != '') {
+      if (searchTerms !== '') {
         initiateSearch();    
       }
     }, 500);
@@ -152,11 +153,11 @@ function ListScheds(schedList, theindex) { // Deal with the list of schedules
   for(var schedName in schedList) { if (schedList.hasOwnProperty(schedName)) {
     $('#schedSelect').append('<option value="'+schedList[schedName]+'">'+schedList[schedName]+'</option>'); // Add options to the schedSelect dropdown
   }}
-
+  var schedNameReq;
   if (theindex === 0) { // If this is a simple listing, set the first option as selected
-    var schedNameReq = schedList[0];
+    schedNameReq = schedList[0];
   } else { // If we just created a new schedule, set that as the default
-    var schedNameReq = schedList[schedList.length - 1];
+    schedNameReq = schedList[schedList.length - 1];
   }
   $('#schedSelect option[value="'+schedNameReq+'"]').attr("selected","selected");
 
@@ -171,24 +172,25 @@ function initiateSearch() { // Deal with search terms
     if (searchTerms != 'favicon.ico' && searchTerms != 'blank') { // Initial filtering
        
       var searchSelect = $('#searchSelect').val();
+      var deptSearch, numbSearch, sectSearch;
       if (!(searchSelect == 'keywordSearch' || searchSelect == 'instSearch')) {
         // Format search terms for server request
         var splitTerms = formatCourseID(searchTerms);
 
         // By now the search terms should be 'DEPT/NUM/SEC/' although NUM/ and SEC/ may not be included
-        var deptSearch = splitTerms.split("/")[0]; // Get deptartment
-        var numbSearch = splitTerms.split("/")[1]; // Get course number
-        var sectSearch = splitTerms.split("/")[2]; // Get section number
-        if(typeof numbSearch === 'undefined'){var numbSearch = '';}
-        if(typeof sectSearch === 'undefined'){var sectSearch = '';}
+        deptSearch = splitTerms.split("/")[0]; // Get deptartment
+        numbSearch = splitTerms.split("/")[1]; // Get course number
+        sectSearch = splitTerms.split("/")[2]; // Get section number
+        if(typeof numbSearch === 'undefined'){numbSearch = '';}
+        if(typeof sectSearch === 'undefined'){sectSearch = '';}
 
       } else {
-        var deptSearch = searchTerms; // Not really a department search but it will go to getCourseNumbers
-        var numbSearch = ''; // Get course number
-        var sectSearch = ''; // Get section number
+        deptSearch = searchTerms; // Not really a department search but it will go to getCourseNumbers
+        numbSearch = ''; // Get course number
+        sectSearch = ''; // Get section number
       }
 
-      var searchSelect = $('#searchSelect').val(); // CID, keyword, instructor?
+      searchSelect = $('#searchSelect').val(); // CID, keyword, instructor?
       getCourseNumbers(deptSearch, searchSelect, TitleHidden);
       if (numbSearch.length == 3) {
         getSectionNumbers(deptSearch+numbSearch, 'all', sectSearch.length);
@@ -244,7 +246,7 @@ function ClickTriggers() {
     var courseName = $(this).find('.courseNumber').html(); // Format the course name for searching
     var searchSelect = $('#searchSelect').val();
     var instFilter = 'all';
-    if (searchSelect == 'instSearch') {var instFilter = $('#CSearch').val();}
+    if (searchSelect == 'instSearch') {instFilter = $('#CSearch').val();}
     getSectionNumbers(courseName, instFilter); // Search for sections
   });
 
@@ -270,7 +272,7 @@ function ClickTriggers() {
     var isStarred = $(this).attr('class'); // Determine whether the section is starred
     if (isStarred == 'fa fa-star-o') {addRem = 'add';} 
     else if (isStarred == 'fa fa-star') {addRem = 'rem';}
-     
+
     Stars(addRem, $(this).prev().html().split("-")[0].replace(/ /g, "")); // Add/rem the section
 
     $(this).toggleClass('fa-star'); // Change the star icon
@@ -381,41 +383,86 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
   $('#CourseList').html(allHTML); // Put the course number list in #CourseList
   if (TitleHidden === false) {$('.CourseTitle').toggle();}
 
-  $( "#CourseList li" ).each(function( index ) {
-    ApplyPCR($(this).attr('id'))
-  });
+  for (var courseID in JSONRes) {
+    var fullID = JSONRes[courseID].courseListName;
+    RetrievePCR(fullID);
+  }
 }
 
-function ApplyPCR(element, inst) {
-  LoadingSum += 1; 
-  LoadingIndicate();
-  var courseID = element.split('-')[0] + '-' + element.split('-')[1]
-  baseURL = '/Review?courseid=' + courseID;
-  if (inst) {baseURL += '&instname=' + inst}
-  $.get(baseURL) // Make the request
-  .done(function(data) {
+function RetrievePCR(courseID, instName) {
+  /* 
+  Check if ls has dept reviews
+    true: search through that json, find, apply
+    false: make request, store JSON, search find apply
+  */
+  var dept = courseID.split(' ')[0];
+  if (!localStorage['Review'+dept]) {
+    LoadingSum += 1; 
+    LoadingIndicate();
+    baseURL = '/NewReview?dept=' + dept;
     try {
-      pcrFrac = data.cQ / 4;
+      $.ajax({
+        url: baseURL,
+        async: false
+      }) // Make the request
+      .done(function(data) {
+        localStorage['Review'+dept] = JSON.stringify(data);
+        ApplyPCR(courseID, instName);
+        return 'done';
+      })
+      .always(function() {
+        LoadingSum -= 1;
+        LoadingIndicate();
+      });
     } catch(err) {
-      pcrFrac = 0;
+      console.log(err)
     }
-    $('#'+element).find('.PCR').css('background-color', 'rgba(45, 160, 240, '+Math.pow(pcrFrac, 5)*5+')');
-    
-    if(!isNaN(data.cQ)) {
-      cQStr = data.cQ.toString() 
+  } else {
+    ApplyPCR(courseID, instName);
+    return 'done';
+  }
+
+}
+
+function ApplyPCR(courseID, instName) {
+  var dept = courseID.split(' ')[0];
+  searchID = dept + ' ' + courseID.split(' ')[1];
+  var allReviews = JSON.parse(localStorage['Review'+dept]);
+  var thisReview = allReviews[searchID];
+  var result;
+  if (typeof thisReview === 'undefined') {
+    result = {};
+  }
+  if (typeof instName === 'undefined') {
+    if (typeof thisReview !== 'undefined') {
+      result = thisReview.Total;
+    }
+  } else {
+    for (var inst in thisReview) {
+      if (inst.indexOf(instName.toUpperCase()) > -1) {
+        result = thisReview[inst];
+        break;
+      }
+    }
+  }
+  try {
+    pcrFrac = result.cQ / 4;
+
+    if(!isNaN(result.cQ)) {
+      cQStr = result.cQ.toString();
       if (cQStr.length == 1) {cQStr += '.';}
       while (cQStr.length < 4) {
         cQStr += '0';
       }
-      $('#'+element).find('.PCR').html(data.cQ);
+      $('#'+courseID.replace(/ /g, '-')).find('.PCR').html(cQStr);
     } else {
-      $('#'+element).find('.PCR').html('0.00');
+      $('#'+courseID.replace(/ /g, '-')).find('.PCR').html('0.00');
     }
-  })
-  .always(function() {
-    LoadingSum -= 1;
-    LoadingIndicate();
-  });
+  } catch(err) {
+    pcrFrac = 0;
+  }
+  $('#'+courseID.replace(/ /g, '-')).find('.PCR').css('background-color', 'rgba(45, 160, 240, '+Math.pow(pcrFrac, 5)*5+')');
+
 }
  
 function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department
@@ -477,8 +524,8 @@ function FormatSectionsList(stars, sections) { // Receive section and star info 
     $('#SectionList').html(allHTML); // Put the course number list in  #SectionList
   }
   for (var sec in sections) {
-    ApplyPCR(sections[sec].SectionName.replace(/ /g,'-'), sections[sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'))
-  } 
+    RetrievePCR(sections[sec].SectionName, sections[sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'));
+  }
 }
  
 function getSectionInfo(sec) { // Get info about the specific section
@@ -539,7 +586,7 @@ function StarFormat(sections) { // Format starred section list
     schedSecList.some(function(meet) {
       if (meet.substring(0, sections[0].NoSpace) == section) {plusCross = 'times';}
     });
-    allHTML += '<li id="' + sections[0][section].SectionName.replace(/ /g,'-') + '">'+
+    allHTML += '<li id="' + sections[0][section].SectionName.replace(/ /g,'-') + '" class="starredSec">'+
       '<i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp'+
       '<span class="'+sections[0][section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
       '<span class="PCR">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
@@ -549,7 +596,7 @@ function StarFormat(sections) { // Format starred section list
   $('#SectionTitle').html('Starred Sections');
   $('#SectionList').append(allHTML); // Put the course number list in  #SectionList  
   for (var sec in sections[0]) {
-    ApplyPCR(sections[0][sec].SectionName.replace(/ /g,'-'), sections[0][sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'))
+    ApplyPCR(sections[0][sec].SectionName.replace(/ /g,'-'), sections[0][sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'));
   }  
 }
  
@@ -631,7 +678,7 @@ function SpitSched(courseSched) {
   if (incSun == 1) {weekdays.unshift('U'); fullWeekdays.unshift('Sunday');} // Update weekdays array if necessary
   if (incSat == 1) {weekdays.push('S'); fullWeekdays.push('Saturday');}
  
-  var percentWidth = 100 / (5 + incSun + incSat); // Update the block width if necessary
+  percentWidth = 100 / (5 + incSun + incSat); // Update the block width if necessary
   var halfScale = 95 / (endHour - startHour + 1); // This defines the scale to be used throughout the scheduling process
   // + 1 keeps the height inside the box
  
@@ -655,7 +702,7 @@ function SpitSched(courseSched) {
   var colorMap = {};
   var colorinc = 0;
   var colorPal = JSON.parse(sessionStorage.colorPalette);
-  for (var sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
+  for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
     colorMap[courseSched[sec].fullCourseName] = colorPal[colorinc]; // assign each section a color
     colorinc += 1;
   }}
