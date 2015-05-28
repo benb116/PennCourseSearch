@@ -27,7 +27,7 @@
             ga('send', 'pageview');
         </script>
 	</head>
-    <body style="background-color:{{ color }};">
+    <body>
         <div id="MenuBar">
             <a rel="leanModal" href="#ModalWindow">About</a>
             <a href="/logout">Logout</a>

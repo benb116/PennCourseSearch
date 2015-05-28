@@ -416,7 +416,7 @@ app.get('/NewReview', stormpath.loginRequired, function(req, res) {
         reviews = {};
       }
       
-      return res.send(reviews);
+      return res.send(JSON.stringify(reviews));
     });
   } catch(err) {
     return res.send(err);

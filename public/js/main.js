@@ -546,7 +546,7 @@ function RetrievePCR(courseID, instName) {
         async: false
       }) // Make the request
       .done(function(data) {
-        localStorage['Review'+dept] = JSON.stringify(data);
+        localStorage['Review'+dept] = data;
         ApplyPCR(courseID, instName);
         return 'done';
       })
