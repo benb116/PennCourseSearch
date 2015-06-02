@@ -105,14 +105,12 @@ app.get('/', function(req, res) {
     var thissub = subtitles[Math.floor(Math.random() * subtitles.length)];
     // Get random payment note
     var fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)];
-    var backColor = '3498db';
 
     return res.render('index', { // Send page
       title: 'PennCourseSearch',
       subtitle: thissub,
       user: req.user.email.split('@')[0],
-      paymentNote: fullPaymentNote,
-      color: '#'+backColor
+      paymentNote: fullPaymentNote
     });
   }
 });
@@ -191,10 +189,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       proFilter 	=== '' && 
       actFilter 	=== '' && 
       includeOpen === '') {
-
     db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
       try {
-	       return res.send(doc[0].Courses);
+	       return res.send(JSON.stringify(doc[0].Courses));
       } catch (error) {
 	       return res.send({});
       }
@@ -219,7 +216,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       } else if 	(resultType == 'sectSearch') {
 	       searchResponse = parseSectionList(body); // Parse the sect response
       } else {searchResponse = {};}
-      return res.send(searchResponse); // return correct info
+      return res.send(JSON.stringify(searchResponse)); // return correct info
     });
   }
 });
@@ -500,7 +497,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
   var schedName 		= req.query.schedName;
   var schedRename		= req.query.schedRename;
   var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
-
+  var placeholder = {};
   db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
     if (typeof doc === 'undefined' || typeof doc === null || err !== null || doc.length === 0) { // If there is no entry or something else went wrong
       db.Students.save({'Pennkey': myPennkey, 'StarList': []}); // Make an entry
@@ -514,7 +511,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
       SchedCourses = doc[0].Schedules[schedName]; // Get previously scheduled courses
     }
     if (typeof SchedCourses === 'undefined') { // If there is no schedule of that name
-      var placeholder = {};
       placeholder['Schedules.' + schedName] = {}; // Make one
       db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
       SchedCourses = {};
@@ -522,7 +518,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
 
     var addRem = req.query.addRem; // Are we adding, removing, or clearing?
     var courseID = req.query.courseID;
-    var placeholder = {};
     if (addRem == 'add') { // If we need to add, then we get meeting info for the section
       request({
       	uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,

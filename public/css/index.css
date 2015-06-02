@@ -201,7 +201,14 @@ ul {
 .ClosedSec {background-color: #F73B3B;}
 .ErrorSec {background-color: #E6E6E6;}
 .PCRSec {background-color: #1f8dd6;}
-.PCR {color: white; width: 3em; height: 1.5em;}
+.PCR {
+    color: white; 
+    width: 2.5em; 
+    height: 1.5em; 
+    text-indent: 0;
+    display: inline-block; 
+    border-radius: 3px;
+    text-align: center;}
 .fa-star, .fa-star-o {
     float: right;
     font-size: 14px;
