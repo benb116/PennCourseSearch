@@ -313,13 +313,15 @@ a.pure-button-primary {
     color: black;
     box-sizing: border-box;
     overflow-y: hidden;
-}
+    font-size: 12px;
+    line-height: 16px;
+}/*
 @media all and (max-width: 1050px) {
     .SchedBlock {font-size: 11px;}
 }
 @media all and (min-width: 1281px) and (max-width: 1700px) {
     .SchedBlock {font-size: 14px;}
-}
+}*/
 .CloseX {
     position: absolute;
     top: 0;

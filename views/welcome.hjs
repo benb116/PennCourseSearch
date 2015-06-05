@@ -37,7 +37,7 @@
     <div class="content">
         <h2 class="content-head is-center">Why should you use PennCourseSearch?</h2>
 
-        <div class="pure-g">
+        <div class="pure-g" style="padding-left:5em;padding-right:5em;">
             <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
                 <h3 class="content-subhead">
                     <i class="fa fa-rocket"></i>
@@ -70,7 +70,7 @@
 
     <div class="ribbon l-box-lrg pure-g" style="padding-bottom:5em;">
         <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
-            <img class="pure-img-responsive" width="400" src="Home/One.png">
+            <img class="pure-img-responsive" width="450" src="Home/One.png">
         </div>
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
             <h2 class="content-head content-head-ribbon">Clean and quick course information</h2>
@@ -78,7 +78,7 @@
                 Search across departments by course ID, keyword, or instructor. Easily compare classes side by side and find the best section and meeting time in a flash. Plus, you can access Penn Course Review ratings to make the best decision about which class to choose.
             </p>
         </div>
-        <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2" style="padding-left:96px;padding-right:64px;">
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2" style="padding-left:160px;padding-right:64px;">
             <h2 class="content-head content-head-ribbon">Admire your schedule</h2>
             <p>
                 Adding a class takes a single click. See your schedule update immediately and watch it resize with your browser. Class blocks also show you room numbers, so you can see if you'll end up going from DRL to Huntsman and back.

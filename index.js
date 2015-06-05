@@ -85,7 +85,10 @@ var subtitles = [
   "Invented by Benjamin Franklin in 1793",
   "Focus on your classes, not your schedule.",
   "Faster than you can say 'Wawa run'",
-  "Classes sine PennCourseSearch vanae."];
+  "Classes sine PennCourseSearch vanae.",
+  "On PennCourseSearch, no one knows you're Amy G.",
+  "Designed by Ben in Speakman 225. Assembled in China.",
+  "Help! I'm trapped in a NodeJS server! Bring Chipotle!"];
 
 var paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";
 var paymentNotes = [
@@ -416,7 +419,7 @@ app.get('/NewReview', stormpath.loginRequired, function(req, res) {
       return res.send(JSON.stringify(reviews));
     });
   } catch(err) {
-    return res.send(err);
+    return res.send('');
   }
 });
 

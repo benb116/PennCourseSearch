@@ -14,3 +14,7 @@ Specific files you may be interested in:
 * [HTML Template](https://github.com/benb116/PennCourseSearch/blob/master/views/index.hjs)
 
 If you have questions, ideas, bug reports, or if you'd like to suggest a new subtitle, let me know.
+
+Screenshot!
+
+![image](https://raw.githubusercontent.com/benb116/PennCourseSearch/master/Screenshot.png)
