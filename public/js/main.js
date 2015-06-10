@@ -140,7 +140,6 @@ function ClickTriggers() {
 
 function SchedTriggers() {
   $('li ul li', '#MenuButtons').click(function() { // If the user clicks a Schedule button
-    console.log('click')
     var schedName, schedURL;
 
     if ($(this).html() == 'Download') {
@@ -226,7 +225,7 @@ function SchedTriggers() {
       });
     }
     if ($(this).html() == 'Recolor') {
-      colorPalette = JSON.parse(sessionStorage.colorPalette)
+      colorPalette = JSON.parse(sessionStorage.colorPalette);
       newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
       sessionStorage.colorPalette = JSON.stringify(colorPalette);
       SpitSched(JSON.parse(sessionStorage.currentSched));
@@ -269,7 +268,7 @@ function LoadingIndicate() {
 }
 
 function ListScheds(schedList, theindex) { // Deal with the list of schedules
-  var schedSelect = $('#schedSelect')
+  var schedSelect = $('#schedSelect');
   schedSelect.empty();
   for(var schedName in schedList) { if (schedList.hasOwnProperty(schedName)) {
     schedSelect.append('<option value="'+schedList[schedName]+'">'+schedList[schedName]+'</option>'); // Populate the schedSelect dropdown
@@ -398,6 +397,10 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     var fullID = JSONRes[courseID].courseListName;
     RetrievePCR(fullID);
   }
+
+  $('.tooltip', '#CourseList').tooltipster({
+    position: 'right'
+  });
 }
  
 function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department
@@ -448,6 +451,9 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
     for (var sec in sections) {
       RetrievePCR(sections[sec].SectionName, sections[sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'));
     }
+    $('.tooltip', '#SectionList').tooltipster({
+      position: 'right'
+    });
     if (!suppress) { 
       courseInfo[1].FullID = courseInfo[1].CourseID;
       delete courseInfo[1].Instructor;
@@ -513,13 +519,14 @@ function StarHandle(data, addRem) {
 function StarFormat(sections) { // Format starred section list
   if (typeof sections === 'string') {sections = JSON.parse(sections);} // JSONify the input
   var starClass = 'fa fa-star';
+  var HTML = '';
   for(var section in sections[0]) { if (sections[0].hasOwnProperty(section)) {
     var plusCross = 'plus';
     var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) { return el.fullCourseName.replace(/ /g, ''); });
     schedSecList.some(function(meet) {
       if (meet.substring(0, sections[0].NoSpace) == section) {plusCross = 'times';}
     });
-    var HTML = '<li id="' + sections[0][section].SectionName.replace(/ /g,'-') + '" class="starredSec">'+
+    HTML += '<li id="' + sections[0][section].SectionName.replace(/ /g,'-') + '" class="starredSec">'+
       '<i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp'+
       '<span class="'+sections[0][section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
       '<span class="PCR tooltip">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
@@ -531,6 +538,9 @@ function StarFormat(sections) { // Format starred section list
   for (var sec in sections[0]) {
     RetrievePCR(sections[0][sec].SectionName);
   }
+  $('.tooltip', '#SectionList').tooltipster({
+    position: 'right'
+  });
 }
 
 function RetrievePCR(courseID, instName) {
@@ -763,7 +773,15 @@ function SpitSched(courseSched) {
             $(this).css('width', (oldBlockWidth / 2) + '%'); // Resize old block
             var newElement = $('#'+newid);
             var newleft = (newElement.offset().left - schedElement.offset().left) * 100 / schedElement.outerWidth(); // Get shift in terms of percentage, not pixels
-            newElement.css('left', newleft + (oldBlockWidth / 2) + '%').css('width', (oldBlockWidth / 2) + '%');  // Shift and resize new block
+            // If a block overlaps with two different blocks, then we only want to shift it over once.
+            // The twoOverlap function only checks vertical overlap
+            var plusOffset;
+            if ($(this).offset().left == newElement.offset().left) { // If we haven't shifted the new block yet
+              plusOffset = oldBlockWidth / 2;
+            } else { //
+              plusOffset = 0;
+            }
+            newElement.css('left', newleft + plusOffset + '%').css('width', (oldBlockWidth / 2) + '%');  // Shift and resize new block
           }
         }
       });
