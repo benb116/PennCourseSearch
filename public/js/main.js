@@ -16,7 +16,7 @@ $(document).ready(function () {
   LoadingSum    = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
 
   var colorPalette;
-  if (sessionStorage.colorPalette) {
+  if (sessionStorage.colorPalette) { // If we recently changed the palette
     colorPalette = JSON.parse(sessionStorage.colorPalette);
   } else {
     colorPalette  = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF','#ecf0f1'];
@@ -32,17 +32,17 @@ $(document).ready(function () {
 
   SchedTriggers(); // This provides functionality to the "Schedule" dropdown
 
-  $('#schedSelect').change(function () {
+  $('#schedSelect').change(function () { // If the user changes the active schedule
     var schedName = $('#schedSelect').val();
     var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName;
     SendReq(schedURL, SpitSched, []);
   });
 
-  $('#reqFilter, #proFilter, #openCheck, #closedCheck, #actFilter').change(function () { // If the user changes from one type of search to another, search again with the new method
+  $('#reqFilter, #proFilter, #openCheck, #closedCheck, #actFilter').change(function () { // If the user changes any filters
     window[sessionStorage.lastReq].apply(this, JSON.parse(sessionStorage.lastPar));
   });
 
-  $('#searchSelect').change(function () {
+  $('#searchSelect').change(function () { // If the user changes the type of search
     var searchTerms = $('#CSearch').val(); // Get raw search
     if (searchTerms !== '') {
       initiateSearch();
@@ -51,11 +51,45 @@ $(document).ready(function () {
  
   $('#CSearch').on('input', function(){ // When the search terms change
     delay(function(){ // Don't check instantaneously
-      initiateSearch();    
+      initiateSearch();
     }, 500);
   });
  
 });
+
+function SendReq(url, fun, passVar) {
+  // Special request wrapper that updates the Loading spinner and automatically passes results to a function
+  // This may seem unnecessary, and it does lead to some short functions. However, it prevents the code from becoming cluttered and repetitive.
+  // url: the request url sent to the server
+  // fun: the keyword or function to which the data is passed
+  // passVar: any extra information that needs to be sent in
+
+  LoadingSum += 1; // Add to the sum of requests
+  LoadingIndicate(); // Update the spinning logo
+  $.get(url) // Make the request
+  .done(function(data) {
+    if (fun == 'localStorage') {
+      // In this case passVar is the name of the key to store the data with
+      localStorage[passVar] = JSON.stringify(data);
+    } else if (fun == 'sessionStorage') {
+      sessionStorage[passVar] = JSON.stringify(data);
+    } else {
+      fun(data, passVar); // Pass the data to another function
+    }
+  })
+  .always(function() {
+    LoadingSum -= 1; // Reset
+    LoadingIndicate();
+  });
+}
+ 
+function LoadingIndicate() {
+  if (LoadingSum > 0) {
+    $('#LoadingInfo').css('display', 'inline-block'); // Display the loading indicator
+  } else {
+    $('#LoadingInfo').css('display', 'none'); // Hide the loading indicator
+  }
+}
 
 function ClickTriggers() {
   $('body')
@@ -68,13 +102,14 @@ function ClickTriggers() {
     getSectionNumbers(courseName, instFilter); // Search for sections
   })
   .on('click', '#SectionList i:nth-child(1)', function() { // If a section's add/drop button is clicked in SectionList
-    var secname = $(this).next().next().next().html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
+    console.log($(this).parent())
+    var secname = $(this).parent().attr('id'); // Format the section name for searching
     var schedName = $('#schedSelect').val();
 
-    if ($(this).attr('class') == 'fa fa-plus') {
+    if ($(this).attr('class') == 'fa fa-plus') { // If the plus is clicked
       addToSched(secname, schedName);
-    } else if ($(this).attr('class') == 'fa fa-times') {
-      removeFromSched($(this).parent().attr('id'), schedName);
+    } else if ($(this).attr('class') == 'fa fa-times') { // If the x is clicked
+      removeFromSched(secname, schedName);
     }
   })
   .on('click', '#SectionList span:nth-child(4)', function() { // If a section name is clicked
@@ -102,7 +137,7 @@ function ClickTriggers() {
     $('#SectionInfo p').toggle();
   })
   .on('click', '#SectionInfo span:nth-child(1)', function() { // If the section is added
-    var secname = $(this).next().html().replace(/ /g, ""); // Format the section name for scheduling
+    var secname = $(this).next().html().replace(/ /g, "-"); // Format the section name for scheduling
     var schedName = $('#schedSelect').val();
     addToSched(secname, schedName); // Search for section info     
   })
@@ -148,7 +183,7 @@ function SchedTriggers() {
           var image = new Image();
           image.src = canvas.toDataURL("image/png"); // Convert the canvas to png
           // window.open(image.src, '_blank'); // Open in new tab
-          $('#SchedImage').attr('src', canvas.toDataURL("image/png"));
+          $('#SchedImage').attr('src', image.src).attr('title', 'My Schedule');
         }
       }); 
     }
@@ -231,40 +266,6 @@ function SchedTriggers() {
       SpitSched(JSON.parse(sessionStorage.currentSched));
     }
   });
-}
-
-function SendReq(url, fun, passVar) {
-  // Special request wrapper that updates the Loading spinner and automatically passes results to a function
-  // This may seem unnecessary, and it does lead to some short functions. However, it prevents the code from becoming cluttered and repetitive.
-  // url: the request url sent to the server
-  // fun: the keyword or function to which the data is passed
-  // passVar: any extra information that needs to be sent in
-
-  LoadingSum += 1; // Add to the sum of requests
-  LoadingIndicate(); // Update the spinning logo
-  $.get(url) // Make the request
-  .done(function(data) {
-    if (fun == 'localStorage') {
-      // In this case passVar is the name of the key to store the data with
-      localStorage[passVar] = JSON.stringify(data);
-    } else if (fun == 'sessionStorage') {
-      sessionStorage[passVar] = JSON.stringify(data);
-    } else {
-      fun(data, passVar); // Pass the data to another function
-    }
-  })
-  .always(function() {
-    LoadingSum -= 1; // Reset
-    LoadingIndicate();
-  });
-}
- 
-function LoadingIndicate() {
-  if (LoadingSum > 0) {
-    $('#LoadingInfo').css('display', 'inline-block'); // Display the loading indicator
-  } else {
-    $('#LoadingInfo').css('display', 'none'); // Hide the loading indicator
-  }
 }
 
 function ListScheds(schedList, theindex) { // Deal with the list of schedules
@@ -544,23 +545,18 @@ function StarFormat(sections) { // Format starred section list
 }
 
 function RetrievePCR(courseID, instName) {
-  /* 
-  Check if ls has dept reviews
-    true: search through that json, find, apply
-    false: make request, store JSON, search find apply
-  */
   var dept = courseID.split(' ')[0];
-  if (!localStorage['Review'+dept]) {
+  if (!localStorage['Review'+dept]) { // If we don't have the dept reviews cached
     LoadingSum += 1; 
     LoadingIndicate();
-    baseURL = '/NewReview?dept=' + dept;
+    baseURL = '/NewReview?dept=' + dept; // Get them
     try {
       $.ajax({
         url: baseURL,
-        async: false
+        async: false // Yeah it's asynchronous, but otherwise the function runs ahead of itself
       }) // Make the request
       .done(function(data) {
-        localStorage['Review'+dept] = data;
+        localStorage['Review'+dept] = data; // Cache that jawn
         ApplyPCR(courseID, instName);
         return 'done';
       })
@@ -580,8 +576,8 @@ function RetrievePCR(courseID, instName) {
 function ApplyPCR(courseID, instName) {
   var dept = courseID.split(' ')[0];
   var searchID = dept + ' ' + courseID.split(' ')[1];
-  var allReviews = JSON.parse(localStorage['Review'+dept]);
-  var thisReview = allReviews[searchID];
+  var allReviews = JSON.parse(localStorage['Review'+dept]); // Search the cache for reviews
+  var thisReview = allReviews[searchID]; // Find relevant course info
   var result;
   if (typeof thisReview === 'undefined') {
     result = {};
@@ -592,7 +588,7 @@ function ApplyPCR(courseID, instName) {
     }
   } else {
     for (var inst in thisReview) {
-      if (inst.indexOf(instName.toUpperCase()) > -1) {
+      if (inst.indexOf(instName.toUpperCase()) > -1) { // Go by specific instructor
         result = thisReview[inst];
         break;
       }
@@ -604,25 +600,26 @@ function ApplyPCR(courseID, instName) {
     pcrFrac = result.cQ / 4;
     if(!isNaN(result.cQ)) {
       cQStr = result.cQ.toString();
-      if (cQStr.length == 1) {cQStr += '.';}
+      if (cQStr.length == 1) {cQStr += '.';} // Format it correctly as '3.00' or '2.50'
       while (cQStr.length < 4) {
         cQStr += '0';
       }
       thisPCR.html(cQStr);
     } else {
-      thisPCR.html('0.00');
+      thisPCR.html('0.00'); // Set it to 0.00 on weird error
     }
   } catch(err) {
     pcrFrac = 0;
   }
-  thisPCR.css('background-color', 'rgba(45, 160, 240, '+Math.pow(pcrFrac, 5)*5+')');
+  thisPCR.css('background-color', 'rgba(45, 160, 240, '+Math.pow(pcrFrac, 5)*5+')'); // Correct PCR shading
   if (result) {
-    thisPCR.prop('title', 'Diff: '+ (result.cD || '0.00') + ' Instructor: ' + (result.cI || '0.00'));
+    thisPCR.prop('title', 'Diff: '+ (result.cD || '0.00') + ' Instructor: ' + (result.cI || '0.00')); // Add the title for tooltipster
   }
 }
- 
+
 function addToSched(sec, schedName) { // Getting info about a section
-  var schedURL = "/Sched?addRem=add&schedName="+schedName+"&courseID="+sec; // Make the request
+  var formattedSec = sec.replace(/-/g, '');
+  var schedURL = "/Sched?addRem=add&schedName="+schedName+"&courseID="+formattedSec; // Make the request
   SendReq(schedURL, SpitSched, []);
   try {
     $('#'+sec+' i:nth-child(1)').toggleClass('fa-plus');
@@ -635,19 +632,20 @@ function addToSched(sec, schedName) { // Getting info about a section
 function removeFromSched(sec, schedName) {
   // Determine the secname by checking when a character is no longer a number (which means the character is the meetDay of the block id)
   // This gets all meet times of a section, including if there are more than one
+  var formattedSec = sec.replace(/-/g, '');
   var secname = '';
-  for (var i = 7; i < sec.length; i++) {
-    if (parseFloat(sec[i]) != sec[i]) {
-      secname = sec.substr(0, i);
+  for (var i = 7; i < formattedSec.length; i++) {
+    if (parseFloat(formattedSec[i]) != formattedSec[i]) {
+      secname = formattedSec.substr(0, i);
       { break; }
     }
   }
-  if (!secname.length) {secname = sec;}
+  if (!secname.length) {secname = formattedSec;}
   var schedURL = "/Sched?addRem=rem&schedName="+schedName+"&courseID="+secname;
   SendReq(schedURL, SpitSched, []);
   try {
-    $('#'+secname+' i:nth-child(1)').toggleClass('fa-plus');
-    $('#'+secname+' i:nth-child(1)').toggleClass('fa-times');
+    $('#'+sec+' i:nth-child(1)').toggleClass('fa-plus');
+    $('#'+sec+' i:nth-child(1)').toggleClass('fa-times');
   } catch(err) {
 
   }
@@ -683,11 +681,12 @@ function SpitSched(courseSched) {
   var sec, day;
 
   for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
-    if (courseSched[sec].meetHour <= startHour) { // If there are classes earlier than the default start
-      startHour = Math.floor(courseSched[sec].meetHour); // push back the earliest hour
+    var secMeetHour = courseSched[sec].meetHour;
+    if (secMeetHour <= startHour) { // If there are classes earlier than the default start
+      startHour = Math.floor(secMeetHour); // push back the earliest hour
     }
-    if (courseSched[sec].meetHour+courseSched[sec].HourLength >= endHour) { // Push back latest hour if necessary
-      endHour = Math.ceil(courseSched[sec].meetHour+courseSched[sec].HourLength);
+    if (secMeetHour+courseSched[sec].HourLength >= endHour) { // Push back latest hour if necessary
+      endHour = Math.ceil(secMeetHour+courseSched[sec].HourLength);
     }
     for (day in courseSched[sec].meetDay) {
       var letterDay = courseSched[sec].meetDay[day];

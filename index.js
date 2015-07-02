@@ -52,7 +52,9 @@ app.use(stormpath.init(app, {
 }));
 
 // Connect to database
-var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', db = mongojs.connect(uri, ["Students", "Courses2015C", "NewReviews"]);
+var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', 
+  db = mongojs.connect(uri, ["Students", "Courses2015C", "NewReviews"]);
+db.on('error',function(err) {console.log('database error: ', err);});
 
 // Set up Keen Analytics
 var client = new Keen({
@@ -214,9 +216,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       var searchResponse;
       if (resultType == 'deptSearch'){
 	       searchResponse = parseDeptList(body);
-      } else if 	(resultType == 'numbSearch') {
+      } else if (resultType == 'numbSearch') {
 	       searchResponse = parseCourseList(body); // Parse the numb response
-      } else if 	(resultType == 'sectSearch') {
+      } else if (resultType == 'sectSearch') {
 	       searchResponse = parseSectionList(body); // Parse the sect response
       } else {searchResponse = {};}
       return res.send(JSON.stringify(searchResponse)); // return correct info
@@ -455,7 +457,7 @@ app.get('/Review', stormpath.loginRequired, function(req, res) {
 app.get('/Star', stormpath.loginRequired, function(req, res) {
   var StarredCourses 	= {};
   var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
-  db.Students.find({Pennkey: myPennkey}, {StarList: 1}, function(err, doc) { // Try to access the database
+  db.Students.findOne({Pennkey: myPennkey}, {StarList: 1}, function(err, doc) { // Try to access the database
     try {
       StarredCourses = doc[0].StarList; // Get previously starred courses
     } catch (error) { // If there is no previous starlist

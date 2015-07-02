@@ -28,7 +28,7 @@
             A better way to find courses and make schedules
         </p>
         <p>
-            <a href="/register" class="pure-button pure-button-primary">Register</a>
+            <a href="/register" class="pure-button pure-button-primary">Sign Up</a>
             <a href="/login" class="pure-button pure-button-primary">Log In</a>
         </p>
     </div>
