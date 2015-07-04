@@ -3,8 +3,7 @@
 	<head>
 		<title>PennCourseSearch</title>
 		<meta charset="UTF-8">
-        <meta content="/Logo.png" itemprop="image">
-        <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/index.min.css"/>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/css/sweet-alert.css">
         <link rel="stylesheet" type="text/css" href="/css/modal.css">
@@ -12,9 +11,9 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
-        <script type="text/javascript" src="/js/html2canvas.js"></script>
-        <script type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
-        <script type="text/javascript" src="/js/sweet-alert.min.js"></script>
+        <script async type="text/javascript" src="/js/html2canvas.js"></script>
+        <script async type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
+        <script async type="text/javascript" src="/js/sweet-alert.min.js"></script>
         <script type="text/javascript" src="/js/jquery.leanModal.min.js"></script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -80,7 +79,7 @@
                       <li id="DeleteSchedBtn">Delete</li>
                     </ul>
                   </li>
-                  <li onclick="Stars('show', 'blank');"><span>Show Stars</span></li>
+                  <li onclick="StarHandle(sessionStorage.starList, 'show');"><span>Show Stars</span></li>
                   <li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li>
                 </ul>
             </div>

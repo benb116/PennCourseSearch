@@ -110,7 +110,6 @@ app.get('/', function(req, res) {
     var thissub = subtitles[Math.floor(Math.random() * subtitles.length)];
     // Get random payment note
     var fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)];
-
     return res.render('index', { // Send page
       title: 'PennCourseSearch',
       subtitle: thissub,
@@ -455,11 +454,12 @@ app.get('/Review', stormpath.loginRequired, function(req, res) {
 
 // Manage requests regarding starred courses
 app.get('/Star', stormpath.loginRequired, function(req, res) {
-  var StarredCourses 	= {};
-  var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
+  var StarredCourses = [];
+  var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
+
   db.Students.findOne({Pennkey: myPennkey}, {StarList: 1}, function(err, doc) { // Try to access the database
     try {
-      StarredCourses = doc[0].StarList; // Get previously starred courses
+      StarredCourses = doc.StarList; // Get previously starred courses
     } catch (error) { // If there is no previous starlist
       db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database	
     }
@@ -489,7 +489,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
     } else if (addRem == 'clear') { // Clear all
       StarredCourses = [];
     }
-
+    
     db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database
     return res.send(StarredCourses);
   });

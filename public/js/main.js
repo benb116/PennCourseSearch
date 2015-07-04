@@ -3,8 +3,6 @@ $(document).ready(function () {
     $('#LoadingInfo').html('Loading ...');
   }
 
-  $('a[rel*=leanModal]').leanModal({ top : 70, closeButton: ".modal_close" }); // Define modal close button
-
   // The delay function that prevents immediate requests
   var delay = (function(){var timer = 0;return function(callback, ms){clearTimeout (timer);timer = setTimeout(callback, ms);};})();
 
@@ -13,7 +11,7 @@ $(document).ready(function () {
   shuffle = function(v){for(var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);return v;};
   
   // Global variables
-  LoadingSum    = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
+  LoadingSum = 0; // Initialize the loading sum. If != 0, the loading indicator will be displayed
 
   var colorPalette;
   if (sessionStorage.colorPalette) { // If we recently changed the palette
@@ -54,7 +52,9 @@ $(document).ready(function () {
       initiateSearch();
     }, 500);
   });
- 
+
+  $('a[rel*=leanModal]').leanModal({ top : 70, closeButton: ".modal_close" }); // Define modal close button
+
 });
 
 function SendReq(url, fun, passVar) {
