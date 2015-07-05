@@ -102,7 +102,6 @@ function ClickTriggers() {
     getSectionNumbers(courseName, instFilter); // Search for sections
   })
   .on('click', '#SectionList i:nth-child(1)', function() { // If a section's add/drop button is clicked in SectionList
-    console.log($(this).parent())
     var secname = $(this).parent().attr('id'); // Format the section name for searching
     var schedName = $('#schedSelect').val();
 

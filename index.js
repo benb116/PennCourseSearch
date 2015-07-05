@@ -36,7 +36,7 @@ var app = express();
 // Set paths
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
-// app.use(express.compress());
+app.use(express.compress());
 app.use(express.static(path.join(__dirname, 'public')));
 process.env.PWD = process.cwd();
 
@@ -89,7 +89,7 @@ var subtitles = [
   "Faster than you can say 'Wawa run'",
   "Classes sine PennCourseSearch vanae.",
   "On PennCourseSearch, no one knows you're Amy G.",
-  "Designed by Ben in Speakman 225. Assembled in China.",
+  "Designed by Ben in Speakman. Assembled in China.",
   "Help! I'm trapped in a NodeJS server! Bring Chipotle!"];
 
 var paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";

@@ -14,15 +14,27 @@ module.exports = function(grunt) {
 		    }
 		},
 
+		// cssmin: {
+		//   target: {
+		//     files: [{
+		//       expand: true,
+		//       cwd: 'public/css',
+		//       src: 'index.css',
+		//       dest: 'public/css',
+		//       ext: '.min.css'
+		//     }]
+		//   }
+		// }
+
 		cssmin: {
+		  options: {
+		    shorthandCompacting: false,
+		    roundingPrecision: -1
+		  },
 		  target: {
-		    files: [{
-		      expand: true,
-		      cwd: 'public/css',
-		      src: 'index.css',
-		      dest: 'public/css',
-		      ext: '.min.css'
-		    }]
+		    files: {
+		      'public/css/index.min.css': ['public/css/index.css', 'public/css/modal.css']
+		    }
 		  }
 		}
 

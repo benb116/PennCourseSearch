@@ -1,5 +1,5 @@
 {
-  "name": "PennCourseScheduler",
+  "name": "PennCourseSearch",
   "version": "0.1.0",
   "description": "A barebones web app designed to help Penn students find classes and make schedules",
   "main": "index.js",
