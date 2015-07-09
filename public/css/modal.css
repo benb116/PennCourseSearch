@@ -13,7 +13,7 @@
     background-color: white;
     color: black;
     width: 60%; 
-    /*border-radius: 5px;*/
+    border-radius: 5px;
     display: none;
     overflow-y: scroll;
 }

@@ -154,7 +154,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
     includeOpen = '&open=true';
   }
 
-  var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=200&term='+currentTerm+reqFilter+proFilter+actFilter+includeOpen;
+  var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term='+currentTerm+reqFilter+proFilter+actFilter+includeOpen;
 
   if (searchType == 'courseIDSearch') {
     baseURL = baseURL + '&course_id='	+ searchParam;

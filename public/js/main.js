@@ -36,8 +36,14 @@ $(document).ready(function () {
     SendReq(schedURL, SpitSched, []);
   });
 
-  $('#reqFilter, #proFilter, #openCheck, #closedCheck, #actFilter').change(function () { // If the user changes any filters
-    window[sessionStorage.lastReq].apply(this, JSON.parse(sessionStorage.lastPar));
+  $('#reqFilter, #proFilter').change(function () { // If the user changes any filters
+    var lastreq = JSON.parse(sessionStorage.lastCourseSearch);
+    getCourseNumbers(lastreq[0], lastreq[1]);
+  });
+
+  $('#openCheck, #closedCheck, #actFilter').change(function () { // If the user changes any filters
+    var lastreq = JSON.parse(sessionStorage.lastSectionSearch);
+    getSectionNumbers(lastreq[0], lastreq[1], lastreq[2]);
   });
 
   $('#searchSelect').change(function () { // If the user changes the type of search
@@ -117,6 +123,7 @@ function ClickTriggers() {
     if ($('#CourseTitle').html() == 'Starred Sections') {
       var dept = secname.slice(0,-6);
       getCourseNumbers(dept, 'courseIDSearch');
+      getSectionNumbers(courseName, 'all');
     }
   })
   .on('click', '#SectionList i:nth-child(5)', function() { // If the user clicks a star in SectionList
@@ -126,8 +133,7 @@ function ClickTriggers() {
 
     Stars(addRem, $(this).prev().html().split("-")[0].replace(/ /g, "")); // Add/rem the section
 
-    $(this).toggleClass('fa-star'); // Change the star icon
-    $(this).toggleClass('fa-star-o');
+    $(this).toggleClass('fa-star').toggleClass('fa-star-o'); // Change the star icon
     if (addRem == 'rem' && $(this).parent().attr('class') == 'starredSec') { // If it was removed from the Show Stars list
       $(this).parent().remove();
     }
@@ -292,16 +298,16 @@ function initiateSearch() { // Deal with course search terms
     if (searchTerms != 'favicon.ico' && searchTerms != 'blank' && searchTerms !== '') { // Initial filtering
       var searchSelect = $('#searchSelect').val(); // What type of search is this
       var deptSearch, numbSearch, sectSearch;
-      if (!(searchSelect == 'keywordSearch' || searchSelect == 'instSearch')) {
+      if (searchSelect == 'courseIDSearch') {
         // Format search terms for server request
-        var splitTerms = formatCourseID(searchTerms);
+        var splitTerms = formatSearch(searchTerms);
 
         // By now the search terms should be 'DEPT/NUM/SEC/' although NUM/ and SEC/ may not be included
-        deptSearch = splitTerms.split("/")[0]; // Get deptartment
-        numbSearch = splitTerms.split("/")[1]; // Get course number
-        sectSearch = splitTerms.split("/")[2]; // Get section number
-        if(typeof numbSearch === 'undefined'){numbSearch = '';}
-        if(typeof sectSearch === 'undefined'){sectSearch = '';}
+        deptSearch = splitTerms[0]; // Get deptartment
+        numbSearch = (splitTerms[1] || ''); // Get course number
+        sectSearch = (splitTerms[2] || ''); // Get section number
+        // if(!numbSearch){numbSearch = '';}
+        // if(!sectSearch){sectSearch = '';}
 
       } else {
         deptSearch = searchTerms; // Not really a department search but it will go to getCourseNumbers
@@ -309,21 +315,21 @@ function initiateSearch() { // Deal with course search terms
         sectSearch = ''; // Get section number
       }
 
-      // searchSelect = $('#searchSelect').val(); // CID, keyword, instructor?
       getCourseNumbers(deptSearch, searchSelect);
+
       if (numbSearch.length == 3) {
         getSectionNumbers(deptSearch+numbSearch, 'all', sectSearch.length);
+
+        if (sectSearch.length == 3) {
+          getSectionInfo(deptSearch+numbSearch+sectSearch);
+        } else {
+          $('#SectionInfo').empty();
+        }
       } else { // If there is no course number, clear the section list and info panel
         $('#SectionTitle').empty();
         $('#CourseTitle').empty();
         $('#SectionList > ul').empty();
       }
-      if (sectSearch.length == 3) {
-        getSectionInfo(deptSearch+numbSearch+sectSearch);
-      } else {
-        $('#SectionInfo').empty();
-      }
-
     } else if (searchTerms !== '' ) { // If there are no good search terms, clear everything
       $('#CourseList').empty();
       $('#CourseTitle').empty();
@@ -334,7 +340,7 @@ function initiateSearch() { // Deal with course search terms
   catch(err) {console.log('No Results '+ err);}
 }
  
-function formatCourseID(searchTerms) {
+function formatSearch(searchTerms) {
   splitTerms = searchTerms.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
 
   if (parseFloat(splitTerms[2]) == splitTerms[2]) { // If the third character is a number (e.g. BE100)
@@ -356,7 +362,7 @@ function formatCourseID(searchTerms) {
       splitTerms = splitTerms.substr(0, 8)+'/'+splitTerms.substr(8); // Splice the search query with a slash after the course number
     }
   }
-  return splitTerms;
+  return splitTerms.split('/');
 }
 
 function getCourseNumbers(search, searchSelect) { // Getting info about courses in a department
@@ -368,8 +374,7 @@ function getCourseNumbers(search, searchSelect) { // Getting info about courses 
   if (programFilter   == '&proParam=noFilter')  {programFilter = '';}
   if (activityFilter  == '&actParam=noFilter')  {activityFilter = '';}
 
-  sessionStorage.lastReq = 'getCourseNumbers';
-  sessionStorage.lastPar = JSON.stringify([search, searchSelect]);
+  sessionStorage.lastCourseSearch = JSON.stringify([search, searchSelect]);
 
   var searchURL = '/Search?searchType='+searchSelect+'&resultType=deptSearch&searchParam='+search+requireFilter+programFilter+activityFilter;
   SendReq(searchURL, CourseFormat); // Send results to CourseFormat
@@ -408,8 +413,7 @@ function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about s
   if (activityFilter == '&actParam=noFilter') {activityFilter = '';}
   if ($('#closedCheck').is(':checked')) {searchOpen = '';} else {searchOpen = '&openAllow=true';}
 
-  sessionStorage.lastReq = 'getSectionNumbers';
-  sessionStorage.lastPar = JSON.stringify([cnum, instFilter, suppress]);
+  sessionStorage.lastSectionSearch = JSON.stringify([cnum, instFilter, suppress]);
 
   searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter+activityFilter+searchOpen;
   SendReq(searchURL, FormatSectionsList, suppress); // Pass it to SectionStars to determine if each section is starred
@@ -433,10 +437,10 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
       var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) { 
         return el.fullCourseName.replace(/ /g, ''); 
       });
-
-      schedSecList.some(function(meet) {
-        if (meet.substring(0, sections[section].SectionName.replace(/ /g, '').length) == sections[section].SectionName.replace(/ /g, '')) {plusCross = 'times';}
-      });
+      
+      if (schedSecList.indexOf(sections[section].SectionName.replace(/ /g, '')) != -1) {
+        plusCross = 'times';
+      }
 
       allHTML += '<li id="' + sections[section].SectionName.replace(/ /g,'-') + '">'+
         '<i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp'+
@@ -491,9 +495,6 @@ function SectionInfoFormat(data, passvar) { // Receive section specific info and
 }
  
 function Stars(addRem, CID) { // Manage star requests
-  sessionStorage.lastReq = 'Stars';
-  sessionStorage.lastPar = JSON.stringify([addRem, CID]);
-
   var searchURL = "/Star?addRem="+addRem+"&courseID="+CID;
   SendReq(searchURL, StarHandle, addRem);
 }
@@ -522,10 +523,13 @@ function StarFormat(sections) { // Format starred section list
   var HTML = '';
   for(var section in sections[0]) { if (sections[0].hasOwnProperty(section)) {
     var plusCross = 'plus';
-    var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) { return el.fullCourseName.replace(/ /g, ''); });
-    schedSecList.some(function(meet) {
-      if (meet.substring(0, sections[0].NoSpace) == section) {plusCross = 'times';}
+    var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) {
+     return el.fullCourseName.replace(/ /g, ''); 
     });
+    
+    if (schedSecList.indexOf(section) != -1) {
+      plusCross = 'times';
+    }
     HTML += '<li id="' + sections[0][section].SectionName.replace(/ /g,'-') + '" class="starredSec">'+
       '<i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp'+
       '<span class="'+sections[0][section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
