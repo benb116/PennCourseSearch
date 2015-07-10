@@ -1,7 +1,6 @@
 // Initial configuration
 var path = require('path');
 var express = require('express');
-var compression = require('compression');
 var stormpath = require('express-stormpath');
 var request = require("request");
 var mongojs = require("mongojs");
@@ -37,7 +36,7 @@ var app = express();
 // Set paths
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
-app.use(compression());
+app.use(express.compress());
 app.use(express.static(path.join(__dirname, 'public')));
 process.env.PWD = process.cwd();
 
@@ -52,12 +51,10 @@ app.use(stormpath.init(app, {
   sessionDuration: 			1000 * 60 * 60 * 24 * 7 
 }));
 
-// // Connect to database
-// var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', 
-//   db = mongojs.connect(uri, ["Students", "Courses2015C", "NewReviews"]);
-// db.on('error',function(err) {console.log('database error: ', err);});
-
-var db = mongojs('mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', ["Students", "Courses2015C", "NewReviews"]);
+// Connect to database
+var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', 
+  db = mongojs.connect(uri, ["Students", "Courses2015C", "NewReviews"]);
+db.on('error',function(err) {console.log('database error: ', err);});
 
 // Set up Keen Analytics
 var client = new Keen({
