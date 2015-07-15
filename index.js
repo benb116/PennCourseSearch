@@ -5,7 +5,7 @@ var compression = require('compression');
 var stormpath = require('express-stormpath');
 var request = require("request");
 var mongojs = require("mongojs");
-var colors = require('colors');
+// var colors = require('colors');
 var fs = require('fs');
 var Keen = require('keen-js');
 var PushBullet = require('pushbullet');
@@ -39,7 +39,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
-process.env.PWD = process.cwd();
 
 app.use(stormpath.init(app, {
   apiKeyId:   config.STORMPATH_API_KEY_ID,
@@ -72,7 +71,7 @@ pusher.devices(function(error, response) {
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
   console.log("Node app is running. Better go catch it.".green);
-  console.log("Search ".yellow + "Sched ".magenta + "Spit ".blue + "Error ".red + "Star ".cyan);
+  // console.log("Search ".yellow + "Sched ".magenta + "Spit ".blue + "Error ".red + "Star ".cyan);
   if (typeof process.env.PUSHBULLETAUTH !== 'undefined') {
     // Don't send notifications when testing locally
     pusher.note(pushDeviceID, 'Server Restart');

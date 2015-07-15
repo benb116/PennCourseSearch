@@ -172,7 +172,7 @@ form > input[type="text"] {
 #SectionInfo {
     height: 65%;
     overflow-y: scroll;
-    padding-right: 0.5em;
+    /*padding-right: 0.5em;*/
     border-top: 1em solid white;
     box-sizing: border-box;
 }
