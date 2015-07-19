@@ -186,18 +186,21 @@ ul {
     padding: 0.125em 2em .125em 4em;
     text-indent: -3em;
 }
-#SectionList li {
+#SectionList li, #SectionInfo li {
     padding: 0.125em 0.5em .125em 0;
 }
 #CourseList li,
 #SectionList li span:nth-child(1), 
-#SectionList li span:nth-child(4) {cursor: pointer;}
+#SectionList li span:nth-child(4),
+#SectionInfo li {cursor: pointer;}
 
 #CourseList li:hover,
-#SectionList li:hover {background-color: #E6E6E6;}
+#SectionList li:hover,
+#SectionInfo li:hover {background-color: #E6E6E6;}
 
 #CourseList li:active,
-#SectionList li:active {background-color: #CCCCCC;}
+#SectionList li:active,
+#SectionInfo li:active {background-color: #CCCCCC;}
 
 #SectionList i:nth-child(1):active {color: #00B3FF;}
 

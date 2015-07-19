@@ -101,13 +101,13 @@ function ClickTriggers() {
   $('body')
   .on('click', '#CourseList li', function() { // If a course is clicked in CourseList
     $('#SectionInfo').empty();
-    var courseName = $(this).find('.courseNumber').html(); // Format the course name for searching
+    var courseName = formatID($(this).attr('id')).join(""); // Format the course name for searching
     var searchSelect = $('#searchSelect').val();
     var instFilter = 'all';
     if (searchSelect == 'instSearch') {instFilter = $('#CSearch').val();}
     getSectionNumbers(courseName, instFilter); // Search for sections
   })
-  .on('click', '#SectionList i:nth-child(1)', function() { // If a section's add/drop button is clicked in SectionList
+  .on('click', 'li > i:nth-child(1)', function() { // If a section's add/drop button is clicked in SectionList
     var secname = $(this).parent().attr('id'); // Format the section name for searching
     var schedName = $('#schedSelect').val();
 
@@ -118,7 +118,7 @@ function ClickTriggers() {
     }
   })
   .on('click', '#SectionList span:nth-child(4)', function() { // If a section name is clicked
-    var secname = $(this).html().split("-")[0].replace(/ /g, ""); // Format the section name for searching
+    var secname = formatID($(this).parent().attr('id')).join("");
     getSectionInfo(secname); // Search for section info
     if ($('#CourseTitle').html() == 'Starred Sections') {
       var dept = secname.slice(0,-6);
@@ -130,8 +130,9 @@ function ClickTriggers() {
     var isStarred = $(this).attr('class'); // Determine whether the section is starred
     if (isStarred == 'fa fa-star-o') {addRem = 'add';} 
     else if (isStarred == 'fa fa-star') {addRem = 'rem';}
+    var secname = formatID($(this).parent().attr('id')).join("");
 
-    Stars(addRem, $(this).prev().html().split("-")[0].replace(/ /g, "")); // Add/rem the section
+    Stars(addRem, secname); // Add/rem the section
 
     $(this).toggleClass('fa-star').toggleClass('fa-star-o'); // Change the star icon
     if (addRem == 'rem' && $(this).parent().attr('class') == 'starredSec') { // If it was removed from the Show Stars list
@@ -141,18 +142,19 @@ function ClickTriggers() {
   .on('click', '.DescBlock', function() { // If a course is clicked
     $('#SectionInfo p').toggle();
   })
-  .on('click', '#SectionInfo span:nth-child(1)', function() { // If the section is added
-    var secname = $(this).next().html().replace(/ /g, "-"); // Format the section name for scheduling
-    var schedName = $('#schedSelect').val();
-    addToSched(secname, schedName); // Search for section info     
-  })
-  .on('click', '.AsscText span:nth-child(2)', function() { // If an Assc Sec is clicked
-    var courseName = $(this).html().replace(/ /g, " "); // Format the course name for searching
+  // .on('click', '#SectionInfo span:nth-child(1)', function() { // If the section is added
+  //   var secname = $(this).next().html(); // Format the section name for scheduling
+  //   var schedName = $('#schedSelect').val();
+  //   addToSched(secname, schedName); // Search for section info     
+  // })
+  .on('click', '.AsscSec', function() { // If an Assc Sec is clicked
+    var courseName = formatID($(this).attr('id')).join(""); // Format the course name for searching
     getSectionInfo(courseName); // Search for sections
   })
   .on('click', '.CloseX', function(e) { // If an X is clicked
     var schedName = $('#schedSelect').val();
     removeFromSched($(this).parent().attr('id'), schedName); // Get rid of the section
+
     e.stopPropagation();
   })
   .on('mouseover', '.SchedBlock', function() {
@@ -164,17 +166,13 @@ function ClickTriggers() {
   .on('click', '.SchedBlock', function() { // If a course is clicked
     sec = $(this).attr('id');
     // Determine the secname by checking when a character is no longer a number (which means the character is the meetDay of the block id)
-    for (var i = 7; i < sec.length; i++) {
-      if (parseFloat(sec[i]) != sec[i]) {
-        secname = sec.substr(0, i);
-        { break; }
-      }
-    }
-    var cnum = secname.slice(0,-3);
-    var dept = secname.slice(0,-6);
+    secname = formatID(sec);
+    var dept = secname[0];
+    var cnum = dept + secname[1];
+    var secnum = cnum + secname[2];
     getCourseNumbers(dept, 'courseIDSearch');
     getSectionNumbers(cnum, 'all', 'suppress');
-    getSectionInfo(secname);
+    getSectionInfo(secnum);
   });
 }
 
@@ -300,7 +298,7 @@ function initiateSearch() { // Deal with course search terms
       var deptSearch, numbSearch, sectSearch;
       if (searchSelect == 'courseIDSearch') {
         // Format search terms for server request
-        var splitTerms = formatSearch(searchTerms);
+        var splitTerms = formatID(searchTerms);
 
         // By now the search terms should be 'DEPT/NUM/SEC/' although NUM/ and SEC/ may not be included
         deptSearch = splitTerms[0]; // Get deptartment
@@ -340,26 +338,23 @@ function initiateSearch() { // Deal with course search terms
   catch(err) {console.log('No Results '+ err);}
 }
  
-function formatSearch(searchTerms) {
+function formatID(searchTerms) {
   splitTerms = searchTerms.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
 
   if (parseFloat(splitTerms[2]) == splitTerms[2]) { // If the third character is a number (e.g. BE100)
     splitTerms = splitTerms.substr(0, 2)+'/'+splitTerms.substr(2); // Splice the search query with a slash after the deptartment
- 
     if (parseFloat(splitTerms[6]) == splitTerms[6]) { // Then, if the sixth character is a number (e.g. BE100001)
-      splitTerms = splitTerms.substr(0, 6)+'/'+splitTerms.substr(6); // Splice the search query with a slash after the course number
+      splitTerms = splitTerms.substr(0, 6)+'/'+splitTerms.substr(6, 3); // Splice the search query with a slash after the course number
     }
   } else if (parseFloat(splitTerms[3]) == splitTerms[3]) { // If the fourth character is a number (e.g. CIS110)
-    splitTerms = splitTerms.substr(0, 3)+'/'+splitTerms.substr(3); // Splice the search query with a slash after the deptartment
- 
+    splitTerms = splitTerms.substr(0, 3)+'/'+splitTerms.substr(3); // Splice the search query with a slash after the deptartment 
     if (parseFloat(splitTerms[7]) == splitTerms[7]) { // Then, if the seventh character is a number (e.g. CIS110001)
-      splitTerms = splitTerms.substr(0, 7)+'/'+splitTerms.substr(7); // Splice the search query with a slash after the course number
+      splitTerms = splitTerms.substr(0, 7)+'/'+splitTerms.substr(7, 3); // Splice the search query with a slash after the course number
     }
   } else if (parseFloat(splitTerms[4]) == splitTerms[4]) { // If the fifth character is a number (e.g. MEAM110)
     splitTerms = splitTerms.substr(0, 4)+'/'+splitTerms.substr(4); // Splice the search query with a slash after the deptartment
- 
     if (parseFloat(splitTerms[8]) == splitTerms[8]) { // Then, if the eighth character is a number (e.g. MEAM110001)
-      splitTerms = splitTerms.substr(0, 8)+'/'+splitTerms.substr(8); // Splice the search query with a slash after the course number
+      splitTerms = splitTerms.substr(0, 8)+'/'+splitTerms.substr(8, 3); // Splice the search query with a slash after the course number
     }
   }
   return splitTerms.split('/');
@@ -414,7 +409,6 @@ function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about s
   if ($('#closedCheck').is(':checked')) {searchOpen = '';} else {searchOpen = '&openAllow=true';}
 
   sessionStorage.lastSectionSearch = JSON.stringify([cnum, instFilter, suppress]);
-
   searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter+activityFilter+searchOpen;
   SendReq(searchURL, FormatSectionsList, suppress); // Pass it to SectionStars to determine if each section is starred
 }
@@ -428,15 +422,16 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
     var allHTML = '';
     var stars = sessionStorage.starList;
     var sections = courseInfo[0];
+      
+    var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) { 
+      return el.fullCourseName.replace(/ /g, ''); 
+    });
+
     for(var section in sections) { if (sections.hasOwnProperty(section)) { // Loop through the sections
       var starClass = 'fa fa-star-o';
       var plusCross = 'plus';
       var index = stars.indexOf(sections[section].NoSpace);
       if (index > -1) {starClass = 'fa fa-star';} // If the section is a starred section, add the filled star
-      
-      var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) { 
-        return el.fullCourseName.replace(/ /g, ''); 
-      });
       
       if (schedSecList.indexOf(sections[section].SectionName.replace(/ /g, '')) != -1) {
         plusCross = 'times';
@@ -463,6 +458,7 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
       delete courseInfo[1].Instructor;
       delete courseInfo[1].OpenClose;
       delete courseInfo[1].TimeInfo;
+      delete courseInfo[1].AssociatedType;
       delete courseInfo[1].AssociatedSections;
       SectionInfoFormat(courseInfo[1]);
     }
@@ -488,13 +484,20 @@ function SectionInfoFormat(data, passvar) { // Receive section specific info and
     if (data.Description)    {HTMLinfo += "Description:<br>" + data.Description + "<br>";}
     if (data.OpenClose)   {HTMLinfo += "Status: " + data.OpenClose + "<br><br>";}
     if (data.termsOffered)    {HTMLinfo += data.termsOffered + "<br><br>";}
-    if (data.Prerequisites)  {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br>";}
-    if (data.AssociatedSections){HTMLinfo += data.AssociatedSections;}
+    if (data.Prerequisites)  {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br><br>";}
+    if (data.AssociatedType){
+      HTMLinfo += 'Associated ' + data.AssociatedType + '<br><br><ul>';
+      for (var assc in data.AssociatedSections) {
+        HTMLinfo += '<li class="AsscSec" id="' + data.AssociatedSections[assc].replace(/ /g, ' ') + '"><span>' + data.AssociatedSections[assc] + '</span></li>';
+      }
+      HTMLinfo += '</ul>';
+    }
     $('#SectionInfo').html(HTMLinfo);
   }
 }
  
 function Stars(addRem, CID) { // Manage star requests
+  
   var searchURL = "/Star?addRem="+addRem+"&courseID="+CID;
   SendReq(searchURL, StarHandle, addRem);
 }
@@ -621,36 +624,28 @@ function ApplyPCR(courseID, instName) {
 }
 
 function addToSched(sec, schedName) { // Getting info about a section
-  var formattedSec = sec.replace(/-/g, '');
+  var formattedSec = formatID(sec).join('-');
   var schedURL = "/Sched?addRem=add&schedName="+schedName+"&courseID="+formattedSec; // Make the request
   SendReq(schedURL, SpitSched, []);
   try {
-    $('#'+sec+' i:nth-child(1)').toggleClass('fa-plus');
-    $('#'+sec+' i:nth-child(1)').toggleClass('fa-times');
+    $('#'+formattedSec+' i:nth-child(1)').toggleClass('fa-plus').toggleClass('fa-times');
   } catch(err) {
-
+    console.log(err);
   }
 }
  
 function removeFromSched(sec, schedName) {
   // Determine the secname by checking when a character is no longer a number (which means the character is the meetDay of the block id)
   // This gets all meet times of a section, including if there are more than one
-  var formattedSec = sec.replace(/-/g, '');
-  var secname = '';
-  for (var i = 7; i < formattedSec.length; i++) {
-    if (parseFloat(formattedSec[i]) != formattedSec[i]) {
-      secname = formattedSec.substr(0, i);
-      { break; }
-    }
-  }
+  var secarray = formatID(sec);
+  var secname = secarray.join("");
   if (!secname.length) {secname = formattedSec;}
   var schedURL = "/Sched?addRem=rem&schedName="+schedName+"&courseID="+secname;
   SendReq(schedURL, SpitSched, []);
   try {
-    $('#'+sec+' i:nth-child(1)').toggleClass('fa-plus');
-    $('#'+sec+' i:nth-child(1)').toggleClass('fa-times');
+    $('#'+secarray.join("-")+' i:nth-child(1)').toggleClass('fa-plus').toggleClass('fa-times');
   } catch(err) {
-
+    console.log(err);
   }
 }
  
@@ -755,7 +750,7 @@ function SpitSched(courseSched) {
       var meetRoom  = courseSched[sec].meetRoom;
       var thiscol  = colorMap[courseSched[sec].fullCourseName]; // Get the color
       if(typeof thiscol === 'undefined'){thiscol = '#E6E6E6';}
-      var newid = (courseSched[sec].fullCourseName.replace(/ /g, "") + weekdays[possDay]+ courseSched[sec].meetHour).replace(".", "");
+      var newid = (courseSched[sec].fullCourseName.replace(/ /g, "-") + '-' + weekdays[possDay]+ courseSched[sec].meetHour).replace(".", "");
 
       schedElement.append('<div class="SchedBlock ' + sec + ' ' + weekdays[possDay] + '" id="'+ newid + // Each block has three classes: SchedBlock, The courseSched entry, and the weekday. Each block has a unique ID
         '" style="top:'+blocktop+
@@ -766,19 +761,19 @@ function SpitSched(courseSched) {
         '"><div class="CloseX">x</div>'+blockname+'<br>'+meetRoom+'</div>');
 
       $('.SchedBlock').each(function(i) { // Check through each previously added meettime
-        var oldMeetFull = $(this).attr('class').split(' ')[1]; // Get the courseSched key (so we can get the meetHour and HourLength values)
-        var oldMeetDay = $(this).attr('class').split(' ')[2]; // Don't compare blocks on different days cause they can't overlap anyway
-        if (oldMeetFull != sec && oldMeetDay == weekdays[possDay]) { // If we aren't comparing to a section to itself :P
-
+        var thisBlock = $(this);
+        var oldMeetFull = thisBlock.attr('class').split(' ')[1]; // Get the courseSched key (so we can get the meetHour and HourLength values)
+        var oldMeetDay = thisBlock.attr('class').split(' ')[2]; // Don't compare blocks on different days cause they can't overlap anyway
+        if (oldMeetFull != sec && oldMeetDay == weekdays[possDay]) { // If we aren't comparing a section to itself :P
           if (twoOverlap(courseSched[oldMeetFull], courseSched[sec])) { // Check if they overlap
-            var oldBlockWidth = $(this).outerWidth() * 100 / $('#Schedule').outerWidth();
-            $(this).css('width', (oldBlockWidth / 2) + '%'); // Resize old block
+            var oldBlockWidth = thisBlock.outerWidth() * 100 / $('#Schedule').outerWidth();
+            thisBlock.css('width', (oldBlockWidth / 2) + '%'); // Resize old block
             var newElement = $('#'+newid);
             var newleft = (newElement.offset().left - schedElement.offset().left) * 100 / schedElement.outerWidth(); // Get shift in terms of percentage, not pixels
             // If a block overlaps with two different blocks, then we only want to shift it over once.
             // The twoOverlap function only checks vertical overlap
             var plusOffset;
-            if ($(this).offset().left == newElement.offset().left) { // If we haven't shifted the new block yet
+            if (thisBlock.offset().left == newElement.offset().left) { // If we haven't shifted the new block yet
               plusOffset = oldBlockWidth / 2;
             } else { //
               plusOffset = 0;

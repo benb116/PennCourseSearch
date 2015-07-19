@@ -5,11 +5,11 @@ var compression = require('compression');
 var stormpath = require('express-stormpath');
 var request = require("request");
 var mongojs = require("mongojs");
-// var colors = require('colors');
+var colors = require('colors');
 var fs = require('fs');
 var Keen = require('keen-js');
 var PushBullet = require('pushbullet');
-
+console.log('Modules loaded')
 // I don't want to host a config file on Github. When running locally, the app has access to a local config file.
 // On Heroku/DigitalOcean, there is no config file so I use environment variables instead
 var config;
@@ -51,6 +51,8 @@ app.use(stormpath.init(app, {
   sessionDuration: 			1000 * 60 * 60 * 24 * 7 
 }));
 
+console.log('Express initialized')
+
 // Connect to database
 var db = mongojs('mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', ["Students", "Courses2015C", "NewReviews"]);
 
@@ -68,10 +70,11 @@ pusher.devices(function(error, response) {
   pushDeviceID = response.devices[0].iden; 
 });
 
+console.log('Plugins initialized')
+
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
   console.log("Node app is running. Better go catch it.".green);
-  // console.log("Search ".yellow + "Sched ".magenta + "Spit ".blue + "Error ".red + "Star ".cyan);
   if (typeof process.env.PUSHBULLETAUTH !== 'undefined') {
     // Don't send notifications when testing locally
     pusher.note(pushDeviceID, 'Server Restart');
@@ -353,36 +356,60 @@ function parseSectionList(JSONString) {
       OpenClose = 'Closed';
     }
 
-    var AsscList, key;
+    // var AsscList, key;
+    // if (entry.recitations.length !== 0) { // If it has recitations
+    //   AsscList = '<br>Associated Recitations<ul class="AsscText">';
+    //   for(key in entry.recitations) {
+    //     if (entry.recitations.hasOwnProperty(key)) { 
+    //       AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</span></li>';
+    //     }
+    //   }
+    //   AsscList += '</ul>';
+
+    // } else if (entry.labs.length !== 0) { // If it has labs
+    //   AsscList = '<br>Associated Labs<ul class="AsscText">';
+    //   for(key in entry.labs) {
+    //     if (entry.labs.hasOwnProperty(key)) { 
+    //       AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</span></li>';
+    //     }
+    //   }
+    //   AsscList += '</ul>';
+
+    // } else if (entry.lectures.length !== 0) { // If it has lectures
+    //   AsscList = '<br>Associated Lectures<ul class="AsscText">';
+    //   for(key in entry.lectures) {
+    //     if (entry.lectures.hasOwnProperty(key)) { 
+    //       AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</span></li>';
+    //     }
+    //   }
+    //   AsscList += '</ul>';
+
+    // } else {
+    //   AsscList = '';
+    // }
+    var asscType = '';
+    var asscList = [];
     if (entry.recitations.length !== 0) { // If it has recitations
-      AsscList = '<br>Associated Recitations<ul class="AsscText">';
+      asscType = "Recitations";
       for(key in entry.recitations) {
         if (entry.recitations.hasOwnProperty(key)) { 
-          AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</span></li>';
+          asscList.push(entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id);
         }
       }
-      AsscList += '</ul>';
-
     } else if (entry.labs.length !== 0) { // If it has labs
-      AsscList = '<br>Associated Labs<ul class="AsscText">';
+      asscType = "Labs";
       for(key in entry.labs) {
         if (entry.labs.hasOwnProperty(key)) { 
-          AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</span></li>';
+          asscList.push(entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id);
         }
       }
-      AsscList += '</ul>';
-
     } else if (entry.lectures.length !== 0) { // If it has lectures
-      AsscList = '<br>Associated Lectures<ul class="AsscText">';
+      asscType = "Lectures";
       for(key in entry.lectures) {
         if (entry.lectures.hasOwnProperty(key)) { 
-          AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</span></li>';
+          asscList.push(entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id);
         }
       }
-      AsscList += '</ul>';
-
-    } else {
-      AsscList = '';
     }
 
     sectionInfo = {
@@ -394,12 +421,14 @@ function parseSectionList(JSONString) {
       'OpenClose': OpenClose, 
       'termsOffered': termsOffered, 
       'Prerequisites': prereq, 
-      'TimeInfo': TimeInfo, 
-      'AssociatedSections': AsscList
+      'TimeInfo': TimeInfo,
+      'AssociatedType': asscType, 
+      'AssociatedSections': asscList
     };
     return sectionInfo;
   }
   catch (err) {
+    console.log(err)
     return 'No Results';
   }
 }
@@ -619,8 +648,8 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
   var Res = JSON.parse(JSONString); // Convert to JSON Object
   var entry = Res.result_data[0];
   try {
-    var SectionName = entry.section_id_normalized.replace(/ /g, "").replace(/-/g, " "); // Format name
-    var SectionID 	= entry.section_id_normalized.replace(/-/g, ""); // Format name
+    var SectionName = entry.section_id_normalized.replace(/ /g, "-").replace(/-/g, " "); // Format name
+    var SectionID 	= entry.section_id_normalized.replace(/ /g, ""); // Format ID
     var resJSON 	= {};
     try { // Not all sections have time info
       for(var meeti in entry.meetings) { if (entry.meetings.hasOwnProperty(meeti)) { // Some sections have multiple meetings
@@ -640,7 +669,7 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
 
       	// Full ID will have sectionID+MeetDays+StartTime
       	// This is necessary for classes like PHYS151, which has times: M@13, TR@9, AND R@18
-      	var FullID = SectionID.replace(/ /g, "")+MeetDays+StartTime.toString().replace(".", "");
+      	var FullID = SectionID+'-'+MeetDays+StartTime.toString().replace(".", "");
 
       	resJSON[FullID] = {	
           'fullCourseName': 	SectionName,
