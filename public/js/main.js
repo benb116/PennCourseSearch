@@ -221,7 +221,7 @@ function SchedTriggers() {
         // {break}
         schedRename = prompt('Please enter a unique name for your new schedule.');
       }
-      if (schedName !== '' && schedName !== null) {
+      if (schedRename !== '' && schedRename !== null && schedRename != 'null') {
         schedURL = "/Sched?addRem=ren&courseID=blank&schedName="+schedName+"&schedRename="+schedRename; // Make the request
         SendReq(schedURL, ListScheds, -2);
       }
@@ -540,7 +540,11 @@ function StarFormat(sections) { // Format starred section list
       '<span>'+sections[0][section].SectionName + sections[0][section].TimeInfo+'</span>'+
       '<i class="'+starClass+'"></i></li>';
   }}
-  $('#CourseTitle').html('Starred Sections');
+  if (sections[0]) {
+    $('#CourseTitle').html('Starred Sections');
+  } else {
+    $('#CourseTitle').html('No Starred Sections');
+  }
   $('#SectionList > ul').append(HTML); // Put the course number list in  #SectionList  
   for (var sec in sections[0]) {
     RetrievePCR(sections[0][sec].SectionName);
