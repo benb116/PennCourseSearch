@@ -2,26 +2,9 @@
 
 
 var async = require('async');
-
-
-///////////////////////////////////
-var PushBullet  = require('pushbullet');
-try {
-  var config = require('../../../config.js');
-} catch (err) { // If there is no config file
-  var config = {};
-  config.PushBulletAuth = process.env.PUSHBULLETAUTH;
-}
-// Initialize PushBullet
-var pusher = new PushBullet(config.PushBulletAuth);
-// Get first deviceID
-var pushDeviceID;
-pusher.devices(function(error, response) {
-  pushDeviceID = response.devices[0].iden; 
-});
-
 var forms = require('./forms');
 var helpers = require('./helpers');
+require('log-timestamp')(function() { return new Date().toISOString() + ' %s' });
 
 
 var FIELDS = {
@@ -125,7 +108,6 @@ function buildAccount(req, form) {
  */
 function createAccount(req, res, form) {
   var view = req.app.get('stormpathRegistrationView');
-
   return function(account, callback) {
     req.app.get('stormpathApplication').createAccount(account, function(err, acc) {
       if (err) {
@@ -133,7 +115,6 @@ function createAccount(req, res, form) {
         req.app.get('stormpathLogger').info('A user tried to create a new account, but this operation failed with an error message: ' + err.developerMessage);
         callback(err);
       } else if (req.app.get('stormpathEnableAccountVerification') && acc.status === 'UNVERIFIED') {
-        pusher.note(pushDeviceID, 'Account Created: ', account.email, function(error, response) {if(err) {console.log(err);}});
         console.log('Account Created: ' + account.email);
         helpers.render(req.app.get('stormpathAccountVerificationEmailSentView'), res, { email: acc.email });
         callback();
@@ -218,7 +199,6 @@ module.exports.register = function(req, res) {
  */
 module.exports.login = function(req, res) {
   if (req.user && req.app.get('stormpathEnableAutoLogin')) {
-    pusher.note(pushDeviceID, 'Login: ', req.user.username.split('@')[0]);
     console.log('Login: ' + req.user.username.split('@')[0]);
     var url = req.query.next || req.app.get('stormpathRedirectUrl');
     return res.redirect(302, url);
@@ -531,7 +511,6 @@ module.exports.verificationComplete = function(req, res) {
               req.session.user = acc.href;
               res.locals.user = acc;
               req.user = acc;
-              pusher.note(pushDeviceID, 'Account Verified: ', req.user.username);
               console.log('Account Verified: ' + req.user.username)
               if (req.app.get('stormpathPostRegistrationHandler')) {
                 req.app.get('stormpathPostRegistrationHandler')(req.user, res, function() {

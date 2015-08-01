@@ -14,6 +14,7 @@
     "fs": "0.0.2",
     "hjs": "0.0.6",
     "keen-js": "^3.2.4",
+    "log-timestamp": "^0.1.2",
     "mongojs": "^1.0.2",
     "path": "^0.11.14",
     "pushbullet": "^1.4.3",

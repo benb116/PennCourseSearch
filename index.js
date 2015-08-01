@@ -9,6 +9,8 @@ var colors = require('colors');
 var fs = require('fs');
 var Keen = require('keen-js');
 var PushBullet = require('pushbullet');
+require('log-timestamp')(function() { return new Date().toISOString() + ' %s' });
+
 console.log('Modules loaded');
 
 // I don't want to host a config file on Github. When running locally, the app has access to a local config file.
@@ -474,9 +476,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
   var schedRename		= req.query.schedRename;
   var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
   var placeholder = {};
-  console.time('test')
   db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
-    console.timeEnd('test')
     if (typeof doc === 'undefined' || typeof doc === null || err !== null || doc.length === 0) { // If there is no entry or something else went wrong
       db.Students.save({'Pennkey': myPennkey, 'StarList': []}); // Make an entry
       doc[0] = {};
@@ -588,11 +588,6 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
       return res.send(SchedCourses); // On a blank request
     }
   });
-});
-
-app.use(function(req, res, next) {
-  res.status(400);
-  res.render('404.html');
 });
 
 function getSchedInfo(JSONString) { // Get the properties required to schedule the section
