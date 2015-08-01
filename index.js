@@ -9,7 +9,8 @@ var colors = require('colors');
 var fs = require('fs');
 var Keen = require('keen-js');
 var PushBullet = require('pushbullet');
-console.log('Modules loaded')
+console.log('Modules loaded');
+
 // I don't want to host a config file on Github. When running locally, the app has access to a local config file.
 // On Heroku/DigitalOcean, there is no config file so I use environment variables instead
 var config;
@@ -38,7 +39,9 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 app.use(compression());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31536000000 }));
+
+console.log('Express initialized');
 
 app.use(stormpath.init(app, {
   apiKeyId:   config.STORMPATH_API_KEY_ID,
@@ -50,8 +53,6 @@ app.use(stormpath.init(app, {
   // Make sessions expire after one week
   sessionDuration: 			1000 * 60 * 60 * 24 * 7 
 }));
-
-console.log('Express initialized')
 
 // Connect to database
 var db = mongojs('mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', ["Students", "Courses2015C", "NewReviews"]);
@@ -70,7 +71,7 @@ pusher.devices(function(error, response) {
   pushDeviceID = response.devices[0].iden; 
 });
 
-console.log('Plugins initialized')
+console.log('Plugins initialized');
 
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
@@ -173,7 +174,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
   if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {
     baseURL = baseURL + '&instructor='+instructFilter;
   }
-  
+
   // Keen.io logging
   var searchEvent = {
     searchType: searchType, 
@@ -356,56 +357,25 @@ function parseSectionList(JSONString) {
       OpenClose = 'Closed';
     }
 
-    // var AsscList, key;
-    // if (entry.recitations.length !== 0) { // If it has recitations
-    //   AsscList = '<br>Associated Recitations<ul class="AsscText">';
-    //   for(key in entry.recitations) {
-    //     if (entry.recitations.hasOwnProperty(key)) { 
-    //       AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id+'</span></li>';
-    //     }
-    //   }
-    //   AsscList += '</ul>';
-
-    // } else if (entry.labs.length !== 0) { // If it has labs
-    //   AsscList = '<br>Associated Labs<ul class="AsscText">';
-    //   for(key in entry.labs) {
-    //     if (entry.labs.hasOwnProperty(key)) { 
-    //       AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id+'</span></li>';
-    //     }
-    //   }
-    //   AsscList += '</ul>';
-
-    // } else if (entry.lectures.length !== 0) { // If it has lectures
-    //   AsscList = '<br>Associated Lectures<ul class="AsscText">';
-    //   for(key in entry.lectures) {
-    //     if (entry.lectures.hasOwnProperty(key)) { 
-    //       AsscList += '<li><span>&nbsp + &nbsp</span><span>'+entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id+'</span></li>';
-    //     }
-    //   }
-    //   AsscList += '</ul>';
-
-    // } else {
-    //   AsscList = '';
-    // }
     var asscType = '';
     var asscList = [];
     if (entry.recitations.length !== 0) { // If it has recitations
       asscType = "Recitations";
-      for(key in entry.recitations) {
+      for(var key in entry.recitations) {
         if (entry.recitations.hasOwnProperty(key)) { 
           asscList.push(entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id);
         }
       }
     } else if (entry.labs.length !== 0) { // If it has labs
       asscType = "Labs";
-      for(key in entry.labs) {
+      for(var key in entry.labs) {
         if (entry.labs.hasOwnProperty(key)) { 
           asscList.push(entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id);
         }
       }
     } else if (entry.lectures.length !== 0) { // If it has lectures
       asscType = "Lectures";
-      for(key in entry.lectures) {
+      for(var key in entry.lectures) {
         if (entry.lectures.hasOwnProperty(key)) { 
           asscList.push(entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id);
         }
@@ -428,7 +398,7 @@ function parseSectionList(JSONString) {
     return sectionInfo;
   }
   catch (err) {
-    console.log(err)
+    console.log(err);
     return 'No Results';
   }
 }
@@ -451,34 +421,6 @@ app.get('/NewReview', stormpath.loginRequired, function(req, res) {
   }
 });
 
-app.get('/Review', stormpath.loginRequired, function(req, res) {
-  var courseid = req.query.courseid;
-  var thedept = courseid.split("-")[0];
-  var instname = req.query.instname;
-  try {
-    db.collection('NewReviews').find({Dept: thedept}, function(err, doc) {
-      var reviews = doc[0].Reviews[courseid.replace(/-/g, ' ')];
-      if (typeof reviews === 'undefined') {
-        return res.send({});
-      }
-      if (typeof instname === 'undefined') {
-        if (typeof reviews !== 'undefined') {
-          return res.send(reviews.Total);
-        }
-      } else {
-        for (var inst in reviews) {
-          if (inst.indexOf(instname.toUpperCase()) > -1) {
-            return res.send(reviews[inst]);
-          }
-        }
-      }
-      return res.send(0);
-    });
-  } catch(err) {
-    return res.send(0);
-  }
-});
-
 // Manage requests regarding starred courses
 app.get('/Star', stormpath.loginRequired, function(req, res) {
   var StarredCourses = [];
@@ -488,7 +430,11 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
     try {
       StarredCourses = doc.StarList; // Get previously starred courses
     } catch (error) { // If there is no previous starlist
-      db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database	
+      // db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database	
+      StarredCourses = [];
+    }
+    if (StarredCourses === null) {
+      StarredCourses = [];
     }
 
     var addRem = req.query.addRem; // Are we adding, removing, or clearing?
@@ -501,9 +447,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
       var starEvent = {
         starCourse: courseID,
         user: myPennkey,
-        keen: {
-          timestamp: new Date().toISOString()
-        }
+        keen: {timestamp: new Date().toISOString()}
       };
       client.addEvent('Star', starEvent, function(err, res) {
         if (err) {console.log(err);}
@@ -530,7 +474,9 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
   var schedRename		= req.query.schedRename;
   var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
   var placeholder = {};
+  console.time('test')
   db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
+    console.timeEnd('test')
     if (typeof doc === 'undefined' || typeof doc === null || err !== null || doc.length === 0) { // If there is no entry or something else went wrong
       db.Students.save({'Pennkey': myPennkey, 'StarList': []}); // Make an entry
       doc[0] = {};
@@ -642,6 +588,11 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
       return res.send(SchedCourses); // On a blank request
     }
   });
+});
+
+app.use(function(req, res, next) {
+  res.status(400);
+  res.render('404.html');
 });
 
 function getSchedInfo(JSONString) { // Get the properties required to schedule the section

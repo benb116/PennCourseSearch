@@ -137,6 +137,9 @@ function ClickTriggers() {
     $(this).toggleClass('fa-star').toggleClass('fa-star-o'); // Change the star icon
     if (addRem == 'rem' && $(this).parent().attr('class') == 'starredSec') { // If it was removed from the Show Stars list
       $(this).parent().remove();
+      if ($('#SectionList > ul').is(':empty')){
+          $('#CourseTitle').html('No Starred Sections');
+      }
     }
   })
   .on('click', '.DescBlock', function() { // If a course is clicked
@@ -327,6 +330,7 @@ function initiateSearch() { // Deal with course search terms
         $('#SectionTitle').empty();
         $('#CourseTitle').empty();
         $('#SectionList > ul').empty();
+        $('#SectionInfo').empty();
       }
     } else if (searchTerms !== '' ) { // If there are no good search terms, clear everything
       $('#CourseList').empty();
@@ -511,7 +515,7 @@ function StarHandle(data, addRem) {
       SendReq(searchURL, StarFormat, []);
     }}
     if (typeof sec === 'undefined') {
-      $('#SectionTitle').html('No starred sections');
+      $('#CourseTitle').html('No starred sections');
       $('#SectionList > ul').empty();
     }
   } else { // Otherwise, pass through
@@ -603,6 +607,7 @@ function ApplyPCR(courseID, instName) {
         break;
       }
     }
+    result = thisReview.Total;
   }
   var thisElement = $('#'+courseID.replace(/ /g, '-'));
   var thisPCR = thisElement.find('.PCR');
@@ -766,9 +771,10 @@ function SpitSched(courseSched) {
 
       $('.SchedBlock').each(function(i) { // Check through each previously added meettime
         var thisBlock = $(this);
-        var oldMeetFull = thisBlock.attr('class').split(' ')[1]; // Get the courseSched key (so we can get the meetHour and HourLength values)
-        var oldMeetDay = thisBlock.attr('class').split(' ')[2]; // Don't compare blocks on different days cause they can't overlap anyway
-        if (oldMeetFull != sec && oldMeetDay == weekdays[possDay]) { // If we aren't comparing a section to itself :P
+        var oldClasses = thisBlock.attr('class').split(' ');
+        var oldMeetFull = oldClasses[1]; // Get the courseSched key (so we can get the meetHour and HourLength values)
+        var oldMeetDay = oldClasses[2]; // Don't compare blocks on different days cause they can't overlap anyway
+        if (oldMeetFull != sec && oldMeetDay == weekdays[possDay]) { // If we aren't comparing a section to itself & if the two meetings are on the same day
           if (twoOverlap(courseSched[oldMeetFull], courseSched[sec])) { // Check if they overlap
             var oldBlockWidth = thisBlock.outerWidth() * 100 / $('#Schedule').outerWidth();
             thisBlock.css('width', (oldBlockWidth / 2) + '%'); // Resize old block
