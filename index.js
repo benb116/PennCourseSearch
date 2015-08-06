@@ -50,10 +50,11 @@ app.use(stormpath.init(app, {
   apiKeySecret: config.STORMPATH_API_KEY_SECRET,
   secretKey:    config.STORMPATH_SECRET_KEY,
   application:  config.STORMPATH_URL,
-  enableAccountVerification: 	true,
-  enableForgotPassword: 		true,
+  enableAccountVerification: true,
+  enableForgotPassword: 		 true,
+  expandCustomData:          true,
   // Make sessions expire after one week
-  sessionDuration: 			1000 * 60 * 60 * 24 * 7 
+  sessionDuration: 			1000 * 60 * 60 * 24 * 7
 }));
 
 // Connect to database
@@ -110,6 +111,7 @@ app.get('/', function(req, res) {
     // If the user is not logged in
     return res.render('welcome');
   } else {
+    // console.log(JSON.stringify(req.user))
     // Get random subtitle
     var thissub = subtitles[Math.floor(Math.random() * subtitles.length)];
     // Get random payment note
@@ -468,126 +470,111 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 
 // Manage scheduling requests
 app.get('/Sched', stormpath.loginRequired, function(req, res) {
-
+  console.time('sched')
   var SchedCourses 	= {};
   var schedName 		= req.query.schedName;
   var schedRename		= req.query.schedRename;
   var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
   var placeholder = {};
-  db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
-    if (typeof doc === 'undefined' || typeof doc === null || err !== null || doc.length === 0) { // If there is no entry or something else went wrong
-      db.Students.save({'Pennkey': myPennkey, 'StarList': []}); // Make an entry
-      doc[0] = {};
-    }
-    if (typeof doc[0].Schedules === 'undefined') {
-      db.Students.update({Pennkey: myPennkey}, { $set: {Schedules: {}}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
-      doc[0].Schedules = {};
-    }
-    if (typeof schedName !== 'undefined') {
-      SchedCourses = doc[0].Schedules[schedName]; // Get previously scheduled courses
-    }
-    if (typeof SchedCourses === 'undefined') { // If there is no schedule of that name
-      placeholder['Schedules.' + schedName] = {}; // Make one
-      db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-      SchedCourses = {};
-    }
 
-    var addRem = req.query.addRem; // Are we adding, removing, or clearing?
-    var courseID = req.query.courseID;
-    if (addRem == 'add') { // If we need to add, then we get meeting info for the section
-      request({
-      	uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
-      	method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
-      }, function(error, response, body) {
+  if(!req.user.customData.Schedules) {req.user.customData.Schedules = {'Schedule': {}};}
+  if(!req.user.customData.Schedules[schedName] && typeof schedName != 'undefined') {req.user.customData.Schedules[schedName] = {};}
+  SchedCourses = req.user.customData.Schedules[schedName];
 
-      	resJSON = getSchedInfo(body); // Format the response
-      	for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
-          SchedCourses[JSONSecID] = resJSON[JSONSecID];
-          // console.log((myPennkey + ' Sched Added: ' + JSONSecID).magenta);
-      	}}
-      	var schedEvent = {
-          schedCourse: courseID,
-          user: myPennkey,
-          keen: {
-            timestamp: new Date().toISOString()
-          }
-      	};
-      	client.addEvent('Sched', schedEvent, function(err, res) {
-          if (err) {console.log(err);}
-      	});
-      	placeholder['Schedules.' + schedName] = SchedCourses;
-      	db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-      	return res.send(SchedCourses);
-      });
-
-    } else if (addRem == 'rem') { // If we need to remove
-      for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
-      	if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) { // Find all meeting times of a given course
-          delete SchedCourses[meetsec];
-          // console.log((myPennkey + ' Sched Removed: ' + courseID).magenta);
-      	}}
-			        }
-      placeholder['Schedules.' + schedName] = SchedCourses;
-      db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-      return res.send(SchedCourses);
-      
-    } else if (addRem == 'clear') { // Clear all
-      SchedCourses = {};
-      placeholder['Schedules.' + schedName] = SchedCourses;
-      db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-      // console.log((myPennkey + ' Sched Cleared').magenta);
-      return res.send(SchedCourses);
-
-    } else if (addRem == 'dup') { // Duplicate a schedule
-      while (Object.keys(doc[0].Schedules).indexOf(schedName) != -1) {
-        var lastchar = schedName[schedName.length - 1];
-        if (isNaN(lastchar) || schedName[schedName.length - 2] != ' ') { // e.g. 'schedule' or 'ABC123'
-          schedName += ' 2';
-        } else { // e.g. 'MEAM 101 2'
-          schedName = schedName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
+  var addRem = req.query.addRem; // Are we adding, removing, or clearing?
+  var courseID = req.query.courseID;
+  if (addRem == 'add') { // If we need to add, then we get meeting info for the section
+    request({
+      uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
+      method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
+    }, function(error, response, body) {
+      resJSON = getSchedInfo(body); // Format the response
+      for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
+        SchedCourses[JSONSecID] = resJSON[JSONSecID];
+        // console.log((myPennkey + ' Sched Added: ' + JSONSecID).magenta);
+      }}
+      var schedEvent = {
+        schedCourse: courseID,
+        user: myPennkey,
+        keen: {
+          timestamp: new Date().toISOString()
         }
-      }
-      placeholder['Schedules.' + schedName] = SchedCourses;
-      db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }});
+      };
+      client.addEvent('Sched', schedEvent, function(err, res) {
+        if (err) {console.log(err);}
+      });
+      req.user.customData.Schedules[schedName] = SchedCourses;
+      req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+      console.timeEnd('sched')
+      return res.send(SchedCourses);
+    });
 
-      schedList = Object.keys(doc[0].Schedules);
-      schedList.push(schedName);
-      // console.log((myPennkey + ' Sched duplicated').magenta);
-      return res.send(schedList);
-
-    } else if (addRem == 'ren') { // Delete
-      doc[0].Schedules[schedRename] = doc[0].Schedules[schedName];
-      delete doc[0].Schedules[schedName];
-      db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
-      schedList = Object.keys(doc[0].Schedules);
-      // console.log((myPennkey + ' Sched renamed.'));
-      return res.send(schedList);
-      
-    } else if (addRem == 'del') { // Delete
-      delete doc[0].Schedules[schedName];
-      if(Object.getOwnPropertyNames(doc[0].Schedules).length === 0){
-        doc[0].Schedules.Schedule = {};
-      }
-      db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
-      schedList = Object.keys(doc[0].Schedules);
-      // console.log((myPennkey + ' Sched deleted.'));
-      return res.send(schedList);
-      
-    } else if (addRem == 'name') { // If we're getting a list of the schedules
-      schedList = Object.keys(doc[0].Schedules);
-      if (schedList.length === 0) {
-        placeholder['Schedules.Schedule'] = {};
-        db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-        schedList.push('Schedule');
-      }
-      if (typeof schedName !== 'undefined' && schedList.indexOf(schedName) == -1 && schedName != 'null') {
-        schedList.push(schedName);
-      }
-      return res.send(schedList);
-    } else {
-      return res.send(SchedCourses); // On a blank request
+  } else if (addRem == 'rem') { // If we need to remove
+    for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
+      if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) { // Find all meeting times of a given course
+        delete SchedCourses[meetsec];
+        // console.log((myPennkey + ' Sched Removed: ' + courseID).magenta);
+      }}
     }
-  });
+    req.user.customData.Schedules[schedName] = SchedCourses;
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+    return res.send(SchedCourses);
+
+  } else if (addRem == 'clear') { // Clear all
+    SchedCourses = {};
+    req.user.customData.Schedules[schedName] = SchedCourses;
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+    return res.send(SchedCourses);
+
+  } else if (addRem == 'dup') { // Duplicate a schedule
+    
+    while (Object.keys(req.user.customData.Schedules).indexOf(schedName) != -1) {
+      var lastchar = schedName[schedName.length - 1];
+      if (isNaN(lastchar) || schedName[schedName.length - 2] != ' ') { // e.g. 'schedule' or 'ABC123'
+        schedName += ' 2';
+      } else { // e.g. 'MEAM 101 2'
+        schedName = schedName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
+      }
+    }
+    req.user.customData.Schedules[schedName] = SchedCourses;
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+
+    schedList = Object.keys(req.user.customData.Schedules);
+    // schedList.push(schedName);
+    // console.log((myPennkey + ' Sched duplicated').magenta);
+    return res.send(schedList);
+
+  } else if (addRem == 'ren') { // Delete
+    req.user.customData.Schedules[schedRename] = req.user.customData.Schedules[schedName];
+
+    delete req.user.customData.Schedules[schedName];
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+
+    schedList = Object.keys(req.user.customData.Schedules);
+    // console.log((myPennkey + ' Sched renamed.'));
+    return res.send(schedList);
+    
+  } else if (addRem == 'del') { // Delete
+    delete req.user.customData.Schedules[schedName];
+    if(Object.getOwnPropertyNames(req.user.customData.Schedules).length === 0){
+      req.user.customData.Schedules.Schedule = {};
+    }
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+
+    schedList = Object.keys(req.user.customData.Schedules);
+    // console.log((myPennkey + ' Sched deleted.'));
+    return res.send(schedList);
+    
+  } else if (addRem == 'name') { // If we're getting a list of the schedules
+    schedList = Object.keys(req.user.customData.Schedules);
+    if (schedList.length === 0) {
+      req.user.customData.Schedules.Schedule = {};
+    }
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+    return res.send(schedList);
+  } else {
+    return res.send(req.user.customData.Schedules[schedName]); // On a blank request
+  }
 });
 
 function getSchedInfo(JSONString) { // Get the properties required to schedule the section
