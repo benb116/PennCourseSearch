@@ -9,7 +9,7 @@ var colors = require('colors');
 var fs = require('fs');
 var Keen = require('keen-js');
 var PushBullet = require('pushbullet');
-require('log-timestamp')(function() { return new Date().toISOString() + ' %s' });
+require('log-timestamp')(function() { return new Date().toISOString() + ' %s'; });
 
 console.log('Modules loaded');
 
@@ -20,17 +20,17 @@ try {
   config = require('./config.js');
 } catch (err) { // If there is no config file
   config = {};
-  config.requestAB = process.env.REQUESTAB;
-  config.requestAT = process.env.REQUESTAT;
-  config.PCRToken = process.env.PCRTOKEN;
-  config.MongoUser = process.env.MONGOUSER;
-  config.MongoPass = process.env.MONGOPASS;
-  config.MongoURI = process.env.MONGOURI;
-  config.STORMPATH_API_KEY_ID = process.env.STORMPATH_API_KEY_ID;
+  config.requestAB =  process.env.REQUESTAB;
+  config.requestAT =  process.env.REQUESTAT;
+  config.PCRToken =   process.env.PCRTOKEN;
+  config.MongoUser =  process.env.MONGOUSER;
+  config.MongoPass =  process.env.MONGOPASS;
+  config.MongoURI =   process.env.MONGOURI;
+  config.STORMPATH_API_KEY_ID =     process.env.STORMPATH_API_KEY_ID;
   config.STORMPATH_API_KEY_SECRET = process.env.STORMPATH_API_KEY_SECRET;
-  config.STORMPATH_SECRET_KEY = process.env.STORMPATH_SECRET_KEY;
-  config.STORMPATH_URL = process.env.STORMPATH_URL;
-  config.KeenIOID	= process.env.KEEN_PROJECT_ID;
+  config.STORMPATH_SECRET_KEY =     process.env.STORMPATH_SECRET_KEY;
+  config.STORMPATH_URL =            process.env.STORMPATH_URL;
+  config.KeenIOID	=       process.env.KEEN_PROJECT_ID;
   config.KeenIOWriteKey	= process.env.KEEN_WRITE_KEY;
   config.PushBulletAuth	= process.env.PUSHBULLETAUTH;
 }
@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31536000000 }))
 console.log('Express initialized');
 
 app.use(stormpath.init(app, {
-  apiKeyId:   config.STORMPATH_API_KEY_ID,
+  apiKeyId:     config.STORMPATH_API_KEY_ID,
   apiKeySecret: config.STORMPATH_API_KEY_SECRET,
   secretKey:    config.STORMPATH_SECRET_KEY,
   application:  config.STORMPATH_URL,
@@ -181,10 +181,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
   var searchEvent = {
     searchType: searchType, 
     searchParam: searchParam,
-    user: myPennkey,
-    keen: {
-      timestamp: new Date().toISOString()
-    }
+    user: myPennkey
   };
   client.addEvent('Search', searchEvent, function(err, res) {
     if (err) {console.log(err);}
@@ -361,23 +358,24 @@ function parseSectionList(JSONString) {
 
     var asscType = '';
     var asscList = [];
+    var key;
     if (entry.recitations.length !== 0) { // If it has recitations
       asscType = "Recitations";
-      for(var key in entry.recitations) {
+      for(key in entry.recitations) {
         if (entry.recitations.hasOwnProperty(key)) { 
           asscList.push(entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id);
         }
       }
     } else if (entry.labs.length !== 0) { // If it has labs
       asscType = "Labs";
-      for(var key in entry.labs) {
+      for(key in entry.labs) {
         if (entry.labs.hasOwnProperty(key)) { 
           asscList.push(entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id);
         }
       }
     } else if (entry.lectures.length !== 0) { // If it has lectures
       asscType = "Lectures";
-      for(var key in entry.lectures) {
+      for(key in entry.lectures) {
         if (entry.lectures.hasOwnProperty(key)) { 
           asscList.push(entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id);
         }
@@ -582,7 +580,9 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
         db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
         schedList.push('Schedule');
       }
-    if (typeof schedName !== 'undefined' && schedList.indexOf(schedName) == -1 && schedName != 'null') {schedList.push(schedName);}
+      if (typeof schedName !== 'undefined' && schedList.indexOf(schedName) == -1 && schedName != 'null') {
+        schedList.push(schedName);
+      }
       return res.send(schedList);
     } else {
       return res.send(SchedCourses); // On a blank request

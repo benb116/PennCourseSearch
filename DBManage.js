@@ -52,7 +52,7 @@ function PullRegistrar(index) {
         // At the end of the list
 				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) {
           // Write JSON to file
-					console.log(('List Spit: '+index));
+					console.log(('List Spit: '+index+' '+thedept));
 				});
 			}
 		}}
@@ -141,15 +141,15 @@ function PullReview(index) {
 			var courseAvgQual = Math.round(100 * courseSumQ / Object.keys(resp[course]).length)/100;
 			var courseAvgDiff = Math.round(100 * courseSumD / Object.keys(resp[course]).length)/100;
 			var courseAvgInst = Math.round(100 * courseSumI / Object.keys(resp[course]).length)/100;
-			resp[course]['Total']  = {
+			resp[course].Total  = {
 				'cQ': courseAvgQual,
 				'cD': courseAvgDiff,
 				'cI': courseAvgInst
 			};
 		}
 		fs.writeFile('./2015ARevRaw/'+thedept+'.json', JSON.stringify(resp), function (err) {
-			console.log('It\'s saved! '+ index);
-			UploadToDB('2015ARevRaw', 'NewReviews', index);
+			console.log('It\'s saved! '+ index + ' ' + thedept);
+			// UploadToDB('2015ARevRaw', 'NewReviews', index);
 			index++;
 			PullReview(index);
 		});
