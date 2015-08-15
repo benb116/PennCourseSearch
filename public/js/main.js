@@ -562,7 +562,7 @@ function RetrievePCR(courseID, instName) {
         async: false // Yeah it's asynchronous, but otherwise the function runs ahead of itself
       }) // Make the request
       .done(function(data) {
-        localStorage['Review'+dept] = data; // Cache that jawn
+        localStorage['Review'+dept] = JSON.stringify(data); // Cache that jawn
         ApplyPCR(courseID, instName);
         return 'done';
       })
