@@ -98,7 +98,7 @@ function LoadingIndicate() {
 }
 
 function ClickTriggers() {
-  $('body')
+  $(document.body)
   .on('click', '#CourseList li', function() { // If a course is clicked in CourseList
     $('#SectionInfo').empty();
     var courseName = formatID($(this).attr('id')).join(""); // Format the course name for searching
@@ -142,14 +142,6 @@ function ClickTriggers() {
       }
     }
   })
-  .on('click', '.DescBlock', function() { // If a course is clicked
-    $('#SectionInfo p').toggle();
-  })
-  // .on('click', '#SectionInfo span:nth-child(1)', function() { // If the section is added
-  //   var secname = $(this).next().html(); // Format the section name for scheduling
-  //   var schedName = $('#schedSelect').val();
-  //   addToSched(secname, schedName); // Search for section info     
-  // })
   .on('click', '.AsscSec', function() { // If an Assc Sec is clicked
     var courseName = formatID($(this).attr('id')).join(""); // Format the course name for searching
     getSectionInfo(courseName); // Search for sections

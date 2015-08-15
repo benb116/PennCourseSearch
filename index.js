@@ -1,3 +1,4 @@
+console.time('Modules loaded');
 // Initial configuration
 var path = require('path');
 var express = require('express');
@@ -11,7 +12,7 @@ var Keen = require('keen-js');
 var PushBullet = require('pushbullet');
 require('log-timestamp')(function() { return new Date().toISOString() + ' %s'; });
 
-console.log('Modules loaded');
+console.timeEnd('Modules loaded');
 
 // I don't want to host a config file on Github. When running locally, the app has access to a local config file.
 // On Heroku/DigitalOcean, there is no config file so I use environment variables instead
@@ -139,45 +140,20 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
   var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
   // Building the request URI
-  if (typeof reqFilter 	=== 'undefined') {
-    reqFilter 	= '';
-  } else {
-    reqFilter 	= '&fulfills_requirement='+reqFilter;
-  }
-  if (typeof proFilter 	=== 'undefined') {
-    proFilter 	= '';
-  } else {
-    proFilter 	= '&program='+proFilter;
-  }
-  if (typeof actFilter 	=== 'undefined') {
-    actFilter 	= '';
-  } else {
-    actFilter 	= '&activity='+actFilter;
-  }
-  if (typeof includeOpen	=== 'undefined') {
-    includeOpen 	= '';
-  } else {
-    includeOpen = '&open=true';
-  }
+  if (typeof reqFilter 	=== 'undefined') {reqFilter 	= '';} else {reqFilter 	= '&fulfills_requirement='+reqFilter;}
+  if (typeof proFilter 	=== 'undefined') {proFilter 	= '';} else {proFilter 	= '&program='+proFilter;}
+  if (typeof actFilter 	=== 'undefined') {actFilter 	= '';} else {actFilter 	= '&activity='+actFilter;}
+  if (typeof includeOpen	=== 'undefined') {includeOpen 	= '';} else {includeOpen = '&open=true';}
 
   var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term='+currentTerm+reqFilter+proFilter+actFilter+includeOpen;
 
-  if (searchType == 'courseIDSearch') {
-    baseURL = baseURL + '&course_id='	+ searchParam;
-  }
-  if (searchType == 'keywordSearch') {
-    baseURL = baseURL + '&description='+ searchParam;
-  }
-  if (searchType == 'instSearch') {
-    baseURL = baseURL + '&instructor='	+ searchParam;
-  }
-
+  if (searchType == 'courseIDSearch') {baseURL = baseURL + '&course_id='	+ searchParam;}
+  if (searchType == 'keywordSearch')  {baseURL = baseURL + '&description='+ searchParam;}
+  if (searchType == 'instSearch')     {baseURL = baseURL + '&instructor='	+ searchParam;}
   // If we are searching by a certain instructor, the course numbers will be filtered because of searchType 'instSearch'. 
   // However, clicking on one of those courses will show all sections, including those not taught by the instructor.
   // instructFilter is an extra parameter that allows further filtering of section results by instructor.
-  if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {
-    baseURL = baseURL + '&instructor='+instructFilter;
-  }
+  if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {baseURL = baseURL + '&instructor='+instructFilter;}
 
   // Keen.io logging
   var searchEvent = {
@@ -185,9 +161,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
     searchParam: searchParam,
     user: myPennkey
   };
-  client.addEvent('Search', searchEvent, function(err, res) {
-    if (err) {console.log(err);}
-  });
+  client.addEvent('Search', searchEvent, function(err, res) {if (err) {console.log(err);}});
 
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
   if (searchType 	== 'courseIDSearch' && 
@@ -257,8 +231,9 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
     for(var meeting in JSONObj.meetings) {
       if (JSONObj.meetings.hasOwnProperty(meeting)) {
         // Some sections have multiple meeting forms (I'm looking at you PHYS151)
-        var StartTime 		= JSONObj.meetings[meeting].start_time.split(" ")[0]; // Get start time
-        var EndTime 		= JSONObj.meetings[meeting].end_time.split(" ")[0];
+        var thisMeet = JSONObj.meetings[meeting];
+        var StartTime 		= thisMeet.start_time.split(" ")[0]; // Get start time
+        var EndTime 		= thisMeet.end_time.split(" ")[0];
 
         if (StartTime[0] == '0') {
           StartTime = StartTime.slice(1);
@@ -267,7 +242,7 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
           EndTime = EndTime.slice(1);
         }
 
-        var MeetDays = JSONObj.meetings[meeting].meeting_days; // Output like MWF or TR
+        var MeetDays = thisMeet.meeting_days; // Output like MWF or TR
         meetListInfo = ' - '+StartTime+" to "+EndTime+" on "+MeetDays;
         TimeInfo.push(meetListInfo);
       }
@@ -470,12 +445,10 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 
 // Manage scheduling requests
 app.get('/Sched', stormpath.loginRequired, function(req, res) {
-  console.time('sched')
   var SchedCourses 	= {};
   var schedName 		= req.query.schedName;
   var schedRename		= req.query.schedRename;
   var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
-  var placeholder = {};
 
   if(!req.user.customData.Schedules) {req.user.customData.Schedules = {'Schedule': {}};}
   if(!req.user.customData.Schedules[schedName] && typeof schedName != 'undefined') {req.user.customData.Schedules[schedName] = {};}
@@ -493,19 +466,12 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
         SchedCourses[JSONSecID] = resJSON[JSONSecID];
         // console.log((myPennkey + ' Sched Added: ' + JSONSecID).magenta);
       }}
-      var schedEvent = {
-        schedCourse: courseID,
-        user: myPennkey,
-        keen: {
-          timestamp: new Date().toISOString()
-        }
-      };
-      client.addEvent('Sched', schedEvent, function(err, res) {
-        if (err) {console.log(err);}
-      });
+
+      var schedEvent = {schedCourse: courseID,user: myPennkey,keen: {timestamp: new Date().toISOString()}};
+      client.addEvent('Sched', schedEvent, function(err, res) {if (err) {console.log(err);}});
+
       req.user.customData.Schedules[schedName] = SchedCourses;
-      req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
-      console.timeEnd('sched')
+      req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
       return res.send(SchedCourses);
     });
 
@@ -517,13 +483,13 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
       }}
     }
     req.user.customData.Schedules[schedName] = SchedCourses;
-    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
     return res.send(SchedCourses);
 
   } else if (addRem == 'clear') { // Clear all
     SchedCourses = {};
     req.user.customData.Schedules[schedName] = SchedCourses;
-    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
     return res.send(SchedCourses);
 
   } else if (addRem == 'dup') { // Duplicate a schedule
@@ -537,7 +503,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
       }
     }
     req.user.customData.Schedules[schedName] = SchedCourses;
-    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
 
     schedList = Object.keys(req.user.customData.Schedules);
     // schedList.push(schedName);
@@ -548,7 +514,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
     req.user.customData.Schedules[schedRename] = req.user.customData.Schedules[schedName];
 
     delete req.user.customData.Schedules[schedName];
-    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
 
     schedList = Object.keys(req.user.customData.Schedules);
     // console.log((myPennkey + ' Sched renamed.'));
@@ -559,7 +525,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
     if(Object.getOwnPropertyNames(req.user.customData.Schedules).length === 0){
       req.user.customData.Schedules.Schedule = {};
     }
-    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
 
     schedList = Object.keys(req.user.customData.Schedules);
     // console.log((myPennkey + ' Sched deleted.'));
@@ -570,7 +536,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
     if (schedList.length === 0) {
       req.user.customData.Schedules.Schedule = {};
     }
-    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err)}});
+    req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
     return res.send(schedList);
   } else {
     return res.send(req.user.customData.Schedules[schedName]); // On a blank request
@@ -586,15 +552,16 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
     var resJSON 	= {};
     try { // Not all sections have time info
       for(var meeti in entry.meetings) { if (entry.meetings.hasOwnProperty(meeti)) { // Some sections have multiple meetings
-      	var StartTime 	= (entry.meetings[meeti].start_hour_24) + (entry.meetings[meeti].start_minutes)/60; 
-      	var EndTime 	= (entry.meetings[meeti].end_hour_24) 	+ (entry.meetings[meeti].end_minutes)/60;
+      	var thisMeet = entry.meetings[meeti];
+        var StartTime 	= (thisMeet.start_hour_24) + (thisMeet.start_minutes)/60; 
+      	var EndTime 	= (thisMeet.end_hour_24) 	+ (thisMeet.end_minutes)/60;
       	var hourLength 	= EndTime - StartTime;
-      	var MeetDays 	= entry.meetings[meeti].meeting_days;
+      	var MeetDays 	= thisMeet.meeting_days;
       	var OpenClose 	= entry.course_status_normalized;
       	var Building, Room;
         try {
-      	 Building 	= entry.meetings[meeti].building_code;
-      	 Room 		= entry.meetings[meeti].room_number;
+      	 Building 	= thisMeet.building_code;
+      	 Room 		= thisMeet.room_number;
       	} catch (err) {
       	 Building 	= "";
       	 Room 		= "";
