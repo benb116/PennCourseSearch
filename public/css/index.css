@@ -1,9 +1,9 @@
-@font-face {
+/*@font-face {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
     src: local('Open Sans'), local('OpenSans'), url(/css/OpenSans.ttf) format('truetype');
-}
+}*/
 body {
     width: 100%;
     min-width: 1000px;
@@ -11,7 +11,7 @@ body {
     background-color: #3498db;
     color: white;
     font-family: 'Helvetica';
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', sans-serif;
     text-align: center;
 }
 ::-webkit-scrollbar {
@@ -216,13 +216,13 @@ ul {
     display: inline-block; 
     border-radius: 3px;
     text-align: center;}
-.fa-star, .fa-star-o {
+.icon-star, .icon-star-empty {
     float: right;
     font-size: 14px;
     line-height: 14px;
     color: #01256e;
 }
-.fa {cursor: pointer;}
+/*.fa {cursor: pointer;}*/
 
 
 

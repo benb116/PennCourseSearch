@@ -5,6 +5,18 @@ $(document).ready(function () {
 
   // The delay function that prevents immediate requests
   var delay = (function(){var timer = 0;return function(callback, ms){clearTimeout (timer);timer = setTimeout(callback, ms);};})();
+  var searchDelay = 500; // millisecond delay before searching
+
+  // cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+  //   if (searchDelay == 500) {
+  //     searchDelay = 20;
+  //     alert('Speed mode enabled.');
+  //   } else {
+  //     searchDelay = 500;
+  //     alert('Speed mode disabled.');
+  //   }
+  
+  // });
 
   //+ Jonas Raoni Soares Silva
   //@ http://jsfromhell.com/array/shuffle [v1.0]
@@ -56,7 +68,7 @@ $(document).ready(function () {
   $('#CSearch').on('input', function(){ // When the search terms change
     delay(function(){ // Don't check instantaneously
       initiateSearch();
-    }, 500);
+    }, searchDelay);
   });
 
   $('a[rel*=leanModal]').leanModal({ top : 70, closeButton: ".modal_close" }); // Define modal close button
@@ -98,7 +110,7 @@ function LoadingIndicate() {
 }
 
 function ClickTriggers() {
-  $('body')
+  $(document.body)
   .on('click', '#CourseList li', function() { // If a course is clicked in CourseList
     $('#SectionInfo').empty();
     var courseName = formatID($(this).attr('id')).join(""); // Format the course name for searching
@@ -111,9 +123,9 @@ function ClickTriggers() {
     var secname = $(this).parent().attr('id'); // Format the section name for searching
     var schedName = $('#schedSelect').val();
 
-    if ($(this).attr('class') == 'fa fa-plus') { // If the plus is clicked
+    if ($(this).attr('class') == 'icon-plus') { // If the plus is clicked
       addToSched(secname, schedName);
-    } else if ($(this).attr('class') == 'fa fa-times') { // If the x is clicked
+    } else if ($(this).attr('class') == 'icon-cancel') { // If the x is clicked
       removeFromSched(secname, schedName);
     }
   })
@@ -128,13 +140,13 @@ function ClickTriggers() {
   })
   .on('click', '#SectionList i:nth-child(5)', function() { // If the user clicks a star in SectionList
     var isStarred = $(this).attr('class'); // Determine whether the section is starred
-    if (isStarred == 'fa fa-star-o') {addRem = 'add';} 
-    else if (isStarred == 'fa fa-star') {addRem = 'rem';}
+    if (isStarred == 'icon-star-empty') {addRem = 'add';} 
+    else if (isStarred == 'icon-star') {addRem = 'rem';}
     var secname = formatID($(this).parent().attr('id')).join("");
 
     Stars(addRem, secname); // Add/rem the section
 
-    $(this).toggleClass('fa-star').toggleClass('fa-star-o'); // Change the star icon
+    $(this).toggleClass('icon-star').toggleClass('icon-star-empty'); // Change the star icon
     if (addRem == 'rem' && $(this).parent().attr('class') == 'starredSec') { // If it was removed from the Show Stars list
       $(this).parent().remove();
       if ($('#SectionList > ul').is(':empty')){
@@ -142,14 +154,6 @@ function ClickTriggers() {
       }
     }
   })
-  .on('click', '.DescBlock', function() { // If a course is clicked
-    $('#SectionInfo p').toggle();
-  })
-  // .on('click', '#SectionInfo span:nth-child(1)', function() { // If the section is added
-  //   var secname = $(this).next().html(); // Format the section name for scheduling
-  //   var schedName = $('#schedSelect').val();
-  //   addToSched(secname, schedName); // Search for section info     
-  // })
   .on('click', '.AsscSec', function() { // If an Assc Sec is clicked
     var courseName = formatID($(this).attr('id')).join(""); // Format the course name for searching
     getSectionInfo(courseName); // Search for sections
@@ -432,17 +436,17 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
     });
 
     for(var section in sections) { if (sections.hasOwnProperty(section)) { // Loop through the sections
-      var starClass = 'fa fa-star-o';
+      var starClass = 'icon-star-empty';
       var plusCross = 'plus';
       var index = stars.indexOf(sections[section].NoSpace);
-      if (index > -1) {starClass = 'fa fa-star';} // If the section is a starred section, add the filled star
+      if (index > -1) {starClass = 'icon-star';} // If the section is a starred section, add the filled star
       
       if (schedSecList.indexOf(sections[section].SectionName.replace(/ /g, '')) != -1) {
-        plusCross = 'times';
+        plusCross = 'cancel';
       }
 
       allHTML += '<li id="' + sections[section].SectionName.replace(/ /g,'-') + '">'+
-        '<i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp'+
+        '<i class="icon-' + plusCross + '"></i>&nbsp&nbsp'+
         '<span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
         '<span class="PCR tooltip">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
         '<span>'+sections[section].SectionName + sections[section].TimeInfo+'</span>'+
@@ -526,7 +530,7 @@ function StarHandle(data, addRem) {
  
 function StarFormat(sections) { // Format starred section list
   if (typeof sections === 'string') {sections = JSON.parse(sections);} // JSONify the input
-  var starClass = 'fa fa-star';
+  var starClass = 'icon-star';
   var HTML = '';
   for(var section in sections[0]) { if (sections[0].hasOwnProperty(section)) {
     var plusCross = 'plus';
@@ -535,10 +539,10 @@ function StarFormat(sections) { // Format starred section list
     });
     
     if (schedSecList.indexOf(section) != -1) {
-      plusCross = 'times';
+      plusCross = 'cancel';
     }
     HTML += '<li id="' + sections[0][section].SectionName.replace(/ /g,'-') + '" class="starredSec">'+
-      '<i class="fa fa-' + plusCross + '"></i>&nbsp&nbsp'+
+      '<i class="icon-' + plusCross + '"></i>&nbsp&nbsp'+
       '<span class="'+sections[0][section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
       '<span class="PCR tooltip">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
       '<span>'+sections[0][section].SectionName + sections[0][section].TimeInfo+'</span>'+
@@ -567,10 +571,11 @@ function RetrievePCR(courseID, instName) {
     try {
       $.ajax({
         url: baseURL,
+        dataType: "json",
         async: false // Yeah it's asynchronous, but otherwise the function runs ahead of itself
       }) // Make the request
       .done(function(data) {
-        localStorage['Review'+dept] = data; // Cache that jawn
+        localStorage['Review'+dept] = JSON.stringify(data); // Cache that jawn
         ApplyPCR(courseID, instName);
         return 'done';
       })
@@ -637,7 +642,7 @@ function addToSched(sec, schedName) { // Getting info about a section
   var schedURL = "/Sched?addRem=add&schedName="+schedName+"&courseID="+formattedSec; // Make the request
   SendReq(schedURL, SpitSched, []);
   try {
-    $('#'+formattedSec+' i:nth-child(1)').toggleClass('fa-plus').toggleClass('fa-times');
+    $('#'+formattedSec+' i:nth-child(1)').toggleClass('icon-plus').toggleClass('icon-cancel');
   } catch(err) {
     console.log(err);
   }
@@ -652,7 +657,7 @@ function removeFromSched(sec, schedName) {
   var schedURL = "/Sched?addRem=rem&schedName="+schedName+"&courseID="+secname;
   SendReq(schedURL, SpitSched, []);
   try {
-    $('#'+secarray.join("-")+' i:nth-child(1)').toggleClass('fa-plus').toggleClass('fa-times');
+    $('#'+secarray.join("-")+' i:nth-child(1)').toggleClass('icon-plus').toggleClass('icon-cancel');
   } catch(err) {
     console.log(err);
   }

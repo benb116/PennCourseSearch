@@ -1,17 +1,18 @@
+console.time('Modules loaded');
 // Initial configuration
 var path = require('path');
 var express = require('express');
 var compression = require('compression');
 var stormpath = require('express-stormpath');
 var request = require("request");
-var mongojs = require("mongojs");
+// var mongojs = require("mongojs");
 var colors = require('colors');
 var fs = require('fs');
 var Keen = require('keen-js');
 var PushBullet = require('pushbullet');
 require('log-timestamp')(function() { return new Date().toISOString() + ' %s'; });
 
-console.log('Modules loaded');
+console.timeEnd('Modules loaded');
 
 // I don't want to host a config file on Github. When running locally, the app has access to a local config file.
 // On Heroku/DigitalOcean, there is no config file so I use environment variables instead
@@ -45,19 +46,23 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31536000000 }))
 
 console.log('Express initialized');
 
+var sendRevOpts     = {root: __dirname + '/2015ARevRaw/', dotfiles: 'deny'};
+var sendCourseOpts  = {root: __dirname + '/2015C/',       dotfiles: 'deny'};
+
 app.use(stormpath.init(app, {
   apiKeyId:     config.STORMPATH_API_KEY_ID,
   apiKeySecret: config.STORMPATH_API_KEY_SECRET,
   secretKey:    config.STORMPATH_SECRET_KEY,
   application:  config.STORMPATH_URL,
-  enableAccountVerification: 	true,
-  enableForgotPassword: 		true,
+  enableAccountVerification: true,
+  enableForgotPassword: 		 true,
+  expandCustomData:          true,
   // Make sessions expire after one week
-  sessionDuration: 			1000 * 60 * 60 * 24 * 7 
+  sessionDuration: 			1000 * 60 * 60 * 24 * 7
 }));
 
 // Connect to database
-var db = mongojs('mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', ["Students", "Courses2015C", "NewReviews"]);
+// var db = mongojs('mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', ["Students", "Courses2015C", "NewReviews"]);
 
 // Set up Keen Analytics
 var client = new Keen({
@@ -110,6 +115,7 @@ app.get('/', function(req, res) {
     // If the user is not logged in
     return res.render('welcome');
   } else {
+    // console.log(JSON.stringify(req.user))
     // Get random subtitle
     var thissub = subtitles[Math.floor(Math.random() * subtitles.length)];
     // Get random payment note
@@ -137,45 +143,20 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
   var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
 
   // Building the request URI
-  if (typeof reqFilter 	=== 'undefined') {
-    reqFilter 	= '';
-  } else {
-    reqFilter 	= '&fulfills_requirement='+reqFilter;
-  }
-  if (typeof proFilter 	=== 'undefined') {
-    proFilter 	= '';
-  } else {
-    proFilter 	= '&program='+proFilter;
-  }
-  if (typeof actFilter 	=== 'undefined') {
-    actFilter 	= '';
-  } else {
-    actFilter 	= '&activity='+actFilter;
-  }
-  if (typeof includeOpen	=== 'undefined') {
-    includeOpen 	= '';
-  } else {
-    includeOpen = '&open=true';
-  }
+  if (typeof reqFilter 	=== 'undefined') {reqFilter 	= '';} else {reqFilter 	= '&fulfills_requirement='+reqFilter;}
+  if (typeof proFilter 	=== 'undefined') {proFilter 	= '';} else {proFilter 	= '&program='+proFilter;}
+  if (typeof actFilter 	=== 'undefined') {actFilter 	= '';} else {actFilter 	= '&activity='+actFilter;}
+  if (typeof includeOpen	=== 'undefined') {includeOpen 	= '';} else {includeOpen = '&open=true';}
 
   var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term='+currentTerm+reqFilter+proFilter+actFilter+includeOpen;
 
-  if (searchType == 'courseIDSearch') {
-    baseURL = baseURL + '&course_id='	+ searchParam;
-  }
-  if (searchType == 'keywordSearch') {
-    baseURL = baseURL + '&description='+ searchParam;
-  }
-  if (searchType == 'instSearch') {
-    baseURL = baseURL + '&instructor='	+ searchParam;
-  }
-
+  if (searchType == 'courseIDSearch') {baseURL = baseURL + '&course_id='	+ searchParam;}
+  if (searchType == 'keywordSearch')  {baseURL = baseURL + '&description='+ searchParam;}
+  if (searchType == 'instSearch')     {baseURL = baseURL + '&instructor='	+ searchParam;}
   // If we are searching by a certain instructor, the course numbers will be filtered because of searchType 'instSearch'. 
   // However, clicking on one of those courses will show all sections, including those not taught by the instructor.
   // instructFilter is an extra parameter that allows further filtering of section results by instructor.
-  if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {
-    baseURL = baseURL + '&instructor='+instructFilter;
-  }
+  if (instructFilter != 'all' && typeof instructFilter !== 'undefined') {baseURL = baseURL + '&instructor='+instructFilter;}
 
   // Keen.io logging
   var searchEvent = {
@@ -183,9 +164,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
     searchParam: searchParam,
     user: myPennkey
   };
-  client.addEvent('Search', searchEvent, function(err, res) {
-    if (err) {console.log(err);}
-  });
+  client.addEvent('Search', searchEvent, function(err, res) {if (err) {console.log(err);}});
 
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
   if (searchType 	== 'courseIDSearch' && 
@@ -194,13 +173,17 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       proFilter 	=== '' && 
       actFilter 	=== '' && 
       includeOpen === '') {
-    db.Courses2015C.find({Dept: searchParam.toUpperCase()}, function(err, doc) {
-      try {
-	       return res.send(JSON.stringify(doc[0].Courses));
-      } catch (error) {
-	       return res.send({});
-      }
-    });
+
+    try {
+      res.sendFile(searchParam.toUpperCase()+'.json', sendCourseOpts, function (err) {
+        if (err) {
+          // console.log(err);
+          return res.send({});
+        }
+      });
+    } catch(err) {
+      return res.send('');
+    }
     
   } else {
     request({
@@ -255,8 +238,9 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
     for(var meeting in JSONObj.meetings) {
       if (JSONObj.meetings.hasOwnProperty(meeting)) {
         // Some sections have multiple meeting forms (I'm looking at you PHYS151)
-        var StartTime 		= JSONObj.meetings[meeting].start_time.split(" ")[0]; // Get start time
-        var EndTime 		= JSONObj.meetings[meeting].end_time.split(" ")[0];
+        var thisMeet = JSONObj.meetings[meeting];
+        var StartTime 		= thisMeet.start_time.split(" ")[0]; // Get start time
+        var EndTime 		= thisMeet.end_time.split(" ")[0];
 
         if (StartTime[0] == '0') {
           StartTime = StartTime.slice(1);
@@ -265,7 +249,7 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
           EndTime = EndTime.slice(1);
         }
 
-        var MeetDays = JSONObj.meetings[meeting].meeting_days; // Output like MWF or TR
+        var MeetDays = thisMeet.meeting_days; // Output like MWF or TR
         meetListInfo = ' - '+StartTime+" to "+EndTime+" on "+MeetDays;
         TimeInfo.push(meetListInfo);
       }
@@ -406,15 +390,11 @@ function parseSectionList(JSONString) {
 app.get('/NewReview', stormpath.loginRequired, function(req, res) {
   var thedept = req.query.dept;
   try {
-    db.collection('NewReviews').find({Dept: thedept}, function(err, doc) {
-      var reviews;
-      if (doc[0]) {
-        reviews = doc[0].Reviews;
-      } else {
-        reviews = {};
+    res.sendFile(thedept+'.json', sendRevOpts, function (err) {
+      if (err) {
+        // console.log(err);
+        res.status(err.status).end();
       }
-      
-      return res.send(JSON.stringify(reviews));
     });
   } catch(err) {
     return res.send('');
@@ -426,24 +406,17 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
   var StarredCourses = [];
   var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
 
-  db.Students.findOne({Pennkey: myPennkey}, {StarList: 1}, function(err, doc) { // Try to access the database
-    try {
-      StarredCourses = doc.StarList; // Get previously starred courses
-    } catch (error) { // If there is no previous starlist
-      // db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database	
-      StarredCourses = [];
-    }
-    if (StarredCourses === null) {
-      StarredCourses = [];
-    }
+  if(!req.user.customData.Starlist) {req.user.customData.Starlist = [];}
+  StarredCourses = req.user.customData.Starlist;
+  var addRem = req.query.addRem; // Are we adding, removing, or clearing?
+  var courseID = req.query.courseID;
 
-    var addRem = req.query.addRem; // Are we adding, removing, or clearing?
-    var courseID = req.query.courseID;
-    var index;
-    if (addRem == 'add') { 
-      // console.log((myPennkey + ' Star: '+ courseID).cyan);
-      index = StarredCourses.indexOf(courseID);
-      if (index == -1) {StarredCourses.push(courseID);} // If the section is not already in the list
+  var index;
+  if (addRem == 'add') { 
+    // console.log((myPennkey + ' Star: '+ courseID).cyan);
+    index = StarredCourses.indexOf(courseID);
+    if (index == -1) { // If the section is not already in the list
+      StarredCourses.push(courseID);
       var starEvent = {
         starCourse: courseID,
         user: myPennkey,
@@ -452,142 +425,104 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
       client.addEvent('Star', starEvent, function(err, res) {
         if (err) {console.log(err);}
       });
-
-    } else if (addRem == 'rem') { // If we need to remove
-      index = StarredCourses.indexOf(courseID);
-      if (index > -1) {StarredCourses.splice(index, 1);}
-
-    } else if (addRem == 'clear') { // Clear all
-      StarredCourses = [];
-    }
+    } 
     
-    db.Students.update({Pennkey: myPennkey}, { $set: {StarList: StarredCourses}, $currentDate: { lastModified: true }}); // Update the database
-    return res.send(StarredCourses);
-  });
+
+  } else if (addRem == 'rem') { // If we need to remove
+    index = StarredCourses.indexOf(courseID);
+    if (index > -1) {StarredCourses.splice(index, 1);}
+
+  } else if (addRem == 'clear') { // Clear all
+    StarredCourses = [];
+  }
+  return res.send(StarredCourses);
 });
 
 // Manage scheduling requests
 app.get('/Sched', stormpath.loginRequired, function(req, res) {
-
   var SchedCourses 	= {};
   var schedName 		= req.query.schedName;
   var schedRename		= req.query.schedRename;
   var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
-  var placeholder = {};
-  db.Students.find({Pennkey: myPennkey}, { Schedules: 1}, function(err, doc) { // Try to access the database
-    if (typeof doc === 'undefined' || typeof doc === null || err !== null || doc.length === 0) { // If there is no entry or something else went wrong
-      db.Students.save({'Pennkey': myPennkey, 'StarList': []}); // Make an entry
-      doc[0] = {};
-    }
-    if (typeof doc[0].Schedules === 'undefined') {
-      db.Students.update({Pennkey: myPennkey}, { $set: {Schedules: {}}, $currentDate: { lastModified: true }}); // Add a schedules block if there is none
-      doc[0].Schedules = {};
-    }
-    if (typeof schedName !== 'undefined') {
-      SchedCourses = doc[0].Schedules[schedName]; // Get previously scheduled courses
-    }
-    if (typeof SchedCourses === 'undefined') { // If there is no schedule of that name
-      placeholder['Schedules.' + schedName] = {}; // Make one
-      db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-      SchedCourses = {};
-    }
 
-    var addRem = req.query.addRem; // Are we adding, removing, or clearing?
-    var courseID = req.query.courseID;
-    if (addRem == 'add') { // If we need to add, then we get meeting info for the section
-      request({
-      	uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
-      	method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
-      }, function(error, response, body) {
+  if(!req.user.customData.Schedules) {req.user.customData.Schedules = {'Schedule': {}};}
+  if(!req.user.customData.Schedules[schedName] && typeof schedName != 'undefined') {req.user.customData.Schedules[schedName] = {};}
+  SchedCourses = req.user.customData.Schedules[schedName];
 
-      	resJSON = getSchedInfo(body); // Format the response
-      	for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
-          SchedCourses[JSONSecID] = resJSON[JSONSecID];
-          // console.log((myPennkey + ' Sched Added: ' + JSONSecID).magenta);
-      	}}
-      	var schedEvent = {
-          schedCourse: courseID,
-          user: myPennkey,
-          keen: {
-            timestamp: new Date().toISOString()
-          }
-      	};
-      	client.addEvent('Sched', schedEvent, function(err, res) {
-          if (err) {console.log(err);}
-      	});
-      	placeholder['Schedules.' + schedName] = SchedCourses;
-      	db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-      	return res.send(SchedCourses);
-      });
+  var addRem = req.query.addRem; // Are we adding, removing, or clearing?
+  var courseID = req.query.courseID;
+  if (addRem == 'add') { // If we need to add, then we get meeting info for the section
+    request({
+      uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
+      method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
+    }, function(error, response, body) {
+      resJSON = getSchedInfo(body); // Format the response
+      for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
+        SchedCourses[JSONSecID] = resJSON[JSONSecID];
+      }}
 
-    } else if (addRem == 'rem') { // If we need to remove
-      for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
-      	if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) { // Find all meeting times of a given course
-          delete SchedCourses[meetsec];
-          // console.log((myPennkey + ' Sched Removed: ' + courseID).magenta);
-      	}}
-			        }
-      placeholder['Schedules.' + schedName] = SchedCourses;
-      db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
+      var schedEvent = {schedCourse: courseID,user: myPennkey,keen: {timestamp: new Date().toISOString()}};
+      client.addEvent('Sched', schedEvent, function(err, res) {if (err) {console.log(err);}});
+
+      req.user.customData.Schedules[schedName] = SchedCourses;
       return res.send(SchedCourses);
-      
-    } else if (addRem == 'clear') { // Clear all
-      SchedCourses = {};
-      placeholder['Schedules.' + schedName] = SchedCourses;
-      db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-      // console.log((myPennkey + ' Sched Cleared').magenta);
-      return res.send(SchedCourses);
+    });
 
-    } else if (addRem == 'dup') { // Duplicate a schedule
-      while (Object.keys(doc[0].Schedules).indexOf(schedName) != -1) {
-        var lastchar = schedName[schedName.length - 1];
-        if (isNaN(lastchar) || schedName[schedName.length - 2] != ' ') { // e.g. 'schedule' or 'ABC123'
-          schedName += ' 2';
-        } else { // e.g. 'MEAM 101 2'
-          schedName = schedName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
-        }
-      }
-      placeholder['Schedules.' + schedName] = SchedCourses;
-      db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }});
-
-      schedList = Object.keys(doc[0].Schedules);
-      schedList.push(schedName);
-      // console.log((myPennkey + ' Sched duplicated').magenta);
-      return res.send(schedList);
-
-    } else if (addRem == 'ren') { // Delete
-      doc[0].Schedules[schedRename] = doc[0].Schedules[schedName];
-      delete doc[0].Schedules[schedName];
-      db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
-      schedList = Object.keys(doc[0].Schedules);
-      // console.log((myPennkey + ' Sched renamed.'));
-      return res.send(schedList);
-      
-    } else if (addRem == 'del') { // Delete
-      delete doc[0].Schedules[schedName];
-      if(Object.getOwnPropertyNames(doc[0].Schedules).length === 0){
-        doc[0].Schedules.Schedule = {};
-      }
-      db.Students.update({Pennkey: myPennkey}, { $set: {'Schedules': doc[0].Schedules}, $currentDate: { lastModified: true }}); // Update the database
-      schedList = Object.keys(doc[0].Schedules);
-      // console.log((myPennkey + ' Sched deleted.'));
-      return res.send(schedList);
-      
-    } else if (addRem == 'name') { // If we're getting a list of the schedules
-      schedList = Object.keys(doc[0].Schedules);
-      if (schedList.length === 0) {
-        placeholder['Schedules.Schedule'] = {};
-        db.Students.update({Pennkey: myPennkey}, { $set: placeholder, $currentDate: { lastModified: true }}); // Update the database
-        schedList.push('Schedule');
-      }
-      if (typeof schedName !== 'undefined' && schedList.indexOf(schedName) == -1 && schedName != 'null') {
-        schedList.push(schedName);
-      }
-      return res.send(schedList);
-    } else {
-      return res.send(SchedCourses); // On a blank request
+  } else if (addRem == 'rem') { // If we need to remove
+    for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
+      if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") == courseID) { // Find all meeting times of a given course
+        delete SchedCourses[meetsec];
+      }}
     }
-  });
+    req.user.customData.Schedules[schedName] = SchedCourses;
+    return res.send(SchedCourses);
+
+  } else if (addRem == 'clear') { // Clear all
+    SchedCourses = {};
+    req.user.customData.Schedules[schedName] = SchedCourses;
+    return res.send(SchedCourses);
+
+  } else if (addRem == 'dup') { // Duplicate a schedule
+    
+    while (Object.keys(req.user.customData.Schedules).indexOf(schedName) != -1) {
+      var lastchar = schedName[schedName.length - 1];
+      if (isNaN(lastchar) || schedName[schedName.length - 2] != ' ') { // e.g. 'schedule' or 'ABC123'
+        schedName += ' 2';
+      } else { // e.g. 'MEAM 101 2'
+        schedName = schedName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
+      }
+    }
+    req.user.customData.Schedules[schedName] = SchedCourses;
+
+    schedList = Object.keys(req.user.customData.Schedules);
+    return res.send(schedList);
+
+  } else if (addRem == 'ren') { // Delete
+    req.user.customData.Schedules[schedRename] = req.user.customData.Schedules[schedName];
+
+    delete req.user.customData.Schedules[schedName];
+
+    schedList = Object.keys(req.user.customData.Schedules);
+    return res.send(schedList);
+    
+  } else if (addRem == 'del') { // Delete
+    delete req.user.customData.Schedules[schedName];
+    if(Object.getOwnPropertyNames(req.user.customData.Schedules).length === 0){
+      req.user.customData.Schedules.Schedule = {};
+    }
+
+    schedList = Object.keys(req.user.customData.Schedules);
+    return res.send(schedList);
+    
+  } else if (addRem == 'name') { // If we're getting a list of the schedules
+    schedList = Object.keys(req.user.customData.Schedules);
+    if (schedList.length === 0) {
+      req.user.customData.Schedules.Schedule = {};
+    }
+    return res.send(schedList);
+  } else {
+    return res.send(req.user.customData.Schedules[schedName]); // On a blank request
+  }
 });
 
 function getSchedInfo(JSONString) { // Get the properties required to schedule the section
@@ -599,15 +534,16 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
     var resJSON 	= {};
     try { // Not all sections have time info
       for(var meeti in entry.meetings) { if (entry.meetings.hasOwnProperty(meeti)) { // Some sections have multiple meetings
-      	var StartTime 	= (entry.meetings[meeti].start_hour_24) + (entry.meetings[meeti].start_minutes)/60; 
-      	var EndTime 	= (entry.meetings[meeti].end_hour_24) 	+ (entry.meetings[meeti].end_minutes)/60;
+      	var thisMeet = entry.meetings[meeti];
+        var StartTime 	= (thisMeet.start_hour_24) + (thisMeet.start_minutes)/60; 
+      	var EndTime 	= (thisMeet.end_hour_24) 	+ (thisMeet.end_minutes)/60;
       	var hourLength 	= EndTime - StartTime;
-      	var MeetDays 	= entry.meetings[meeti].meeting_days;
+      	var MeetDays 	= thisMeet.meeting_days;
       	var OpenClose 	= entry.course_status_normalized;
       	var Building, Room;
         try {
-      	 Building 	= entry.meetings[meeti].building_code;
-      	 Room 		= entry.meetings[meeti].room_number;
+      	 Building 	= thisMeet.building_code;
+      	 Room 		= thisMeet.room_number;
       	} catch (err) {
       	 Building 	= "";
       	 Room 		= "";

@@ -52,6 +52,7 @@ function PullRegistrar(index) {
         // At the end of the list
 				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) {
           // Write JSON to file
+					// console.log(err)
 					console.log(('List Spit: '+index+' '+thedept));
 				});
 			}
