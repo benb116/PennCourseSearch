@@ -177,8 +177,8 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
     try {
       res.sendFile(searchParam.toUpperCase()+'.json', sendCourseOpts, function (err) {
         if (err) {
-          console.log(err);
-          res.status(err.status).end();
+          // console.log(err);
+          return res.send({});
         }
       });
     } catch(err) {
@@ -392,7 +392,7 @@ app.get('/NewReview', stormpath.loginRequired, function(req, res) {
   try {
     res.sendFile(thedept+'.json', sendRevOpts, function (err) {
       if (err) {
-        console.log(err);
+        // console.log(err);
         res.status(err.status).end();
       }
     });
@@ -422,11 +422,11 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
         user: myPennkey,
         keen: {timestamp: new Date().toISOString()}
       };
+      client.addEvent('Star', starEvent, function(err, res) {
+        if (err) {console.log(err);}
+      });
     } 
     
-    client.addEvent('Star', starEvent, function(err, res) {
-      if (err) {console.log(err);}
-    });
 
   } else if (addRem == 'rem') { // If we need to remove
     index = StarredCourses.indexOf(courseID);
