@@ -3,15 +3,12 @@
 	<head>
 		<title>PennCourseSearch</title>
 		<meta charset="UTF-8">
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
         <link rel="stylesheet" type="text/css" href="/css/index.css"/>
         <link rel="stylesheet" type="text/css" href="/css/plugins.css">
         <link rel="stylesheet" type="text/css" href="/css/fontello-embedded.css">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
-        <!-- <script type="text/javascript" src="/js/plugins.js"></script> -->
-        
         <script async type="text/javascript" src="/js/html2canvas.js"></script>
         <script async type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
         <script async type="text/javascript" src="/js/sweet-alert.min.js"></script>
