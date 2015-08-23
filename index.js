@@ -5,7 +5,6 @@ var express = require('express');
 var compression = require('compression');
 var stormpath = require('express-stormpath');
 var request = require("request");
-// var mongojs = require("mongojs");
 var colors = require('colors');
 var fs = require('fs');
 var Keen = require('keen-js');
@@ -46,9 +45,6 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31536000000 }))
 
 console.log('Express initialized');
 
-var sendRevOpts     = {root: __dirname + '/2015ARevRaw/', dotfiles: 'deny'};
-var sendCourseOpts  = {root: __dirname + '/2015C/',       dotfiles: 'deny'};
-
 app.use(stormpath.init(app, {
   apiKeyId:     config.STORMPATH_API_KEY_ID,
   apiKeySecret: config.STORMPATH_API_KEY_SECRET,
@@ -60,9 +56,6 @@ app.use(stormpath.init(app, {
   // Make sessions expire after one week
   sessionDuration: 			1000 * 60 * 60 * 24 * 7
 }));
-
-// Connect to database
-// var db = mongojs('mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', ["Students", "Courses2015C", "NewReviews"]);
 
 // Set up Keen Analytics
 var client = new Keen({
@@ -115,11 +108,8 @@ app.get('/', function(req, res) {
     // If the user is not logged in
     return res.render('welcome');
   } else {
-    // console.log(JSON.stringify(req.user))
-    // Get random subtitle
-    var thissub = subtitles[Math.floor(Math.random() * subtitles.length)];
-    // Get random payment note
-    var fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)];
+    var thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
+    var fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
     return res.render('index', { // Send page
       title: 'PennCourseSearch',
       subtitle: thissub,
@@ -128,6 +118,10 @@ app.get('/', function(req, res) {
     });
   }
 });
+
+// For use below when sending JSON files
+var sendRevOpts     = {root: __dirname + '/2015ARevRaw/', dotfiles: 'deny'};
+var sendCourseOpts  = {root: __dirname + '/2015C/',       dotfiles: 'deny'};
 
 // Manage search requests
 app.get('/Search', stormpath.loginRequired, function(req, res) {
@@ -274,6 +268,7 @@ function parseCourseList(JSONString) {
       var TimeInfoArray = getTimeInfo(Res.result_data[key]); // Get meeting times for a section
       var StatusClass = TimeInfoArray[0];
       var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
+      var actType = Res.result_data[key].activity;
       var SectionInst;
       try {
         SectionInst	= Res.result_data[key].instructors[0].name;
@@ -295,7 +290,8 @@ function parseCourseList(JSONString) {
         'TimeInfo': TimeInfo, 
         'NoSpace': sectionNameNoSpace, 
         'CourseTitle': Res.result_data[0].course_title,
-        'SectionInst': SectionInst
+        'SectionInst': SectionInst,
+        'ActType': actType
       };
     }
   }
@@ -413,7 +409,6 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 
   var index;
   if (addRem == 'add') { 
-    // console.log((myPennkey + ' Star: '+ courseID).cyan);
     index = StarredCourses.indexOf(courseID);
     if (index == -1) { // If the section is not already in the list
       StarredCourses.push(courseID);
@@ -440,17 +435,21 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 
 // Manage scheduling requests
 app.get('/Sched', stormpath.loginRequired, function(req, res) {
-  var SchedCourses 	= {};
-  var schedName 		= req.query.schedName;
-  var schedRename		= req.query.schedRename;
-  var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
+  var addRem      = req.query.addRem; // Are we adding, removing, or clearing?
+  var courseID    = req.query.courseID;
+  var schedName 	= req.query.schedName;
+  var schedRename	= req.query.schedRename;
+  var myPennkey 	= req.user.email.split('@')[0]; // Get Pennkey
+  var userScheds  = req.user.customData.Schedules;
 
-  if(!req.user.customData.Schedules) {req.user.customData.Schedules = {'Schedule': {}};}
-  if(!req.user.customData.Schedules[schedName] && typeof schedName != 'undefined') {req.user.customData.Schedules[schedName] = {};}
-  SchedCourses = req.user.customData.Schedules[schedName];
+  if(!userScheds) {  // If there are no schedules defined
+    userScheds = {'Schedule': {}};
+  }
+  if(!userScheds[schedName] && typeof schedName != 'undefined') {
+    userScheds[schedName] = {}; // Create a schedule if the name doesn't exist
+  }
+  var SchedCourses = userScheds[schedName];
 
-  var addRem = req.query.addRem; // Are we adding, removing, or clearing?
-  var courseID = req.query.courseID;
   if (addRem == 'add') { // If we need to add, then we get meeting info for the section
     request({
       uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
@@ -460,11 +459,12 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
       for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
         SchedCourses[JSONSecID] = resJSON[JSONSecID];
       }}
-
       var schedEvent = {schedCourse: courseID,user: myPennkey,keen: {timestamp: new Date().toISOString()}};
       client.addEvent('Sched', schedEvent, function(err, res) {if (err) {console.log(err);}});
 
-      req.user.customData.Schedules[schedName] = SchedCourses;
+      userScheds[schedName] = SchedCourses;
+      req.user.customData.Schedules = userScheds;
+      req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
       return res.send(SchedCourses);
     });
 
@@ -474,17 +474,10 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
         delete SchedCourses[meetsec];
       }}
     }
-    req.user.customData.Schedules[schedName] = SchedCourses;
-    return res.send(SchedCourses);
-
-  } else if (addRem == 'clear') { // Clear all
-    SchedCourses = {};
-    req.user.customData.Schedules[schedName] = SchedCourses;
-    return res.send(SchedCourses);
+    userScheds[schedName] = SchedCourses;
 
   } else if (addRem == 'dup') { // Duplicate a schedule
-    
-    while (Object.keys(req.user.customData.Schedules).indexOf(schedName) != -1) {
+    while (Object.keys(userScheds).indexOf(schedName) != -1) {
       var lastchar = schedName[schedName.length - 1];
       if (isNaN(lastchar) || schedName[schedName.length - 2] != ' ') { // e.g. 'schedule' or 'ABC123'
         schedName += ' 2';
@@ -492,36 +485,30 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
         schedName = schedName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
       }
     }
-    req.user.customData.Schedules[schedName] = SchedCourses;
-
-    schedList = Object.keys(req.user.customData.Schedules);
-    return res.send(schedList);
+    userScheds[schedName] = SchedCourses;
 
   } else if (addRem == 'ren') { // Delete
-    req.user.customData.Schedules[schedRename] = req.user.customData.Schedules[schedName];
-
-    delete req.user.customData.Schedules[schedName];
-
-    schedList = Object.keys(req.user.customData.Schedules);
-    return res.send(schedList);
+    userScheds[schedRename] = userScheds[schedName];
+    delete userScheds[schedName];
     
+  } else if (addRem == 'clr') { // Clear all
+    SchedCourses = {};
+    userScheds[schedName] = SchedCourses;
+
   } else if (addRem == 'del') { // Delete
-    delete req.user.customData.Schedules[schedName];
-    if(Object.getOwnPropertyNames(req.user.customData.Schedules).length === 0){
-      req.user.customData.Schedules.Schedule = {};
-    }
+    delete userScheds[schedName];
+    if(Object.getOwnPropertyNames(userScheds).length === 0){
+      userScheds.Schedule = {};
+    } 
+  }
 
-    schedList = Object.keys(req.user.customData.Schedules);
-    return res.send(schedList);
-    
-  } else if (addRem == 'name') { // If we're getting a list of the schedules
-    schedList = Object.keys(req.user.customData.Schedules);
-    if (schedList.length === 0) {
-      req.user.customData.Schedules.Schedule = {};
-    }
-    return res.send(schedList);
-  } else {
-    return res.send(req.user.customData.Schedules[schedName]); // On a blank request
+  req.user.customData.Schedules = userScheds;
+  req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
+
+ if (addRem == 'rem' || addRem == 'clr') {
+    return res.send(userScheds[schedName]);
+  } else if (addRem != 'add') {
+    return res.send(userScheds);
   }
 });
 
@@ -563,7 +550,7 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
       }}
     }
     catch (err) {
-      console.log(("Error getting times: "+err).red);
+      console.log("Error getting times: "+err);
       var TimeInfo = '';
     }
     return resJSON;

@@ -23,7 +23,9 @@ body {
     background: #95a5a6;
     border-radius: 1px;
 }
-
+i {
+    cursor: pointer;
+}
 
 #MenuBar {
     height: 2em;
@@ -341,6 +343,7 @@ ul {
     -webkit-transition: opacity .15s ease-in-out;
     transition: opacity .15s ease-in-out;
 }
+.LocName {font-size: 11px; line-height: 11px;}
 
 #lean_overlay {
     position: fixed;
