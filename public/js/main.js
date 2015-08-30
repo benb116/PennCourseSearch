@@ -416,23 +416,14 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
     var allHTML = '';
     var stars = sessionStorage.starList;
     var sections = courseInfo[0];
-      
-    var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) { 
-      return el.fullCourseName.replace(/ /g, ''); 
-    });
 
     for(var section in sections) { if (sections.hasOwnProperty(section)) { // Loop through the sections
       var starClass = 'icon-star-empty';
-      var plusCross = 'plus';
       var index = stars.indexOf(sections[section].NoSpace);
       if (index > -1) {starClass = 'icon-star';} // If the section is a starred section, add the filled star
-      
-      if (schedSecList.indexOf(sections[section].SectionName.replace(/ /g, '')) != -1) {
-        plusCross = 'cancel';
-      }
 
       allHTML += '<li id="' + sections[section].SectionName.replace(/ /g,'-') + '" class="' + sections[section].ActType + '">'+
-        '<i class="icon-' + plusCross + '"></i>&nbsp&nbsp'+
+        '<i class="icon-plus"></i>&nbsp&nbsp'+
         '<span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
         '<span class="PCR tooltip">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
         '<span>'+sections[section].SectionName + sections[section].TimeInfo+'</span>'+
@@ -444,6 +435,7 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
     for (var sec in sections) {
       RetrievePCR(sections[sec].SectionName, sections[sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'));
     }
+    UpdatePlusCancel();
     $('.tooltip', '#SectionList').tooltipster({
       position: 'right'
     });
@@ -500,6 +492,19 @@ function UpdateFilters() {
     $('#SectionList li').not('.'+filterVal).hide();
   }
 }
+
+function UpdatePlusCancel() {
+  var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) { 
+    return el.fullCourseName.replace(/ /g, ''); 
+  });
+  $('#SectionList li').each(function(i) {
+    if (schedSecList.indexOf($(this).attr('id').replace(/-/g, '')) != -1) {
+      $(this).find('i').first().removeClass('icon-plus').addClass('icon-cancel');
+    } else {
+      $(this).find('i').first().removeClass('icon-cancel').addClass('icon-plus');
+    }
+  });
+}
  
 function Stars(addRem, CID) { // Manage star requests
   var searchURL = "/Star?addRem="+addRem+"&courseID="+CID;
@@ -528,17 +533,9 @@ function StarFormat(sections) { // Format starred section list
   if (typeof sections === 'string') {sections = JSON.parse(sections);} // JSONify the input
   var starClass = 'icon-star';
   var HTML = '';
-  for(var section in sections[0]) { if (sections[0].hasOwnProperty(section)) {
-    var plusCross = 'plus';
-    var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) {
-     return el.fullCourseName.replace(/ /g, ''); 
-    });
-    
-    if (schedSecList.indexOf(section) != -1) {
-      plusCross = 'cancel';
-    }
+  for(var section in sections[0]) { if (sections[0].hasOwnProperty(section)) {    
     HTML += '<li id="' + sections[0][section].SectionName.replace(/ /g,'-') + '" class="starredSec">'+
-      '<i class="icon-' + plusCross + '"></i>&nbsp&nbsp'+
+      '<i class="icon-plus"></i>&nbsp&nbsp'+
       '<span class="'+sections[0][section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
       '<span class="PCR tooltip">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
       '<span>'+sections[0][section].SectionName + sections[0][section].TimeInfo+'</span>'+
@@ -550,6 +547,7 @@ function StarFormat(sections) { // Format starred section list
     $('#CourseTitle').html('No Starred Sections');
   }
   $('#SectionList > ul').append(HTML); // Put the course number list in  #SectionList  
+  UpdatePlusCancel();
   for (var sec in sections[0]) {
     RetrievePCR(sections[0][sec].SectionName);
   }
@@ -602,13 +600,13 @@ function ApplyPCR(courseID, instName) {
       result = thisReview.Total;
     }
   } else {
+    result = thisReview.Total;
     for (var inst in thisReview) {
       if (inst.indexOf(instName.toUpperCase()) > -1) { // Go by specific instructor
         result = thisReview[inst];
         break;
       }
     }
-    result = thisReview.Total;
   }
   var thisElement = $('#'+courseID.replace(/ /g, '-'));
   var thisPCR = thisElement.find('.PCR');
@@ -785,6 +783,7 @@ function SpitSched(courseSched) {
   }}
 
   sessionStorage.currentSched = JSON.stringify(courseSched);
+  UpdatePlusCancel();
 }
 
 function twoOverlap (block1, block2) {

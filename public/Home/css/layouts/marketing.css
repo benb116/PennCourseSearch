@@ -335,6 +335,7 @@ a.pure-button-primary {
     -webkit-transition: opacity .15s ease-in-out;
     transition: opacity .15s ease-in-out;
 }
+.LocName {font-size: 11px; line-height: 11px;}
 
 .clearsec {
     height: 400px; width: 100%;
