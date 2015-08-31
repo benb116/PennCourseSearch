@@ -114,14 +114,15 @@ app.get('/', function(req, res) {
       title: 'PennCourseSearch',
       subtitle: thissub,
       user: req.user.email.split('@')[0],
-      paymentNote: fullPaymentNote
+      paymentNote: fullPaymentNote,
+      status: "hakol beseder" // Everything's OK in hebrew
     });
   }
 });
 
 // For use below when sending JSON files
 var sendRevOpts     = {root: __dirname + '/2015ARevRaw/', dotfiles: 'deny'};
-var sendCourseOpts  = {root: __dirname + '/2015C/',       dotfiles: 'deny'};
+var sendCourseOpts  = {root: __dirname + '/'+currentTerm+'/',       dotfiles: 'deny'};
 
 // Manage search requests
 app.get('/Search', stormpath.loginRequired, function(req, res) {

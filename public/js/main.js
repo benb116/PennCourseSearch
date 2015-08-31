@@ -2,24 +2,12 @@ $(document).ready(function () {
   if (detectIE()) { // IE doesn't do animated SVG's
     $('#LoadingInfo').html('Loading ...');
   }
-
   // The delay function that prevents immediate requests
   var delay = (function(){var timer = 0;return function(callback, ms){clearTimeout (timer);timer = setTimeout(callback, ms);};})();
+
   var searchDelay = 500; // millisecond delay before searching
 
-  // cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
-  //   if (searchDelay == 500) {
-  //     searchDelay = 20;
-  //     alert('Speed mode enabled.');
-  //   } else {
-  //     searchDelay = 500;
-  //     alert('Speed mode disabled.');
-  //   }
-  
-  // });
-
-  //+ Jonas Raoni Soares Silva
-  //@ http://jsfromhell.com/array/shuffle [v1.0]
+  //+ Jonas Raoni Soares Silva @ http://jsfromhell.com/array/shuffle [v1.0]
   shuffle = function(v){for(var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);return v;};
   
   // Global variables
@@ -33,46 +21,30 @@ $(document).ready(function () {
     sessionStorage.colorPalette = JSON.stringify(colorPalette);
   }
 
+  $('a[rel*=leanModal]').leanModal({ top : 70, closeButton: ".modal_close" }); // Define modal close button
+
   var schedURL = "/Sched?addRem=pull"; // Make the initial schedule list request
   SendReq(schedURL, ListScheds, 0);
   var starURL = "/Star?addRem=show"; // Make initial star list request
   SendReq(starURL, 'sessionStorage', 'starList');
  
   ClickTriggers(); // This defines all of the click handlers (see below)
+  MenuTriggers(); // This provides functionality to the "Schedule" dropdown
+  OtherTriggers();
 
-  SchedTriggers(); // This provides functionality to the "Schedule" dropdown
+  var statusMessage = $('#StatusMessage').text();
+  if (statusMessage != 'hakol beseder') {
+    setTimeout(function(){
+      swal("PCS Alert", statusMessage, "warning");
+    },300);
+    // console.log(statusMessage)
+  }
 
-  $('#schedSelect').change(function () { // If the user changes the active schedule
-    var schedName = $('#schedSelect').val();
-    // var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName;
-    // SendReq(schedURL, SpitSched, []);
-    SpitSched(JSON.parse(sessionStorage.schedInfo)[schedName]);
-  });
-
-  $('#reqFilter, #proFilter').change(function () { // If the user changes any filters
-    var lastreq = JSON.parse(sessionStorage.lastCourseSearch);
-    getCourseNumbers(lastreq[0], lastreq[1]);
-  });
-
-  $('#closedCheck, #actFilter').change(function () { // If the user changes any filters
-    UpdateFilters();
-  });
-
-  $('#searchSelect').change(function () { // If the user changes the type of search
-    var searchTerms = $('#CSearch').val(); // Get raw search
-    if (searchTerms !== '') {
-      initiateSearch();
-    }
-  });
- 
   $('#CSearch').on('input', function(){ // When the search terms change
     delay(function(){ // Don't check instantaneously
       initiateSearch();
     }, searchDelay);
   });
-
-  $('a[rel*=leanModal]').leanModal({ top : 70, closeButton: ".modal_close" }); // Define modal close button
-
 });
 
 function SendReq(url, fun, passVar) {
@@ -85,7 +57,7 @@ function SendReq(url, fun, passVar) {
   LoadingSum += 1; // Add to the sum of requests
   LoadingIndicate(); // Update the spinning logo
   $.get(url) // Make the request
-  .done(function(data) {
+  .success(function(data) {
     if (fun == 'localStorage') {
       // In this case passVar is the name of the key to store the data with
       localStorage[passVar] = JSON.stringify(data);
@@ -94,6 +66,9 @@ function SendReq(url, fun, passVar) {
     } else {
       fun(data, passVar); // Pass the data to another function
     }
+  })
+  .error(function() {
+    sweetAlert('#awkward', 'An error occured. Refresh or email Ben', 'error');
   })
   .always(function() {
     LoadingSum -= 1; // Reset
@@ -183,7 +158,7 @@ function ClickTriggers() {
   });
 }
 
-function SchedTriggers() {
+function MenuTriggers() {
   $('li ul li', '#MenuButtons').click(function() { // If the user clicks a Schedule button
     var schedName, schedURL;
 
@@ -199,21 +174,36 @@ function SchedTriggers() {
     }
 
     if ($(this).html() == 'New') {
-      schedName = prompt('Please enter a name for your new schedule.'); 
-      while (JSON.parse(sessionStorage.schedList).indexOf(schedName) != -1) {
-        // {break}
-        schedName = prompt('Please enter a unique name for your new schedule.');
-      }
-      if (schedName !== '' && schedName !== null) {
-        schedURL = "/Sched?addRem=cre&courseID=blank&schedName="+schedName; // Make the request
-        SendReq(schedURL, ListScheds, 1);
-      }
+
+      swal({
+        title: "Please name your new schedule",
+        // text: "Write something interesting:",
+        type: "input",
+        inputPlaceholder: "Spring 2016",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        animation: "slide-from-top",
+      }, function(inputValue) {
+        if (inputValue === false) return false;
+        else if (inputValue === "") {
+            swal.showInputError("Your schedule needs a name, silly!");
+            return false;
+        }
+        else if (JSON.parse(sessionStorage.schedList).indexOf(inputValue) != -1) {
+          swal.showInputError('Your schedule needs a unique name (e.g. "Seven")');
+        }
+        else {
+          schedURL = "/Sched?addRem=cre&courseID=blank&schedName="+inputValue; // Make the request
+          SendReq(schedURL, ListScheds, 1);
+          swal.close();
+        }
+      });
     }
 
     if ($(this).html() == 'Duplicate') {
       schedName = $("#schedSelect").val();
       schedURL = "/Sched?addRem=dup&courseID=blank&schedName="+schedName; // Make the request
-      SendReq(schedURL, ListScheds, -2);
+      SendReq(schedURL, ListScheds, 1);
       swal({
         title: "Schedule duplicated.",   
         type: "success",   
@@ -222,16 +212,29 @@ function SchedTriggers() {
     }
 
     if ($(this).html() == 'Rename') {
-      schedName = $("#schedSelect").val();
-      schedRename = prompt('Please enter a name for your new schedule.'); 
-      while (JSON.parse(sessionStorage.schedList).indexOf(schedRename) != -1) {
-        // {break}
-        schedRename = prompt('Please enter a unique name for your new schedule.');
-      }
-      if (schedRename !== '' && schedRename !== null && schedRename != 'null') {
-        schedURL = "/Sched?addRem=ren&courseID=blank&schedName="+schedName+"&schedRename="+schedRename; // Make the request
-        SendReq(schedURL, ListScheds, -2);
-      }
+      swal({
+        title: "Please enter a new name.",
+        type: "input",
+        inputPlaceholder: "Schedule 2: Book of Secrets",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        animation: "slide-from-top",
+      }, function(inputValue) {
+        if (inputValue === false) return false;
+        else if (inputValue === "") {
+            swal.showInputError("Your schedule needs a name, silly!");
+            return false;
+        }
+        else if (JSON.parse(sessionStorage.schedList).indexOf(inputValue) != -1) {
+          swal.showInputError('Your schedule needs a unique name (e.g. "Seven")');
+        }
+        else {
+          schedName = $("#schedSelect").val();
+          schedURL = "/Sched?addRem=ren&courseID=blank&schedName="+schedName+"&schedRename="+inputValue; // Make the request
+          SendReq(schedURL, ListScheds, 1);
+          swal.close();
+        }
+      });
     }
 
     if ($(this).html() == 'Clear') {
@@ -249,7 +252,7 @@ function SchedTriggers() {
       function(){
         var schedName = $("#schedSelect").val();
         schedURL = "/Sched?addRem=del&schedName="+schedName;
-        SendReq(schedURL, ListScheds, 0);
+        SendReq(schedURL, ListScheds, 1);
         swal({title: "Your schedule has been deleted.", type: "success", timer: 1000}); 
       });
     }
@@ -258,6 +261,31 @@ function SchedTriggers() {
       newcolorPalette = shuffle(colorPalette); // Randomly reorder the colorPalette
       sessionStorage.colorPalette = JSON.stringify(colorPalette);
       SpitSched(JSON.parse(sessionStorage.currentSched));
+    }
+  });
+}
+
+function OtherTriggers() {
+  $('#schedSelect').change(function () { // If the user changes the active schedule
+    var schedName = $('#schedSelect').val();
+    // var schedURL = "/Sched?addRem=blank&courseID=blank&schedName="+schedName;
+    // SendReq(schedURL, SpitSched, []);
+    SpitSched(JSON.parse(sessionStorage.schedInfo)[schedName]);
+  });
+
+  $('#reqFilter, #proFilter').change(function () { // If the user changes any filters
+    var lastreq = JSON.parse(sessionStorage.lastCourseSearch);
+    getCourseNumbers(lastreq[0], lastreq[1]);
+  });
+
+  $('#closedCheck, #actFilter').change(function () { // If the user changes any filters
+    UpdateFilters();
+  });
+
+  $('#searchSelect').change(function () { // If the user changes the type of search
+    var searchTerms = $('#CSearch').val(); // Get raw search
+    if (searchTerms !== '') {
+      initiateSearch();
     }
   });
 }
@@ -398,11 +426,6 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
 }
  
 function getSectionNumbers(cnum, instFilter, suppress) { // Getting info about sections in a department
-  // var activityFilter = '&actParam=' + $('#actFilter').val();
-  // if (activityFilter == '&actParam=noFilter') {activityFilter = '';}
-  // if ($('#closedCheck').is(':checked')) {searchOpen = '';} else {searchOpen = '&openAllow=true';}
-
-  // sessionStorage.lastSectionSearch = JSON.stringify([cnum, instFilter, suppress]);
   searchURL = "/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam="+cnum+"&instFilter="+instFilter;
   SendReq(searchURL, FormatSectionsList, suppress); // Pass it to SectionStars to determine if each section is starred
 }
