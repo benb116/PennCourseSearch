@@ -54,8 +54,7 @@ app.use(stormpath.init(app, {
   enableForgotPassword: 		 true,
   expandCustomData:          true,
   // Make sessions expire after one week
-  sessionDuration: 			1000 * 60 * 60 * 24 * 7,
-  website: true
+  sessionDuration: 			1000 * 60 * 60 * 24 * 7
 }));
 
 // Set up Keen Analytics
