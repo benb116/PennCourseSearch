@@ -116,7 +116,7 @@ app.get('/', function(req, res) {
       subtitle: thissub,
       user: req.user.email.split('@')[0],
       paymentNote: fullPaymentNote,
-      statusMessage: "hakol beseder" // Everything's OK in hebrew
+      status: "hakol beseder" // Everything's OK in hebrew
     });
   }
 });
