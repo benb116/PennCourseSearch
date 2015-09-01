@@ -32,12 +32,13 @@ try {
  *   processing the request if the user is authenticated.
  */
 module.exports.loginRequired = function(req, res, next) {
-  if ((!req.user || !req.session || !req.session.user) && req.headers.autotest != config.autotestKey ){
+  if ((!req.user || !req.session || !req.session.user) && (req.headers.autotest != config.autotestKey)){
     // Wipe req.user, just in case.
-    req.user = undefined;
+    // req.user = undefined;
 
     var url = req.app.get('stormpathLoginUrl') + '?next=' + encodeURIComponent(req.originalUrl.split('?')[0]);
-    res.redirect(302, url);
+    // res.redirect(302, url);
+    res.render('welcome');
   } else {
     next();
   }
