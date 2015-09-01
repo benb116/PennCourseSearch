@@ -103,21 +103,22 @@ var paymentNotes = [
 var currentTerm = '2015C';
 
 // Handle main page requests
-app.get('/', function(req, res) {
-  if (!req.user) {
-    // If the user is not logged in
-    return res.render('welcome');
+app.get('/', stormpath.loginRequired, function(req, res) {
+  var pennkey;
+  if (req.user) {
+    pennkey = req.user.email.split('@')[0];
   } else {
-    var thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
-    var fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
-    return res.render('index', { // Send page
-      title: 'PennCourseSearch',
-      subtitle: thissub,
-      user: req.user.email.split('@')[0],
-      paymentNote: fullPaymentNote,
-      status: "hakol beseder" // Everything's OK in hebrew
-    });
+    pennkey = 'other';
   }
+  var thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
+  var fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
+  return res.render('index', { // Send page
+    title: 'PennCourseSearch',
+    subtitle: thissub,
+    user: pennkey,
+    paymentNote: fullPaymentNote,
+    status: "hakol beseder" // Everything's OK in hebrew
+  });
 });
 
 // For use below when sending JSON files
