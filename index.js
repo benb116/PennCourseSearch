@@ -103,7 +103,7 @@ var paymentNotes = [
 var currentTerm = '2015C';
 
 // Handle main page requests
-app.get('/', stormpath.loginRequired, function(req, res) {
+app.get('/', function(req, res) {
   var pennkey;
   if (req.user) {
     pennkey = req.user.email.split('@')[0];
