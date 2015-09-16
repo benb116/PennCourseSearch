@@ -9,13 +9,13 @@ try {
 	config.requestAB 	= process.env.REQUESTAB;
 	config.requestAT 	= process.env.REQUESTAT;
 	config.PCRToken 	= process.env.PCRTOKEN;
-	config.MongoUser 	= process.env.MONGOUSER;
-	config.MongoPass 	= process.env.MONGOPASS;
-	config.MongoURI 	= process.env.MONGOURI;
+	// config.MongoUser 	= process.env.MONGOUSER;
+	// config.MongoPass 	= process.env.MONGOPASS;
+	// config.MongoURI 	= process.env.MONGOURI;
 }
 
 // Connect to database
-var db = mongojs('mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', ["Students", "Courses2015C", "NewReviews"]);
+// var db = mongojs('mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', ["Students", "Courses2015C", "NewReviews"]);
 
 var currentTerm = '2015C';
 var deptList = ["AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANCH", "ANEL", "ANTH", "ARAB", "ARCH", "ARTH", "ASAM", "ASTR", "BCHE", "BE", "BENF", "BENG", "BEPP", "BFMD", "BIBB", "BIOE", "BIOL", "BIOM", "BIOT", "BMB", "BSTA", "CAMB", "CBE", "CHEM", "CHIN", "CINE", "CIS", "CIT", "CLST", "COGS", "COLL", "COML", "COMM", "CPLN", "CRIM", "DEMG", "DENT", "DOSP", "DTCH", "DYNM", "EALC", "EAS", "ECON", "EDCE", "EDUC", "EEUR", "ENGL", "ENGR", "ENM", "ENMG", "ENVS", "EPID", "ESE", "FNAR", "FNCE", "FOLK", "FREN", "GAFL", "GAS", "GCB", "GEND", "GEOL", "GREK", "GRMN", "GSWS", "GUJR", "HCMG", "HEBR", "HIND", "HIST", "HPR", "HSOC", "HSPV", "HSSC", "IMUN", "INTG", "INTL", "INTR", "INTS", "IPD", "ITAL", "JPAN", "JWST", "KORN", "LALS", "LARP", "LATN", "LAW", "LGIC", "LGST", "LING", "LSMP", "MATH", "MCS", "MEAM", "MED", "MGEC", "MGMT", "MKTG", "MLA", "MLYM", "MMP", "MSCI", "MSE", "MSSP", "MTR", "MUSA", "MUSC", "NANO", "NELC", "NETS", "NGG", "NPLD", "NSCI", "NURS", "OPIM", "PERS", "PHIL", "PHRM", "PHYS", "PPE", "PREC", "PRTG", "PSCI", "PSYC", "PSYS", "PUBH", "PUNJ", "REAL", "REG", "RELS", "ROML", "RUSS", "SAST", "SCND", "SKRT", "SLAV", "SOCI", "SPAN", "STAT", "STSC", "SWRK", "TAML", "TELU", "THAR", "TURK", "URBS", "URDU", "VANB", "VBMS", "VCSN", "VCSP", "VIPR", "VISR", "VLST", "VMED", "WH", "WHCP", "WHG", "WRIT", "YDSH"];
@@ -195,14 +195,20 @@ function Match(index) {
 			}
 		}
 	}
-	db.collection('Courses'+currentTerm).find({Dept: thedept}, function(err, doc) {
-    // Try to access the database
-		if (doc.length === 0) {
-			db.collection('Courses'+currentTerm).save({'Dept': thedept});
-		}
-    // Add a schedules block if there is none
-		db.collection('Courses'+currentTerm).update({Dept: thedept}, { $set: {Courses: dept}, $currentDate: { lastModified: true }});
+	fs.writeFile('./'+currentTerm+'Full/'+thedept+'.json', JSON.stringify(dept), function (err) {
+		console.log('It\'s saved! '+ index + ' ' + thedept);
+		// UploadToDB('2015ARevRaw', 'NewReviews', index);
 		index++;
 		PullReview(index);
 	});
+	// db.collection('Courses'+currentTerm).find({Dept: thedept}, function(err, doc) {
+ //    // Try to access the database
+	// 	if (doc.length === 0) {
+	// 		db.collection('Courses'+currentTerm).save({'Dept': thedept});
+	// 	}
+ //    // Add a schedules block if there is none
+	// 	db.collection('Courses'+currentTerm).update({Dept: thedept}, { $set: {Courses: dept}, $currentDate: { lastModified: true }});
+	// 	index++;
+	// 	PullReview(index);
+	// });
 }

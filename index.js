@@ -380,7 +380,7 @@ function parseSectionList(JSONString) {
     return sectionInfo;
   }
   catch (err) {
-    console.log(err);
+    //console.log(err);
     return 'No Results';
   }
 }

@@ -44,7 +44,7 @@
 
                 <!-- <span style="margin-left:1em;" class="OpenSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Open </span><span class="ClosedSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Closed </span> -->
                 
-                <span style="margin-left:2em;">Schedule:</span><select id="schedSelect"></select>
+                <span style="margin-left:1em;">Schedule:</span><select id="schedSelect"></select>
                 
                 <div id="loaderWrap">
                     <div class="loader" id="LoadingInfo" title="1">
@@ -59,7 +59,7 @@
                                 repeatCount="indefinite"/>
                             </path>
                         </svg>
-                    </div>                    
+                    </div>
                 </div>
 
     		</form>
@@ -98,7 +98,7 @@
                 </div>
                  <div class="ModalThird">
                     <span>Want to see all of PCS's code?</span>
-                    <a href="https://github.com/benb116/PennCourseSearch"><span><i class="icon-github-circled" style="padding-right:0.25em;font-size:20px;"></i>View on Github</span></a>
+                    <a href="https://github.com/benb116/PennCourseSearch"><span style=""><i class="icon-github-circled" style="padding-right:0.25em;font-size:20px;line-height:1em;"></i>View on Github</span></a>
                 </div>
                 <a class="modal_close"><i class="icon-cancel"></i></a>
             </div>

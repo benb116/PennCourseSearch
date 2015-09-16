@@ -17,7 +17,7 @@ $(document).ready(function () {
   if (sessionStorage.colorPalette) { // If we recently changed the palette
     colorPalette = JSON.parse(sessionStorage.colorPalette);
   } else {
-    colorPalette  = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF','#ecf0f1'];
+    colorPalette  = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF','#ecf0f1','#F62459', '#F64747'];
     sessionStorage.colorPalette = JSON.stringify(colorPalette);
   }
 
@@ -35,9 +35,14 @@ $(document).ready(function () {
   var statusMessage = $('#StatusMessage').text();
   if (statusMessage != 'hakol beseder') {
     setTimeout(function(){
-      swal("PCS Alert", statusMessage, "warning");
-    },300);
-    // console.log(statusMessage)
+      sweetAlert({
+        title: 'PCS Alert', 
+        html: true,
+        text: statusMessage, 
+        icon: 'warning'
+      });
+    }, 300);
+    console.log(statusMessage);
   }
 
   $('#CSearch').on('input', function(){ // When the search terms change
@@ -68,7 +73,12 @@ function SendReq(url, fun, passVar) {
     }
   })
   .error(function() {
-    sweetAlert('#awkward', 'An error occured. Refresh or email Ben', 'error');
+    sweetAlert({
+      title: '#awkward', 
+      html: true,
+      text: 'An error occured. Refresh or email <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!">Ben</a>', 
+      icon: 'error'
+    });
   })
   .always(function() {
     LoadingSum -= 1; // Reset
@@ -414,12 +424,10 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     allHTML += '</ul>';
   }
   $('#CourseList').html(allHTML); // Put the course number list in #CourseList
-
   for (var courseID in JSONRes) { // Add PCR data
     var fullID = JSONRes[courseID].courseListName;
     RetrievePCR(fullID);
   }
-
   $('.tooltip', '#CourseList').tooltipster({
     position: 'right'
   });
