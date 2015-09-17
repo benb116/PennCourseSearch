@@ -33,6 +33,7 @@ try {
  */
 module.exports.loginRequired = function(req, res, next) {
   if (!req.user || !req.session || !req.session.user) {
+
     if (req.headers.autotest == config.autotestKey) {
       next();
     } else {
