@@ -98,7 +98,7 @@
                 </div>
                  <div class="ModalThird">
                     <span>Want to see all of PCS's code?</span>
-                    <a href="https://github.com/benb116/PennCourseSearch"><span style=""><i class="icon-github-circled" style="padding-right:0.25em;font-size:20px;line-height:1em;"></i>View on Github</span></a>
+                    <a href="https://github.com/benb116/PennCourseSearch"><span><i class="icon-github-circled" style="padding-right:0.25em;font-size:20px;line-height:16px;"></i>View on Github</span></a>
                 </div>
                 <a class="modal_close"><i class="icon-cancel"></i></a>
             </div>

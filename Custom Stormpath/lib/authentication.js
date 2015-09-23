@@ -34,13 +34,20 @@ try {
 module.exports.loginRequired = function(req, res, next) {
   if (!req.user || !req.session || !req.session.user) {
     if (req.headers.autotest == config.autotestKey) {
+      req.user = {};
+      req.user.email = "autotest@pcs.com";
+      req.user.customData = {};
       next();
     } else {
       // Wipe req.user, just in case.
       req.user = undefined;
 
       var url = req.app.get('stormpathLoginUrl') + '?next=' + encodeURIComponent(req.originalUrl.split('?')[0]);
-      res.redirect(302, url);
+      if (req.originalUrl.split('?')[0] == '/') {
+        next();
+      } else {
+        res.redirect(302, url);
+      }
     }
   } else {
     next();

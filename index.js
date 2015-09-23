@@ -33,6 +33,7 @@ try {
   config.KeenIOID	=       process.env.KEEN_PROJECT_ID;
   config.KeenIOWriteKey	= process.env.KEEN_WRITE_KEY;
   config.PushBulletAuth	= process.env.PUSHBULLETAUTH;
+  config.autotestKey =    process.env.AUTOTESTKEY;
 }
 
 var app = express();
@@ -103,17 +104,23 @@ var paymentNotes = [
 var currentTerm = '2015C';
 
 // Handle main page requests
-app.get('/', function(req, res) {
-  if (!req.user) {
+app.get('/', stormpath.loginRequired, function(req, res) {
+  if (!req.user && req.headers.autotest != config.autotestKey) {
     // If the user is not logged in
     return res.render('welcome');
   } else {
+    var pennkey;
+    if (!req.user) {
+      pennkey = 'autotest';
+    } else {
+      pennkey = req.user.email.split('@')[0];
+    }
     var thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
     var fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
     return res.render('index', { // Send page
       title: 'PennCourseSearch',
       subtitle: thissub,
-      user: req.user.email.split('@')[0],
+      user: pennkey,
       paymentNote: fullPaymentNote,
       status: "hakol beseder" // Everything's OK in hebrew
     });
