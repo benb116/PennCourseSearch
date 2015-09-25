@@ -5,7 +5,8 @@
 		<meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="/css/index.css"/>
         <link rel="stylesheet" type="text/css" href="/css/plugins.css">
-        <link rel="stylesheet" type="text/css" href="/css/fontello-embedded.css">
+        {{!-- <link rel="stylesheet" type="text/css" href="/css/fontello-embedded.css"> --}}
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script async type="text/javascript" src="/js/html2canvas.js"></script>
@@ -66,7 +67,7 @@
             <div id="MenuButtons">
                 <ul>
                   <li>
-                    Schedule <i class="icon-down-dir"></i>
+                    Schedule <i class="fa fa-caret-down"></i>
                     <ul>
                       <a rel="leanModal" href="#SchedModal"><li>Download</li></a>
                       <li>Recolor</li>
@@ -100,12 +101,12 @@
                     <span>Want to see all of PCS's code?</span>
                     <a href="https://github.com/benb116/PennCourseSearch"><span><i class="icon-github-circled" style="padding-right:0.25em;font-size:20px;line-height:16px;"></i>View on Github</span></a>
                 </div>
-                <a class="modal_close"><i class="icon-cancel"></i></a>
+                <a class="modal_close"><i class="fa fa-times"></i></a>
             </div>
             <div id="SchedModal" class="Modal">
                 <img id="SchedImage" src="">
                 <span>Right click the image to save it.</span>
-                <a class="modal_close"><i class="icon-cancel"></i></a>
+                <a class="modal_close"><i class="fa fa-times"></i></a>
             </div>
 		</div>
         <div id="BottomResults">

@@ -17,7 +17,7 @@ $(document).ready(function () {
   if (sessionStorage.colorPalette) { // If we recently changed the palette
     colorPalette = JSON.parse(sessionStorage.colorPalette);
   } else {
-    colorPalette  = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF','#ecf0f1','#F62459', '#F64747'];
+    colorPalette  = ['#1abc9c','#e74c3c','#f1c40f','#3498db','#9b59b6','#e67e22','#2ecc71','#95a5a6','#FF73FD','#73F1FF','#CA75FF','#ecf0f1','#F64747'];
     sessionStorage.colorPalette = JSON.stringify(colorPalette);
   }
 
@@ -121,9 +121,9 @@ function ClickTriggers() {
     var schedName = $('#schedSelect').val(); // Which schedule are we changing
 
     var whichClass = $(this).attr('class');
-    if (whichClass == 'icon-plus') { // If the plus is clicked
+    if (whichClass == 'fa fa-plus') { // If the plus is clicked
       addToSched(secname, schedName);
-    } else if (whichClass == 'icon-cancel') { // If the x is clicked
+    } else if (whichClass == 'fa fa-times') { // If the x is clicked
       removeFromSched(secname, schedName);
     }
   })
@@ -138,13 +138,13 @@ function ClickTriggers() {
   })
   .on('click', '#SectionList i:nth-child(5)', function() { // If the user clicks a star in SectionList
     var isStarred = $(this).attr('class'); // Determine whether the section is starred
-    if (isStarred == 'icon-star-empty') {addRem = 'add';} 
-    else if (isStarred == 'icon-star') {addRem = 'rem';}
+    if (isStarred == 'fa fa-star-o') {addRem = 'add';} 
+    else if (isStarred == 'fa fa-star') {addRem = 'rem';}
     var secname = formatID($(this).parent().attr('id')).join("");
 
     Stars(addRem, secname); // Add/rem the section
 
-    $(this).toggleClass('icon-star').toggleClass('icon-star-empty'); // Change the star icon
+    $(this).toggleClass('fa-star').toggleClass('fa-star-o'); // Change the star icon
     if (addRem == 'rem' && $(this).parent().attr('class') == 'starredSec') { // If it was removed from the Show Stars list
       $(this).parent().remove();
       if ($('#SectionList > ul').is(':empty')){
@@ -463,16 +463,16 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
     var sections = courseInfo[0];
 
     for(var section in sections) { if (sections.hasOwnProperty(section)) { // Loop through the sections
-      var starClass = 'icon-star-empty';
+      var starClass = 'fa-star-o';
       var index = stars.indexOf(sections[section].NoSpace);
-      if (index > -1) {starClass = 'icon-star';} // If the section is a starred section, add the filled star
+      if (index > -1) {starClass = 'fa-star';} // If the section is a starred section, add the filled star
 
       allHTML += '<li id="' + sections[section].SectionName.replace(/ /g,'-') + '" class="' + sections[section].ActType + '">'+
-        '<i class="icon-plus"></i>&nbsp&nbsp'+
+        '<i class="fa fa-plus"></i>&nbsp&nbsp'+
         '<span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
         '<span class="PCR tooltip">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
         '<span>'+sections[section].SectionName + sections[section].TimeInfo+'</span>'+
-        '<i class="'+starClass+'"></i></li>';
+        '<i class="fa '+starClass+'"></i></li>';
     }}
     $('#CourseTitle').html(sections[section].CourseTitle);
     $('#SectionList > ul').html(allHTML); // Put the course number list in  #SectionList
@@ -544,9 +544,9 @@ function UpdatePlusCancel() { // When a course is added or removed, update the p
   }); // Return a list of scheduled sections in the correct format
   $('#SectionList li').each(function(i) {
     if (schedSecList.indexOf($(this).attr('id').replace(/-/g, '')) != -1) {
-      $(this).find('i').first().removeClass('icon-plus').addClass('icon-cancel');
+      $(this).find('i').first().removeClass('fa-plus').addClass('fa-times');
     } else {
-      $(this).find('i').first().removeClass('icon-cancel').addClass('icon-plus');
+      $(this).find('i').first().removeClass('fa-times').addClass('fa-plus');
     }
   });
 }
@@ -576,15 +576,15 @@ function StarHandle(data, addRem) {
  
 function StarFormat(sections) { // Format starred section list
   if (typeof sections === 'string') {sections = JSON.parse(sections);} // JSONify the input
-  var starClass = 'icon-star';
+  var starClass = 'fa-star';
   var HTML = '';
   for(var section in sections[0]) { if (sections[0].hasOwnProperty(section)) {    
     HTML += '<li id="' + sections[0][section].SectionName.replace(/ /g,'-') + '" class="starredSec">'+
-      '<i class="icon-plus"></i>&nbsp&nbsp'+
+      '<i class="fa fa-plus"></i>&nbsp&nbsp'+
       '<span class="'+sections[0][section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
       '<span class="PCR tooltip">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
       '<span>'+sections[0][section].SectionName + sections[0][section].TimeInfo+'</span>'+
-      '<i class="'+starClass+'"></i></li>';
+      '<i class="fa '+starClass+'"></i></li>';
   }}
   if (sections[0]) {
     $('#CourseTitle').html('Starred Sections');
@@ -681,7 +681,7 @@ function addToSched(sec, schedName) { // Getting info about a section
   var schedURL = "/Sched?addRem=add&schedName="+schedName+"&courseID="+formattedSec; // Make the request
   SendReq(schedURL, SpitSched, []);
   try {
-    $('#'+formattedSec+' i:nth-child(1)').toggleClass('icon-plus').toggleClass('icon-cancel');
+    $('#'+formattedSec+' i:nth-child(1)').toggleClass('fa-plus').toggleClass('fa-times');
   } catch(err) {
     console.log(err);
   }
@@ -696,7 +696,7 @@ function removeFromSched(sec, schedName) {
   var schedURL = "/Sched?addRem=rem&schedName="+schedName+"&courseID="+secname;
   SendReq(schedURL, SpitSched, []);
   try {
-    $('#'+secarray.join("-")+' i:nth-child(1)').toggleClass('icon-plus').toggleClass('icon-cancel');
+    $('#'+secarray.join("-")+' i:nth-child(1)').toggleClass('fa-plus').toggleClass('fa-times');
   } catch(err) {
     console.log(err);
   }

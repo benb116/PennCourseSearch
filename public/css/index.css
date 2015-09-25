@@ -218,7 +218,7 @@ ul {
     display: inline-block; 
     border-radius: 3px;
     text-align: center;}
-.icon-star, .icon-star-empty {
+.fa-star, .fa-star-o {
     float: right;
     font-size: 14px;
     line-height: 14px;
