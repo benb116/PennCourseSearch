@@ -35,22 +35,17 @@ h2 {
 	color: #7f8c8d;
 	background-color: white;
 	cursor: pointer;
-
-	-webkit-box-shadow: 0px 10px 54px -10px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 10px 54px -10px rgba(0,0,0,0.75);
-	box-shadow: 0px 10px 54px -10px rgba(0,0,0,0.75);
+    box-shadow: 0px 3px 4px 0px rgba(50, 50, 50, 0.58);
 	transition: all ease-in-out 0.1s;
 }
 .linkButton:hover {
-	-webkit-box-shadow: 0px 10px 54px -5px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 10px 54px -5px rgba(0,0,0,0.75);
-	box-shadow: 0px 10px 54px -5px rgba(0,0,0,0.75);
-	/*background-color: #E6E6E6;*/
+	box-shadow: 0px 10px 10px -4px rgba(50, 50, 50, 0.58);
 }
 .linkButton:active {
-	-webkit-box-shadow: 0px 10px 54px -10px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 10px 54px -10px rgba(0,0,0,0.75);
-	box-shadow: 0px 10px 54px -10px rgba(0,0,0,0.75);
+	box-shadow: 0px 3px 4px 0px rgba(50, 50, 50, 0.58);
+}
+.linkButton:focus {
+    outline-width: 0;
 }
 
 #Reasons, #Features {
@@ -124,7 +119,7 @@ footer {
 	padding-top: 1em;
 }
 #LogoWhite {
-	background-image: url(/Home/logo-white.svg);
+	background-image: url(/css/welcome/logo-white.svg);
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;

@@ -104,6 +104,7 @@
             </div>
             <div id="SchedModal" class="Modal">
                 <img id="SchedImage" src="">
+                <span>Right click the image to save it.</span>
                 <a class="modal_close"><i class="icon-cancel"></i></a>
             </div>
 		</div>
