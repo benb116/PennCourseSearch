@@ -38,7 +38,7 @@ try {
 
 var app = express();
 
-// Set paths
+// Set express settings
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 app.use(compression());
@@ -46,6 +46,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31536000000 }))
 
 console.log('Express initialized');
 
+// Set up stormpath
 app.use(stormpath.init(app, {
   apiKeyId:     config.STORMPATH_API_KEY_ID,
   apiKeySecret: config.STORMPATH_API_KEY_SECRET,
@@ -110,7 +111,7 @@ app.get('/', stormpath.loginRequired, function(req, res) {
     return res.render('welcome');
   } else {
     var pennkey;
-    if (!req.user) {
+    if (!req.user) { // If this is an approved automated request
       pennkey = 'autotest';
     } else {
       pennkey = req.user.email.split('@')[0];

@@ -37,21 +37,24 @@ function PullRegistrar(index) {
 
 		var resp = {};
 		for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
-      // For each section that comes up
-      // Get course name (e.g. CIS 120)
-			var spacedName = inJSON[key].section_id_normalized
-            .replace('-', " ")
-            .split('-')[0]
-            .replace(/   /g, ' ')
-            .replace(/  /g, ' ');
-			resp[spacedName] = {
-				'courseListName': spacedName,
-				'courseTitle': inJSON[key].course_title
-			};
+	    	// For each section that comes up
+	    	// Get course name (e.g. CIS 120)
+
+	    	if (!inJSON[key].is_cancelled) {
+				var spacedName = inJSON[key].section_id_normalized
+	            .replace('-', " ")
+	            .split('-')[0]
+	            .replace(/   /g, ' ')
+	            .replace(/  /g, ' ');
+				resp[spacedName] = {
+					'courseListName': spacedName,
+					'courseTitle': inJSON[key].course_title
+				};
+			}
 			if (key == inJSON.length - 1) {
-        // At the end of the list
+				// At the end of the list
 				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) {
-          // Write JSON to file
+					// Write JSON to file
 					// console.log(err)
 					console.log(('List Spit: '+index+' '+thedept));
 				});

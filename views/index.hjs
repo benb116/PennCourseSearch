@@ -5,8 +5,7 @@
 		<meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="/css/index.css"/>
         <link rel="stylesheet" type="text/css" href="/css/plugins.css">
-        {{!-- <link rel="stylesheet" type="text/css" href="/css/fontello-embedded.css"> --}}
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css">
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script async type="text/javascript" src="/js/html2canvas.js"></script>
@@ -95,11 +94,11 @@
                 </div>
                 <div class="ModalThird">
                     <span>Questions or comments?</span>
-                    <a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span><i class="icon-paper-plane-empty" style="padding-right:0.5em;"></i>Email Me</span></a>
+                    <a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
                 </div>
                  <div class="ModalThird">
                     <span>Want to see all of PCS's code?</span>
-                    <a href="https://github.com/benb116/PennCourseSearch"><span><i class="icon-github-circled" style="padding-right:0.25em;font-size:20px;line-height:16px;"></i>View on Github</span></a>
+                    <a href="https://github.com/benb116/PennCourseSearch"><span><i class="fa fa-github" style="padding-right:0.25em;"></i>View on Github</span></a>
                 </div>
                 <a class="modal_close"><i class="fa fa-times"></i></a>
             </div>
