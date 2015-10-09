@@ -7,7 +7,6 @@ body {
 
 #Background {
     text-align: center;
-    wi
 }
 #TitleBlock {
 	margin-top: 10%;
@@ -92,9 +91,7 @@ h3 {
 	vertical-align: top;
 }
 .featureBlock img {
-	width: 75%;;
-}
-.featureBlock span {
+	width: 75%;
 	display: block;
 	font-size: 1.5em;
 	margin-top: 0.5em;
@@ -102,7 +99,7 @@ h3 {
 .featureBlock p {
 	width: 75%;
 	margin: 0 auto;
-	text-align: justify;
+	/*text-align: justify;*/
 	text-indent: 1em;
 	margin-top: 0.5em;
 }

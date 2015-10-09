@@ -102,7 +102,7 @@ var paymentNotes = [
   "Donation%20to%20PennInTouch%20Sucks,%20Inc.",
   "For%20your%20next%20trip%20to%20Wawa"];
 
-var currentTerm = '2015C';
+var currentTerm = '2016A';
 
 // Handle main page requests
 app.get('/', stormpath.loginRequired, function(req, res) {
