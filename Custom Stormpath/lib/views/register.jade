@@ -38,7 +38,7 @@ block body
                   label.col-sm-4 First Name
                   .col-sm-8
                     - var value = form.data ? form.data.givenName : '';
-                    input.form-control(placeholder='Ben', name='givenName', value=value, required=app.get('stormpathRequireGivenName') ? true : false, type='text')
+                    input.form-control(placeholder='First Name', name='givenName', value=value, required=app.get('stormpathRequireGivenName') ? true : false, type='text')
 
               if app.get('stormpathEnableMiddleName')
                 .form-group.group-middle-name(form-group='true')
@@ -52,18 +52,18 @@ block body
                   label.col-sm-4 Last Name
                   .col-sm-8
                     - var value = form.data ? form.data.surname : '';
-                    input.form-control(placeholder='Franklin', name='surname', value=value, required=app.get('stormpathRequireSurname') ? true : false, type='text')
+                    input.form-control(placeholder='Last Name', name='surname', value=value, required=app.get('stormpathRequireSurname') ? true : false, type='text')
 
               .form-group.group-email(form-group='true')
-                label.col-sm-4 Penn Email
+                label.col-sm-4 Email
                 .col-sm-8
                   - var value = form.data ? form.data.email : '';
-                  input.form-control(placeholder='bfrank@sas.upenn.edu', name='email', value=value, required='true', type='text')
+                  input.form-control(placeholder='Email', name='email', value=value, required='true', type='text')
 
               .form-group.group-password(form-group='true')
                 label.col-sm-4 Password
                 .col-sm-8
-                  input.form-control(placeholder='#yolo1776', name='password', required='true', type='password')
+                  input.form-control(placeholder='Password', name='password', required='true', type='password')
 
               button.btn.btn-register.btn-sp-green(type='submit') Create Account
 

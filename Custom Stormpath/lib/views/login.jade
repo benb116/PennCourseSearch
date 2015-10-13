@@ -28,12 +28,13 @@ block body
             if error
               .alert.alert-danger.bad-login
                 p #{error}
-
             if formErrors
               .alert.alert-danger.bad-login
                 each error in formErrors
                   p #{error.error}
-
+            else
+              .alert.alert-warning
+                p If you've never used PennCourseSearch before, first <a href="#{app.get('stormpathRegistrationUrl')}">create an account.</a>
             form.login-form.form-horizontal(method='post', role='form')
               input(name='_csrf', type='hidden', value=csrfToken)
 
@@ -46,7 +47,7 @@ block body
                 if app.get('stormpathEnableUsername')
                   label(class='#{cls}') Username or Email
                 else
-                  label(class='#{cls}') Penn Email
+                  label(class='#{cls}') Email
 
                 if app.get('stormpathEnableFacebook') || app.get('stormpathEnableGoogle')
                   - var cls = 'col-sm-12'
