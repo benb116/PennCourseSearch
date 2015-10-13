@@ -284,10 +284,11 @@ ul {
     vertical-align: top;
     min-height: 300px;
 }
+/*
 #Schedule > span {
     font-size: 1.5em;
     line-height: 15em;
-}
+}*/
 #TimeCol {
     width: 5%;
     min-width: 40px;

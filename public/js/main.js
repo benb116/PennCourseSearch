@@ -69,31 +69,40 @@ function SendReq(url, fun, passVar) {
   // fun: the keyword or function to which the data is passed
   // passVar: any extra information that needs to be sent in
 
-  LoadingSum += 1; // Add to the sum of requests
-  LoadingIndicate(); // Update the spinning logo
-  $.get(url) // Make the request
-  .success(function(data) {
-    if (fun == 'localStorage') {
-      // In this case passVar is the name of the key to store the data with
-      localStorage[passVar] = JSON.stringify(data);
-    } else if (fun == 'sessionStorage') {
-      sessionStorage[passVar] = JSON.stringify(data);
-    } else {
-      fun(data, passVar); // Pass the data to another function
-    }
-  })
-  .error(function() {
+  try {
+    LoadingSum += 1; // Add to the sum of requests
+    LoadingIndicate(); // Update the spinning logo
+    $.get(url) // Make the request
+    .success(function(data) {
+      if (fun == 'localStorage') {
+        // In this case passVar is the name of the key to store the data with
+        localStorage[passVar] = JSON.stringify(data);
+      } else if (fun == 'sessionStorage') {
+        sessionStorage[passVar] = JSON.stringify(data);
+      } else {
+        fun(data, passVar); // Pass the data to another function
+      }
+    })
+    .error(function() {
+      sweetAlert({
+        title: '#awkward', 
+        html: true,
+        text: 'An error occured. Refresh or email <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!">Ben</a>', 
+        type: 'error'
+      });
+    })
+    .always(function() {
+      LoadingSum -= 1; // Remove from the sum of requests
+      LoadingIndicate();
+    });
+  } catch(err) {
     sweetAlert({
       title: '#awkward', 
       html: true,
       text: 'An error occured. Refresh or email <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!">Ben</a>', 
       type: 'error'
     });
-  })
-  .always(function() {
-    LoadingSum -= 1; // Remove from the sum of requests
-    LoadingIndicate();
-  });
+  }
 }
  
 function LoadingIndicate() { // Displays the loading icon if there are requests that haven't come back yet
@@ -640,7 +649,7 @@ function ApplyPCR(courseID, instName) {
   if (typeof thisReview === 'undefined') {
     result = {};
   }
-  if (typeof instName === 'undefined') { // If we aren't getting reviews for a specific instructor
+  else if (typeof instName === 'undefined') { // If we aren't getting reviews for a specific instructor
     if (typeof thisReview !== 'undefined') {
       result = thisReview.Total;
     }
@@ -762,7 +771,7 @@ function SpitSched(courseSched) {
     schedElement.html(schedHTML);
     timeColElement.html(timeColHTML);
   } else {
-    schedElement.html('<span>Click a section\'s + icon to add it to the schedule</span>'); // Clear
+    schedElement.html('<p style="font-size:1.5em;margin-top:7em;display:block">Click a section\'s + icon to add it to the schedule</p><p style="font-size:1.25em">These are mock schedules. You still need to register for these classes on Penn InTouch.</p>'); // Clear
     timeColElement.empty();
   }
  
