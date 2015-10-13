@@ -37,12 +37,12 @@
             <p>Fewer clicks and quicker load times let you focus on what's important: your schedule.</p>
         </div>
         <div class="reasonBlock">
-            <span><i class="fa fa-search"></i>It's super easy.</span>
-            <p>One page is all you need. Search for courses and view your schedules at the same time.</p>
-        </div>
-        <div class="reasonBlock">
             <span><i class="fa fa-ban"></i>PennInTouch sucks.</span>
             <p>But you knew that already.</p>
+        </div>
+        <div class="reasonBlock">
+            <span><i class="fa fa-search"></i>It's super easy.</span>
+            <p>One page is all you need. Search for courses and view your schedules at the same time.</p>
         </div>
     </section>
     <section id="Features">
