@@ -771,7 +771,7 @@ function SpitSched(courseSched) {
     schedElement.html(schedHTML);
     timeColElement.html(timeColHTML);
   } else {
-    schedElement.html('<p style="font-size:1.5em;margin-top:7em;display:block">Click a section\'s + icon to add it to the schedule</p><p style="font-size:1.25em">These are mock schedules. You still need to register for these classes on Penn InTouch.</p>'); // Clear
+    schedElement.html('<p style="font-size:1.5em;margin-top:7em;display:block;margin-right:45px;">Click a section\'s + icon to add it to the schedule</p><p style="font-size:1em;margin-right:45px;">These are mock schedules.<br> You still need to register for your classes on Penn InTouch.</p>'); // Clear
     timeColElement.empty();
   }
  
