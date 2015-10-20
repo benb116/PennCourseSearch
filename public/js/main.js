@@ -83,7 +83,8 @@ function SendReq(url, fun, passVar) {
         fun(data, passVar); // Pass the data to another function
       }
     })
-    .error(function() {
+    .error(function(err) {
+      console.log(err);
       sweetAlert({
         title: '#awkward', 
         html: true,
@@ -91,11 +92,12 @@ function SendReq(url, fun, passVar) {
         type: 'error'
       });
     })
-    .always(function() {
+    .complete(function() {
       LoadingSum -= 1; // Remove from the sum of requests
       LoadingIndicate();
     });
   } catch(err) {
+    console.log(err);
     sweetAlert({
       title: '#awkward', 
       html: true,
@@ -627,7 +629,7 @@ function RetrievePCR(courseID, instName) {
         ApplyPCR(courseID, instName);
         return 'done';
       })
-      .always(function() {
+      .complete(function() {
         LoadingSum -= 1;
         LoadingIndicate();
       });

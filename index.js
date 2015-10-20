@@ -193,19 +193,25 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       uri: baseURL,
       method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
     }, function(error, response, body) {
+      console.log('one')
       if (error) {
       	console.error('Request failed:', error);
       	return res.send('PCSERROR: request failed');
       }
-
+      var parsedRes = {};
+      try {
+        parsedRes = JSON.parse(body);
+      } catch(err) {
+        return res.send("Can't parse JSON response");
+      }
       // Send the raw data to the appropriate formatting function
       var searchResponse;
       if (resultType == 'deptSearch'){
-	       searchResponse = parseDeptList(body);
+	       searchResponse = parseDeptList(parsedRes);
       } else if (resultType == 'numbSearch') {
-	       searchResponse = parseCourseList(body); // Parse the numb response
+	       searchResponse = parseCourseList(parsedRes); // Parse the numb response
       } else if (resultType == 'sectSearch') {
-	       searchResponse = parseSectionList(body); // Parse the sect response
+	       searchResponse = parseSectionList(parsedRes); // Parse the sect response
       } else {searchResponse = {};}
       return res.send(JSON.stringify(searchResponse)); // return correct info
     });
@@ -213,8 +219,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 });
 
 // This function spits out the list of courses that goes in #CourseList
-function parseDeptList(JSONString) {
-  var Res = JSON.parse(JSONString); // Convert to JSON object
+function parseDeptList(Res) {
   var coursesList = {};
   for(var key in Res.result_data) {
     if (Res.result_data.hasOwnProperty(key)) { // Iterate through each course
@@ -266,9 +271,8 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 }
 
 // This function spits out the list of sections that goes in #SectionList
-function parseCourseList(JSONString) {
+function parseCourseList(Res) {
   // Convert to JSON object
-  var Res = JSON.parse(JSONString);
   var sectionsList = {};
   for(var key in Res.result_data) {
     if (Res.result_data.hasOwnProperty(key)) { 
@@ -310,8 +314,7 @@ function parseCourseList(JSONString) {
 }
 
 // This function spits out section-specific info
-function parseSectionList(JSONString) {
-  var Res = JSON.parse(JSONString); // Convert to JSON Object
+function parseSectionList(Res) {
   var entry = Res.result_data[0];
   var sectionInfo = {};
   try {
