@@ -417,7 +417,6 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
   var courseID = req.query.courseID;
 
   var index;
-  console.log(StarredCourses);
   if (addRem == 'add') { 
     index = StarredCourses.indexOf(courseID);
     if (index == -1) { // If the section is not already in the list
@@ -438,7 +437,6 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
   } else if (addRem == 'clear') { // Clear all
     StarredCourses = [];
   }
-  console.log(StarredCourses);
   req.user.customData.Starlist = StarredCourses;
   req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
   return res.send(StarredCourses);
