@@ -1,14 +1,14 @@
 console.time('Modules loaded');
 // Initial configuration
-var path = require('path');
-var express = require('express');
+var path        = require('path');
+var express     = require('express');
 var compression = require('compression');
-var stormpath = require('express-stormpath');
-var request = require("request");
-var colors = require('colors');
-var fs = require('fs');
-var Keen = require('keen-js');
-var PushBullet = require('pushbullet');
+var stormpath   = require('express-stormpath');
+var request     = require("request");
+var colors      = require('colors');
+var fs          = require('fs');
+var Keen        = require('keen-js');
+var PushBullet  = require('pushbullet');
 require('log-timestamp')(function() { return new Date().toISOString() + ' %s'; });
 
 console.timeEnd('Modules loaded');
@@ -23,16 +23,13 @@ try {
   config.requestAB =  process.env.REQUESTAB;
   config.requestAT =  process.env.REQUESTAT;
   config.PCRToken =   process.env.PCRTOKEN;
-  config.MongoUser =  process.env.MONGOUSER;
-  config.MongoPass =  process.env.MONGOPASS;
-  config.MongoURI =   process.env.MONGOURI;
   config.STORMPATH_API_KEY_ID =     process.env.STORMPATH_API_KEY_ID;
   config.STORMPATH_API_KEY_SECRET = process.env.STORMPATH_API_KEY_SECRET;
   config.STORMPATH_SECRET_KEY =     process.env.STORMPATH_SECRET_KEY;
   config.STORMPATH_URL =            process.env.STORMPATH_URL;
-  config.KeenIOID	=       process.env.KEEN_PROJECT_ID;
-  config.KeenIOWriteKey	= process.env.KEEN_WRITE_KEY;
-  config.PushBulletAuth	= process.env.PUSHBULLETAUTH;
+  config.KeenIOID =       process.env.KEEN_PROJECT_ID;
+  config.KeenIOWriteKey = process.env.KEEN_WRITE_KEY;
+  config.PushBulletAuth = process.env.PUSHBULLETAUTH;
   config.autotestKey =    process.env.AUTOTESTKEY;
 }
 
@@ -53,10 +50,10 @@ app.use(stormpath.init(app, {
   secretKey:    config.STORMPATH_SECRET_KEY,
   application:  config.STORMPATH_URL,
   enableAccountVerification: true,
-  enableForgotPassword: 		 true,
+  enableForgotPassword:      true,
   expandCustomData:          true,
   // Make sessions expire after one week
-  sessionDuration: 			1000 * 60 * 60 * 24 * 7
+  sessionDuration:      1000 * 60 * 60 * 24 * 7
 }));
 
 // Set up Keen Analytics
@@ -123,6 +120,7 @@ app.get('/', stormpath.loginRequired, function(req, res) {
       subtitle: thissub,
       user: pennkey,
       paymentNote: fullPaymentNote,
+      // status: "We're experiencing some issues with Penn InTouch (shocker). Please hang tight!" // Everything's OK in hebrew
       status: "hakol beseder" // Everything's OK in hebrew
     });
   }
@@ -134,28 +132,28 @@ var sendCourseOpts  = {root: __dirname + '/'+currentTerm+'/',       dotfiles: 'd
 
 // Manage search requests
 app.get('/Search', stormpath.loginRequired, function(req, res) {
-  var searchParam 	= req.query.searchParam; 	// The search terms
-  var searchType 		= req.query.searchType; 	// Course ID, Keyword, or Instructor
-  var resultType 		= req.query.resultType; 	// Course numbers, section numbers, section info
-  var instructFilter 	= req.query.instFilter; 	// Is there an instructor filter?
-  var reqFilter 		= req.query.reqParam;		// Is there a requirement filter?
-  var proFilter		= req.query.proParam;		// So on ...
-  var actFilter		= req.query.actParam;
-  var includeOpen		= req.query.openAllow;
-  var includeClosed	= req.query.closedAllow;
-  var myPennkey 		= req.user.email.split('@')[0]; // Get Pennkey
+  var searchParam   = req.query.searchParam;  // The search terms
+  var searchType    = req.query.searchType;   // Course ID, Keyword, or Instructor
+  var resultType    = req.query.resultType;   // Course numbers, section numbers, section info
+  var instructFilter= req.query.instFilter;   // Is there an instructor filter?
+  var reqFilter     = req.query.reqParam;   // Is there a requirement filter?
+  var proFilter     = req.query.proParam;   // So on ...
+  var actFilter     = req.query.actParam;
+  var includeOpen   = req.query.openAllow;
+  var includeClosed = req.query.closedAllow;
+  var myPennkey     = req.user.email.split('@')[0]; // Get Pennkey
 
   // Building the request URI
-  if (typeof reqFilter 	=== 'undefined') {reqFilter 	= '';} else {reqFilter 	= '&fulfills_requirement='+reqFilter;}
-  if (typeof proFilter 	=== 'undefined') {proFilter 	= '';} else {proFilter 	= '&program='+proFilter;}
-  if (typeof actFilter 	=== 'undefined') {actFilter 	= '';} else {actFilter 	= '&activity='+actFilter;}
-  if (typeof includeOpen	=== 'undefined') {includeOpen 	= '';} else {includeOpen = '&open=true';}
+  if (typeof reqFilter  === 'undefined') {reqFilter   = '';} else {reqFilter  = '&fulfills_requirement='+reqFilter;}
+  if (typeof proFilter  === 'undefined') {proFilter   = '';} else {proFilter  = '&program='+proFilter;}
+  if (typeof actFilter  === 'undefined') {actFilter   = '';} else {actFilter  = '&activity='+actFilter;}
+  if (typeof includeOpen  === 'undefined') {includeOpen   = '';} else {includeOpen = '&open=true';}
 
   var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term='+currentTerm+reqFilter+proFilter+actFilter+includeOpen;
 
-  if (searchType == 'courseIDSearch') {baseURL = baseURL + '&course_id='	+ searchParam;}
+  if (searchType == 'courseIDSearch') {baseURL = baseURL + '&course_id='  + searchParam;}
   if (searchType == 'keywordSearch')  {baseURL = baseURL + '&description='+ searchParam;}
-  if (searchType == 'instSearch')     {baseURL = baseURL + '&instructor='	+ searchParam;}
+  if (searchType == 'instSearch')     {baseURL = baseURL + '&instructor=' + searchParam;}
   // If we are searching by a certain instructor, the course numbers will be filtered because of searchType 'instSearch'. 
   // However, clicking on one of those courses will show all sections, including those not taught by the instructor.
   // instructFilter is an extra parameter that allows further filtering of section results by instructor.
@@ -170,11 +168,11 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
   client.addEvent('Search', searchEvent, function(err, res) {if (err) {console.log(err);}});
 
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
-  if (searchType 	== 'courseIDSearch' && 
-      resultType 	== 'deptSearch' && 
-      reqFilter 	=== '' && 
-      proFilter 	=== '' && 
-      actFilter 	=== '' && 
+  if (searchType  == 'courseIDSearch' && 
+      resultType  == 'deptSearch' && 
+      reqFilter   === '' && 
+      proFilter   === '' && 
+      actFilter   === '' && 
       includeOpen === '') {
 
     try {
@@ -193,10 +191,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       uri: baseURL,
       method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
     }, function(error, response, body) {
-      console.log('one')
       if (error) {
-      	console.error('Request failed:', error);
-      	return res.send('PCSERROR: request failed');
+        console.error('Request failed:', error);
+        return res.send('PCSERROR: request failed');
       }
       var parsedRes = {};
       try {
@@ -207,11 +204,11 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       // Send the raw data to the appropriate formatting function
       var searchResponse;
       if (resultType == 'deptSearch'){
-	       searchResponse = parseDeptList(parsedRes);
+         searchResponse = parseDeptList(parsedRes);
       } else if (resultType == 'numbSearch') {
-	       searchResponse = parseCourseList(parsedRes); // Parse the numb response
+         searchResponse = parseCourseList(parsedRes); // Parse the numb response
       } else if (resultType == 'sectSearch') {
-	       searchResponse = parseSectionList(parsedRes); // Parse the sect response
+         searchResponse = parseSectionList(parsedRes); // Parse the sect response
       } else {searchResponse = {};}
       return res.send(JSON.stringify(searchResponse)); // return correct info
     });
@@ -223,8 +220,8 @@ function parseDeptList(Res) {
   var coursesList = {};
   for(var key in Res.result_data) {
     if (Res.result_data.hasOwnProperty(key)) { // Iterate through each course
-      var courseListName 	= Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
-      var courseTitle 	= Res.result_data[key].course_title;
+      var courseListName  = Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
+      var courseTitle   = Res.result_data[key].course_title;
       coursesList[courseListName] = {'courseListName': courseListName, 'courseTitle': courseTitle};
     }
   }
@@ -247,8 +244,8 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
       if (JSONObj.meetings.hasOwnProperty(meeting)) {
         // Some sections have multiple meeting forms (I'm looking at you PHYS151)
         var thisMeet = JSONObj.meetings[meeting];
-        var StartTime 		= thisMeet.start_time.split(" ")[0]; // Get start time
-        var EndTime 		= thisMeet.end_time.split(" ")[0];
+        var StartTime     = thisMeet.start_time.split(" ")[0]; // Get start time
+        var EndTime     = thisMeet.end_time.split(" ")[0];
 
         if (StartTime[0] == '0') {
           StartTime = StartTime.slice(1);
@@ -284,7 +281,7 @@ function parseCourseList(Res) {
       var actType = Res.result_data[key].activity;
       var SectionInst;
       try {
-        SectionInst	= Res.result_data[key].instructors[0].name;
+        SectionInst = Res.result_data[key].instructors[0].name;
       } catch(err) {
         SectionInst = '';
       }
@@ -308,7 +305,7 @@ function parseCourseList(Res) {
       };
     }
   }
-  courseInfo = parseSectionList(JSONString);
+  courseInfo = parseSectionList(Res);
 
   return [sectionsList, courseInfo];
 }
@@ -336,10 +333,10 @@ function parseSectionList(Res) {
     if (typeof prereq === 'undefined') {
       prereq = "none";
     }
-    var termsOffered 	= entry.course_terms_offered;
+    var termsOffered  = entry.course_terms_offered;
 
     for(var listing in meetArray) {
-      TimeInfo 		+= meetArray[listing].split("-")[1] + '<br>';
+      TimeInfo    += meetArray[listing].split("-")[1] + '<br>';
     }
     var OpenClose;
     if (StatusClass == "OpenSec") {
@@ -420,6 +417,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
   var courseID = req.query.courseID;
 
   var index;
+  console.log(StarredCourses);
   if (addRem == 'add') { 
     index = StarredCourses.indexOf(courseID);
     if (index == -1) { // If the section is not already in the list
@@ -432,9 +430,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
       client.addEvent('Star', starEvent, function(err, res) {
         if (err) {console.log(err);}
       });
-    } 
-    
-
+    }     
   } else if (addRem == 'rem') { // If we need to remove
     index = StarredCourses.indexOf(courseID);
     if (index > -1) {StarredCourses.splice(index, 1);}
@@ -442,6 +438,9 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
   } else if (addRem == 'clear') { // Clear all
     StarredCourses = [];
   }
+  console.log(StarredCourses);
+  req.user.customData.Starlist = StarredCourses;
+  req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
   return res.send(StarredCourses);
 });
 
@@ -449,9 +448,9 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 app.get('/Sched', stormpath.loginRequired, function(req, res) {
   var addRem      = req.query.addRem; // Are we adding, removing, or clearing?
   var courseID    = req.query.courseID;
-  var schedName 	= req.query.schedName;
-  var schedRename	= req.query.schedRename;
-  var myPennkey 	= req.user.email.split('@')[0]; // Get Pennkey
+  var schedName   = req.query.schedName;
+  var schedRename = req.query.schedRename;
+  var myPennkey   = req.user.email.split('@')[0]; // Get Pennkey
   var userScheds  = req.user.customData.Schedules;
 
   if(!userScheds) {  // If there are no schedules defined
@@ -529,36 +528,36 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
   var entry = Res.result_data[0];
   try {
     var SectionName = entry.section_id_normalized.replace(/ /g, "-").replace(/-/g, " "); // Format name
-    var SectionID 	= entry.section_id_normalized.replace(/ /g, ""); // Format ID
-    var resJSON 	= {};
+    var SectionID   = entry.section_id_normalized.replace(/ /g, ""); // Format ID
+    var resJSON   = {};
     try { // Not all sections have time info
       for(var meeti in entry.meetings) { if (entry.meetings.hasOwnProperty(meeti)) { // Some sections have multiple meetings
-      	var thisMeet = entry.meetings[meeti];
-        var StartTime 	= (thisMeet.start_hour_24) + (thisMeet.start_minutes)/60; 
-      	var EndTime 	= (thisMeet.end_hour_24) 	+ (thisMeet.end_minutes)/60;
-      	var hourLength 	= EndTime - StartTime;
-      	var MeetDays 	= thisMeet.meeting_days;
-      	var OpenClose 	= entry.course_status_normalized;
-      	var Building, Room;
+        var thisMeet = entry.meetings[meeti];
+        var StartTime   = (thisMeet.start_hour_24) + (thisMeet.start_minutes)/60; 
+        var EndTime   = (thisMeet.end_hour_24)  + (thisMeet.end_minutes)/60;
+        var hourLength  = EndTime - StartTime;
+        var MeetDays  = thisMeet.meeting_days;
+        var OpenClose   = entry.course_status_normalized;
+        var Building, Room;
         try {
-      	 Building 	= thisMeet.building_code;
-      	 Room 		= thisMeet.room_number;
-      	} catch (err) {
-      	 Building 	= "";
-      	 Room 		= "";
-      	}
+         Building   = thisMeet.building_code;
+         Room     = thisMeet.room_number;
+        } catch (err) {
+         Building   = "";
+         Room     = "";
+        }
 
-      	// Full ID will have sectionID+MeetDays+StartTime
-      	// This is necessary for classes like PHYS151, which has times: M@13, TR@9, AND R@18
-      	var FullID = SectionID+'-'+MeetDays+StartTime.toString().replace(".", "");
+        // Full ID will have sectionID+MeetDays+StartTime
+        // This is necessary for classes like PHYS151, which has times: M@13, TR@9, AND R@18
+        var FullID = SectionID+'-'+MeetDays+StartTime.toString().replace(".", "");
 
-      	resJSON[FullID] = {	
-          'fullCourseName': 	SectionName,
-  				'HourLength': 		hourLength,
-  				'meetDay': 			MeetDays,
-  				'meetHour': 		StartTime,
-  				'meetRoom': 		Building+' '+Room
-  		  };
+        resJSON[FullID] = { 
+          'fullCourseName':   SectionName,
+          'HourLength':     hourLength,
+          'meetDay':      MeetDays,
+          'meetHour':     StartTime,
+          'meetRoom':     Building+' '+Room
+        };
       }}
     }
     catch (err) {

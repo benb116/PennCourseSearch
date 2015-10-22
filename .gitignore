@@ -29,7 +29,7 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 /node_modules/
 
-DB Backup.zip
+DB Backup/
 2015C/
 2015ARevRaw/
 2016A/
