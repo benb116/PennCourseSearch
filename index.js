@@ -100,6 +100,7 @@ var paymentNotes = [
   "For%20your%20next%20trip%20to%20Wawa"];
 
 var currentTerm = '2016A';
+var latestRev = '2015C';
 
 // Handle main page requests
 app.get('/', stormpath.loginRequired, function(req, res) {
@@ -120,14 +121,14 @@ app.get('/', stormpath.loginRequired, function(req, res) {
       subtitle: thissub,
       user: pennkey,
       paymentNote: fullPaymentNote,
-      // status: "We're experiencing some issues with Penn InTouch (shocker). Please hang tight!" // Everything's OK in hebrew
-      status: "hakol beseder" // Everything's OK in hebrew
+      // statusMessage: "We're experiencing some issues with Penn InTouch (shocker). Please hang tight!" // Everything's OK in hebrew
+      statusMessage: "hakol beseder" // Everything's OK in hebrew
     });
   }
 });
 
 // For use below when sending JSON files
-var sendRevOpts     = {root: __dirname + '/2015ARevRaw/', dotfiles: 'deny'};
+var sendRevOpts     = {root: __dirname + '/'+latestRev+'Rev/', dotfiles: 'deny'};
 var sendCourseOpts  = {root: __dirname + '/'+currentTerm+'/',       dotfiles: 'deny'};
 
 // Manage search requests

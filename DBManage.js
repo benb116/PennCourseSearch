@@ -20,15 +20,19 @@ try {
 var currentTerm = '2016A';
 var deptList = ["AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANCH", "ANEL", "ANTH", "ARAB", "ARCH", "ARTH", "ASAM", "ASTR", "BCHE", "BE", "BENF", "BENG", "BEPP", "BFMD", "BIBB", "BIOE", "BIOL", "BIOM", "BIOT", "BMB", "BSTA", "CAMB", "CBE", "CHEM", "CHIN", "CINE", "CIS", "CIT", "CLST", "COGS", "COLL", "COML", "COMM", "CPLN", "CRIM", "DEMG", "DENT", "DOSP", "DTCH", "DYNM", "EALC", "EAS", "ECON", "EDCE", "EDUC", "EEUR", "ENGL", "ENGR", "ENM", "ENMG", "ENVS", "EPID", "ESE", "FNAR", "FNCE", "FOLK", "FREN", "GAFL", "GAS", "GCB", "GEND", "GEOL", "GREK", "GRMN", "GSWS", "GUJR", "HCMG", "HEBR", "HIND", "HIST", "HPR", "HSOC", "HSPV", "HSSC", "IMUN", "INTG", "INTL", "INTR", "INTS", "IPD", "ITAL", "JPAN", "JWST", "KORN", "LALS", "LARP", "LATN", "LAW", "LGIC", "LGST", "LING", "LSMP", "MATH", "MCS", "MEAM", "MED", "MGEC", "MGMT", "MKTG", "MLA", "MLYM", "MMP", "MSCI", "MSE", "MSSP", "MTR", "MUSA", "MUSC", "NANO", "NELC", "NETS", "NGG", "NPLD", "NSCI", "NURS", "OIDD", "PERS", "PHIL", "PHRM", "PHYS", "PPE", "PREC", "PRTG", "PSCI", "PSYC", "PSYS", "PUBH", "PUNJ", "REAL", "REG", "RELS", "ROML", "RUSS", "SAST", "SCND", "SKRT", "SLAV", "SOCI", "SPAN", "STAT", "STSC", "SWRK", "TAML", "TELU", "THAR", "TURK", "URBS", "URDU", "VANB", "VBMS", "VCSN", "VCSP", "VIPR", "VISR", "VLST", "VMED", "WH", "WHCP", "WHG", "WRIT", "YDSH"];
 
-var index = Number(process.argv[2]);
-PullRegistrar(index);
-console.log('Done');
+var source = process.argv[2].toLowerCase();
+var index = Number(process.argv[3]);
+if (source == 'registrar') {
+	PullRegistrar(index);
+} else if (source == "review") {
+	PullReview(index);
+}
 
 function PullRegistrar(index) {
 	var thedept = deptList[index];
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
 
-  request({
+  	request({
 		uri: baseURL,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}
 	}, function(error, response, body) {
@@ -56,13 +60,18 @@ function PullRegistrar(index) {
 				// At the end of the list
 				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) {
 					// Write JSON to file
-					// console.log(err)
-					console.log(('List Spit: '+index+' '+thedept));
+					if (err) {
+						console.log(index+' '+thedept+' '+err);
+					} else {
+						console.log(('List Spit: '+index+' '+thedept));
+					}
 				});
 			}
 		}}
 		index++;
-		PullRegistrar(index);
+		if (index <= deptList.length) {
+			PullRegistrar(index);
+		}
 	});
 }
 
@@ -152,11 +161,17 @@ function PullReview(index) {
 				'cI': courseAvgInst
 			};
 		}
-		fs.writeFile('./2015ARevRaw/'+thedept+'.json', JSON.stringify(resp), function (err) {
-			console.log('It\'s saved! '+ index + ' ' + thedept);
+		fs.writeFile('./2015CRev/'+thedept+'.json', JSON.stringify(resp), function (err) {
+			if (err) {
+				console.log(index+' '+thedept+' '+err);
+			} else {
+				console.log('It\'s saved! '+ index + ' ' + thedept);
+			}
 			// UploadToDB('2015ARevRaw', 'NewReviews', index);
 			index++;
-			PullReview(index);
+			if (index <= deptList.length) {
+				PullReview(index);
+			}
 		});
 	});
 	return 0;

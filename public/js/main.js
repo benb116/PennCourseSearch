@@ -474,18 +474,27 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
     var sections = courseInfo[0];
 
     for(var section in sections) { if (sections.hasOwnProperty(section)) { // Loop through the sections
+      var thisSec = sections[section];
       var starClass = 'fa-star-o';
-      var index = stars.indexOf(sections[section].NoSpace);
+      var index = stars.indexOf(thisSec.NoSpace);
       if (index > -1) {starClass = 'fa-star';} // If the section is a starred section, add the filled star
 
-      allHTML += '<li id="' + sections[section].SectionName.replace(/ /g,'-') + '" class="' + sections[section].ActType + '">'+
+      var status = thisSec.StatusClass.split("Sec")[0].toLowerCase();
+      var statusTitleText
+      if (status == "error") {
+        statusTitleText = "Status error :(";
+      } else {
+        statusTitleText = 'This section is '+thisSec.StatusClass.split("Sec")[0].toLowerCase()+'.';
+      };
+
+      allHTML += '<li id="' + thisSec.SectionName.replace(/ /g,'-') + '" class="' + thisSec.ActType + '">'+
         '<i class="fa fa-plus"></i>&nbsp&nbsp'+
-        '<span class="'+sections[section].StatusClass+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
+        '<span class="'+thisSec.StatusClass+' tooltip" title="'+statusTitleText+'">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
         '<span class="PCR tooltip">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;'+
-        '<span>'+sections[section].SectionName + sections[section].TimeInfo+'</span>'+
+        '<span>'+thisSec.SectionName + thisSec.TimeInfo+'</span>'+
         '<i class="fa '+starClass+'"></i></li>';
     }}
-    $('#CourseTitle').html(sections[section].CourseTitle);
+    $('#CourseTitle').html(thisSec.CourseTitle);
     $('#SectionList > ul').html(allHTML); // Put the course number list in  #SectionList
     UpdateFilters();
     for (var sec in sections) {
@@ -523,12 +532,12 @@ function SectionInfoFormat(data, passvar) { // Receive section specific info and
     if (data.Title)         {HTMLinfo += " - " + data.Title + "<br><br>";}
     if (data.Instructor)    {HTMLinfo += "Instructor: " + data.Instructor + "<br><br>";}
     if (data.TimeInfo)      {HTMLinfo += data.TimeInfo + "<br>";}
-    if (data.Description)   {HTMLinfo += "Description:<br>" + data.Description + "<br>";}
+    if (data.Description)   {HTMLinfo += "Description:<br>" + data.Description + "<br><br>";}
     if (data.OpenClose)     {HTMLinfo += "Status: " + data.OpenClose + "<br><br>";}
     if (data.termsOffered)  {HTMLinfo += data.termsOffered + "<br><br>";}
     if (data.Prerequisites) {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br><br>";}
     if (data.AssociatedType){
-      HTMLinfo += 'Associated ' + data.AssociatedType + '<br><br><ul>';
+      HTMLinfo += 'Associated ' + data.AssociatedType + ':<br><ul>';
       for (var assc in data.AssociatedSections) {
         HTMLinfo += '<li class="AsscSec" id="' + data.AssociatedSections[assc].replace(/ /g, ' ') + '"><span>' + data.AssociatedSections[assc] + '</span></li>';
       }
@@ -614,7 +623,7 @@ function StarFormat(sections) { // Format starred section list
 
 function RetrievePCR(courseID, instName) {
   var dept = courseID.split(' ')[0];
-  if (!localStorage['Review'+dept]) { // If we don't have the dept reviews cached
+  if (!localStorage['Review2015C'+dept]) { // If we don't have the dept reviews cached
     LoadingSum += 1; 
     LoadingIndicate();
     baseURL = '/NewReview?dept=' + dept; // Get them
@@ -625,7 +634,7 @@ function RetrievePCR(courseID, instName) {
         async: false // Yeah it's asynchronous, but otherwise the function runs ahead of itself
       }) // Make the request
       .done(function(data) {
-        localStorage['Review'+dept] = JSON.stringify(data); // Cache that jawn
+        localStorage['Review2015C'+dept] = JSON.stringify(data); // Cache that jawn
         ApplyPCR(courseID, instName);
         return 'done';
       })
@@ -645,7 +654,7 @@ function RetrievePCR(courseID, instName) {
 function ApplyPCR(courseID, instName) {
   var dept = courseID.split(' ')[0];
   var searchID = dept + ' ' + courseID.split(' ')[1];
-  var allReviews = JSON.parse(localStorage['Review'+dept]); // Search the cache for reviews
+  var allReviews = JSON.parse(localStorage['Review2015C'+dept]); // Search the cache for reviews
   var thisReview = allReviews[searchID]; // Find relevant course info
   var result;
   if (typeof thisReview === 'undefined') {
@@ -682,8 +691,16 @@ function ApplyPCR(courseID, instName) {
     pcrFrac = 0;
   }
   thisPCR.css('background-color', 'rgba(45, 160, 240, '+Math.pow(pcrFrac, 5)*5+')'); // Correct PCR shading
+  var toolText;
+  if (isNaN(pcrFrac)) {
+    console.log('yes')
+    thisPCR.css('color', 'black');
+    toolText = 'No PCR data for this class';
+  } else {
+    toolText = 'Diff: '+ (result.cD || '0.00') + ' Instructor: ' + (result.cI || '0.00');
+  };
   if (result) {
-    thisPCR.prop('title', 'Diff: '+ (result.cD || '0.00') + ' Instructor: ' + (result.cI || '0.00')); // Add the title for tooltipster
+    thisPCR.prop('title', toolText); // Add the title for tooltipster
   }
 }
 

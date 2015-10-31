@@ -173,6 +173,7 @@ form > input[type="text"] {
     overflow-y: scroll;}
 #SectionInfo {
     height: 65%;
+    width: 305.5px;
     overflow-y: scroll;
     /*padding-right: 0.5em;*/
     border-top: 1em solid white;
