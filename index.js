@@ -273,37 +273,40 @@ function parseCourseList(Res) {
   // Convert to JSON object
   var sectionsList = {};
   for(var key in Res.result_data) {
-    if (Res.result_data.hasOwnProperty(key)) { 
-      var SectionName = Res.result_data[key].section_id_normalized.replace(/ /g, "").replace(/-/g, " ");
-      var sectionNameNoSpace = Res.result_data[key].section_id;
-      var TimeInfoArray = getTimeInfo(Res.result_data[key]); // Get meeting times for a section
-      var StatusClass = TimeInfoArray[0];
-      var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
-      var actType = Res.result_data[key].activity;
-      var SectionInst;
-      try {
-        SectionInst = Res.result_data[key].instructors[0].name;
-      } catch(err) {
-        SectionInst = '';
-      }
-      
-      // If there are multiple meeting times
-      if (typeof TimeInfoArray[1][1] !== 'undefined') {
-        TimeInfo += ' ...';
-      }
-      if (typeof TimeInfo === 'undefined') {
-        TimeInfo = '';
-      }
+    if (Res.result_data.hasOwnProperty(key)) {
+      var thisEntry = Res.result_data[key];
+      if (!thisEntry.is_cancelled) {
+        var SectionName = thisEntry.section_id_normalized.replace(/ /g, "").replace(/-/g, " ");
+        var sectionNameNoSpace = thisEntry.section_id;
+        var TimeInfoArray = getTimeInfo(thisEntry); // Get meeting times for a section
+        var StatusClass = TimeInfoArray[0];
+        var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
+        var actType = thisEntry.activity;
+        var SectionInst;
+        try {
+          SectionInst = thisEntry.instructors[0].name;
+        } catch(err) {
+          SectionInst = '';
+        }
+        
+        // If there are multiple meeting times
+        if (typeof TimeInfoArray[1][1] !== 'undefined') {
+          TimeInfo += ' ...';
+        }
+        if (typeof TimeInfo === 'undefined') {
+          TimeInfo = '';
+        }
 
-      sectionsList[sectionNameNoSpace] = {
-        'SectionName': SectionName, 
-        'StatusClass': StatusClass, 
-        'TimeInfo': TimeInfo, 
-        'NoSpace': sectionNameNoSpace, 
-        'CourseTitle': Res.result_data[0].course_title,
-        'SectionInst': SectionInst,
-        'ActType': actType
-      };
+        sectionsList[sectionNameNoSpace] = {
+          'SectionName': SectionName, 
+          'StatusClass': StatusClass, 
+          'TimeInfo': TimeInfo, 
+          'NoSpace': sectionNameNoSpace, 
+          'CourseTitle': Res.result_data[0].course_title,
+          'SectionInst': SectionInst,
+          'ActType': actType
+        };
+      }
     }
   }
   courseInfo = parseSectionList(Res);
