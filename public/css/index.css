@@ -248,7 +248,6 @@ ul {
     width: 48%;
     display: inline-block;
     float: left;
-    padding-top:.75em;
 }
 .FilterBlock {
     box-sizing: border-box;
@@ -258,7 +257,7 @@ ul {
     overflow: hidden;     
 }
 .FilterBlock > input {margin: 0 1em 0 .5em;}
-
+#reqFilter {margin-top:.75em;}
 
 
 #SchedGraph {

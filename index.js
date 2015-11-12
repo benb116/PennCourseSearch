@@ -171,10 +171,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
   if (searchType  == 'courseIDSearch' && 
       resultType  == 'deptSearch' && 
-      reqFilter   === '' && 
-      proFilter   === '' && 
-      actFilter   === '' && 
-      includeOpen === '') {
+      !reqFilter && !proFilter && !actFilter && !includeOpen ) {
     try {
       res.sendFile(searchParam.toUpperCase()+'.json', sendCourseOpts, function (err) {
         if (err) {return res.send({});}
@@ -183,7 +180,6 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       return res.send('');
     }
   } else {
-    console.log(baseURL)
     request({
       uri: baseURL,
       method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
@@ -384,6 +380,8 @@ function parseSectionList(Res) {
       }
     }
 
+    var reqsArray = entry.fulfills_college_requirements;
+
     sectionInfo = {
       'FullID': FullID, 
       'CourseID': CourseID,
@@ -395,7 +393,8 @@ function parseSectionList(Res) {
       'Prerequisites': prereq, 
       'TimeInfo': TimeInfo,
       'AssociatedType': asscType, 
-      'AssociatedSections': asscList
+      'AssociatedSections': asscList,
+      'reqsFilled': reqsArray
     };
     return sectionInfo;
   }

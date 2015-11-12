@@ -486,7 +486,7 @@ function getCourseNumbers( search, searchSelect ) { // Getting info about course
   ] );
 
   var searchURL = '/Search?searchType=' + searchSelect + '&resultType=deptSearch&searchParam=' + search + requireFilter + programFilter + activityFilter;
-  console.log(searchURL)
+  // console.log(searchURL)
   SendReq( searchURL, CourseFormat ); // Send results to CourseFormat
 }
 
@@ -602,32 +602,16 @@ function SectionInfoFormat( data, passvar ) { // Receive section specific info a
   } else {
     var HTMLinfo = "";
     // if (data.Instructor)  {HTMLinfo += "<span>&nbsp + &nbsp</span>";}
-    if ( data.FullID ) {
-      HTMLinfo += "<span>" + data.FullID + "</span>";
-    } // Format the whole response
-    if ( data.Title ) {
-      HTMLinfo += " - " + data.Title + "<br><br>";
-    }
-    if ( data.Instructor ) {
-      HTMLinfo += "Instructor: " + data.Instructor + "<br><br>";
-    }
-    if ( data.TimeInfo ) {
-      HTMLinfo += data.TimeInfo + "<br>";
-    }
-    if ( data.Description ) {
-      HTMLinfo += "Description:<br>" + data.Description + "<br><br>";
-    }
-    if ( data.OpenClose ) {
-      HTMLinfo += "Status: " + data.OpenClose + "<br><br>";
-    }
-    if ( data.termsOffered ) {
-      HTMLinfo += data.termsOffered + "<br><br>";
-    }
-    if ( data.Prerequisites ) {
-      HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br><br>";
-    }
-    if ( data.AssociatedType ) {
-      HTMLinfo += 'Associated ' + data.AssociatedType + ':<br><ul>';
+    if ( data.FullID ) {HTMLinfo += "<span>" + data.FullID + "</span>";} // Format the whole response
+    if ( data.Title ) {HTMLinfo += " - " + data.Title + "<br><br>";}
+    if ( data.Instructor ) {HTMLinfo += "Instructor: " + data.Instructor + "<br><br>";}
+    if ( data.TimeInfo ) {HTMLinfo += data.TimeInfo + "<br>";}
+    if ( data.Description ) {HTMLinfo += "Description:<br>" + data.Description + "<br><br>";}
+    if ( data.OpenClose ) {HTMLinfo += "Status: " + data.OpenClose + "<br><br>";}
+    if ( data.reqsFilled.length ) {HTMLinfo += "Requirements fulfilled: " + data.reqsFilled.join(", ") + "<br><br>";}
+    if ( data.termsOffered ) {HTMLinfo += data.termsOffered + "<br><br>";}
+    if ( data.Prerequisites ) {HTMLinfo += "Prerequisites: " + data.Prerequisites + "<br><br>";}
+    if ( data.AssociatedType ) {HTMLinfo += 'Associated ' + data.AssociatedType + ':<br><ul>';
       for (var assc in data.AssociatedSections) {
         HTMLinfo += '<li class="AsscSec" id="' + data.AssociatedSections[ assc ].replace( / /g, ' ' ) + '"><span>' + data.AssociatedSections[ assc ] + '</span></li>';
       }
