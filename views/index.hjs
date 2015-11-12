@@ -79,6 +79,7 @@
                   </li>
                   <li onclick="StarHandle(sessionStorage.starList, 'show');"><span>Show Stars</span></li>
                   <li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li>
+                  <li onclick="ClearSearch()"><span>Clear Search</span></li>
                 </ul>
             </div>
             <div id="ModalWindow" class="Modal">
@@ -118,57 +119,63 @@
         		<div id="SectionInfo"></div>
         	</div>
         	<div id="InfoPanel">
-                <div id="FilterSearch"><div id="FilterPanel">
-                    <div class="FilterBlock">
-                        <input type="checkbox" id="closedCheck" value="ClosedSec" checked>Show closed sections
+                <div id="FilterSearch">
+                    <div class="FilterPanel">
+                        <div class="FilterBlock">
+                            {{!-- <span>Filter by requirement</span> --}}
+                            <select multiple id="reqFilter" size=7>
+                                {{!-- <option value="noFilter">Filter by requirement</option> --}}
+                                <option value="MDS">Society Sector</option>
+                                <option value="MDH">History &amp; Tradition Sector</option>
+                                <option value="MDA">Arts &amp; Letters Sector</option>
+                                <option value="MDO,MDB">Humanities &amp; Social Science Sector</option>
+                                <option value="MDL">Living World Sector</option>
+                                <option value="MDP">Physical World Sector</option>
+                                <option value="MDN,MDB">Natural Science &amp; Math Sector</option>
+                                <option value="MWC">Writing Requirement</option>
+                                <option value="MQS">College Quantitative Data Analysis Req.</option>
+                                <option value="MFR">Formal Reasoning Course</option>
+                                <option value="MC1">Cross Cultural Analysis</option>
+                                <option value="MC2">Cultural Diversity in the US</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="FilterBlock">
-                        <select id="actFilter">
-                            <option value="noFilter">Filter by section type</option>
-                            <option value="LEC">Lecture</option>
-                            <option value="REC">Recitation</option>
-                            <option value="LAB">Laboratory</option>
-                            <option value="IND">Independent Study</option>
-                            <option value="SEM">Seminar</option>
-                            <option value="SRT">Senior Thesis</option>
-                            <option value="STU">Studio</option>
-                            <option value="CLN">Clinic</option>
-                            <option value="PRC">SCUE Preceptorial</option>
-                            <option value="PRO">NSO Proseminar</option>
-                            <option value="ONL">Online Course</option>
-                        </select>
+                    <div class="FilterPanel">
+                        <div class="FilterBlock">
+                            <input type="checkbox" id="closedCheck" value="ClosedSec" checked>Show closed sections
+                        </div>
+                        <div class="FilterBlock">
+                            <select id="actFilter">
+                                <option value="noFilter">Filter by section type</option>
+                                <option value="LEC">Lecture</option>
+                                <option value="REC">Recitation</option>
+                                <option value="LAB">Laboratory</option>
+                                <option value="IND">Independent Study</option>
+                                <option value="SEM">Seminar</option>
+                                <option value="SRT">Senior Thesis</option>
+                                <option value="STU">Studio</option>
+                                <option value="CLN">Clinic</option>
+                                <option value="PRC">SCUE Preceptorial</option>
+                                <option value="PRO">NSO Proseminar</option>
+                                <option value="ONL">Online Course</option>
+                            </select>
+                        </div>
+                        
+                        <div class="FilterBlock">
+                            <select id="proFilter">
+                                <option value="noFilter">Filter by program</option>
+                                <option value="MSL">ABCS Courses</option>
+                                <option value="BFS">Ben Franklin Seminars</option>
+                                <option value="CGS">College of Liberal &amp; Professional Studies</option>
+                                <option value="CRS">Critical Writing Seminars</option>
+                                <option value="FORB">Freshman-Friendly courses</option>
+                                <option value="MFS">Freshman Seminars</option>
+                                <option value="PLC">Penn Language Center</option>
+                                <option value="SS">Summer Sessions I &amp; II</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="FilterBlock">
-                        <select id="reqFilter">
-                            <option value="noFilter">Filter by requirement</option>
-                            <option value="MDS">Society Sector</option>
-                            <option value="MDH">History &amp; Tradition Sector</option>
-                            <option value="MDA">Arts &amp; Letters Sector</option>
-                            <option value="MDO,MDB">Humanities &amp; Social Science Sector</option>
-                            <option value="MDL">Living World Sector</option>
-                            <option value="MDP">Physical World Sector</option>
-                            <option value="MDN,MDB">Natural Science &amp; Math Sector</option>
-                            <option value="MWC">Writing Requirement</option>
-                            <option value="MQS">College Quantitative Data Analysis Req.</option>
-                            <option value="MFR">Formal Reasoning Course</option>
-                            <option value="MC1">Cross Cultural Analysis</option>
-                            <option value="MC2">Cultural Diversity in the US</option>
-                        </select>
-                    </div>
-                    <div class="FilterBlock">
-                        <select id="proFilter">
-                            <option value="noFilter">Filter by program</option>
-                            <option value="MSL">ABCS Courses</option>
-                            <option value="BFS">Ben Franklin Seminars</option>
-                            <option value="CGS">College of Liberal &amp; Professional Studies</option>
-                            <option value="CRS">Critical Writing Seminars</option>
-                            <option value="FORB">Freshman-Friendly courses</option>
-                            <option value="MFS">Freshman Seminars</option>
-                            <option value="PLC">Penn Language Center</option>
-                            <option value="SS">Summer Sessions I &amp; II</option>
-                        </select>
-                    </div>
-                </div></div>
+                </div>
                 <div id="SchedGraph">
             		<div id="TimeCol" style="position:relative;"></div>
                     <div id="Schedule" style="position:relative;"></div>

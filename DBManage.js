@@ -9,9 +9,6 @@ try {
 	config.requestAB 	= process.env.REQUESTAB;
 	config.requestAT 	= process.env.REQUESTAT;
 	config.PCRToken 	= process.env.PCRTOKEN;
-	// config.MongoUser 	= process.env.MONGOUSER;
-	// config.MongoPass 	= process.env.MONGOPASS;
-	// config.MongoURI 	= process.env.MONGOURI;
 }
 
 // Connect to database
@@ -26,13 +23,15 @@ var limit = false;
 if (isNaN(index)) {
 	limit = 1;
 	index = deptList.indexOf(process.argv[3].toUpperCase());
-};
+}
 console.log(index);
 if (source == 'registrar') {
 	PullRegistrar(index);
 } else if (source == "review") {
 	PullReview(index);
 }
+
+var reqCodes = {Society: "MDS",History: "MDH",Arts: "MDA",Humanities: "MDO,MDB",Living: "MDL",Physical: "MDP",Natural: "MDN,MDB",Writing: "MWC",College: "MQS",Formal: "MFR",Cross: "MC1",Cultural: "MC2" };
 
 function PullRegistrar(index) {
 	var thedept = deptList[index];
@@ -49,16 +48,20 @@ function PullRegistrar(index) {
 		for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
 	    	// For each section that comes up
 	    	// Get course name (e.g. CIS 120)
-
-	    	if (!inJSON[key].is_cancelled) {
-				var spacedName = inJSON[key].section_id_normalized
-	            .replace('-', " ")
-	            .split('-')[0]
-	            .replace(/   /g, ' ')
-	            .replace(/  /g, ' ');
+	    	var thisKey = inJSON[key];
+			var spacedName = thisKey.section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' ');
+	    	if (!thisKey.is_cancelled && !resp[spacedName]) {
+				// console.log(spacedName);
+				var reqList = thisKey.fulfills_college_requirements;
+				var reqCodesList = [];
+				try {
+					reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
+					reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
+				} catch(err) {}
 				resp[spacedName] = {
 					'courseListName': spacedName,
-					'courseTitle': inJSON[key].course_title
+					'courseTitle': thisKey.course_title,
+					'courseReqs': reqCodesList
 				};
 			}
 			// console.log(JSON.stringify(resp))

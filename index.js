@@ -121,7 +121,7 @@ app.get('/', stormpath.loginRequired, function(req, res) {
       subtitle: thissub,
       user: pennkey,
       paymentNote: fullPaymentNote,
-      // statusMessage: "We're experiencing some issues with Penn InTouch (shocker). Please hang tight!" // Everything's OK in hebrew
+      // statusMessage: "We're experiencing some issues with Penn InTouch (what a shock). Please hang tight!" // Everything's OK in hebrew
       statusMessage: "hakol beseder" // Everything's OK in hebrew
     });
   }
@@ -145,12 +145,12 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
   var myPennkey     = req.user.email.split('@')[0]; // Get Pennkey
 
   // Building the request URI
-  if (typeof reqFilter  === 'undefined') {reqFilter   = '';} else {reqFilter  = '&fulfills_requirement='+reqFilter;}
-  if (typeof proFilter  === 'undefined') {proFilter   = '';} else {proFilter  = '&program='+proFilter;}
-  if (typeof actFilter  === 'undefined') {actFilter   = '';} else {actFilter  = '&activity='+actFilter;}
+  if (typeof reqFilter  === 'undefined') {reqSearch   = '';} else {reqSearch  = '&fulfills_requirement='+reqFilter;}
+  if (typeof proFilter  === 'undefined') {proSearch   = '';} else {proSearch  = '&program='+proFilter;}
+  if (typeof actFilter  === 'undefined') {actSearch   = '';} else {actSearch  = '&activity='+actFilter;}
   if (typeof includeOpen  === 'undefined') {includeOpen   = '';} else {includeOpen = '&open=true';}
 
-  var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term='+currentTerm+reqFilter+proFilter+actFilter+includeOpen;
+  var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term='+currentTerm+reqSearch+proSearch+actSearch+includeOpen;
 
   if (searchType == 'courseIDSearch') {baseURL = baseURL + '&course_id='  + searchParam;}
   if (searchType == 'keywordSearch')  {baseURL = baseURL + '&description='+ searchParam;}
@@ -175,19 +175,15 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       proFilter   === '' && 
       actFilter   === '' && 
       includeOpen === '') {
-
     try {
       res.sendFile(searchParam.toUpperCase()+'.json', sendCourseOpts, function (err) {
-        if (err) {
-          // console.log(err);
-          return res.send({});
-        }
+        if (err) {return res.send({});}
       });
     } catch(err) {
       return res.send('');
     }
-    
   } else {
+    console.log(baseURL)
     request({
       uri: baseURL,
       method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
@@ -216,14 +212,27 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
   }
 });
 
+var reqCodes = {Society: "MDS",History: "MDH",Arts: "MDA",Humanities: "MDO,MDB",Living: "MDL",Physical: "MDP",Natural: "MDN,MDB",Writing: "MWC",College: "MQS",Formal: "MFR",Cross: "MC1",Cultural: "MC2"};
+
 // This function spits out the list of courses that goes in #CourseList
 function parseDeptList(Res) {
   var coursesList = {};
   for(var key in Res.result_data) {
-    if (Res.result_data.hasOwnProperty(key)) { // Iterate through each course
-      var courseListName  = Res.result_data[key].course_department+' '+Res.result_data[key].course_number; // Get course dept and number
-      var courseTitle   = Res.result_data[key].course_title;
-      coursesList[courseListName] = {'courseListName': courseListName, 'courseTitle': courseTitle};
+    var thisKey = Res.result_data[key];
+    var courseListName  = thisKey.course_department+' '+thisKey.course_number; // Get course dept and number
+    if (Res.result_data.hasOwnProperty(key) && !coursesList[courseListName]) { // Iterate through each course
+      var courseTitle   = thisKey.course_title;
+      var reqList = thisKey.fulfills_college_requirements;
+      var reqCodesList = [];
+      try {
+        reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
+        reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
+      } catch(err) {}
+      coursesList[courseListName] = {
+        'courseListName': courseListName, 
+        'courseTitle': courseTitle,
+        'courseReqs': reqCodesList
+      };
     }
   }
   return coursesList;
@@ -500,13 +509,12 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
     }
     userScheds[schedName] = SchedCourses;
 
-  } else if (addRem == 'ren') { // Delete
+  } else if (addRem == 'ren') { // Rename
     userScheds[schedRename] = userScheds[schedName];
     delete userScheds[schedName];
     
   } else if (addRem == 'clr') { // Clear all
-    SchedCourses = {};
-    userScheds[schedName] = SchedCourses;
+    userScheds[schedName] = {};
 
   } else if (addRem == 'del') { // Delete
     delete userScheds[schedName];

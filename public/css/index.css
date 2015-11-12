@@ -230,36 +230,34 @@ ul {
 
 
 #FilterSearch {
-    height: 10%;
     overflow: hidden;
-    padding-left: 4em;
-    padding-right: 4em;
+    width: 90%;
+    margin: 0 auto;
     font-size: 12px;
     min-width: 500px;
-    height: 6em;
+    height: 10em;
     margin-bottom: 1em;
-    text-align: center;
     display: none;
+    background-color: white;
+    border-radius: 5px;
+    vertical-align: top;
 }
-#FilterPanel {
+.FilterPanel {
     height: 100%;
     background-color: white;
-    width: 100%;
-    border-radius: 5px;
+    width: 48%;
+    display: inline-block;
+    float: left;
+    padding-top:.75em;
 }
 .FilterBlock {
-    height: 49%; 
-    width: 49%; 
-    display: inline-block;
     box-sizing: border-box;
     text-align: left; 
     text-indent: 2em; 
-    vertical-align: middle;
     line-height: 3em; 
     overflow: hidden;     
 }
 .FilterBlock > input {margin: 0 1em 0 .5em;}
-
 
 
 
@@ -268,13 +266,15 @@ ul {
     min-height: 350px;
     min-width: 500px;
     overflow: hidden;
-    padding: 0 2em 0 2em;
+    /*padding: 0 1em 0 1em;*/
     font-size: 12px;
 }
 #InfoPanel {
     height: calc(100vh - 16em);
-    min-width: 500px;
+    /*min-width: 500px;*/
+    width: calc(100% - 650px);
     font-size: 12px;
+    display: inline-block;
 }
 #TimeCol,
 #Schedule {
