@@ -91,7 +91,8 @@ var subtitles = [
   "Classes sine PennCourseSearch vanae.",
   "On PennCourseSearch, no one knows you're Amy G.",
   "Designed by Ben in Speakman. Assembled in China.",
-  "Help! I'm trapped in a NodeJS server! Bring Chipotle!"];
+  "Help! I'm trapped in a NodeJS server! Bring Chipotle!",
+  "Actually in touch."];
 
 var paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";
 var paymentNotes = [
@@ -123,6 +124,7 @@ app.get('/', stormpath.loginRequired, function(req, res) {
       paymentNote: fullPaymentNote,
       // statusMessage: "We're experiencing some issues with Penn InTouch (what a shock). Please hang tight!" // Everything's OK in hebrew
       statusMessage: "hakol beseder" // Everything's OK in hebrew
+      // statusMessage: 'Do you love PennCourseSearch more than Wawa? Do you hate it more than DRL? Let <a href="mailto:bernsb@seas.upenn.edu?subject=PCS feedback">Ben</a> know what you think!'
     });
   }
 });
