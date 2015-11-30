@@ -34,14 +34,14 @@ h2 {
 	color: #7f8c8d;
 	background-color: white;
 	cursor: pointer;
-    box-shadow: 0px 3px 4px 0px rgba(50, 50, 50, 0.58);
+    box-shadow: 0 3px 4px 0 rgba(50, 50, 50, 0.58);
 	transition: all ease-in-out 0.1s;
 }
 .linkButton:hover {
-	box-shadow: 0px 10px 10px -4px rgba(50, 50, 50, 0.58);
+	box-shadow: 0 10px 10px -4px rgba(50, 50, 50, 0.58);
 }
 .linkButton:active {
-	box-shadow: 0px 3px 4px 0px rgba(50, 50, 50, 0.58);
+	box-shadow: 0 3px 4px 0 rgba(50, 50, 50, 0.58);
 }
 .linkButton:focus {
     outline-width: 0;
@@ -61,8 +61,8 @@ h3 {
 }
 .reasonBlock {
 	display: inline-block;
-	position: float;
-	width: 30%;
+/*	position: float;
+*/	width: 30%;
 	min-width: 250px;
 	max-width: 500px;
 	min-height: 60px;
@@ -83,7 +83,7 @@ h3 {
 
 .featureBlock {
 	display: inline-block;
-	position: float;
+	/*position: float;*/
 	width: 49%;
 	min-width: 450px;
 	max-width: 700px;

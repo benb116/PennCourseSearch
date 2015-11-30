@@ -1,6 +1,6 @@
 var fs = require('fs');
 var request = require("request");
-var mongojs = require("mongojs");
+// var mongojs = require("mongojs");
 var config;
 try {
 	config = require('./config.js');
@@ -25,9 +25,9 @@ if (isNaN(index)) {
 	index = deptList.indexOf(process.argv[3].toUpperCase());
 }
 console.log(index);
-if (source == 'registrar') {
+if (source === 'registrar') {
 	PullRegistrar(index);
-} else if (source == "review") {
+} else if (source === "review") {
 	PullReview(index);
 }
 
@@ -64,7 +64,6 @@ function PullRegistrar(index) {
 					'courseReqs': reqCodesList
 				};
 			}
-			// console.log(JSON.stringify(resp))
 			if (key == inJSON.length - 1) {
 				// At the end of the list
 				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) {
@@ -94,11 +93,11 @@ function PullReview(index) {
 		console.log('Received');
 		var deptReviews = JSON.parse(body).result.values;
 		var resp = {};
-		for(var rev in deptReviews) {
+		for(var rev in deptReviews) { if(deptReviews.hasOwnProperty(rev)) {
       // Iterate through each review
 			var sectionIDs = deptReviews[rev].section.aliases;
 			for(var alias in sectionIDs) {
-				if (sectionIDs[alias].split('-')[0] == thedept) {
+				if (sectionIDs[alias].split('-')[0] === thedept) {
           // Only create an entry for the course in this department
 					// Get data
 					var courseID = sectionIDs[alias].split('-')[0] + ' ' + sectionIDs[alias].split('-')[1];
@@ -132,21 +131,21 @@ function PullReview(index) {
 					});
 				}
 			}
-		}
+		}}
 		// This part computes average values and replaces the full data
-		for (var course in resp) {
+		for (var course in resp) { if (resp.hasOwnProperty(course)) {
 			var courseSumQ = 0;
 			var courseSumD = 0;
 			var courseSumI = 0;
-			for (var inst in resp[course]) {
+			for (var inst in resp[course]) { if (resp[course].hasOwnProperty(inst)) {
 				var instSumQ = 0;
 				var instSumD = 0;
 				var instSumI = 0;
-				for (var review in resp[course][inst]) {
+				for (var review in resp[course][inst]) { if (resp[course][inst].hasOwnProperty(review)) {
 					instSumQ += resp[course][inst][review].cQ;
 					instSumD += resp[course][inst][review].cD;
 					instSumI += resp[course][inst][review].cI;
-				}
+				}}
 				// Get average ratings for each instructor for a given class
 				var instAvgQual = Math.round(100 * instSumQ / resp[course][inst].length)/100;
 				var instAvgDiff = Math.round(100 * instSumD / resp[course][inst].length)/100;
@@ -159,7 +158,7 @@ function PullReview(index) {
 				courseSumQ += instAvgQual;
 				courseSumD += instAvgDiff;
 				courseSumI += instAvgInst;
-			}
+			}}
 			// Get average of average instructor ratings for a given class
 			var courseAvgQual = Math.round(100 * courseSumQ / Object.keys(resp[course]).length)/100;
 			var courseAvgDiff = Math.round(100 * courseSumD / Object.keys(resp[course]).length)/100;
@@ -169,7 +168,7 @@ function PullReview(index) {
 				'cD': courseAvgDiff,
 				'cI': courseAvgInst
 			};
-		}
+		}}
 		fs.writeFile('./2015CRev/'+thedept+'.json', JSON.stringify(resp), function (err) {
 			if (err) {
 				console.log(index+' '+thedept+' '+err);
@@ -224,6 +223,7 @@ function Match(index) {
 		}
 	}
 	fs.writeFile('./'+currentTerm+'Full/'+thedept+'.json', JSON.stringify(dept), function (err) {
+		if (err) {console.log(err);}
 		console.log('It\'s saved! '+ index + ' ' + thedept);
 		// UploadToDB('2015ARevRaw', 'NewReviews', index);
 		index++;

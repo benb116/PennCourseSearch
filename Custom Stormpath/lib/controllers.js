@@ -212,7 +212,7 @@ module.exports.login = function(req, res) {
     // If we get here, it means the user is submitting a login request, so we
     // should attempt to log the user into their account.
     success: function(form) {
-      if (form.data.login == 'bernsb') {form.data.login += '@seas.upenn.edu'}
+      if (form.data.login === 'bernsb') {form.data.login += '@seas.upenn.edu'}
       req.app.get('stormpathApplication').authenticateAccount({
         username: form.data.login,
         password: form.data.password
