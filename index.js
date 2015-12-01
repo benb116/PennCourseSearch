@@ -62,6 +62,14 @@ var client = new Keen({
   writeKey: config.KeenIOWriteKey   // String (required for sending data)
 });
 
+var logEvent = function (eventName, eventData) {
+  client.addEvent(eventName, eventData, function (err, res) {
+    if (err) {
+      console.log(err);
+    }
+  });
+};
+
 // Initialize PushBullet
 var pusher = new PushBullet(config.PushBulletAuth);
 // Get first deviceID
@@ -168,7 +176,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
     searchParam: searchParam,
     user: myPennkey
   };
-  client.addEvent('Search', searchEvent, function(err, res) {if (err) {console.log(err);}});
+  logEvent('Search', searchEvent);
 
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
   if (searchType  === 'courseIDSearch' && 
@@ -441,9 +449,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
         user: myPennkey,
         keen: {timestamp: new Date().toISOString()}
       };
-      client.addEvent('Star', starEvent, function(err, res) {
-        if (err) {console.log(err);}
-      });
+      logEvent('Star', starEvent);
     }     
   } else if (addRem === 'rem') { // If we need to remove
     index = StarredCourses.indexOf(courseID);
@@ -484,7 +490,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
         SchedCourses[JSONSecID] = resJSON[JSONSecID];
       }}
       var schedEvent = {schedCourse: courseID,user: myPennkey,keen: {timestamp: new Date().toISOString()}};
-      client.addEvent('Sched', schedEvent, function(err, res) {if (err) {console.log(err);}});
+      logEvent('Sched', schedEvent);
 
       userScheds[schedName] = SchedCourses;
       req.user.customData.Schedules = userScheds;
