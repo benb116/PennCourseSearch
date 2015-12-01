@@ -27,9 +27,12 @@ build/Release
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules/
+/node_modules/
 
-2015A/
-2015ARev/
-2015ARevRaw/
+DB Backup/
 2015C/
+2015CRev/
+2016A/
+stormpath-exports.zip
+Server Files/
+Logs/

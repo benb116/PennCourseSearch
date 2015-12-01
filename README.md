@@ -4,7 +4,7 @@ Fed up with the bloated, inefficient, ugly excuse for an online portal that is P
 
 Students can search departments, courses, and sections as well as descriptions and instructors. All of the data comes from the [Penn OpenData API](https://esb.isc-seo.upenn.edu/8091/documentation/) and [PennCourseReview API](http://pennlabs.org/docs/pcr.html). The server sorts and returns the requested information as JSON, which is then formatted client-side. Schedules are also created using OpenData information and the image is made using client-side JS.
 
-The server is written using NodeJS and the app is currently hosted on Heroku.
+The server is written using NodeJS and the app is currently hosted on ~~Heroku~~ DigitalOcean.
 
 Specific files you may be interested in:
 
@@ -14,3 +14,7 @@ Specific files you may be interested in:
 * [HTML Template](https://github.com/benb116/PennCourseSearch/blob/master/views/index.hjs)
 
 If you have questions, ideas, bug reports, or if you'd like to suggest a new subtitle, let me know.
+
+Screenshot!
+
+![image](https://raw.githubusercontent.com/benb116/PennCourseSearch/master/Screenshot.png)

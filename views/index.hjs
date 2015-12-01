@@ -3,17 +3,14 @@
 	<head>
 		<title>PennCourseSearch</title>
 		<meta charset="UTF-8">
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/css/sweet-alert.css">
-        <link rel="stylesheet" type="text/css" href="/css/venmo.css">
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css">
         <link rel="stylesheet" type="text/css" href="/css/index.css"/>
-        <link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script async id="github-bjs"  src="//buttons.github.io/buttons.js"></script>
-        <script type="text/javascript" src="/js/html2canvas.js"></script>
-        <script type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
-        <script type="text/javascript" src="/js/sweet-alert.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/plugins.css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script async type="text/javascript" src="/js/html2canvas.js"></script>
+        <script async type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
+        <script async type="text/javascript" src="/js/sweetalert.min.js"></script>
         <script type="text/javascript" src="/js/jquery.leanModal.min.js"></script>
         <script type="text/javascript" src="/js/main.js"></script>
         <script>
@@ -23,10 +20,10 @@
             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
             ga('create', 'UA-49014722-4', 'auto');
-            ga('send', 'pageview');
+            ga('send', 'pageview', '/home');
         </script>
 	</head>
-    <body style="background-color:{{ color }};">
+    <body>
         <div id="MenuBar">
             <a rel="leanModal" href="#ModalWindow">About</a>
             <a href="/logout">Logout</a>
@@ -47,7 +44,7 @@
 
                 <!-- <span style="margin-left:1em;" class="OpenSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Open </span><span class="ClosedSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Closed </span> -->
                 
-                <span style="margin-left:2em;">Schedule:</span><select id="schedSelect"></select>
+                <span style="margin-left:1em;">Schedule:</span><select id="schedSelect"></select>
                 
                 <div id="loaderWrap">
                     <div class="loader" id="LoadingInfo" title="1">
@@ -62,7 +59,7 @@
                                 repeatCount="indefinite"/>
                             </path>
                         </svg>
-                    </div>                    
+                    </div>
                 </div>
 
     		</form>
@@ -80,9 +77,9 @@
                       <li id="DeleteSchedBtn">Delete</li>
                     </ul>
                   </li>
-                  <li onclick="$('.CourseTitle').toggle();TitleHidden = !TitleHidden;"><span>Show Titles</span></li>
-                  <li onclick="Stars('show', 'blank');"><span>Show Stars</span></li>
+                  <li onclick="StarHandle(sessionStorage.starList, 'show');"><span>Show Stars</span></li>
                   <li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li>
+                  <li onclick="ClearSearch()"><span>Clear Search</span></li>
                 </ul>
             </div>
             <div id="ModalWindow" class="Modal">
@@ -102,12 +99,13 @@
                 </div>
                  <div class="ModalThird">
                     <span>Want to see all of PCS's code?</span>
-                    <a class="github-button" href="https://github.com/benb116/PennCourseSearch" data-style="mega" style="cursor:pointer;">View on Github</a>
+                    <a href="https://github.com/benb116/PennCourseSearch"><span><i class="fa fa-github" style="padding-right:0.25em;"></i>View on Github</span></a>
                 </div>
                 <a class="modal_close"><i class="fa fa-times"></i></a>
             </div>
             <div id="SchedModal" class="Modal">
                 <img id="SchedImage" src="">
+                <span>Right click the image to save it.</span>
                 <a class="modal_close"><i class="fa fa-times"></i></a>
             </div>
 		</div>
@@ -116,67 +114,74 @@
         	<div id="SectionCol">
         		<div id="Sections">
                     <span id="CourseTitle"></span>
-                    <div id="SectionList"></div>
+                    <div id="SectionList"><ul></ul></div>
                 </div>
         		<div id="SectionInfo"></div>
         	</div>
         	<div id="InfoPanel">
-                <div id="FilterSearch"><div id="FilterPanel">
-                    <div class="FilterBlock">
-                        <input type="checkbox" id="closedCheck" value="ClosedSec" checked>Show closed sections
+                <div id="FilterSearch">
+                    <div class="FilterPanel">
+                        <div class="FilterBlock">
+                            {{!-- <span>Filter by requirement</span> --}}
+                            <select multiple id="reqFilter" size=7>
+                                {{!-- <option value="noFilter">Filter by requirement</option> --}}
+                                <option value="MDS">Society Sector</option>
+                                <option value="MDH">History &amp; Tradition Sector</option>
+                                <option value="MDA">Arts &amp; Letters Sector</option>
+                                <option value="MDO,MDB">Humanities &amp; Social Science Sector</option>
+                                <option value="MDL">Living World Sector</option>
+                                <option value="MDP">Physical World Sector</option>
+                                <option value="MDN,MDB">Natural Science &amp; Math Sector</option>
+                                <option value="MWC">Writing Requirement</option>
+                                <option value="MQS">College Quantitative Data Analysis Req.</option>
+                                <option value="MFR">Formal Reasoning Course</option>
+                                <option value="MC1">Cross Cultural Analysis</option>
+                                <option value="MC2">Cultural Diversity in the US</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="FilterBlock">
-                        <select id="actFilter">
-                            <option value="noFilter">Filter by section type</option>
-                            <option value="LEC">Lecture</option>
-                            <option value="REC">Recitation</option>
-                            <option value="LAB">Laboratory</option>
-                            <option value="IND">Independent Study</option>
-                            <option value="SEM">Seminar</option>
-                            <option value="SRT">Senior Thesis</option>
-                            <option value="STU">Studio</option>
-                            <option value="CLN">Clinic</option>
-                            <option value="PRC">SCUE Preceptorial</option>
-                            <option value="PRO">NSO Proseminar</option>
-                            <option value="ONL">Online Course</option>
-                        </select>
+                    <div class="FilterPanel">
+                        <div class="FilterBlock">
+                            <input type="checkbox" id="closedCheck" value="ClosedSec" checked>Show closed sections
+                        </div>
+                        <div class="FilterBlock">
+                            <select id="actFilter">
+                                <option value="noFilter">Filter by section type</option>
+                                <option value="LEC">Lecture</option>
+                                <option value="REC">Recitation</option>
+                                <option value="LAB">Laboratory</option>
+                                <option value="IND">Independent Study</option>
+                                <option value="SEM">Seminar</option>
+                                <option value="SRT">Senior Thesis</option>
+                                <option value="STU">Studio</option>
+                                <option value="CLN">Clinic</option>
+                                <option value="PRC">SCUE Preceptorial</option>
+                                <option value="PRO">NSO Proseminar</option>
+                                <option value="ONL">Online Course</option>
+                            </select>
+                        </div>
+                        
+                        <div class="FilterBlock">
+                            <select id="proFilter">
+                                <option value="noFilter">Filter by program</option>
+                                <option value="MSL">ABCS Courses</option>
+                                <option value="BFS">Ben Franklin Seminars</option>
+                                <option value="CGS">College of Liberal &amp; Professional Studies</option>
+                                <option value="CRS">Critical Writing Seminars</option>
+                                <option value="FORB">Freshman-Friendly courses</option>
+                                <option value="MFS">Freshman Seminars</option>
+                                <option value="PLC">Penn Language Center</option>
+                                <option value="SS">Summer Sessions I &amp; II</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="FilterBlock">
-                        <select id="reqFilter">
-                            <option value="noFilter">Filter by requirement</option>
-                            <option value="MDS">Society Sector</option>
-                            <option value="MDH">History &amp; Tradition Sector</option>
-                            <option value="MDA">Arts &amp; Letters Sector</option>
-                            <option value="MDO,MDB">Humanities &amp; Social Science Sector</option>
-                            <option value="MDL">Living World Sector</option>
-                            <option value="MDP">Physical World Sector</option>
-                            <option value="MDN,MDB">Natural Science &amp; Math Sector</option>
-                            <option value="MWC">Writing Requirement</option>
-                            <option value="MQS">College Quantitative Data Analysis Req.</option>
-                            <option value="MFR">Formal Reasoning Course</option>
-                            <option value="MC1">Cross Cultural Analysis</option>
-                            <option value="MC2">Cultural Diversity in the US</option>
-                        </select>
-                    </div>
-                    <div class="FilterBlock">
-                        <select id="proFilter">
-                            <option value="noFilter">Filter by program</option>
-                            <option value="MSL">ABCS Courses</option>
-                            <option value="BFS">Ben Franklin Seminars</option>
-                            <option value="CGS">College of Liberal &amp; Professional Studies</option>
-                            <option value="CRS">Critical Writing Seminars</option>
-                            <option value="FORB">Freshman-Friendly courses</option>
-                            <option value="MFS">Freshman Seminars</option>
-                            <option value="PLC">Penn Language Center</option>
-                            <option value="SS">Summer Sessions I &amp; II</option>
-                        </select>
-                    </div>
-                </div></div>
+                </div>
                 <div id="SchedGraph">
             		<div id="TimeCol" style="position:relative;"></div>
                     <div id="Schedule" style="position:relative;"></div>
                 </div>
         	</div>
         </div>
+        <div style="display:none" id="StatusMessage">{{ statusMessage }}</div>
     </body>
 </html>

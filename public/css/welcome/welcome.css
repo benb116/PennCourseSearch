@@ -1,0 +1,131 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	color: white;
+	background-color: #3498db;
+}
+
+#Background {
+    text-align: center;
+}
+#TitleBlock {
+	margin-top: 10%;
+}
+h1 {
+	font-size: 4em;
+	line-height: 1em;
+}
+h2 {
+	font-size: 2em;
+	line-height: 1em;
+}
+#ButtonBlock {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+.linkButton {
+	width: 200px;
+	height: 50px;
+	border-radius: 10px;
+	border: none;
+	margin: 2em;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #7f8c8d;
+	background-color: white;
+	cursor: pointer;
+    box-shadow: 0 3px 4px 0 rgba(50, 50, 50, 0.58);
+	transition: all ease-in-out 0.1s;
+}
+.linkButton:hover {
+	box-shadow: 0 10px 10px -4px rgba(50, 50, 50, 0.58);
+}
+.linkButton:active {
+	box-shadow: 0 3px 4px 0 rgba(50, 50, 50, 0.58);
+}
+.linkButton:focus {
+    outline-width: 0;
+}
+
+#Reasons, #Features {
+	background-color: white;
+	color: #3498db;
+	width: 100%;
+	text-align: center;
+	padding-top: 1.5em;
+	/*padding-bottom: 1.5em;*/
+}
+h3 {
+	font-size: 2.5em;
+	margin-top: 0;
+}
+.reasonBlock {
+	display: inline-block;
+/*	position: float;
+*/	width: 30%;
+	min-width: 250px;
+	max-width: 500px;
+	min-height: 60px;
+	padding: 1em;
+	box-sizing: border-box;
+	vertical-align: top;
+}
+.reasonBlock i {
+	/*font-size: 2.5em;*/
+	margin-right: 0.5em;
+}
+.reasonBlock span {
+	font-size: 2em;
+}
+.reasonBlock p {
+	font-size: 1em;
+}
+
+.featureBlock {
+	display: inline-block;
+	/*position: float;*/
+	width: 49%;
+	min-width: 450px;
+	max-width: 700px;
+	min-height: 450px;
+	text-align: center;
+	vertical-align: top;
+}
+.featureBlock img {
+	width: 75%;
+	margin: 0.5em auto;
+	display: block;
+	font-size: 1.5em;
+	margin-top: 0.5em;
+}
+.featureBlock span {
+	font-size: 1.5em;
+}
+.featureBlock p {
+	width: 75%;
+	margin: 0 auto;
+	text-align: justify;
+	text-indent: 1em;
+	margin-top: 0.5em;
+}
+
+#BottomLinks {
+	text-align: center;
+	padding-top: 1.5em;
+}
+
+footer {
+	background-color: black;
+	text-align: center;
+	height: 150px;
+	padding-top: 1em;
+}
+#LogoWhite {
+	background-image: url(/css/welcome/logo-white.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	width: 120px;
+	height: 80px;
+	margin: 0.5em auto;
+}

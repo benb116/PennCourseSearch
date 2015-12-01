@@ -1,34 +1,43 @@
-var fs 			= require('fs');
+var fs = require('fs');
 var request = require("request");
-var mongojs = require("mongojs");
+// var mongojs = require("mongojs");
+var config;
 try {
-	var config = require('./config.js');
+	config = require('./config.js');
 } catch (err) { // If there is no config file
 	config = {};
 	config.requestAB 	= process.env.REQUESTAB;
 	config.requestAT 	= process.env.REQUESTAT;
 	config.PCRToken 	= process.env.PCRTOKEN;
-	config.MongoUser 	= process.env.MONGOUSER;
-	config.MongoPass 	= process.env.MONGOPASS;
-	config.MongoURI 	= process.env.MONGOURI;
 }
 
 // Connect to database
-var uri = 'mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1',
-		db = mongojs.connect(uri, ["Students", "Courses2015C", "Reviews"]);
+// var db = mongojs('mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', ["Students", "Courses2015C", "NewReviews"]);
 
-var currentTerm = '2015C';
-var deptList = ["AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANCH", "ANEL", "ANTH", "ARAB", "ARCH", "ARTH", "ASAM", "ASTR", "BCHE", "BE", "BENG", "BEPP", "BFMD", "BIBB", "BIOE", "BIOL", "BMB", "BSTA", "CAMB", "CBE", "CHEM", "CHIN", "CINE", "CIS", "CIT", "CLST", "COGS", "COLL", "COML", "COMM", "CPLN", "CRIM", "DEMG", "DTCH", "DYNM", "EALC", "EAS", "ECON", "EDUC", "EEUR", "ENGL", "ENGR", "ENM", "ENVS", "ESE", "FNAR", "FNCE", "FOLK", "FREN", "FRSM", "GAFL", "GAS", "GCB", "GEOL", "GREK", "GRMN", "GSWS", "GUJR", "HCMG", "HEBR", "HIND", "HIST", "HPR", "HSOC", "HSPV", "HSSC", "IMUN", "INTG", "INTR", "IPD", "ITAL", "JPAN", "JWST", "KORN", "LALS", "LARP", "LATN", "LAW", "LGIC", "LGST", "LING", "LSMP", "MATH", "MEAM", "MED", "MGEC", "MGMT", "MKTG", "MLA", "MLYM", "MMP", "MSCI", "MSE", "MSSP", "MUSC", "NANO", "NELC", "NETS", "NGG", "NPLD", "NURS", "OPIM", "PERS", "PHIL", "PHRM", "PHYS", "PPE", "PRTG", "PSCI", "PSYC", "PUBH", "PUNJ", "REAL", "RELS", "ROML", "RUSS", "SAST", "SCND", "SKRT", "SLAV", "SOCI", "SPAN", "STAT", "STSC", "SWRK", "TAML", "TCOM", "TELU", "THAR", "TURK", "URBS", "URDU", "VIPR", "VLST", "WH", "WHCP", "WRIT", "YDSH"];
+var currentTerm = '2016A';
+var deptList = ["AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANCH", "ANEL", "ANTH", "ARAB", "ARCH", "ARTH", "ASAM", "ASTR", "BCHE", "BE", "BENF", "BENG", "BEPP", "BFMD", "BIBB", "BIOE", "BIOL", "BIOM", "BIOT", "BMB", "BSTA", "CAMB", "CBE", "CHEM", "CHIN", "CINE", "CIS", "CIT", "CLST", "COGS", "COLL", "COML", "COMM", "CPLN", "CRIM", "DEMG", "DENT", "DOSP", "DTCH", "DYNM", "EALC", "EAS", "ECON", "EDCE", "EDUC", "EEUR", "ENGL", "ENGR", "ENM", "ENMG", "ENVS", "EPID", "ESE", "FNAR", "FNCE", "FOLK", "FREN", "GAFL", "GAS", "GCB", "GEND", "GEOL", "GREK", "GRMN", "GSWS", "GUJR", "HCMG", "HEBR", "HIND", "HIST", "HPR", "HSOC", "HSPV", "HSSC", "IMUN", "INTG", "INTL", "INTR", "INTS", "IPD", "ITAL", "JPAN", "JWST", "KORN", "LALS", "LARP", "LATN", "LAW", "LGIC", "LGST", "LING", "LSMP", "MATH", "MCS", "MEAM", "MED", "MGEC", "MGMT", "MKTG", "MLA", "MLYM", "MMP", "MSCI", "MSE", "MSSP", "MTR", "MUSA", "MUSC", "NANO", "NELC", "NETS", "NGG", "NPLD", "NSCI", "NURS", "OIDD", "OPIM", "PERS", "PHIL", "PHRM", "PHYS", "PPE", "PREC", "PRTG", "PSCI", "PSYC", "PSYS", "PUBH", "PUNJ", "REAL", "REG", "RELS", "ROML", "RUSS", "SAST", "SCND", "SKRT", "SLAV", "SOCI", "SPAN", "STAT", "STSC", "SWRK", "TAML", "TELU", "THAR", "TURK", "URBS", "URDU", "VANB", "VBMS", "VCSN", "VCSP", "VIPR", "VISR", "VLST", "VMED", "WH", "WHCP", "WHG", "WRIT", "YDSH"];
 
-var index = Number(process.argv[2]);
-PullReview(index);
-console.log('Done');
+var source = process.argv[2].toLowerCase();
+var index = Number(process.argv[3]);
+var limit = false;
+if (isNaN(index)) {
+	limit = 1;
+	index = deptList.indexOf(process.argv[3].toUpperCase());
+}
+console.log(index);
+if (source === 'registrar') {
+	PullRegistrar(index);
+} else if (source === "review") {
+	PullReview(index);
+}
+
+var reqCodes = {Society: "MDS",History: "MDH",Arts: "MDA",Humanities: "MDO,MDB",Living: "MDL",Physical: "MDP",Natural: "MDN,MDB",Writing: "MWC",College: "MQS",Formal: "MFR",Cross: "MC1",Cultural: "MC2" };
 
 function PullRegistrar(index) {
 	var thedept = deptList[index];
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
 
-  request({
+  	request({
 		uri: baseURL,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}
 	}, function(error, response, body) {
@@ -37,27 +46,40 @@ function PullRegistrar(index) {
 
 		var resp = {};
 		for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
-      // For each section that comes up
-      // Get course name (e.g. CIS 120)
-			var spacedName = inJSON[key].section_id_normalized
-            .replace('-', " ")
-            .split('-')[0]
-            .replace(/   /g, ' ')
-            .replace(/  /g, ' ');
-			resp[spacedName] = {
-				'courseListName': spacedName,
-				'courseTitle': inJSON[key].course_title
-			};
+	    	// For each section that comes up
+	    	// Get course name (e.g. CIS 120)
+	    	var thisKey = inJSON[key];
+			var spacedName = thisKey.section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' ');
+	    	if (!thisKey.is_cancelled && !resp[spacedName]) {
+				// console.log(spacedName);
+				var reqList = thisKey.fulfills_college_requirements;
+				var reqCodesList = [];
+				try {
+					reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
+					reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
+				} catch(err) {}
+				resp[spacedName] = {
+					'courseListName': spacedName,
+					'courseTitle': thisKey.course_title,
+					'courseReqs': reqCodesList
+				};
+			}
 			if (key == inJSON.length - 1) {
-        // At the end of the list
+				// At the end of the list
 				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) {
-          // Write JSON to file
-					console.log(('List Spit: '+index));
+					// Write JSON to file
+					if (err) {
+						console.log(index+' '+thedept+' '+err);
+					} else {
+						console.log(('List Spit: '+index+' '+thedept));
+					}
 				});
 			}
 		}}
 		index++;
-		PullRegistrar(index);
+		if (index <= deptList.length && !limit) {
+			PullRegistrar(index);
+		}
 	});
 }
 
@@ -71,11 +93,11 @@ function PullReview(index) {
 		console.log('Received');
 		var deptReviews = JSON.parse(body).result.values;
 		var resp = {};
-		for(var rev in deptReviews) {
+		for(var rev in deptReviews) { if(deptReviews.hasOwnProperty(rev)) {
       // Iterate through each review
 			var sectionIDs = deptReviews[rev].section.aliases;
 			for(var alias in sectionIDs) {
-				if (sectionIDs[alias].split('-')[0] == thedept) {
+				if (sectionIDs[alias].split('-')[0] === thedept) {
           // Only create an entry for the course in this department
 					// Get data
 					var courseID = sectionIDs[alias].split('-')[0] + ' ' + sectionIDs[alias].split('-')[1];
@@ -109,21 +131,21 @@ function PullReview(index) {
 					});
 				}
 			}
-		}
+		}}
 		// This part computes average values and replaces the full data
-		for (var course in resp) {
+		for (var course in resp) { if (resp.hasOwnProperty(course)) {
 			var courseSumQ = 0;
 			var courseSumD = 0;
 			var courseSumI = 0;
-			for (var inst in resp[course]) {
+			for (var inst in resp[course]) { if (resp[course].hasOwnProperty(inst)) {
 				var instSumQ = 0;
 				var instSumD = 0;
 				var instSumI = 0;
-				for (var review in resp[course][inst]) {
+				for (var review in resp[course][inst]) { if (resp[course][inst].hasOwnProperty(review)) {
 					instSumQ += resp[course][inst][review].cQ;
 					instSumD += resp[course][inst][review].cD;
 					instSumI += resp[course][inst][review].cI;
-				}
+				}}
 				// Get average ratings for each instructor for a given class
 				var instAvgQual = Math.round(100 * instSumQ / resp[course][inst].length)/100;
 				var instAvgDiff = Math.round(100 * instSumD / resp[course][inst].length)/100;
@@ -136,22 +158,28 @@ function PullReview(index) {
 				courseSumQ += instAvgQual;
 				courseSumD += instAvgDiff;
 				courseSumI += instAvgInst;
-			}
+			}}
 			// Get average of average instructor ratings for a given class
 			var courseAvgQual = Math.round(100 * courseSumQ / Object.keys(resp[course]).length)/100;
 			var courseAvgDiff = Math.round(100 * courseSumD / Object.keys(resp[course]).length)/100;
 			var courseAvgInst = Math.round(100 * courseSumI / Object.keys(resp[course]).length)/100;
-			resp[course]['Total']  = {
+			resp[course].Total  = {
 				'cQ': courseAvgQual,
 				'cD': courseAvgDiff,
 				'cI': courseAvgInst
 			};
-		}
-		fs.writeFile('./2015ARevRaw/'+thedept+'.json', JSON.stringify(resp), function (err) {
-			console.log('It\'s saved! '+ index);
-			UploadToDB('2015ARevRaw', 'NewReviews', index);
+		}}
+		fs.writeFile('./2015CRev/'+thedept+'.json', JSON.stringify(resp), function (err) {
+			if (err) {
+				console.log(index+' '+thedept+' '+err);
+			} else {
+				console.log('It\'s saved! '+ index + ' ' + thedept);
+			}
+			// UploadToDB('2015ARevRaw', 'NewReviews', index);
 			index++;
-			PullReview(index);
+			if (index <= deptList.length && !limit) {
+				PullReview(index);
+			}
 		});
 	});
 	return 0;
@@ -194,14 +222,21 @@ function Match(index) {
 			}
 		}
 	}
-	db.collection('Courses'+currentTerm).find({Dept: thedept}, function(err, doc) {
-    // Try to access the database
-		if (doc.length === 0) {
-			db.collection('Courses'+currentTerm).save({'Dept': thedept});
-		}
-    // Add a schedules block if there is none
-		db.collection('Courses'+currentTerm).update({Dept: thedept}, { $set: {Courses: dept}, $currentDate: { lastModified: true }});
+	fs.writeFile('./'+currentTerm+'Full/'+thedept+'.json', JSON.stringify(dept), function (err) {
+		if (err) {console.log(err);}
+		console.log('It\'s saved! '+ index + ' ' + thedept);
+		// UploadToDB('2015ARevRaw', 'NewReviews', index);
 		index++;
 		PullReview(index);
 	});
+	// db.collection('Courses'+currentTerm).find({Dept: thedept}, function(err, doc) {
+ //    // Try to access the database
+	// 	if (doc.length === 0) {
+	// 		db.collection('Courses'+currentTerm).save({'Dept': thedept});
+	// 	}
+ //    // Add a schedules block if there is none
+	// 	db.collection('Courses'+currentTerm).update({Dept: thedept}, { $set: {Courses: dept}, $currentDate: { lastModified: true }});
+	// 	index++;
+	// 	PullReview(index);
+	// });
 }
