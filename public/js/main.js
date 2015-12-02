@@ -270,9 +270,9 @@ function MenuTriggers() {
                 closeOnConfirm: false,
                 animation: "slide-from-top",
             }, function(inputValue) {
-                if (inputValue === false)
+                if (inputValue === false) {
                     return false;
-                else if (inputValue === "") {
+                } else if (inputValue === "") {
                     sweetAlert.showInputError("Your schedule needs a name, silly!");
                     return false;
                 } else if (JSON.parse(sessionStorage.schedList).indexOf(inputValue) !== -1) {
@@ -454,21 +454,21 @@ function initiateSearch() { // Deal with course search terms
 }
 
 function formatID(searchTerms) {
-    splitTerms = searchTerms.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
+    var splitTerms = searchTerms.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
 
-    if (parseFloat(splitTerms[2]) === splitTerms[2]) { // If the third character is a number (e.g. BE100)
+    if (parseFloat(splitTerms[2]) == splitTerms[2]) { // If the third character is a number (e.g. BE100)
         splitTerms = splitTerms.substr(0, 2) + '/' + splitTerms.substr(2); // Splice the search query with a slash after the deptartment
-        if (parseFloat(splitTerms[6]) === splitTerms[6]) { // Then, if the sixth character is a number (e.g. BE100001)
+        if (parseFloat(splitTerms[6]) == splitTerms[6]) { // Then, if the sixth character is a number (e.g. BE100001)
             splitTerms = splitTerms.substr(0, 6) + '/' + splitTerms.substr(6, 3); // Splice the search query with a slash after the course number
         }
-    } else if (parseFloat(splitTerms[3]) === splitTerms[3]) { // If the fourth character is a number (e.g. CIS110)
+    } else if (parseFloat(splitTerms[3]) == splitTerms[3]) { // If the fourth character is a number (e.g. CIS110)
         splitTerms = splitTerms.substr(0, 3) + '/' + splitTerms.substr(3); // Splice the search query with a slash after the deptartment 
-        if (parseFloat(splitTerms[7]) === splitTerms[7]) { // Then, if the seventh character is a number (e.g. CIS110001)
+        if (parseFloat(splitTerms[7]) == splitTerms[7]) { // Then, if the seventh character is a number (e.g. CIS110001)
             splitTerms = splitTerms.substr(0, 7) + '/' + splitTerms.substr(7, 3); // Splice the search query with a slash after the course number
         }
-    } else if (parseFloat(splitTerms[4]) === splitTerms[4]) { // If the fifth character is a number (e.g. MEAM110)
+    } else if (parseFloat(splitTerms[4]) == splitTerms[4]) { // If the fifth character is a number (e.g. MEAM110)
         splitTerms = splitTerms.substr(0, 4) + '/' + splitTerms.substr(4); // Splice the search query with a slash after the deptartment
-        if (parseFloat(splitTerms[8]) === splitTerms[8]) { // Then, if the eighth character is a number (e.g. MEAM110001)
+        if (parseFloat(splitTerms[8]) == splitTerms[8]) { // Then, if the eighth character is a number (e.g. MEAM110001)
             splitTerms = splitTerms.substr(0, 8) + '/' + splitTerms.substr(8, 3); // Splice the search query with a slash after the course number
         }
     }
@@ -608,7 +608,7 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
 }
 
 function getSectionInfo(sec) { // Get info about the specific section
-    searchURL = "/Search?searchType=courseIDSearch&resultType=sectSearch&searchParam=" + sec;
+    var searchURL = "/Search?searchType=courseIDSearch&resultType=sectSearch&searchParam=" + sec;
     SendReq(searchURL, SectionInfoFormat, []);
 }
 
