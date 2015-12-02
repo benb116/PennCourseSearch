@@ -62,6 +62,14 @@ var client = new Keen({
   writeKey: config.KeenIOWriteKey   // String (required for sending data)
 });
 
+var logEvent = function (eventName, eventData) {
+  client.addEvent(eventName, eventData, function (err, res) {
+    if (err) {
+      console.log(err);
+    }
+  });
+};
+
 // Initialize PushBullet
 var pusher = new PushBullet(config.PushBulletAuth);
 // Get first deviceID
@@ -92,13 +100,15 @@ var subtitles = [
   "On PennCourseSearch, no one knows you're Amy G.",
   "Designed by Ben in Speakman. Assembled in China.",
   "Help! I'm trapped in a NodeJS server! Bring Chipotle!",
-  "Actually in touch."];
+  "Actually in touch."
+];
 
 var paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";
 var paymentNotes = [
   "PennCourseSearch%20rocks%20my%20socks!",
   "Donation%20to%20PennInTouch%20Sucks,%20Inc.",
-  "For%20your%20next%20trip%20to%20Wawa"];
+  "For%20your%20next%20trip%20to%20Wawa"
+];
 
 var currentTerm = '2016A';
 var latestRev = '2015C';
@@ -133,34 +143,64 @@ app.get('/', stormpath.loginRequired, function(req, res) {
 var sendRevOpts     = {root: __dirname + '/'+latestRev+'Rev/', dotfiles: 'deny'};
 var sendCourseOpts  = {root: __dirname + '/'+currentTerm+'/',       dotfiles: 'deny'};
 
+var searchTypes = {
+  courseIDSearch: '&course_id=',
+  keywordSearch: '&description=',
+  instSearch: '&instructor='
+};
+
+var filterURI = {
+  reqFilter: '&fulfills_requirement=',
+  proFilter: '&program=',
+  actFilter: '&activity=',
+  includeOpen: '&open=true'
+};
+
+var buildURI = function (filter, type) {
+  if (typeof filter === 'undefined') {
+    return '';
+  } else {
+    if (type === 'includeOpen') {
+      return filterURI[type];
+    } else {
+      return filterURI[type] + filter;
+    }
+  }
+};
+
+var resultTypes = {
+  deptSearch: parseDeptList,
+  numbSearch: parseCourseList,
+  sectSearch: parseSectionList
+};
+
+var BASE_URL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term=';
+
 // Manage search requests
 app.get('/Search', stormpath.loginRequired, function(req, res) {
   var searchParam   = req.query.searchParam;  // The search terms
   var searchType    = req.query.searchType;   // Course ID, Keyword, or Instructor
   var resultType    = req.query.resultType;   // Course numbers, section numbers, section info
   var instructFilter= req.query.instFilter;   // Is there an instructor filter?
-  var reqFilter     = req.query.reqParam;   // Is there a requirement filter?
-  var proFilter     = req.query.proParam;   // So on ...
-  var actFilter     = req.query.actParam;
-  var includeOpen   = req.query.openAllow;
   var myPennkey     = req.user.email.split('@')[0]; // Get Pennkey
 
   // Building the request URI
-  var reqSearch, proSearch, actSearch;
-  if (typeof reqFilter  === 'undefined') {reqSearch   = '';} else {reqSearch  = '&fulfills_requirement='+reqFilter;}
-  if (typeof proFilter  === 'undefined') {proSearch   = '';} else {proSearch  = '&program='+proFilter;}
-  if (typeof actFilter  === 'undefined') {actSearch   = '';} else {actSearch  = '&activity='+actFilter;}
-  if (typeof includeOpen  === 'undefined') {includeOpen   = '';} else {includeOpen = '&open=true';}
+  var reqSearch = buildURI(req.query.reqParam, 'reqFilter');
+  var proSearch = buildURI(req.query.proParam, 'proFilter');
+  var actSearch = buildURI(req.query.actParam, 'actFilter');
+  includeOpen = buildURI(req.query.openAllow, 'includeOpen');
 
-  var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term='+currentTerm+reqSearch+proSearch+actSearch+includeOpen;
+  var baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
 
-  if (searchType === 'courseIDSearch') {baseURL = baseURL + '&course_id='  + searchParam;}
-  if (searchType === 'keywordSearch')  {baseURL = baseURL + '&description='+ searchParam;}
-  if (searchType === 'instSearch')     {baseURL = baseURL + '&instructor=' + searchParam;}
+  if (searchType) {
+    baseURL += searchTypes[searchType] + searchParam;
+  }
   // If we are searching by a certain instructor, the course numbers will be filtered because of searchType 'instSearch'. 
   // However, clicking on one of those courses will show all sections, including those not taught by the instructor.
   // instructFilter is an extra parameter that allows further filtering of section results by instructor.
-  if (instructFilter !== 'all' && typeof instructFilter !== 'undefined') {baseURL = baseURL + '&instructor='+instructFilter;}
+  if (instructFilter !== 'all' && typeof instructFilter !== 'undefined') {
+    baseURL += '&instructor=' + instructFilter;
+  }
 
   // Keen.io logging
   var searchEvent = {
@@ -168,7 +208,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
     searchParam: searchParam,
     user: myPennkey
   };
-  client.addEvent('Search', searchEvent, function(err, res) {if (err) {console.log(err);}});
+  logEvent('Search', searchEvent);
 
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
   if (searchType  === 'courseIDSearch' && 
@@ -190,27 +230,41 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
         console.error('Request failed:', error);
         return res.send('PCSERROR: request failed');
       }
+
       var parsedRes = {};
       try {
         parsedRes = JSON.parse(body);
       } catch(err) {
         return res.send("Can't parse JSON response");
       }
+
       // Send the raw data to the appropriate formatting function
       var searchResponse;
-      if (resultType === 'deptSearch'){
-         searchResponse = parseDeptList(parsedRes);
-      } else if (resultType === 'numbSearch') {
-         searchResponse = parseCourseList(parsedRes); // Parse the numb response
-      } else if (resultType === 'sectSearch') {
-         searchResponse = parseSectionList(parsedRes); // Parse the sect response
-      } else {searchResponse = {};}
+      if (resultType in resultTypes) {
+        searchResponse = resultTypes[resultType](parsedRes);
+      } else {
+        searchEvent = {};
+      }
+
       return res.send(JSON.stringify(searchResponse)); // return correct info
     });
   }
 });
 
-var reqCodes = {Society: "MDS",History: "MDH",Arts: "MDA",Humanities: "MDO,MDB",Living: "MDL",Physical: "MDP",Natural: "MDN,MDB",Writing: "MWC",College: "MQS",Formal: "MFR",Cross: "MC1",Cultural: "MC2"};
+var reqCodes = {
+  Society: "MDS",
+  History: "MDH",
+  Arts: "MDA",
+  Humanities: "MDO,MDB",
+  Living: "MDL",
+  Physical: "MDP",
+  Natural: "MDN,MDB",
+  Writing: "MWC",
+  College: "MQS",
+  Formal: "MFR",
+  Cross: "MC1",
+  Cultural: "MC2"
+};
 
 // This function spits out the list of courses that goes in #CourseList
 function parseDeptList(Res) {
@@ -236,7 +290,7 @@ function parseDeptList(Res) {
   return coursesList;
 }
 
-function getTimeInfo(JSONObj) { // A function to retrieve and format meeting times
+function getTimeInfo (JSONObj) { // A function to retrieve and format meeting times
   var OCStatus = JSONObj.course_status;
   var StatusClass;
   if (OCStatus === "O") {
@@ -441,9 +495,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
         user: myPennkey,
         keen: {timestamp: new Date().toISOString()}
       };
-      client.addEvent('Star', starEvent, function(err, res) {
-        if (err) {console.log(err);}
-      });
+      logEvent('Star', starEvent);
     }     
   } else if (addRem === 'rem') { // If we need to remove
     index = StarredCourses.indexOf(courseID);
@@ -484,7 +536,7 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
         SchedCourses[JSONSecID] = resJSON[JSONSecID];
       }}
       var schedEvent = {schedCourse: courseID,user: myPennkey,keen: {timestamp: new Date().toISOString()}};
-      client.addEvent('Sched', schedEvent, function(err, res) {if (err) {console.log(err);}});
+      logEvent('Sched', schedEvent);
 
       userScheds[schedName] = SchedCourses;
       req.user.customData.Schedules = userScheds;
