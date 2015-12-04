@@ -12,6 +12,7 @@
     "express": "^4.13.1",
     "express-stormpath": "^0.6.9",
     "fs": "0.0.2",
+    "git-rev": "^0.2.1",
     "hjs": "0.0.6",
     "keen-js": "^3.2.4",
     "log-timestamp": "^0.1.2",

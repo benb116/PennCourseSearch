@@ -9,6 +9,7 @@ var colors      = require('colors');
 var fs          = require('fs');
 var Keen        = require('keen-js');
 var PushBullet  = require('pushbullet');
+var git         = require('git-rev');
 require('log-timestamp')(function() { return new Date().toISOString() + ' %s'; });
 
 console.timeEnd('Modules loaded');
@@ -79,6 +80,11 @@ pusher.devices(function(error, response) {
 });
 
 console.log('Plugins initialized');
+
+git.short(function (str) {
+  console.log('Current git commit:', str);
+  // => aefdd94 
+});
 
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
@@ -188,7 +194,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
   var reqSearch = buildURI(req.query.reqParam, 'reqFilter');
   var proSearch = buildURI(req.query.proParam, 'proFilter');
   var actSearch = buildURI(req.query.actParam, 'actFilter');
-  includeOpen = buildURI(req.query.openAllow, 'includeOpen');
+  var includeOpen = buildURI(req.query.openAllow, 'includeOpen');
 
   var baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
 
@@ -476,7 +482,7 @@ app.get('/NewReview', stormpath.loginRequired, function(req, res) {
 });
 
 // Manage requests regarding starred courses
-app.get('/Star', stormpath.loginRequired, function(req, res) {
+app.post('/Star', stormpath.loginRequired, function(req, res) {
   var StarredCourses = [];
   var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
 
@@ -510,7 +516,7 @@ app.get('/Star', stormpath.loginRequired, function(req, res) {
 });
 
 // Manage scheduling requests
-app.get('/Sched', stormpath.loginRequired, function(req, res) {
+app.post('/Sched', stormpath.loginRequired, function(req, res) {
   var addRem      = req.query.addRem; // Are we adding, removing, or clearing?
   var courseID    = req.query.courseID;
   var schedName   = req.query.schedName;
@@ -527,23 +533,8 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
   var SchedCourses = userScheds[schedName];
 
   if (addRem === 'add') { // If we need to add, then we get meeting info for the section
-    request({
-      uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
-      method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
-    }, function(error, response, body) {
-      var resJSON = getSchedInfo(body); // Format the response
-      for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
-        SchedCourses[JSONSecID] = resJSON[JSONSecID];
-      }}
-      var schedEvent = {schedCourse: courseID,user: myPennkey,keen: {timestamp: new Date().toISOString()}};
-      logEvent('Sched', schedEvent);
-
-      userScheds[schedName] = SchedCourses;
-      req.user.customData.Schedules = userScheds;
-      req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
-      return res.send(SchedCourses);
-    });
-
+      var newSched = AddToSched(courseID, schedName); // Format the response
+      return res.send(newSched);
   } else if (addRem === 'rem') { // If we need to remove
     for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
       if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") === courseID) { // Find all meeting times of a given course
@@ -553,20 +544,13 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
     userScheds[schedName] = SchedCourses;
 
   } else if (addRem === 'dup') { // Duplicate a schedule
-    while (Object.keys(userScheds).indexOf(schedName) !== -1) {
-      var lastchar = schedName[schedName.length - 1];
-      if (isNaN(lastchar) || schedName[schedName.length - 2] !== ' ') { // e.g. 'schedule' or 'ABC123'
-        schedName += ' 2';
-      } else { // e.g. 'MEAM 101 2'
-        schedName = schedName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
-      }
-    }
-    userScheds[schedName] = SchedCourses;
+    var normName = NormalizeName(schedName);
+    userScheds[normName] = SchedCourses;
 
   } else if (addRem === 'ren') { // Rename
     userScheds[schedRename] = userScheds[schedName];
     delete userScheds[schedName];
-    
+
   } else if (addRem === 'clr') { // Clear all
     userScheds[schedName] = {};
 
@@ -584,6 +568,37 @@ app.get('/Sched', stormpath.loginRequired, function(req, res) {
     return res.send(userScheds[schedName]);
   } else if (addRem !== 'add') {
     return res.send(userScheds);
+  }
+
+  function AddToSched (secID, whichSched) {
+    request({
+      uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+secID,
+      method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
+    }, function(error, response, body) {
+      var resJSON = getSchedInfo(body); // Format the response
+      for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
+        SchedCourses[JSONSecID] = resJSON[JSONSecID];
+      }}
+      var schedEvent = {schedCourse: secID, user: myPennkey, keen: {timestamp: new Date().toISOString()}};
+      logEvent('Sched', schedEvent);
+      console.log(secID)
+      userScheds[whichSched] = SchedCourses;
+      req.user.customData.Schedules = userScheds;
+      req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
+      return SchedCourses;
+    });
+  }
+
+  function NormalizeName (possibleName) {
+    while (Object.keys(userScheds).indexOf(possibleName) !== -1) {
+      var lastchar = possibleName[possibleName.length - 1];
+      if (isNaN(lastchar) || possibleName[possibleName.length - 2] !== ' ') { // e.g. 'schedule' or 'ABC123'
+        possibleName += ' 2';
+      } else { // e.g. 'MEAM 101 2'
+        possibleName = possibleName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
+      }
+    }
+    return possibleName;
   }
 });
 

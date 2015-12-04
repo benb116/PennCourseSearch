@@ -32,7 +32,7 @@
         <div id="Top">
     	   <h1>{{ title }}</h1>
     	   <span>{{ subtitle }}</span>
-            <form onkeypress="if (event.keyCode == 13) {event.preventDefault();initiateSearch();}">
+            <form onkeypress="if (event.keyCode == 13) {event.preventDefault();InitiateSearch();}">
                 <span>Search by:</span>
     			<select id="searchSelect" style="margin-right:1em;">
                     <option selected="selected" value="courseIDSearch">Course ID</option>
