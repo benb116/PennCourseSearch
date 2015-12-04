@@ -88,7 +88,6 @@ function SendReq(reqOpts) {
         var reqObj;
         if (reqOpts.reqType.toLowerCase() === 'get') {
             reqObj = $.get(reqOpts.url);
-            
         } else {
             reqObj = $.post(reqOpts.url, reqOpts.upData);
         }

@@ -533,8 +533,7 @@ app.post('/Sched', stormpath.loginRequired, function(req, res) {
   var SchedCourses = userScheds[schedName];
 
   if (addRem === 'add') { // If we need to add, then we get meeting info for the section
-      var newSched = AddToSched(courseID, schedName); // Format the response
-      return res.send(newSched);
+      AddToSched(courseID, schedName); // Format the response
   } else if (addRem === 'rem') { // If we need to remove
     for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
       if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") === courseID) { // Find all meeting times of a given course
@@ -581,11 +580,10 @@ app.post('/Sched', stormpath.loginRequired, function(req, res) {
       }}
       var schedEvent = {schedCourse: secID, user: myPennkey, keen: {timestamp: new Date().toISOString()}};
       logEvent('Sched', schedEvent);
-      console.log(secID)
       userScheds[whichSched] = SchedCourses;
       req.user.customData.Schedules = userScheds;
       req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
-      return SchedCourses;
+      return res.send(SchedCourses);
     });
   }
 
