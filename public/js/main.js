@@ -572,17 +572,20 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
                     starClass = 'fa-star';
                 } // If the section is a starred section, add the filled star
 
+                if(thisSec.StatusClass === "ClosedSec") {thisSec.StatusClass += " Notify";}
                 var status = thisSec.StatusClass.split("Sec")[0].toLowerCase();
-                var statusTitleText
+                var statusTitleText;
                 if (status === "error") {
                     statusTitleText = "Status error :(";
                 } else {
-                    statusTitleText = 'This section is ' + thisSec.StatusClass.split("Sec")[0].toLowerCase() + '.';
+                    statusTitleText = 'This section is ' + status + '.';
+                    
+                        // statusTitleText += ' &lt;span &gt;Get notified if it opens up.&lt;/span&gt;';
                 };
 
                 allHTML += '<li id="' + thisSec.SectionName.replace(/ /g, '-') + '" class="' + thisSec.ActType + '">' +
                     '<i class="fa fa-plus"></i>&nbsp&nbsp' +
-                    '<span class="' + thisSec.StatusClass + ' tooltip" title="' + statusTitleText + '">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;' +
+                    '<span class="' + thisSec.StatusClass + '" title="' + statusTitleText + '">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;' +
                     '<span class="PCR tooltip">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;' +
                     '<span>' + thisSec.SectionName + thisSec.TimeInfo + '</span>' +
                     '<i class="fa ' + starClass + '"></i></li>';
@@ -596,8 +599,29 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
         }
         UpdatePlusCancel();
         $('.tooltip', '#SectionList').tooltipster({
-            position: 'right'
+            position: 'right',
         });
+        $('.Notify', '#SectionList').tooltipster({
+            position: 'right',
+            contentAsHTML: true,
+            interactive: true,
+            // autoClose: false,
+            content: 'This section is closed. <span style="color:white;text-decoration:underline;cursor:pointer;">Get notified if it opens up.</span>',
+            functionBefore: function(origin, continueTooltip, other) {
+                continueTooltip();
+                var secID = origin.context.parentElement.id;
+                // origin.tooltipster('content', 'This section is closed. <span class="NotifyTooltip" style="color:white;text-decoration:underline;cursor:pointer;">Get notified if it opens up.</span>');
+                $('.tooltipster-content > span').click(function() {
+                    // console.log();
+                    // SendNotify(secID, origin);
+                    SendReq({reqType: 'post', url: '/Notify?secID='+secID, fun: function(res, origin) {origin.tooltipster('content', res);}, passVar: origin});
+                    origin.tooltipster('content', 'Loading...');
+                });
+            }
+        });
+        // $('.tooltipster-content > span').click(function() {
+        //     console.log($this);
+        // });
         if (!suppress) { // We do this if we also sent out a GetSectionInfo request so that this data doesn't overwrite that data
             courseInfo[1].FullID = courseInfo[1].CourseID;
             delete courseInfo[1].Instructor;
@@ -608,6 +632,14 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
             SectionInfoFormat(courseInfo[1]);
         }
     }
+}
+
+function SendNotify (sec, tooltip) {
+    SendReq({reqType: 'post', url: '/Notify?secID='+sec, fun: function(res, origin) {origin.tooltipster('content', res);}, passVar: tooltip});
+}
+
+function NotifyTooltip (res, origin) {
+    origin.tooltipster('content', res);
 }
 
 function GetSectionInfo(sec) { // Get info about the specific section

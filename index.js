@@ -647,3 +647,28 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
     return 'No Results';
   }
 }
+
+app.post('/Notify', stormpath.loginRequired, function(req, res) {
+  var secID = req.query.secID;
+  var formatSecID = secID.replace(/-/g, ' ');
+  var userEmail = req.user.email;
+
+  request({
+      uri: 'http://www.penncoursenotify.com/',
+      method: "POST",
+      form: {'course': formatSecID, 'email': userEmail}
+    }, function(error, response, body) {
+      var returnText = "Sorry, there was an error while trying set up notifications.";
+      try {
+        if (response.statusCode === 406) {
+          returnText = "Notifications already requested.";
+        } else if (body.split('<h3>')[1].split('</h3>')[0] === "Success!") {
+          returnText = "Great! You'll be notified if this class opens up.";
+        }
+      } catch(err) {
+        console.log(err);
+      }
+      console.log(body)
+      return res.send(returnText);
+  });
+});
