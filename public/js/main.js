@@ -535,10 +535,7 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
             RetrievePCR(fullID);
         }
     }
-    $('.tooltip', '#CourseList').tooltipster({
-        position: 'right'
-    });
-
+    AddTooltips('course');
     var currentReqs = $('#reqFilter').val();
     if (currentReqs) {
         $('#CourseList li').hide();
@@ -572,6 +569,7 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
                     starClass = 'fa-star';
                 } // If the section is a starred section, add the filled star
 
+                if(thisSec.StatusClass === "OpenSec") {thisSec.StatusClass += " tooltip";}
                 if(thisSec.StatusClass === "ClosedSec") {thisSec.StatusClass += " Notify";}
                 var status = thisSec.StatusClass.split("Sec")[0].toLowerCase();
                 var statusTitleText;
@@ -579,9 +577,7 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
                     statusTitleText = "Status error :(";
                 } else {
                     statusTitleText = 'This section is ' + status + '.';
-                    
-                        // statusTitleText += ' &lt;span &gt;Get notified if it opens up.&lt;/span&gt;';
-                };
+                }
 
                 allHTML += '<li id="' + thisSec.SectionName.replace(/ /g, '-') + '" class="' + thisSec.ActType + '">' +
                     '<i class="fa fa-plus"></i>&nbsp&nbsp' +
@@ -593,35 +589,14 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
         }
         $('#CourseTitle').html(thisSec.CourseTitle);
         $('#SectionList > ul').html(allHTML); // Put the course number list in  #SectionList
+        
         UpdateSecFilters();
         for (var sec in sections) {
             RetrievePCR(sections[sec].SectionName, sections[sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'));
         }
         UpdatePlusCancel();
-        $('.tooltip', '#SectionList').tooltipster({
-            position: 'right',
-        });
-        $('.Notify', '#SectionList').tooltipster({
-            position: 'right',
-            contentAsHTML: true,
-            interactive: true,
-            // autoClose: false,
-            content: 'This section is closed. <span style="color:white;text-decoration:underline;cursor:pointer;">Get notified if it opens up.</span>',
-            functionBefore: function(origin, continueTooltip, other) {
-                continueTooltip();
-                var secID = origin.context.parentElement.id;
-                // origin.tooltipster('content', 'This section is closed. <span class="NotifyTooltip" style="color:white;text-decoration:underline;cursor:pointer;">Get notified if it opens up.</span>');
-                $('.tooltipster-content > span').click(function() {
-                    // console.log();
-                    // SendNotify(secID, origin);
-                    SendReq({reqType: 'post', url: '/Notify?secID='+secID, fun: function(res, origin) {origin.tooltipster('content', res);}, passVar: origin});
-                    origin.tooltipster('content', 'Loading...');
-                });
-            }
-        });
-        // $('.tooltipster-content > span').click(function() {
-        //     console.log($this);
-        // });
+        AddTooltips('section');
+
         if (!suppress) { // We do this if we also sent out a GetSectionInfo request so that this data doesn't overwrite that data
             courseInfo[1].FullID = courseInfo[1].CourseID;
             delete courseInfo[1].Instructor;
@@ -634,12 +609,40 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
     }
 }
 
-function SendNotify (sec, tooltip) {
-    SendReq({reqType: 'post', url: '/Notify?secID='+sec, fun: function(res, origin) {origin.tooltipster('content', res);}, passVar: tooltip});
-}
-
-function NotifyTooltip (res, origin) {
-    origin.tooltipster('content', res);
+function AddTooltips(type) {
+    if (type === 'course') {
+        $('.tooltip', '#CourseList').tooltipster({
+            position: 'right'
+        });
+    } else if (type === 'section') {
+        $('.tooltip', '#SectionList').tooltipster({
+            position: 'right',
+        });
+        $('.Notify', '#SectionList').tooltipster({
+            position: 'right',
+            contentAsHTML: true,
+            interactive: true,
+            // autoClose: false,
+            content: 'This section is closed. <span style="color:white;text-decoration:underline;cursor:pointer;">Get notified if it opens up.</span>',
+            functionBefore: function(origin, continueTooltip, other) {
+                continueTooltip();
+                var secID = origin.context.parentElement.id;
+                $('.tooltipster-content > span').click(function() {
+                    SendReq({
+                        reqType: 'post',
+                        url: '/Notify?secID='+secID,
+                        fun: function(res, origin) {
+                            origin.tooltipster('content', res);
+                            setTimeout(function() {
+                                origin.tooltipster('hide');
+                            }, 2000);
+                        }, 
+                        passVar: origin});
+                    origin.tooltipster('content', 'Loading...');
+                });
+            }
+        });
+    }
 }
 
 function GetSectionInfo(sec) { // Get info about the specific section
@@ -755,11 +758,14 @@ function StarFormat(sections) { // Format starred section list
     var HTML = '';
     for (var section in sections[0]) {
         if (sections[0].hasOwnProperty(section)) {
-            HTML += '<li id="' + sections[0][section].SectionName.replace(/ /g, '-') + '" class="starredSec">' +
+            var thisSec = sections[0][section];
+            if(thisSec.StatusClass === "OpenSec") {thisSec.StatusClass += " tooltip";}
+            if(thisSec.StatusClass === "ClosedSec") {thisSec.StatusClass += " Notify";}
+            HTML += '<li id="' + thisSec.SectionName.replace(/ /g, '-') + '" class="starredSec">' +
                 '<i class="fa fa-plus"></i>&nbsp&nbsp' +
-                '<span class="' + sections[0][section].StatusClass + '">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;' +
+                '<span class="' + thisSec.StatusClass + '">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;' +
                 '<span class="PCR tooltip">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;' +
-                '<span>' + sections[0][section].SectionName + sections[0][section].TimeInfo + '</span>' +
+                '<span>' + thisSec.SectionName + thisSec.TimeInfo + '</span>' +
                 '<i class="fa ' + starClass + '"></i></li>';
         }
     }
@@ -773,9 +779,7 @@ function StarFormat(sections) { // Format starred section list
     for (var sec in sections[0]) {
         RetrievePCR(sections[0][sec].SectionName);
     }
-    $('.tooltip', '#SectionList').tooltipster({
-        position: 'right'
-    });
+    AddTooltips('section');
 }
 
 function RetrievePCR(courseID, instName) {

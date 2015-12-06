@@ -668,7 +668,6 @@ app.post('/Notify', stormpath.loginRequired, function(req, res) {
       } catch(err) {
         console.log(err);
       }
-      console.log(body)
       return res.send(returnText);
   });
 });
