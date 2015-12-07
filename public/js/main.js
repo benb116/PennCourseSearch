@@ -559,10 +559,9 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
         var allHTML = '';
         var stars = sessionStorage.starList;
         var sections = courseInfo[0];
-        var thisSec = sections[0];
         for (var section in sections) {
             if (sections.hasOwnProperty(section)) { // Loop through the sections
-                thisSec = sections[section];
+                var thisSec = sections[section];
                 var starClass = 'fa-star-o';
                 var index = stars.indexOf(thisSec.NoSpace);
                 if (index > -1) {
@@ -587,7 +586,7 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
                     '<i class="fa ' + starClass + '"></i></li>';
             }
         }
-        $('#CourseTitle').html(thisSec.CourseTitle);
+        $('#CourseTitle').html(thisSec.SectionName + ' - ' + thisSec.CourseTitle);
         $('#SectionList > ul').html(allHTML); // Put the course number list in  #SectionList
         
         UpdateSecFilters();

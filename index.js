@@ -668,6 +668,7 @@ app.post('/Notify', stormpath.loginRequired, function(req, res) {
       } catch(err) {
         console.log(err);
       }
+      logEvent('Notify', {user: userEmail.split("@")[0], secID: secID});
       return res.send(returnText);
   });
 });
