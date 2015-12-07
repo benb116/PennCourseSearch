@@ -278,7 +278,7 @@ function parseDeptList(Res) {
   for(var key in Res.result_data) { if (Res.result_data.hasOwnProperty(key)) {
     var thisKey = Res.result_data[key];
     var courseListName  = thisKey.course_department+' '+thisKey.course_number; // Get course dept and number
-    if (Res.result_data.hasOwnProperty(key) && !coursesList[courseListName]) { // Iterate through each course
+    if (Res.result_data.hasOwnProperty(key) && !coursesList[courseListName] && !thisKey.is_cancelled) { // Iterate through each course
       var courseTitle   = thisKey.course_title;
       var reqList = thisKey.fulfills_college_requirements;
       var reqCodesList = [];

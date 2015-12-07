@@ -568,12 +568,12 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
                     starClass = 'fa-star';
                 } // If the section is a starred section, add the filled star
 
-                if(thisSec.StatusClass === "OpenSec") {thisSec.StatusClass += " tooltip";}
+                if(thisSec.StatusClass === "OpenSec" || thisSec.StatusClass === "ErrorSec") {thisSec.StatusClass += " tooltip";}
                 if(thisSec.StatusClass === "ClosedSec") {thisSec.StatusClass += " Notify";}
                 var status = thisSec.StatusClass.split("Sec")[0].toLowerCase();
                 var statusTitleText;
                 if (status === "error") {
-                    statusTitleText = "Status error :(";
+                    statusTitleText = "This class has been cancelled :(";
                 } else {
                     statusTitleText = 'This section is ' + status + '.';
                 }
