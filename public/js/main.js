@@ -517,10 +517,18 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
         allHTML = '<ul>';
         for (var course in JSONRes) {
             if (JSONRes.hasOwnProperty(course)) { // Add a line for each course
-                var pcrFrac = 0;
                 var thisCourse = JSONRes[course];
                 if (!thisCourse.courseReqs) {thisCourse.courseReqs = [];}
-                allHTML += '<li id="' + thisCourse.courseListName.replace(' ', '-') + '" class="' + thisCourse.courseReqs.join(' ') + '">' + '<span class="PCR tooltip" style="background-color:rgba(45, 160, 240, ' + pcrFrac * pcrFrac + ')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;' +
+                var pcrFrac = Math.pow(thisCourse.courseRevs.cQ / 4, 1);
+                if (!pcrFrac) {
+                    revTextStyle = 'black';
+                    toolText = 'No PCR data for this class';
+                } else {
+                    revTextStyle = 'white';
+                    toolText = 'Diff: ' + (thisCourse.courseRevs.cD || '0.00') + ' Instructor: ' + (thisCourse.courseRevs.cI || '0.00');
+                }
+                allHTML += '<li id="' + thisCourse.courseListName.replace(' ', '-') + '" class="' + thisCourse.courseReqs.join(' ') + '">' + 
+                    '<span class="PCR tooltip" style="background-color:rgba(45, 160, 240, ' + pcrFrac * pcrFrac + ');color:'+revTextStyle+'" title="'+toolText+'">'+pcrFrac*4+'</span>&nbsp;&nbsp;' +
                     '<span class="courseNumber">' + thisCourse.courseListName + '</span>' +
                     '<span class="CourseTitle"> - ' + thisCourse.courseTitle + '</span></li>';
 
@@ -532,7 +540,7 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
     for (var courseID in JSONRes) { 
         if (JSONRes.hasOwnProperty(courseID)) {// Add PCR data
             var fullID = JSONRes[courseID].courseListName;
-            RetrievePCR(fullID);
+            // RetrievePCR(fullID);
         }
     }
     AddTooltips('course');

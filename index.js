@@ -10,6 +10,7 @@ var fs          = require('fs');
 var Keen        = require('keen-js');
 var PushBullet  = require('pushbullet');
 var git         = require('git-rev');
+
 require('log-timestamp')(function() { return new Date().toISOString() + ' %s'; });
 
 console.timeEnd('Modules loaded');
@@ -80,6 +81,9 @@ pusher.devices(function(error, response) {
 });
 
 console.log('Plugins initialized');
+
+var allRevs     = require('./loadRevs.js');
+console.log('Reviews loaded')
 
 git.short(function (str) {
   console.log('Current git commit:', str);
@@ -175,9 +179,9 @@ var buildURI = function (filter, type) {
 };
 
 var resultTypes = {
-  deptSearch: parseDeptList,
-  numbSearch: parseCourseList,
-  sectSearch: parseSectionList
+  deptSearch: parseCourseList,
+  numbSearch: parseSectionList,
+  sectSearch: parseSectionInfo
 };
 
 var BASE_URL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term=';
@@ -221,8 +225,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       resultType  === 'deptSearch' && 
       !reqSearch && !proSearch && !actSearch && !includeOpen ) {
     try {
-      res.sendFile(searchParam.toUpperCase()+'.json', sendCourseOpts, function (err) {
+      fs.readFile('./2016A/'+searchParam.toUpperCase()+'.json', function (err, data) {
         if (err) {return res.send({});}
+        return res.send(ParseDeptList(JSON.parse(data)));
       });
     } catch(err) {
       return res.send('');
@@ -272,24 +277,58 @@ var reqCodes = {
   Cultural: "MC2"
 };
 
+function GetRevData (dept, num, inst) {
+  var revData = allRevs[dept][num];
+  if (revData) {
+    if (inst) {
+
+      for (var possInst in revData) {
+          if (possInst.indexOf(inst.toUpperCase()) > -1) { // Go by specific instructor
+              revData = revData[possInst];
+              break;
+          }
+      }
+    } else {
+      revData = revData.Total;
+    }
+  } else {
+    revData = {"cQ": 0, "cD": 0, "cI": 0};
+  }
+  return revData;
+}
+
+function ParseDeptList (res) {
+  for (var course in res) {
+    var courData = res[course].courseListName.split(' ');
+    var courDept = courData[0];
+    var courNum = courData[1];
+    res[course].courseRevs = GetRevData(courDept, courNum);
+  }
+  return res;
+}
+
 // This function spits out the list of courses that goes in #CourseList
-function parseDeptList(Res) {
+function parseCourseList(Res) {
   var coursesList = {};
   for(var key in Res.result_data) { if (Res.result_data.hasOwnProperty(key)) {
-    var thisKey = Res.result_data[key];
-    var courseListName  = thisKey.course_department+' '+thisKey.course_number; // Get course dept and number
+    var thisKey   = Res.result_data[key];
+    var thisDept  = thisKey.course_department.toUpperCase();
+    var thisNum   = thisKey.course_number.toString();
+    var courseListName  = thisDept+' '+thisNum; // Get course dept and number
     if (Res.result_data.hasOwnProperty(key) && !coursesList[courseListName] && !thisKey.is_cancelled) { // Iterate through each course
       var courseTitle   = thisKey.course_title;
-      var reqList = thisKey.fulfills_college_requirements;
-      var reqCodesList = [];
+      var reqList       = thisKey.fulfills_college_requirements;
+      var reqCodesList  = [];
       try {
         reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
         reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
       } catch(err) {}
+      var revData = GetRevData(thisDept, thisNum);
       coursesList[courseListName] = {
         'courseListName': courseListName, 
         'courseTitle': courseTitle,
-        'courseReqs': reqCodesList
+        'courseReqs': reqCodesList,
+        'courseRevs': revData
       };
     }
   }}
@@ -336,7 +375,7 @@ function getTimeInfo (JSONObj) { // A function to retrieve and format meeting ti
 }
 
 // This function spits out the list of sections that goes in #SectionList
-function parseCourseList(Res) {
+function parseSectionList(Res) {
   // Convert to JSON object
   var sectionsList = {};
   var courseInfo = {};
@@ -377,13 +416,13 @@ function parseCourseList(Res) {
       }
     }
   }
-  courseInfo = parseSectionList(Res);
+  courseInfo = parseSectionInfo(Res);
 
   return [sectionsList, courseInfo];
 }
 
 // This function spits out section-specific info
-function parseSectionList(Res) {
+function parseSectionInfo(Res) {
   var entry = Res.result_data[0];
   var sectionInfo = {};
   try {

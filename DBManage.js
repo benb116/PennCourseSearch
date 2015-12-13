@@ -100,7 +100,8 @@ function PullReview(index) {
 				if (sectionIDs[alias].split('-')[0] === thedept) {
           // Only create an entry for the course in this department
 					// Get data
-					var courseID = sectionIDs[alias].split('-')[0] + ' ' + sectionIDs[alias].split('-')[1];
+					var courseNum = sectionIDs[alias].split('-')[1];
+					var courseID = sectionIDs[alias].split('-')[0] + ' ' + courseNum;
 					var instID = deptReviews[rev].instructor.id;
 					// var instName = deptReviews[rev].instructor.name;
 					var courseQual = Number(deptReviews[rev].ratings.rCourseQuality);
@@ -121,9 +122,9 @@ function PullReview(index) {
 					 }
 					 */
 
-					if (typeof resp[courseID] === 'undefined') {resp[courseID] = {};}
-					if (typeof resp[courseID][instID] === 'undefined') {resp[courseID][instID] = [];}
-					var entry = resp[courseID][instID];
+					if (typeof resp[courseNum] === 'undefined') {resp[courseNum] = {};}
+					if (typeof resp[courseNum][instID] === 'undefined') {resp[courseNum][instID] = [];}
+					var entry = resp[courseNum][instID];
 					entry.push({
 						'cQ': courseQual,
 						'cD': courseDiff,
@@ -169,6 +170,8 @@ function PullReview(index) {
 				'cI': courseAvgInst
 			};
 		}}
+		// var finalResp = {};
+		// finalResp[thedept] = resp;
 		fs.writeFile('./2015CRev/'+thedept+'.json', JSON.stringify(resp), function (err) {
 			if (err) {
 				console.log(index+' '+thedept+' '+err);
