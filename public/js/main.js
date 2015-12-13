@@ -19,9 +19,6 @@ $(document).ready(function() {
         return v;
     };
 
-    // Global variables
-    LoadingSum = 0; // Initialize the loading sum. If !== 0, the loading indicator will be displayed
-
     var colorPalette;
     if (sessionStorage.colorPalette) { // If we recently changed the palette
         colorPalette = JSON.parse(sessionStorage.colorPalette);
@@ -75,6 +72,14 @@ $(document).ready(function() {
     });
 });
 
+$(document)
+.ajaxStart(function() {
+    $('#LoadingInfo').css('display', 'inline-block'); // Display the loading indicator
+})
+.ajaxComplete(function() {
+    $('#LoadingInfo').css('display', 'none'); // Hide the loading indicator
+});
+
 function SendReq(reqOpts) {
     // Special request wrapper that updates the Loading spinner and automatically passes results to a function
     // This may seem unnecessary, and it does lead to some short functions. However, it prevents the code from becoming cluttered and repetitive.
@@ -83,8 +88,6 @@ function SendReq(reqOpts) {
     // passVar: any extra information that needs to be sent in
 
     try {
-        LoadingSum += 1; // Add to the sum of requests
-        LoadingIndicate(); // Update the spinning logo
         var reqObj;
         if (reqOpts.reqType.toLowerCase() === 'get') {
             reqObj = $.get(reqOpts.url);
@@ -97,10 +100,6 @@ function SendReq(reqOpts) {
         .fail(function(err) {
             ErrorAlert(err);
         })
-        .always(function() {
-            LoadingSum -= 1; // Remove from the sum of requests
-            LoadingIndicate();
-        });
     } catch (err) {
         ErrorAlert(err);
     }
@@ -520,6 +519,7 @@ function CourseFormat(JSONRes, passVar) { // Get course number info and display 
             if (JSONRes.hasOwnProperty(course)) { // Add a line for each course
                 var pcrFrac = 0;
                 var thisCourse = JSONRes[course];
+                if (!thisCourse.courseReqs) {thisCourse.courseReqs = [];}
                 allHTML += '<li id="' + thisCourse.courseListName.replace(' ', '-') + '" class="' + thisCourse.courseReqs.join(' ') + '">' + '<span class="PCR tooltip" style="background-color:rgba(45, 160, 240, ' + pcrFrac * pcrFrac + ')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;' +
                     '<span class="courseNumber">' + thisCourse.courseListName + '</span>' +
                     '<span class="CourseTitle"> - ' + thisCourse.courseTitle + '</span></li>';
@@ -784,8 +784,6 @@ function StarFormat(sections) { // Format starred section list
 function RetrievePCR(courseID, instName) {
     var dept = courseID.split(' ')[0];
     if (!localStorage['Review2015C' + dept]) { // If we don't have the dept reviews cached
-        LoadingSum += 1;
-        LoadingIndicate();
         var baseURL = '/NewReview?dept=' + dept; // Get them
         try {
             $.ajax({
@@ -797,10 +795,6 @@ function RetrievePCR(courseID, instName) {
                     localStorage['Review2015C' + dept] = JSON.stringify(data); // Cache that jawn
                     ApplyPCR(courseID, instName);
                     return 'done';
-                })
-                .complete(function() {
-                    LoadingSum -= 1;
-                    LoadingIndicate();
                 });
         } catch (error) {
             console.log(error);

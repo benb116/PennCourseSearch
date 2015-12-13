@@ -66,7 +66,7 @@ var client = new Keen({
 var logEvent = function (eventName, eventData) {
   client.addEvent(eventName, eventData, function (err, res) {
     if (err) {
-      console.log(err);
+      console.log("KEENIOERROR: " + err);
     }
   });
 };
@@ -233,7 +233,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
     }, function(error, response, body) {
       if (error) {
-        console.error('Request failed:', error);
+        console.log('OpenData Request failed:', error);
         return res.send('PCSERROR: request failed');
       }
 
