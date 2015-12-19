@@ -83,7 +83,7 @@ pusher.devices(function(error, response) {
 console.log('Plugins initialized');
 
 var allRevs     = require('./loadRevs.js');
-console.log('Reviews loaded')
+console.log('Reviews loaded');
 
 git.short(function (str) {
   console.log('Current git commit:', str);
@@ -213,11 +213,7 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
   }
 
   // Keen.io logging
-  var searchEvent = {
-    searchType: searchType, 
-    searchParam: searchParam,
-    user: myPennkey
-  };
+  var searchEvent;
   logEvent('Search', searchEvent);
 
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
@@ -227,6 +223,12 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
     try {
       fs.readFile('./2016A/'+searchParam.toUpperCase()+'.json', function (err, data) {
         if (err) {return res.send({});}
+        searchEvent = {
+          searchType: searchType, 
+          searchParam: searchParam,
+          user: myPennkey
+        };
+        logEvent('Search', searchEvent);
         return res.send(ParseDeptList(JSON.parse(data)));
       });
     } catch(err) {
@@ -256,7 +258,12 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       } else {
         searchEvent = {};
       }
-
+      searchEvent = {
+        searchType: searchType, 
+        searchParam: searchParam,
+        user: myPennkey
+      };
+      logEvent('Search', searchEvent);
       return res.send(JSON.stringify(searchResponse)); // return correct info
     });
   }
@@ -279,22 +286,13 @@ var reqCodes = {
 
 function GetRevData (dept, num, inst) {
   var revData = allRevs[dept][num];
+  var thisRevData = {};
   if (revData) {
-    if (inst) {
-
-      for (var possInst in revData) {
-          if (possInst.indexOf(inst.toUpperCase()) > -1) { // Go by specific instructor
-              revData = revData[possInst];
-              break;
-          }
-      }
-    } else {
-      revData = revData.Total;
-    }
+    thisRevData = (revData[(inst || '').toUpperCase()] || revData.Total);
   } else {
-    revData = {"cQ": 0, "cD": 0, "cI": 0};
+    thisRevData = {"cQ": 0, "cD": 0, "cI": 0};
   }
-  return revData;
+  return thisRevData;
 }
 
 function ParseDeptList (res) {
@@ -395,6 +393,8 @@ function parseSectionList(Res) {
         } catch(err) {
           SectionInst = '';
         }
+
+        var revData = GetRevData(thisEntry.course_department, thisEntry.course_number, SectionInst);
         
         // If there are multiple meeting times
         if (typeof TimeInfoArray[1][1] !== 'undefined') {
@@ -411,7 +411,8 @@ function parseSectionList(Res) {
           'NoSpace': sectionNameNoSpace, 
           'CourseTitle': Res.result_data[0].course_title,
           'SectionInst': SectionInst,
-          'ActType': actType
+          'ActType': actType,
+          'courseRevs': revData
         };
       }
     }

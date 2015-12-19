@@ -95,23 +95,20 @@ function SendReq(reqOpts) {
             reqObj = $.post(reqOpts.url, reqOpts.upData);
         }
         reqObj.done(function(data) {
-            DoneFunc(data, reqOpts.fun, reqOpts.passVar);
+            if (reqOpts.fun === 'localStorage') {
+                // In this case passVar is the name of the key to store the data with
+                localStorage[reqOpts.passVar] = JSON.stringify(data);
+            } else if (reqOpts.fun === 'sessionStorage') {
+                sessionStorage[reqOpts.passVar] = JSON.stringify(data);
+            } else if (reqOpts.fun) {
+                reqOpts.fun(data, reqOpts.passVar); // Pass the data to another function
+            }
         })
         .fail(function(err) {
             ErrorAlert(err);
-        })
+        });
     } catch (err) {
         ErrorAlert(err);
-    }
-    function DoneFunc (data, fun, passVar) {
-        if (fun === 'localStorage') {
-            // In this case passVar is the name of the key to store the data with
-            localStorage[passVar] = JSON.stringify(data);
-        } else if (fun === 'sessionStorage') {
-            sessionStorage[passVar] = JSON.stringify(data);
-        } else if (fun) {
-            fun(data, passVar); // Pass the data to another function
-        }
     }
 }
 function ErrorAlert (err) {
@@ -121,14 +118,6 @@ function ErrorAlert (err) {
         text: 'An error occured. Refresh or email <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!">Ben</a>',
         type: 'error'
     });
-}
-
-function LoadingIndicate() { // Displays the loading icon if there are requests that haven't come back yet
-    if (LoadingSum > 0) { // Reads the global variable
-        $('#LoadingInfo').css('display', 'inline-block'); // Display the loading indicator
-    } else {
-        $('#LoadingInfo').css('display', 'none'); // Hide the loading indicator
-    }
 }
 
 function ClickTriggers() {
@@ -585,11 +574,18 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
                 } else {
                     statusTitleText = 'This section is ' + status + '.';
                 }
-
+                var pcrFrac = Math.pow(thisSec.courseRevs.cQ / 4, 1);
+                if (!pcrFrac) {
+                    revTextStyle = 'black';
+                    toolText = 'No PCR data for this class';
+                } else {
+                    revTextStyle = 'white';
+                    toolText = 'Diff: ' + (thisSec.courseRevs.cD || '0.00') + ' Instructor: ' + (thisSec.courseRevs.cI || '0.00');
+                }
                 allHTML += '<li id="' + thisSec.SectionName.replace(/ /g, '-') + '" class="' + thisSec.ActType + '">' +
                     '<i class="fa fa-plus"></i>&nbsp&nbsp' +
                     '<span class="' + thisSec.StatusClass + '" title="' + statusTitleText + '">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;' +
-                    '<span class="PCR tooltip">&nbsp&nbsp&nbsp&nbsp&nbsp</span>&nbsp;&nbsp;' +
+                    '<span class="PCR tooltip" style="background-color:rgba(45, 160, 240, ' + pcrFrac * pcrFrac + ');color:'+revTextStyle+'" title="'+toolText+'">'+pcrFrac*4+'</span>&nbsp;&nbsp;' +
                     '<span>' + thisSec.SectionName + thisSec.TimeInfo + '</span>' +
                     '<i class="fa ' + starClass + '"></i></li>';
             }
@@ -599,7 +595,7 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
         
         UpdateSecFilters();
         for (var sec in sections) {
-            RetrievePCR(sections[sec].SectionName, sections[sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'));
+            // RetrievePCR(sections[sec].SectionName, sections[sec].SectionInst.toUpperCase().replace(/ /g, '-').replace(/\./, '-'));
         }
         UpdatePlusCancel();
         AddTooltips('section');
@@ -784,7 +780,7 @@ function StarFormat(sections) { // Format starred section list
     $('#SectionList > ul').append(HTML); // Put the course number list in  #SectionList  
     UpdatePlusCancel();
     for (var sec in sections[0]) {
-        RetrievePCR(sections[0][sec].SectionName);
+        // RetrievePCR(sections[0][sec].SectionName);
     }
     AddTooltips('section');
 }
@@ -1002,7 +998,7 @@ function SpitSched(courseSched) {
                 hourtext -= 12;
             } // no 24-hour time
             timeColHTML += '<div class="TimeBlock" style="top:' + toppos + '%">' + hourtext + ':00</div>'; // add time label
-            schedHTML += '<hr width="100%"style="top:' + toppos + '%" >'; // add time line
+            schedHTML += '<hr width="99.7%"style="top:' + toppos + '%" >'; // add time line
         }
         for (var daynum in weekdays) {
             schedHTML += '<div class="DayName" style="width:' + percentWidth + '%;">' + fullWeekdays[daynum] + '</div>';
@@ -1030,26 +1026,18 @@ function SpitSched(courseSched) {
         if (courseSched.hasOwnProperty(sec)) {
             for (day in courseSched[sec].meetDay) {
                 if (courseSched[sec].meetDay.hasOwnProperty(day)) { // some sections have multiple meeting times and days
-                    var meetLetterDay = courseSched[sec].meetDay[day]; // On which day does this meeting take place?
-                    var blockleft;
-                    for (var possDay in weekdays) {
-                        if (weekdays[possDay] === meetLetterDay) {
-                            blockleft = possDay * percentWidth; {
-                                break;
-                            } // determine left spacing
-                        }
-                    }
-                    var blocktop = (courseSched[sec].meetHour - startHour) * halfScale + 9; // determine top spacing based on time from startHour (offset for prettiness)
-                    var blockheight = courseSched[sec].HourLength * halfScale;
-                    var blockname = courseSched[sec].fullCourseName;
-                    var meetRoom = courseSched[sec].meetRoom;
-                    var thiscol = colorMap[courseSched[sec].fullCourseName]; // Get the color
-                    if (typeof thiscol === 'undefined') {
-                        thiscol = '#E6E6E6';
-                    }
-                    var newid = (courseSched[sec].fullCourseName.replace(/ /g, "-") + '-' + weekdays[possDay] + courseSched[sec].meetHour).replace(".", "");
 
-                    schedElement.append('<div class="SchedBlock ' + sec + ' ' + weekdays[possDay] + '" id="' + newid + // Each block has three classes: SchedBlock, The courseSched entry, and the weekday. Each block has a unique ID
+                    var meetLetterDay   = courseSched[sec].meetDay[day]; // On which day does this meeting take place?
+                    var blockleft       = weekdays.indexOf(meetLetterDay) * percentWidth;
+                    var blocktop        = (courseSched[sec].meetHour - startHour) * halfScale + 9; // determine top spacing based on time from startHour (offset for prettiness)
+                    var blockheight     = courseSched[sec].HourLength * halfScale;
+                    var blockname       = courseSched[sec].fullCourseName;
+                    var meetRoom        = courseSched[sec].meetRoom;
+                    var thiscol         = (colorMap[courseSched[sec].fullCourseName] || "#E6E6E6"); // Get the color
+
+                    var newid = (courseSched[sec].fullCourseName.replace(/ /g, "-") + '-' + meetLetterDay + courseSched[sec].meetHour).replace(".", "");
+
+                    schedElement.append('<div class="SchedBlock ' + sec + ' ' + meetLetterDay + '" id="' + newid + // Each block has three classes: SchedBlock, The courseSched entry, and the weekday. Each block has a unique ID
                         '" style="top:' + blocktop +
                         '%;left:' + blockleft +
                         '%;width:' + percentWidth +
@@ -1062,7 +1050,7 @@ function SpitSched(courseSched) {
                         var oldClasses = thisBlock.attr('class').split(' ');
                         var oldMeetFull = oldClasses[1]; // Get the courseSched key (so we can get the meetHour and HourLength values)
                         var oldMeetDay = oldClasses[2]; // Don't compare blocks on different days cause they can't overlap anyway
-                        if (oldMeetFull !== sec && oldMeetDay === weekdays[possDay]) { // If we aren't comparing a section to itself & if the two meetings are on the same day
+                        if (oldMeetFull !== sec && oldMeetDay === meetLetterDay) { // If we aren't comparing a section to itself & if the two meetings are on the same day
                             if (TwoOverlap(courseSched[oldMeetFull], courseSched[sec])) { // Check if they overlap
                                 var oldBlockWidth = thisBlock.outerWidth() * 100 / $('#Schedule').outerWidth();
                                 thisBlock.css('width', (oldBlockWidth / 2) + '%'); // Resize old block

@@ -102,7 +102,7 @@ function PullReview(index) {
 					// Get data
 					var courseNum = sectionIDs[alias].split('-')[1];
 					var courseID = sectionIDs[alias].split('-')[0] + ' ' + courseNum;
-					var instID = deptReviews[rev].instructor.id;
+					var instID = deptReviews[rev].instructor.id.replace('-', ' ').split(' ')[1].replace(/--/g, '. ').replace(/-/g, ' ');
 					// var instName = deptReviews[rev].instructor.name;
 					var courseQual = Number(deptReviews[rev].ratings.rCourseQuality);
 					var courseDiff = Number(deptReviews[rev].ratings.rDifficulty);
