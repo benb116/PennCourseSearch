@@ -3,7 +3,7 @@ console.time('Modules loaded');
 var path        = require('path');
 var express     = require('express');
 var compression = require('compression');
-var stormpath   = require('express-stormpath');
+// var stormpath   = require('express-stormpath');
 var request     = require("request");
 var colors      = require('colors');
 var fs          = require('fs');
@@ -39,24 +39,24 @@ var app = express();
 
 // Set express settings
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hjs');
+app.set('view engine', 'jade');
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31536000000 }));
 
 console.log('Express initialized');
 
 // Set up stormpath
-app.use(stormpath.init(app, {
-  apiKeyId:     config.STORMPATH_API_KEY_ID,
-  apiKeySecret: config.STORMPATH_API_KEY_SECRET,
-  secretKey:    config.STORMPATH_SECRET_KEY,
-  application:  config.STORMPATH_URL,
-  enableAccountVerification: true,
-  enableForgotPassword:      true,
-  expandCustomData:          true,
-  // Make sessions expire after one week
-  sessionDuration:      1000 * 60 * 60 * 24 * 7
-}));
+// app.use(stormpath.init(app, {
+//   apiKeyId:     config.STORMPATH_API_KEY_ID,
+//   apiKeySecret: config.STORMPATH_API_KEY_SECRET,
+//   secretKey:    config.STORMPATH_SECRET_KEY,
+//   application:  config.STORMPATH_URL,
+//   enableAccountVerification: true,
+//   enableForgotPassword:      true,
+//   expandCustomData:          true,
+//   // Make sessions expire after one week
+//   sessionDuration:      1000 * 60 * 60 * 24 * 7
+// }));
 
 // Set up Keen Analytics
 var client = new Keen({
@@ -124,29 +124,18 @@ var currentTerm = '2016A';
 var latestRev = '2015C';
 
 // Handle main page requests
-app.get('/', stormpath.loginRequired, function(req, res) {
-  if (!req.user && req.headers.autotest !== config.autotestKey) {
-    // If the user is not logged in
-    return res.render('welcome');
-  } else {
-    var pennkey;
-    if (!req.user) { // If this is an approved automated request
-      pennkey = 'autotest';
-    } else {
-      pennkey = req.user.email.split('@')[0];
-    }
-    var thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
-    var fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
-    return res.render('index', { // Send page
-      title: 'PennCourseSearch',
-      subtitle: thissub,
-      user: pennkey,
-      paymentNote: fullPaymentNote,
-      // statusMessage: "We're experiencing some issues with Penn InTouch (what a shock). Please hang tight!" // Everything's OK in hebrew
-      statusMessage: "hakol beseder" // Everything's OK in hebrew
-      // statusMessage: 'Do you love PennCourseSearch more than Wawa? Do you hate it more than DRL? Let <a href="mailto:bernsb@seas.upenn.edu?subject=PCS feedback">Ben</a> know what you think!'
-    });
-  }
+app.get('/', function(req, res) {
+  var thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
+  var fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
+  // return res.render('index', { // Send page
+  //   title: 'PennCourseSearch',
+  //   subtitle: thissub,
+  //   paymentNote: fullPaymentNote,
+  //   // statusMessage: "We're experiencing some issues with Penn InTouch (what a shock). Please hang tight!" // Everything's OK in hebrew
+  //   statusMessage: "hakol beseder" // Everything's OK in hebrew
+  //   // statusMessage: 'Do you love PennCourseSearch more than Wawa? Do you hate it more than DRL? Let <a href="mailto:bernsb@seas.upenn.edu?subject=PCS feedback">Ben</a> know what you think!'
+  // });
+  res.sendFile(path.join(__dirname+'/index.html'));
 });
 
 // For use below when sending JSON files
@@ -187,13 +176,12 @@ var resultTypes = {
 var BASE_URL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term=';
 
 // Manage search requests
-app.get('/Search', stormpath.loginRequired, function(req, res) {
+app.get('/Search', function(req, res) {
   var searchParam   = req.query.searchParam;  // The search terms
   var searchType    = req.query.searchType;   // Course ID, Keyword, or Instructor
   var resultType    = req.query.resultType;   // Course numbers, section numbers, section info
   var instructFilter= req.query.instFilter;   // Is there an instructor filter?
-  var myPennkey     = req.user.email.split('@')[0]; // Get Pennkey
-
+  console.log('yes')
   // Building the request URI
   var reqSearch = buildURI(req.query.reqParam, 'reqFilter');
   var proSearch = buildURI(req.query.proParam, 'proFilter');
@@ -214,7 +202,6 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
 
   // Keen.io logging
   var searchEvent;
-  logEvent('Search', searchEvent);
 
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
   if (searchType  === 'courseIDSearch' && 
@@ -225,10 +212,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
         if (err) {return res.send({});}
         searchEvent = {
           searchType: searchType, 
-          searchParam: searchParam,
-          user: myPennkey
+          searchParam: searchParam
         };
-        logEvent('Search', searchEvent);
+        // logEvent('Search', searchEvent);
         return res.send(ParseDeptList(JSON.parse(data)));
       });
     } catch(err) {
@@ -260,10 +246,9 @@ app.get('/Search', stormpath.loginRequired, function(req, res) {
       }
       searchEvent = {
         searchType: searchType, 
-        searchParam: searchParam,
-        user: myPennkey
+        searchParam: searchParam
       };
-      logEvent('Search', searchEvent);
+      // logEvent('Search', searchEvent);
       return res.send(JSON.stringify(searchResponse)); // return correct info
     });
   }
@@ -297,7 +282,7 @@ function GetRevData (dept, num, inst) {
 
 function ParseDeptList (res) {
   for (var course in res) {
-    var courData = res[course].courseListName.split(' ');
+    var courData = res[course].idSpaced.split(' ');
     var courDept = courData[0];
     var courNum = courData[1];
     res[course].courseRevs = GetRevData(courDept, courNum);
@@ -382,7 +367,7 @@ function parseSectionList(Res) {
       var thisEntry = Res.result_data[key];
       if (!thisEntry.is_cancelled) {
         var SectionName = thisEntry.section_id_normalized.replace(/ /g, "").replace(/-/g, " ");
-        var sectionNameNoSpace = thisEntry.section_id;
+        var sectionNameNoSpace = thisEntry.section_id.replace(/ /g, "").replace(/  /g, "");
         var TimeInfoArray = getTimeInfo(thisEntry); // Get meeting times for a section
         var StatusClass = TimeInfoArray[0];
         var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
@@ -507,137 +492,125 @@ function parseSectionInfo(Res) {
   }
 }
 
-app.get('/NewReview', stormpath.loginRequired, function(req, res) {
-  var thedept = req.query.dept;
-  try {
-    res.sendFile(thedept+'.json', sendRevOpts, function (err) {
-      if (err) {
-        // console.log(err);
-        res.status(err.status).end();
-      }
-    });
-  } catch(err) {
-    return res.send('');
-  }
-});
+// app.get('/NewReview', function(req, res) {
+//   var thedept = req.query.dept;
+//   try {
+//     res.sendFile(thedept+'.json', sendRevOpts, function (err) {
+//       if (err) {
+//         // console.log(err);
+//         res.status(err.status).end();
+//       }
+//     });
+//   } catch(err) {
+//     return res.send('');
+//   }
+// });
 
-// Manage requests regarding starred courses
-app.post('/Star', stormpath.loginRequired, function(req, res) {
-  var StarredCourses = [];
-  var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
+// // Manage requests regarding starred courses
+// app.post('/Star', function(req, res) {
+//   var StarredCourses = [];
+//   var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
 
-  if(!req.user.customData.Starlist) {req.user.customData.Starlist = [];}
-  StarredCourses = req.user.customData.Starlist;
-  var addRem = req.query.addRem; // Are we adding, removing, or clearing?
-  var courseID = req.query.courseID;
+//   if(!req.user.customData.Starlist) {req.user.customData.Starlist = [];}
+//   StarredCourses = req.user.customData.Starlist;
+//   var addRem = req.query.addRem; // Are we adding, removing, or clearing?
+//   var courseID = req.query.courseID;
 
-  var index;
-  if (addRem === 'add') { 
-    index = StarredCourses.indexOf(courseID);
-    if (index === -1) { // If the section is not already in the list
-      StarredCourses.push(courseID);
-      var starEvent = {
-        starCourse: courseID,
-        user: myPennkey,
-        keen: {timestamp: new Date().toISOString()}
-      };
-      logEvent('Star', starEvent);
-    }     
-  } else if (addRem === 'rem') { // If we need to remove
-    index = StarredCourses.indexOf(courseID);
-    if (index > -1) {StarredCourses.splice(index, 1);}
+//   var index;
+//   if (addRem === 'add') { 
+//     index = StarredCourses.indexOf(courseID);
+//     if (index === -1) { // If the section is not already in the list
+//       StarredCourses.push(courseID);
+//       var starEvent = {
+//         starCourse: courseID,
+//         user: myPennkey,
+//         keen: {timestamp: new Date().toISOString()}
+//       };
+//       logEvent('Star', starEvent);
+//     }     
+//   } else if (addRem === 'rem') { // If we need to remove
+//     index = StarredCourses.indexOf(courseID);
+//     if (index > -1) {StarredCourses.splice(index, 1);}
 
-  } else if (addRem === 'clear') { // Clear all
-    StarredCourses = [];
-  }
-  req.user.customData.Starlist = StarredCourses;
-  req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
-  return res.send(StarredCourses);
-});
+//   } else if (addRem === 'clear') { // Clear all
+//     StarredCourses = [];
+//   }
+//   req.user.customData.Starlist = StarredCourses;
+//   req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
+//   return res.send(StarredCourses);
+// });
 
 // Manage scheduling requests
-app.post('/Sched', stormpath.loginRequired, function(req, res) {
-  var addRem      = req.query.addRem; // Are we adding, removing, or clearing?
+app.post('/Sched', function(req, res) {
   var courseID    = req.query.courseID;
-  var schedName   = req.query.schedName;
-  var schedRename = req.query.schedRename;
-  var myPennkey   = req.user.email.split('@')[0]; // Get Pennkey
-  var userScheds  = req.user.customData.Schedules;
 
-  if(!userScheds) {  // If there are no schedules defined
-    userScheds = {'Schedule': {}};
-  }
-  if(!userScheds[schedName] && typeof schedName !== 'undefined') {
-    userScheds[schedName] = {}; // Create a schedule if the name doesn't exist
-  }
-  var SchedCourses = userScheds[schedName];
+ //  if (addRem === 'add') { // If we need to add, then we get meeting info for the section
+ //      AddToSched(courseID, schedName); // Format the response
+ //  } else if (addRem === 'rem') { // If we need to remove
+ //    for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
+ //      if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") === courseID) { // Find all meeting times of a given course
+ //        delete SchedCourses[meetsec];
+ //      }}
+ //    }
+ //    userScheds[schedName] = SchedCourses;
 
-  if (addRem === 'add') { // If we need to add, then we get meeting info for the section
-      AddToSched(courseID, schedName); // Format the response
-  } else if (addRem === 'rem') { // If we need to remove
-    for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
-      if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") === courseID) { // Find all meeting times of a given course
-        delete SchedCourses[meetsec];
-      }}
-    }
-    userScheds[schedName] = SchedCourses;
+ //  } else if (addRem === 'dup') { // Duplicate a schedule
+ //    var normName = NormalizeName(schedName);
+ //    userScheds[normName] = SchedCourses;
 
-  } else if (addRem === 'dup') { // Duplicate a schedule
-    var normName = NormalizeName(schedName);
-    userScheds[normName] = SchedCourses;
+ //  } else if (addRem === 'ren') { // Rename
+ //    userScheds[schedRename] = userScheds[schedName];
+ //    delete userScheds[schedName];
 
-  } else if (addRem === 'ren') { // Rename
-    userScheds[schedRename] = userScheds[schedName];
-    delete userScheds[schedName];
+ //  } else if (addRem === 'clr') { // Clear all
+ //    userScheds[schedName] = {};
 
-  } else if (addRem === 'clr') { // Clear all
-    userScheds[schedName] = {};
+ //  } else if (addRem === 'del') { // Delete
+ //    delete userScheds[schedName];
+ //    if(Object.getOwnPropertyNames(userScheds).length === 0){
+ //      userScheds.Schedule = {};
+ //    } 
+ //  }
 
-  } else if (addRem === 'del') { // Delete
-    delete userScheds[schedName];
-    if(Object.getOwnPropertyNames(userScheds).length === 0){
-      userScheds.Schedule = {};
-    } 
-  }
+ //  req.user.customData.Schedules = userScheds;
+ //  req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
 
-  req.user.customData.Schedules = userScheds;
-  req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
+ // if (addRem === 'rem' || addRem === 'clr') {
+ //    return res.send(userScheds[schedName]);
+ //  } else if (addRem !== 'add') {
+ //    return res.send(userScheds);
+ //  }
 
- if (addRem === 'rem' || addRem === 'clr') {
-    return res.send(userScheds[schedName]);
-  } else if (addRem !== 'add') {
-    return res.send(userScheds);
-  }
+  // function AddToSched (secID, whichSched) {
+  var SchedCourses = {};
+  request({
+    uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
+    method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
+  }, function(error, response, body) {
+    var resJSON = getSchedInfo(body); // Format the response
+    for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
+      SchedCourses[JSONSecID] = resJSON[JSONSecID];
+    }}
+    var schedEvent = {schedCourse: courseID};
+    // logEvent('Sched', schedEvent);
+    // userScheds[whichSched] = SchedCourses;
+    // req.user.customData.Schedules = userScheds;
+    // req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
+    return res.send(SchedCourses);
+  });
+  // }
 
-  function AddToSched (secID, whichSched) {
-    request({
-      uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+secID,
-      method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
-    }, function(error, response, body) {
-      var resJSON = getSchedInfo(body); // Format the response
-      for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
-        SchedCourses[JSONSecID] = resJSON[JSONSecID];
-      }}
-      var schedEvent = {schedCourse: secID, user: myPennkey, keen: {timestamp: new Date().toISOString()}};
-      logEvent('Sched', schedEvent);
-      userScheds[whichSched] = SchedCourses;
-      req.user.customData.Schedules = userScheds;
-      req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
-      return res.send(SchedCourses);
-    });
-  }
-
-  function NormalizeName (possibleName) {
-    while (Object.keys(userScheds).indexOf(possibleName) !== -1) {
-      var lastchar = possibleName[possibleName.length - 1];
-      if (isNaN(lastchar) || possibleName[possibleName.length - 2] !== ' ') { // e.g. 'schedule' or 'ABC123'
-        possibleName += ' 2';
-      } else { // e.g. 'MEAM 101 2'
-        possibleName = possibleName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
-      }
-    }
-    return possibleName;
-  }
+  // function NormalizeName (possibleName) {
+  //   while (Object.keys(userScheds).indexOf(possibleName) !== -1) {
+  //     var lastchar = possibleName[possibleName.length - 1];
+  //     if (isNaN(lastchar) || possibleName[possibleName.length - 2] !== ' ') { // e.g. 'schedule' or 'ABC123'
+  //       possibleName += ' 2';
+  //     } else { // e.g. 'MEAM 101 2'
+  //       possibleName = possibleName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
+  //     }
+  //   }
+  //   return possibleName;
+  // }
 });
 
 function getSchedInfo(JSONString) { // Get the properties required to schedule the section
@@ -688,10 +661,10 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
   }
 }
 
-app.post('/Notify', stormpath.loginRequired, function(req, res) {
+app.post('/Notify', function(req, res) {
   var secID = req.query.secID;
   var formatSecID = secID.replace(/-/g, ' ');
-  var userEmail = req.user.email;
+  var userEmail = req.query.email;
 
   request({
       uri: 'http://www.penncoursenotify.com/',
@@ -708,7 +681,7 @@ app.post('/Notify', stormpath.loginRequired, function(req, res) {
       } catch(err) {
         console.log(err);
       }
-      logEvent('Notify', {user: userEmail.split("@")[0], secID: secID});
+      // logEvent('Notify', {user: userEmail.split("@")[0], secID: secID});
       return res.send(returnText);
   });
 });

@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    Init();
+    ListScheds(0);
     if (DetectIE()) { // IE doesn't do animated SVG's
         $('#LoadingInfo').html('Loading ...');
     }
@@ -32,10 +34,10 @@ $(document).ready(function() {
         closeButton: ".modal_close"
     }); // Define modal close button
 
-    var schedURL = "/Sched?addRem=pull"; // Make the initial schedule list request. Returns the list of schedules and the first schedule's classes
-    SendReq({reqType: 'post', url: schedURL, fun: ListScheds, passVar: 0});
-    var starURL = "/Star?addRem=show"; // Make initial star list request. Returns the list of starred classes
-    SendReq({reqType: 'post', url: starURL, fun: 'sessionStorage', passVar: 'starList'});
+    // var schedURL = "/Sched?addRem=pull"; // Make the initial schedule list request. Returns the list of schedules and the first schedule's classes
+    // SendReq({reqType: 'post', url: schedURL, fun: ListScheds, passVar: 0});
+    // var starURL = "/Star?addRem=show"; // Make initial star list request. Returns the list of starred classes
+    // SendReq({reqType: 'post', url: starURL, fun: 'sessionStorage', passVar: 'starList'});
 
     ClickTriggers(); // This defines all of the click handlers (see below)
     MenuTriggers(); // This provides functionality to the "Schedule" dropdown
@@ -51,18 +53,18 @@ $(document).ready(function() {
             });
         }, 300);
     } else {
-        var statusMessage = $('#StatusMessage').text();
-        if (statusMessage !== 'hakol beseder') { // If there is a status message from the server, it will be passed in the #StatusMessage block
-            setTimeout(function() {
-                sweetAlert({
-                    title: 'PCS Alert',
-                    html: true,
-                    text: statusMessage,
-                    type: 'warning'
-                });
-            }, 300);
-            console.log(statusMessage);
-        }
+        // var statusMessage = $('#StatusMessage').text();
+        // if (statusMessage !== 'hakol beseder') { // If there is a status message from the server, it will be passed in the #StatusMessage block
+        //     setTimeout(function() {
+        //         sweetAlert({
+        //             title: 'PCS Alert',
+        //             html: true,
+        //             text: statusMessage,
+        //             type: 'warning'
+        //         });
+        //     }, 300);
+        //     console.log(statusMessage);
+        // }
     }
 
     $('#CSearch').on('input', function() { // When the search terms change
@@ -79,6 +81,15 @@ $(document)
 .ajaxComplete(function() {
     $('#LoadingInfo').css('display', 'none'); // Hide the loading indicator
 });
+
+
+
+
+function blankSched() {
+    this.term = '2016';
+    this.colorPalette = ['#e74c3c', '#f1c40f', '#3498db', '#9b59b6', '#e67e22', '#2ecc71', '#95a5a6', '#FF73FD', '#73F1FF', '#CA75FF', '#1abc9c', '#F64747', '#ecf0f1'];
+    this.meetings = {};
+}
 
 function SendReq(reqOpts) {
     // Special request wrapper that updates the Loading spinner and automatically passes results to a function
@@ -164,7 +175,7 @@ function ClickTriggers() {
             }
             var secname = FormatID($(this).parent().attr('id')).join("");
 
-            Stars(addRem, secname); // Add/rem the section
+            Star(addRem, secname); // Add/rem the section
 
             $(this).toggleClass('fa-star').toggleClass('fa-star-o'); // Change the star icon
             if (addRem === 'rem' && $(this).parent().attr('class') === 'starredSec') { // If it was removed from the Show Stars list
@@ -227,16 +238,21 @@ function MenuTriggers() {
                 closeOnConfirm: false,
                 animation: "slide-from-top",
             }, function(inputValue) {
+                var schedData = JSON.parse(localStorage.sched);
+                var schedList = Object.keys(schedData);
                 if (inputValue === false) {
                     return false;
                 } else if (inputValue === "") {
                     sweetAlert.showInputError("Your schedule needs a name, silly!");
                     return false;
-                } else if (JSON.parse(sessionStorage.schedList).indexOf(inputValue) !== -1) { // If the user put in a name that already exists
+                } else if (schedList.indexOf(inputValue) !== -1) { // If the user put in a name that already exists
                     sweetAlert.showInputError('Your schedule needs a unique name (e.g. "Seven")');
                 } else {
-                    schedURL = "/Sched?addRem=cre&courseID=blank&schedName=" + inputValue; // Make the request
-                    SendReq({reqType: 'post', url: schedURL, fun: ListScheds, passVar: 1});
+                    // schedURL = "/Sched?addRem=cre&courseID=blank&schedName=" + inputValue; // Make the request
+                    // SendReq({reqType: 'post', url: schedURL, fun: ListScheds, passVar: 1});
+                    schedData[inputValue] = new blankSched();
+                    localStorage.sched = JSON.stringify(schedData);
+                    ListScheds(1);
                     sweetAlert.close();
                 }
             });
@@ -329,7 +345,7 @@ function MenuTriggers() {
 function OtherTriggers() {
     $('#schedSelect').change(function() { // If the user changes the active schedule
         var schedName = $('#schedSelect').val();
-        SpitSched(JSON.parse(sessionStorage.schedInfo)[schedName]);
+        SpitSched(schedName);
     });
 
     $('#reqFilter').change(function() { // If the user changes any filters
@@ -371,9 +387,9 @@ function OtherTriggers() {
     });
 }
 
-function ListScheds(schedInfo, theindex) { // Deal with the list of schedules
+function ListScheds(theindex) { // Deal with the list of schedules
     // Receives all schedule data, makes a list of schedules, chooses the "active" schedule and renders it.
-    var schedList = Object.keys(schedInfo);
+    var schedList = Object.keys(JSON.parse(localStorage.sched));
     var schedSelect = $('#schedSelect');
     schedSelect.empty();
     for (var schedName in schedList) {
@@ -388,11 +404,12 @@ function ListScheds(schedInfo, theindex) { // Deal with the list of schedules
     } else { // If we want to show a specific schedule
         visibleSched = schedList[schedList.length - theindex];
     }
+    // console.log(visibleSched)
     $('#schedSelect').find('option[value="' + visibleSched + '"]').attr("selected", "selected");
-    SpitSched(schedInfo[visibleSched]);
+    SpitSched(visibleSched);
 
-    sessionStorage.schedList = JSON.stringify(schedList);
-    sessionStorage.schedInfo = JSON.stringify(schedInfo);
+    // sessionStorage.schedList = JSON.stringify(schedList);
+    // sessionStorage.schedInfo = JSON.stringify(schedInfo);
 }
 
 function InitiateSearch() { // Deal with course search terms
@@ -554,7 +571,7 @@ function FormatSectionsList(courseInfo, suppress) { // Receive section and star 
         $('#SectionList > ul').empty();
     } else {
         var allHTML = '';
-        var stars = sessionStorage.starList;
+        var stars = JSON.parse(localStorage.stars);
         var sections = courseInfo[0];
         for (var section in sections) {
             if (sections.hasOwnProperty(section)) { // Loop through the sections
@@ -713,11 +730,13 @@ function UpdateSecFilters() { // When a filter value changes, hide and show the 
 }
 
 function UpdatePlusCancel() { // When a course is added or removed, update the plus-x icon of the course
-    var schedSecList = $.map(JSON.parse(sessionStorage.currentSched), function(el) {
-        return el.fullCourseName.replace(/ /g, '');
-    }); // Return a list of scheduled sections in the correct format
+    
+    var schedSecList = Object.keys(JSON.parse(localStorage.sched)[sessionStorage.currentSched].meetings).map(function(sec) {
+        var idArr = FormatID(sec);
+        return idArr[0]+'-'+idArr[1]+'-'+idArr[2];
+    });
     $('#SectionList li').each(function(i) {
-        if (schedSecList.indexOf($(this).attr('id').replace(/-/g, '')) !== -1) {
+        if (schedSecList.indexOf($(this).attr('id')) !== -1) {
             $(this).find('i').first().removeClass('fa-plus').addClass('fa-times');
         } else {
             $(this).find('i').first().removeClass('fa-times').addClass('fa-plus');
@@ -725,17 +744,27 @@ function UpdatePlusCancel() { // When a course is added or removed, update the p
     });
 }
 
-function Stars(addRem, CID) { // Manage star requests
-    var searchURL = "/Star?addRem=" + addRem + "&courseID=" + CID;
-    // SendReq(searchURL, StarHandle, addRem);
-    SendReq({reqType: 'post', url: searchURL, fun: StarHandle, passVar: addRem}); //Send results
+function Star(addRem, secID) {
+    var starList = JSON.parse(localStorage.stars);
+    if (addRem === 'add') {
+        if (starList.indexOf(secID) === -1) {
+                starList.push(secID);
+        }
+    } else if (addRem === 'rem') {
+        if (starList.indexOf(secID) !== -1) {
+        console.log('rem')
+            starList.splice(starList.indexOf(secID), 1);
+        }
+    }
+    localStorage.stars = JSON.stringify(starList);
 }
 
-function StarHandle(data, addRem) {
-    if (typeof data === 'string') {
-        data = JSON.parse(data);
-    } // JSONify the input
-    if (addRem === 'show') { // If the user clicked "Show Stars"
+function StarHandle() {
+    // if (typeof data === 'string') {
+    //     data = JSON.parse(data);
+    // } // JSONify the input
+    var data = JSON.parse(localStorage.stars);
+    // if (addRem === 'show') { // If the user clicked "Show Stars"
         $('#SectionList > ul').empty();
         for (var sec in data) {
             if (data.hasOwnProperty(sec)) { // Request section and time info for each star
@@ -747,10 +776,10 @@ function StarHandle(data, addRem) {
             $('#CourseTitle').html('No starred sections');
             $('#SectionList > ul').empty();
         }
-    } else { // Otherwise, pass through
-        sessionStorage.starList = JSON.stringify(data);
-        return data;
-    }
+    // } else { // Otherwise, pass through
+    //     sessionStorage.starList = JSON.stringify(data);
+    //     return data;
+    // }
 }
 
 function StarFormat(sections) { // Format starred section list
@@ -936,7 +965,12 @@ function ClearSearch() {
     $('#CSearch').val('');
 }
 
-function SpitSched(courseSched) {
+function SpitSched(schedName) {
+    var schedData = JSON.parse(localStorage.sched)[schedName];
+    // console.log(schedName)
+    // console.log(JSON.parse(localStorage.sched)[schedName])
+    var courseSched = schedData.meetings;
+
     var schedElement = $('#Schedule');
     var timeColElement = $('#TimeCol');
     // schedElement.empty(); // Clear
@@ -1013,7 +1047,7 @@ function SpitSched(courseSched) {
     // Define the color map
     var colorMap = {};
     var colorinc = 0;
-    var colorPal = JSON.parse(sessionStorage.colorPalette);
+    var colorPal = schedData.colorPalette;
     for (sec in courseSched) {
         if (courseSched.hasOwnProperty(sec)) {
             colorMap[courseSched[sec].fullCourseName] = colorPal[colorinc]; // assign each section a color
@@ -1073,7 +1107,7 @@ function SpitSched(courseSched) {
         }
     }
 
-    sessionStorage.currentSched = JSON.stringify(courseSched);
+    sessionStorage.currentSched = schedName;
     UpdatePlusCancel();
 }
 

@@ -26,7 +26,7 @@
             ga('send', 'pageview', '/home');
         </script> -->
 	</head>
-    <body>
+    <body ng-controller="CourseController">
         <div id="MenuBar">
             <a rel="leanModal" href="#ModalWindow">About</a>
             <a href="/logout">Logout</a>
@@ -36,17 +36,17 @@
     	   <span>{{ subtitle }}</span> -->
             <form onkeypress="if (event.keyCode == 13) {event.preventDefault();InitiateSearch();}">
                 <span>Search by:</span>
-    			<select id="searchSelect" style="margin-right:1em;">
+    			<select id="searchSelect" style="margin-right:1em;" ng-model="searchType">
                     <option selected="selected" value="courseIDSearch">Course ID</option>
                     <option value="keywordSearch">Keywords</option>
                     <option value="instSearch">Instructor</option>
                 </select>
 
-                <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses..." autofocus="autofocus">
+                <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses..." autofocus="autofocus" ng-model="search" ng-change="change()">
 
                 <!-- <span style="margin-left:1em;" class="OpenSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Open </span><span class="ClosedSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Closed </span> -->
                 
-                <span style="margin-left:1em;">Schedule:</span><select id="schedSelect"></select>
+                <span style="margin-left:1em;">Schedule:</span><select id="schedSelect" ng-model="currentSched"></select>
                 
                 <div id="loaderWrap">
                     <div class="loader" id="LoadingInfo" title="1">
@@ -112,13 +112,13 @@
             </div>
 		</div>
         <div id="BottomResults">
-        	<div id="CourseList" ng-controller="CourseController">
+        	<div id="CourseList">
                 <ul>
-                     <li ng-repeat="course in countries">
-                        <!-- <span class="PCR" style="background-color:rgba(45, 160, 240, {{ course.pcrQShade }};color: {{ course.pcrQColor }} ">{{ course.pcrQ }}</span> -->
-                        <!-- <span class="PCR" style="background-color:rgba(231, 76, 60, {{ course.pcrDShade }};color: {{ course.pcrDColor }} ">{{ course.pcrD }}</span> -->
-                        <span class="cID">{{ course.name }}</span>
-                        <span class="cTitle">{{ course.population }}</span>
+                     <li ng-repeat="course in courses | orderBy:'-courseRevs.cD'">
+                        <span class="PCR" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.courseRevs.cQ | number:2}}</span>
+                        <span class="PCR" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.courseRevs.cD | number:2}}</span>
+                        <span class="cID">{{ course.courseListName }}</span>
+                        <span class="cTitle">{{ course.courseTitle }}</span>
                     </li>
                 </ul>   
             </div>

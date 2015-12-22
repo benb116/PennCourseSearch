@@ -49,8 +49,10 @@ function PullRegistrar(index) {
 	    	// For each section that comes up
 	    	// Get course name (e.g. CIS 120)
 	    	var thisKey = inJSON[key];
-			var spacedName = thisKey.section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' ');
-	    	if (!thisKey.is_cancelled && !resp[spacedName]) {
+			// var spacedName = thisKey.section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' ');
+			var idSpaced = thisKey.course_department + ' ' + thisKey.course_number;
+			var idDashed = idSpaced.replace(' ', '-');
+	    	if (!thisKey.is_cancelled && !resp[idSpaced]) {
 				// console.log(spacedName);
 				var reqList = thisKey.fulfills_college_requirements;
 				var reqCodesList = [];
@@ -58,15 +60,23 @@ function PullRegistrar(index) {
 					reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
 					reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
 				} catch(err) {}
-				resp[spacedName] = {
-					'courseListName': spacedName,
+				resp[idSpaced] = {
+					'idDashed': idDashed,
+					'idSpaced': idSpaced,
 					'courseTitle': thisKey.course_title,
 					'courseReqs': reqCodesList
 				};
 			}
 			if (key == inJSON.length - 1) {
+
+				var arrResp = [];
+				for (var key in resp) {
+					arrResp.push(resp[key]);
+				}
+
+				console.log(arrResp)
 				// At the end of the list
-				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) {
+				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(arrResp), function (err) {
 					// Write JSON to file
 					if (err) {
 						console.log(index+' '+thedept+' '+err);
