@@ -36,17 +36,17 @@
     	   <span>{{ subtitle }}</span> -->
             <form onkeypress="if (event.keyCode == 13) {event.preventDefault();InitiateSearch();}">
                 <span>Search by:</span>
-    			<select id="searchSelect" style="margin-right:1em;" ng-model="searchType">
+    			<select id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="typeChange()">
                     <option selected="selected" value="courseIDSearch">Course ID</option>
                     <option value="keywordSearch">Keywords</option>
                     <option value="instSearch">Instructor</option>
                 </select>
 
-                <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses..." autofocus="autofocus" ng-model="search" ng-change="change()">
+                <input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="Search for courses..." autofocus="autofocus" ng-model="search" ng-change="searchChange()">
 
                 <!-- <span style="margin-left:1em;" class="OpenSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Open </span><span class="ClosedSec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span> = Closed </span> -->
                 
-                <span style="margin-left:1em;">Schedule:</span><select id="schedSelect" ng-model="currentSched"></select>
+                <span style="margin-left:1em;">Schedule:</span><select id="schedSelect" ng-model="currentSched" ng-change="schedChange()"></select>
                 
                 <div id="loaderWrap">
                     <div class="loader" id="LoadingInfo" title="1">
@@ -114,18 +114,30 @@
         <div id="BottomResults">
         	<div id="CourseList">
                 <ul>
-                     <li ng-repeat="course in courses | orderBy:'-courseRevs.cD'">
-                        <span class="PCR" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.courseRevs.cQ | number:2}}</span>
-                        <span class="PCR" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.courseRevs.cD | number:2}}</span>
-                        <span class="cID">{{ course.courseListName }}</span>
+                    <!-- | orderBy:'-courseRevs.cQ' -->
+                     <li ng-repeat="course in courses" id="{{ course.idDashed }}" ng-click="courseClick(course.idDashed)">
+                        <span class="PCR" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQ | number:2}}</span>
+                        <span class="PCR" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cD | number:2}}</span>
+                        <span class="cID">{{ course.idSpaced }}</span>
                         <span class="cTitle">{{ course.courseTitle }}</span>
                     </li>
                 </ul>   
             </div>
         	<div id="SectionCol">
         		<div id="Sections">
-                    <span id="CourseTitle"></span>
-                    <div id="SectionList"><ul></ul></div>
+                    <span id="CourseTitle">{{ currentCourse.idSpaced }} {{ currentCourse.title }}</span>
+                    <div id="SectionList">
+                        <ul>
+                            <li ng-repeat="section in sections" id="{{ section.idDashed }}" class="{{section.actType}}" ng-click="sectionClick(section.idDashed)">
+                                <i class="fa" ng-class="{'fa-plus': !section.isScheduled, 'fa-times': section.isScheduled}" ng-click="sched(section.idDashed)"></i>
+                                <span class="statusClass" ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"></span>
+                                <span class="PCR" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span>
+                                <span class="PCR" style="background:rgba(231, 76, 60, {{ section.pcrDShade }});color: {{ section.pcrDColor }} ">{{ section.revs.cD | number:2}}</span>
+                                <span>{{ section.idSpaced}}{{ section.timeInfo }} </span>
+                                <i class="fa" ng-class="{'fa-star': section.isStarred, 'fa-star-o': !section.isStarred}" ng-click="star(section.idDashed)"></i>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
         		<div id="SectionInfo"></div>
         	</div>
@@ -135,7 +147,7 @@
                         <div class="FilterBlock">
                             <span>Filter by requirement</span>
                             <select multiple id="reqFilter" size=7>
-                                {{!-- <option value="noFilter">Filter by requirement</option> --}}
+                                <option value="noFilter">Filter by requirement</option>
                                 <option value="MDS">Society Sector</option>
                                 <option value="MDH">History &amp; Tradition Sector</option>
                                 <option value="MDA">Arts &amp; Letters Sector</option>

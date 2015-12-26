@@ -133,18 +133,18 @@ function ErrorAlert (err) {
 
 function ClickTriggers() {
     $(document.body)
-        .on('click', '#CourseList li', function() { // If a course is clicked in CourseList
-            $('#SectionInfo').empty();
-            var courseName = FormatID($(this).attr('id')).join(""); // Format the course name for searching
+        // .on('click', '#CourseList li', function() { // If a course is clicked in CourseList
+        //     $('#SectionInfo').empty();
+        //     var courseName = FormatID($(this).attr('id')).join(""); // Format the course name for searching
 
-            var searchSelect = $('#searchSelect').val(); // Will we need to have an instructor filter
-            var instFilter = 'all';
-            if (searchSelect === 'instSearch') {
-                instFilter = $('#CSearch').val();
-            }
+        //     var searchSelect = $('#searchSelect').val(); // Will we need to have an instructor filter
+        //     var instFilter = 'all';
+        //     if (searchSelect === 'instSearch') {
+        //         instFilter = $('#CSearch').val();
+        //     }
 
-            GetSectionNumbers(courseName, instFilter); // Search for sections
-        })
+        //     GetSectionNumbers(courseName, instFilter); // Search for sections
+        // })
         .on('click', 'li > i:nth-child(1)', function() { // If a section's add/drop button is clicked in SectionList
             var secname = $(this).parent().attr('id'); // Format the section name for searching
             var schedName = $('#schedSelect').val(); // Which schedule are we changing

@@ -181,7 +181,6 @@ app.get('/Search', function(req, res) {
   var searchType    = req.query.searchType;   // Course ID, Keyword, or Instructor
   var resultType    = req.query.resultType;   // Course numbers, section numbers, section info
   var instructFilter= req.query.instFilter;   // Is there an instructor filter?
-  console.log('yes')
   // Building the request URI
   var reqSearch = buildURI(req.query.reqParam, 'reqFilter');
   var proSearch = buildURI(req.query.proParam, 'proFilter');
@@ -209,7 +208,7 @@ app.get('/Search', function(req, res) {
       !reqSearch && !proSearch && !actSearch && !includeOpen ) {
     try {
       fs.readFile('./2016A/'+searchParam.toUpperCase()+'.json', function (err, data) {
-        if (err) {return res.send({});}
+        if (err) {return res.send([]);}
         searchEvent = {
           searchType: searchType, 
           searchParam: searchParam
@@ -285,7 +284,7 @@ function ParseDeptList (res) {
     var courData = res[course].idSpaced.split(' ');
     var courDept = courData[0];
     var courNum = courData[1];
-    res[course].courseRevs = GetRevData(courDept, courNum);
+    res[course].revs = GetRevData(courDept, courNum);
   }
   return res;
 }
@@ -311,7 +310,7 @@ function parseCourseList(Res) {
         'courseListName': courseListName, 
         'courseTitle': courseTitle,
         'courseReqs': reqCodesList,
-        'courseRevs': revData
+        'revs': revData
       };
     }
   }}
@@ -320,13 +319,11 @@ function parseCourseList(Res) {
 
 function getTimeInfo (JSONObj) { // A function to retrieve and format meeting times
   var OCStatus = JSONObj.course_status;
-  var StatusClass;
+  var isOpen;
   if (OCStatus === "O") {
-    StatusClass = 'OpenSec'; // If section is open, add class open
-  } else if (OCStatus === "C") {
-    StatusClass = 'ClosedSec'; // If section is closed, add class closed
+    isOpen = true; // If section is open, add class open
   } else {
-    StatusClass = 'ErrorSec'; // Otherwise make it gray
+    isOpen = false; // Otherwise make it gray
   }
   var TimeInfo = [];
   try { // Not all sections have time info
@@ -354,7 +351,7 @@ function getTimeInfo (JSONObj) { // A function to retrieve and format meeting ti
     // console.log(("Error getting times" + JSONObj.section_id).red);
     TimeInfo = '';
   }
-  return [StatusClass, TimeInfo];
+  return [isOpen, TimeInfo];
 }
 
 // This function spits out the list of sections that goes in #SectionList
@@ -366,11 +363,11 @@ function parseSectionList(Res) {
     if (Res.result_data.hasOwnProperty(key)) {
       var thisEntry = Res.result_data[key];
       if (!thisEntry.is_cancelled) {
-        var SectionName = thisEntry.section_id_normalized.replace(/ /g, "").replace(/-/g, " ");
-        var sectionNameNoSpace = thisEntry.section_id.replace(/ /g, "").replace(/  /g, "");
-        var TimeInfoArray = getTimeInfo(thisEntry); // Get meeting times for a section
-        var StatusClass = TimeInfoArray[0];
-        var TimeInfo = TimeInfoArray[1][0]; // Get the first meeting slot
+        var idDashed = thisEntry.section_id_normalized.replace(/ /g, "");
+        var idSpaced = idDashed.replace(/-/g, ' ');
+        var timeInfoArray = getTimeInfo(thisEntry); // Get meeting times for a section
+        var isOpen = timeInfoArray[0];
+        var timeInfo = timeInfoArray[1][0]; // Get the first meeting slot
         var actType = thisEntry.activity;
         var SectionInst;
         try {
@@ -382,29 +379,29 @@ function parseSectionList(Res) {
         var revData = GetRevData(thisEntry.course_department, thisEntry.course_number, SectionInst);
         
         // If there are multiple meeting times
-        if (typeof TimeInfoArray[1][1] !== 'undefined') {
-          TimeInfo += ' ...';
+        if (typeof timeInfoArray[1][1] !== 'undefined') {
+          timeInfo += ' ...';
         }
-        if (typeof TimeInfo === 'undefined') {
-          TimeInfo = '';
+        if (typeof timeInfo === 'undefined') {
+          timeInfo = '';
         }
 
-        sectionsList[sectionNameNoSpace] = {
-          'SectionName': SectionName, 
-          'StatusClass': StatusClass, 
-          'TimeInfo': TimeInfo, 
-          'NoSpace': sectionNameNoSpace, 
-          'CourseTitle': Res.result_data[0].course_title,
+        sectionsList[idDashed] = {
+          'idDashed': idDashed, 
+          'idSpaced': idSpaced,
+          'isOpen': isOpen, 
+          'timeInfo': timeInfo, 
+          'courseTitle': Res.result_data[0].course_title,
           'SectionInst': SectionInst,
           'ActType': actType,
-          'courseRevs': revData
+          'revs': revData
         };
       }
     }
   }
   courseInfo = parseSectionInfo(Res);
 
-  return [sectionsList, courseInfo];
+  return sectionsList;
 }
 
 // This function spits out section-specific info
