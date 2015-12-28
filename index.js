@@ -291,7 +291,7 @@ function ParseDeptList (res) {
 
 // This function spits out the list of courses that goes in #CourseList
 function parseCourseList(Res) {
-  var coursesList = {};
+  var coursesList = [];
   for(var key in Res.result_data) { if (Res.result_data.hasOwnProperty(key)) {
     var thisKey   = Res.result_data[key];
     var thisDept  = thisKey.course_department.toUpperCase();
@@ -314,7 +314,11 @@ function parseCourseList(Res) {
       };
     }
   }}
-  return coursesList;
+  var arrResp = [];
+  for (var course in coursesList) {
+    arrResp.push(resp[course]);
+  }
+  return arrResp;
 }
 
 function getTimeInfo (JSONObj) { // A function to retrieve and format meeting times
@@ -357,8 +361,8 @@ function getTimeInfo (JSONObj) { // A function to retrieve and format meeting ti
 // This function spits out the list of sections that goes in #SectionList
 function parseSectionList(Res) {
   // Convert to JSON object
-  var sectionsList = {};
-  var courseInfo = {};
+  var sectionsList = [];
+  // var courseInfo = {};
   for(var key in Res.result_data) {
     if (Res.result_data.hasOwnProperty(key)) {
       var thisEntry = Res.result_data[key];
@@ -386,7 +390,7 @@ function parseSectionList(Res) {
           timeInfo = '';
         }
 
-        sectionsList[idDashed] = {
+        sectionsList.push({
           'idDashed': idDashed, 
           'idSpaced': idSpaced,
           'isOpen': isOpen, 
@@ -394,12 +398,13 @@ function parseSectionList(Res) {
           'courseTitle': Res.result_data[0].course_title,
           'SectionInst': SectionInst,
           'ActType': actType,
-          'revs': revData
-        };
+          'revs': revData,
+          'isScheduled': false
+        });
       }
     }
   }
-  courseInfo = parseSectionInfo(Res);
+  // courseInfo = parseSectionInfo(Res);
 
   return sectionsList;
 }

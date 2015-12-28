@@ -73,8 +73,6 @@ function PullRegistrar(index) {
 				for (var key in resp) {
 					arrResp.push(resp[key]);
 				}
-
-				console.log(arrResp)
 				// At the end of the list
 				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(arrResp), function (err) {
 					// Write JSON to file
