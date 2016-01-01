@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    Init();
+    // Init();
     ListScheds(0);
     if (DetectIE()) { // IE doesn't do animated SVG's
         $('#LoadingInfo').html('Loading ...');

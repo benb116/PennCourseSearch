@@ -291,7 +291,7 @@ function ParseDeptList (res) {
 
 // This function spits out the list of courses that goes in #CourseList
 function parseCourseList(Res) {
-  var coursesList = [];
+  var coursesList = {};
   for(var key in Res.result_data) { if (Res.result_data.hasOwnProperty(key)) {
     var thisKey   = Res.result_data[key];
     var thisDept  = thisKey.course_department.toUpperCase();
@@ -543,7 +543,7 @@ function parseSectionInfo(Res) {
 // });
 
 // Manage scheduling requests
-app.post('/Sched', function(req, res) {
+app.get('/Sched', function(req, res) {
   var courseID    = req.query.courseID;
 
  //  if (addRem === 'add') { // If we need to add, then we get meeting info for the section
@@ -584,7 +584,7 @@ app.post('/Sched', function(req, res) {
  //  }
 
   // function AddToSched (secID, whichSched) {
-  var SchedCourses = {};
+  var SchedCourses = [];
   request({
     uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
     method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
@@ -619,9 +619,9 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
   var Res = JSON.parse(JSONString); // Convert to JSON Object
   var entry = Res.result_data[0];
   try {
-    var SectionName = entry.section_id_normalized.replace(/ /g, "-").replace(/-/g, " "); // Format name
-    var SectionID   = entry.section_id_normalized.replace(/ /g, ""); // Format ID
-    var resJSON   = {};
+    var idDashed   = entry.section_id_normalized.replace(/ /g, ""); // Format ID
+    var idSpaced = idDashed.replace(/-/g, ' ');
+    var resJSON   = [];
     try { // Not all sections have time info
       for(var meeti in entry.meetings) { if (entry.meetings.hasOwnProperty(meeti)) { // Some sections have multiple meetings
         var thisMeet = entry.meetings[meeti];
@@ -641,21 +641,24 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
 
         // Full ID will have sectionID+MeetDays+StartTime
         // This is necessary for classes like PHYS151, which has times: M@13, TR@9, AND R@18
-        var FullID = SectionID+'-'+MeetDays+StartTime.toString().replace(".", "");
+        var FullID = idDashed+'-'+MeetDays+StartTime.toString().replace(".", "");
 
-        resJSON[FullID] = { 
-          'fullCourseName':   SectionName,
-          'HourLength':     hourLength,
+        resJSON.push({ 
+          'fullID': FullID,
+          'idDashed':   idDashed,
+          'idSpaced': idSpaced,
+          'hourLength':     hourLength,
           'meetDay':      MeetDays,
           'meetHour':     StartTime,
-          'meetRoom':     Building+' '+Room
-        };
+          'meetLoc':     Building+' '+Room
+        });
       }}
     }
     catch (err) {
       console.log("Error getting times: "+err);
       var TimeInfo = '';
     }
+    // console.log(JSON.stringify(resJSON))
     return resJSON;
   }
   catch (err) {

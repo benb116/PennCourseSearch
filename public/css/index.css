@@ -337,8 +337,8 @@ ul {
     width: 15px;
     height: 15px;
     color: black;
-    opacity: 0;
-    filter: alpha(opacity=0);
+    opacity: 1;
+    /*filter: alpha(opacity=0);*/
     -webkit-transition: opacity .15s ease-in-out;
     transition: opacity .15s ease-in-out;
 }
