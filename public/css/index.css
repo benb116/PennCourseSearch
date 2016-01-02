@@ -151,7 +151,7 @@ form > input[type="text"] {
     text-align: left;
 }
 #CourseList {
-    width: 250px;
+    width: 275px;
     margin-left: 2.5%;
     text-align: left;
     overflow-y: scroll;
@@ -206,9 +206,16 @@ ul {
 
 #SectionList i:nth-child(1):active {color: #00B3FF;}
 
-.OpenSec {background-color: #47EA4C;}
-.ClosedSec {background-color: #F73B3B;}
-.ErrorSec {background-color: #E6E6E6;}
+.statusClass {display: inline-block; 
+    width:15px; 
+    height: 15px;
+    vertical-align: top;
+    padding-top: 1px;
+    margin-left: 2px;
+}
+.openSec {background-color: #47EA4C;}
+.closedSec {background-color: #F73B3B;}
+.errorSec {background-color: #E6E6E6;}
 .PCRSec {background-color: #1f8dd6;}
 .PCR {
     color: white; 
@@ -217,7 +224,10 @@ ul {
     text-indent: 0;
     display: inline-block; 
     border-radius: 3px;
-    text-align: center;}
+    text-align: center;
+    margin-left: 2px;
+    margin-right: 2px;
+}
 .fa-star, .fa-star-o {
     float: right;
     font-size: 15px;
@@ -337,11 +347,12 @@ ul {
     width: 15px;
     height: 15px;
     color: black;
-    opacity: 1;
+    opacity: 0;
     /*filter: alpha(opacity=0);*/
     -webkit-transition: opacity .15s ease-in-out;
     transition: opacity .15s ease-in-out;
 }
+.CloseX:hover {opacity: 1;}
 .LocName {font-size: 11px; line-height: 11px;}
 
 #lean_overlay {

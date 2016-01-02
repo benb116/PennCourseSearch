@@ -33,8 +33,8 @@
             <a href="/logout">Logout</a>
         </div>
         <div id="Top">
-<!--     	   <h1>{{ title }}</h1>
-    	   <span>{{ subtitle }}</span> -->
+    	   <h1>PennCourseSearch</h1>
+    	   <span>Subtitle</span>
             <form onkeypress="if (event.keyCode == 13) {event.preventDefault();InitiateSearch();}">
                 <span>Search by:</span>
     			<select id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="typeChange()">
@@ -119,8 +119,8 @@
                 <ul>
                     <!-- | orderBy:'-courseRevs.cQ' -->
                      <li ng-repeat="course in courses" id="{{ course.idDashed }}" ng-click="courseClick(course.idDashed)">
-                        <span class="PCR" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQ | number:2}}</span>
-                        <span class="PCR" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cD | number:2}}</span>
+                        <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQ | number:2}}</span>
+                        <span class="PCR Diff" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cD | number:2}}</span>
                         <span class="cID">{{ course.idSpaced }}</span>
                         <span class="cTitle">{{ course.courseTitle }}</span>
                     </li>
@@ -134,16 +134,25 @@
                             <li ng-repeat="section in sections" id="{{ section.idDashed }}" class="{{section.actType}}" ng-click="sectionClick(section.idDashed)">
                                 <i class="fa" ng-class="{'fa-plus': !section.isScheduled, 'fa-times': section.isScheduled}" ng-click="sched(section.idDashed)"></i>
                                 <span class="statusClass" ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"></span>
-                                <span class="PCR" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span>
-                                <span class="PCR" style="background:rgba(231, 76, 60, {{ section.pcrDShade }});color: {{ section.pcrDColor }} ">{{ section.revs.cD | number:2}}</span>
-                                <span>{{ section.idSpaced}}{{ section.timeInfo }} </span>
+                                <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span>
+                                <!-- <span class="PCR Diff" style="background:rgba(231, 76, 60, {{ section.pcrDShade }});color: {{ section.pcrDColor }} ">{{ section.revs.cD | number:2}}</span> -->
+                                <span>{{ section.idSpaced}} - {{ section.timeInfo }} </span>
                                 <i class="fa" ng-class="{'fa-star': section.isStarred, 'fa-star-o': !section.isStarred}" ng-click="star(section.idDashed)"></i>
                             </li>
                         </ul>
                     </div>
                 </div>
         		<div id="SectionInfo">
-                          
+                    <span ng-show="sectionInfo.fullID"> {{sectionInfo.fullID}} - {{sectionInfo.title}} <br><br></span>
+                    <span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></span>
+                    <span ng-show="sectionInfo.timeInfo"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}} <br></span><br></span>
+                    <span ng-show="sectionInfo.description">Description: {{sectionInfo.description}} <br><br></span>
+                    <span ng-show="sectionInfo.openClose"> Status: {{sectionInfo.openClose}} <br><br></span>
+                    <span ng-show="sectionInfo.reqsFilled"><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span><br></span>
+                    <span ng-show="sectionInfo.prereqs"> Prerequisites: {{sectionInfo.prereqs}} <br><br></span>
+                    <span ng-show="sectionInfo.associatedType"> Associated {{sectionInfo.associatedType}}: <br></span>
+                    <span ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="sectionClick(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></span>
+
                 </div>
         	</div>
         	<div id="InfoPanel">

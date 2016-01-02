@@ -3,31 +3,18 @@ var PCS = angular.module('PCSApp', ['LocalStorageModule']);
 PCS.controller('CourseController', function ($scope, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules){
 	$scope.courses = [];
 	$scope.sections = [];
-	$scope.currentCourse = {};
-	$scope.currentSection = {};
+	$scope.currentCourse = '';
+	$scope.currentSection = '';
 	$scope.schedSections = [];
-
+	$scope.searchType = "courseIDSearch";
 
 	localStorageService.bind($scope, 'schedData');
 	localStorageService.bind($scope, 'starSections');
 
-	$scope.schedData = ($scope.schedData || {
-		"Schedule" : {
-			"term": "2016A",
-			"meetings": [
-				// {
-				// 	"fullID": "MEAM-201-001-T15",
-				// 	"idSpaced": "MEAM 201 001",
-				// 	"idDashed": "MEAM-201-001",
-				// 	"hourLength": 1.5,
-				// 	"meetDay": "T",
-				// 	"meetHour": 15,
-				// 	"meetLoc": "TOWN 313"
-				// }
-			],
-			"colorPalette": ["#e74c3c", "#f1c40f", "#3498db", "#9b59b6", "#e67e22", "#2ecc71", "#95a5a6", "#FF73FD", "#73F1FF", "#CA75FF", "#1abc9c", "#F64747", "#ecf0f1"]
-		}
-	});
+	if (!$scope.schedData) {
+		$scope.schedData = {};
+		$scope.schedData.Schedule = new Schedule('2016A');
+	}
 
 	$scope.starSections = ($scope.starSections || []);
 	$scope.schedules = Object.keys($scope.schedData);
@@ -37,29 +24,37 @@ PCS.controller('CourseController', function ($scope, localStorageService, PCR, U
 	$scope.searchChange = function() {
 		var terms = FormatID($scope.search);
 		if(terms[0]) {
-			UpdateCourseList.getDeptCourses(terms[0]).then(function(resp) {
+			UpdateCourseList.getDeptCourses(terms[0], $scope.searchType).then(function(resp) {
 				$scope.courses = resp.data;
 			});
 		}
 		if(terms[1].length === 3) {
+			$scope.currentCourse = terms[1];
 			UpdateSectionList.getCourseSections(terms[0]+terms[1]).then(function(resp) {
-				$scope.sections = resp.data;
+				$scope.sections = resp.data[0];
+				$scope.sectionInfo = resp.data[1];
+				suppressInfo();
 			});
 		} else {
+			$scope.currentCourse = '000';
 			$scope.sections = [];
 		}
 		if(terms[2].length === 3) {
+			$scope.currentSection = terms[2];
 			UpdateSectionInfo.getSectionInfo(terms[0]+terms[1]+terms[2]).then(function(resp) {
 				$scope.sectionInfo = resp.data;
 			});
 		} else {
+			$scope.currentSection = '000';
 			$scope.sectionInfo = [];
 		}
 	};
 	$scope.courseClick = function(cID) {
 		$scope.currentCourse = cID;
 		UpdateSectionList.getCourseSections(cID).then(function(resp) {
-			$scope.sections = resp.data;
+			$scope.sections = resp.data[0];
+			$scope.sectionInfo = resp.data[1];
+			suppressInfo();
 		});
 	};
 	$scope.sectionClick = function(secID) {
@@ -69,7 +64,6 @@ PCS.controller('CourseController', function ($scope, localStorageService, PCR, U
 		});
 	};
 	$scope.sched = function(secID) {
-		console.log(secID)
 		if ($scope.schedSections.indexOf(secID) === -1) {
 			UpdateSchedules.getSchedData(secID).then(function(resp) {
 					var oldData = $scope.schedData[$scope.currentSched].meetings;
@@ -77,7 +71,6 @@ PCS.controller('CourseController', function ($scope, localStorageService, PCR, U
 					$scope.schedData[$scope.currentSched].meetings = newData;
 				});
 		} else {
-			console.log(secID)
 			$scope.schedData[$scope.currentSched].meetings = $scope.schedData[$scope.currentSched].meetings.filter(function(item) {
 				if (item.idDashed === secID) {
 					return false;
@@ -102,6 +95,16 @@ PCS.controller('CourseController', function ($scope, localStorageService, PCR, U
 		return array;
 	}
 
+	function suppressInfo() {
+		if ($scope.currentSection === '000') {
+			delete $scope.sectionInfo.instructor;
+            delete $scope.sectionInfo.openClose;
+            delete $scope.sectionInfo.timeInfo;
+            delete $scope.sectionInfo.associatedType;
+            delete $scope.sectionInfo.associatedSections;
+       }
+	}
+
 	$scope.$watch('courses', function(val, old) {
 		PCR($scope.courses);
 	});
@@ -119,6 +122,12 @@ PCS.controller('CourseController', function ($scope, localStorageService, PCR, U
 	}, true);
 });
 
+function Schedule(term) {
+	this.term = term;
+	this.meetings = [];
+	this.colorPalette = ["#e74c3c", "#f1c40f", "#3498db", "#9b59b6", "#e67e22", "#2ecc71", "#95a5a6", "#FF73FD", "#73F1FF", "#CA75FF", "#1abc9c", "#F64747", "#ecf0f1"];
+}
+
 PCS.factory('PCR', function(){
 	return function PCR(data){
 		angular.forEach(data, function(item, index) {
@@ -134,8 +143,8 @@ PCS.factory('PCR', function(){
 });
 PCS.factory('UpdateCourseList', ['$http', function($http){
 	var retObj = {};
-	retObj.getDeptCourses = function(dept) {
-		return $http.get('/Search?searchType=courseIDSearch&resultType=deptSearch&searchParam='+dept).success(function(data) {
+	retObj.getDeptCourses = function(dept, searchType) {
+		return $http.get('/Search?searchType='+searchType+'&resultType=deptSearch&searchParam='+dept).success(function(data) {
 			return [data];
 		});
 	};
@@ -163,7 +172,7 @@ PCS.factory('UpdateSectionList', ['$http', function($http){
 PCS.factory('UpdateSectionInfo', ['$http', function($http){
 	var retObj = {};
 	retObj.getSectionInfo = function(section) {
-		return $http.get('/Search?searchType=courseIDSearch&resultType=sectsearch&searchParam='+section).success(function(data) {
+		return $http.get('/Search?searchType=courseIDSearch&resultType=sectSearch&searchParam='+section).success(function(data) {
 			return data;
 		});
 	};
@@ -315,7 +324,7 @@ function SpitSched(schedData) {
                         '%;width:' + percentWidth +
                         '%;height:' + blockheight +
                         '%;background-color:' + thiscol +
-                        '"><div class="CloseX" ng-click="sched(\''+courseSched[sec].idDashed+'\')">x</div><span class="SecName">' + blockname + '</span><br><span class="LocName">' + meetRoom + '</span></div>');
+                        '"><div class="CloseX" onclick="" ng-click="console.log(true);sched(\''+courseSched[sec].idDashed+'\')">x</div><span class="SecName">' + blockname + '</span><br><span class="LocName">' + meetRoom + '</span></div>');
 
                     // $('.SchedBlock').each(function(i) { // Check through each previously added meettime
                     //     var thisBlock = $(this);

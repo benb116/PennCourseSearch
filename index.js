@@ -198,9 +198,9 @@ app.get('/Search', function(req, res) {
   if (instructFilter !== 'all' && typeof instructFilter !== 'undefined') {
     baseURL += '&instructor=' + instructFilter;
   }
-
   // Keen.io logging
   var searchEvent;
+  console.log(baseURL)
 
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
   if (searchType  === 'courseIDSearch' && 
@@ -224,6 +224,7 @@ app.get('/Search', function(req, res) {
       uri: baseURL,
       method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
     }, function(error, response, body) {
+
       if (error) {
         console.log('OpenData Request failed:', error);
         return res.send('PCSERROR: request failed');
@@ -235,7 +236,6 @@ app.get('/Search', function(req, res) {
       } catch(err) {
         return res.send("Can't parse JSON response");
       }
-
       // Send the raw data to the appropriate formatting function
       var searchResponse;
       if (resultType in resultTypes) {
@@ -247,6 +247,7 @@ app.get('/Search', function(req, res) {
         searchType: searchType, 
         searchParam: searchParam
       };
+
       // logEvent('Search', searchEvent);
       return res.send(JSON.stringify(searchResponse)); // return correct info
     });
@@ -307,16 +308,18 @@ function parseCourseList(Res) {
       } catch(err) {}
       var revData = GetRevData(thisDept, thisNum);
       coursesList[courseListName] = {
-        'courseListName': courseListName, 
+        'idSpaced': courseListName, 
+        'idDashed': courseListName.replace(/ /g,'-'),
         'courseTitle': courseTitle,
         'courseReqs': reqCodesList,
         'revs': revData
       };
     }
   }}
+  console.log(JSON.stringify(coursesList))
   var arrResp = [];
   for (var course in coursesList) {
-    arrResp.push(resp[course]);
+    arrResp.push(coursesList[course]);
   }
   return arrResp;
 }
@@ -346,7 +349,7 @@ function getTimeInfo (JSONObj) { // A function to retrieve and format meeting ti
         }
 
         var MeetDays = thisMeet.meeting_days; // Output like MWF or TR
-        var meetListInfo = ' - '+StartTime+" to "+EndTime+" on "+MeetDays;
+        var meetListInfo = StartTime+" to "+EndTime+" on "+MeetDays;
         TimeInfo.push(meetListInfo);
       }
     }
@@ -404,9 +407,9 @@ function parseSectionList(Res) {
       }
     }
   }
-  // courseInfo = parseSectionInfo(Res);
+  sectionInfo = parseSectionInfo(Res);
 
-  return sectionsList;
+  return [sectionsList, sectionInfo];
 }
 
 // This function spits out section-specific info
@@ -434,9 +437,6 @@ function parseSectionInfo(Res) {
     }
     var termsOffered  = entry.course_terms_offered;
 
-    for(var listing in meetArray) { if (meetArray.hasOwnProperty(listing)) {
-      TimeInfo += meetArray[listing].split("-")[1] + '<br>';
-    }}
     var OpenClose;
     if (StatusClass === "OpenSec") {
       OpenClose = 'Open';
@@ -473,17 +473,17 @@ function parseSectionInfo(Res) {
     var reqsArray = entry.fulfills_college_requirements;
 
     sectionInfo = {
-      'FullID': FullID, 
+      'fullID': FullID, 
       'CourseID': CourseID,
-      'Title': Title, 
-      'Instructor': Instructor, 
-      'Description': Desc, 
-      'OpenClose': OpenClose, 
+      'title': Title, 
+      'instructor': Instructor, 
+      'description': Desc, 
+      'openClose': OpenClose, 
       'termsOffered': termsOffered, 
-      'Prerequisites': prereq, 
-      'TimeInfo': TimeInfo,
-      'AssociatedType': asscType, 
-      'AssociatedSections': asscList,
+      'prereqs': prereq, 
+      'timeInfo': meetArray,
+      'associatedType': asscType, 
+      'associatedSections': asscList,
       'reqsFilled': reqsArray
     };
     return sectionInfo;
