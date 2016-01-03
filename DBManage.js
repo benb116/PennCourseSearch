@@ -134,9 +134,9 @@ function PullReview(index) {
 					if (typeof resp[courseNum][instID] === 'undefined') {resp[courseNum][instID] = [];}
 					var entry = resp[courseNum][instID];
 					entry.push({
-						'cQ': courseQual,
-						'cD': courseDiff,
-						'cI': courseInst
+						'cQ': (courseQual || 0),
+						'cD': (courseDiff || 0),
+						'cI': (courseInst || 0)
 					});
 				}
 			}

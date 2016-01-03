@@ -200,7 +200,6 @@ app.get('/Search', function(req, res) {
   }
   // Keen.io logging
   var searchEvent;
-  console.log(baseURL)
 
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
   if (searchType  === 'courseIDSearch' && 
@@ -316,7 +315,6 @@ function parseCourseList(Res) {
       };
     }
   }}
-  console.log(JSON.stringify(coursesList))
   var arrResp = [];
   for (var course in coursesList) {
     arrResp.push(coursesList[course]);
@@ -494,124 +492,22 @@ function parseSectionInfo(Res) {
   }
 }
 
-// app.get('/NewReview', function(req, res) {
-//   var thedept = req.query.dept;
-//   try {
-//     res.sendFile(thedept+'.json', sendRevOpts, function (err) {
-//       if (err) {
-//         // console.log(err);
-//         res.status(err.status).end();
-//       }
-//     });
-//   } catch(err) {
-//     return res.send('');
-//   }
-// });
-
-// // Manage requests regarding starred courses
-// app.post('/Star', function(req, res) {
-//   var StarredCourses = [];
-//   var myPennkey = req.user.email.split('@')[0]; // Get Pennkey
-
-//   if(!req.user.customData.Starlist) {req.user.customData.Starlist = [];}
-//   StarredCourses = req.user.customData.Starlist;
-//   var addRem = req.query.addRem; // Are we adding, removing, or clearing?
-//   var courseID = req.query.courseID;
-
-//   var index;
-//   if (addRem === 'add') { 
-//     index = StarredCourses.indexOf(courseID);
-//     if (index === -1) { // If the section is not already in the list
-//       StarredCourses.push(courseID);
-//       var starEvent = {
-//         starCourse: courseID,
-//         user: myPennkey,
-//         keen: {timestamp: new Date().toISOString()}
-//       };
-//       logEvent('Star', starEvent);
-//     }     
-//   } else if (addRem === 'rem') { // If we need to remove
-//     index = StarredCourses.indexOf(courseID);
-//     if (index > -1) {StarredCourses.splice(index, 1);}
-
-//   } else if (addRem === 'clear') { // Clear all
-//     StarredCourses = [];
-//   }
-//   req.user.customData.Starlist = StarredCourses;
-//   req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
-//   return res.send(StarredCourses);
-// });
-
 // Manage scheduling requests
 app.get('/Sched', function(req, res) {
   var courseID    = req.query.courseID;
-
- //  if (addRem === 'add') { // If we need to add, then we get meeting info for the section
- //      AddToSched(courseID, schedName); // Format the response
- //  } else if (addRem === 'rem') { // If we need to remove
- //    for (var meetsec in SchedCourses) { if (SchedCourses.hasOwnProperty(meetsec)) {
- //      if (SchedCourses[meetsec].fullCourseName.replace(/ /g, "") === courseID) { // Find all meeting times of a given course
- //        delete SchedCourses[meetsec];
- //      }}
- //    }
- //    userScheds[schedName] = SchedCourses;
-
- //  } else if (addRem === 'dup') { // Duplicate a schedule
- //    var normName = NormalizeName(schedName);
- //    userScheds[normName] = SchedCourses;
-
- //  } else if (addRem === 'ren') { // Rename
- //    userScheds[schedRename] = userScheds[schedName];
- //    delete userScheds[schedName];
-
- //  } else if (addRem === 'clr') { // Clear all
- //    userScheds[schedName] = {};
-
- //  } else if (addRem === 'del') { // Delete
- //    delete userScheds[schedName];
- //    if(Object.getOwnPropertyNames(userScheds).length === 0){
- //      userScheds.Schedule = {};
- //    } 
- //  }
-
- //  req.user.customData.Schedules = userScheds;
- //  req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
-
- // if (addRem === 'rem' || addRem === 'clr') {
- //    return res.send(userScheds[schedName]);
- //  } else if (addRem !== 'add') {
- //    return res.send(userScheds);
- //  }
-
-  // function AddToSched (secID, whichSched) {
   var SchedCourses = [];
   request({
     uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
     method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
   }, function(error, response, body) {
     var resJSON = getSchedInfo(body); // Format the response
-    for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
-      SchedCourses[JSONSecID] = resJSON[JSONSecID];
-    }}
+    // for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
+    //   SchedCourses[JSONSecID] = resJSON[JSONSecID];
+    // }}
     var schedEvent = {schedCourse: courseID};
     // logEvent('Sched', schedEvent);
-    // userScheds[whichSched] = SchedCourses;
-    // req.user.customData.Schedules = userScheds;
-    // req.user.customData.save(function(err, updatedUser) {if (err) {console.log('ERR: '+err);}});
-    return res.send(SchedCourses);
+    return res.send(resJSON);
   });
-  // }
-
-  // function NormalizeName (possibleName) {
-  //   while (Object.keys(userScheds).indexOf(possibleName) !== -1) {
-  //     var lastchar = possibleName[possibleName.length - 1];
-  //     if (isNaN(lastchar) || possibleName[possibleName.length - 2] !== ' ') { // e.g. 'schedule' or 'ABC123'
-  //       possibleName += ' 2';
-  //     } else { // e.g. 'MEAM 101 2'
-  //       possibleName = possibleName.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
-  //     }
-  //   }
-  //   return possibleName;
   // }
 });
 
