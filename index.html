@@ -16,7 +16,6 @@
         <!-- <script type="text/javascript" src="/js/init.js"></script> -->
         <!-- <script type="text/javascript" src="/js/main.js"></script> -->
         <script type="text/javascript" src="https://rawgit.com/grevory/angular-local-storage/master/dist/angular-local-storage.min.js"></script>
-        <!-- <script type="text/javascript" src="/js/menu.js"></script> -->
         <script type="text/javascript" src="/js/angular.js"></script>
         <!-- <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -110,7 +109,6 @@
                     </select>
                 </div>
                 <ul>
-                    <!-- | orderBy:'-courseRevs.cQ' -->
                      <li ng-repeat="course in courses | orderBy:courseSort" id="{{ course.idDashed }}" ng-class="{{course.courseReqs}}" ng-click="get.Sections(course.idDashed)" ng-show="(!checkArr.length) || ((course.courseReqs.indexOf(checkArr[0]) > -1) && (!checkArr[1] || course.courseReqs.indexOf(checkArr[1]) > -1))">
                         <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQ | number:2}}</span>
                         <span class="PCR Diff" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cD | number:2}}</span>
@@ -121,16 +119,15 @@
             </div>
         	<div id="SectionCol">
         		<div id="Sections">
-                    <span id="CourseTitle">{{ currentCourse.idSpaced }} {{ currentCourse.title }}</span>
                     <div id="SectionList">
                         <ul>
                             <li ng-repeat="section in sections" id="{{ section.idDashed }}" class="{{section.actType}}" ng-show="(showAct == section.actType || showAct == 'noFilter') && (section.isOpen || showClosed)">
-                                <i class="fa" ng-class="{'fa-plus': !section.isScheduled, 'fa-times': section.isScheduled}" ng-click="sched.AddRem(section.idDashed)"></i>
+                                <i class="fa" ng-class="{'fa-plus': schedSections.indexOf(section.idDashed) === -1, 'fa-times': schedSections.indexOf(section.idDashed) > -1}" ng-click="sched.AddRem(section.idDashed)"></i>
                                 <span class="statusClass" ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"></span>
-                                <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cI | number:2}}</span>
+                                <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span>
                                 <!-- <span class="PCR Diff" style="background:rgba(231, 76, 60, {{ section.pcrDShade }});color: {{ section.pcrDColor }} ">{{ section.revs.cD | number:2}}</span> -->
                                 <span ng-click="get.SectionInfo(section.idDashed)">{{ section.idSpaced}} - {{ section.timeInfo }} </span>
-                                <i class="fa" ng-class="{'fa-star': section.isStarred, 'fa-star-o': !section.isStarred}" ng-click="star(section.idDashed)"></i>
+                                <i class="fa" ng-class="{'fa-star': starSections.indexOf(section.idDashed) > -1, 'fa-star-o': starSections.indexOf(section.idDashed) === -1}" ng-click="star(section.idDashed)"></i>
                             </li>
                         </ul>
                     </div>

@@ -22,9 +22,11 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 	$scope.subtitle = subtitles[Math.floor(Math.random() * subtitles.length)];
 	$scope.paymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)];
 	$scope.clearSearch = function() {
+		$scope.search = '';
 		$scope.courses = [];
 		$scope.sections = [];
 		$scope.sectionInfo = {};
+		$scope.currentDept = '';
 		$scope.currentCourse = '';
 		$scope.currentSection = '';
 		$scope.schedSections = [];
@@ -39,7 +41,6 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 		$scope.checkArr = [];
 	};
 	$scope.clearSearch();
-
 
 	localStorageService.bind($scope, 'schedData');
 	localStorageService.bind($scope, 'starSections');
@@ -67,17 +68,15 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 			$scope.currentDept = '';
 		}
 		if(terms[1].length === 3) {
-			$scope.get.Sections(terms[0]+terms[1]);
+			$scope.get.Sections(terms[0], terms[1], terms[2]);
+			$scope.get.SectionInfo(terms[0], terms[1], terms[2]);
 		} else {
 			$scope.currentCourse = '000';
 			$scope.sections = [];
-		}
-		if(terms[2].length === 3) {
-			$scope.get.SectionInfo(terms[0]+terms[1]+terms[2]);
-		} else {
 			$scope.currentSection = '000';
 			$scope.sectionInfo = {};
 		}
+		
 	};
 	$scope.get = {
 		Courses: function(param, type, req, pro) {
@@ -90,12 +89,20 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 				$scope.courses = resp.data;
 			});
 		},
-		Sections: function(cID) {
+		Sections: function(dept, num, sec) {
+			console.log(dept)
+			if (!num) {
+				terms = FormatID(dept);
+				dept = terms[0];
+				num = terms[1];
+				sec = '';
+			}
+			var cID = dept+num;
 			$scope.currentCourse = cID;
 			UpdateSectionList.getCourseSections(cID).then(function(resp) {
 				$scope.sections = resp.data[0];
-				$scope.sectionInfo = resp.data[1];
-				if ($scope.currentSection === '000') {
+				if (sec.length < 3) {
+					$scope.sectionInfo = resp.data[1];
 					delete $scope.sectionInfo.instructor;
 		            delete $scope.sectionInfo.openClose;
 		            delete $scope.sectionInfo.timeInfo;
@@ -104,7 +111,14 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 		       }
 			});
 		},
-		SectionInfo: function(secID) {
+		SectionInfo: function(dept, num, sec) {
+			if (!num) {
+				terms = FormatID(dept);
+				dept = terms[0];
+				num = terms[1];
+				sec = terms[2];
+			}
+			var secID = dept+num+sec;
 			$scope.currentSection = secID;
 			UpdateSectionInfo.getSectionInfo(secID).then(function(resp) {
 				$scope.sectionInfo = resp.data;
@@ -113,7 +127,6 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 	};
 	$scope.star = function(secID) {
 		addrem(secID, $scope.starSections);
-		UpdateSectionList.updateStarStatus($scope.sections, $scope.starSections);
 	};
 	$scope.sched = {
 		AddRem: function(secID) {
@@ -157,7 +170,7 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
                 } else if (inputValue === "") {
                     sweetAlert.showInputError("Your schedule needs a name, silly!");
                     return false;
-                } else if (inputValue !== Uniquify(inputValue)) { // If the user put in a name that already exists
+                } else if (inputValue !== Uniquify(inputValue, $scope.schedules)) { // If the user put in a name that already exists
                     sweetAlert.showInputError('Your schedule needs a unique name (e.g. "Seven")');
                 } else {
                 	$scope.schedData[inputValue] = new Schedule('2016A');
@@ -168,7 +181,7 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
             });
 		},
 		Duplicate: function() {
-			var uniqueName = Uniquify($scope.currentSched);
+			var uniqueName = Uniquify($scope.currentSched, $scope.schedules);
 			$scope.schedData[uniqueName] = $scope.schedData[$scope.currentSched];
 			$scope.currentSched = uniqueName;
 			sweetAlert({
@@ -191,7 +204,7 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
                 } else if (inputValue === "") {
                     sweetAlert.showInputError("Your schedule needs a name, silly!");
                     return false;
-                } else if (inputValue !== Uniquify(inputValue)) { // If the user put in a name that already exists
+                } else if (inputValue !== Uniquify(inputValue, $scope.schedules)) { // If the user put in a name that already exists
                     sweetAlert.showInputError('Your schedule needs a unique name (e.g. "Seven")');
                 } else {
                 	$scope.schedData[inputValue] = $scope.schedData[$scope.currentSched];
@@ -247,49 +260,11 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 		}
 	};
 
-	function Uniquify (name) {
-		if ($scope.schedules.indexOf(name) === -1) {
-			return name;
-		} else {
-			var lastchar = name[name.length - 1];
-			if (isNaN(lastchar) || name[name.length - 2] !== ' ') { // e.g. 'schedule' or 'ABC123'
-				name += ' 2';
-			} else { // e.g. 'MEAM 101 2'
-				name = name.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
-			}
-			return Uniquify(name);
-		}
-	}
-	
-	var delay = (function() {var timer = 0;return function(callback, ms) {clearTimeout(timer);timer = setTimeout(callback, ms);};})();
-
-	shuffle = function(v) {
-        for (var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
-        return v;
-    };
-
-	function addrem (item, array) {
-		var index = array.indexOf(item);
-		if (index === -1) {
-			array.push(item);
-		} else {
-			array.splice(index, 1);
-		}
-		return array;
-	}
-
-	$('a[rel*=leanModal]').leanModal({
-        top: 70,
-        closeButton: ".modal_close"
-    }); // Define modal close button
-
 	$scope.$watch('courses', function(val, old) {
 		PCR($scope.courses);
 	});
 	$scope.$watch('sections', function(val, old) {
 		PCR($scope.sections);
-		UpdateSectionList.updateSchedStatus($scope.sections, $scope.schedSections);
-		UpdateSectionList.updateStarStatus($scope.sections, $scope.starSections);
 	});
 	$scope.$watch('schedData', function(val, old) {
 		SpitSched($scope.schedData[$scope.currentSched]);
@@ -297,7 +272,6 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 			return $scope.schedData[$scope.currentSched].meetings[index].idDashed;
 		});
 		$scope.schedules = Object.keys($scope.schedData);
-		UpdateSectionList.updateSchedStatus($scope.sections, $scope.schedSections);
 	}, true);
 	$scope.$watch('currentSched', function(val, old) {
 		SpitSched($scope.schedData[$scope.currentSched]);
@@ -305,7 +279,6 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 			return $scope.schedData[$scope.currentSched].meetings[index].idDashed;
 		});
 		$scope.schedules = Object.keys($scope.schedData);
-		UpdateSectionList.updateSchedStatus($scope.sections, $scope.schedSections);
 	}, true);
 	$scope.$watch('check', function(val, old){
 		$scope.checkArr = [];
@@ -316,12 +289,20 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 			$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
 		}
 	}, true);
+	$scope.$watch('showPro', function(val, old) {
+		$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
+	});
 	$scope.$watch(function() {
 	    return $http.pendingRequests.length;
 	}, function() {
     	$scope.loading = ($http.pendingRequests.length !== 0);
 	});
 });
+
+$('a[rel*=leanModal]').leanModal({
+        top: 70,
+        closeButton: ".modal_close"
+    }); // Define modal close button
 
 function Schedule(term) {
 	this.term = term;
@@ -349,7 +330,7 @@ PCS.factory('UpdateCourseList', ['$http', function($http, PCR){
 	retObj.getDeptCourses = function(dept, searchType, reqFilter, proFilter) {
 		var url = '/Search?searchType='+searchType+'&resultType=deptSearch&searchParam='+dept;
 		if (reqFilter) {url += '&reqParam='+reqFilter;}
-		if (proFilter) {url += '&proParam='+proFilter;}
+		if (proFilter && proFilter !== 'noFilter') {url += '&proParam='+proFilter;}
 		return $http.get(url).success(function(data) {
 			return data;
 		});
@@ -361,16 +342,6 @@ PCS.factory('UpdateSectionList', ['$http', function($http){
 	retObj.getCourseSections = function(course) {
 		return $http.get('/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam='+course).success(function(data) {
 			return data;
-		});
-	};
-	retObj.updateSchedStatus = function(sections, schedSections) {
-		angular.forEach(sections, function(section, index) {
-			section.isScheduled = (schedSections.indexOf(section.idDashed) > -1);
-		});
-	};
-	retObj.updateStarStatus = function(sections, starSections) {
-		angular.forEach(sections, function(section, index) {
-			section.isStarred = (starSections.indexOf(section.idDashed) > -1);
 		});
 	};
 	return retObj;
@@ -393,6 +364,37 @@ PCS.factory('UpdateSchedules', ['$http', function($http) {
 	};
 	return retObj;
 }]);
+
+function Uniquify (name, arr) {
+	if (arr.indexOf(name) === -1) {
+		return name;
+	} else {
+		var lastchar = name[name.length - 1];
+		if (isNaN(lastchar) || name[name.length - 2] !== ' ') { // e.g. 'schedule' or 'ABC123'
+			name += ' 2';
+		} else { // e.g. 'MEAM 101 2'
+			name = name.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
+		}
+		return Uniquify(name, arr);
+	}
+}
+
+var delay = (function() {var timer = 0;return function(callback, ms) {clearTimeout(timer);timer = setTimeout(callback, ms);};})();
+
+shuffle = function(v) {
+    for (var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
+    return v;
+};
+
+function addrem (item, array) {
+	var index = array.indexOf(item);
+	if (index === -1) {
+		array.push(item);
+	} else {
+		array.splice(index, 1);
+	}
+	return array;
+}
 
 function FormatID(searchTerms) {
     var splitTerms = searchTerms.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
