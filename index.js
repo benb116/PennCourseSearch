@@ -81,13 +81,12 @@ pusher.devices(function(error, response) {
 });
 
 console.log('Plugins initialized');
-
+console.time('Reviews loaded');
 var allRevs     = require('./loadRevs.js');
-console.log('Reviews loaded');
+console.timeEnd('Reviews loaded');
 
 git.short(function (str) {
   console.log('Current git commit:', str);
-  // => aefdd94 
 });
 
 // Start the server
@@ -177,10 +176,12 @@ var BASE_URL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_sear
 
 // Manage search requests
 app.get('/Search', function(req, res) {
-  var searchParam   = req.query.searchParam;  // The search terms
-  var searchType    = req.query.searchType;   // Course ID, Keyword, or Instructor
-  var resultType    = req.query.resultType;   // Course numbers, section numbers, section info
-  var instructFilter= req.query.instFilter;   // Is there an instructor filter?
+  var searchParam     = req.query.searchParam;  // The search terms
+  var searchType      = req.query.searchType;   // Course ID, Keyword, or Instructor
+  var resultType      = req.query.resultType;   // Course numbers, section numbers, section info
+  var instructFilter  = req.query.instFilter;   // Is there an instructor filter?
+
+  if (req.query.reqParam == 'MDO' || req.query.reqParam == 'MDN') {req.query.reqParam += ',MDB';}
   // Building the request URI
   var reqSearch = buildURI(req.query.reqParam, 'reqFilter');
   var proSearch = buildURI(req.query.proParam, 'proFilter');
@@ -257,10 +258,10 @@ var reqCodes = {
   Society: "MDS",
   History: "MDH",
   Arts: "MDA",
-  Humanities: "MDO,MDB",
+  Humanities: "MDO",
   Living: "MDL",
   Physical: "MDP",
-  Natural: "MDN,MDB",
+  Natural: "MDN",
   Writing: "MWC",
   College: "MQS",
   Formal: "MFR",
@@ -398,7 +399,7 @@ function parseSectionList(Res) {
           'timeInfo': timeInfo, 
           'courseTitle': Res.result_data[0].course_title,
           'SectionInst': SectionInst,
-          'ActType': actType,
+          'actType': actType,
           'revs': revData,
           'isScheduled': false
         });

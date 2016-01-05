@@ -1,14 +1,45 @@
 var PCS = angular.module('PCSApp', ['LocalStorageModule']);
 
-PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules){
-	$scope.courses = [];
-	$scope.sections = [];
-	$scope.currentCourse = '';
-	$scope.currentSection = '';
-	$scope.schedSections = [];
-	$scope.searchType = "courseIDSearch";
-	$scope.loading = ($http.pendingRequests.length !== 0);
-	console.log($scope.loading)
+PCS.controller('CourseController', function ($scope, $http, $filter, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules){
+	var subtitles = [
+		"Cause PennInTouch sucks", 
+		"You can press the back button, but you don't even need to.",
+		"Invented by Benjamin Franklin in 1793",
+		"Focus on your classes, not your schedule.",
+		"Faster than you can say 'Wawa run'",
+		"Classes sine PennCourseSearch vanae.",
+		"On PennCourseSearch, no one knows you're Amy G.",
+		"Designed by Ben in Speakman. Assembled in China.",
+		"Help! I'm trapped in a NodeJS server! Bring Chipotle!",
+		"Actually in touch."
+	];
+	var paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";
+	var paymentNotes = [
+		"PennCourseSearch%20rocks%20my%20socks!",
+		"Donation%20to%20PennInTouch%20Sucks,%20Inc.",
+		"For%20your%20next%20trip%20to%20Wawa"
+	];
+	$scope.subtitle = subtitles[Math.floor(Math.random() * subtitles.length)];
+	$scope.paymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)];
+	$scope.clearSearch = function() {
+		$scope.courses = [];
+		$scope.sections = [];
+		$scope.sectionInfo = {};
+		$scope.currentCourse = '';
+		$scope.currentSection = '';
+		$scope.schedSections = [];
+		$scope.searchType = "courseIDSearch";
+		$scope.loading = ($http.pendingRequests.length !== 0);
+		$scope.courseSort = 'idDashed';
+		$scope.showClosed = true;
+		$scope.showAct = 'noFilter';
+		$scope.showReq = ['noFilter'];
+		$scope.showPro = 'noFilter';
+		$scope.check = {};
+		$scope.checkArr = [];
+	};
+	$scope.clearSearch();
+
 
 	localStorageService.bind($scope, 'schedData');
 	localStorageService.bind($scope, 'starSections');
@@ -28,10 +59,12 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			$scope.initiateSearch($scope.search);
 		}, 500);
 	};
-	$scope.initiateSearch = function(param) {
+	$scope.initiateSearch = function(param, courseType) {
 		var terms = FormatID(param);
 		if(terms[0]) {
-			$scope.get.Courses(terms[0]);
+			$scope.get.Courses(terms[0], courseType);
+		} else {
+			$scope.currentDept = '';
 		}
 		if(terms[1].length === 3) {
 			$scope.get.Sections(terms[0]+terms[1]);
@@ -43,13 +76,17 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			$scope.get.SectionInfo(terms[0]+terms[1]+terms[2]);
 		} else {
 			$scope.currentSection = '000';
-			$scope.sectionInfo = [];
+			$scope.sectionInfo = {};
 		}
-	}
+	};
 	$scope.get = {
-		Courses: function(param) {
-			$scope.loading = ($http.pendingRequests.length !== 0);
-			UpdateCourseList.getDeptCourses(param, $scope.searchType).then(function(resp) {
+		Courses: function(param, type, req, pro) {
+			if (!param) {param = '';}
+			if (!type) {type = $scope.searchType;}
+			if (!req) {reqText = '';} else {reqText = req;}
+			if (!pro) {pro = $scope.showPro;}
+			$scope.currentDept = param;
+			UpdateCourseList.getDeptCourses(param, type, reqText, pro).then(function(resp) {
 				$scope.courses = resp.data;
 			});
 		},
@@ -241,6 +278,11 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		return array;
 	}
 
+	$('a[rel*=leanModal]').leanModal({
+        top: 70,
+        closeButton: ".modal_close"
+    }); // Define modal close button
+
 	$scope.$watch('courses', function(val, old) {
 		PCR($scope.courses);
 	});
@@ -250,7 +292,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		UpdateSectionList.updateStarStatus($scope.sections, $scope.starSections);
 	});
 	$scope.$watch('schedData', function(val, old) {
-		console.log($scope.currentSched)
 		SpitSched($scope.schedData[$scope.currentSched]);
 		$scope.schedSections = $scope.schedData[$scope.currentSched].meetings.map(function(value, index) {
 			return $scope.schedData[$scope.currentSched].meetings[index].idDashed;
@@ -265,6 +306,15 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		});
 		$scope.schedules = Object.keys($scope.schedData);
 		UpdateSectionList.updateSchedStatus($scope.sections, $scope.schedSections);
+	}, true);
+	$scope.$watch('check', function(val, old){
+		$scope.checkArr = [];
+		for (var req in $scope.check) {
+			if ($scope.check[req]) {$scope.checkArr.push(req);}
+		}
+		if (!($scope.courses.length && $scope.currentDept !== '') && $scope.checkArr.length == 1) {
+			$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
+		}
 	}, true);
 	$scope.$watch(function() {
 	    return $http.pendingRequests.length;
@@ -288,14 +338,19 @@ PCS.factory('PCR', function(){
 			item.pcrDShade = Math.pow(dFrac, 3)*2;
 			if (qFrac < 0.35) {item.pcrQColor = 'black';} else {item.pcrQColor = 'white';}
 			if (dFrac < 0.35) {item.pcrDColor = 'black';} else {item.pcrDColor = 'white';}
+			item.revs.QDratio = item.revs.cQ / item.revs.cD;
+			if (isNaN(item.revs.QDratio) || !isFinite(item.revs.QDratio)) {item.revs.QDratio = 0;}
 		});
 		return data;
 	};
 });
 PCS.factory('UpdateCourseList', ['$http', function($http, PCR){
 	var retObj = {};
-	retObj.getDeptCourses = function(dept, searchType) {
-		return $http.get('/Search?searchType='+searchType+'&resultType=deptSearch&searchParam='+dept).success(function(data) {
+	retObj.getDeptCourses = function(dept, searchType, reqFilter, proFilter) {
+		var url = '/Search?searchType='+searchType+'&resultType=deptSearch&searchParam='+dept;
+		if (reqFilter) {url += '&reqParam='+reqFilter;}
+		if (proFilter) {url += '&proParam='+proFilter;}
+		return $http.get(url).success(function(data) {
 			return data;
 		});
 	};
@@ -470,7 +525,7 @@ function SpitSched(schedData) {
                     var thiscol         = (colorMap[courseSched[sec].idDashed] || "#E6E6E6"); // Get the color
                     var newid 			= courseSched[sec].fullID.replace(".", "");
 
-                    schedElement.append('<div onclick="angular.element(this).scope().initiateSearch(\''+courseSched[sec].idDashed+'\')" class="SchedBlock ' + courseSched[sec].idDashed + ' ' + meetLetterDay + '" id="' + newid + // Each block has three classes: SchedBlock, The courseSched entry, and the weekday. Each block has a unique ID
+                    schedElement.append('<div onclick="angular.element(this).scope().initiateSearch(\''+courseSched[sec].idDashed+'\', \'courseIDSearch\')" class="SchedBlock ' + courseSched[sec].idDashed + ' ' + meetLetterDay + '" id="' + newid + // Each block has three classes: SchedBlock, The courseSched entry, and the weekday. Each block has a unique ID
                         '" style="top:' + blocktop +
                         '%;left:' + blockleft +
                         '%;width:' + percentWidth +
@@ -483,7 +538,8 @@ function SpitSched(schedData) {
                     //     var oldClasses = thisBlock.attr('class').split(' ');
                     //     var oldMeetFull = oldClasses[1]; // Get the courseSched key (so we can get the meetHour and hourLength values)
                     //     var oldMeetDay = oldClasses[2]; // Don't compare blocks on different days cause they can't overlap anyway
-                    //     if (oldMeetFull !== sec && oldMeetDay === meetLetterDay) { // If we aren't comparing a section to itself & if the two meetings are on the same day
+                    //     console.log(oldClasses)
+                    //     if (oldMeetFull !== courseSched[sec].idDashed && oldMeetDay === meetLetterDay) { // If we aren't comparing a section to itself & if the two meetings are on the same day
                     //         if (TwoOverlap(courseSched[oldMeetFull], courseSched[sec])) { // Check if they overlap
                     //             var oldBlockWidth = thisBlock.outerWidth() * 100 / $('#Schedule').outerWidth();
                     //             thisBlock.css('width', (oldBlockWidth / 2) + '%'); // Resize old block

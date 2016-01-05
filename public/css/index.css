@@ -29,7 +29,7 @@ i {
 
 #MenuBar {
     height: 2em;
-    width: 18em;
+    width: 6em;
     position: absolute;
     top: 0;
     right: 0;
@@ -39,7 +39,7 @@ i {
     line-height: 2em;
 }
 #MenuBar > a {
-    margin-right: 2em;
+    /*margin-right: 2em;*/
     text-decoration: none;
     color: black;
 }
@@ -318,7 +318,7 @@ ul {
     overflow: hidden;     
 }
 .FilterBlock > input {margin: 0 1em 0 .5em;}
-#reqFilter {margin-top:.75em;}
+#reqFilter {line-height: 12px; text-indent: 0em; padding-left: 1.75em; height: 7em; overflow-y: scroll;}
 
 
 #SchedGraph {
