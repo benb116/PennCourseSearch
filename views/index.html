@@ -13,9 +13,8 @@
         <script async type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
         <script async type="text/javascript" src="/js/sweetalert.min.js"></script>
         <script type="text/javascript" src="/js/jquery.leanModal.min.js"></script>
-        <!-- <script type="text/javascript" src="/js/init.js"></script> -->
-        <!-- <script type="text/javascript" src="/js/main.js"></script> -->
         <script type="text/javascript" src="https://rawgit.com/grevory/angular-local-storage/master/dist/angular-local-storage.min.js"></script>
+        <script type="text/javascript" src="/js/functions.js"></script>
         <script type="text/javascript" src="/js/angular.js"></script>
         <!-- <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -33,7 +32,7 @@
         </div>
         <div id="Top">
     	   <h1>PennCourseSearch</h1>
-    	   <span>{{ subtitle }}</span>
+    	   <span id="subtitle">{{ subtitle }}</span>
             <form>
                 <span>Search by:</span>
     			<select id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="searchChange()">
@@ -80,7 +79,7 @@
                 <p>To add a section to your schedule, click on its '+' icon. To remove a course, mouse over it and click the 'X' in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
                 <br>
                 <div class="ModalThird">
-                    <span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a href="{{ paymentNote }}" target="_blank"><span class="logo"></span><span class="label">Venmo Me</span></a>
+                    <span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Venmo Me</span></a>
                 </div>
                 <div class="ModalThird">
                     <span>Questions or comments?</span>

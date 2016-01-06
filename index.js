@@ -38,25 +38,10 @@ try {
 var app = express();
 
 // Set express settings
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31536000000 }));
 
 console.log('Express initialized');
-
-// Set up stormpath
-// app.use(stormpath.init(app, {
-//   apiKeyId:     config.STORMPATH_API_KEY_ID,
-//   apiKeySecret: config.STORMPATH_API_KEY_SECRET,
-//   secretKey:    config.STORMPATH_SECRET_KEY,
-//   application:  config.STORMPATH_URL,
-//   enableAccountVerification: true,
-//   enableForgotPassword:      true,
-//   expandCustomData:          true,
-//   // Make sessions expire after one week
-//   sessionDuration:      1000 * 60 * 60 * 24 * 7
-// }));
 
 // Set up Keen Analytics
 var client = new Keen({
@@ -98,43 +83,12 @@ app.listen(process.env.PORT || 3000, function(){
   }
 });
 
-// Rotating subtitles
-var subtitles = [
-  "Cause PennInTouch sucks", 
-  "You can press the back button, but you don't even need to.",
-  "Invented by Benjamin Franklin in 1793",
-  "Focus on your classes, not your schedule.",
-  "Faster than you can say 'Wawa run'",
-  "Classes sine PennCourseSearch vanae.",
-  "On PennCourseSearch, no one knows you're Amy G.",
-  "Designed by Ben in Speakman. Assembled in China.",
-  "Help! I'm trapped in a NodeJS server! Bring Chipotle!",
-  "Actually in touch."
-];
-
-var paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";
-var paymentNotes = [
-  "PennCourseSearch%20rocks%20my%20socks!",
-  "Donation%20to%20PennInTouch%20Sucks,%20Inc.",
-  "For%20your%20next%20trip%20to%20Wawa"
-];
-
 var currentTerm = '2016A';
 var latestRev = '2015C';
 
 // Handle main page requests
 app.get('/', function(req, res) {
-  var thissub = subtitles[Math.floor(Math.random() * subtitles.length)]; // Get random subtitle
-  var fullPaymentNote = paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]; // Get random payment note
-  // return res.render('index', { // Send page
-  //   title: 'PennCourseSearch',
-  //   subtitle: thissub,
-  //   paymentNote: fullPaymentNote,
-  //   // statusMessage: "We're experiencing some issues with Penn InTouch (what a shock). Please hang tight!" // Everything's OK in hebrew
-  //   statusMessage: "hakol beseder" // Everything's OK in hebrew
-  //   // statusMessage: 'Do you love PennCourseSearch more than Wawa? Do you hate it more than DRL? Let <a href="mailto:bernsb@seas.upenn.edu?subject=PCS feedback">Ben</a> know what you think!'
-  // });
-  res.sendFile(path.join(__dirname+'/index.html'));
+  res.sendFile(path.join(__dirname+'/views/index.html'));
 });
 
 // For use below when sending JSON files
