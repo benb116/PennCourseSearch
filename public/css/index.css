@@ -452,7 +452,7 @@ ul {
 .ModalThird {
     display: inline-block; width: 30%;
     vertical-align: top;
-    /*margin-top: 2em;*/
+    margin-top: 2em;
 }
 #SchedImage {
     width: 100%;

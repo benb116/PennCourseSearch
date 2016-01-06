@@ -23,8 +23,8 @@ $(document).ready(function() {
 		"Donation%20to%20PennInTouch%20Sucks,%20Inc.",
 		"For%20your%20next%20trip%20to%20Wawa"
 	];
-	$('#subtitle').html(subtitles[Math.floor(Math.random() * subtitles.length)]);
-	$('#paymentNote').attr('href', paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]);
+	$('#subtitle').html(subtitles[Math.floor(Math.random() * subtitles.length)]); // Show a random subtitle
+	$('#paymentNote').attr('href', paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]); // Use a random payment note
 
 	if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) { // Doesn't look good on mobile, so tell the user
         setTimeout(function() {
@@ -52,6 +52,8 @@ $(document).ready(function() {
 });
 
 function ErrorAlert(err) {
+    // Shows an error dialog and logs the error to the console
+    // Also includes the error report in an email that can be sent to Ben
     console.log(err);
     sweetAlert({
         title: '#awkward',
@@ -62,33 +64,38 @@ function ErrorAlert(err) {
 }
 
 function Schedule(term) {
-	this.term = term;
+    // This is a blank schedule object constructor
+	this.term = term; // e.g. "2016A"
 	this.meetings = [];
-	this.colorPalette = ["#e74c3c", "#f1c40f", "#3498db", "#9b59b6", "#e67e22", "#2ecc71", "#95a5a6", "#FF73FD", "#73F1FF", "#CA75FF", "#1abc9c", "#F64747", "#ecf0f1"];
+	this.colorPalette = ["#e74c3c", "#f1c40f", "#3498db", "#9b59b6", "#e67e22", "#2ecc71", "#95a5a6", "#FF73FD", "#73F1FF", "#CA75FF", "#1abc9c", "#F64747", "#ecf0f1"]; // Standard colorPalette
 }
 
 function Uniquify (name, arr) {
+    // Given an array and a string, this ensures that the string doesn't already exist in the array
 	if (arr.indexOf(name) === -1) {
 		return name;
-	} else {
+	} else { // If it does, then we "+1" the string
 		var lastchar = name[name.length - 1];
-		if (isNaN(lastchar) || name[name.length - 2] !== ' ') { // e.g. 'schedule' or 'ABC123'
-			name += ' 2';
+		if (isNaN(lastchar) || name[name.length - 2] !== ' ') { // e.g. if string == 'schedule' or 'ABC123'
+			name += ' 2'; // becomes 'schedule 2' or 'ABC123 2'
 		} else { // e.g. 'MEAM 101 2'
-			name = name.slice(0, -2) + ' ' + (parseInt(lastchar) + 1);
+			name = name.slice(0, -2) + ' ' + (parseInt(lastchar) + 1); // becomes "MEAM 101 3"
 		}
-		return Uniquify(name, arr);
+		return Uniquify(name, arr); // Make sure that this new name is unique
 	}
 }
 
 var delay = (function() {var timer = 0;return function(callback, ms) {clearTimeout(timer);timer = setTimeout(callback, ms);};})();
 
 shuffle = function(v) {
+    // Randomly reorders an array.
+    //+ Jonas Raoni Soares Silva @ http://jsfromhell.com/array/shuffle [v1.0]
     for (var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
     return v;
 };
 
 function addrem (item, array) {
+    // Adds or removes an item from an array depending on whether the array already contains that item.
 	var index = array.indexOf(item);
 	if (index === -1) {
 		array.push(item);
@@ -99,24 +106,23 @@ function addrem (item, array) {
 }
 
 function validEmail(email) {
+    // Regex test to see if an email is valid
     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
 
 function promptNotify (secID) {
+    // Register a user for notifications from PCN
 	secID = secID.replace(/-/g, ' ');
-	var email;
-	if (localStorage.email) {
-		email = localStorage.email;
-	} else {
-		email = '';
-	}
+    // Has the user put in an email already?
+    var email = (localStorage.email || '');
+
 	sweetAlert({
 		title: "PennCourseNotify",
-		text: "Please enter your email for notifications for "+secID,
+		text: "Get notified when "+secID+" opens up.",
         type: "input",
         inputPlaceholder: "bfrank@sas.upenn.edu",
-        inputValue: email,
+        inputValue: email, // Make previous email defaut input value
         showCancelButton: true,
         closeOnConfirm: false,
         animation: "slide-from-top"
@@ -126,9 +132,9 @@ function promptNotify (secID) {
         } else if (inputValue === "") {
             sweetAlert.showInputError("Please enter an email address");
             return false;
-        } else if (!validEmail(inputValue)) { // If the user put in a name that already exists
+        } else if (!validEmail(inputValue)) { // If the user did not put in a valid email
             sweetAlert.showInputError('Please enter a valid email');
-        } else {
+        } else { // If it's all good
         	email = inputValue;
         	localStorage.email = email;
             registerNotify(secID, email);
@@ -137,12 +143,15 @@ function promptNotify (secID) {
 }
 
 function registerNotify(secID, email) {
-	sweetAlert({title: 'Requesting'});
+	sweetAlert({title: 'Requesting...'});
 	$.post('/Notify?secID='+secID+'&email='+email).done(function(res, one, two) {
 		var stat;
 		if (two.status === 200) {
 			stat = 'success';
-		} else {
+		} else if (two.status >= 400) { // If there was an actual PCS server error or something
+            sweetAlert.close();
+            ErrorAlert(two);
+        } else {
 			stat = 'error';
 		}
 		sweetAlert({

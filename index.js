@@ -3,7 +3,6 @@ console.time('Modules loaded');
 var path        = require('path');
 var express     = require('express');
 var compression = require('compression');
-// var stormpath   = require('express-stormpath');
 var request     = require("request");
 var colors      = require('colors');
 var fs          = require('fs');
