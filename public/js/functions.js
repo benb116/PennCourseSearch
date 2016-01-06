@@ -35,18 +35,19 @@ $(document).ready(function() {
             });
         }, 300);
     } else {
-        // var statusMessage = $('#StatusMessage').text();
-        // if (statusMessage !== 'hakol beseder') { // If there is a status message from the server, it will be passed in the #StatusMessage block
-        //     setTimeout(function() {
-        //         sweetAlert({
-        //             title: 'PCS Alert',
-        //             html: true,
-        //             text: statusMessage,
-        //             type: 'warning'
-        //         });
-        //     }, 300);
-        //     console.log(statusMessage);
-        // }
+    	$.get('/Status').done(function(statusMessage) {
+    		if (statusMessage !== 'hakol beseder') { // If there is a status message from the server, it will be passed in the #StatusMessage block
+	            setTimeout(function() {
+	                sweetAlert({
+	                    title: 'PCS Alert',
+	                    html: true,
+	                    text: statusMessage,
+	                    type: 'warning'
+	                });
+	            }, 300);
+	            console.log(statusMessage);
+        	}
+    	});
     }
 });
 
@@ -95,6 +96,62 @@ function addrem (item, array) {
 		array.splice(index, 1);
 	}
 	return array;
+}
+
+function validEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+function promptNotify (secID) {
+	secID = secID.replace(/-/g, ' ');
+	var email;
+	if (localStorage.email) {
+		email = localStorage.email;
+	} else {
+		email = '';
+	}
+	sweetAlert({
+		title: "PennCourseNotify",
+		text: "Please enter your email for notifications for "+secID,
+        type: "input",
+        inputPlaceholder: "bfrank@sas.upenn.edu",
+        inputValue: email,
+        showCancelButton: true,
+        closeOnConfirm: false,
+        animation: "slide-from-top"
+	}, function(inputValue) {
+        if (inputValue === false) {
+            return false;
+        } else if (inputValue === "") {
+            sweetAlert.showInputError("Please enter an email address");
+            return false;
+        } else if (!validEmail(inputValue)) { // If the user put in a name that already exists
+            sweetAlert.showInputError('Please enter a valid email');
+        } else {
+        	email = inputValue;
+        	localStorage.email = email;
+            registerNotify(secID, email);
+        }
+    });
+}
+
+function registerNotify(secID, email) {
+	sweetAlert({title: 'Requesting'});
+	$.post('/Notify?secID='+secID+'&email='+email).done(function(res, one, two) {
+		var stat;
+		if (two.status === 200) {
+			stat = 'success';
+		} else {
+			stat = 'error';
+		}
+		sweetAlert({
+			text: res,
+			title: 'PennCourseNotify',
+			type: stat,
+			timer: 3000
+		});
+	});
 }
 
 function FormatID(searchTerms) {
@@ -205,7 +262,7 @@ function SpitSched(schedData) {
     var colorMap = {};
     var colorinc = 0;
     var colorPal = schedData.colorPalette;
-    for (var sec in courseSched) {
+    for (sec in courseSched) {
     	var secID = courseSched[sec].idDashed;
     	if (!colorMap[secID]) {
     		colorMap[secID] = colorPal[colorinc];

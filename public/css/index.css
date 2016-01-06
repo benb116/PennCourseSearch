@@ -265,6 +265,9 @@ ul {
     vertical-align: top;
     padding-top: 1px;
     margin-left: 2px;
+    text-align: center;
+    line-height: 13px;
+    border-radius: 2px;
 }
 .openSec {background-color: #47EA4C;}
 .closedSec {background-color: #F73B3B;}
@@ -286,6 +289,14 @@ ul {
     font-size: 15px;
     line-height: 15px;
     color: #01256e;
+}
+.fa-envelope {
+    color: white;
+    font-size: 12px;
+    /*margin: auto;*/
+    /*text-align: center;*/
+    /*line-height: 8px;*/
+    /*margin-bottom: 3px;*/
 }
 
 

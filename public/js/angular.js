@@ -250,6 +250,9 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 			shuffle($scope.schedData[$scope.currentSched].colorPalette);
 		}
 	};
+	$scope.Notify = function (secID) {
+		promptNotify(secID);
+	};
 
 	$scope.$watch('courses', function(val, old) {
 		PCR($scope.courses);

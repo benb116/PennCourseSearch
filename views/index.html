@@ -122,7 +122,7 @@
                         <ul>
                             <li ng-repeat="section in sections" id="{{ section.idDashed }}" class="{{section.actType}}" ng-show="(showAct == section.actType || showAct == 'noFilter') && (section.isOpen || showClosed)" ng-hide="!currentCourse && starSections.indexOf(section.idDashed) === -1">
                                 <i class="fa" ng-class="{'fa-plus': schedSections.indexOf(section.idDashed) === -1, 'fa-times': schedSections.indexOf(section.idDashed) > -1}" ng-click="sched.AddRem(section.idDashed)"></i>
-                                <span class="statusClass" ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"></span>
+                                <span class="statusClass" ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"><i class="fa fa-envelope" ng-show="!section.isOpen" ng-click="Notify(section.idDashed)"></i></span>
                                 <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span>
                                 <!-- <span class="PCR Diff" style="background:rgba(231, 76, 60, {{ section.pcrDShade }});color: {{ section.pcrDColor }} ">{{ section.revs.cD | number:2}}</span> -->
                                 <span ng-click="get.SectionInfo(section.idDashed)">{{ section.idSpaced}} - {{ section.timeInfo }} </span>

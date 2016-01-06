@@ -91,6 +91,10 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname+'/views/index.html'));
 });
 
+app.get('/Status', function(req, res) {
+  res.send('hakol beseder');
+});
+
 // For use below when sending JSON files
 var sendRevOpts     = {root: __dirname + '/'+latestRev+'Rev/', dotfiles: 'deny'};
 var sendCourseOpts  = {root: __dirname + '/'+currentTerm+'/',       dotfiles: 'deny'};
@@ -519,23 +523,26 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
 
 app.post('/Notify', function(req, res) {
   var secID = req.query.secID;
-  var formatSecID = secID.replace(/-/g, ' ');
+  // var formatSecID = secID.replace(/-/g, ' ');
   var userEmail = req.query.email;
 
   request({
       uri: 'http://www.penncoursenotify.com/',
       method: "POST",
-      form: {'course': formatSecID, 'email': userEmail}
+      form: {'course': secID, 'email': userEmail}
     }, function(error, response, body) {
       var returnText = "Sorry, there was an error while trying set up notifications.";
+      res.statusCode = 201;
       try {
         if (response.statusCode === 406) {
           returnText = "Notifications already requested.";
+          res.statusCode = 200;
         } else if (body.split('<h3>')[1].split('</h3>')[0] === "Success!") {
-          returnText = "Great! You'll be notified if this class opens up.";
+          returnText = "Great! You'll be notified if "+secID+" opens up.";
+          res.statusCode = 200;
         }
       } catch(err) {
-        console.log(err);
+        // console.log(err);
       }
       // logEvent('Notify', {user: userEmail.split("@")[0], secID: secID});
       return res.send(returnText);
