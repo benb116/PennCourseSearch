@@ -90,7 +90,6 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 			});
 		},
 		Sections: function(dept, num, sec) {
-			console.log(dept)
 			if (!num) {
 				terms = FormatID(dept);
 				dept = terms[0];
@@ -125,8 +124,20 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 			});
 		}
 	};
-	$scope.star = function(secID) {
-		addrem(secID, $scope.starSections);
+	$scope.star = {
+		AddRem: function(secID) {
+			addrem(secID, $scope.starSections);
+		},
+		Show: function() {
+			$scope.currentCourse = false;
+			$scope.sections = [];
+			for (var sec in $scope.starSections) {
+				UpdateSectionList.getCourseSections($scope.starSections[sec]).then(function(resp) {
+					PCR(resp.data[0]);
+					$scope.sections.push(resp.data[0][0]);
+				});
+			}
+		}
 	};
 	$scope.sched = {
 		AddRem: function(secID) {
@@ -297,12 +308,13 @@ PCS.controller('CourseController', function ($scope, $http, $filter, localStorag
 	}, function() {
     	$scope.loading = ($http.pendingRequests.length !== 0);
 	});
+	$('a[rel*=leanModal]').leanModal({
+	    top: 70,
+	    closeButton: ".modal_close"
+	}); // Define modal close button
 });
 
-$('a[rel*=leanModal]').leanModal({
-        top: 70,
-        closeButton: ".modal_close"
-    }); // Define modal close button
+
 
 function Schedule(term) {
 	this.term = term;
