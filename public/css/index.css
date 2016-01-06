@@ -89,7 +89,7 @@ form > input[type="text"] {
     /*opacity: 0;*/
 }
 .hide {
-    opacity: 0;
+    visibility: hidden;
 }
 @-webkit-keyframes rotation {
   from {
@@ -204,7 +204,7 @@ form > input[type="text"] {
     text-align: left;
 }
 #CourseList {
-    width: 275px;
+    width: 300px;
     margin-left: 2.5%;
     text-align: left;
     overflow-y: scroll;
@@ -238,8 +238,8 @@ ul {
     margin: 0;
 }
 #CourseList li {
-    padding: 0.125em 2em .125em 4em;
-    text-indent: -3em;
+    padding: 0.125em 1em .125em 6.5em;
+    text-indent: -6.25em;
 }
 #SectionList li, #SectionInfo li {
     padding: 0.125em 0.5em .125em 0;
@@ -433,7 +433,7 @@ ul {
     padding: 10px;
     background-color: white;
     color: black;
-    width: 60%; 
+    width: 65%; 
     /*border-radius: 5px;*/
     display: none;
     overflow-y: scroll;
@@ -452,6 +452,7 @@ ul {
 .ModalThird {
     display: inline-block; width: 30%;
     vertical-align: top;
+    /*margin-top: 2em;*/
 }
 #SchedImage {
     width: 100%;

@@ -1,4 +1,4 @@
-var PCS = angular.module('PCSApp', ['LocalStorageModule']);
+var PCS = angular.module('PCSApp', ['LocalStorageModule', '720kb.tooltips']);
 
 PCS.controller('CourseController', function ($scope, $http, $filter, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules){
 	$scope.clearSearch = function() {

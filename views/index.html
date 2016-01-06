@@ -3,17 +3,20 @@
 	<head>
 		<title>PennCourseSearch</title>
 		<meta charset="UTF-8">
-        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/css/index.css"/>
         <link rel="stylesheet" type="text/css" href="/css/plugins.css">
+        <!-- <link rel="stylesheet" type="text/css" href="/css/angular-tooltips.min.css"> -->
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
-        <script async type="text/javascript" src="/js/html2canvas.js"></script>
-        <script async type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
-        <script async type="text/javascript" src="/js/sweetalert.min.js"></script>
-        <script type="text/javascript" src="/js/jquery.leanModal.min.js"></script>
-        <script type="text/javascript" src="https://rawgit.com/grevory/angular-local-storage/master/dist/angular-local-storage.min.js"></script>
+        <script async type="text/javascript" src="/js/plugins/html2canvas.js"></script>
+        <script async type="text/javascript" src="/js/plugins/jquery.tooltipster.min.js"></script>
+        <script async type="text/javascript" src="/js/plugins/sweetalert.min.js"></script>
+        <script type="text/javascript" src="/js/plugins/jquery.leanModal.min.js"></script>
+        <!-- <script type="text/javascript" src="/js/plugins/tether.js"></script> -->
+        <script type="text/javascript" src="/js/plugins/angular-tooltips.min.js"></script>
+        <script type="text/javascript" src="/js/plugins/angular-local-storage.min.js"></script>
         <script type="text/javascript" src="/js/functions.js"></script>
         <script type="text/javascript" src="/js/angular.js"></script>
         <!-- <script>
@@ -74,9 +77,12 @@
                 <h2>About PennCourseSearch</h2>
                 <p>PennCourseSearch is a cleaner and simpler way for Quakers to find classes and make schedules. While this is not a full replacement for Penn InTouch, it acts as an improvement of the "Course Search" and "Mock Schedules" features. Search across departments, courses, and sections and refine searches by specific criteria.</p>
                 <h2>How do I search for courses?</h2>
+                <!-- <div style="background-image:url('/css/Search.png'); width:90%;height:5em;margin:0 auto;background-size:contain;background-repeat:no-repeat;background-position:center"></div> -->
                 <p>Just type a course in the search box. Then you can click on the results to see more in-depth information about different sections. If you want to filter the results, click on the filter button and change your options. You can also choose to search by course description or instructor in the menu bar.</p>
                 <h2>How do I change my schedule?</h2>
                 <p>To add a section to your schedule, click on its '+' icon. To remove a course, mouse over it and click the 'X' in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
+                <h2>What do the colors mean?</h2>
+                <p>The rectangles with numbers are Penn Course Review ratings. Course quality ratings are in <span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);color:white;display:inline;">blue</span> while course difficulty ratings are in <span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);color:white;display:inline;">red</span>. The squares tell you the status of a section. <span class="statusClass openSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is an open section and <span class="statusClass closedSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"><i class="fa fa-envelope"></i></span> is a closed section. </p>
                 <br>
                 <div class="ModalThird">
                     <span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Venmo Me</span></a>
@@ -122,9 +128,9 @@
                         <ul>
                             <li ng-repeat="section in sections" id="{{ section.idDashed }}" class="{{section.actType}}" ng-show="(showAct == section.actType || showAct == 'noFilter') && (section.isOpen || showClosed)" ng-hide="!currentCourse && starSections.indexOf(section.idDashed) === -1">
                                 <i class="fa" ng-class="{'fa-plus': schedSections.indexOf(section.idDashed) === -1, 'fa-times': schedSections.indexOf(section.idDashed) > -1}" ng-click="sched.AddRem(section.idDashed)"></i>
-                                <span class="statusClass" ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"><i class="fa fa-envelope" ng-show="!section.isOpen" ng-click="Notify(section.idDashed)"></i></span>
+                                <span class="statusClass" ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"><i class="fa fa-envelope" ng-show="!section.isOpen" ng-click="Notify(section.idDashed)" tooltips tooltip-template="PennCourseNotify" tooltip-side="right"></i></span>
                                 <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span>
-                                <!-- <span class="PCR Diff" style="background:rgba(231, 76, 60, {{ section.pcrDShade }});color: {{ section.pcrDColor }} ">{{ section.revs.cD | number:2}}</span> -->
+                                <!-- <span class="PCR Inst" style="background:rgba(46, 204, 113, {{ section.pcrIShade }});color: {{ section.pcrIColor }} ">{{ section.revs.cI | number:2}}</span> -->
                                 <span ng-click="get.SectionInfo(section.idDashed)">{{ section.idSpaced}} - {{ section.timeInfo }} </span>
                                 <i class="fa" ng-class="{'fa-star': starSections.indexOf(section.idDashed) > -1, 'fa-star-o': starSections.indexOf(section.idDashed) === -1}" ng-click="star.AddRem(section.idDashed)"></i>
                             </li>
