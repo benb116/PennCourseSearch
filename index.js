@@ -23,15 +23,11 @@ try {
   config = {};
   config.requestAB =  process.env.REQUESTAB;
   config.requestAT =  process.env.REQUESTAT;
-  config.PCRToken =   process.env.PCRTOKEN;
-  config.STORMPATH_API_KEY_ID =     process.env.STORMPATH_API_KEY_ID;
-  config.STORMPATH_API_KEY_SECRET = process.env.STORMPATH_API_KEY_SECRET;
-  config.STORMPATH_SECRET_KEY =     process.env.STORMPATH_SECRET_KEY;
-  config.STORMPATH_URL =            process.env.STORMPATH_URL;
-  config.KeenIOID =       process.env.KEEN_PROJECT_ID;
+  config.PCRToken  =  process.env.PCRTOKEN;
+  config.KeenIOID       = process.env.KEEN_PROJECT_ID;
   config.KeenIOWriteKey = process.env.KEEN_WRITE_KEY;
   config.PushBulletAuth = process.env.PUSHBULLETAUTH;
-  config.autotestKey =    process.env.AUTOTESTKEY;
+  config.autotestKey    = process.env.AUTOTESTKEY;
 }
 
 var app = express();
@@ -65,6 +61,7 @@ pusher.devices(function(error, response) {
 });
 
 console.log('Plugins initialized');
+
 console.time('Reviews loaded');
 var allRevs     = require('./loadRevs.js');
 console.timeEnd('Reviews loaded');
@@ -137,8 +134,8 @@ app.get('/Search', function(req, res) {
   var searchType      = req.query.searchType;   // Course ID, Keyword, or Instructor
   var resultType      = req.query.resultType;   // Course numbers, section numbers, section info
   var instructFilter  = req.query.instFilter;   // Is there an instructor filter?
+  if (req.query.reqParam == 'MDO' || req.query.reqParam == 'MDN') {req.query.reqParam += ',MDB';} // this is stupid
 
-  if (req.query.reqParam == 'MDO' || req.query.reqParam == 'MDN') {req.query.reqParam += ',MDB';}
   // Building the request URI
   var reqSearch = buildURI(req.query.reqParam, 'reqFilter');
   var proSearch = buildURI(req.query.proParam, 'proFilter');
@@ -157,7 +154,8 @@ app.get('/Search', function(req, res) {
     baseURL += '&instructor=' + instructFilter;
   }
   // Keen.io logging
-  var searchEvent;
+  var searchEvent = {searchParam: searchParam};
+  logEvent('Search', searchEvent);
 
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
   if (searchType  === 'courseIDSearch' && 
@@ -165,12 +163,7 @@ app.get('/Search', function(req, res) {
       !reqSearch && !proSearch && !actSearch && !includeOpen ) {
     try {
       fs.readFile('./2016A/'+searchParam.toUpperCase()+'.json', function (err, data) {
-        if (err) {return res.send([]);}
-        searchEvent = {
-          searchType: searchType, 
-          searchParam: searchParam
-        };
-        // logEvent('Search', searchEvent);
+        if (err) {return res.send([]);}        
         return res.send(ParseDeptList(JSON.parse(data)));
       });
     } catch(err) {
@@ -198,14 +191,8 @@ app.get('/Search', function(req, res) {
       if (resultType in resultTypes) {
         searchResponse = resultTypes[resultType](parsedRes);
       } else {
-        searchEvent = {};
+        searchResponse = {};
       }
-      searchEvent = {
-        searchType: searchType, 
-        searchParam: searchParam
-      };
-
-      // logEvent('Search', searchEvent);
       return res.send(JSON.stringify(searchResponse)); // return correct info
     });
   }
@@ -463,7 +450,7 @@ app.get('/Sched', function(req, res) {
     //   SchedCourses[JSONSecID] = resJSON[JSONSecID];
     // }}
     var schedEvent = {schedCourse: courseID};
-    // logEvent('Sched', schedEvent);
+    logEvent('Sched', schedEvent);
     return res.send(resJSON);
   });
   // }
@@ -524,7 +511,9 @@ app.post('/Notify', function(req, res) {
   var secID = req.query.secID;
   // var formatSecID = secID.replace(/-/g, ' ');
   var userEmail = req.query.email;
-
+  
+  var schedEvent = {notifySec: secID};
+  logEvent('Notify', schedEvent);
   request({
       uri: 'http://www.penncoursenotify.com/',
       method: "POST",

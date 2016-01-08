@@ -58,7 +58,7 @@ function ErrorAlert(err) {
     sweetAlert({
         title: '#awkward',
         html: true,
-        text: 'An error occured. Refresh or <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!&body='+encodeURIComponent(JSON.stringify(err))+'">email Ben</a>',
+        text: 'An error occured. Refresh or <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!&body=Error%20message:%20'+encodeURIComponent(JSON.stringify(err))+'">email Ben</a>',
         type: 'error'
     });
 }
@@ -151,7 +151,7 @@ function registerNotify(secID, email) {
 		} else if (two.status >= 400) { // If there was an actual PCS server error or something
             sweetAlert.close();
             ErrorAlert(two);
-        } else {
+        } else { // If there was a PCN error
 			stat = 'error';
 		}
 		sweetAlert({
@@ -279,6 +279,10 @@ function SpitSched(schedData) {
     	}
     }
 
+    var secArray = courseSched.map(function(meeting) {
+        return meeting.idDashed;
+    });
+    console.log(secArray)
     // Add the blocks
     for (sec in courseSched) {
         // if (courseSched.hasOwnProperty(sec)) {
@@ -292,7 +296,7 @@ function SpitSched(schedData) {
                     var blockname       = courseSched[sec].idSpaced;
                     var meetRoom        = courseSched[sec].meetLoc;
                     var thiscol         = (colorMap[courseSched[sec].idDashed] || "#E6E6E6"); // Get the color
-                    var newid 			= courseSched[sec].fullID.replace(".", "");
+                    var newid           = courseSched[sec].idDashed+'-'+meetLetterDay+courseSched[sec].meetHour.toString().replace(".", "");
 
                     schedElement.append('<div onclick="angular.element(this).scope().initiateSearch(\''+courseSched[sec].idDashed+'\', \'courseIDSearch\')" class="SchedBlock ' + courseSched[sec].idDashed + ' ' + meetLetterDay + '" id="' + newid + // Each block has three classes: SchedBlock, The courseSched entry, and the weekday. Each block has a unique ID
                         '" style="top:' + blocktop +
@@ -302,37 +306,40 @@ function SpitSched(schedData) {
                         '%;background-color:' + thiscol +
                         '"><div class="CloseX" onclick="angular.element(this).scope().sched.AddRem(\''+courseSched[sec].idDashed+'\')">x</div><span class="SecName">' + blockname + '</span><br><span class="LocName">' + meetRoom + '</span></div>');
 
-                    // $('.SchedBlock').each(function(i) { // Check through each previously added meettime
-                    //     var thisBlock = $(this);
-                    //     var oldClasses = thisBlock.attr('class').split(' ');
-                    //     var oldMeetFull = oldClasses[1]; // Get the courseSched key (so we can get the meetHour and hourLength values)
-                    //     var oldMeetDay = oldClasses[2]; // Don't compare blocks on different days cause they can't overlap anyway
-                    //     console.log(oldClasses)
-                    //     if (oldMeetFull !== courseSched[sec].idDashed && oldMeetDay === meetLetterDay) { // If we aren't comparing a section to itself & if the two meetings are on the same day
-                    //         if (TwoOverlap(courseSched[oldMeetFull], courseSched[sec])) { // Check if they overlap
-                    //             var oldBlockWidth = thisBlock.outerWidth() * 100 / $('#Schedule').outerWidth();
-                    //             thisBlock.css('width', (oldBlockWidth / 2) + '%'); // Resize old block
-                    //             var newElement = $('#' + newid);
-                    //             var newleft = (newElement.offset().left - schedElement.offset().left) * 100 / schedElement.outerWidth(); // Get shift in terms of percentage, not pixels
-                    //             // If a block overlaps with two different blocks, then we only want to shift it over once.
-                    //             // The TwoOverlap function only checks vertical overlap
-                    //             var plusOffset;
-                    //             if (thisBlock.offset().left === newElement.offset().left) { // If we haven't shifted the new block yet
-                    //                 plusOffset = oldBlockWidth / 2;
-                    //             } else { //
-                    //                 plusOffset = 0;
-                    //             }
-                    //             newElement.css('left', newleft + plusOffset + '%').css('width', (oldBlockWidth / 2) + '%'); // Shift and resize new block
-                    //         }
-                    //     }
-                    // });
+                    $('.SchedBlock').each(function(i) { // Check through each previously added meettime
+                        var thisBlock = $(this);
+                        var oldClasses = thisBlock.attr('class').split(' ');
+                        var oldMeetFull = oldClasses[1]; // Get the courseSched key (so we can get the meetHour and hourLength values)
+                        var oldMeetDay = oldClasses[2]; // Don't compare blocks on different days cause they can't overlap anyway
+                        if (oldMeetFull !== courseSched[sec].idDashed && oldMeetDay === meetLetterDay) { // If we aren't comparing a section to itself & if the two meetings are on the same day
+                            var oldMeetData = courseSched[secArray.indexOf(oldMeetFull)];
+                            if (TwoOverlap(oldMeetData, courseSched[sec])) { // Check if they overlap
+                                var oldBlockWidth = thisBlock.outerWidth() * 100 / $('#Schedule').outerWidth();
+                                thisBlock.css('width', (oldBlockWidth / 2) + '%'); // Resize old block
+                                var newElement = $('#' + newid);
+                                console.log(meetLetterDay)
+                                var newleft = (newElement.offset().left - schedElement.offset().left) * 100 / schedElement.outerWidth(); // Get shift in terms of percentage, not pixels
+                                // If a block overlaps with two different blocks, then we only want to shift it over once.
+                                // The TwoOverlap function only checks vertical overlap
+                                var plusOffset;
+                                if (thisBlock.offset().left === newElement.offset().left) { // If we haven't shifted the new block yet
+                                    plusOffset = oldBlockWidth / 2;
+                                } else { //
+                                    plusOffset = 0;
+                                }
+                                console.log(newleft)
+                                console.log(plusOffset)
+                                console.log(oldBlockWidth)
+                                newElement.css('left', newleft + plusOffset + '%').css('width', (oldBlockWidth / 2) + '%'); // Shift and resize new block
+                            } else {
+                                console.log('hsss')
+                            }
+                        }
+                    });
                 // }
             }
         // }
     }
-
-    // sessionStorage.currentSched = schedName;
-    // UpdatePlusCancel();
 
     function TwoOverlap(block1, block2) {
 	    // Thank you to Stack Overflow user BC. for the function this is based on.
@@ -348,8 +355,12 @@ function SpitSched(schedData) {
 	    // This checks if the top of block 2 is lower down (higher value) than the bottom of block 1...
 	    // or if the top of block 1 is lower down (higher value) than the bottom of block 2.
 	    // In this case, they are not overlapping, so return false
-	    if (b1 <= y2 || y1 >= b2)
-	        return false;
-	    return true;
+	    if (b1 <= y2 || b2 <= y1) {
+            console.log(false)
+            return false;
+        } else {
+            console.log(true)
+    	    return true;
+        }
 	}
 }

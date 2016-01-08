@@ -19,7 +19,7 @@
         <script type="text/javascript" src="/js/plugins/angular-local-storage.min.js"></script>
         <script type="text/javascript" src="/js/functions.js"></script>
         <script type="text/javascript" src="/js/angular.js"></script>
-        <!-- <script>
+        <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -27,7 +27,7 @@
 
             ga('create', 'UA-49014722-4', 'auto');
             ga('send', 'pageview', '/home');
-        </script> -->
+        </script>
 	</head>
     <body ng-controller="CourseController">
         <div id="MenuBar">
@@ -83,12 +83,12 @@
                 <h2>How do I search for courses?</h2>
                 <p>Just type a course in the search box. Then you can click on the results to see more in-depth information about different sections. If you want to filter the results, click on the filter button and change your options. You can also choose to search by course description or instructor in the menu bar.</p>
                 <h2>How do I change my schedule?</h2>
-                <p>To add a section to your schedule, click on its '+' icon. To remove a course, mouse over it and click the 'X' in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
+                <p>To add a section to your schedule, click on its <i class="fa fa-plus" style="display:inline"></i> icon. To remove a course, mouse over it and click the <i class="fa fa-times" style="display:inline"></i> in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
                 <h2>What do the colors mean?</h2>
                 <p>The rectangles with numbers are Penn Course Review ratings. Course quality ratings are in 
-                <span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);color:white;display:inline;">blue</span> 
+                <span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);color:white;display:inline;padding-left:0.25em;padding-right:0.25em;">blue</span> 
                 while course difficulty ratings are in 
-                <span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);color:white;display:inline;">red</span>. 
+                <span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);color:white;display:inline;padding-left:0.25em;padding-right:0.25em;">red</span>. 
                 The squares tell you the status of a section. 
                 <span class="statusClass openSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> 
                 is an open section and 
@@ -275,7 +275,11 @@
                 </div>
                 <div id="SchedGraph">
             		<div id="TimeCol" style="position:relative;"></div>
-                    <div id="Schedule" style="position:relative;"></div>
+                    <div id="Schedule" style="position:relative;">
+                        <div ng-repeat="key in schedData[currentSched].meetings">
+                            
+                        </div>
+                    </div>
                 </div>
         	</div>
         </div>
