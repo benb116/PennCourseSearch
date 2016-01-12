@@ -41,7 +41,7 @@ console.log('Express initialized');
 // Set up Keen Analytics
 var client;
 var keenEnable = true;
-if (process.env.KEEN_WRITE_KEY && keenEnable) { // Only log from production
+if (process.env.KEEN_WRITE_KEY && keenEnable) { // Only log from production 
   console.log('KeenIO logging enabled');
   client = new Keen({
     projectId: config.KeenIOID,  // String (required always)
@@ -164,7 +164,9 @@ app.get('/Search', function(req, res) {
   }
   // Keen.io logging
   var searchEvent = {searchParam: searchParam};
-  logEvent('Search', searchEvent);
+  if (searchParam) {
+    logEvent('Search', searchEvent);
+  }
 
   // Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
   if (searchType  === 'courseIDSearch' && 
@@ -469,14 +471,17 @@ function parseSectionInfo(Res) {
 app.get('/Sched', function(req, res) {
   var courseID    = req.query.courseID;
   var SchedCourses = [];
+  console.log(courseID)
   request({
     uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
     method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
   }, function(error, response, body) {
+    console.log(body)
     var resJSON = getSchedInfo(body); // Format the response
     // for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
     //   SchedCourses[JSONSecID] = resJSON[JSONSecID];
     // }}
+    console.log(JSON.stringify(resJSON))
     var schedEvent = {schedCourse: courseID};
     logEvent('Sched', schedEvent);
     return res.send(resJSON);
@@ -486,7 +491,7 @@ app.get('/Sched', function(req, res) {
 
 function getSchedInfo(JSONString) { // Get the properties required to schedule the section
   var Res = JSON.parse(JSONString); // Convert to JSON Object
-  var entry = Res[0];
+  var entry = Res.result_data[0];
   try {
     var idDashed   = entry.section_id_normalized.replace(/ /g, ""); // Format ID
     var idSpaced = idDashed.replace(/-/g, ' ');

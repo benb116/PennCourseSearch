@@ -8,11 +8,11 @@ The server is written using NodeJS and the app is currently hosted on ~~Heroku~~
 
 Specific files you may be interested in:
 
-* [Server JS](https://github.com/benb116/PennCourseSearch/blob/master/index.js)
-* [Angular Code](https://github.com/benb116/PennCourseSearch/blob/master/public/js/angular.js) - Beware scope soup
-* [Additional client JS](https://github.com/benb116/PennCourseSearch/blob/master/public/js/functions.js)
-* [CSS](https://github.com/benb116/PennCourseSearch/blob/master/public/css/index.css)
-* [HTML with Angular directives](https://github.com/benb116/PennCourseSearch/blob/master/views/index.html)
+* [Server JS](https://github.com/benb116/PennCourseSearch/blob/Angular/index.js)
+* [Angular Code](https://github.com/benb116/PennCourseSearch/blob/Angular/public/js/angular.js) - Beware scope soup
+* [Additional client JS](https://github.com/benb116/PennCourseSearch/blob/Angular/public/js/functions.js)
+* [CSS](https://github.com/benb116/PennCourseSearch/blob/Angular/public/css/index.css)
+* [HTML with Angular directives](https://github.com/benb116/PennCourseSearch/blob/Angular/views/index.html)
 
 If you have questions, ideas, bug reports, or if you'd like to suggest a new subtitle, let me know.
 
