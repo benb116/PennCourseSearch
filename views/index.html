@@ -206,7 +206,7 @@
                     <span ng-show="sectionInfo.reqsFilled.length"><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span><br></span>
                     <span ng-show="sectionInfo.prereqs"> Prerequisites: {{sectionInfo.prereqs}} <br><br></span>
                     <span ng-show="sectionInfo.associatedType"> Associated {{sectionInfo.associatedType}}: <br></span>
-                    <span ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="sectionClick(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></span>
+                    <span ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="get.SectionInfo(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></span>
 
                 </div>
         	</div>

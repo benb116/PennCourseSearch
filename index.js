@@ -39,17 +39,24 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31536000000 }))
 console.log('Express initialized');
 
 // Set up Keen Analytics
-var client = new Keen({
-  projectId: config.KeenIOID,  // String (required always)
-  writeKey: config.KeenIOWriteKey   // String (required for sending data)
-});
+var client;
+var keenEnable = true;
+if (process.env.KEEN_WRITE_KEY && keenEnable) { // Only log from production
+  console.log('KeenIO logging enabled');
+  client = new Keen({
+    projectId: config.KeenIOID,  // String (required always)
+    writeKey: config.KeenIOWriteKey   // String (required for sending data)
+  });
+}
 
 var logEvent = function (eventName, eventData) {
-  client.addEvent(eventName, eventData, function (err, res) {
-    if (err) {
-      console.log("KEENIOERROR: " + err);
-    }
-  });
+  if (client) {
+    client.addEvent(eventName, eventData, function (err, res) {
+      if (err) {
+        console.log("KEENIOERROR: " + err);
+      }
+    });
+  }
 };
 
 // Initialize PushBullet
@@ -57,7 +64,9 @@ var pusher = new PushBullet(config.PushBulletAuth);
 // Get first deviceID
 var pushDeviceID;
 pusher.devices(function(error, response) {
-  pushDeviceID = response.devices[0].iden; 
+  if (!error) {
+    pushDeviceID = response.devices[0].iden;
+  }
 });
 
 console.log('Plugins initialized');
@@ -73,7 +82,7 @@ git.short(function (str) {
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
   console.log("Node app is running. Better go catch it.".green);
-  if (typeof process.env.PUSHBULLETAUTH !== 'undefined') {
+  if (typeof process.env.PUSHBULLETAUTH !== 'undefined' && pushDeviceID) {
     // Don't send notifications when testing locally
     pusher.note(pushDeviceID, 'Server Restart');
   }
@@ -181,11 +190,30 @@ app.get('/Search', function(req, res) {
       }
 
       var parsedRes = {};
+      // console.log(body)
+      // try {
+      //   parsedRes = JSON.parse(body.result_data);
+      // } catch(err) {
+      //   return res.send("Can't parse JSON response");
+      // }
       try {
-        parsedRes = JSON.parse(body);
+        var rawResp = JSON.parse(body);
       } catch(err) {
-        return res.send("Can't parse JSON response");
+        console.log(err);
+        return res.send({});
       }
+
+      try {
+        if (rawResp.service_meta.error_text) {
+          throw rawResp.service_meta.error_text;
+        }
+        parsedRes = rawResp.result_data;
+      } catch(err) {
+        console.log(err)
+        res.statusCode = 500;
+        return res.send(err);
+      }
+
       // Send the raw data to the appropriate formatting function
       var searchResponse;
       if (resultType in resultTypes) {
@@ -237,12 +265,12 @@ function ParseDeptList (res) {
 // This function spits out the list of courses that goes in #CourseList
 function parseCourseList(Res) {
   var coursesList = {};
-  for(var key in Res.result_data) { if (Res.result_data.hasOwnProperty(key)) {
-    var thisKey   = Res.result_data[key];
+  for(var key in Res) { if (Res.hasOwnProperty(key)) {
+    var thisKey   = Res[key];
     var thisDept  = thisKey.course_department.toUpperCase();
     var thisNum   = thisKey.course_number.toString();
     var courseListName  = thisDept+' '+thisNum; // Get course dept and number
-    if (Res.result_data.hasOwnProperty(key) && !coursesList[courseListName] && !thisKey.is_cancelled) { // Iterate through each course
+    if (Res.hasOwnProperty(key) && !coursesList[courseListName] && !thisKey.is_cancelled) { // Iterate through each course
       var courseTitle   = thisKey.course_title;
       var reqList       = thisKey.fulfills_college_requirements;
       var reqCodesList  = [];
@@ -309,9 +337,9 @@ function parseSectionList(Res) {
   // Convert to JSON object
   var sectionsList = [];
   // var courseInfo = {};
-  for(var key in Res.result_data) {
-    if (Res.result_data.hasOwnProperty(key)) {
-      var thisEntry = Res.result_data[key];
+  for(var key in Res) {
+    if (Res.hasOwnProperty(key)) {
+      var thisEntry = Res[key];
       if (!thisEntry.is_cancelled) {
         var idDashed = thisEntry.section_id_normalized.replace(/ /g, "");
         var idSpaced = idDashed.replace(/-/g, ' ');
@@ -341,7 +369,7 @@ function parseSectionList(Res) {
           'idSpaced': idSpaced,
           'isOpen': isOpen, 
           'timeInfo': timeInfo, 
-          'courseTitle': Res.result_data[0].course_title,
+          'courseTitle': Res[0].course_title,
           'SectionInst': SectionInst,
           'actType': actType,
           'revs': revData,
@@ -357,7 +385,7 @@ function parseSectionList(Res) {
 
 // This function spits out section-specific info
 function parseSectionInfo(Res) {
-  var entry = Res.result_data[0];
+  var entry = Res[0];
   var sectionInfo = {};
   try {
     var Title = entry.course_title;
@@ -458,7 +486,7 @@ app.get('/Sched', function(req, res) {
 
 function getSchedInfo(JSONString) { // Get the properties required to schedule the section
   var Res = JSON.parse(JSONString); // Convert to JSON Object
-  var entry = Res.result_data[0];
+  var entry = Res[0];
   try {
     var idDashed   = entry.section_id_normalized.replace(/ /g, ""); // Format ID
     var idSpaced = idDashed.replace(/-/g, ' ');

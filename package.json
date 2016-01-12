@@ -19,7 +19,7 @@
     "request": "^2.67.0"
   },
   "engines": {
-    "node": "0.12.x"
+    "node": "5.4.x"
   },
   "repository": {
     "type": "git",

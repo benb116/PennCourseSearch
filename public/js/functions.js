@@ -282,7 +282,6 @@ function SpitSched(schedData) {
     var secArray = courseSched.map(function(meeting) {
         return meeting.idDashed;
     });
-    console.log(secArray)
     // Add the blocks
     for (sec in courseSched) {
         // if (courseSched.hasOwnProperty(sec)) {
@@ -317,7 +316,6 @@ function SpitSched(schedData) {
                                 var oldBlockWidth = thisBlock.outerWidth() * 100 / $('#Schedule').outerWidth();
                                 thisBlock.css('width', (oldBlockWidth / 2) + '%'); // Resize old block
                                 var newElement = $('#' + newid);
-                                console.log(meetLetterDay)
                                 var newleft = (newElement.offset().left - schedElement.offset().left) * 100 / schedElement.outerWidth(); // Get shift in terms of percentage, not pixels
                                 // If a block overlaps with two different blocks, then we only want to shift it over once.
                                 // The TwoOverlap function only checks vertical overlap
@@ -327,12 +325,7 @@ function SpitSched(schedData) {
                                 } else { //
                                     plusOffset = 0;
                                 }
-                                console.log(newleft)
-                                console.log(plusOffset)
-                                console.log(oldBlockWidth)
                                 newElement.css('left', newleft + plusOffset + '%').css('width', (oldBlockWidth / 2) + '%'); // Shift and resize new block
-                            } else {
-                                console.log('hsss')
                             }
                         }
                     });
@@ -356,10 +349,8 @@ function SpitSched(schedData) {
 	    // or if the top of block 1 is lower down (higher value) than the bottom of block 2.
 	    // In this case, they are not overlapping, so return false
 	    if (b1 <= y2 || b2 <= y1) {
-            console.log(false)
             return false;
         } else {
-            console.log(true)
     	    return true;
         }
 	}
