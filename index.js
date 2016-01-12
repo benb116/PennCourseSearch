@@ -471,17 +471,14 @@ function parseSectionInfo(Res) {
 app.get('/Sched', function(req, res) {
   var courseID    = req.query.courseID;
   var SchedCourses = [];
-  console.log(courseID)
   request({
     uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
     method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
   }, function(error, response, body) {
-    console.log(body)
     var resJSON = getSchedInfo(body); // Format the response
     // for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
     //   SchedCourses[JSONSecID] = resJSON[JSONSecID];
     // }}
-    console.log(JSON.stringify(resJSON))
     var schedEvent = {schedCourse: courseID};
     logEvent('Sched', schedEvent);
     return res.send(resJSON);
