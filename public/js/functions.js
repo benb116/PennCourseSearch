@@ -58,7 +58,7 @@ function ErrorAlert(err) {
     sweetAlert({
         title: '#awkward',
         html: true,
-        text: 'An error occured. Refresh or <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!&body=Error%20message:%20'+encodeURIComponent(JSON.stringify(err))+'">email Ben</a>',
+        text: 'An error occurred. Refresh or <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!&body=Error%20message:%20'+encodeURIComponent(JSON.stringify(err))+'">email Ben</a>',
         type: 'error'
     });
 }
@@ -70,18 +70,18 @@ function Schedule(term) {
 	this.colorPalette = ["#e74c3c", "#f1c40f", "#3498db", "#9b59b6", "#e67e22", "#2ecc71", "#95a5a6", "#FF73FD", "#73F1FF", "#CA75FF", "#1abc9c", "#F64747", "#ecf0f1"]; // Standard colorPalette
 }
 
-function Uniquify (name, arr) {
+function Uniquify (str, arr) {
     // Given an array and a string, this ensures that the string doesn't already exist in the array
-	if (arr.indexOf(name) === -1) {
-		return name;
+	if (arr.indexOf(str) === -1) {
+		return str;
 	} else { // If it does, then we "+1" the string
-		var lastchar = name[name.length - 1];
-		if (isNaN(lastchar) || name[name.length - 2] !== ' ') { // e.g. if string == 'schedule' or 'ABC123'
-			name += ' 2'; // becomes 'schedule 2' or 'ABC123 2'
+		var lastchar = str[str.length - 1];
+		if (isNaN(lastchar) || str[str.length - 2] !== ' ') { // e.g. if string == 'schedule' or 'ABC123'
+			str += ' 2'; // becomes 'schedule 2' or 'ABC123 2'
 		} else { // e.g. 'MEAM 101 2'
-			name = name.slice(0, -2) + ' ' + (parseInt(lastchar) + 1); // becomes "MEAM 101 3"
+			str = str.slice(0, -2) + ' ' + (parseInt(lastchar) + 1); // becomes "MEAM 101 3"
 		}
-		return Uniquify(name, arr); // Make sure that this new name is unique
+		return Uniquify(str, arr); // Make sure that this new name is unique
 	}
 }
 

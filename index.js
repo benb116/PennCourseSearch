@@ -244,12 +244,13 @@ var reqCodes = {
 };
 
 function GetRevData (dept, num, inst) {
-  var revData = allRevs[dept][num];
-  var thisRevData = {};
-  if (revData) {
-    thisRevData = (revData[(inst || '').toUpperCase()] || revData.Total);
-  } else {
-    thisRevData = {"cQ": 0, "cD": 0, "cI": 0};
+  var deptData = allRevs[dept];
+  var thisRevData = {"cQ": 0, "cD": 0, "cI": 0};
+  if (deptData) {
+    var revData = deptData[num];
+    if (revData) {
+      thisRevData = (revData[(inst || '').toUpperCase()] || revData.Total);
+    }
   }
   return thisRevData;
 }
