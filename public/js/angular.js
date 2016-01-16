@@ -258,6 +258,15 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		},
 		Recolor: function() {
 			shuffle($scope.schedData[$scope.currentSched].colorPalette);
+		},
+		Import: function() {
+			// var schedName = Uniquify('Imported', $scope.schedules);
+			$scope.schedData['Import'] = new Schedule('2016A');
+        	$scope.currentSched = 'Import';
+			$('#secsToImport > input:checked').each(function() {
+				console.log($(this).attr('name'));
+				$scope.sched.AddRem($(this).attr('name'));
+			});
 		}
 	};
 	$scope.Notify = function (secID) {
@@ -311,11 +320,13 @@ PCS.factory('PCR', function(){
 		angular.forEach(data, function(item, index) {
 			var qFrac = item.revs.cQ / 4;
 			var dFrac = item.revs.cD / 4;
+			var iFrac = item.revs.cI / 4;
 			item.pcrQShade = Math.pow(qFrac, 3)*2; // This is the opacity of the PCR block
 			item.pcrDShade = Math.pow(dFrac, 3)*2;
+			item.pcrIShade = Math.pow(iFrac, 3)*2;
 			if (qFrac < 0.35) {item.pcrQColor = 'black';} else {item.pcrQColor = 'white';} // It's hard to see white text on a light background
 			if (dFrac < 0.35) {item.pcrDColor = 'black';} else {item.pcrDColor = 'white';}
-			item.revs.QDratio = item.revs.cQ / item.revs.cD; // This is my way of calculating if a class is "good and easy." R > 1 means good and easy, < 1 means bad and hard
+			item.revs.QDratio = item.revs.cQ - item.revs.cD; // This is my way of calculating if a class is "good and easy." R > 1 means good and easy, < 1 means bad and hard
 			if (isNaN(item.revs.QDratio) || !isFinite(item.revs.QDratio)) {item.revs.QDratio = 0;} // Cleanup to keep incomplete data on the bottom;
 		});
 		return data;

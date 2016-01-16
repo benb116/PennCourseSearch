@@ -63,9 +63,10 @@
                   <li>
                     Schedule <i class="fa fa-caret-down"></i>
                     <ul>
+                      <li ng-click="sched.New()">New</li>
+                      <a rel="leanModal" href="#UploadModal"><li>Import</li></a>
                       <a ng-click="sched.Download()" rel="leanModal" href="#SchedModal"><li>Download</li></a>
                       <li ng-click="sched.Recolor()">Recolor</li>
-                      <li ng-click="sched.New()">New</li>
                       <li ng-click="sched.Duplicate()">Duplicate</li>
                       <li ng-click="sched.Rename()">Rename</li>
                       <li ng-click="sched.Clear()">Clear</li>
@@ -115,10 +116,25 @@
                 <a class="modal_close"><i class="fa fa-times"></i></a>
             </div>
 
+            <div id="UploadModal" class="Modal">
+                <h2>Import your schedule from Penn InTouch</h2>
+                <img src="/Import.png">
+                <p style="text-align:center;">Under your schedule on Penn InTouch, click the "Export as iCalendar" button to download the schedule file.</p>
+                <input type="file" id="schedInput" name="file" style="width:160px" accept=".ics" onchange="readCalFile()" />
+                <p style="text-align:center;">Upload the file here to import the classes.</p>
+                <div id="secsToImport">
+                    
+                </div>
+                <input type="submit" name="upload" value="Upload!" id="importSubmit" disabled ng-click="sched.Import()">
+                <a class="modal_close"><i class="fa fa-times"></i></a>
+            </div>
+
 		</div>
         <div id="BottomResults">
         	<div id="CourseList">
                 <div ng-show="(courses.length)">
+                    <span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);margin-left:0.45em">Qual</span>
+                    <span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
                     <span style="margin-left:0.5em;margin-right:0.5em;">Sort by: </span>
                     <select id="sortCourses" ng-model="courseSort" style="margin-bottom:0.5em;">
                         <option value="idDashed">Course Number</option>
@@ -138,9 +154,9 @@
                     <!--Dealing with requirements: The list element will be shown if: 
                         There are no requirements (checkArr == [], therefore !checkArr[0] && !checkArr[1]) 
                         OR
-                        There is one requirement (checkArr[0]) AND the course's array of reqs fulfilled contains checkArr[0] 
+                        There is one requirement (checkArr[0] && !checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0] 
                         OR
-                        There are two requirements (checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0] AND checkArr[1]
+                        There are two requirements (checkArr[0] && checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0] AND checkArr[1]
                     -->
                         <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQ | number:2}}</span>
                         <span class="PCR Diff" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cD | number:2}}</span>
@@ -152,6 +168,7 @@
         	<div id="SectionCol">
         		<div id="Sections">
                     <div id="SectionList">
+                        <span>{{sectionInfo.title}} </span>
                         <ul>
                             <li ng-repeat="section in sections" 
                             id="{{ section.idDashed }}" 
