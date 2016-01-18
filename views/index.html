@@ -5,7 +5,8 @@
 		<meta charset="UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/css/index.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/plugins.css">
+        <link rel="stylesheet" type="text/css" href="/css/plugins/sweetalert.css">
+        <link rel="stylesheet" type="text/css" href="/css/plugins/tooltipster.css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>        
     </head>
     <body ng-controller="CourseController">
@@ -52,7 +53,7 @@
                     </ul>
                   </li>
                   <li ng-click="star.Show()"><span>Show Stars</span></li>
-                  <a rel="leanModal" href="#UploadModal"><li>Import</li></a>
+                  <a rel="leanModal" href="#UploadModal" id="ImportButton"><li>Import</li></a>
                   <a ng-click="sched.Download()" rel="leanModal" href="#SchedModal"><li>Download</li></a>
                   <li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li>
                   <li ng-click="clearSearch()"><span>Clear Search</span></li>
@@ -67,9 +68,11 @@
                 <p>To add a section to your schedule, click on its <i class="fa fa-plus" style="display:inline"></i> icon. To remove a course, mouse over it and click the <i class="fa fa-times" style="display:inline"></i> in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
                 <h2>What do the colors mean?</h2>
                 <p>The rectangles with numbers are Penn Course Review ratings. Course quality ratings are in 
-                <span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);color:white;display:inline;padding-left:0.25em;padding-right:0.25em;">blue</span> 
-                while course difficulty ratings are in 
-                <span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);color:white;display:inline;padding-left:0.25em;padding-right:0.25em;">red</span>. 
+                <span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">blue</span>,
+                course difficulty ratings are in 
+                <span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">red</span>,
+                and instructor ratings are in 
+                <span class="PCR Inst" style="background:rgba(46, 204, 113, 0.85 );display:inline;padding-left:0.25em;padding-right:0.25em;">green</span>. 
                 The squares tell you the status of a section. 
                 <span class="statusClass openSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> 
                 is an open section and 
@@ -137,7 +140,7 @@
                         OR
                         There are two requirements (checkArr[0] && checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0] AND checkArr[1]
                     -->
-                        <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} " tooltips tooltip-template="Course quality: {{ course.revs.cQ | number:2}} " tooltip-side="right">{{ course.revs.cQ | number:2}}</span>
+                        <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQ | number:2}}</span>
                         <span class="PCR Diff" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cD | number:2}}</span>
                         <span class="cID">{{ course.idSpaced }}</span>
                         <span class="cTitle">{{ course.courseTitle }}</span>
