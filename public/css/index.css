@@ -171,7 +171,7 @@ form > input[type="text"] {
     text-shadow: 0 -1px 0 #000;
 }
 #MenuButtons ul li ul li:hover {background: #666;}
-#MenuButtons ul li ul li:nth-child(7):hover{background-color: #c0392b;}
+#MenuButtons ul li ul > li:nth-last-child(1):hover{background-color: #c0392b;}
 #MenuButtons ul li:hover ul {
     display: block;
     visibility: visible;
@@ -225,7 +225,7 @@ form > input[type="text"] {
     overflow-y: scroll;}
 #SectionInfo {
     height: 65%;
-    width: 305.5px;
+    width: 305px;
     overflow-y: scroll;
     /*padding-right: 0.5em;*/
     border-top: 1em solid white;
@@ -251,7 +251,8 @@ ul {
 
 #CourseList li:hover,
 #SectionList li:hover,
-#SectionInfo li:hover {background-color: #E6E6E6;}
+#SectionInfo li:hover,
+.activeItem {background-color: #E6E6E6;}
 
 #CourseList li:active,
 #SectionList li:active,
@@ -343,7 +344,7 @@ ul {
 #InfoPanel {
     height: calc(100vh - 16em);
     /*min-width: 500px;*/
-    width: calc(100% - 650px);
+    width: calc(100% - 700px);
     font-size: 12px;
     display: inline-block;
 }

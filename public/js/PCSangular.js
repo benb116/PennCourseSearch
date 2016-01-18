@@ -5,6 +5,12 @@ var PCS = angular.module('PCSApp', ['LocalStorageModule', '720kb.tooltips']);
 */
 
 PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules){
+	
+	var placeholderMap = {
+		'courseIDSearch': 'Search for a department, course, or section',
+		'keywordSearch': 'Search by course title or description',
+		'instSearch': 'Search for a specific instructor'
+	};	
 	// Initial values that reset all of the search information
 	$scope.clearSearch = function() {
 		$scope.search = ''; // value of the search bar
@@ -16,6 +22,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		$scope.currentSection = ''; // current parameter used to get section information
 		$scope.schedSections = []; // array of section idDashed's as strings
 		$scope.searchType = "courseIDSearch"; // value of Search By select menu
+		$scope.searchPlaceholder = placeholderMap[$scope.searchType];
 		$scope.loading = ($http.pendingRequests.length !== 0); // Are there outstanding HTTP requests
 		$scope.courseSort = 'idDashed'; // how are courses being sorted right now (defaults to course number)
 		$scope.showClosed = true; // filter list of sections to exclude closed sections
@@ -45,6 +52,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		delay(function() {
 			$scope.initiateSearch($scope.search);
 		}, 500);
+		$scope.searchPlaceholder = placeholderMap[$scope.searchType];
 	};
 	$scope.initiateSearch = function(param, courseType) {
 		// Used for typed searches and schedBlock clicks
@@ -63,7 +71,13 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			$scope.currentSection = '000';
 			$scope.sectionInfo = {};
 		}
-		
+	};
+	$scope.schedChange = function() {
+		SpitSched($scope.schedData[$scope.currentSched]);
+		$scope.schedSections = $scope.schedData[$scope.currentSched].meetings.map(function(value, index) {
+			return $scope.schedData[$scope.currentSched].meetings[index].idDashed;
+		});
+		$scope.schedules = Object.keys($scope.schedData);
 	};
 	$scope.get = {
 		Courses: function(param, type, req, pro) {
@@ -129,7 +143,151 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		}
 	};
 
-	$scope.sched = schedFuncObj;
+	$scope.sched = {
+		AddRem: function(secID) {
+			// schedSections is a continually updated array of sections in the current schedule
+			if ($scope.schedSections.indexOf(secID) === -1) { // If the requested section is not scheduled
+				UpdateSchedules.getSchedData(secID).then(function(resp) {
+						var oldData = $scope.schedData[$scope.currentSched].meetings;
+						newData = oldData.concat(resp.data); // Combine old meetings and new meetings
+						$scope.schedData[$scope.currentSched].meetings = newData;
+					});
+			} else {
+				// Filter out meeting objects whose corresponding sectionID is the requested section
+				$scope.schedData[$scope.currentSched].meetings = $scope.schedData[$scope.currentSched].meetings.filter(function(item) {
+					if (item.idDashed === secID) {
+						return false;
+					} else {
+						return true;
+					}
+				});
+			}
+		},
+		Download: function() {
+			html2canvas($('#SchedGraph'), { // Convert the div to a canvas
+	            onrendered: function(canvas) {
+	                var image = new Image();
+	                image.src = canvas.toDataURL("image/png"); // Convert the canvas to png
+	                // window.open(image.src, '_blank'); // Open in new tab
+	                $('#SchedImage').attr('src', image.src).attr('title', 'My Schedule');
+	            }
+	        });
+		},
+		New: function() {
+			sweetAlert({
+	            title: "Please name your new schedule",
+	            type: "input",
+	            inputPlaceholder: "Spring 2016",
+	            showCancelButton: true,
+	            closeOnConfirm: false,
+	            animation: "slide-from-top",
+	        }, function(inputValue) {
+	            if (inputValue === false) {
+	                return false;
+	            } else if (inputValue === "") {
+	                sweetAlert.showInputError("Your schedule needs a name, silly!");
+	                return false;
+	            } else if (inputValue !== Uniquify(inputValue, $scope.schedules)) { // If the user put in a name that already exists
+	                sweetAlert.showInputError('Your schedule needs a unique name (e.g. "Seven")');
+	            } else {
+	            	$scope.schedData[inputValue] = new Schedule('2016A');
+	            	$scope.currentSched = inputValue;
+	                sweetAlert.close();
+	            }
+	            $scope.$apply();
+	        });
+		},
+		Duplicate: function() {
+			var uniqueName = Uniquify($scope.currentSched, $scope.schedules);
+			$scope.schedData[uniqueName] = $scope.schedData[$scope.currentSched];
+			$scope.currentSched = uniqueName;
+			sweetAlert({
+	            title: "Schedule duplicated.",
+	            type: "success",
+	            timer: 1000
+	        });
+		},
+		Rename: function() {
+			sweetAlert({
+	            title: "Please enter a new name",
+	            type: "input",
+	            inputPlaceholder: "Schedule 2: Book of Secrets",
+	            showCancelButton: true,
+	            closeOnConfirm: false,
+	            animation: "slide-from-top",
+	        }, function(inputValue) {
+	            if (inputValue === false) {
+	                return false;
+	            } else if (inputValue === "") {
+	                sweetAlert.showInputError("Your schedule needs a name, silly!");
+	                return false;
+	            } else if (inputValue !== Uniquify(inputValue, $scope.schedules)) { // If the user put in a name that already exists
+	                sweetAlert.showInputError('Your schedule needs a unique name (e.g. "Seven")');
+	            } else {
+	            	$scope.schedData[inputValue] = $scope.schedData[$scope.currentSched];
+					delete $scope.schedData[$scope.currentSched];
+					$scope.currentSched = inputValue;
+	                sweetAlert.close();
+	            }
+	            $scope.$apply();
+	        });
+		},
+		Clear: function() {
+			sweetAlert({
+	            title: "Are you sure you want to clear your whole schedule?",
+	            type: "warning",
+	            showCancelButton: true,
+	            confirmButtonColor: "#DD6B55",
+	            confirmButtonText: "Yes",
+	            closeOnConfirm: false
+	        }, function() {
+	            $scope.schedData[$scope.currentSched] = new Schedule('2016A');
+	            $scope.$apply();
+	            sweetAlert({
+	                title: "Your schedule has been cleared.",
+	                type: "success",
+	                timer: 1000
+	            });
+	        });
+		},
+		Delete: function() {
+			sweetAlert({
+	            title: "Are you sure you want to delete this schedule?",
+	            type: "warning",
+	            showCancelButton: true,
+	            confirmButtonColor: "#DD6B55",
+	            confirmButtonText: "Yes",
+	            closeOnConfirm: false
+	        }, function() {
+	            delete $scope.schedData[$scope.currentSched];
+	            if (!Object.keys($scope.schedData).length) { // If there are no schedules, create a blank one.
+	            	$scope.schedData.Schedule = new Schedule('2016');
+	            }
+	            $scope.currentSched = Object.keys($scope.schedData)[Object.keys($scope.schedData).length-1]; // Set currentSched to the last schedule in the list
+	            $scope.$apply();
+	            sweetAlert({
+	                title: "Your schedule has been deleted.",
+	                type: "success",
+	                timer: 1000
+	            });
+	        });
+		},
+		Recolor: function() {
+			shuffle($scope.schedData[$scope.currentSched].colorPalette);
+		},
+		Import: function() {
+			var schedName = Uniquify('Imported', $scope.schedules);
+			$scope.schedData[schedName] = new Schedule('2016A');
+	    	$scope.currentSched = schedName;
+	    	$scope.schedSections = [];
+			$('#secsToImport > input:checked').each(function() {
+				$scope.sched.AddRem($(this).attr('name'));
+			});
+			$('#secsToImport').empty();
+			$('#schedInput').val('');
+			$('#importSubmit').prop('disabled', true);
+		}
+	};
 
 	$scope.Notify = promptNotify;
 
@@ -140,18 +298,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		PCR($scope.sections);
 	});
 	$scope.$watch('schedData', function(val, old) { // When schedData changes
-		SpitSched($scope.schedData[$scope.currentSched]); // Render new schedule
-		$scope.schedSections = $scope.schedData[$scope.currentSched].meetings.map(function(value, index) { // Update schedSections list with currently scheduled sections
-			return $scope.schedData[$scope.currentSched].meetings[index].idDashed;
-		});
-		$scope.schedules = Object.keys($scope.schedData); // Update list of schedules
-	}, true);
-	$scope.$watch('currentSched', function(val, old) {
-		SpitSched($scope.schedData[$scope.currentSched]);
-		$scope.schedSections = $scope.schedData[$scope.currentSched].meetings.map(function(value, index) {
-			return $scope.schedData[$scope.currentSched].meetings[index].idDashed;
-		});
-		$scope.schedules = Object.keys($scope.schedData);
+		$scope.schedChange();
 	}, true);
 	$scope.$watch('check', function(val, old){ // When a requirement checkbox is changed
 		$scope.checkArr = [];

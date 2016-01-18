@@ -16,7 +16,7 @@ function readCalFile() {
             console.log(secArr)
             $('#secsToImport').empty();
             for (var i = 0; i < secArr.length; i++) {
-                $('#secsToImport').append('<input type="checkbox" name="'+FormatID(secArr[i]).join('-')+'" checked><span style="display-inline">'+FormatID(secArr[i]).join(' ')+'</span></input>')
+                $('#secsToImport').append('<input type="checkbox" name="'+FormatID(secArr[i]).join('-')+'" checked><span style="display:inline">'+FormatID(secArr[i]).join(' ')+'</span><br>')
             };
             return secArr;
         } else {
@@ -25,7 +25,6 @@ function readCalFile() {
         }
     };
     var blob = file.slice(0, file.size-1);
-    console.log(blob)
     reader.readAsBinaryString(blob);
 }
 

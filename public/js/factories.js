@@ -7,8 +7,9 @@ PCS.factory('PCR', function(){
 			item.pcrQShade = Math.pow(qFrac, 3)*2; // This is the opacity of the PCR block
 			item.pcrDShade = Math.pow(dFrac, 3)*2;
 			item.pcrIShade = Math.pow(iFrac, 3)*2;
-			if (qFrac < 0.35) {item.pcrQColor = 'black';} else {item.pcrQColor = 'white';} // It's hard to see white text on a light background
-			if (dFrac < 0.35) {item.pcrDColor = 'black';} else {item.pcrDColor = 'white';}
+			if (qFrac < 0.50) {item.pcrQColor = 'black';} else {item.pcrQColor = 'white';} // It's hard to see white text on a light background
+			if (dFrac < 0.50) {item.pcrDColor = 'black';} else {item.pcrDColor = 'white';}
+			if (iFrac < 0.50) {item.pcrIColor = 'black';} else {item.pcrIColor = 'white';}
 			item.revs.QDratio = item.revs.cQ - item.revs.cD; // This is my way of calculating if a class is "good and easy." R > 1 means good and easy, < 1 means bad and hard
 			if (isNaN(item.revs.QDratio) || !isFinite(item.revs.QDratio)) {item.revs.QDratio = 0;} // Cleanup to keep incomplete data on the bottom;
 		});
