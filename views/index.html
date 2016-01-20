@@ -114,8 +114,8 @@
         <div id="BottomResults">
         	<div id="CourseList">
                 <div ng-show="(courses.length)">
-                    <span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);margin-left:0.45em">Qual</span>
-                    <span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
+                    <span class="PCR Qual tooltip" title="Course quality rating" style="background:rgba(45, 160, 240, 0.85);margin-left:0.45em">Qual</span>
+                    <span class="PCR Diff tooltip" title="Course difficult rating" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
                     <span style="margin-left:0.5em;margin-right:0.5em;">Sort by: </span>
                     <select id="sortCourses" ng-model="courseSort" style="margin-bottom:0.5em;">
                         <option value="idDashed">Course Number</option>
@@ -149,10 +149,11 @@
             </div>
         	<div id="SectionCol">
         		<div id="Sections">
-                   <!--  <div ng-show="sections.length" style="margin-bottom:0.6em;">
-                        <span class="PCR Inst" style="background:rgba(46, 204, 113, 0.85);margin-left:3.05em;">Inst</span>
-                        <div style="display:inline">{{sectionInfo.title}} </div>
-                    </div> -->
+                    <div ng-show="sections.length" style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                        <span class="tooltip" title="Section status (open or closed)" style="margin-left:1em;margin-right:-0.2em;">O/C</span>
+                        <span class="PCR Inst tooltip" title="Instructor Quality rating" style="background:rgba(46, 204, 113, 0.85);">Inst</span>
+                        <span style="display:inline;text-overflow:ellipsis">{{sectionInfo.title}} </span>
+                    </div>
                     <div id="SectionList">
                         <ul>
                             <li ng-repeat="section in sections" 
@@ -189,13 +190,13 @@
 
                                 <!-- <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span> -->
                                 <span class="PCR Inst" style="background:rgba(46, 204, 113, {{ section.pcrIShade }});color: {{ section.pcrIColor }} ">{{ section.revs.cI | number:2}}</span>
-
-                                <span ng-click="get.SectionInfo(section.idDashed)" style="text-overflow:ellipsis">{{ section.idSpaced}} - {{ section.timeInfo }} </span>
-
                                 <i class="fa" 
                                 ng-class="{'fa-star': starSections.indexOf(section.idDashed) > -1, 'fa-star-o': starSections.indexOf(section.idDashed) === -1}" 
                                 ng-click="star.AddRem(section.idDashed)"></i>
                                 <!-- Show an full star if the section is starred, empty star if not -->
+                                <span ng-click="get.SectionInfo(section.idDashed)" style="text-overflow:ellipsis;white-space: nowrap;">{{ section.idSpaced}} - {{ section.timeInfo }} </span>
+
+                                
                             </li>
                         </ul>
                     </div>
@@ -293,7 +294,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
     <!-- My code -->
-    <script type="text/javascript" src="/js/PCSAngular.js"></script>
+    <script type="text/javascript" src="/js/PCSangular.js"></script>
     <script type="text/javascript" src="/js/functions.js"></script>
     <script type="text/javascript" src="/js/schedFunctions.js"></script>
     <script type="text/javascript" src="/js/factories.js"></script>

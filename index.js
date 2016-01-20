@@ -281,6 +281,17 @@ function parseCourseList(Res) {
         reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
         reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
       } catch(err) {}
+      var extraReq = thisKey.important_notes;
+      var extraReqCode;
+      for (var i = 0; i < extraReq.length; i++) {
+        extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
+        if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
+          reqCodesList.push(extraReqCode);
+        } else if (thisKey.requirements[0].registration_control_code === 'MDB') {
+          reqCodesList.push('MDO');
+          reqCodesList.push('MDN');
+        }
+      }
       var revData = GetRevData(thisDept, thisNum);
       coursesList[courseListName] = {
         'idSpaced': courseListName, 
@@ -348,7 +359,7 @@ function parseSectionList(Res) {
         var idSpaced = idDashed.replace(/-/g, ' ');
         var timeInfoArray = getTimeInfo(thisEntry); // Get meeting times for a section
         var isOpen = timeInfoArray[0];
-        var timeInfo = timeInfoArray[1][0]; // Get the first meeting slot
+        var timeInfo = timeInfoArray[1].join(', '); // Get the first meeting slot
         var actType = thisEntry.activity;
         var SectionInst;
         try {
@@ -358,11 +369,7 @@ function parseSectionList(Res) {
         }
 
         var revData = GetRevData(thisEntry.course_department, thisEntry.course_number, SectionInst);
-        
-        // If there are multiple meeting times
-        if (typeof timeInfoArray[1][1] !== 'undefined') {
-          timeInfo += ' ...';
-        }
+      
         if (typeof timeInfo === 'undefined') {
           timeInfo = '';
         }

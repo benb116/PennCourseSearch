@@ -235,6 +235,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		Clear: function() {
 			sweetAlert({
 	            title: "Are you sure you want to clear your whole schedule?",
+	            text: "You can't undo this, it will be gone forever.",
 	            type: "warning",
 	            showCancelButton: true,
 	            confirmButtonColor: "#DD6B55",
@@ -253,6 +254,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		Delete: function() {
 			sweetAlert({
 	            title: "Are you sure you want to delete this schedule?",
+	            text: "You can't undo this, it will be gone forever.",
 	            type: "warning",
 	            showCancelButton: true,
 	            confirmButtonColor: "#DD6B55",

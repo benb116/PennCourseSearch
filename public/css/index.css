@@ -243,6 +243,9 @@ ul {
 }
 #SectionList li, #SectionInfo li {
     padding: 0.125em 0.5em .125em 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 #CourseList li,
 #SectionList li span:nth-child(1), 
