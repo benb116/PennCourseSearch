@@ -55,11 +55,8 @@ function PullRegistrar(index) {
 	    	if (!thisKey.is_cancelled && !resp[idSpaced]) {
 				// console.log(spacedName);
 				var reqList = thisKey.fulfills_college_requirements;
-				var reqCodesList = [];
-				try {
-					reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
-					reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
-				} catch(err) {}
+				var reqCodesList = GetRequirements(thisKey)[0]
+				
 				resp[idSpaced] = {
 					'idDashed': idDashed,
 					'idSpaced': idSpaced,
@@ -89,6 +86,33 @@ function PullRegistrar(index) {
 			PullRegistrar(index);
 		}
 	});
+}
+
+function GetRequirements(section) {
+  var reqList = section.fulfills_college_requirements;
+  var reqCodesList = []; 
+  try {
+    reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
+    reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
+  } catch(err) {}
+  var extraReq = section.important_notes;
+  var extraReqCode;
+  for (var i = 0; i < extraReq.length; i++) {
+    extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
+    if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
+      // reqList.push(extraReq[i]);
+      reqCodesList.push(extraReqCode);
+    } else if (section.requirements[0]) {
+    	if (section.requirements[0].registration_control_code === 'MDB') {
+      		reqCodesList.push('MDO');
+      		reqCodesList.push('MDN');
+    	}
+    }
+    if (extraReq[i].split(" ")[0] !== "Registration") {
+      reqList.push(extraReq[i]);
+    }
+  }
+  return [reqCodesList, reqList];
 }
 
 function PullReview(index) {

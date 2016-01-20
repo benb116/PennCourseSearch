@@ -265,6 +265,33 @@ function ParseDeptList (res) {
   return res;
 }
 
+function GetRequirements(section) {
+  var reqList = section.fulfills_college_requirements;
+  var reqCodesList = []; 
+  try {
+    reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
+    reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
+  } catch(err) {}
+  var extraReq = section.important_notes;
+  var extraReqCode;
+  for (var i = 0; i < extraReq.length; i++) {
+    extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
+    if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
+      // reqList.push(extraReq[i]);
+      reqCodesList.push(extraReqCode);
+    } else if (section.requirements[0]) {
+      if (section.requirements[0].registration_control_code === 'MDB') {
+          reqCodesList.push('MDO');
+          reqCodesList.push('MDN');
+      }
+    }
+    if (extraReq[i].split(" ")[0] !== "Registration") {
+      reqList.push(extraReq[i]);
+    }
+  }
+  return [reqCodesList, reqList];
+}
+
 // This function spits out the list of courses that goes in #CourseList
 function parseCourseList(Res) {
   var coursesList = {};
@@ -275,29 +302,13 @@ function parseCourseList(Res) {
     var courseListName  = thisDept+' '+thisNum; // Get course dept and number
     if (Res.hasOwnProperty(key) && !coursesList[courseListName] && !thisKey.is_cancelled) { // Iterate through each course
       var courseTitle   = thisKey.course_title;
-      var reqList       = thisKey.fulfills_college_requirements;
-      var reqCodesList  = [];
-      try {
-        reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
-        reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
-      } catch(err) {}
-      var extraReq = thisKey.important_notes;
-      var extraReqCode;
-      for (var i = 0; i < extraReq.length; i++) {
-        extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
-        if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
-          reqCodesList.push(extraReqCode);
-        } else if (thisKey.requirements[0].registration_control_code === 'MDB') {
-          reqCodesList.push('MDO');
-          reqCodesList.push('MDN');
-        }
-      }
+      var reqCodesList = GetRequirements(thisKey);
       var revData = GetRevData(thisDept, thisNum);
       coursesList[courseListName] = {
         'idSpaced': courseListName, 
         'idDashed': courseListName.replace(/ /g,'-'),
         'courseTitle': courseTitle,
-        'courseReqs': reqCodesList,
+        'courseReqs': reqCodesList[0],
         'revs': revData
       };
     }
@@ -451,7 +462,7 @@ function parseSectionInfo(Res) {
       }
     }
 
-    var reqsArray = entry.fulfills_college_requirements;
+    var reqsArray = GetRequirements(entry)[1];
 
     sectionInfo = {
       'fullID': FullID, 
