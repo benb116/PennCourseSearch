@@ -9,8 +9,7 @@ The server is written using NodeJS and the app is currently hosted on ~~Heroku~~
 Specific files you may be interested in:
 
 * [Server JS](https://github.com/benb116/PennCourseSearch/blob/Angular/index.js)
-* [Angular Code](https://github.com/benb116/PennCourseSearch/blob/Angular/public/js/angular.js) - Beware scope soup
-* [Additional client JS](https://github.com/benb116/PennCourseSearch/blob/Angular/public/js/functions.js)
+* [JS (including Angular controller)](https://github.com/benb116/PennCourseSearch/tree/Angular/public/js)
 * [CSS](https://github.com/benb116/PennCourseSearch/blob/Angular/public/css/index.css)
 * [HTML with Angular directives](https://github.com/benb116/PennCourseSearch/blob/Angular/views/index.html)
 
