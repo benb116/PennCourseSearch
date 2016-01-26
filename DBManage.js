@@ -31,13 +31,11 @@ if (source === 'registrar') {
 	PullReview(index);
 }
 
-var reqCodes = {Society: "MDS",History: "MDH",Arts: "MDA",Humanities: "MDO,MDB",Living: "MDL",Physical: "MDP",Natural: "MDN,MDB",Writing: "MWC",College: "MQS",Formal: "MFR",Cross: "MC1",Cultural: "MC2" };
-
 function PullRegistrar(index) {
 	var thedept = deptList[index];
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
 
-  	request({
+	request({
 		uri: baseURL,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}
 	}, function(error, response, body) {
@@ -46,27 +44,32 @@ function PullRegistrar(index) {
 
 		var resp = {};
 		for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
-	    	// For each section that comes up
-	    	// Get course name (e.g. CIS 120)
-	    	var thisKey = inJSON[key];
-			var spacedName = thisKey.section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' ');
-	    	if (!thisKey.is_cancelled && !resp[spacedName]) {
+			// For each section that comes up
+			// Get course name (e.g. CIS 120)
+			var thisKey = inJSON[key];
+			// var spacedName = thisKey.section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' ');
+			var idSpaced = thisKey.course_department + ' ' + thisKey.course_number;
+			var idDashed = idSpaced.replace(' ', '-');
+			if (!thisKey.is_cancelled && !resp[idSpaced]) {
 				// console.log(spacedName);
 				var reqList = thisKey.fulfills_college_requirements;
-				var reqCodesList = [];
-				try {
-					reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
-					reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
-				} catch(err) {}
-				resp[spacedName] = {
-					'courseListName': spacedName,
+				var reqCodesList = GetRequirements(thisKey)[0];
+				
+				resp[idSpaced] = {
+					'idDashed': idDashed,
+					'idSpaced': idSpaced,
 					'courseTitle': thisKey.course_title,
 					'courseReqs': reqCodesList
 				};
 			}
 			if (key == inJSON.length - 1) {
+
+				var arrResp = [];
+				for (key in resp) {
+					arrResp.push(resp[key]);
+				}
 				// At the end of the list
-				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(resp), function (err) {
+				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(arrResp), function (err) {
 					// Write JSON to file
 					if (err) {
 						console.log(index+' '+thedept+' '+err);
@@ -83,25 +86,53 @@ function PullRegistrar(index) {
 	});
 }
 
+function GetRequirements(section) {
+  var reqList = section.fulfills_college_requirements;
+  var reqCodesList = []; 
+  try {
+	reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
+	reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
+  } catch(err) {}
+  var extraReq = section.important_notes;
+  var extraReqCode;
+  for (var i = 0; i < extraReq.length; i++) {
+	extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
+	if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
+	  // reqList.push(extraReq[i]);
+	  reqCodesList.push(extraReqCode);
+	} else if (section.requirements[0]) {
+		if (section.requirements[0].registration_control_code === 'MDB') {
+			reqCodesList.push('MDO');
+			reqCodesList.push('MDN');
+		}
+	}
+	if (extraReq[i].split(" ")[0] !== "Registration") {
+	  reqList.push(extraReq[i]);
+	}
+  }
+  return [reqCodesList, reqList];
+}
+
 function PullReview(index) {
 	var thedept = deptList[index];
 	console.log(('PCR Rev Spit: '+thedept));
 	request({
-    // Get raw data
+	// Get raw data
 		uri: 'http://api.penncoursereview.com/v1/depts/'+thedept+'/reviews?token='+config.PCRToken 
 	}, function(error, response, body) {
 		console.log('Received');
 		var deptReviews = JSON.parse(body).result.values;
 		var resp = {};
 		for(var rev in deptReviews) { if(deptReviews.hasOwnProperty(rev)) {
-      // Iterate through each review
+	  // Iterate through each review
 			var sectionIDs = deptReviews[rev].section.aliases;
 			for(var alias in sectionIDs) {
 				if (sectionIDs[alias].split('-')[0] === thedept) {
-          // Only create an entry for the course in this department
+		  // Only create an entry for the course in this department
 					// Get data
-					var courseID = sectionIDs[alias].split('-')[0] + ' ' + sectionIDs[alias].split('-')[1];
-					var instID = deptReviews[rev].instructor.id;
+					var courseNum = sectionIDs[alias].split('-')[1];
+					var courseID  = sectionIDs[alias].split('-')[0] + ' ' + courseNum;
+					var instID    = deptReviews[rev].instructor.id.replace('-', ' ').split(' ')[1].replace(/--/g, '. ').replace(/-/g, ' ');
 					// var instName = deptReviews[rev].instructor.name;
 					var courseQual = Number(deptReviews[rev].ratings.rCourseQuality);
 					var courseDiff = Number(deptReviews[rev].ratings.rDifficulty);
@@ -110,24 +141,24 @@ function PullReview(index) {
 					/* This JSON has the following form (using MEAM 101 as an example)
 					 {
 					   "MEAM 101": {
-					     "1234-Fiene": [
-					       {"cQ": 4, "cD": 3.9, "cI": 4},
-					       {"cQ": 3.9, "cD": 4, "cI": 3.9}
-					     ],
-					     "4321-Wabiszewski": [
-					       {"cQ": 4, "cD": 3.9, "cI": 4}
-					     ]
+						 "1234-Fiene": [
+						   {"cQ": 4, "cD": 3.9, "cI": 4},
+						   {"cQ": 3.9, "cD": 4, "cI": 3.9}
+						 ],
+						 "4321-Wabiszewski": [
+						   {"cQ": 4, "cD": 3.9, "cI": 4}
+						 ]
 					   }
 					 }
 					 */
 
-					if (typeof resp[courseID] === 'undefined') {resp[courseID] = {};}
-					if (typeof resp[courseID][instID] === 'undefined') {resp[courseID][instID] = [];}
-					var entry = resp[courseID][instID];
+					if (typeof resp[courseNum] === 'undefined') {resp[courseNum] = {};}
+					if (typeof resp[courseNum][instID] === 'undefined') {resp[courseNum][instID] = [];}
+					var entry = resp[courseNum][instID];
 					entry.push({
-						'cQ': courseQual,
-						'cD': courseDiff,
-						'cI': courseInst
+						'cQ': (courseQual || 0),
+						'cD': (courseDiff || 0),
+						'cI': (courseInst || 0)
 					});
 				}
 			}
@@ -169,6 +200,8 @@ function PullReview(index) {
 				'cI': courseAvgInst
 			};
 		}}
+		// var finalResp = {};
+		// finalResp[thedept] = resp;
 		fs.writeFile('./2015CRev/'+thedept+'.json', JSON.stringify(resp), function (err) {
 			if (err) {
 				console.log(index+' '+thedept+' '+err);
@@ -190,11 +223,11 @@ function UploadToDB(folder, thedb, index) {
   // Get split data
 	var rawJSON = JSON.parse(fs.readFileSync('./'+folder+'/'+thedept+'.json', 'utf8'));
 	db.collection(thedb).find({Dept: thedept}, function(err, doc) {
-    // Try to access the database
+	// Try to access the database
 		if (doc.length === 0) {
 			db.collection(thedb).save({'Dept': thedept, 'Reviews': {}});
 		}
-    // Add a schedules block if there is none
+	// Add a schedules block if there is none
 		db.collection(thedb).update({Dept: thedept}, { $set: {Reviews: rawJSON}, $currentDate: { lastModified: true }}, function(err, doc) {
 			console.log('It\'s saved! ' + thedept);
 		});
@@ -209,15 +242,15 @@ function Match(index) {
   // Get PCR data
 	var deptrev = JSON.parse(fs.readFileSync('./2015ARev/'+thedept+'.json', 'utf8'));
 	for (var course in dept) {
-    // Go through each course
+	// Go through each course
 		if (typeof deptrev[course] !== 'undefined') {
 			var sum = 0;
 			for (var i = 0; i < deptrev[course].length; i++) {
-        // Go through each section in the courses PCR data and sum the values
+		// Go through each section in the courses PCR data and sum the values
 				sum += Number(deptrev[course][i].Rating);
 			}
 			if (deptrev[course].length !== 0) {
-        // Average the values and add to the spit data
+		// Average the values and add to the spit data
 				dept[course].PCR = Math.floor(100*sum/deptrev[course].length)/100;
 			}
 		}
