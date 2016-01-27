@@ -1,6 +1,6 @@
 PCS.factory('PCR', function(){
 	return function PCR(data){
-		angular.forEach(data, function(item, index) {
+		angular.forEach(data, function(item) {
 			var qFrac = item.revs.cQ / 4;
 			var dFrac = item.revs.cD / 4;
 			var iFrac = item.revs.cI / 4;
@@ -16,7 +16,7 @@ PCS.factory('PCR', function(){
 		return data;
 	};
 });
-PCS.factory('UpdateCourseList', ['$http', function($http, PCR){
+PCS.factory('UpdateCourseList', ['$http', function($http){
 	var retObj = {};
 	retObj.getDeptCourses = function(dept, searchType, reqFilter, proFilter) {
 		// Build the request URL

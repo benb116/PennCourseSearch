@@ -24,26 +24,24 @@ function SpitSched(schedData) {
 
 	var sec, day;
 
-	for (sec in courseSched) {
-		if (courseSched.hasOwnProperty(sec)) {
-			var secMeetHour = courseSched[sec].meetHour;
-			if (secMeetHour <= startHour) { // If there are classes earlier than the default start
-				startHour = Math.floor(secMeetHour); // push back the earliest hour
-			}
-			if (secMeetHour + courseSched[sec].hourLength >= endHour) { // Push back latest hour if necessary
-				endHour = Math.ceil(secMeetHour + courseSched[sec].hourLength);
-			}
-			for (day in courseSched[sec].meetDay) {
-				var letterDay = courseSched[sec].meetDay[day];
-				if (letterDay === 'U') { // If there are sunday classes
-					incSun = 1;
-				}
-				if (letterDay === 'S') { // If there are saturday classes
-					incSat = 1;
-				}
-			}
+	for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
+		var secMeetHour = courseSched[sec].meetHour;
+		if (secMeetHour <= startHour) { // If there are classes earlier than the default start
+			startHour = Math.floor(secMeetHour); // push back the earliest hour
 		}
-	}
+		if (secMeetHour + courseSched[sec].hourLength >= endHour) { // Push back latest hour if necessary
+			endHour = Math.ceil(secMeetHour + courseSched[sec].hourLength);
+		}
+		for (day in courseSched[sec].meetDay) { if (courseSched[sec].meetDay.hasOwnProperty(day)) {
+			var letterDay = courseSched[sec].meetDay[day];
+			if (letterDay === 'U') { // If there are sunday classes
+				incSun = 1;
+			}
+			if (letterDay === 'S') { // If there are saturday classes
+				incSat = 1;
+			}
+		}}
+	}}
 
 	if (incSun === 1) {
 		weekdays.unshift('U');
@@ -71,9 +69,9 @@ function SpitSched(schedData) {
 			timeColHTML += '<div class="TimeBlock" style="top:' + toppos + '%">' + hourtext + ':00</div>'; // add time label
 			schedHTML += '<hr width="99.7%"style="top:' + toppos + '%" >'; // add time line
 		}
-		for (var daynum in weekdays) {
+		for (var daynum in weekdays) { if (weekdays.hasOwnProperty(daynum)) {
 			schedHTML += '<div class="DayName" style="width:' + percentWidth + '%;">' + fullWeekdays[daynum] + '</div>';
-		}
+		}}
 		schedElement.html(schedHTML);
 		timeColElement.html(timeColHTML);
 	} else {
@@ -85,20 +83,20 @@ function SpitSched(schedData) {
 	var colorMap = {};
 	var colorinc = 0;
 	var colorPal = schedData.colorPalette;
-	for (sec in courseSched) {
+	for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
 		var secID = courseSched[sec].idDashed;
 		if (!colorMap[secID]) {
 			colorMap[secID] = colorPal[colorinc];
 			colorinc++;
 		}
-	}
+	}}
 
 	var secArray = courseSched.map(function(meeting) {
 		return meeting.idDashed;
 	});
 	// Add the blocks
-	for (sec in courseSched) {
-		for (day in courseSched[sec].meetDay) {
+	for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
+		for (day in courseSched[sec].meetDay) { if (courseSched[sec].meetDay.hasOwnProperty(day)) {
 			var meetLetterDay   = courseSched[sec].meetDay[day]; // On which day does this meeting take place?
 			var blockleft       = weekdays.indexOf(meetLetterDay) * percentWidth;
 			var blocktop        = (courseSched[sec].meetHour - startHour) * halfScale + 9; // determine top spacing based on time from startHour (offset for prettiness)
@@ -140,8 +138,8 @@ function SpitSched(schedData) {
 					}
 				}
 			});
-		}
-	}
+		}}
+	}}
 
 	function TwoOverlap(block1, block2) {
 		// Thank you to Stack Overflow user BC. for the function this is based on.

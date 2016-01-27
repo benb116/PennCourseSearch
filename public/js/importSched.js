@@ -6,7 +6,7 @@ function readCalFile() {
 	var reader = new FileReader();
 	// If we use onloadend, we need to check the readyState.
 	reader.onloadend = function(evt) {
-		if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+		if (evt.target.readyState === FileReader.DONE) { // DONE == 2
 			var secArr = parseCalFile(evt.target.result);
 			if (secArr.length) {
 				$('#importSubmit').prop('disabled', false);
@@ -39,7 +39,7 @@ function parseCalFile(rawCal) {
 
 	var secs = rawCal.split('\n').filter(FilterFunc).map(MapFunc);
 	var uniq = secs.filter(function(elem, pos) {
-		return secs.indexOf(elem) == pos;
+		return secs.indexOf(elem) === pos;
 	}); 
 	return uniq;
 }

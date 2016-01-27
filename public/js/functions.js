@@ -108,30 +108,25 @@ function addrem(item, array) {
 	return array;
 }
 
-function FormatID(searchTerms) {
-	var splitTerms = searchTerms.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
+function FormatID(rawParam) {
+	var searchParam = rawParam.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
+	var retArr = ['', '', ''];
 
-	if (parseFloat(splitTerms[2]) == splitTerms[2]) { // If the third character is a number (e.g. BE100)
-		splitTerms = splitTerms.substr(0, 2) + '/' + splitTerms.substr(2); // Splice the search query with a slash after the deptartment
-		if (parseFloat(splitTerms[6]) == splitTerms[6]) { // Then, if the sixth character is a number (e.g. BE100001)
-			splitTerms = splitTerms.substr(0, 6) + '/' + splitTerms.substr(6, 3); // Splice the search query with a slash after the course number
-		}
-	} else if (parseFloat(splitTerms[3]) == splitTerms[3]) { // If the fourth character is a number (e.g. CIS110)
-		splitTerms = splitTerms.substr(0, 3) + '/' + splitTerms.substr(3); // Splice the search query with a slash after the deptartment 
-		if (parseFloat(splitTerms[7]) == splitTerms[7]) { // Then, if the seventh character is a number (e.g. CIS110001)
-			splitTerms = splitTerms.substr(0, 7) + '/' + splitTerms.substr(7, 3); // Splice the search query with a slash after the course number
-		}
-	} else if (parseFloat(splitTerms[4]) == splitTerms[4]) { // If the fifth character is a number (e.g. MEAM110)
-		splitTerms = splitTerms.substr(0, 4) + '/' + splitTerms.substr(4); // Splice the search query with a slash after the deptartment
-		if (parseFloat(splitTerms[8]) == splitTerms[8]) { // Then, if the eighth character is a number (e.g. MEAM110001)
-			splitTerms = splitTerms.substr(0, 8) + '/' + splitTerms.substr(8, 3); // Splice the search query with a slash after the course number
-		}
+	if (isFinite(searchParam[2])) {  // If the third character is a number (e.g. BE100)
+		splitTerms(2);
+	} else if (isFinite(searchParam[3])) {  // If the fourth character is a number (e.g. CIS110)
+		splitTerms(3);
+	} else if (isFinite(searchParam[4])) {  // If the fifth character is a number (e.g. MEAM110)
+		splitTerms(4);
+	} else {
+		retArr[0] = searchParam;
 	}
-	// At this point the format should be "dept/num/sec"
-	// Return as a list
-	var retArr = splitTerms.split('/');
-	retArr[0] = (retArr[0] || '');
-	retArr[1] = (retArr[1] || '');
-	retArr[2] = (retArr[2] || '');
+
+	function splitTerms(n) {
+		retArr[0] = searchParam.substr(0, n);
+		retArr[1] = searchParam.substr(n, 3);
+		retArr[2] = searchParam.substr(n+3, 3);
+	}
+	
 	return retArr;
 }

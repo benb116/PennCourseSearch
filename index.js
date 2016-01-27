@@ -15,7 +15,7 @@ require('log-timestamp')(function() { return new Date().toISOString() + ' %s'; }
 console.timeEnd('Modules loaded');
 
 // I don't want to host a config file on Github. When running locally, the app has access to a local config file.
-// On Heroku/DigitalOcean, there is no config file so I use environment variables instead
+// In production, there is no config file so I use environment variables instead
 var config;
 try {
 	config = require('./config.js');
@@ -51,7 +51,7 @@ if (process.env.KEEN_WRITE_KEY && keenEnable) { // Only log from production
 
 var logEvent = function (eventName, eventData) {
 	if (client) {
-		client.addEvent(eventName, eventData, function (err, res) {
+		client.addEvent(eventName, eventData, function (err) {
 			if (err) {
 				console.log("KEENIOERROR: " + err);
 			}
@@ -100,10 +100,6 @@ app.get('/Status', function(req, res) {
 	res.send('hakol beseder');
 });
 
-// For use below when sending JSON files
-var sendRevOpts		 = {root: __dirname + '/'+latestRev+'Rev/', dotfiles: 'deny'};
-var sendCourseOpts	= {root: __dirname + '/'+currentTerm+'/',			 dotfiles: 'deny'};
-
 var searchTypes = {
 	courseIDSearch: '&course_id=',
 	keywordSearch: '&description=',
@@ -143,7 +139,7 @@ app.get('/Search', function(req, res) {
 	var searchType     = req.query.searchType;	 // Course ID, Keyword, or Instructor
 	var resultType     = req.query.resultType;	 // Course numbers, section numbers, section info
 	var instructFilter = req.query.instFilter;	 // Is there an instructor filter?
-	if (req.query.reqParam == 'MDO' || req.query.reqParam == 'MDN') {req.query.reqParam += ',MDB';} // this is stupid
+	if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {req.query.reqParam += ',MDB';} // this is stupid
 
 	// Building the request URI
 	var reqSearch   = buildURI(req.query.reqParam, 'reqFilter');
@@ -191,7 +187,7 @@ app.get('/Search', function(req, res) {
 				return res.send('PCSERROR: request failed');
 			}
 
-			var parsedRes = {};
+			var parsedRes, rawResp = {};
 			// console.log(body)
 			// try {
 			//	 parsedRes = JSON.parse(body.result_data);
@@ -199,7 +195,7 @@ app.get('/Search', function(req, res) {
 			//	 return res.send("Can't parse JSON response");
 			// }
 			try {
-				var rawResp = JSON.parse(body);
+				rawResp = JSON.parse(body);
 			} catch(err) {
 				console.log(err);
 				return res.send({});
@@ -207,11 +203,12 @@ app.get('/Search', function(req, res) {
 
 			try {
 				if (rawResp.service_meta.error_text) {
-					throw rawResp.service_meta.error_text;
+					console.log(rawResp.service_meta.error_text);
+					pusher.note(pushDeviceID, rawResp.service_meta.error_text);
 				}
 				parsedRes = rawResp.result_data;
 			} catch(err) {
-				console.log(err)
+				console.log(err);
 				res.statusCode = 500;
 				return res.send(err);
 			}
@@ -256,12 +253,12 @@ function GetRevData (dept, num, inst) {
 }
 
 function ParseDeptList (res) {
-	for (var course in res) {
+	for (var course in res) { if (res.hasOwnProperty(course)) {
 		var courData = res[course].idSpaced.split(' ');
 		var courDept = courData[0];
 		var courNum  = courData[1];
 		res[course].revs = GetRevData(courDept, courNum);
-	}
+	}}
 	return res;
 }
 
@@ -314,9 +311,9 @@ function parseCourseList(Res) {
 		}
 	}}
 	var arrResp = [];
-	for (var course in coursesList) {
+	for (var course in coursesList) { if (coursesList.hasOwnProperty(course)) {
 		arrResp.push(coursesList[course]);
-	}
+	}}
 	return arrResp;
 }
 
@@ -399,7 +396,7 @@ function parseSectionList(Res) {
 			}
 		}
 	}
-	sectionInfo = parseSectionInfo(Res);
+	var sectionInfo = parseSectionInfo(Res);
 
 	return [sectionsList, sectionInfo];
 }
@@ -422,7 +419,6 @@ function parseSectionInfo(Res) {
 		var TimeInfoArray = getTimeInfo(entry);
 		var StatusClass   = TimeInfoArray[0];
 		var meetArray     = TimeInfoArray[1];
-		var TimeInfo      = '';
 		var prereq = entry.prerequisite_notes[0];
 		if (typeof prereq === 'undefined') {
 			prereq = "none";
@@ -489,7 +485,6 @@ function parseSectionInfo(Res) {
 // Manage scheduling requests
 app.get('/Sched', function(req, res) {
 	var courseID		= req.query.courseID;
-	var SchedCourses = [];
 	request({
 		uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
@@ -519,7 +514,6 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
 				var EndTime    = (thisMeet.end_hour_24)   + (thisMeet.end_minutes)/60;
 				var hourLength = EndTime - StartTime;
 				var MeetDays   = thisMeet.meeting_days;
-				var OpenClose  = entry.course_status_normalized;
 				var Building, Room;
 				try {
 				 Building	 = thisMeet.building_code;

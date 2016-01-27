@@ -51,8 +51,6 @@ function PullRegistrar(index) {
 			var idSpaced = thisKey.course_department + ' ' + thisKey.course_number;
 			var idDashed = idSpaced.replace(' ', '-');
 			if (!thisKey.is_cancelled && !resp[idSpaced]) {
-				// console.log(spacedName);
-				var reqList = thisKey.fulfills_college_requirements;
 				var reqCodesList = GetRequirements(thisKey)[0];
 				
 				resp[idSpaced] = {
@@ -62,12 +60,12 @@ function PullRegistrar(index) {
 					'courseReqs': reqCodesList
 				};
 			}
-			if (key == inJSON.length - 1) {
+			if (key === inJSON.length - 1) {
 
 				var arrResp = [];
-				for (key in resp) {
+				for (key in resp) { if (resp.hasOwnProperty(key)) {
 					arrResp.push(resp[key]);
-				}
+				}}
 				// At the end of the list
 				fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(arrResp), function (err) {
 					// Write JSON to file
@@ -131,7 +129,6 @@ function PullReview(index) {
 		  // Only create an entry for the course in this department
 					// Get data
 					var courseNum = sectionIDs[alias].split('-')[1];
-					var courseID  = sectionIDs[alias].split('-')[0] + ' ' + courseNum;
 					var instID    = deptReviews[rev].instructor.id.replace('-', ' ').split(' ')[1].replace(/--/g, '. ').replace(/-/g, ' ');
 					// var instName = deptReviews[rev].instructor.name;
 					var courseQual = Number(deptReviews[rev].ratings.rCourseQuality);
@@ -216,60 +213,4 @@ function PullReview(index) {
 		});
 	});
 	return 0;
-}
-
-function UploadToDB(folder, thedb, index) {
-	var thedept = deptList[index];
-  // Get split data
-	var rawJSON = JSON.parse(fs.readFileSync('./'+folder+'/'+thedept+'.json', 'utf8'));
-	db.collection(thedb).find({Dept: thedept}, function(err, doc) {
-	// Try to access the database
-		if (doc.length === 0) {
-			db.collection(thedb).save({'Dept': thedept, 'Reviews': {}});
-		}
-	// Add a schedules block if there is none
-		db.collection(thedb).update({Dept: thedept}, { $set: {Reviews: rawJSON}, $currentDate: { lastModified: true }}, function(err, doc) {
-			console.log('It\'s saved! ' + thedept);
-		});
-	});
-	return 0;
-}
-
-function Match(index) {
-	var thedept = deptList[index];
-  // Get split data
-	var dept = JSON.parse(fs.readFileSync('./'+currentTerm+'/'+thedept+'.json', 'utf8'));
-  // Get PCR data
-	var deptrev = JSON.parse(fs.readFileSync('./2015ARev/'+thedept+'.json', 'utf8'));
-	for (var course in dept) {
-	// Go through each course
-		if (typeof deptrev[course] !== 'undefined') {
-			var sum = 0;
-			for (var i = 0; i < deptrev[course].length; i++) {
-		// Go through each section in the courses PCR data and sum the values
-				sum += Number(deptrev[course][i].Rating);
-			}
-			if (deptrev[course].length !== 0) {
-		// Average the values and add to the spit data
-				dept[course].PCR = Math.floor(100*sum/deptrev[course].length)/100;
-			}
-		}
-	}
-	fs.writeFile('./'+currentTerm+'Full/'+thedept+'.json', JSON.stringify(dept), function (err) {
-		if (err) {console.log(err);}
-		console.log('It\'s saved! '+ index + ' ' + thedept);
-		// UploadToDB('2015ARevRaw', 'NewReviews', index);
-		index++;
-		PullReview(index);
-	});
-	// db.collection('Courses'+currentTerm).find({Dept: thedept}, function(err, doc) {
- //    // Try to access the database
-	// 	if (doc.length === 0) {
-	// 		db.collection('Courses'+currentTerm).save({'Dept': thedept});
-	// 	}
- //    // Add a schedules block if there is none
-	// 	db.collection('Courses'+currentTerm).update({Dept: thedept}, { $set: {Courses: dept}, $currentDate: { lastModified: true }});
-	// 	index++;
-	// 	PullReview(index);
-	// });
 }

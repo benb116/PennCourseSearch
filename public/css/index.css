@@ -93,45 +93,27 @@ form > input[type="text"] {
 }*/
 
 .spinner {
-    display: inline-block;
-    height: 20px;
-    width: 20px;
-    vertical-align: middle;
-    margin-left: 2em;
-    -webkit-animation: rotation .6s infinite linear;
-    -moz-animation: rotation .6s infinite linear;
-    -o-animation: rotation .6s infinite linear;
-    animation: rotation .6s infinite linear;
-    border-left: 3px solid white);
-    border-right: 3px solid white);
-    border-bottom: 3px solid white);
-    border-top: 3px solid white;
-    border-radius: 100%;
-    /*opacity: 0;*/
+	/*  margin: 50px;
+	height: 28px;
+	width: 28px;*/
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	vertical-align: middle;
+	margin-left: 2em;
+	animation: rotate 0.8s infinite linear;
+	border: 3px solid #fff;
+	border-right-color: transparent;
+	border-radius: 50%;
+}
+
+@keyframes rotate {
+  0%    { transform: rotate(0deg); }
+  100%  { transform: rotate(360deg); }
 }
 
 .hide {
 	visibility: hidden;
-}
-
-@-webkit-keyframes rotation {
-	from {
-		-webkit-transform: rotate(0deg);
-	}
-	to {
-		-webkit-transform: rotate(359deg);
-	}
-}
-
-@keyframes rotation {
-	from {
-		-webkit-transform: rotate(0deg);
-				transform: rotate(0deg);
-	}
-	to {
-		-webkit-transform: rotate(359deg);
-				transform: rotate(359deg);
-	}
 }
 
 
@@ -391,7 +373,6 @@ ul {
 	background-color: white;
 	width: 48%;
 	display: inline-block;
-	float: left;
 }
 
 .FilterBlock {
