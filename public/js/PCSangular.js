@@ -21,6 +21,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		$scope.currentCourse = ''; // current parameter used to get list of sections
 		$scope.currentSection = ''; // current parameter used to get section information
 		$scope.schedSections = []; // array of section idDashed's as strings
+		$scope.secListTitle = '';
 		$scope.searchType = "courseIDSearch"; // value of Search By select menu
 		$scope.searchPlaceholder = placeholderMap[$scope.searchType];
 		$scope.loading = ($http.pendingRequests.length !== 0); // Are there outstanding HTTP requests
@@ -51,7 +52,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		// This prevents requests from being sent out immediately
 		delay(function() {
 			$scope.initiateSearch($scope.search);
-		}, 500);
+		}, 400);
 		$scope.searchPlaceholder = placeholderMap[$scope.searchType];
 	};
 	$scope.initiateSearch = function(param, courseType) {
@@ -85,6 +86,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		Courses: function(param, type, req, pro) {
 			if (!param) {param = '';}
 			if (!type) {type = $scope.searchType;}
+			var reqText;
 			if (!req) {reqText = '';} else {reqText = req;}
 			if (!pro) {pro = $scope.showPro;}
 			$scope.currentDept = param;
@@ -94,7 +96,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		},
 		Sections: function(dept, num, sec) {
 			if (!num) {
-				terms = FormatID(dept);
+				var terms = FormatID(dept);
 				dept = terms[0];
 				num = terms[1];
 				sec = '';
@@ -103,6 +105,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			$scope.currentCourse = cID;
 			UpdateSectionList.getCourseSections(cID).then(function(resp) {
 				$scope.sections = resp.data[0];
+				$scope.secListTitle = $scope.sections[0].courseTitle;
 				if (sec.length < 3) { // If we are not searching for a specific section, show some course information
 					$scope.sectionInfo = resp.data[1];
 					delete $scope.sectionInfo.instructor;
@@ -135,13 +138,23 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		Show: function() {
 			$scope.currentCourse = false;
 			$scope.sections = [];
+			$scope.sectionInfo = {};
 			// Send section requests for each section and add the responses to the array
-			for (var sec in $scope.starSections) {
+			for (var sec in $scope.starSections) { if ($scope.starSections.hasOwnProperty(sec)) {
 				UpdateSectionList.getCourseSections($scope.starSections[sec]).then(function(resp) {
 					PCR(resp.data[0]);
 					$scope.sections.push(resp.data[0][0]);
 				});
+			}}
+			console.log($scope.starSections.length)
+			if ($scope.starSections.length) {
+				$scope.secListTitle = "Starred sections";
+			} else {
+				console.log($scope.secListTitle)
+				$scope.secListTitle = "No starred sections";
+				console.log($scope.secListTitle)
 			}
+			
 		}
 	};
 
@@ -151,7 +164,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			if ($scope.schedSections.indexOf(secID) === -1) { // If the requested section is not scheduled
 				UpdateSchedules.getSchedData(secID).then(function(resp) {
 						var oldData = $scope.schedData[$scope.currentSched].meetings;
-						newData = oldData.concat(resp.data); // Combine old meetings and new meetings
+						var newData = oldData.concat(resp.data); // Combine old meetings and new meetings
 						$scope.schedData[$scope.currentSched].meetings = newData;
 					});
 			} else {
@@ -229,7 +242,11 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 					$scope.schedData[inputValue] = $scope.schedData[$scope.currentSched];
 					delete $scope.schedData[$scope.currentSched];
 					$scope.currentSched = inputValue;
-					sweetAlert.close();
+					sweetAlert({
+						title: "Your schedule has been renamed.",
+						type: "success",
+						timer: 1000
+					});
 				}
 				$scope.$apply();
 			});
@@ -295,29 +312,26 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 
 	$scope.Notify = promptNotify;
 
-	$scope.$watch('courses', function(val, old) {
+	$scope.$watch('courses', function(val) {
 		PCR($scope.courses); // Calculate and add extra PCR info
 	});
-	$scope.$watch('sections', function(val, old) {
+	$scope.$watch('sections', function(val) {
 		PCR($scope.sections);
 	});
-	$scope.$watch('schedData', function(val, old) { // When schedData changes
+	$scope.$watch('schedData', function(val) { // When schedData changes
 		$scope.schedChange();
 	}, true);
-	$scope.$watch('check', function(val, old){ // When a requirement checkbox is changed
+	$scope.$watch('check', function(val){ // When a requirement checkbox is changed
 		$scope.checkArr = [];
 		for (var req in $scope.check) { // Build an array of all checked boxes (length <= 2)
 			if ($scope.check[req]) {$scope.checkArr.push(req);}
 		}
 		// If there are no courses in the list and no currentDept search, the user probably just wants to see all classes that satisfy a given requirement
-		if (!($scope.courses.length && $scope.currentDept !== '') && $scope.checkArr.length == 1) {
+		if (!($scope.courses.length && $scope.currentDept !== '') && $scope.checkArr.length === 1) {
 			$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
 		}
 		// Otherwise the filtering in the view will take care of hiding and showing the corrent courses
 	}, true);
-	$scope.$watch('showPro', function(val, old) {
-		$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
-	});
 	$scope.$watch(function() { // If there are any unresolved HTTP requests, show the loading spinner
 		return $http.pendingRequests.length;
 	}, function() {

@@ -52,7 +52,7 @@ function SpitSched(schedData) {
 		fullWeekdays.push('Saturday');
 	}
 
-	percentWidth = 100 / (5 + incSun + incSat); // Update the block width if necessary
+	percentWidth = 100 / weekdays.length; // Update the block width if necessary
 	var halfScale = 95 / (endHour - startHour + 1); // This defines the scale to be used throughout the scheduling process
 	// + 1 keeps the height inside the box
 

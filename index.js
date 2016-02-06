@@ -3,7 +3,7 @@ console.time('Modules loaded');
 var path        = require('path');
 var express     = require('express');
 var compression = require('compression');
-var request     = require("request");
+var request     = require('request');
 var colors      = require('colors');
 var fs          = require('fs');
 var Keen        = require('keen-js');
@@ -409,20 +409,15 @@ function parseSectionInfo(Res) {
 		var Title         = entry.course_title;
 		var FullID        = entry.section_id_normalized.replace(/-/g, " "); // Format name
 		var CourseID      = entry.section_id_normalized.split('-')[0] + ' ' + entry.section_id_normalized.split('-')[1];
-		var Instructor;
-		try {
-			Instructor = entry.instructors[0].name;
-		} catch (err) {
-			Instructor = "";
+		var Instructor    = '';
+		if (entry.instructors[0]) {
+			Instructor    = entry.instructors[0].name;
 		}
 		var Desc          = entry.course_description;
 		var TimeInfoArray = getTimeInfo(entry);
 		var StatusClass   = TimeInfoArray[0];
 		var meetArray     = TimeInfoArray[1];
-		var prereq = entry.prerequisite_notes[0];
-		if (typeof prereq === 'undefined') {
-			prereq = "none";
-		}
+		var prereq        = (entry.prerequisite_notes[0] || 'none');
 		var termsOffered  = entry.course_terms_offered;
 
 		var OpenClose;
@@ -437,25 +432,21 @@ function parseSectionInfo(Res) {
 		var key;
 		if (entry.recitations.length !== 0) { // If it has recitations
 			asscType = "Recitations";
-			for(key in entry.recitations) {
-				if (entry.recitations.hasOwnProperty(key)) { 
+			for(key in entry.recitations) { if (entry.recitations.hasOwnProperty(key)) { 
 					asscList.push(entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id);
-				}
-			}
+			}}
+
 		} else if (entry.labs.length !== 0) { // If it has labs
 			asscType = "Labs";
-			for(key in entry.labs) {
-				if (entry.labs.hasOwnProperty(key)) { 
+			for(key in entry.labs) { if (entry.labs.hasOwnProperty(key)) { 
 					asscList.push(entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id);
-				}
-			}
+			}}
+
 		} else if (entry.lectures.length !== 0) { // If it has lectures
 			asscType = "Lectures";
-			for(key in entry.lectures) {
-				if (entry.lectures.hasOwnProperty(key)) { 
+			for(key in entry.lectures) { if (entry.lectures.hasOwnProperty(key)) { 
 					asscList.push(entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id);
-				}
-			}
+			}}
 		}
 
 		var reqsArray = GetRequirements(entry)[1];
