@@ -1,16 +1,16 @@
 var PCS = angular.module('PCSApp', ['LocalStorageModule', '720kb.tooltips']);
 
 /*
-	I know this is scope soup. I'm still learning. 
+	I know this is scope soup. I'm still learning.
 */
 
 PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules){
-	
+
 	var placeholderMap = {
 		'courseIDSearch': 'Search for a department, course, or section',
 		'keywordSearch': 'Search by course title or description',
 		'instSearch': 'Search for a specific instructor'
-	};	
+	};
 	// Initial values that reset all of the search information
 	$scope.clearSearch = function() {
 		$scope.search = ''; // value of the search bar
@@ -91,7 +91,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			if (!pro) {pro = $scope.showPro;}
 			$scope.currentDept = param;
 			UpdateCourseList.getDeptCourses(param, type, reqText, pro).then(function(resp) {
-				$scope.courses = resp.data;
+				$scope.courses = PCR(resp.data);
 			});
 		},
 		Sections: function(dept, num, sec) {
@@ -104,7 +104,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			var cID = dept+num;
 			$scope.currentCourse = cID;
 			UpdateSectionList.getCourseSections(cID).then(function(resp) {
-				$scope.sections = resp.data[0];
+				$scope.sections = PCR(resp.data[0]);
 				$scope.secListTitle = $scope.sections[0].courseTitle;
 				if (sec.length < 3) { // If we are not searching for a specific section, show some course information
 					$scope.sectionInfo = resp.data[1];
@@ -117,6 +117,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			});
 		},
 		SectionInfo: function(dept, num, sec) {
+			var terms;
 			if (!num) {
 				terms = FormatID(dept);
 				dept = terms[0];
@@ -134,6 +135,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	$scope.star = {
 		AddRem: function(secID) {
 			addrem(secID, $scope.starSections);
+			this.Title();
 		},
 		Show: function() {
 			$scope.currentCourse = false;
@@ -146,20 +148,23 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 					$scope.sections.push(resp.data[0][0]);
 				});
 			}}
-			console.log($scope.starSections.length)
-			if ($scope.starSections.length) {
-				$scope.secListTitle = "Starred sections";
-			} else {
-				console.log($scope.secListTitle)
-				$scope.secListTitle = "No starred sections";
-				console.log($scope.secListTitle)
+			this.Title();
+		},
+		Title: function() {
+			if ($scope.currentCourse === false) {
+				if ($scope.starSections.length) {
+					$scope.secListTitle = "Starred sections";
+				} else {
+					$scope.secListTitle = "No starred sections";
+				}
 			}
-			
 		}
 	};
 
 	$scope.sched = {
 		AddRem: function(secID) {
+			secID = FormatID(secID).join('-');
+			console.log(secID)
 			// schedSections is a continually updated array of sections in the current schedule
 			if ($scope.schedSections.indexOf(secID) === -1) { // If the requested section is not scheduled
 				UpdateSchedules.getSchedData(secID).then(function(resp) {
@@ -176,6 +181,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 						return true;
 					}
 				});
+				$scope.$apply();
 			}
 		},
 		Download: function() {
@@ -311,17 +317,10 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	};
 
 	$scope.Notify = promptNotify;
-
-	$scope.$watch('courses', function(val) {
-		PCR($scope.courses); // Calculate and add extra PCR info
-	});
-	$scope.$watch('sections', function(val) {
-		PCR($scope.sections);
-	});
-	$scope.$watch('schedData', function(val) { // When schedData changes
+	$scope.$watch('schedData', function() { // When schedData changes
 		$scope.schedChange();
 	}, true);
-	$scope.$watch('check', function(val){ // When a requirement checkbox is changed
+	$scope.$watch('check', function(){ // When a requirement checkbox is changed
 		$scope.checkArr = [];
 		for (var req in $scope.check) { // Build an array of all checked boxes (length <= 2)
 			if ($scope.check[req]) {$scope.checkArr.push(req);}

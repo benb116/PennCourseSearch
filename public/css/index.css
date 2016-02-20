@@ -216,8 +216,11 @@ form > input[type="text"] {
 	width: 300px;
 	margin-left: 2.5%;
 	text-align: left;
-	overflow-y: scroll;
 	border-top-left-radius: 5px;
+}
+#CourseList > ul {
+	overflow-y: scroll;
+	height: calc(100% - 23px);
 }
 
 #SectionCol {
@@ -374,7 +377,7 @@ ul {
 	box-sizing: border-box;
 	text-align: left;
 	text-indent: 2em;
-	line-height: 3em;0
+	line-height: 3em;
 	overflow: hidden;
 }
 

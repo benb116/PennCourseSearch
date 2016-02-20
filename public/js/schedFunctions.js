@@ -106,15 +106,25 @@ function SpitSched(schedData) {
 			var thiscol         = (colorMap[courseSched[sec].idDashed] || "#E6E6E6"); // Get the color
 			var newid           = courseSched[sec].idDashed+'-'+meetLetterDay+courseSched[sec].meetHour.toString().replace(".", "");
 
-			schedElement.append('<div onclick="angular.element(this).scope().initiateSearch(\''+courseSched[sec].idDashed+'\', \'courseIDSearch\')" class="SchedBlock ' + courseSched[sec].idDashed + ' ' + meetLetterDay + '" id="' + newid + // Each block has three classes: SchedBlock, The courseSched entry, and the weekday. Each block has a unique ID
+			schedElement.append('<div class="SchedBlock ' + courseSched[sec].idDashed + ' ' + meetLetterDay + '" id="' + newid + // Each block has three classes: SchedBlock, The courseSched entry, and the weekday. Each block has a unique ID
 				'" style="top:' + blocktop +
 				'%;left:' + blockleft +
 				'%;width:' + percentWidth +
 				'%;height:' + blockheight +
 				'%;background-color:' + thiscol +
-				'"><div class="CloseX" onclick="angular.element(this).scope().sched.AddRem(\''+courseSched[sec].idDashed+'\')">x</div><span class="SecName">' + blockname + '</span><br><span class="LocName">' + meetRoom + '</span></div>');
+				'"><div class="CloseX">x</div><span class="SecName">' + blockname + '</span><br><span class="LocName">' + meetRoom + '</span></div>');
 
-			$('.SchedBlock').each(function(i) { // Check through each previously added meettime
+			$('#'+newid).click(function() {
+				angular.element(this).scope().initiateSearch($(this).attr('id'), 'courseIDSearch');
+				console.log(this)
+			});
+			$('#'+newid+'> .CloseX').click(function(e) {
+				e.stopPropagation();
+				console.log($(this).parent().attr('id'))
+				angular.element(this).scope().sched.AddRem($(this).parent().attr('id'));
+			});
+
+			$('.SchedBlock').each(function() { // Check through each previously added meettime
 				var thisBlock   = $(this);
 				var oldClasses  = thisBlock.attr('class').split(' ');
 				var oldMeetFull = oldClasses[1]; // Get the courseSched key (so we can get the meetHour and hourLength values)
@@ -139,7 +149,16 @@ function SpitSched(schedData) {
 				}
 			});
 		}}
-	}}
+	}
+	// $('.SchedBlock').click(function(e, elem) {
+	// 	console.log('33')
+	// 	console.log(this);
+	// });
+	// $('.CloseX').click(function(e) {
+	// 	e.stopPropagation();
+	// 	console.log('t')
+	// })
+}
 
 	function TwoOverlap(block1, block2) {
 		// Thank you to Stack Overflow user BC. for the function this is based on.

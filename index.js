@@ -41,7 +41,7 @@ console.log('Express initialized');
 // Set up Keen Analytics
 var client;
 var keenEnable = true;
-if (process.env.KEEN_WRITE_KEY && keenEnable) { // Only log from production 
+if (process.env.KEEN_WRITE_KEY && keenEnable) { // Only log from production
 	console.log('KeenIO logging enabled');
 	client = new Keen({
 		projectId: config.KeenIOID,	// String (required always)
@@ -89,7 +89,6 @@ app.listen(process.env.PORT || 3000, function(){
 });
 
 var currentTerm = '2016A';
-var latestRev = '2015C';
 
 // Handle main page requests
 app.get('/', function(req, res) {
@@ -152,7 +151,7 @@ app.get('/Search', function(req, res) {
 	if (searchType) {
 		baseURL += searchTypes[searchType] + searchParam;
 	}
-	// If we are searching by a certain instructor, the course numbers will be filtered because of searchType 'instSearch'. 
+	// If we are searching by a certain instructor, the course numbers will be filtered because of searchType 'instSearch'.
 	// However, clicking on one of those courses will show all sections, including those not taught by the instructor.
 	// instructFilter is an extra parameter that allows further filtering of section results by instructor.
 	if (instructFilter !== 'all' && typeof instructFilter !== 'undefined') {
@@ -165,12 +164,12 @@ app.get('/Search', function(req, res) {
 	}
 
 	// Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
-	if (searchType	=== 'courseIDSearch' && 
-			resultType	=== 'deptSearch' && 
+	if (searchType	=== 'courseIDSearch' &&
+			resultType	=== 'deptSearch' &&
 			!reqSearch && !proSearch && !actSearch && !includeOpen ) {
 		try {
 			fs.readFile('./2016A/'+searchParam.toUpperCase()+'.json', function (err, data) {
-				if (err) {return res.send([]);}				
+				if (err) {return res.send([]);}
 				return res.send(ParseDeptList(JSON.parse(data)));
 			});
 		} catch(err) {
@@ -264,7 +263,7 @@ function ParseDeptList (res) {
 
 function GetRequirements(section) {
 	var reqList = section.fulfills_college_requirements;
-	var reqCodesList = []; 
+	var reqCodesList = [];
 	try {
 		reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
 		reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
@@ -302,7 +301,7 @@ function parseCourseList(Res) {
 			var reqCodesList = GetRequirements(thisKey);
 			var revData = GetRevData(thisDept, thisNum);
 			coursesList[courseListName] = {
-				'idSpaced': courseListName, 
+				'idSpaced': courseListName,
 				'idDashed': courseListName.replace(/ /g,'-'),
 				'courseTitle': courseTitle,
 				'courseReqs': reqCodesList[0],
@@ -377,16 +376,16 @@ function parseSectionList(Res) {
 				}
 
 				var revData = GetRevData(thisEntry.course_department, thisEntry.course_number, SectionInst);
-			
+
 				if (typeof timeInfo === 'undefined') {
 					timeInfo = '';
 				}
 
 				sectionsList.push({
-					'idDashed': idDashed, 
+					'idDashed': idDashed,
 					'idSpaced': idSpaced,
-					'isOpen': isOpen, 
-					'timeInfo': timeInfo, 
+					'isOpen': isOpen,
+					'timeInfo': timeInfo,
 					'courseTitle': Res[0].course_title,
 					'SectionInst': SectionInst,
 					'actType': actType,
@@ -432,19 +431,19 @@ function parseSectionInfo(Res) {
 		var key;
 		if (entry.recitations.length !== 0) { // If it has recitations
 			asscType = "Recitations";
-			for(key in entry.recitations) { if (entry.recitations.hasOwnProperty(key)) { 
+			for(key in entry.recitations) { if (entry.recitations.hasOwnProperty(key)) {
 					asscList.push(entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id);
 			}}
 
 		} else if (entry.labs.length !== 0) { // If it has labs
 			asscType = "Labs";
-			for(key in entry.labs) { if (entry.labs.hasOwnProperty(key)) { 
+			for(key in entry.labs) { if (entry.labs.hasOwnProperty(key)) {
 					asscList.push(entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id);
 			}}
 
 		} else if (entry.lectures.length !== 0) { // If it has lectures
 			asscType = "Lectures";
-			for(key in entry.lectures) { if (entry.lectures.hasOwnProperty(key)) { 
+			for(key in entry.lectures) { if (entry.lectures.hasOwnProperty(key)) {
 					asscList.push(entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id);
 			}}
 		}
@@ -452,16 +451,16 @@ function parseSectionInfo(Res) {
 		var reqsArray = GetRequirements(entry)[1];
 
 		sectionInfo = {
-			'fullID': FullID, 
+			'fullID': FullID,
 			'CourseID': CourseID,
-			'title': Title, 
-			'instructor': Instructor, 
-			'description': Desc, 
-			'openClose': OpenClose, 
-			'termsOffered': termsOffered, 
-			'prereqs': prereq, 
+			'title': Title,
+			'instructor': Instructor,
+			'description': Desc,
+			'openClose': OpenClose,
+			'termsOffered': termsOffered,
+			'prereqs': prereq,
 			'timeInfo': meetArray,
-			'associatedType': asscType, 
+			'associatedType': asscType,
 			'associatedSections': asscList,
 			'reqsFilled': reqsArray
 		};
@@ -518,7 +517,7 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
 				// This is necessary for classes like PHYS151, which has times: M@13, TR@9, AND R@18
 				var FullID = idDashed+'-'+MeetDays+StartTime.toString().replace(".", "");
 
-				resJSON.push({ 
+				resJSON.push({
 					'fullID': FullID,
 					'idDashed':	 idDashed,
 					'idSpaced': idSpaced,
@@ -531,7 +530,6 @@ function getSchedInfo(JSONString) { // Get the properties required to schedule t
 		}
 		catch (err) {
 			console.log("Error getting times: "+err);
-			var TimeInfo = '';
 		}
 		// console.log(JSON.stringify(resJSON))
 		return resJSON;
@@ -545,7 +543,7 @@ app.post('/Notify', function(req, res) {
 	var secID = req.query.secID;
 	// var formatSecID = secID.replace(/-/g, ' ');
 	var userEmail = req.query.email;
-	
+
 	var schedEvent = {notifySec: secID};
 	logEvent('Notify', schedEvent);
 	request({

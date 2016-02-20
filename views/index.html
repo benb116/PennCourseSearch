@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/index.css" />
 	<link rel="stylesheet" type="text/css" href="/css/plugins/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="/css/plugins/tooltipster.css">
+	<!-- <link rel="stylesheet" type="text/css" href="/css/plugins/shepherd-theme-arrows.css"> -->
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
 
@@ -54,7 +55,7 @@
 				<a rel="leanModal" href="#UploadModal" id="ImportButton">
 					<li>Import</li>
 				</a>
-				
+
 				<li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li>
 				<li ng-click="clearSearch()"><span>Clear Search</span></li>
 			</ul>
@@ -62,11 +63,11 @@
 	</div>
 	<div id="BottomResults">
 		<div id="CourseList">
-			<div ng-show="(courses.length)">
+			<div id="CourseHeader">
 				<span class="PCR Qual tooltip" title="Course quality rating" style="background:rgba(45, 160, 240, 0.85);margin-left:0.45em">Qual</span>
 				<span class="PCR Diff tooltip" title="Course difficult rating" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
 				<span style="margin-left:0.5em;margin-right:0.5em;">Sort by: </span>
-				<select id="sortCourses" ng-model="courseSort" style="margin-bottom:0.5em;">
+				<select id="sortCourses" ng-model="courseSort" style="margin-bottom:0.5em;" onchange="$('#CourseList>ul').scrollTop(0);">
 					<option value="idDashed">Course Number</option>
 					<option value="-revs.cQ">Quality (high to low)</option>
 					<option value="revs.cD">Difficulty (easy to hard)</option>
@@ -97,7 +98,7 @@
 		</div>
 		<div id="SectionCol">
 			<div id="Sections">
-				<div ng-show="sections.length" style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+				<div style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 					<span class="tooltip" title="Section status (open or closed)" style="margin-left:1em;margin-right:-0.2em;">O/C</span>
 					<span class="PCR Inst tooltip" title="Instructor Quality rating" style="background:rgba(46, 204, 113, 0.85);">Inst</span>
 					<span style="display:inline;text-overflow:ellipsis">{{secListTitle}}</span>
@@ -280,7 +281,6 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
 <!-- My code -->
 <script type="text/javascript" src="/js/PCSangular.js"></script>
-<!-- <script type="text/javascript" src="/js/infoModel.js"></script> -->
 <script type="text/javascript" src="/js/functions.js"></script>
 <script type="text/javascript" src="/js/schedFunctions.js"></script>
 <script type="text/javascript" src="/js/factories.js"></script>
@@ -293,6 +293,10 @@
 <script type="text/javascript" src="/js/plugins/jquery.leanModal.min.js"></script>
 <script type="text/javascript" src="/js/plugins/angular-tooltips.min.js"></script>
 <script type="text/javascript" src="/js/plugins/angular-local-storage.min.js"></script>
+<!-- <script type="text/javascript" src="/js/plugins/tether.js"></script>
+<script type="text/javascript" src="/js/plugins/shepherd.min.js"></script>
+
+<script type="text/javascript" src="/js/tour.js"></script> -->
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
