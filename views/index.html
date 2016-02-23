@@ -8,7 +8,6 @@
 	<link rel="stylesheet" type="text/css" href="/css/index.css" />
 	<link rel="stylesheet" type="text/css" href="/css/plugins/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="/css/plugins/tooltipster.css">
-	<!-- <link rel="stylesheet" type="text/css" href="/css/plugins/shepherd-theme-arrows.css"> -->
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
 
@@ -33,7 +32,7 @@
 				<option ng-repeat="schedName in schedules" value="{{schedName}}">{{schedName}}</option>
 			</select>
 			<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>
-			<!-- This only shows if loading is true. Need to use visibility: hidden -->
+			<!-- This only shows if loading == true. Need to use visibility: hidden -->
 		</form>
 		<div id="MenuButtons">
 			<ul>
@@ -56,7 +55,7 @@
 					<li>Import</li>
 				</a>
 
-				<li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li>
+<!-- 				<li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li> -->
 				<li ng-click="clearSearch()"><span>Clear Search</span></li>
 			</ul>
 		</div>
@@ -130,7 +129,7 @@
 							<span class="PCR Inst" style="background:rgba(46, 204, 113, {{ section.pcrIShade }});color: {{ section.pcrIColor }} ">{{ section.revs.cI | number:2}}</span>
 							<i class="fa" ng-class="{'fa-star': starSections.indexOf(section.idDashed) > -1, 'fa-star-o': starSections.indexOf(section.idDashed) === -1}" ng-click="star.AddRem(section.idDashed)"></i>
 							<!-- Show an full star if the section is starred, empty star if not -->
-							<span ng-click="get.SectionInfo(section.idDashed)" style="text-overflow:ellipsis;white-space: nowrap;">{{ section.idSpaced}} - {{ section.timeInfo }} </span>
+							<span class="sectionText" ng-click="get.SectionInfo(section.idDashed)" style="text-overflow:ellipsis;white-space: nowrap;">{{ section.idSpaced}} - {{ section.timeInfo }} </span>
 						</li>
 					</ul>
 				</div>

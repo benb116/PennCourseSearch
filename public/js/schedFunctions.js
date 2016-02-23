@@ -116,11 +116,9 @@ function SpitSched(schedData) {
 
 			$('#'+newid).click(function() {
 				angular.element(this).scope().initiateSearch($(this).attr('id'), 'courseIDSearch');
-				console.log(this)
 			});
 			$('#'+newid+'> .CloseX').click(function(e) {
 				e.stopPropagation();
-				console.log($(this).parent().attr('id'))
 				angular.element(this).scope().sched.AddRem($(this).parent().attr('id'));
 			});
 

@@ -94,7 +94,7 @@ var currentTerm = '2016A';
 app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname+'/views/index.html'));
 });
-
+// Handle status requests. This lets the admin disseminate info if necessary
 app.get('/Status', function(req, res) {
 	res.send('hakol beseder');
 });
@@ -163,10 +163,8 @@ app.get('/Search', function(req, res) {
 		logEvent('Search', searchEvent);
 	}
 
-	// Instead of searching the API for department-wide queries (which are very slow), get the preloaded results from the DB
-	if (searchType	=== 'courseIDSearch' &&
-			resultType	=== 'deptSearch' &&
-			!reqSearch && !proSearch && !actSearch && !includeOpen ) {
+	// It's much faster to access pre-fetched department data than to poll the API for dozens of classes
+	if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !reqSearch && !proSearch && !actSearch && !includeOpen ) {
 		try {
 			fs.readFile('./2016A/'+searchParam.toUpperCase()+'.json', function (err, data) {
 				if (err) {return res.send([]);}
@@ -175,10 +173,10 @@ app.get('/Search', function(req, res) {
 		} catch(err) {
 			return res.send('');
 		}
-	} else {
+	} else { // Otherwise, ask the API for data
 		request({
 			uri: baseURL,
-			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
+			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
 		}, function(error, response, body) {
 
 			if (error) {
@@ -187,12 +185,6 @@ app.get('/Search', function(req, res) {
 			}
 
 			var parsedRes, rawResp = {};
-			// console.log(body)
-			// try {
-			//	 parsedRes = JSON.parse(body.result_data);
-			// } catch(err) {
-			//	 return res.send("Can't parse JSON response");
-			// }
 			try {
 				rawResp = JSON.parse(body);
 			} catch(err) {
@@ -224,27 +216,14 @@ app.get('/Search', function(req, res) {
 	}
 });
 
-var reqCodes = {
-	Society: "MDS",
-	History: "MDH",
-	Arts: "MDA",
-	Humanities: "MDO",
-	Living: "MDL",
-	Physical: "MDP",
-	Natural: "MDN",
-	Writing: "MWC",
-	College: "MQS",
-	Formal: "MFR",
-	Cross: "MC1",
-	Cultural: "MC2"
-};
-
 function GetRevData (dept, num, inst) {
-	var deptData = allRevs[dept];
+	// Given a department, course number, and instructor (optional), get back the three rating values
+	var deptData = allRevs[dept]; // Get dept level ratings
 	var thisRevData = {"cQ": 0, "cD": 0, "cI": 0};
 	if (deptData) {
-		var revData = deptData[num];
+		var revData = deptData[num]; // Get course level ratings
 		if (revData) {
+			// Try to get instructor specific reviews, but fallback to course reviews
 			thisRevData = (revData[(inst || '').toUpperCase()] || revData.Total);
 		}
 	}
@@ -261,27 +240,48 @@ function ParseDeptList (res) {
 	return res;
 }
 
+// The requirement name -> code map
+var reqCodes = {
+	Society: "MDS",
+	History: "MDH",
+	Arts: "MDA",
+	Humanities: "MDO",
+	Living: "MDL",
+	Physical: "MDP",
+	Natural: "MDN",
+	Writing: "MWC",
+	College: "MQS",
+	Formal: "MFR",
+	Cross: "MC1",
+	Cultural: "MC2"
+};
+
 function GetRequirements(section) {
+	// College requirements are not uniform throughout the api :(
+	// This goes through the various ways they could be listed
+	// It can also deal with double counted classes.
+	// reqList is an array of names. recCodesList is an array of codes
 	var reqList = section.fulfills_college_requirements;
 	var reqCodesList = [];
 	try {
+		// Try to map any requirement name to its code by checking the first word
 		reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
 		reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
 	} catch(err) {}
+
 	var extraReq = section.important_notes;
 	var extraReqCode;
 	for (var i = 0; i < extraReq.length; i++) {
-		extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
+		extraReqCode = reqCodes[extraReq[i].split(" ")[0]]; // Try to map an extra requirement name to its code
 		if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
-			// reqList.push(extraReq[i]);
-			reqCodesList.push(extraReqCode);
+			reqCodesList.push(extraReqCode); // Add it if it's a valid code
 		} else if (section.requirements[0]) {
-			if (section.requirements[0].registration_control_code === 'MDB') {
+			if (section.requirements[0].registration_control_code === 'MDB') { // A weird thing where a class fulfills two sector reqs
 					reqCodesList.push('MDO');
 					reqCodesList.push('MDN');
 			}
 		}
-		if (extraReq[i].split(" ")[0] !== "Registration") {
+		if (extraReq[i].split(" ")[0] !== "Registration") { // Add the names of the requirements
 			reqList.push(extraReq[i]);
 		}
 	}
@@ -320,31 +320,29 @@ function getTimeInfo (JSONObj) { // A function to retrieve and format meeting ti
 	var OCStatus = JSONObj.course_status;
 	var isOpen;
 	if (OCStatus === "O") {
-		isOpen = true; // If section is open, add class open
+		isOpen = true;
 	} else {
-		isOpen = false; // Otherwise make it gray
+		isOpen = false;
 	}
 	var TimeInfo = [];
 	try { // Not all sections have time info
-		for(var meeting in JSONObj.meetings) {
-			if (JSONObj.meetings.hasOwnProperty(meeting)) {
-				// Some sections have multiple meeting forms (I'm looking at you PHYS151)
-				var thisMeet = JSONObj.meetings[meeting];
-				var StartTime		 = thisMeet.start_time.split(" ")[0]; // Get start time
-				var EndTime		 = thisMeet.end_time.split(" ")[0];
+		for(var meeting in JSONObj.meetings) { if (JSONObj.meetings.hasOwnProperty(meeting)) {
+			// Some sections have multiple meeting forms (I'm looking at you PHYS151)
+			var thisMeet = JSONObj.meetings[meeting];
+			var StartTime		 = thisMeet.start_time.split(" ")[0]; // Get start time
+			var EndTime		 = thisMeet.end_time.split(" ")[0];
 
-				if (StartTime[0] === '0') {
-					StartTime = StartTime.slice(1);
-				} // If it's 08:00, make it 8:00
-				if (EndTime[0] === '0') {
-					EndTime = EndTime.slice(1);
-				}
-
-				var MeetDays = thisMeet.meeting_days; // Output like MWF or TR
-				var meetListInfo = StartTime+" to "+EndTime+" on "+MeetDays;
-				TimeInfo.push(meetListInfo);
+			if (StartTime[0] === '0') {
+				StartTime = StartTime.slice(1);
+			} // If it's 08:00, make it 8:00
+			if (EndTime[0] === '0') {
+				EndTime = EndTime.slice(1);
 			}
-		}
+
+			var MeetDays = thisMeet.meeting_days; // Output like MWF or TR
+			var meetListInfo = StartTime+" to "+EndTime+" on "+MeetDays;
+			TimeInfo.push(meetListInfo);
+		}}
 	}
 	catch (err) {
 		// console.log(("Error getting times" + JSONObj.section_id).red);

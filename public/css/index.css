@@ -273,7 +273,7 @@ ul {
 }
 
 #CourseList li,
-#SectionList li,
+.sectionText,
 #SectionInfo li {
 	cursor: pointer;
 }
@@ -360,7 +360,7 @@ ul {
 	min-width: 500px;
 	height: 10em;
 	margin-bottom: 1em;
-	display: none;
+	/*display: none;*/
 	background-color: white;
 	border-radius: 5px;
 	vertical-align: top;
@@ -371,13 +371,15 @@ ul {
 	background-color: white;
 	width: 48%;
 	display: inline-block;
+	vertical-align: top;
 }
 
 .FilterBlock {
 	box-sizing: border-box;
 	text-align: left;
 	text-indent: 2em;
-	line-height: 3em;
+	line-height: 2.5em;
+	margin-bottom: 1em;
 	overflow: hidden;
 }
 
