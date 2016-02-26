@@ -14,18 +14,34 @@ try {
 // Connect to database
 // var db = mongojs('mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', ["Students", "Courses2015C", "NewReviews"]);
 
-var currentTerm = '2016A';
+var currentTerm = '2016C';
 var deptList = ['AAMW', 'ACCT', 'AFRC', 'AFST', 'ALAN', 'AMCS', 'ANCH', 'ANEL', 'ANTH', 'ARAB', 'ARCH', 'ARTH', 'ASAM', 'ASTR', 'BCHE', 'BE', 'BENG', 'BEPP', 'BFMD', 'BIBB', 'BIOE', 'BIOL', 'BIOM', 'BMB', 'BSTA', 'CAMB', 'CBE', 'CHEM', 'CHIN', 'CINE', 'CIS', 'CIT', 'CLST', 'COLL', 'COML', 'COMM', 'CPLN', 'CRIM', 'DCOH', 'DEMG', 'DEND', 'DENT', 'DOMD', 'DORT', 'DOSP', 'DPED', 'DPRD', 'DPTH', 'DRAD', 'DRST', 'DTCH', 'DYNM', 'EALC', 'EAS', 'ECON', 'EDCE', 'EDUC', 'EEUR', 'ENGL', 'ENGR', 'ENM', 'ENMG', 'ENVS', 'EPID', 'ESE', 'FNAR', 'FNCE', 'FOLK', 'FREN', 'GAFL', 'GAS', 'GCB', 'GEOL', 'GREK', 'GRMN', 'GSWS', 'GUJR', 'HCMG', 'HEBR', 'HIND', 'HIST', 'HPR', 'HSOC', 'HSPV', 'HSSC', 'IMUN', 'INTG', 'INTL', 'INTR', 'INTS', 'IPD', 'ITAL', 'JPAN', 'JWST', 'KORN', 'LALS', 'LARP', 'LATN', 'LAW', 'LGIC', 'LGST', 'LING', 'LSMP', 'MATH', 'MCS', 'MEAM', 'MED', 'MGMT', 'MKTG', 'MLA', 'MLYM', 'MMP', 'MSCI', 'MSE', 'MSSP', 'MTR', 'MUSA', 'MUSC', 'NANO', 'NELC', 'NETS', 'NGG', 'NPLD', 'NSCI', 'NURS', 'OIDD', 'PERS', 'PHIL', 'PHRM', 'PHYS', 'PPE', 'PREC', 'PRTG', 'PSCI', 'PSYC', 'PSYS', 'PUBH', 'PUNJ', 'REAL', 'REG', 'RELS', 'ROML', 'RUSS', 'SAST', 'SCND', 'SKRT', 'SLAV', 'SOCI', 'SPAN', 'STAT', 'STSC', 'SWRK', 'TAML', 'TELU', 'THAR', 'TURK', 'URBS', 'URDU', 'VBMS', 'VCSN', 'VCSP', 'VIPR', 'VISR', 'VLST', 'VMED', 'VPTH', 'WH', 'WHCP', 'WHG', 'WRIT', 'YDSH'];
 var maxIndex = deptList.length;
 
-var source = process.argv[2].toLowerCase();
-var index = Number(process.argv[3]);
+// The requirement name -> code map
+var reqCodes = {
+	Society: "MDS",
+	History: "MDH",
+	Arts: "MDA",
+	Humanities: "MDO",
+	Living: "MDL",
+	Physical: "MDP",
+	Natural: "MDN",
+	Writing: "MWC",
+	College: "MQS",
+	Formal: "MFR",
+	Cross: "MC1",
+	Cultural: "MC2"
+};
+
+var source = process.argv[2].toLowerCase(); // registrar or review
+var index = Number(process.argv[3]); // Can be a number or a dept code
 var endindex;
 try {
-	endindex = Number(process.argv[4]) + 1;
+	endindex = Number(process.argv[4]) + 1; // If there's a second number, end at that number
 } catch(err) {}
 var limit = false;
-if (isNaN(index)) {
+if (isNaN(index)) { // If we're doing a specific department
 	limit = 1;
 	index = deptList.indexOf(process.argv[3].toUpperCase());
 }
@@ -50,22 +66,6 @@ if (source === 'registrar') {
 	}
 }
 return "done";
-
-// The requirement name -> code map
-var reqCodes = {
-	Society: "MDS",
-	History: "MDH",
-	Arts: "MDA",
-	Humanities: "MDO",
-	Living: "MDL",
-	Physical: "MDP",
-	Natural: "MDN",
-	Writing: "MWC",
-	College: "MQS",
-	Formal: "MFR",
-	Cross: "MC1",
-	Cultural: "MC2"
-};
 
 function PullRegistrar(index) {
 	var thedept = deptList[index];
@@ -119,20 +119,6 @@ function PullRegistrar(index) {
 }
 
 function GetRequirements(section) {
-	var reqCodes = {
-		Society: "MDS",
-		History: "MDH",
-		Arts: "MDA",
-		Humanities: "MDO",
-		Living: "MDL",
-		Physical: "MDP",
-		Natural: "MDN",
-		Writing: "MWC",
-		College: "MQS",
-		Formal: "MFR",
-		Cross: "MC1",
-		Cultural: "MC2"
-	};
   var reqList = section.fulfills_college_requirements;
   var reqCodesList = []; 
   try {
@@ -219,9 +205,10 @@ function PullReview(index) {
 				var instSumD = 0;
 				var instSumI = 0;
 				for (var review in resp[course][inst]) { if (resp[course][inst].hasOwnProperty(review)) {
-					instSumQ += resp[course][inst][review].cQ;
-					instSumD += resp[course][inst][review].cD;
-					instSumI += resp[course][inst][review].cI;
+					var thisrev = resp[course][inst][review];
+					instSumQ += thisrev.cQ;
+					instSumD += thisrev.cD;
+					instSumI += thisrev.cI;
 					revcount++;
 				}}
 				// Get average ratings for each instructor for a given class
@@ -237,6 +224,7 @@ function PullReview(index) {
 				courseSumD += instSumD;
 				courseSumI += instSumI;
 			}}
+			if (!revcount) {revcount = 1;}
 			// Get average of average instructor ratings for a given class
 			var courseAvgQual = Math.round(100 * courseSumQ / revcount) /100;
 			var courseAvgDiff = Math.round(100 * courseSumD / revcount) /100;

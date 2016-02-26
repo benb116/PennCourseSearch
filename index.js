@@ -88,7 +88,7 @@ app.listen(process.env.PORT || 3000, function(){
 	}
 });
 
-var currentTerm = '2016A';
+var currentTerm = '2016C';
 
 // Handle main page requests
 app.get('/', function(req, res) {
@@ -166,7 +166,7 @@ app.get('/Search', function(req, res) {
 	// It's much faster to access pre-fetched department data than to poll the API for dozens of classes
 	if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !reqSearch && !proSearch && !actSearch && !includeOpen ) {
 		try {
-			fs.readFile('./2016A/'+searchParam.toUpperCase()+'.json', function (err, data) {
+			fs.readFile('./'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
 				if (err) {return res.send([]);}
 				return res.send(ParseDeptList(JSON.parse(data)));
 			});
