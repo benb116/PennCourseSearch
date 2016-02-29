@@ -97,10 +97,6 @@ function PullRegistrar(index) {
 					'courseReqs': reqCodesList
 				};
 			}
-			if (key === inJSON.length - 1) {
-
-				
-			}
 		}}
 		var arrResp = [];
 		for (key in resp) { if (resp.hasOwnProperty(key)) {

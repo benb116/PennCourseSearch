@@ -64,7 +64,7 @@
 		<div id="CourseList">
 			<div id="CourseHeader">
 				<span class="PCR Qual tooltip" title="Course quality rating" style="background:rgba(45, 160, 240, 0.85);margin-left:0.45em">Qual</span>
-				<span class="PCR Diff tooltip" title="Course difficult rating" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
+				<span class="PCR Diff tooltip" title="Course difficulty rating" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
 				<span style="margin-left:0.5em;margin-right:0.5em;">Sort by: </span>
 				<select id="sortCourses" ng-model="courseSort" style="margin-bottom:0.5em;" onchange="$('#CourseList>ul').scrollTop(0);">
 					<option value="idDashed">Course Number</option>
@@ -118,13 +118,14 @@
 							<i class="fa" ng-class="{'fa-plus': schedSections.indexOf(section.idDashed) === -1, 'fa-times': schedSections.indexOf(section.idDashed) > -1}" ng-click="sched.AddRem(section.idDashed)"></i>
 							<!-- The icon should be a + if the section is not currently scheduled and an x if it is -->
 							<span class="statusClass" ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}">
-								<!-- the status square should be green if the section is open, red if it's closed -->
+							<!-- the status square should be green if the section is open, red if it's closed -->
 
 								<i class="fa fa-envelope tooltip" 
-								ng-show="!section.isOpen" 
+								ng-hide="section.isOpen" 
 								ng-click="Notify(section.idDashed)" 
-								title="PennCourseNotify"></i></span>
+								title="PennCourseNotify"></i>
 								<!-- If the section is closed, show the notify icon -->
+							</span>
 							<!-- <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span> -->
 							<span class="PCR Inst" style="background:rgba(46, 204, 113, {{ section.pcrIShade }});color: {{ section.pcrIColor }} ">{{ section.revs.cI | number:2}}</span>
 							<i class="fa" ng-class="{'fa-star': starSections.indexOf(section.idDashed) > -1, 'fa-star-o': starSections.indexOf(section.idDashed) === -1}" ng-click="star.AddRem(section.idDashed)"></i>
@@ -161,29 +162,29 @@
 									the total number of checked boxes is >= 2
 								This prevents a user from selecting more than two filters
 							-->
-							<input type="checkbox" ng-disabled="(!check.MDS && checkArr.length >= 2)" ng-model="check.MDS" value="MDS">Society Sector
+							<input type="checkbox" ng-disabled="(!check.MDS && checkArr.length >= 2)" ng-model="check.MDS" ng-change="reqChange()" value="MDS">Society Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDH && checkArr.length >= 2)" ng-model="check.MDH" value="MDH">History &amp; Tradition Sector
+							<input type="checkbox" ng-disabled="(!check.MDH && checkArr.length >= 2)" ng-model="check.MDH" ng-change="reqChange()" value="MDH">History &amp; Tradition Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDA && checkArr.length >= 2)" ng-model="check.MDA" value="MDA">Arts &amp; Letters Sector
+							<input type="checkbox" ng-disabled="(!check.MDA && checkArr.length >= 2)" ng-model="check.MDA" ng-change="reqChange()" value="MDA">Arts &amp; Letters Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDO && checkArr.length >= 2)" ng-model="check.MDO" value="MDO">Humanities &amp; Social Science Sector
+							<input type="checkbox" ng-disabled="(!check.MDO && checkArr.length >= 2)" ng-model="check.MDO" ng-change="reqChange()" value="MDO">Humanities &amp; Social Science Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDL && checkArr.length >= 2)" ng-model="check.MDL" value="MDL">Living World Sector
+							<input type="checkbox" ng-disabled="(!check.MDL && checkArr.length >= 2)" ng-model="check.MDL" ng-change="reqChange()" value="MDL">Living World Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDP && checkArr.length >= 2)" ng-model="check.MDP" value="MDP">Physical World Sector
+							<input type="checkbox" ng-disabled="(!check.MDP && checkArr.length >= 2)" ng-model="check.MDP" ng-change="reqChange()" value="MDP">Physical World Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDN && checkArr.length >= 2)" ng-model="check.MDN" value="MDN">Natural Science &amp; Math Sector
+							<input type="checkbox" ng-disabled="(!check.MDN && checkArr.length >= 2)" ng-model="check.MDN" ng-change="reqChange()" value="MDN">Natural Science &amp; Math Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MWC && checkArr.length >= 2)" ng-model="check.MWC" value="MWC">Writing Requirement
+							<input type="checkbox" ng-disabled="(!check.MWC && checkArr.length >= 2)" ng-model="check.MWC" ng-change="reqChange()" value="MWC">Writing Requirement
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MQS && checkArr.length >= 2)" ng-model="check.MQS" value="MQS">College Quantitative Data Analysis Req.
+							<input type="checkbox" ng-disabled="(!check.MQS && checkArr.length >= 2)" ng-model="check.MQS" ng-change="reqChange()" value="MQS">College Quantitative Data Analysis Req.
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MFR && checkArr.length >= 2)" ng-model="check.MFR" value="MFR">Formal Reasoning Course
+							<input type="checkbox" ng-disabled="(!check.MFR && checkArr.length >= 2)" ng-model="check.MFR" ng-change="reqChange()" value="MFR">Formal Reasoning Course
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MC1 && checkArr.length >= 2)" ng-model="check.MC1" value="MC1">Cross Cultural Analysis
+							<input type="checkbox" ng-disabled="(!check.MC1 && checkArr.length >= 2)" ng-model="check.MC1" ng-change="reqChange()" value="MC1">Cross Cultural Analysis
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MC2 && checkArr.length >= 2)" ng-model="check.MC2" value="MC2">Cultural Diversity in the US
+							<input type="checkbox" ng-disabled="(!check.MC2 && checkArr.length >= 2)" ng-model="check.MC2" ng-change="reqChange()" value="MC2">Cultural Diversity in the US
 						</div>
 					</div>
 				</div>

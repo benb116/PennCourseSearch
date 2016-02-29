@@ -164,9 +164,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	$scope.sched = {
 		AddRem: function(secID) {
 			secID = FormatID(secID).join('-');
-			console.log(secID)
-			console.log($scope.schedSections)
-			console.log($scope.currentSched)
 
 			// schedSections is a continually updated array of sections in the current schedule
 			if ($scope.schedSections.indexOf(secID) === -1) { // If the requested section is not scheduled
@@ -178,7 +175,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			} else {
 				// Filter out meeting objects whose corresponding sectionID is the requested section
 				var oldData = $scope.schedData[$scope.currentSched].meetings;
-				console.log(oldData)
 				var newData = oldData.filter(function(item) {
 					if (item.idDashed === secID) {
 						return false;
@@ -186,7 +182,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 						return true;
 					}
 				});
-				console.log(newData)
 				$scope.schedData[$scope.currentSched].meetings = newData;
 				$scope.$apply();
 			}
@@ -323,11 +318,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		}
 	};
 
-	$scope.Notify = promptNotify;
-	$scope.$watch('schedData', function() { // When schedData changes
-		$scope.schedChange();
-	}, true);
-	$scope.$watch('check', function(){ // When a requirement checkbox is changed
+	$scope.reqChange = function () {
 		$scope.checkArr = [];
 		for (var req in $scope.check) { // Build an array of all checked boxes (length <= 2)
 			if ($scope.check[req]) {$scope.checkArr.push(req);}
@@ -337,6 +328,11 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
 		}
 		// Otherwise the filtering in the view will take care of hiding and showing the corrent courses
+	};
+
+	$scope.Notify = promptNotify;
+	$scope.$watch('schedData', function() { // When schedData changes
+		$scope.schedChange();
 	}, true);
 	$scope.$watch(function() { // If there are any unresolved HTTP requests, show the loading spinner
 		return $http.pendingRequests.length;
