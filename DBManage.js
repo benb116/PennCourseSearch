@@ -151,6 +151,7 @@ function PullReview(index) {
 	}, function(error, response, body) {
 		console.log('Received');
 		var deptReviews = JSON.parse(body).result.values;
+		console.log(deptReviews);
 		var resp = {};
 		for(var rev in deptReviews) { if(deptReviews.hasOwnProperty(rev)) {
 	  // Iterate through each review

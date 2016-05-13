@@ -188,13 +188,13 @@ app.get('/Search', function(req, res) {
 			try {
 				rawResp = JSON.parse(body);
 			} catch(err) {
-				console.log(err);
+				console.log('Resp parse error' + err);
 				return res.send({});
 			}
 
 			try {
 				if (rawResp.service_meta.error_text) {
-					console.log(rawResp.service_meta.error_text);
+					console.log('Resp Err:' + rawResp.service_meta.error_text);
 					pusher.note(pushDeviceID, rawResp.service_meta.error_text);
 				}
 				parsedRes = rawResp.result_data;
