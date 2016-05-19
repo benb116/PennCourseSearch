@@ -418,7 +418,7 @@ function parseSectionInfo(Res) {
 		var termsOffered  = entry.course_terms_offered;
 
 		var OpenClose;
-		if (StatusClass === "OpenSec") {
+		if (StatusClass) {
 			OpenClose = 'Open';
 		} else {
 			OpenClose = 'Closed';
