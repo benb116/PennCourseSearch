@@ -138,6 +138,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			this.Title();
 		},
 		Show: function() {
+			ga('send', 'event', 'UI interaction', 'show-stars');
 			$scope.currentCourse = false;
 			$scope.sections = [];
 			$scope.sectionInfo = {};
@@ -319,6 +320,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	};
 
 	$scope.reqChange = function () {
+		ga('send', 'event', 'UI interaction', 'requirement');
 		$scope.checkArr = [];
 		for (var req in $scope.check) { // Build an array of all checked boxes (length <= 2)
 			if ($scope.check[req]) {$scope.checkArr.push(req);}
