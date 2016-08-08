@@ -96,7 +96,15 @@ app.get('/', function(req, res) {
 });
 // Handle status requests. This lets the admin disseminate info if necessary
 app.get('/Status', function(req, res) {
-	res.send('hakol beseder');
+	var statustext = 'hakol beseder';
+	// Penn InTouch often is refreshing data between 1:00 AM and 3:00 AM, which renders the API useless.
+	// This is just letting the user know.
+	var now = new Date();
+	var hour = now.getHours();
+	if (hour >= 1 && hour < 3) {
+		statustext = "Penn InTouch sometimes screws up around this time of night, which can cause problems with PennCourseSearch. <br> Sorry in advance.";
+	}
+	res.send(statustext);
 });
 
 var searchTypes = {
@@ -196,6 +204,8 @@ app.get('/Search', function(req, res) {
 				if (rawResp.service_meta.error_text) {
 					console.log('Resp Err:' + rawResp.service_meta.error_text);
 					pusher.note(pushDeviceID, rawResp.service_meta.error_text);
+					res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
+					return res.send(rawResp.service_meta.error_text);
 				}
 				parsedRes = rawResp.result_data;
 			} catch(err) {

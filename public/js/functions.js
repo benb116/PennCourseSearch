@@ -58,13 +58,21 @@ $(document).ready(function() {
 function ErrorAlert(err) {
 	// Shows an error dialog and logs the error to the console
 	// Also includes the error report in an email that can be sent to Ben
-	console.log(err);
-	sweetAlert({
-		title: '#awkward',
-		html: true,
-		text: 'An error occurred. Refresh or <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!&body=Error%20message:%20' + encodeURIComponent(JSON.stringify(err)) + '">email Ben</a>',
-		type: 'error'
-	});
+	if (err.status === 512) {
+		sweetAlert({
+			title: '#awkward',
+			html: true,
+			text: "PennInTouch is refreshing, so we can't access class info :(  <br> Please frustratedly wait about half an hour before trying again." ,
+			type: 'error'
+		});
+	} else {
+		sweetAlert({
+			title: '#awkward',
+			html: true,
+			text: 'An error occurred. Refresh or <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!&body=Error%20message:%20' + encodeURIComponent(JSON.stringify(err)) + '">email Ben</a>',
+			type: 'error'
+		});
+	}
 }
 
 function Uniquify(str, arr) {

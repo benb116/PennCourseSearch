@@ -5,7 +5,7 @@ var PCS = angular.module('PCSApp', ['LocalStorageModule', '720kb.tooltips']);
 */
 
 PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules){
-
+	var currentTerm = '2016C';
 	var placeholderMap = {
 		'courseIDSearch': 'Search for a department, course, or section',
 		'keywordSearch': 'Search by course title or description',
@@ -41,7 +41,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	// If there's no schedule data
 	if (!$scope.schedData || !Object.keys($scope.schedData).length) {
 		$scope.schedData = {};
-		$scope.schedData.Schedule = new Schedule('2016C'); // see functions.js for the Schedule constructor
+		$scope.schedData.Schedule = new Schedule(currentTerm); // see functions.js for the Schedule constructor
 	}
 
 	$scope.starSections = ($scope.starSections || []);
@@ -214,7 +214,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 				} else if (inputValue !== Uniquify(inputValue, $scope.schedules)) { // If the user put in a name that already exists
 					sweetAlert.showInputError('Your schedule needs a unique name (e.g. "Seven")');
 				} else {
-					$scope.schedData[inputValue] = new Schedule('2016C');
+					$scope.schedData[inputValue] = new Schedule(currentTerm);
 					$scope.currentSched = inputValue;
 					sweetAlert.close();
 				}
@@ -270,7 +270,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 				confirmButtonText: "Yes",
 				closeOnConfirm: false
 			}, function() {
-				$scope.schedData[$scope.currentSched] = new Schedule('2016C');
+				$scope.schedData[$scope.currentSched] = new Schedule(currentTerm);
 				$scope.$apply();
 				sweetAlert({
 					title: "Your schedule has been cleared.",
@@ -291,7 +291,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			}, function() {
 				delete $scope.schedData[$scope.currentSched];
 				if (!Object.keys($scope.schedData).length) { // If there are no schedules, create a blank one.
-					$scope.schedData.Schedule = new Schedule('2016C');
+					$scope.schedData.Schedule = new Schedule(currentTerm);
 				}
 				$scope.currentSched = Object.keys($scope.schedData)[Object.keys($scope.schedData).length-1]; // Set currentSched to the last schedule in the list
 				$scope.$apply();
@@ -307,7 +307,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		},
 		Import: function() {
 			var schedName = Uniquify('Imported', $scope.schedules);
-			$scope.schedData[schedName] = new Schedule('2016C');
+			$scope.schedData[schedName] = new Schedule(currentTerm);
 			$scope.currentSched = schedName;
 			$scope.schedSections = [];
 			$('#secsToImport > input:checked').each(function() {
