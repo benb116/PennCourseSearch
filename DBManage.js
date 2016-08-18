@@ -77,40 +77,44 @@ function PullRegistrar(index) {
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}
 	}, function(error, response, body) {
 		console.log('Received', thedept);
-		var inJSON = JSON.parse(body).result_data; // Convert to JSON object
+		if (!error && body) {
+			var inJSON = JSON.parse(body).result_data; // Convert to JSON object
 
-		var resp = {};
-		for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
-			// For each section that comes up
-			// Get course name (e.g. CIS 120)
-			var thisKey = inJSON[key];
-			// var spacedName = thisKey.section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' ');
-			var idSpaced = thisKey.course_department + ' ' + thisKey.course_number;
-			var idDashed = idSpaced.replace(' ', '-');
-			if (!thisKey.is_cancelled && !resp[idSpaced]) {
-				var reqCodesList = GetRequirements(thisKey)[0];
-				
-				resp[idSpaced] = {
-					'idDashed': idDashed,
-					'idSpaced': idSpaced,
-					'courseTitle': thisKey.course_title,
-					'courseReqs': reqCodesList
-				};
-			}
-		}}
-		var arrResp = [];
-		for (key in resp) { if (resp.hasOwnProperty(key)) {
-			arrResp.push(resp[key]);
-		}}
-		// At the end of the list
-		fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(arrResp), function (err) {
-			// Write JSON to file
-			if (err) {
-				console.log(index+' '+thedept+' '+err);
-			} else {
-				console.log(('List Spit: '+index+' '+thedept));
-			}
-		});
+			var resp = {};
+			for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
+				// For each section that comes up
+				// Get course name (e.g. CIS 120)
+				var thisKey = inJSON[key];
+				// var spacedName = thisKey.section_id_normalized.replace('-', " ").split('-')[0].replace(/   /g, ' ').replace(/  /g, ' ');
+				var idSpaced = thisKey.course_department + ' ' + thisKey.course_number;
+				var idDashed = idSpaced.replace(' ', '-');
+				if (!thisKey.is_cancelled && !resp[idSpaced]) {
+					var reqCodesList = GetRequirements(thisKey)[0];
+					
+					resp[idSpaced] = {
+						'idDashed': idDashed,
+						'idSpaced': idSpaced,
+						'courseTitle': thisKey.course_title,
+						'courseReqs': reqCodesList
+					};
+				}
+			}}
+			var arrResp = [];
+			for (key in resp) { if (resp.hasOwnProperty(key)) {
+				arrResp.push(resp[key]);
+			}}
+			// At the end of the list
+			fs.writeFile('./'+currentTerm+'/'+thedept+'.json', JSON.stringify(arrResp), function (err) {
+				// Write JSON to file
+				if (err) {
+					console.log(index+' '+thedept+' '+err);
+				} else {
+					console.log(('List Spit: '+index+' '+thedept));
+				}
+			});
+		} else {
+			console.log('request error: ' + thedept)
+		}
 	});
 }
 
@@ -151,7 +155,6 @@ function PullReview(index) {
 	}, function(error, response, body) {
 		console.log('Received');
 		var deptReviews = JSON.parse(body).result.values;
-		console.log(deptReviews);
 		var resp = {};
 		for(var rev in deptReviews) { if(deptReviews.hasOwnProperty(rev)) {
 	  // Iterate through each review

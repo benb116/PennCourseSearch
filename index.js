@@ -97,11 +97,11 @@ app.get('/', function(req, res) {
 // Handle status requests. This lets the admin disseminate info if necessary
 app.get('/Status', function(req, res) {
 	var statustext = 'hakol beseder';
-	// Penn InTouch often is refreshing data between 1:00 AM and 3:00 AM, which renders the API useless.
+	// Penn InTouch often is refreshing data between 1:00 AM and 5:00 AM, which renders the API useless.
 	// This is just letting the user know.
 	var now = new Date();
 	var hour = now.getHours();
-	if (hour >= 1 && hour < 3) {
+	if (hour >= 1 && hour < 5) {
 		statustext = "Penn InTouch sometimes screws up around this time of night, which can cause problems with PennCourseSearch. <br> Sorry in advance.";
 	}
 	res.send(statustext);
