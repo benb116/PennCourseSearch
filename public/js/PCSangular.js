@@ -169,9 +169,11 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			// schedSections is a continually updated array of sections in the current schedule
 			if ($scope.schedSections.indexOf(secID) === -1) { // If the requested section is not scheduled
 				UpdateSchedules.getSchedData(secID).then(function(resp) {
-						var oldData = $scope.schedData[$scope.currentSched].meetings;
-						var newData = oldData.concat(resp.data); // Combine old meetings and new meetings
-						$scope.schedData[$scope.currentSched].meetings = newData;
+						if (resp.data) {
+							var oldData = $scope.schedData[$scope.currentSched].meetings;
+							var newData = oldData.concat(resp.data); // Combine old meetings and new meetings
+							$scope.schedData[$scope.currentSched].meetings = newData;
+						}
 					});
 			} else {
 				// Filter out meeting objects whose corresponding sectionID is the requested section

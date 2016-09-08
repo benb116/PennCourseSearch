@@ -487,7 +487,33 @@ app.get('/Sched', function(req, res) {
 		uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
 	}, function(error, response, body) {
-		var resJSON = getSchedInfo(body); // Format the response
+		if (error) {
+			console.log('OpenData Request failed:', error);
+			return res.send('PCSERROR: request failed');
+		}
+
+		var parsedRes, rawResp = {};
+		try {
+			rawResp = JSON.parse(body);
+		} catch(err) {
+			console.log('Resp parse error - ' + err);
+			return res.send(undefined);
+		}
+
+		try {
+			if (rawResp.service_meta.error_text) {
+				console.log('Resp Err:' + rawResp.service_meta.error_text);
+				pusher.note(pushDeviceID, rawResp.service_meta.error_text);
+				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
+				return res.send(rawResp.service_meta.error_text);
+			}
+			parsedRes = rawResp;
+		} catch(err) {
+			console.log(err);
+			res.statusCode = 500;
+			return res.send(err);
+		}
+		var resJSON = getSchedInfo(parsedRes.result_data[0]); // Format the response
 		// for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
 		//	 SchedCourses[JSONSecID] = resJSON[JSONSecID];
 		// }}
@@ -498,9 +524,7 @@ app.get('/Sched', function(req, res) {
 	// }
 });
 
-function getSchedInfo(JSONString) { // Get the properties required to schedule the section
-	var Res = JSON.parse(JSONString); // Convert to JSON Object
-	var entry = Res.result_data[0];
+function getSchedInfo(entry) { // Get the properties required to schedule the section
 	try {
 		var idDashed	 = entry.section_id_normalized.replace(/ /g, ""); // Format ID
 		var idSpaced = idDashed.replace(/-/g, ' ');
