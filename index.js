@@ -88,7 +88,7 @@ app.listen(process.env.PORT || 3000, function(){
 	}
 });
 
-var currentTerm = '2016C';
+var currentTerm = '2017A';
 
 // Handle main page requests
 app.get('/', function(req, res) {

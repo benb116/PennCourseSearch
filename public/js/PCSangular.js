@@ -5,7 +5,7 @@ var PCS = angular.module('PCSApp', ['LocalStorageModule', '720kb.tooltips']);
 */
 
 PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules){
-	var currentTerm = '2016C';
+	var currentTerm = '2017A';
 	var placeholderMap = {
 		'courseIDSearch': 'Search for a department, course, or section',
 		'keywordSearch': 'Search by course title or description',
@@ -39,6 +39,15 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	localStorageService.bind($scope, 'starSections');
 
 	// If there's no schedule data
+	if (!$scope.schedData || !Object.keys($scope.schedData).length) {
+		$scope.schedData = {};
+		$scope.schedData.Schedule = new Schedule(currentTerm); // see functions.js for the Schedule constructor
+	}
+	for (var schedObj in $scope.schedData) {
+		if ($scope.schedData[schedObj].term != currentTerm) {
+			delete $scope.schedData[schedObj];
+		}
+	}
 	if (!$scope.schedData || !Object.keys($scope.schedData).length) {
 		$scope.schedData = {};
 		$scope.schedData.Schedule = new Schedule(currentTerm); // see functions.js for the Schedule constructor

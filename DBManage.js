@@ -14,7 +14,7 @@ try {
 // Connect to database
 // var db = mongojs('mongodb://'+config.MongoUser+':'+config.MongoPass+'@'+config.MongoURI+'/pcs1', ["Students", "Courses2015C", "NewReviews"]);
 
-var currentTerm = '2016C';
+var currentTerm = '2017A';
 var deptList = ['AAMW', 'ACCT', 'AFRC', 'AFST', 'ALAN', 'AMCS', 'ANCH', 'ANEL', 'ANTH', 'ARAB', 'ARCH', 'ARTH', 'ASAM', 'ASTR', 'BCHE', 'BE', 'BENG', 'BEPP', 'BFMD', 'BIBB', 'BIOE', 'BIOL', 'BIOM', 'BMB', 'BSTA', 'CAMB', 'CBE', 'CHEM', 'CHIN', 'CINE', 'CIS', 'CIT', 'CLST', 'COLL', 'COML', 'COMM', 'CPLN', 'CRIM', 'DCOH', 'DEMG', 'DEND', 'DENT', 'DOMD', 'DORT', 'DOSP', 'DPED', 'DPRD', 'DPTH', 'DRAD', 'DRST', 'DTCH', 'DYNM', 'EALC', 'EAS', 'ECON', 'EDCE', 'EDUC', 'EEUR', 'ENGL', 'ENGR', 'ENM', 'ENMG', 'ENVS', 'EPID', 'ESE', 'FNAR', 'FNCE', 'FOLK', 'FREN', 'GAFL', 'GAS', 'GCB', 'GEOL', 'GREK', 'GRMN', 'GSWS', 'GUJR', 'HCMG', 'HEBR', 'HIND', 'HIST', 'HPR', 'HSOC', 'HSPV', 'HSSC', 'IMUN', 'INTG', 'INTL', 'INTR', 'INTS', 'IPD', 'ITAL', 'JPAN', 'JWST', 'KORN', 'LALS', 'LARP', 'LATN', 'LAW', 'LGIC', 'LGST', 'LING', 'LSMP', 'MATH', 'MCS', 'MEAM', 'MED', 'MGMT', 'MKTG', 'MLA', 'MLYM', 'MMP', 'MSCI', 'MSE', 'MSSP', 'MTR', 'MUSA', 'MUSC', 'NANO', 'NELC', 'NETS', 'NGG', 'NPLD', 'NSCI', 'NURS', 'OIDD', 'PERS', 'PHIL', 'PHRM', 'PHYS', 'PPE', 'PREC', 'PRTG', 'PSCI', 'PSYC', 'PSYS', 'PUBH', 'PUNJ', 'REAL', 'REG', 'RELS', 'ROML', 'RUSS', 'SAST', 'SCND', 'SKRT', 'SLAV', 'SOCI', 'SPAN', 'STAT', 'STSC', 'SWRK', 'TAML', 'TELU', 'THAR', 'TURK', 'URBS', 'URDU', 'VBMS', 'VCSN', 'VCSP', 'VIPR', 'VISR', 'VLST', 'VMED', 'VPTH', 'WH', 'WHCP', 'WHG', 'WRIT', 'YDSH'];
 var maxIndex = deptList.length;
 
@@ -90,7 +90,6 @@ function PullRegistrar(index) {
 				var idDashed = idSpaced.replace(' ', '-');
 				if (!thisKey.is_cancelled && !resp[idSpaced]) {
 					var reqCodesList = GetRequirements(thisKey)[0];
-					
 					resp[idSpaced] = {
 						'idDashed': idDashed,
 						'idSpaced': idSpaced,
