@@ -236,17 +236,17 @@ function PullReview(index) {
 		}}
 		// var finalResp = {};
 		// finalResp[thedept] = resp;
-		fs.writeFile('./2015CRev/'+thedept+'.json', JSON.stringify(resp), function (err) {
+		fs.writeFile('./2016ARev/'+thedept+'.json', JSON.stringify(resp), function (err) {
 			if (err) {
 				console.log(index+' '+thedept+' '+err);
 			} else {
 				console.log('It\'s saved! '+ index + ' ' + thedept);
 			}
 			// UploadToDB('2015ARevRaw', 'NewReviews', index);
-			index++;
-			if (index <= deptList.length && !limit) {
-				PullReview(index);
-			}
+			// index++;
+			// if (index <= deptList.length && !limit) {
+			// 	PullReview(index);
+			// }
 		});
 	});
 	return 0;
