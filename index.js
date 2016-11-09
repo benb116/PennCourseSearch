@@ -27,6 +27,7 @@ try {
 	config.KeenIOID	      = process.env.KEEN_PROJECT_ID;
 	config.KeenIOWriteKey = process.env.KEEN_WRITE_KEY;
 	config.PushBulletAuth = process.env.PUSHBULLETAUTH;
+	config.PushBulletIden = process.eng.PUSHBULLETIDEN;
 	config.autotestKey    = process.env.AUTOTESTKEY;
 }
 
@@ -61,13 +62,6 @@ var logEvent = function (eventName, eventData) {
 
 // Initialize PushBullet
 var pusher = new PushBullet(config.PushBulletAuth);
-// Get first deviceID
-var pushDeviceID;
-pusher.devices(function(error, response) {
-	if (!error) {
-		pushDeviceID = response.devices[0].iden;
-	}
-});
 
 console.log('Plugins initialized');
 
@@ -82,9 +76,9 @@ git.short(function (str) {
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
 	console.log("Node app is running. Better go catch it.".green);
-	if (typeof process.env.PUSHBULLETAUTH !== 'undefined' && pushDeviceID) {
+	if (process.env.PUSHBULLETAUTH) {
 		// Don't send notifications when testing locally
-		pusher.note(pushDeviceID, 'Server Restart');
+		pusher.note(config.PushBulletIden, 'Server Restart');
 	}
 });
 
@@ -203,7 +197,7 @@ app.get('/Search', function(req, res) {
 			try {
 				if (rawResp.service_meta.error_text) {
 					console.log('Resp Err:' + rawResp.service_meta.error_text);
-					pusher.note(pushDeviceID, rawResp.service_meta.error_text);
+					pusher.note(config.PushBulletIden, rawResp.service_meta.error_text);
 					res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
 					return res.send(rawResp.service_meta.error_text);
 				}
@@ -503,7 +497,7 @@ app.get('/Sched', function(req, res) {
 		try {
 			if (rawResp.service_meta.error_text) {
 				console.log('Resp Err:' + rawResp.service_meta.error_text);
-				pusher.note(pushDeviceID, rawResp.service_meta.error_text);
+				pusher.note(config.PushBulletIden, rawResp.service_meta.error_text);
 				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
 				return res.send(rawResp.service_meta.error_text);
 			}
