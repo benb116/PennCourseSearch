@@ -27,7 +27,7 @@ try {
 	config.KeenIOID	      = process.env.KEEN_PROJECT_ID;
 	config.KeenIOWriteKey = process.env.KEEN_WRITE_KEY;
 	config.PushBulletAuth = process.env.PUSHBULLETAUTH;
-	config.PushBulletIden = process.eng.PUSHBULLETIDEN;
+	config.PushBulletIden = process.env.PUSHBULLETIDEN;
 	config.autotestKey    = process.env.AUTOTESTKEY;
 }
 
