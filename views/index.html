@@ -77,7 +77,7 @@
 					</ul>
 				</li>
 				<li ng-click="star.Show()"><span>Show Stars</span></li>
-				<a rel="leanModal" href="#UploadModal" id="ImportButton">
+				<a rel="leanModal" href="#UploadModal" id="ImportButton" onclick="ga('send', 'event', 'UI interaction', 'import')">
 					<li>Import</li>
 				</a>
 
@@ -174,7 +174,7 @@
 				</span>
 				<span ng-show="sectionInfo.prereqs"> Prerequisites: {{sectionInfo.prereqs}} <br><br></span>
 				<span ng-show="sectionInfo.associatedType"> Associated {{sectionInfo.associatedType}}: <br></span>
-				<span ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="get.SectionInfo(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></span>
+				<li ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="get.SectionInfo(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></li>
 			</div>
 		</div>
 		<div id="InfoPanel">
@@ -283,6 +283,7 @@
 				<span>Want to see all of PCS's code?</span>
 				<a href="https://github.com/benb116/PennCourseSearch"><span><i class="fa fa-github" style="padding-right:0.25em;"></i>View on Github</span></a>
 			</div>
+			<a href="https://keen.io?s=badge" rel="nofollow"><img src="https://goo.gl/LjjmCh" alt="Analytics by Keen IO" style="margin-top:1.5em;"/></a>
 			<a class="modal_close"><i class="fa fa-times"></i></a>
 		</div>
 		<div id="SchedModal" class="Modal">

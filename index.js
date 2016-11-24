@@ -368,7 +368,10 @@ function parseSectionList(Res) {
 				var idSpaced      = idDashed.replace(/-/g, ' ');
 				var timeInfoArray = getTimeInfo(thisEntry); // Get meeting times for a section
 				var isOpen        = timeInfoArray[0];
-				var timeInfo      = timeInfoArray[1].join(', '); // Get the first meeting slot
+				var timeInfo      = timeInfoArray[1][0]; // Get the first meeting slot
+				if (timeInfoArray[1][1]) {
+					timeInfo += ' ...';
+				}
 				var actType       = thisEntry.activity;
 				var SectionInst;
 				try {
