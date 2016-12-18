@@ -47,16 +47,16 @@ $(document).ready(function() {
 				}, 300);
 				console.log(statusMessage);
 			} else {
-				if (!localStorage.getItem('survey2016C')) {
-					localStorage.setItem('survey2016C', 'true');
-					sweetAlert({
-						title: 'PCS Alert',
-						html: true,
-						confirmButtonText: "Close",
-						text: 'Love PCS? Hate it? Want to vent about your life?<br>Take a quick <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSe2KE3iU7eLucDWH2h4WK-wCYrLAb_58mWit-uZ_xbGFAtbYw/viewform">survey!</a>',
-						type: 'warning'
-					});
-				}
+				// if (!localStorage.getItem('survey2016C')) {
+				// 	localStorage.setItem('survey2016C', 'true');
+				// 	sweetAlert({
+				// 		title: 'PCS Alert',
+				// 		html: true,
+				// 		confirmButtonText: "Close",
+				// 		text: 'Love PCS? Hate it? Want to vent about your life?<br>Take a quick <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSe2KE3iU7eLucDWH2h4WK-wCYrLAb_58mWit-uZ_xbGFAtbYw/viewform">survey!</a>',
+				// 		type: 'warning'
+				// 	});
+				// }
 			}
 		});
 	}
