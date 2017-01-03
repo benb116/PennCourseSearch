@@ -129,6 +129,7 @@ function SpitSched(schedData) {
 				var oldMeetDay  = oldClasses[2]; // Don't compare blocks on different days cause they can't overlap anyway
 				if (oldMeetFull !== courseSched[sec].idDashed && oldMeetDay === meetLetterDay) { // If we aren't comparing a section to itself & if the two meetings are on the same day
 					var oldMeetData = courseSched[secArray.indexOf(oldMeetFull)];
+					// console.log(oldMeetData, courseSched[sec]);
 					if (TwoOverlap(oldMeetData, courseSched[sec])) { // Check if they overlap
 						var oldBlockWidth = thisBlock.outerWidth() * 100 / $('#Schedule').outerWidth();
 						thisBlock.css('width', (oldBlockWidth / 2) + '%'); // Resize old block
@@ -147,35 +148,26 @@ function SpitSched(schedData) {
 				}
 			});
 		}}
-	}
-	// $('.SchedBlock').click(function(e, elem) {
-	// 	console.log('33')
-	// 	console.log(this);
-	// });
-	// $('.CloseX').click(function(e) {
-	// 	e.stopPropagation();
-	// 	console.log('t')
-	// })
+	}}
 }
 
-	function TwoOverlap(block1, block2) {
-		// Thank you to Stack Overflow user BC. for the function this is based on.
-		// http://stackoverflow.com/questions/5419134/how-to-detect-if-two-divs-touch-with-jquery
-		var y1 = block1.meetHour;
-		var h1 = block1.hourLength;
-		var b1 = y1 + h1;
+function TwoOverlap(block1, block2) {
+	// Thank you to Stack Overflow user BC. for the function this is based on.
+	// http://stackoverflow.com/questions/5419134/how-to-detect-if-two-divs-touch-with-jquery
+	var y1 = block1.meetHour;
+	var h1 = block1.hourLength;
+	var b1 = y1 + h1;
 
-		var y2 = block2.meetHour;
-		var h2 = block2.hourLength;
-		var b2 = y2 + h2;
+	var y2 = block2.meetHour;
+	var h2 = block2.hourLength;
+	var b2 = y2 + h2;
 
-		// This checks if the top of block 2 is lower down (higher value) than the bottom of block 1...
-		// or if the top of block 1 is lower down (higher value) than the bottom of block 2.
-		// In this case, they are not overlapping, so return false
-		if (b1 <= y2 || b2 <= y1) {
-			return false;
-		} else {
-			return true;
-		}
+	// This checks if the top of block 2 is lower down (higher value) than the bottom of block 1...
+	// or if the top of block 1 is lower down (higher value) than the bottom of block 2.
+	// In this case, they are not overlapping, so return false
+	if (b1 <= y2 || b2 <= y1) {
+		return false;
+	} else {
+		return true;
 	}
 }

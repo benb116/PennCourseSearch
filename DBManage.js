@@ -31,8 +31,14 @@ var reqCodes = {
 	College: "MQS",
 	Formal: "MFR",
 	Cross: "MC1",
-	Cultural: "MC2"
+	Cultural: "MC2",
+	WGLO: "Global Environment",
+	WSST: "Social Structures",
+	WSAT: "Science and Technology",
+	WLAC: "Language, Arts & Culture"
 };
+
+var WhartonReq = require('./wharreq.json');
 
 var source = process.argv[2].toLowerCase(); // registrar or review
 var index = Number(process.argv[3]); // Can be a number or a dept code
@@ -118,30 +124,43 @@ function PullRegistrar(index) {
 }
 
 function GetRequirements(section) {
-  var reqList = section.fulfills_college_requirements;
-  var reqCodesList = []; 
-  try {
-	reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
-	reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
-  } catch(err) {}
-  var extraReq = section.important_notes;
-  var extraReqCode;
-  for (var i = 0; i < extraReq.length; i++) {
-	extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
-	if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
-	  // reqList.push(extraReq[i]);
-	  reqCodesList.push(extraReqCode);
-	} else if (section.requirements[0]) {
-		if (section.requirements[0].registration_control_code === 'MDB') {
-			reqCodesList.push('MDO');
-			reqCodesList.push('MDN');
+	var idDashed = (section.course_department + '-' + section.course_number);
+
+	var reqList = section.fulfills_college_requirements;
+	var reqCodesList = []; 
+	try {
+		reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
+		reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
+	} catch(err) {}
+	var extraReq = section.important_notes;
+	var extraReqCode;
+	for (var i = 0; i < extraReq.length; i++) {
+		extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
+		if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
+		  // reqList.push(extraReq[i]);
+		 	reqCodesList.push(extraReqCode);
+		} else if (section.requirements[0]) {
+			if (section.requirements[0].registration_control_code === 'MDB') {
+				reqCodesList.push('MDO');
+				reqCodesList.push('MDN');
+			}
+		}
+		if (extraReq[i].split(" ")[0] !== "Registration") {
+		  reqList.push(extraReq[i]);
 		}
 	}
-	if (extraReq[i].split(" ")[0] !== "Registration") {
-	  reqList.push(extraReq[i]);
-	}
-  }
-  return [reqCodesList, reqList];
+	try {
+		var this_GED = WhartonReq[idDashed].GED;
+		reqCodesList.push(this_GED);
+		reqList.push(reqCodes[this_GED]);
+	} catch (err) {}
+	try {
+		if (WhartonReq[idDashed].global) {
+			reqCodesList.push("WGLO");
+		reqList.push(reqCodes["WGLO"]);
+		}
+	} catch (err) {}
+	return [reqCodesList, reqList];
 }
 
 function PullReview(index) {

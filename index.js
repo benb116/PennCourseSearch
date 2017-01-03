@@ -67,6 +67,7 @@ console.log('Plugins initialized');
 
 console.time('Reviews loaded');
 var allRevs		 = require('./loadRevs.js');
+var WhartonReq = require('./wharreq.json');
 console.timeEnd('Reviews loaded');
 
 git.short(function (str) {
@@ -246,49 +247,49 @@ function ParseDeptList (res) {
 
 // The requirement name -> code map
 var reqCodes = {
-	Society: "MDS",
-	History: "MDH",
-	Arts: "MDA",
-	Humanities: "MDO",
-	Living: "MDL",
-	Physical: "MDP",
-	Natural: "MDN",
-	Writing: "MWC",
-	College: "MQS",
-	Formal: "MFR",
-	Cross: "MC1",
-	Cultural: "MC2"
+	WGLO: "Wharton - Global Environment",
+	WSST: "Wharton - Social Structures",
+	WSAT: "Wharton - Science and Technology",
+	WLAC: "Wharton - Language, Arts & Culture"
 };
 
 function GetRequirements(section) {
-	// College requirements are not uniform throughout the api :(
-	// This goes through the various ways they could be listed
-	// It can also deal with double counted classes.
-	// reqList is an array of names. recCodesList is an array of codes
+	var idDashed = (section.course_department + '-' + section.course_number);
+
 	var reqList = section.fulfills_college_requirements;
-	var reqCodesList = [];
+	var reqCodesList = []; 
 	try {
-		// Try to map any requirement name to its code by checking the first word
 		reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
 		reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
 	} catch(err) {}
-
 	var extraReq = section.important_notes;
 	var extraReqCode;
 	for (var i = 0; i < extraReq.length; i++) {
-		extraReqCode = reqCodes[extraReq[i].split(" ")[0]]; // Try to map an extra requirement name to its code
+		extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
 		if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
-			reqCodesList.push(extraReqCode); // Add it if it's a valid code
+		  // reqList.push(extraReq[i]);
+		 	reqCodesList.push(extraReqCode);
 		} else if (section.requirements[0]) {
-			if (section.requirements[0].registration_control_code === 'MDB') { // A weird thing where a class fulfills two sector reqs
-					reqCodesList.push('MDO');
-					reqCodesList.push('MDN');
+			if (section.requirements[0].registration_control_code === 'MDB') {
+				reqCodesList.push('MDO');
+				reqCodesList.push('MDN');
 			}
 		}
-		if (extraReq[i].split(" ")[0] !== "Registration") { // Add the names of the requirements
-			reqList.push(extraReq[i]);
+		if (extraReq[i].split(" ")[0] !== "Registration") {
+		  reqList.push(extraReq[i]);
 		}
 	}
+	try {
+		var this_GED = WhartonReq[idDashed].GED;
+		reqCodesList.push(this_GED);
+		reqList.push(reqCodes[this_GED]);
+	} catch (err) {}
+	try {
+		if (WhartonReq[idDashed].global) {
+			reqCodesList.push("WGLO");
+		reqList.push(reqCodes.WGLO);
+		}
+	} catch (err) {}
 	return [reqCodesList, reqList];
 }
 
@@ -333,8 +334,8 @@ function getTimeInfo (JSONObj) { // A function to retrieve and format meeting ti
 		for(var meeting in JSONObj.meetings) { if (JSONObj.meetings.hasOwnProperty(meeting)) {
 			// Some sections have multiple meeting forms (I'm looking at you PHYS151)
 			var thisMeet = JSONObj.meetings[meeting];
-			var StartTime		 = thisMeet.start_time.split(" ")[0]; // Get start time
-			var EndTime		 = thisMeet.end_time.split(" ")[0];
+			var StartTime= thisMeet.start_time.split(" ")[0]; // Get start time
+			var EndTime	 = thisMeet.end_time.split(" ")[0];
 
 			if (StartTime[0] === '0') {
 				StartTime = StartTime.slice(1);
@@ -386,6 +387,8 @@ function parseSectionList(Res) {
 					timeInfo = '';
 				}
 
+				var schedInfo = getSchedInfo(thisEntry);
+
 				sectionsList.push({
 					'idDashed': idDashed,
 					'idSpaced': idSpaced,
@@ -395,7 +398,7 @@ function parseSectionList(Res) {
 					'SectionInst': SectionInst,
 					'actType': actType,
 					'revs': revData,
-					'isScheduled': false
+					'fullSchedInfo': schedInfo
 				});
 			}
 		}

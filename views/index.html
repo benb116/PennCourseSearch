@@ -104,8 +104,9 @@
 					ng-click="get.Sections(course.idDashed)" 
 					ng-class="{'activeItem': (currentCourse.toUpperCase() == course.idSpaced.replace(' ', ''))}"
 					ng-show="
-						(!checkArr[0]) || ((course.courseReqs.indexOf(checkArr[0]) > -1) && 
-						(!checkArr[1] || course.courseReqs.indexOf(checkArr[1]) > -1))
+						(!checkArr[0]) || ((course.courseReqs.indexOf(checkArr[0]) > -1)) && 
+						(!checkArr[1] || course.courseReqs.indexOf(checkArr[1]) > -1) && 
+						(!checkArr[2] || course.courseReqs.indexOf(checkArr[2]) > -1)
 					">
 					<!--Dealing with requirements: The list element will be shown if: 
 						There are no requirements (checkArr == [], therefore !checkArr[0] && !checkArr[1]) 
@@ -169,7 +170,7 @@
 				</span>
 				<span ng-show="sectionInfo.description">Description: {{sectionInfo.description}} <br><br></span>
 				<span ng-show="sectionInfo.openClose"> Status: {{sectionInfo.openClose}} <br><br></span>
-				<span ng-show="sectionInfo.reqsFilled.length"><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span>
+				<span ng-show="sectionInfo.reqsFilled.length">Requirements Fulfilled: <br><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span>
 				<br>
 				</span>
 				<span ng-show="sectionInfo.prereqs"> Prerequisites: {{sectionInfo.prereqs}} <br><br></span>
@@ -211,6 +212,14 @@
 							<input type="checkbox" ng-disabled="(!check.MC1 && checkArr.length >= 2)" ng-model="check.MC1" ng-change="reqChange()" value="MC1">Cross Cultural Analysis
 							<br>
 							<input type="checkbox" ng-disabled="(!check.MC2 && checkArr.length >= 2)" ng-model="check.MC2" ng-change="reqChange()" value="MC2">Cultural Diversity in the US
+							<br>
+							<input type="checkbox" ng-disabled="!(courses.length && currentDept !== '')" ng-model="check.WGLO" ng-change="reqChange()" value="WGLO">Wharton - Global Environment
+							<br>
+							<input type="checkbox" ng-disabled="!(courses.length && currentDept !== '')" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Wharton - Social Structures
+							<br>
+							<input type="checkbox" ng-disabled="!(courses.length && currentDept !== '')" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Wharton - Science and Technology
+							<br>
+							<input type="checkbox" ng-disabled="!(courses.length && currentDept !== '')" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Wharton - Language, Arts & Culture
 						</div>
 					</div>
 				</div>
