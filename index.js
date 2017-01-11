@@ -229,7 +229,7 @@ function GetRevData (dept, num, inst) {
 		var revData = deptData[num]; // Get course level ratings
 		if (revData) {
 			// Try to get instructor specific reviews, but fallback to course reviews
-			thisRevData = (revData[(inst || '').toUpperCase()] || revData.Total);
+			thisRevData = (revData[(inst || '').trim().toUpperCase()] || revData.Total);
 		}
 	}
 	return thisRevData;
