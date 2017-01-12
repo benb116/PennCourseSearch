@@ -182,6 +182,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 							var oldData = $scope.schedData[$scope.currentSched].meetings;
 							var newData = oldData.concat(resp.data); // Combine old meetings and new meetings
 							$scope.schedData[$scope.currentSched].meetings = newData;
+							localStorageService.set('schedData', $scope.schedData);
 						}
 					});
 			} else {
