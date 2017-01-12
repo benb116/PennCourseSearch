@@ -247,6 +247,18 @@ function ParseDeptList (res) {
 
 // The requirement name -> code map
 var reqCodes = {
+	Society: "MDS",
+	History: "MDH",
+	Arts: "MDA",
+	Humanities: "MDO",
+	Living: "MDL",
+	Physical: "MDP",
+	Natural: "MDN",
+	Writing: "MWC",
+	College: "MQS",
+	Formal: "MFR",
+	Cross: "MC1",
+	Cultural: "MC2",
 	WGLO: "Wharton - Global Environment",
 	WSST: "Wharton - Social Structures",
 	WSAT: "Wharton - Science and Technology",

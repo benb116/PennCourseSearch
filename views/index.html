@@ -92,7 +92,7 @@
 				<span class="PCR Qual tooltip" title="Course quality rating" style="background:rgba(45, 160, 240, 0.85);margin-left:0.45em">Qual</span>
 				<span class="PCR Diff tooltip" title="Course difficulty rating" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
 				<span style="margin-left:0.5em;margin-right:0.5em;">Sort by: </span>
-				<select id="sortCourses" ng-model="courseSort" style="margin-bottom:0.5em;" onchange="$('#CourseList>ul').scrollTop(0);" onclick="ga('send', 'event', 'UI interaction', 'sort')">
+				<select id="sortCourses" ng-model="courseSort" style="margin-bottom:0.5em;">
 					<option value="idDashed">Course Number</option>
 					<option value="-revs.cQ">Quality (high to low)</option>
 					<option value="revs.cD">Difficulty (easy to hard)</option>

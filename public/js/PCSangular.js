@@ -99,8 +99,11 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			if (!req) {reqText = '';} else {reqText = req;}
 			if (!pro) {pro = $scope.showPro;}
 			$scope.currentDept = param;
+			console.log(1)
 			UpdateCourseList.getDeptCourses(param, type, reqText, pro).then(function(resp) {
+				console.log(resp)
 				$scope.courses = PCR(resp.data);
+				console.log($scope.courses)
 			});
 		},
 		Sections: function(dept, num, sec) {
@@ -332,11 +335,11 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	};
 
 	$scope.reqChange = function () {
-		ga('send', 'event', 'UI interaction', 'requirement');
 		$scope.checkArr = [];
 		for (var req in $scope.check) { // Build an array of all checked boxes (length <= 2)
 			if ($scope.check[req]) {$scope.checkArr.push(req);}
 		}
+		ga('send', 'event', 'UI interaction', 'requirement', $scope.checkArr[$scope.checkArr.length-1]);
 		// If there are no courses in the list and no currentDept search, the user probably just wants to see all classes that satisfy a given requirement
 		if (!($scope.courses.length && $scope.currentDept !== '') && $scope.checkArr.length === 1) {
 			$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
@@ -348,6 +351,12 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	$scope.$watch('schedData', function() { // When schedData changes
 		$scope.schedChange();
 	}, true);
+	$scope.$watch('courseSort', function() {
+		if ($scope.courseSort != 'idDashed') {
+			ga('send', 'event', 'UI interaction', 'sort', $scope.courseSort);
+		}
+		$('#CourseList>ul').scrollTop(0);
+	})
 	$scope.$watch(function() { // If there are any unresolved HTTP requests, show the loading spinner
 		return $http.pendingRequests.length;
 	}, function() {
