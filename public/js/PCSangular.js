@@ -5,7 +5,7 @@ var PCS = angular.module('PCSApp', ['LocalStorageModule', '720kb.tooltips']);
 */
 
 PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules){
-	var currentTerm = '2017A';
+	var currentTerm = '2017C';
 	var placeholderMap = {
 		'courseIDSearch': 'Search for a department, course, or section',
 		'keywordSearch': 'Search by course title or description',
@@ -44,7 +44,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		$scope.schedData.Schedule = new Schedule(currentTerm); // see functions.js for the Schedule constructor
 	}
 	for (var schedObj in $scope.schedData) {
-		if ($scope.schedData[schedObj].term != currentTerm) {
+		if ($scope.schedData[schedObj].term !== currentTerm) {
 			delete $scope.schedData[schedObj];
 		}
 	}
@@ -352,11 +352,11 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		$scope.schedChange();
 	}, true);
 	$scope.$watch('courseSort', function() {
-		if ($scope.courseSort != 'idDashed') {
+		if ($scope.courseSort !== 'idDashed') {
 			ga('send', 'event', 'UI interaction', 'sort', $scope.courseSort);
 		}
 		$('#CourseList>ul').scrollTop(0);
-	})
+	});
 	$scope.$watch(function() { // If there are any unresolved HTTP requests, show the loading spinner
 		return $http.pendingRequests.length;
 	}, function() {
