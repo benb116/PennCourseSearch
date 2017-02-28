@@ -45,7 +45,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	}
 	for (var schedObj in $scope.schedData) {
 		if ($scope.schedData[schedObj].term !== currentTerm) {
-			delete $scope.schedData[schedObj];
+			delete $scope.schedData[schedObj]; // Delete schedules that are not for the current term
 		}
 	}
 	if (!$scope.schedData || !Object.keys($scope.schedData).length) {

@@ -176,6 +176,15 @@ app.get('/Search', function(req, res) {
 		} catch(err) {
 			return res.send('');
 		}
+	} else if (req.query.reqParam && req.query.reqParam.charAt(0) == "W") {
+		try {
+			fs.readFile('./'+currentTerm+'/WHAR.json', function (err, data) {
+				if (err) {return res.send([]);}
+				return res.send(ParseDeptList(JSON.parse(data)));
+			});
+		} catch(err) {
+			return res.send('');
+		}
 	} else { // Otherwise, ask the API for data
 		request({
 			uri: baseURL,

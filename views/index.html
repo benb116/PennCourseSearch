@@ -213,13 +213,13 @@
 							<br>
 							<input type="checkbox" ng-disabled="(!check.MC2 && checkArr.length >= 2)" ng-model="check.MC2" ng-change="reqChange()" value="MC2">Cultural Diversity in the US
 							<br>
-							<input type="checkbox" ng-disabled="!(courses.length && currentDept !== '')" ng-model="check.WGLO" ng-change="reqChange()" value="WGLO">Wharton - Global Environment
+							<input type="checkbox" ng-disabled="" ng-model="check.WGLO" ng-change="reqChange()" value="WGLO">Wharton - Global Environment
 							<br>
-							<input type="checkbox" ng-disabled="!(courses.length && currentDept !== '')" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Wharton - Social Structures
+							<input type="checkbox" ng-disabled="(check.WSAT || check.WLAC)" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Wharton - Social Structures
 							<br>
-							<input type="checkbox" ng-disabled="!(courses.length && currentDept !== '')" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Wharton - Science and Technology
+							<input type="checkbox" ng-disabled="(check.WSST || check.WLAC)" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Wharton - Science and Technology
 							<br>
-							<input type="checkbox" ng-disabled="!(courses.length && currentDept !== '')" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Wharton - Language, Arts & Culture
+							<input type="checkbox" ng-disabled="(check.WSAT || check.WSST)" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Wharton - Language, Arts & Culture
 						</div>
 					</div>
 				</div>

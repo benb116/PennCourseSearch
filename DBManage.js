@@ -70,6 +70,8 @@ if (source === 'registrar') {
 			PullReview(i);
 		}
 	}
+} else if (source === "wharton") {
+	CollectWharton();
 }
 return "done";
 
@@ -118,7 +120,7 @@ function PullRegistrar(index) {
 				}
 			});
 		} else {
-			console.log('request error: ' + thedept)
+			console.log('request error: ' + thedept);
 		}
 	});
 }
@@ -157,7 +159,7 @@ function GetRequirements(section) {
 	try {
 		if (WhartonReq[idDashed].global) {
 			reqCodesList.push("WGLO");
-		reqList.push(reqCodes["WGLO"]);
+			reqList.push(reqCodes.WGLO);
 		}
 	} catch (err) {}
 	return [reqCodesList, reqList];
@@ -253,20 +255,51 @@ function PullReview(index) {
 				'cI': courseAvgInst
 			};
 		}}
-		// var finalResp = {};
-		// finalResp[thedept] = resp;
 		fs.writeFile('./2016ARev/'+thedept+'.json', JSON.stringify(resp), function (err) {
 			if (err) {
 				console.log(index+' '+thedept+' '+err);
 			} else {
 				console.log('It\'s saved! '+ index + ' ' + thedept);
 			}
-			// UploadToDB('2015ARevRaw', 'NewReviews', index);
-			// index++;
-			// if (index <= deptList.length && !limit) {
-			// 	PullReview(index);
-			// }
 		});
 	});
 	return 0;
+}
+
+function CollectWharton() {
+	var wharResp = {};
+	for (var i = 0; i < deptList.length; i++) {
+		// console.log(i)
+		var thisdept = deptList[i];
+		fs.readFile('./' + currentTerm + '/' + thisdept + '.json', 'utf8', function(err, contents) {
+			if (!err) {
+				var deptJSON = JSON.parse(contents);
+				// var deptJSON = deptJSON[0];
+				for (var key in deptJSON) {
+					var thisCourse = deptJSON[key];
+					if (thisCourse.courseReqs) {
+						var lastreq = thisCourse.courseReqs[thisCourse.courseReqs.length-1];
+						if (lastreq && lastreq.charAt(0) == "W") {
+							wharResp[thisCourse.idSpaced] = {
+								'idDashed': thisCourse.idDashed,
+								'idSpaced': thisCourse.idSpaced,
+								'courseTitle': thisCourse.courseTitle,
+								'courseReqs': thisCourse.courseReqs
+							};
+							index++;
+						}
+					}
+					if (thisCourse.idDashed.split('-')[0] == deptList[deptList.length-1]) {
+						var arrResp = [];
+						for (key in wharResp) { if (wharResp.hasOwnProperty(key)) {
+							arrResp.push(wharResp[key]);
+						}}
+						fs.writeFile('./'+currentTerm+'/WHAR.json', JSON.stringify(arrResp), function (err) {
+						
+						});
+					}
+				}
+			}
+		});
+	}
 }
