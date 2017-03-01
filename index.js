@@ -144,8 +144,8 @@ app.get('/Search', function(req, res) {
 	if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {req.query.reqParam += ',MDB';} // this is stupid
 
 	// Building the request URI
-	var reqSearch = buildURI("", 'reqFilter');
-	if (req.query.reqParam && req.query.reqParam.charAt(0) != "W") {
+	var reqSearch = buildURI("", 'reqFilter');;
+	if (!(req.query.reqParam && req.query.reqParam.charAt(0) == "W")) {
 			reqSearch = buildURI(req.query.reqParam, 'reqFilter');
 	}
 	var proSearch   = buildURI(req.query.proParam, 'proFilter');
@@ -168,11 +168,9 @@ app.get('/Search', function(req, res) {
 	if (searchParam) {
 		logEvent('Search', searchEvent);
 	}
-	console.log(baseURL)
 
 	// It's much faster to access pre-fetched department data than to poll the API for dozens of classes
-	if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !reqSearch && !proSearch && !actSearch && !includeOpen ) {
-		console.log('eeeee')
+	if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !req.query.reqParam && !proSearch && !actSearch && !includeOpen ) {
 		try {
 			fs.readFile('./'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
 				if (err) {return res.send([]);}
@@ -182,7 +180,6 @@ app.get('/Search', function(req, res) {
 			return res.send('');
 		}
 	} else if (req.query.reqParam && req.query.reqParam.charAt(0) == "W" && !proSearch) {
-		console.log('eee')
 		try {
 			fs.readFile('./'+currentTerm+'/WHAR.json', function (err, data) {
 				if (err) {return res.send([]);}
