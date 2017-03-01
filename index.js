@@ -144,7 +144,10 @@ app.get('/Search', function(req, res) {
 	if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {req.query.reqParam += ',MDB';} // this is stupid
 
 	// Building the request URI
-	var reqSearch   = buildURI(req.query.reqParam, 'reqFilter');
+	var reqSearch = "";
+	if (req.query.reqParam && req.query.reqParam.charAt(0) != "W") {
+			reqSearch = buildURI(req.query.reqParam, 'reqFilter');
+	}
 	var proSearch   = buildURI(req.query.proParam, 'proFilter');
 	var actSearch   = buildURI(req.query.actParam, 'actFilter');
 	var includeOpen = buildURI(req.query.openAllow, 'includeOpen');
@@ -176,7 +179,7 @@ app.get('/Search', function(req, res) {
 		} catch(err) {
 			return res.send('');
 		}
-	} else if (req.query.reqParam && req.query.reqParam.charAt(0) == "W") {
+	} else if (req.query.reqParam && req.query.reqParam.charAt(0) == "W" && !req.query.proParam) {
 		try {
 			fs.readFile('./'+currentTerm+'/WHAR.json', function (err, data) {
 				if (err) {return res.send([]);}

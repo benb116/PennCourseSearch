@@ -45,7 +45,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	}
 	for (var schedObj in $scope.schedData) {
 		if ($scope.schedData[schedObj].term !== currentTerm) {
-			delete $scope.schedData[schedObj]; // Delete schedules that are not for the current term
+			delete $scope.schedData[schedObj]; // Delete schedules that are not for the current term2
 		}
 	}
 	if (!$scope.schedData || !Object.keys($scope.schedData).length) {
@@ -99,11 +99,8 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			if (!req) {reqText = '';} else {reqText = req;}
 			if (!pro) {pro = $scope.showPro;}
 			$scope.currentDept = param;
-			console.log(1)
 			UpdateCourseList.getDeptCourses(param, type, reqText, pro).then(function(resp) {
-				console.log(resp)
 				$scope.courses = PCR(resp.data);
-				console.log($scope.courses)
 			});
 		},
 		Sections: function(dept, num, sec) {
@@ -341,7 +338,8 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		}
 		ga('send', 'event', 'UI interaction', 'requirement', $scope.checkArr[$scope.checkArr.length-1]);
 		// If there are no courses in the list and no currentDept search, the user probably just wants to see all classes that satisfy a given requirement
-		if (!($scope.courses.length && $scope.currentDept !== '') && $scope.checkArr.length === 1) {
+		console.log($scope.showPro);
+		if (!($scope.courses.length && $scope.currentDept !== '') && $scope.checkArr.length === 1 && $scope.showPro === 'noFilter') {
 			$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
 		}
 		// Otherwise the filtering in the view will take care of hiding and showing the corrent courses
