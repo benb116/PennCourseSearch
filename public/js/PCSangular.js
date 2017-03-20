@@ -336,8 +336,9 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		for (var req in $scope.check) { // Build an array of all checked boxes (length <= 2)
 			if ($scope.check[req]) {$scope.checkArr.push(req);}
 		}
-		ga('send', 'event', 'UI interaction', 'requirement', $scope.checkArr[$scope.checkArr.length-1]);
-		// If there are no courses in the list and no currentDept search, the user probably just wants to see all classes that satisfy a given requirement
+		if ($scope.checkArr[$scope.checkArr.length-1]) {
+			ga('send', 'event', 'UI interaction', 'requirement', $scope.checkArr[$scope.checkArr.length-1]);			
+		}		// If there are no courses in the list and no currentDept search, the user probably just wants to see all classes that satisfy a given requirement
 		console.log($scope.showPro);
 		if (!($scope.courses.length && $scope.currentDept !== '') && $scope.checkArr.length === 1 && $scope.showPro === 'noFilter') {
 			$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
