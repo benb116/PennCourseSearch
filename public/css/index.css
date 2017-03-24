@@ -1,3 +1,11 @@
+html {
+	font-size: calc(100vw/90);
+}
+/* @media only screen and (min-width: 1450px) {
+	html {
+		font-size: 20px;
+	}
+}*/
 body {
 	width: 100%;
 	min-width: 1000px;
@@ -10,8 +18,8 @@ body {
 }
 
 ::-webkit-scrollbar {
-	width: 5px;
-	height: 5px;
+	width: .5em;
+	height: .5em;
 }
 
 ::-webkit-scrollbar-track {
@@ -53,18 +61,22 @@ h1 {
 	margin: 1em 0 0 0;
 }
 
+select {
+	font-size:  0.75em;
+}
+
 #schedSelect,
 #LoadingInfo {
 	margin-left: 1em;
 }
 
 form {
-	padding-left: calc(30px + 1em);
+	padding-left: 3em;
 }
 
 form > input[type="text"] {
 	border: solid 1px #ccc;
-	border-radius: 5px;
+	border-radius: .3em;
 	padding: 0.4em;
 	width: 30em;
 	font-size: .75em;
@@ -90,12 +102,12 @@ form > input[type="text"] {
 	height: 28px;
 	width: 28px;*/
 	display: inline-block;
-	height: 20px;
-	width: 20px;
+	height: 1.25em;
+	width: 1.25em;
 	vertical-align: middle;
 	margin-left: 2em;
 	animation: rotate 0.8s infinite linear;
-	border: 3px solid #fff;
+	border: 0.1875em solid #fff;
 	border-right-color: transparent;
 	border-radius: 50%;
 	opacity: 1;
@@ -129,9 +141,9 @@ form > input[type="text"] {
 	display: inline-block;
 	position: relative;
 	margin-right: -4px;
-	padding: 5px 25px;
+	padding: 0.3125em 1.5625em;
 	cursor: pointer;
-	font-size: 16px;
+	font-size: 1em;
 	transition: all 0.2s;
 }
 
@@ -147,7 +159,7 @@ form > input[type="text"] {
 	display: none;
 	visibility: hidden;
 	position: absolute;
-	top: 32px;
+	top: 2em;
 	left: 0;
 	padding: 0;
 	box-shadow: none;
@@ -162,10 +174,10 @@ form > input[type="text"] {
 #MenuButtons ul li ul li {
 	display: block;
 	width: 100%;
-	min-width: 80px;
+	min-width: 5em;
 	background: #555;
-	padding: 10px 20px;
-	font-size: 14px;
+	padding: 0.625em 1.25em;
+	font-size: 1em;
 	line-height: 1.5em;
 	text-shadow: 0 -1px 0 #000;
 }
@@ -193,48 +205,53 @@ form > input[type="text"] {
 #BottomResults {
 	width: 100%;
 	position: absolute;
-	top: 178px;
+	top: 11.5em;
 	color: black;
+}
+
+#CourseHeader {
+	overflow: hidden;
+	height: 1.5em;
 }
 
 #CourseList,
 #SectionCol {
-	height: calc(100vh - 180px);
-	border-left: 5px solid white;
-	border-top: 5px solid white;
+	height: calc(100vh - 15.5em);
+	border-left: .375em solid white;
+	border-top: .375em solid white;
 	box-sizing: border-box;
 	margin: 0;
 	float: left;
 	list-style-type: none;
 	background-color: white;
-	font-size: 11px;
+	font-size: 0.75em;
 	text-align: left;
 }
 
 #CourseList {
-	width: 300px;
+	width: 25em;
 	margin-left: 2.5%;
 	text-align: left;
-	border-top-left-radius: 5px;
+	border-top-left-radius: .375em;
 }
 #CourseList > ul {
 	overflow-y: scroll;
-	height: calc(100% - 23px);
+	height: calc(100% - 2.5em);
 }
 
 #SectionCol {
-	border-top-right-radius: 5px;
+	border-top-right-radius: .375em;
 }
 
 #Sections,
 #SectionInfo {
-	width: 300px;
+	width: 25em;
 	padding-left: 0.5em;
 }
 
 #Sections {
 	height: 35%;
-	border-top-right-radius: 5px;
+	border-top-right-radius: .375em;
 	overflow-y: hidden;
 }
 
@@ -242,14 +259,23 @@ form > input[type="text"] {
 	height: calc(100% - 1em);
 	overflow-y: scroll;
 }
+.sectionText {
+	display: inline-block;
+	width: 16.5em;
+	height: 1.5em;
+	line-height: 1.5em;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
 
 #SectionInfo {
-	height: 65%;
-	width: 305px;
+	height: 60%;
+	/* width: 25.3em; */
 	overflow-y: scroll;
 	/*padding-right: 0.5em;*/
 	border-top: 1em solid white;
-	box-sizing: border-box;
+	/* box-sizing: border-box; */
 }
 
 ul {
@@ -265,7 +291,7 @@ ul {
 
 #SectionList li,
 #SectionInfo li {
-	padding: 0.125em 0.5em .125em 0;
+	padding: 0.125em 0.5em 0 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -296,13 +322,13 @@ ul {
 
 .statusClass {
 	display: inline-block;
-	width: 16px;
-	height: 16px;
+	width: 1.5em;
+	height: 1.5em;
 	vertical-align: top;
-	padding-top: 1px;
+	/* padding-top: 1px; */
 	margin-left: 2px;
 	text-align: center;
-	line-height: 13px;
+	/* line-height: 13px; */
 	border-radius: 2px;
 }
 
@@ -323,9 +349,10 @@ ul {
 }
 
 .PCR {
+	vertical-align: top;
 	color: white;
 	width: 2.5em;
-	height: 1.5em;
+	/* height: 1.5em; */
 	text-indent: 0;
 	display: inline-block;
 	border-radius: 3px;
@@ -334,17 +361,18 @@ ul {
 	margin-right: 2px;
 }
 
+.fa-plus, .fa-times {vertical-align: text-top}
 .fa-star,
 .fa-star-o {
 	float: right;
-	font-size: 16px;
-	line-height: 16px;
+	font-size: 1.25em;
+	line-height: 1.25em;
 	color: #01256e;
 }
 
 .fa-envelope {
 	color: white;
-	font-size: 12px;
+	font-size: 1em;
 	/*margin: auto;*/
 	/*text-align: center;*/
 	/*line-height: 8px;*/
@@ -355,7 +383,7 @@ ul {
 	overflow: hidden;
 	width: 90%;
 	margin: 0 auto;
-	font-size: 12px;
+	font-size: 1em;
 	min-width: 500px;
 	height: 10em;
 	margin-bottom: 1em;
@@ -387,7 +415,7 @@ ul {
 }
 
 #reqFilter {
-	line-height: 12px;
+	line-height: 1.25em;
 	text-indent: 0;
 	padding-left: 1.75em;
 	height: 7em;
@@ -400,14 +428,14 @@ ul {
 	min-width: 500px;
 	overflow: hidden;
 	/*padding: 0 1em 0 1em;*/
-	font-size: 12px;
+	font-size: 1em;
 }
 
 #InfoPanel {
 	height: calc(100vh - 16em);
 	/*min-width: 500px;*/
-	width: calc(100% - 700px);
-	font-size: 12px;
+	width: calc(100% - 58.5em);
+	font-size: .75em;
 	display: inline-block;
 }
 
@@ -430,12 +458,11 @@ ul {
 
 #TimeCol {
 	width: 5%;
-	min-width: 40px;
-	margin-right: -3px;
-	padding-right: 5px;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	line-height: 14px;
+	margin-right: -.25em;
+	padding-right: .5em;
+	border-top-left-radius: .5em;
+	border-bottom-left-radius: .5em;
+	line-height: 1.25em;
 }
 
 #Schedule {
@@ -451,15 +478,15 @@ hr {
 }
 
 .TimeBlock {
-	width: 40px;
+	width: 3.2em;
 	margin-right: 0;
-	right: 8px;
+	right: .6667em;
 }
 
 .DayName {
 	display: inline-block;
-	height: 30px;
-	line-height: 30px;
+	height: 2.5em;
+	line-height: 2.5em;
 }
 
 .SchedBlock {
@@ -472,25 +499,25 @@ hr {
 	color: black;
 }
 
-@media all and (max-width: 1050px) {
+/* @media all and (max-width: 1050px) { */
 	.SchedBlock {
-		font-size: 11px;
+		font-size: 1.125em;
 	}
-}
+/* } */
 
-@media all and (min-width: 1281px) and (max-width: 1700px) {
+/* @media all and (min-width: 1281px) and (max-width: 1700px) {
 	.SchedBlock {
 		font-size: 14px;
 	}
 }
-
+ */
 .CloseX {
 	position: absolute;
 	top: 0;
 	left: 0;
 	display: block;
-	width: 15px;
-	height: 15px;
+	width: 1.25em;
+	height: 1.25em;
 	color: black;
 	opacity: 0;
 	/*filter: alpha(opacity=0);*/
@@ -502,8 +529,8 @@ hr {
 }
 
 .LocName {
-	font-size: 11px;
-	line-height: 11px;
+	font-size: 1em;
+	line-height: 1em;
 }
 
 #lean_overlay {
@@ -518,7 +545,7 @@ hr {
 }
 
 .Modal {
-	padding: 10px;
+	padding: .6em;
 	background-color: white;
 	color: black;
 	width: 65%;
@@ -552,8 +579,8 @@ hr {
 
 .modal_close {
 	position: absolute;
-	top: 10px;
-	left: 15px;
+	top: .6em;
+	left: 1.25em;
 	cursor: pointer;
 }
 
@@ -573,12 +600,12 @@ hr {
 	border-radius: 4px 0 0 4px;
 	border: 1px solid #3f94d0;
 	position: absolute;
-	left: calc(16% - 30px);
-	width: 30px;
-	height: 24px;
+	left: calc(16% - 2em);
+	width: 2em;
+	height: 1.5em;
 	background-color: #3f94d0;
 	background-position: 50%;
-	background-size: 14px;
+	background-size: 1em;
 	background-image: url(/css/venmo.png);
 	background-repeat: no-repeat;
 }
@@ -590,12 +617,12 @@ hr {
 	position: absolute;
 	left: calc(16%);
 	padding: 0 4px;
-	width: 100px;
-	height: 24px;
+	width: 6.25em;
+	height: 1.5em;
 	text-align: center;
 	font-weight: 400;
-	font-size: 16px;
-	line-height: 24px;
+	font-size: 1em;
+	line-height: 1.5em;
 	background: #fff;
 	color: #3f94d0;
 }
@@ -605,18 +632,18 @@ hr {
 	border: 1px solid black;
 	border-right: 0;
 	padding: 5px 10px;
-	font-size: 16px;
+	font-size: 1.5em;
 }
 
 #EmailLabel {
 	border-radius: 4px 0 0 4px;
 	border: 1px solid black;
 	border-left: 0;
-	font-size: 16px;
+	font-size: 1.5em;
 	left: calc(49%);
 	padding: 0 4px;
-	width: 100px;
-	height: 24px;
+	width: 6.25em;
+	height: 1.5em;
 	text-align: center;
 	position: absolute;
 }
