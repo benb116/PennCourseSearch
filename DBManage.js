@@ -177,11 +177,10 @@ function PullReview(index) {
 		var deptReviews = JSON.parse(body).result.values;
 		var resp = {};
 		for(var rev in deptReviews) { if(deptReviews.hasOwnProperty(rev)) {
-	  // Iterate through each review
+	 	 // Iterate through each review
 			var sectionIDs = deptReviews[rev].section.aliases;
 			for(var alias in sectionIDs) {
-				if (sectionIDs[alias].split('-')[0] === thedept) {
-		  // Only create an entry for the course in this department
+				if (sectionIDs[alias].split('-')[0] === thedept) { // Only create an entry for the course in this department
 					// Get data
 					var courseNum = sectionIDs[alias].split('-')[1];
 					var instID    = deptReviews[rev].instructor.id.replace('-', ' ').split(' ')[1].replace(/--/g, '. ').replace(/-/g, ' ');
@@ -189,6 +188,8 @@ function PullReview(index) {
 					var courseQual = Number(deptReviews[rev].ratings.rCourseQuality);
 					var courseDiff = Number(deptReviews[rev].ratings.rDifficulty);
 					var courseInst = Number(deptReviews[rev].ratings.rInstructorQuality);
+
+					var revID = Number(deptReviews[rev].id.split("-")[0]);
 
 					if (typeof resp[courseNum] === 'undefined') {resp[courseNum] = {};}
 					if (typeof resp[courseNum][instID] === 'undefined') {resp[courseNum][instID] = [];}
@@ -198,6 +199,18 @@ function PullReview(index) {
 						'cD': (courseDiff || 0),
 						'cI': (courseInst || 0)
 					});
+					if (typeof resp[courseNum].Recent === 'undefined') {resp[courseNum].Recent = {'lastrev': 0, 'revs': []};}
+					if (resp[courseNum].Recent.lastrev < revID) {
+						resp[courseNum].Recent.lastrev = revID;
+						resp[courseNum].Recent.revs = [];
+					}
+					if (resp[courseNum].Recent.lastrev <= revID) {
+						resp[courseNum].Recent.revs.push({
+							'cQ': (courseQual || 0),
+							'cD': (courseDiff || 0),
+							'cI': (courseInst || 0)
+						});
+					}
 				}
 			}
 		}}
@@ -220,31 +233,46 @@ function PullReview(index) {
 			var courseSumD = 0;
 			var courseSumI = 0;
 			var revcount = 0;
+			var recentQ = 0;
+			var recentD = 0;
+			var recentI = 0;
+			var recentrevcount = 0;
 			for (var inst in resp[course]) { if (resp[course].hasOwnProperty(inst)) {
-				var instSumQ = 0;
-				var instSumD = 0;
-				var instSumI = 0;
-				for (var review in resp[course][inst]) { if (resp[course][inst].hasOwnProperty(review)) {
-					var thisrev = resp[course][inst][review];
-					instSumQ += thisrev.cQ;
-					instSumD += thisrev.cD;
-					instSumI += thisrev.cI;
-					revcount++;
-				}}
-				// Get average ratings for each instructor for a given class
-				var instAvgQual = Math.round(100 * instSumQ / resp[course][inst].length)/100;
-				var instAvgDiff = Math.round(100 * instSumD / resp[course][inst].length)/100;
-				var instAvgInst = Math.round(100 * instSumI / resp[course][inst].length)/100;
-				resp[course][inst] = {
-					'cQ': instAvgQual,
-					'cD': instAvgDiff,
-					'cI': instAvgInst
-				};
-				courseSumQ += instSumQ;
-				courseSumD += instSumD;
-				courseSumI += instSumI;
+				if (inst !== 'Recent') {
+					var instSumQ = 0;
+					var instSumD = 0;
+					var instSumI = 0;
+					for (var review in resp[course][inst]) { if (resp[course][inst].hasOwnProperty(review)) {
+						var thisrev = resp[course][inst][review];
+						instSumQ += thisrev.cQ;
+						instSumD += thisrev.cD;
+						instSumI += thisrev.cI;
+						revcount++;
+					}}
+					// Get average ratings for each instructor for a given class
+					var instAvgQual = Math.round(100 * instSumQ / resp[course][inst].length)/100;
+					var instAvgDiff = Math.round(100 * instSumD / resp[course][inst].length)/100;
+					var instAvgInst = Math.round(100 * instSumI / resp[course][inst].length)/100;
+					resp[course][inst] = {
+						'cQ': instAvgQual,
+						'cD': instAvgDiff,
+						'cI': instAvgInst
+					};
+					courseSumQ += instSumQ;
+					courseSumD += instSumD;
+					courseSumI += instSumI;
+				} else {
+					for (var review in resp[course].Recent.revs) {
+						var thisrev = resp[course].Recent.revs[review];
+						recentQ += thisrev.cQ;
+						recentD += thisrev.cD;
+						recentI += thisrev.cI;
+						recentrevcount++;
+					}
+				}
 			}}
 			if (!revcount) {revcount = 1;}
+			if (!recentrevcount) {recentrevcount = 1;}
 			// Get average of average instructor ratings for a given class
 			var courseAvgQual = Math.round(100 * courseSumQ / revcount) /100;
 			var courseAvgDiff = Math.round(100 * courseSumD / revcount) /100;
@@ -254,8 +282,17 @@ function PullReview(index) {
 				'cD': courseAvgDiff,
 				'cI': courseAvgInst
 			};
+			var recentAvgQual = Math.round(100 * recentQ / recentrevcount) /100;
+			var recentAvgDiff = Math.round(100 * recentD / recentrevcount) /100;
+			var recentAvgInst = Math.round(100 * recentI / recentrevcount) /100;
+			resp[course].Recent  = {
+				'cQ': recentAvgQual,
+				'cD': recentAvgDiff,
+				'cI': recentAvgInst
+			};
 		}}
-		fs.writeFile('./2016ARev/'+thedept+'.json', JSON.stringify(resp), function (err) {
+
+		fs.writeFile('./2016CRev/'+thedept+'.json', JSON.stringify(resp), function (err) {
 			if (err) {
 				console.log(index+' '+thedept+' '+err);
 			} else {
@@ -279,7 +316,7 @@ function CollectWharton() {
 					var thisCourse = deptJSON[key];
 					if (thisCourse.courseReqs) {
 						var lastreq = thisCourse.courseReqs[thisCourse.courseReqs.length-1];
-						if (lastreq && lastreq.charAt(0) == "W") {
+						if (lastreq && lastreq.charAt(0) === "W") {
 							wharResp[thisCourse.idSpaced] = {
 								'idDashed': thisCourse.idDashed,
 								'idSpaced': thisCourse.idSpaced,
@@ -289,13 +326,15 @@ function CollectWharton() {
 							index++;
 						}
 					}
-					if (thisCourse.idDashed.split('-')[0] == deptList[deptList.length-1]) {
+					if (thisCourse.idDashed.split('-')[0] === deptList[deptList.length-1]) {
 						var arrResp = [];
 						for (key in wharResp) { if (wharResp.hasOwnProperty(key)) {
 							arrResp.push(wharResp[key]);
 						}}
 						fs.writeFile('./'+currentTerm+'/WHAR.json', JSON.stringify(arrResp), function (err) {
-						
+							if (err) {
+								console.log("Wharton error: " + err);
+							}
 						});
 					}
 				}

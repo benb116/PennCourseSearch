@@ -144,8 +144,8 @@ app.get('/Search', function(req, res) {
 	if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {req.query.reqParam += ',MDB';} // this is stupid
 
 	// Building the request URI
-	var reqSearch = buildURI("", 'reqFilter');;
-	if (!(req.query.reqParam && req.query.reqParam.charAt(0) == "W")) {
+	var reqSearch = buildURI("", 'reqFilter');
+	if (!(req.query.reqParam && req.query.reqParam.charAt(0) === "W")) {
 			reqSearch = buildURI(req.query.reqParam, 'reqFilter');
 	}
 	var proSearch   = buildURI(req.query.proParam, 'proFilter');
@@ -173,8 +173,14 @@ app.get('/Search', function(req, res) {
 	if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !req.query.reqParam && !proSearch && !actSearch && !includeOpen ) {
 		try {
 			fs.readFile('./'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
-				if (err) {return res.send([]);}
-				return res.send(ParseDeptList(JSON.parse(data)));
+				if (err) {
+					baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
+					baseURL += "&description=" + searchParam;
+					SendPennReq(baseURL, resultType, res);
+
+				} else {
+					return res.send(ParseDeptList(JSON.parse(data)));
+				}
 			});
 		} catch(err) {
 			return res.send('');
@@ -189,49 +195,52 @@ app.get('/Search', function(req, res) {
 			return res.send('');
 		}
 	} else { // Otherwise, ask the API for data
-		request({
-			uri: baseURL,
-			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
-		}, function(error, response, body) {
-
-			if (error) {
-				console.log('OpenData Request failed:', error);
-				return res.send('PCSERROR: request failed');
-			}
-
-			var parsedRes, rawResp = {};
-			try {
-				rawResp = JSON.parse(body);
-			} catch(err) {
-				console.log('Resp parse error' + err);
-				return res.send({});
-			}
-
-			try {
-				if (rawResp.service_meta.error_text) {
-					console.log('Resp Err:' + rawResp.service_meta.error_text);
-					pusher.note(config.PushBulletIden, rawResp.service_meta.error_text);
-					res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
-					return res.send(rawResp.service_meta.error_text);
-				}
-				parsedRes = rawResp.result_data;
-			} catch(err) {
-				console.log(err);
-				res.statusCode = 500;
-				return res.send(err);
-			}
-
-			// Send the raw data to the appropriate formatting function
-			var searchResponse;
-			if (resultType in resultTypes) {
-				searchResponse = resultTypes[resultType](parsedRes);
-			} else {
-				searchResponse = {};
-			}
-			return res.send(JSON.stringify(searchResponse)); // return correct info
-		});
+		SendPennReq(baseURL, resultType, res);
 	}
 });
+
+function SendPennReq (url, resultType, res) {
+	request({
+		uri: url,
+		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
+	}, function(error, response, body) {
+		if (error) {
+			console.log('OpenData Request failed:', error);
+			return res.send('PCSERROR: request failed');
+		}
+
+		var parsedRes, rawResp = {};
+		try {
+			rawResp = JSON.parse(body);
+		} catch(err) {
+			console.log('Resp parse error' + err);
+			return res.send({});
+		}
+
+		try {
+			if (rawResp.service_meta.error_text) {
+				console.log('Resp Err:' + rawResp.service_meta.error_text);
+				pusher.note(config.PushBulletIden, rawResp.service_meta.error_text);
+				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
+				return res.send(rawResp.service_meta.error_text);
+			}
+			parsedRes = rawResp.result_data;
+		} catch(err) {
+			console.log(err);
+			res.statusCode = 500;
+			return res.send(err);
+		}
+
+		// Send the raw data to the appropriate formatting function
+		var searchResponse;
+		if (resultType in resultTypes) {
+			searchResponse = resultTypes[resultType](parsedRes);
+		} else {
+			searchResponse = {};
+		}
+		return res.send(JSON.stringify(searchResponse)); // return correct info
+	});
+}
 
 function GetRevData (dept, num, inst) {
 	// Given a department, course number, and instructor (optional), get back the three rating values
@@ -241,7 +250,9 @@ function GetRevData (dept, num, inst) {
 		var revData = deptData[num]; // Get course level ratings
 		if (revData) {
 			// Try to get instructor specific reviews, but fallback to course reviews
-			thisRevData = (revData[(inst || '').trim().toUpperCase()] || revData.Total);
+			// var generalReview = revData.Recent;
+			// if (total) {generalReview = revData.Total;}
+			thisRevData = (revData[(inst || '').trim().toUpperCase()] || (revData.Total));
 		}
 	}
 	return thisRevData;
