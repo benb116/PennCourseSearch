@@ -174,10 +174,10 @@ app.get('/Search', function(req, res) {
 		try {
 			fs.readFile('./'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
 				if (err) {
-					baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
-					baseURL += "&description=" + searchParam;
-					SendPennReq(baseURL, resultType, res);
-
+				// 	baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
+				// 	baseURL += "&description=" + searchParam;
+				// 	SendPennReq(baseURL, resultType, res);
+					return res.send([]);
 				} else {
 					return res.send(ParseDeptList(JSON.parse(data)));
 				}
