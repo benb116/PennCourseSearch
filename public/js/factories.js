@@ -55,8 +55,10 @@ PCS.factory('UpdateSectionInfo', ['$http', function($http){
 }]);
 PCS.factory('UpdateSchedules', ['$http', function($http) {
 	var retObj = {};
-	retObj.getSchedData = function(secID) {
-		return $http.get('/Sched?courseID='+secID).then(function(data) {
+	retObj.getSchedData = function(secID, needLoc) {
+		var url = '/Sched?courseID='+secID;
+		if (needLoc) {url += '&needLoc=1';}
+		return $http.get(url).then(function(data) {
 			return data;
 		}, function(err) {
 			ErrorAlert(err);

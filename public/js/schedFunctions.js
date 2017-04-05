@@ -3,6 +3,7 @@ function Schedule(term) {
 	this.term = term; // e.g. "2016A"
 	this.meetings = [];
 	this.colorPalette = ["#e74c3c", "#f1c40f", "#3498db", "#9b59b6", "#e67e22", "#2ecc71", "#95a5a6", "#FF73FD", "#73F1FF", "#CA75FF", "#1abc9c", "#F64747", "#ecf0f1"]; // Standard colorPalette
+	this.locAdded = false;
 }
 
 function SpitSched(schedData) {

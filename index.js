@@ -96,7 +96,7 @@ app.get('/Status', function(req, res) {
 	// This is just letting the user know.
 	var now = new Date();
 	var hour = now.getHours();
-	if (hour >= 1 && hour < 5) {
+	if (hour >= 5 && hour < 9) {
 		statustext = "Penn InTouch sometimes screws up around this time of night, which can cause problems with PennCourseSearch. <br> Sorry in advance.";
 	}
 	res.send(statustext);
@@ -252,7 +252,7 @@ function GetRevData (dept, num, inst) {
 			// Try to get instructor specific reviews, but fallback to course reviews
 			// var generalReview = revData.Recent;
 			// if (total) {generalReview = revData.Total;}
-			thisRevData = (revData[(inst || '').trim().toUpperCase()] || (revData.Total));
+			thisRevData = (revData[(inst || '').trim().toUpperCase()] || (revData.Recent));
 		}
 	}
 	return thisRevData;
@@ -517,7 +517,8 @@ function parseSectionInfo(Res) {
 
 // Manage scheduling requests
 app.get('/Sched', function(req, res) {
-	var courseID		= req.query.courseID;
+	var courseID = req.query.courseID;
+	var needLoc = req.query.needLoc;
 	request({
 		uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
@@ -553,7 +554,7 @@ app.get('/Sched', function(req, res) {
 		//	 SchedCourses[JSONSecID] = resJSON[JSONSecID];
 		// }}
 		var schedEvent = {schedCourse: courseID};
-		logEvent('Sched', schedEvent);
+		if (!needLoc) {logEvent('Sched', schedEvent);} else {console.log('yes')}
 		return res.send(resJSON);
 	});
 	// }

@@ -47,16 +47,20 @@ $(document).ready(function() {
 				}, 300);
 				console.log(statusMessage);
 			} else {
-				// if (!localStorage.getItem('survey2016C')) {
-				// 	localStorage.setItem('survey2016C', 'true');
-				// 	sweetAlert({
-				// 		title: 'PCS Alert',
-				// 		html: true,
-				// 		confirmButtonText: "Close",
-				// 		text: 'Love PCS? Hate it? Want to vent about your life?<br>Take a quick <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSe2KE3iU7eLucDWH2h4WK-wCYrLAb_58mWit-uZ_xbGFAtbYw/viewform">survey!</a>',
-				// 		type: 'warning'
-				// 	});
-				// }
+				if (localStorage.getItem('secondvisit')) {
+					// if (!localStorage.getItem('survey2016C')) {
+						// localStorage.setItem('survey2016C', 'true');
+						// sweetAlert({
+						// 	title: 'PCS Alert',
+						// 	html: true,
+						// 	confirmButtonText: "Close",
+						// 	text: 'Love PCS? Hate it? Want to vent about your life?<br>Take a quick <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSe2KE3iU7eLucDWH2h4WK-wCYrLAb_58mWit-uZ_xbGFAtbYw/viewform">survey!</a>',
+						// 	type: 'warning'
+						// });
+					// }
+				} else {
+					localStorage.setItem('secondvisit', 'true');
+				}
 			}
 		});
 	}
@@ -73,7 +77,7 @@ function ErrorAlert(err) {
 		sweetAlert({
 			title: '#awkward',
 			html: true,
-			text: "PennInTouch is refreshing, so we can't access class info :(  <br> Please frustratedly wait about half an hour before trying again." ,
+			text: "PennInTouch is refreshing, so we can't access class info :( <br> Please frustratedly wait about half an hour before trying again.",
 			type: 'error'
 		});
 	} else {

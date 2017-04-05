@@ -1,4 +1,4 @@
-var PCS = angular.module('PCSApp', ['LocalStorageModule', '720kb.tooltips']);
+var PCS = angular.module('PCSApp', ['LocalStorageModule']);
 
 /*
 	I know this is scope soup. I'm still learning.
@@ -172,19 +172,19 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	};
 
 	$scope.sched = {
-		AddRem: function(secID) {
+		AddRem: function(secID, needloc) {
 			secID = FormatID(secID).join('-');
 
 			// schedSections is a continually updated array of sections in the current schedule
 			if ($scope.schedSections.indexOf(secID) === -1) { // If the requested section is not scheduled
-				UpdateSchedules.getSchedData(secID).then(function(resp) {
-						if (resp.data) {
-							var oldData = $scope.schedData[$scope.currentSched].meetings;
-							var newData = oldData.concat(resp.data); // Combine old meetings and new meetings
-							$scope.schedData[$scope.currentSched].meetings = newData;
-							localStorageService.set('schedData', $scope.schedData);
-						}
-					});
+				UpdateSchedules.getSchedData(secID, needloc).then(function(resp) {
+					if (resp.data) {
+						var oldData = $scope.schedData[$scope.currentSched].meetings;
+						var newData = oldData.concat(resp.data); // Combine old meetings and new meetings
+						$scope.schedData[$scope.currentSched].meetings = newData;
+						localStorageService.set('schedData', $scope.schedData);
+					}
+				});
 			} else {
 				// Filter out meeting objects whose corresponding sectionID is the requested section
 				var oldData = $scope.schedData[$scope.currentSched].meetings;
@@ -328,6 +328,13 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			$('#secsToImport').empty();
 			$('#schedInput').val('');
 			$('#importSubmit').prop('disabled', true);
+		},
+		AddLoc: function() {
+			for (var thisSched in $scope.schedData) {
+				for (var thissec in $scope.schedData[thisSched].meetings) {
+				
+				}
+			}
 		}
 	};
 
