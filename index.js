@@ -26,8 +26,6 @@ try {
 	config.PCRToken	      = process.env.PCRTOKEN;
 	config.KeenIOID	      = process.env.KEEN_PROJECT_ID;
 	config.KeenIOWriteKey = process.env.KEEN_WRITE_KEY;
-	config.PushBulletAuth = process.env.PUSHBULLETAUTH;
-	config.PushBulletIden = process.env.PUSHBULLETIDEN;
 	config.autotestKey    = process.env.AUTOTESTKEY;
 }
 
@@ -60,14 +58,11 @@ var logEvent = function (eventName, eventData) {
 	}
 };
 
-// Initialize PushBullet
-var pusher = new PushBullet(config.PushBulletAuth);
-
 console.log('Plugins initialized');
 
 console.time('Reviews loaded');
-var allRevs		 = require('./loadRevs.js');
-var WhartonReq = require('./wharreq.json');
+var allRevs		= require('./loadRevs.js');
+var WhartonReq 	= require('./wharreq.json');
 console.timeEnd('Reviews loaded');
 
 git.short(function (str) {
@@ -77,10 +72,6 @@ git.short(function (str) {
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
 	console.log("Node app is running. Better go catch it.".green);
-	if (process.env.PUSHBULLETAUTH) {
-		// Don't send notifications when testing locally
-		pusher.note(config.PushBulletIden, 'Server Restart');
-	}
 });
 
 var currentTerm = '2017C';
@@ -213,14 +204,13 @@ function SendPennReq (url, resultType, res) {
 		try {
 			rawResp = JSON.parse(body);
 		} catch(err) {
-			console.log('Resp parse error' + err);
+			console.log('Resp parse error ' + err);
 			return res.send({});
 		}
 
 		try {
 			if (rawResp.service_meta.error_text) {
-				console.log('Resp Err:' + rawResp.service_meta.error_text);
-				pusher.note(config.PushBulletIden, rawResp.service_meta.error_text);
+				console.log('Resp Err: ' + rawResp.service_meta.error_text);
 				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
 				return res.send(rawResp.service_meta.error_text);
 			}
@@ -385,7 +375,7 @@ function getTimeInfo (JSONObj) { // A function to retrieve and format meeting ti
 		}}
 	}
 	catch (err) {
-		// console.log(("Error getting times" + JSONObj.section_id).red);
+		console.log(("Error getting times" + JSONObj.section_id));
 		TimeInfo = '';
 	}
 	return [isOpen, TimeInfo];
@@ -473,19 +463,19 @@ function parseSectionInfo(Res) {
 		var asscList = [];
 		var key;
 		if (entry.recitations.length !== 0) { // If it has recitations
-			asscType = "Recitations";
+			asscType = "recitation";
 			for(key in entry.recitations) { if (entry.recitations.hasOwnProperty(key)) {
 					asscList.push(entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id);
 			}}
 
 		} else if (entry.labs.length !== 0) { // If it has labs
-			asscType = "Labs";
+			asscType = "lab";
 			for(key in entry.labs) { if (entry.labs.hasOwnProperty(key)) {
 					asscList.push(entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id);
 			}}
 
 		} else if (entry.lectures.length !== 0) { // If it has lectures
-			asscType = "Lectures";
+			asscType = "lecture";
 			for(key in entry.lectures) { if (entry.lectures.hasOwnProperty(key)) {
 					asscList.push(entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id);
 			}}
@@ -539,7 +529,6 @@ app.get('/Sched', function(req, res) {
 		try {
 			if (rawResp.service_meta.error_text) {
 				console.log('Resp Err:' + rawResp.service_meta.error_text);
-				pusher.note(config.PushBulletIden, rawResp.service_meta.error_text);
 				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
 				return res.send(rawResp.service_meta.error_text);
 			}
@@ -554,7 +543,7 @@ app.get('/Sched', function(req, res) {
 		//	 SchedCourses[JSONSecID] = resJSON[JSONSecID];
 		// }}
 		var schedEvent = {schedCourse: courseID};
-		if (!needLoc) {logEvent('Sched', schedEvent);} else {console.log('yes')}
+		if (!needLoc) {logEvent('Sched', schedEvent);} else {console.log('yes');}
 		return res.send(resJSON);
 	});
 	// }
@@ -580,19 +569,36 @@ function getSchedInfo(entry) { // Get the properties required to schedule the se
 				 Building	 = "";
 				 Room		 = "";
 				}
+				var SchedAsscSecs = [];
+				if (entry.lectures.length) {
+					for (var thisAssc in entry.lectures) {
+						SchedAsscSecs.push(entry.lectures[thisAssc].subject + '-' + entry.lectures[thisAssc].course_id + '-' + entry.lectures[thisAssc].section_id);
+					}
+				} else {
+					if (entry.recitations.length) {
+						for (var thisAssc in entry.recitations) {
+							SchedAsscSecs.push(entry.recitations[thisAssc].subject + '-' + entry.recitations[thisAssc].course_id + '-' + entry.recitations[thisAssc].section_id);
+						}
+					} else if (entry.labs.length) {
+						for (var thisAssc in entry.labs) {
+							SchedAsscSecs.push(entry.labs[thisAssc].subject + '-' + entry.labs[thisAssc].course_id + '-' + entry.labs[thisAssc].section_id);
+						}
+					}
+				}
 
 				// Full ID will have sectionID+MeetDays+StartTime
 				// This is necessary for classes like PHYS151, which has times: M@13, TR@9, AND R@18
 				var FullID = idDashed+'-'+MeetDays+StartTime.toString().replace(".", "");
 
 				resJSON.push({
-					'fullID': FullID,
-					'idDashed':	 idDashed,
-					'idSpaced': idSpaced,
-					'hourLength':		 hourLength,
-					'meetDay':			MeetDays,
-					'meetHour':		 StartTime,
-					'meetLoc':		 Building+' '+Room
+					'fullID': 		FullID,
+					'idDashed':	 	idDashed,
+					'idSpaced': 	idSpaced,
+					'hourLength': 	hourLength,
+					'meetDay':		MeetDays,
+					'meetHour': 	StartTime,
+					'meetLoc':		Building+' '+Room,
+					'SchedAsscSecs': 	SchedAsscSecs
 				});
 			}}
 		}

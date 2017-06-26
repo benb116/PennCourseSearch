@@ -30,6 +30,7 @@ build/Release
 /node_modules/
 
 DB Backup/
+Stormpath\ Backup/
 2015C/
 2015CRev/
 2016A/
@@ -41,3 +42,4 @@ DB Backup/
 Server Files/
 Logs/
 Analytics/
+Keen\ Export/

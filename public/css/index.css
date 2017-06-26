@@ -1,11 +1,6 @@
 html {
 	font-size: calc(100vw/90);
 }
-/* @media only screen and (min-width: 1450px) {
-	html {
-		font-size: 20px;
-	}
-}*/
 body {
 	width: 100%;
 	min-width: 1000px;
@@ -250,7 +245,7 @@ form > input[type="text"] {
 }
 
 #Sections {
-	height: 35%;
+	height: 30%;
 	border-top-right-radius: .375em;
 	overflow-y: hidden;
 }
@@ -270,7 +265,7 @@ form > input[type="text"] {
 }
 
 #SectionInfo {
-	height: 60%;
+	height: 65%;
 	/* width: 25.3em; */
 	overflow-y: scroll;
 	/*padding-right: 0.5em;*/
@@ -511,17 +506,26 @@ hr {
 	}
 }
  */
-.CloseX {
+.CloseX, .NeedAssc {
 	position: absolute;
 	top: 0;
-	left: 0;
 	display: block;
 	width: 1.25em;
 	height: 1.25em;
 	color: black;
-	opacity: 0;
 	/*filter: alpha(opacity=0);*/
 	transition: opacity .15s ease-in-out;
+}
+
+.CloseX {
+	left: 0;
+	opacity: 0;
+	text-align: left;
+	padding-left: 4%;
+	box-sizing: border-box;
+}
+.NeedAssc {
+	right: 0;
 }
 
 .CloseX:hover {
@@ -647,3 +651,42 @@ hr {
 	text-align: center;
 	position: absolute;
 }
+
+
+/* @media only screen and (max-device-width: 480px) {
+	#SchedGraph, #schedSelect, #MenuButtons, form>span, #searchSelect {
+		display: none;
+	}
+	html {
+		font-size: 3em;
+	}
+	body {
+		width: 100vw;
+		min-width: 320px;
+		margin: 0;
+	}
+	#subtitle {
+		font-size: 0.73em;
+	}
+	form {
+		padding: 0.25em;
+	}
+	#CSearch {
+		width: 23em;
+	}
+	#BottomResults {
+		top: 10em;
+	}
+	#FilterSearch {
+		display: none;
+	}
+	#CourseList {
+		width: 100vw;
+		margin: 0;
+		border-radius: 0;
+		height: 30em;
+	}
+	.cTitle, .cID {
+		font-size: 0.50em;
+	}
+} */

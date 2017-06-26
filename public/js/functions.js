@@ -73,21 +73,17 @@ $(document).ready(function() {
 function ErrorAlert(err) {
 	// Shows an error dialog and logs the error to the console
 	// Also includes the error report in an email that can be sent to Ben
+	var errtext = 'An error occurred. Refresh or <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!&body=Error%20message:%20' + encodeURIComponent(JSON.stringify(err)) + '">email Ben</a>';
+
 	if (err.status === 512) {
-		sweetAlert({
-			title: '#awkward',
-			html: true,
-			text: "PennInTouch is refreshing, so we can't access class info :( <br> Please frustratedly wait about half an hour before trying again.",
-			type: 'error'
-		});
-	} else {
-		sweetAlert({
-			title: '#awkward',
-			html: true,
-			text: 'An error occurred. Refresh or <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!&body=Error%20message:%20' + encodeURIComponent(JSON.stringify(err)) + '">email Ben</a>',
-			type: 'error'
-		});
+		errtext = "PennInTouch is refreshing, so we can't access class info :( <br> Please frustratedly wait about half an hour before trying again.";
 	}
+	sweetAlert({
+		title: '#awkward',
+		html: true,
+		text: 'An error occurred. Refresh or <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!&body=Error%20message:%20' + encodeURIComponent(JSON.stringify(err)) + '">email Ben</a>',
+		type: 'error'
+	});
 }
 
 function Uniquify(str, arr) {
@@ -152,4 +148,12 @@ function FormatID(rawParam) {
 	}
 	
 	return retArr;
+}
+
+function Schedule(term) {
+	// This is a blank schedule object constructor
+	this.term = term; // e.g. "2016A"
+	this.meetings = [];
+	this.colorPalette = ["#e74c3c", "#f1c40f", "#3498db", "#9b59b6", "#e67e22", "#2ecc71", "#95a5a6", "#FF73FD", "#73F1FF", "#CA75FF", "#1abc9c", "#F64747", "#ecf0f1"]; // Standard colorPalette
+	this.locAdded = false;
 }

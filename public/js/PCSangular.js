@@ -86,7 +86,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		}
 	};
 	$scope.schedChange = function() {
-		SpitSched($scope.schedData[$scope.currentSched]);
+		$scope.sched.Render($scope.schedData[$scope.currentSched]);
 		$scope.schedSections = $scope.schedData[$scope.currentSched].meetings.map(function(value, index) {
 			return $scope.schedData[$scope.currentSched].meetings[index].idDashed;
 		});
@@ -197,7 +197,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 					}
 				});
 				$scope.schedData[$scope.currentSched].meetings = newData;
-				$scope.$apply();
 			}
 		},
 		Download: function() {
@@ -214,7 +213,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			sweetAlert({
 				title: "Please name your new schedule",
 				type: "input",
-				inputPlaceholder: "Spring 2016",
+				inputPlaceholder: "Fall 2017",
 				showCancelButton: true,
 				closeOnConfirm: false,
 				animation: "slide-from-top",
@@ -336,6 +335,143 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 				
 				}
 			}
+		},
+		Render: function(thisschedData) {
+			var courseSched = thisschedData.meetings;
+			var weekdays     = ['M', 'T', 'W', 'R', 'F'];
+			$scope.fullWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+			var startHour    = 10; // start at 10
+			var endHour      = 15; // end at 3pm
+			var percentWidth = 20; // five day default
+			var incSun       = 0; // no weekends
+			var incSat       = 0;
+
+			for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
+				var secMeetHour = courseSched[sec].meetHour;
+				if (secMeetHour <= startHour) { // If there are classes earlier than the default start
+					startHour = Math.floor(secMeetHour); // push back the earliest hour
+				}
+				if (secMeetHour + courseSched[sec].hourLength >= endHour) { // Push back latest hour if necessary
+					endHour = Math.ceil(secMeetHour + courseSched[sec].hourLength);
+				}
+				for (day in courseSched[sec].meetDay) { if (courseSched[sec].meetDay.hasOwnProperty(day)) {
+					var letterDay = courseSched[sec].meetDay[day];
+					if (letterDay === 'U') { // If there are sunday classes
+						incSun = 1;
+					}
+					if (letterDay === 'S') { // If there are saturday classes
+						incSat = 1;
+					}
+				}}
+			}}
+
+			if (incSun === 1) {
+				weekdays.unshift('U');
+				$scope.fullWeekdays.unshift('Sunday');
+			} // Update weekdays array if necessary
+			if (incSat === 1) {
+				weekdays.push('S');
+				$scope.fullWeekdays.push('Saturday');
+			}
+			$scope.percentWidth = 100 / weekdays.length; // Update the block width if necessary
+			var halfScale = 95 / (endHour - startHour + 1); // This defines the scale to be used throughout the scheduling process
+			
+			$scope.timeblocks = [];
+			$scope.schedlines = [];
+			if (courseSched.length) {
+				for (var i = 0; i <= (endHour - startHour); i++) { // for each hour
+					var toppos = (i) * halfScale + 7.5; // each height value is linearly spaced with an offset
+					var hourtext = Math.round(i + startHour); // If startHour is not an integer, make it pretty
+					if (hourtext > 12) {
+						hourtext -= 12;
+					} // no 24-hour time
+
+					$scope.schedlines.push(toppos);
+					$scope.timeblocks.push(hourtext);
+				}
+			}
+
+			// Define the color map
+			var colorMap = {};
+			var colorinc = 0;
+			var colorPal = thisschedData.colorPalette;
+			for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
+				var secID = courseSched[sec].idDashed;
+				if (!colorMap[secID]) {
+					colorMap[secID] = colorPal[colorinc];
+					colorinc++;
+				}
+			}}
+
+			$scope.schedBlocks = [];
+			// Add the blocks
+			for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
+				for (day in courseSched[sec].meetDay) { if (courseSched[sec].meetDay.hasOwnProperty(day)) {
+					var meetLetterDay   = courseSched[sec].meetDay[day]; // On which day does this meeting take place?
+					var blockleft       = weekdays.indexOf(meetLetterDay) * $scope.percentWidth;
+					var blocktop        = (courseSched[sec].meetHour - startHour) * halfScale + 9; // determine top spacing based on time from startHour (offset for prettiness)
+					var blockheight     = courseSched[sec].hourLength * halfScale;
+					var blockname       = courseSched[sec].idSpaced;
+					var meetRoom        = courseSched[sec].meetLoc;
+					var thiscol         = (colorMap[courseSched[sec].idDashed] || "#E6E6E6"); // Get the color
+					var newid           = courseSched[sec].idDashed+'-'+meetLetterDay+courseSched[sec].meetHour.toString().replace(".", "");
+					var asscsecs 		= courseSched[sec].SchedAsscSecs;
+
+					$scope.schedBlocks.push({
+						'class': courseSched[sec].idDashed,
+						'letterday': meetLetterDay,
+						'id': newid,
+						'top': blocktop,
+						'left': blockleft,
+						'width': $scope.percentWidth,
+						'height': blockheight,
+						'color': thiscol,
+						'name': blockname,
+						'room': meetRoom,
+						'asscsecs': asscsecs
+					});
+				}}
+			}}
+
+			for (var weekday in weekdays) {
+				var dayblocks = $scope.schedBlocks.filter(function(n) {return n.letterday == weekdays[weekday];});
+				for (var i = 0; i < dayblocks.length-1; i++) {
+					for (var j = i+1; j < dayblocks.length; j++) {
+						if (TwoOverlap(dayblocks[i], dayblocks[j])) {
+							dayblocks[i].width = dayblocks[i].width / 2;
+							dayblocks[j].width = dayblocks[j].width / 2;
+							dayblocks[j].left = dayblocks[j].left + dayblocks[i].width;
+						}
+					}
+				}
+				$scope.schedBlocks.filter(function(n) {return n.letterday != weekdays[weekday];});
+				$scope.schedBlocks.concat(dayblocks);
+			}
+
+			function TwoOverlap(block1, block2) {
+			// Thank you to Stack Overflow user BC. for the function this is based on.
+			// http://stackoverflow.com/questions/5419134/how-to-detect-if-two-divs-touch-with-jquery
+			var y1 = block1.top;
+			var h1 = block1.height;
+			var b1 = y1 + h1;
+
+			var y2 = block2.top;
+			var h2 = block2.height;
+			var b2 = y2 + h2;
+
+			// This checks if the top of block 2 is lower down (higher value) than the bottom of block 1...
+			// or if the top of block 1 is lower down (higher value) than the bottom of block 2.
+			// In this case, they are not overlapping, so return false
+			if (b1 <= y2 || b2 <= y1) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+		},
+		CrossCheck: function(asscarray) {
+			var filt = asscarray.filter(function(n) {return $scope.schedSections.indexOf(n) !== -1;});
+			return (filt.length || !asscarray.length);
 		}
 	};
 
@@ -347,7 +483,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		if ($scope.checkArr[$scope.checkArr.length-1]) {
 			ga('send', 'event', 'UI interaction', 'requirement', $scope.checkArr[$scope.checkArr.length-1]);			
 		}		// If there are no courses in the list and no currentDept search, the user probably just wants to see all classes that satisfy a given requirement
-		console.log($scope.showPro);
 		if (!($scope.courses.length && $scope.currentDept !== '') && $scope.checkArr.length === 1 && $scope.showPro === 'noFilter') {
 			$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
 		}
