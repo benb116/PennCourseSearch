@@ -173,16 +173,16 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	};
 
 	$scope.sched = {
-		AddRem: function(secID, needloc) {
+		AddRem: function(secID, schedname, needloc) {
 			secID = FormatID(secID).join('-');
 
 			// schedSections is a continually updated array of sections in the current schedule
 			if ($scope.schedSections.indexOf(secID) === -1) { // If the requested section is not scheduled
 				UpdateSchedules.getSchedData(secID, needloc).then(function(resp) {
 					if (resp.data) {
-						var oldData = $scope.schedData[$scope.currentSched].meetings;
+						var oldData = $scope.schedData[(schedname || $scope.currentSched)].meetings;
 						var newData = oldData.concat(resp.data); // Combine old meetings and new meetings
-						$scope.schedData[$scope.currentSched].meetings = newData;
+						$scope.schedData[(schedname || $scope.currentSched)].meetings = newData;
 						localStorageService.set('schedData', $scope.schedData);
 					}
 				});
@@ -332,7 +332,10 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		AddLoc: function() {
 			for (var thisSched in $scope.schedData) {
 				for (var thissec in $scope.schedData[thisSched].meetings) {
-				
+					console.log($scope.schedData[thisSched].meetings[thissec])
+					var thisID = $scope.schedData[thisSched].meetings[thissec].idDashed;
+					$scope.schedData[thisSched].meetings.splice(thissec, 1);
+					$scope.sched.AddRem(thisID, thisSched, true);
 				}
 			}
 		},
@@ -474,6 +477,8 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			return (filt.length || !asscarray.length);
 		}
 	};
+	
+	$scope.sched.AddLoc();
 
 	$scope.reqChange = function () {
 		$scope.checkArr = [];
