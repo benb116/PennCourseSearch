@@ -81,7 +81,7 @@ function ErrorAlert(err) {
 	sweetAlert({
 		title: '#awkward',
 		html: true,
-		text: 'An error occurred. Refresh or <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!&body=Error%20message:%20' + encodeURIComponent(JSON.stringify(err)) + '">email Ben</a>',
+		text: errtext,
 		type: 'error'
 	});
 }

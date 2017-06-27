@@ -7,7 +7,6 @@ var request     = require('request');
 var colors      = require('colors');
 var fs          = require('fs');
 var Keen        = require('keen-js');
-var PushBullet  = require('pushbullet');
 var git         = require('git-rev');
 
 require('log-timestamp')(function() { return new Date().toISOString() + ' %s'; });
@@ -33,7 +32,7 @@ var app = express();
 
 // Set express settings
 app.use(compression());
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31536000000 }));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: 604800000 }));
 
 console.log('Express initialized');
 
@@ -543,7 +542,7 @@ app.get('/Sched', function(req, res) {
 		//	 SchedCourses[JSONSecID] = resJSON[JSONSecID];
 		// }}
 		var schedEvent = {schedCourse: courseID};
-		if (!needLoc) {logEvent('Sched', schedEvent);} else {console.log('yes');}
+		if (!needLoc) {logEvent('Sched', schedEvent);}
 		return res.send(resJSON);
 	});
 	// }

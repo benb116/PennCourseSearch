@@ -332,7 +332,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		AddLoc: function() {
 			for (var thisSched in $scope.schedData) {
 				for (var thissec in $scope.schedData[thisSched].meetings) {
-					console.log($scope.schedData[thisSched].meetings[thissec])
 					var thisID = $scope.schedData[thisSched].meetings[thissec].idDashed;
 					$scope.schedData[thisSched].meetings.splice(thissec, 1);
 					$scope.sched.AddRem(thisID, thisSched, true);
@@ -345,7 +344,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			$scope.fullWeekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 			var startHour    = 10; // start at 10
 			var endHour      = 15; // end at 3pm
-			var percentWidth = 20; // five day default
 			var incSun       = 0; // no weekends
 			var incSat       = 0;
 
@@ -452,25 +450,25 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			}
 
 			function TwoOverlap(block1, block2) {
-			// Thank you to Stack Overflow user BC. for the function this is based on.
-			// http://stackoverflow.com/questions/5419134/how-to-detect-if-two-divs-touch-with-jquery
-			var y1 = block1.top;
-			var h1 = block1.height;
-			var b1 = y1 + h1;
+				// Thank you to Stack Overflow user BC. for the function this is based on.
+				// http://stackoverflow.com/questions/5419134/how-to-detect-if-two-divs-touch-with-jquery
+				var y1 = block1.top;
+				var h1 = block1.height;
+				var b1 = y1 + h1;
 
-			var y2 = block2.top;
-			var h2 = block2.height;
-			var b2 = y2 + h2;
+				var y2 = block2.top;
+				var h2 = block2.height;
+				var b2 = y2 + h2;
 
-			// This checks if the top of block 2 is lower down (higher value) than the bottom of block 1...
-			// or if the top of block 1 is lower down (higher value) than the bottom of block 2.
-			// In this case, they are not overlapping, so return false
-			if (b1 <= y2 || b2 <= y1) {
-				return false;
-			} else {
-				return true;
+				// This checks if the top of block 2 is lower down (higher value) than the bottom of block 1...
+				// or if the top of block 1 is lower down (higher value) than the bottom of block 2.
+				// In this case, they are not overlapping, so return false
+				if (b1 <= y2 || b2 <= y1) {
+					return false;
+				} else {
+					return true;
+				}
 			}
-		}
 		},
 		CrossCheck: function(asscarray) {
 			var filt = asscarray.filter(function(n) {return $scope.schedSections.indexOf(n) !== -1;});
@@ -478,8 +476,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		}
 	};
 	
-	$scope.sched.AddLoc();
-
 	$scope.reqChange = function () {
 		$scope.checkArr = [];
 		for (var req in $scope.check) { // Build an array of all checked boxes (length <= 2)
