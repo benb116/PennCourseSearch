@@ -79,6 +79,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			$scope.get.Sections(terms[0], terms[1], terms[2]);
 			$scope.get.SectionInfo(terms[0], terms[1], terms[2]);
 		} else {
+			$scope.secListTitle = '';
 			$scope.currentCourse = '000';
 			$scope.sections = [];
 			$scope.currentSection = '000';
