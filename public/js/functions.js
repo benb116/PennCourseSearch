@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	$('.tooltip').tooltipster();
 	$('a[rel*=leanModal]').leanModal({
 		top: 70,
 		closeButton: ".modal_close"

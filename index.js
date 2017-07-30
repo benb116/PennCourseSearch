@@ -204,6 +204,7 @@ function SendPennReq (url, resultType, res) {
 			rawResp = JSON.parse(body);
 		} catch(err) {
 			console.log('Resp parse error ' + err);
+			console.log(response);
 			return res.send({});
 		}
 

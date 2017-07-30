@@ -1,4 +1,4 @@
-var PCS = angular.module('PCSApp', ['LocalStorageModule']);
+var PCS = angular.module('PCSApp', ['LocalStorageModule', 'tooltips']);
 
 /*
 	I know this is scope soup. I'm still learning.
