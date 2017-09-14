@@ -32,7 +32,9 @@ var app = express();
 
 // Set express settings
 app.use(compression());
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: 604800000 }));
+app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: '1m' }));
+app.use('/js', express.static(path.join(__dirname, 'public/js'), { maxAge: 0 }));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: '1m' }));
 
 console.log('Express initialized');
 
@@ -202,8 +204,13 @@ function SendPennReq (url, resultType, res) {
 		var parsedRes, rawResp = {};
 		try {
 			rawResp = JSON.parse(body);
+			if (rawResp.statusCode) {
+				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
+				return res.send('status code error');
+			}
 		} catch(err) {
 			console.log('Resp parse error ' + err);
+			console.log(response);
 			console.log(JSON.stringify(response));
 			return res.send({});
 		}
@@ -211,7 +218,7 @@ function SendPennReq (url, resultType, res) {
 		try {
 			if (rawResp.service_meta.error_text) {
 				console.log('Resp Err: ' + rawResp.service_meta.error_text);
-				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
+				res.statusCode = 513; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
 				return res.send(rawResp.service_meta.error_text);
 			}
 			parsedRes = rawResp.result_data;

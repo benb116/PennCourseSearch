@@ -3,6 +3,7 @@
 
 <head>
 	<title>PennCourseSearch</title>
+	<meta name="description" content="PennCourseSearch is a web app designed to help Penn students find courses and make schedules.">
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/index.css" />
@@ -24,7 +25,7 @@
 	<script defer type="text/javascript" src="/js/plugins/sweetalert.min.js"></script>
 	<script defer type="text/javascript" src="/js/plugins/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" src="/js/plugins/angular-local-storage.min.js"></script>
-	<script defer type="text/javascript" src="/js/plugins/angular-tooltips.min.js"></script>
+	<script type="text/javascript" src="/js/plugins/angular-tooltips.min.js"></script>
 	<script defer>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -37,12 +38,15 @@
 </head>
 
 <body ng-controller="CourseController">
+
 	<div id="MenuBar">
 		<a rel="leanModal" href="#ModalWindow" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')">About</a>
 	</div>
+
 	<div id="Top">
 		<h1>PennCourseSearch</h1>
 		<span id="subtitle">{{ subtitle }}</span>
+
 		<form ng-submit="searchChange()">
 			<span>Search by:</span>
 			<select id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="searchChange()">
@@ -59,6 +63,7 @@
 			<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>
 			<!-- This only shows if loading == true. Need to use visibility: hidden -->
 		</form>
+
 		<div id="MenuButtons">
 			<ul>
 				<li>
@@ -87,6 +92,7 @@
 	</div>
 	<div id="BottomResults">
 		<div id="CourseList">
+
 			<div id="CourseHeader">
 				<span class="PCR Qual tooltip" title="Course quality rating" style="background:rgba(45, 160, 240, 0.85);margin-left:0.45em">Qual</span>
 				<span class="PCR Diff tooltip" title="Course difficulty rating" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
@@ -98,6 +104,7 @@
 					<option value="-revs.QDratio">Good and Easy</option>
 				</select>
 			</div>
+
 			<ul>
 				<li ng-repeat="course in courses | orderBy:courseSort" id="{{ course.idDashed }}" 
 					ng-click="get.Sections(course.idDashed)" 
@@ -121,6 +128,7 @@
 				</li>
 			</ul>
 		</div>
+
 		<div id="SectionCol">
 			<div id="Sections">
 				<div style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
@@ -128,6 +136,7 @@
 					<span class="PCR Inst tooltip" title="Instructor Quality rating" style="background:rgba(46, 204, 113, 0.85);">Inst</span>
 					<span style="display:inline;text-overflow:ellipsis">{{secListTitle}}</span>
 				</div>
+
 				<div id="SectionList">
 					<ul>
 						<li ng-repeat="section in sections" id="{{ section.idDashed }}" class="{{section.actType}}" ng-class="{'activeItem': (currentSection == section.idSpaced.replace(' ', '').replace(' ', ''))}" ng-show="
@@ -161,6 +170,7 @@
 					</ul>
 				</div>
 			</div>
+
 			<div id="SectionInfo">
 				<span ng-show="sectionInfo.fullID" style="font-size:1.25em"> {{sectionInfo.fullID}} - {{sectionInfo.title}} <br><br></span>
 				<span ng-show="sectionInfo.timeInfo"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}}</span>
@@ -175,11 +185,12 @@
 				<li ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="get.SectionInfo(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></li>
 			</div>
 		</div>
+
 		<div id="InfoPanel">
 			<div id="FilterSearch">
 				<div class="FilterPanel">
 					<div class="FilterBlock">
-						<span>Filter by requirement (up to two)</span>
+						<span>Filter by College or Wharton requirement (up to two)</span>
 						<div id="reqFilter">
 							<!--ng-disabled for any given checkbox is true if
 									the checkbox itself if not checked AND
@@ -220,10 +231,12 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="FilterPanel">
 					<div class="FilterBlock">
 						<input type="checkbox" id="closedCheck" value="ClosedSec" ng-model="showClosed" checked onchange="ga('send', 'event', 'UI interaction', 'open-close');">Show closed sections
 					</div>
+
 					<div class="FilterBlock">
 						<select id="actFilter" ng-model="showAct" onchange="ga('send', 'event', 'UI interaction', 'activity');">
 							<option value="noFilter">Filter by section type</option>
@@ -240,6 +253,7 @@
 							<option value="ONL">Online Course</option>
 						</select>
 					</div>
+
 					<div class="FilterBlock">
 						<select id="proFilter" ng-model="showPro" ng-change="get.Courses(currentDept, null, checkArr[0]);" onchange="ga('send', 'event', 'UI interaction', 'program');">
 							<option value="noFilter">Filter by program</option>
@@ -255,6 +269,7 @@
 					</div>
 				</div>
 			</div>
+
 			<div id="SchedGraph">
 				<div id="TimeCol" style="position:relative;">
 					<div ng-repeat="timeblock in timeblocks track by $index" class="TimeBlock" style="top: {{schedlines[$index]}}%"> {{timeblock}}:00</div>
@@ -289,6 +304,7 @@
 			</div>
 		</div>
 	</div>
+
 	<div id="ModalWindow" class="Modal">
 			<h2>About PennCourseSearch</h2>
 			<p>PennCourseSearch is a cleaner and simpler way for Quakers to find classes and make schedules. While this is not a full replacement for Penn InTouch, it acts as an improvement of the "Course Search" and "Mock Schedules" features. Search across departments, courses, and sections and refine searches by specific criteria.</p>
@@ -317,11 +333,13 @@
 			<a href="https://keen.io?s=badge" rel="nofollow"><img src="/keen.svg" alt="Analytics by Keen IO" style="margin-top:1.5em;"/></a>
 			<a class="modal_close"><i class="fa fa-times"></i></a>
 		</div>
+
 		<div id="SchedModal" class="Modal">
 			<img id="SchedImage" src="">
 			<span>Right click the image to save it.</span>
 			<a class="modal_close"><i class="fa fa-times"></i></a>
 		</div>
+
 		<div id="UploadModal" class="Modal">
 			<h2>Import your schedule from Penn InTouch</h2>
 			<img src="/Import.png" width="598" height="246">
@@ -332,7 +350,6 @@
 			<input type="submit" name="upload" value="Import!" id="importSubmit" disabled ng-click="sched.Import()">
 			<a class="modal_close"><i class="fa fa-times"></i></a>
 		</div>
-	<!-- <div style="display:none" id="StatusMessage">{{ statusMessage }}</div> -->
 </body>
 
 </html>

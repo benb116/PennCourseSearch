@@ -5,6 +5,7 @@ function validEmail(email) {
 }
 
 function promptNotify (secID) {
+	ga('send', 'event', 'UI interaction', 'notify');
 	// Register a user for notifications from PCN
 	secID = secID.replace(/-/g, ' ');
 	// Has the user put in an email already?

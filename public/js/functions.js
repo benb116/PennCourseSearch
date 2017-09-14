@@ -75,6 +75,8 @@ function ErrorAlert(err) {
 	var errtext = 'An error occurred. Refresh or <a href="mailto:bernsb@seas.upenn.edu?Subject=PCS%20IS%20BROKEN!!!!&body=Error%20message:%20' + encodeURIComponent(JSON.stringify(err)) + '">email Ben</a>';
 
 	if (err.status === 512) {
+		errtext = "PennInTouch just crapped out on us. Please try again.";
+	} else if (err.status === 513) {
 		errtext = "PennInTouch is refreshing, so we can't access class info :( <br> Please frustratedly wait about half an hour before trying again.";
 	}
 	sweetAlert({
