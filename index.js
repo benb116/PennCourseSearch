@@ -32,9 +32,9 @@ var app = express();
 
 // Set express settings
 app.use(compression());
-app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: '1m' }));
+app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: 2628000000 }));
 app.use('/js', express.static(path.join(__dirname, 'public/js'), { maxAge: 0 }));
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: '1m' }));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: 2628000000 }));
 
 console.log('Express initialized');
 
