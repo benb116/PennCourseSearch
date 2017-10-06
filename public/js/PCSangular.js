@@ -59,6 +59,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	$scope.currentSched = $scope.schedules[0];
 
 	$scope.searchChange = function() {
+		ga('send', 'event', 'UI interaction', 'searchChange', $scope.searchType);		
 		// This prevents requests from being sent out immediately
 		delay(function() {
 			$scope.initiateSearch($scope.search);

@@ -164,7 +164,7 @@ app.get('/Search', function(req, res) {
 	// It's much faster to access pre-fetched department data than to poll the API for dozens of classes
 	if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !req.query.reqParam && !proSearch && !actSearch && !includeOpen ) {
 		try {
-			fs.readFile('./'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
+			fs.readFile('./Data/'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
 				if (err) {
 				// 	baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
 				// 	baseURL += "&description=" + searchParam;
@@ -179,7 +179,7 @@ app.get('/Search', function(req, res) {
 		}
 	} else if (req.query.reqParam && req.query.reqParam.charAt(0) == "W" && !proSearch) {
 		try {
-			fs.readFile('./'+currentTerm+'/WHAR.json', function (err, data) {
+			fs.readFile('./Data/'+currentTerm+'/WHAR.json', function (err, data) {
 				if (err) {return res.send([]);}
 				return res.send(ParseDeptList(JSON.parse(data)));
 			});

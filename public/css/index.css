@@ -31,8 +31,9 @@ i {
 }
 
 #MenuBar {
+	text-align: right;
 	height: 2em;
-	width: 6em;
+	width: 20em;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -43,7 +44,7 @@ i {
 }
 
 #MenuBar > a {
-	/*margin-right: 2em;*/
+	margin-right: 1em;
 	text-decoration: none;
 	color: black;
 }
@@ -604,12 +605,13 @@ hr {
 	border-radius: 4px 0 0 4px;
 	border: 1px solid #3f94d0;
 	position: absolute;
-	left: calc(16% - 2em);
-	width: 2em;
-	height: 1.5em;
+	left: calc(14% - 1.6em);
+	top: 4px;
+	width: 1.5em;
+	height: 1.1em;
 	background-color: #3f94d0;
 	background-position: 50%;
-	background-size: 1em;
+	background-size: .75em;
 	background-image: url(/css/venmo.png);
 	background-repeat: no-repeat;
 }
@@ -619,13 +621,14 @@ hr {
 	border: 1px solid #3f94d0;
 	border-left: 0;
 	position: absolute;
-	left: calc(16%);
+	left: calc(14%);
+	top: 4px;
 	padding: 0 4px;
-	width: 6.25em;
+	width: 5em;
 	height: 1.5em;
 	text-align: center;
 	font-weight: 400;
-	font-size: 1em;
+	font-size: .75em;
 	line-height: 1.5em;
 	background: #fff;
 	color: #3f94d0;

@@ -5,7 +5,7 @@ $(document).ready(function() {
 	}); // Define modal close button
 
 	var subtitles = [
-		"Cause PennInTouch sucks",
+		"Free shipping on all items in your course cart.",
 		"You can press the back button, but you don't even need to.",
 		"Invented by Benjamin Franklin in 1793",
 		"Focus on your classes, not your schedule.",

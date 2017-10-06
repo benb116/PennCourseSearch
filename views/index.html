@@ -16,7 +16,7 @@
 	<!-- My code -->
 	<script type="text/javascript" src="/js/PCSangular.js"></script>
 	<script type="text/javascript" src="/js/functions.js"></script>
-	<script defer type="text/javascript" src="/js/factories.js"></script>
+	<script type="text/javascript" src="/js/factories.js"></script>
 	<script defer type="text/javascript" src="/js/pcn.js"></script>
 	<script defer type="text/javascript" src="/js/importSched.js"></script>
 	<!-- Third party plugins -->
@@ -31,7 +31,9 @@
 <body ng-controller="CourseController">
 
 	<div id="MenuBar">
-		<a rel="leanModal" href="#ModalWindow" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')">About</a>
+		<a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Donate</span></a>
+		<a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span style="padding-right:0.5em;"><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
+		<a rel="leanModal" href="#ModalWindow" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')" style="padding-right:0.5em;">About</a>
 	</div>
 
 	<div id="Top">
@@ -310,9 +312,9 @@
 				<span class="PCR Inst" style="background:rgba(46, 204, 113, 0.85 );display:inline;padding-left:0.25em;padding-right:0.25em;">green</span>. The squares tell you the status of a section.
 				<span class="statusClass openSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is an open section and
 				<span class="statusClass closedSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is a closed section.</p>
-			<div class="ModalThird">
+			<!-- <div class="ModalThird">
 				<span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Venmo Me</span></a>
-			</div>
+			</div> -->
 			<div class="ModalThird">
 				<span>Questions or comments?</span>
 				<a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
@@ -321,7 +323,7 @@
 				<span>Want to see all of PCS's code?</span>
 				<a href="https://github.com/benb116/PennCourseSearch"><span><i class="fa fa-github" style="padding-right:0.25em;"></i>View on Github</span></a>
 			</div>
-			<a href="https://keen.io?s=badge" rel="nofollow"><img src="/keen.svg" alt="Analytics by Keen IO" style="margin-top:1.5em;"/></a>
+			<div class="ModalThird"><a href="https://keen.io?s=badge" rel="nofollow"><img src="/keen.svg" alt="Analytics by Keen IO"/></a></div>
 			<a class="modal_close"><i class="fa fa-times"></i></a>
 		</div>
 
