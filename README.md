@@ -10,10 +10,10 @@ The server is written using NodeJS and the frontend with Angular. The app is cur
 
 Specific files you may be interested in:
 
-* [Server JS](https://github.com/benb116/PennCourseSearch/blob/Angular/index.js)
-* [JS (including Angular controller)](https://github.com/benb116/PennCourseSearch/tree/Angular/public/js)
-* [CSS](https://github.com/benb116/PennCourseSearch/blob/Angular/public/css/index.css)
-* [HTML with Angular directives](https://github.com/benb116/PennCourseSearch/blob/Angular/views/index.html)
+* [Server JS](https://github.com/benb116/PennCourseSearch/blob/master/index.js)
+* [JS (including Angular controller)](https://github.com/benb116/PennCourseSearch/tree/master/public/js)
+* [CSS](https://github.com/benb116/PennCourseSearch/blob/master/public/css/index.css)
+* [HTML with Angular directives](https://github.com/benb116/PennCourseSearch/blob/master/views/index.html)
 
 If you have questions, ideas, bug reports, or if you'd like to suggest a new subtitle, let me know.
 

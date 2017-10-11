@@ -75,7 +75,7 @@ app.listen(process.env.PORT || 3000, function(){
 	console.log("Node app is running. Better go catch it.".green);
 });
 
-var currentTerm = '2017C';
+var currentTerm = '2018A';
 
 // Handle main page requests
 app.get('/', function(req, res) {

@@ -6,7 +6,7 @@ var PCS = angular.module('PCSApp', ['LocalStorageModule', 'tooltips']);
 
 PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules){
 
-	var currentTerm = '2017C';
+	var currentTerm = '2018A';
 	var placeholderMap = {
 		'courseIDSearch': 'Search for a department, course, or section',
 		'keywordSearch': 'Search by course title or description',
@@ -46,7 +46,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	}
 	for (var schedObj in $scope.schedData) {
 		if ($scope.schedData[schedObj].term !== currentTerm) {
-			delete $scope.schedData[schedObj]; // Delete schedules that are not for the current term2
+			delete $scope.schedData[schedObj]; // Delete schedules that are not for the current term
 		}
 	}
 	if (!$scope.schedData || !Object.keys($scope.schedData).length) {
