@@ -32,10 +32,19 @@ var reqCodes = {
 	WGLO: "Global Environment",
 	WSST: "Social Structures",
 	WSAT: "Science and Technology",
-	WLAC: "Language, Arts & Culture"
+	WLAC: "Language, Arts & Culture",
+	EMAT: "SEAS - Math",
+	ESCI: "SEAS - Natural Science",
+	EENG: "SEAS - Engineering",
+	ESSC: "SEAS - Social Sciences",
+	EHUM: "SEAS - Humanities",
+	ETBS: "SEAS - Technology, Business, and Society",
+	EWRT: "SEAS - Writing",
+	ENOC: "SEAS - No Credit"
 };
 
 var WhartonReq = require('./wharreq.json');
+var EngineerReq = require('./engreq.json');
 
 var source = process.argv[2].toLowerCase(); // registrar or review
 var index = Number(process.argv[3]); // Can be a number or a dept code
@@ -74,7 +83,6 @@ return "done";
 
 function PullRegistrar(index) {
 	var thedept = deptList[index];
-	console.log(thedept, index);
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
 	if (!thedept) {return;}
 	request({
@@ -82,6 +90,7 @@ function PullRegistrar(index) {
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}
 	}, function(error, response, body) {
 		console.log('Received', thedept);
+		console.time('go');
 		if (!error && body) {
 			var inJSON = JSON.parse(body).result_data; // Convert to JSON object
 
@@ -131,41 +140,120 @@ function PullRegistrar(index) {
 function GetRequirements(section) {
 	var idDashed = (section.course_department + '-' + section.course_number);
 
-	var reqList = section.fulfills_college_requirements;
+	var reqList = section.fulfills_college_requirements; // Pull standard college requirements
 	var reqCodesList = []; 
 	try {
-		reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
+		reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];  // Generate the req codes
 		reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
 	} catch(err) {}
-	var extraReq = section.important_notes;
+
+	var extraReq = section.important_notes; // Sometimes there are extra college requirements cause why not
 	var extraReqCode;
-	for (var i = 0; i < extraReq.length; i++) {
+	for (var i = 0; i < extraReq.length; i++) { // Run through each one
 		extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
-		if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
+		if (extraReqCode === 'MDO' || extraReqCode === 'MDN') { // If it matches humanities or natural science
 		  // reqList.push(extraReq[i]);
 		 	reqCodesList.push(extraReqCode);
 		} else if (section.requirements[0]) {
-			if (section.requirements[0].registration_control_code === 'MDB') {
+			if (section.requirements[0].registration_control_code === 'MDB') { // Both?
 				reqCodesList.push('MDO');
 				reqCodesList.push('MDN');
 			}
 		}
-		if (extraReq[i].split(" ")[0] !== "Registration") {
+		if (extraReq[i].split(" ")[0] !== "Registration") { // Other notes that are not about "registration for associated"
 		  reqList.push(extraReq[i]);
 		}
 	}
+
 	try {
-		var this_GED = WhartonReq[idDashed].GED;
+		var this_GED = WhartonReq[idDashed].GED; // Pull the courses wharton requirement if it has one
 		reqCodesList.push(this_GED);
 		reqList.push(reqCodes[this_GED]);
 	} catch (err) {}
 	try {
-		if (WhartonReq[idDashed].global) {
+		if (WhartonReq[idDashed].global) { // Check if it also applies to wharton global requirement
 			reqCodesList.push("WGLO");
-			reqList.push(reqCodes.WGLO);
+		reqList.push(reqCodes.WGLO);
 		}
 	} catch (err) {}
+
+	engReturn = EngReqRules(section.course_department, section.course_number);
+	reqCodesList = reqCodesList.concat(engReturn[0]);
+	reqList = reqList.concat(engReturn[1]);
 	return [reqCodesList, reqList];
+}
+
+function EngReqRules(dept, num) {
+	// If the course has it's own definition
+	var engreqCodesList = [];
+	var engreqList = [];
+	var thisEngObj = {};
+	// Get the departmental rules first
+	if (EngineerReq[dept]) {
+		// Check math
+		if (EngineerReq[dept].math) {
+			if (dept != 'MATH' || (dept == 'MATH' && Number(num) >= 104)) { // Only math classes >= 104 count
+				thisEngObj.math = true;
+			}
+		}
+		// Check natsci
+		if (EngineerReq[dept].natsci) {
+			if ((['BIOL', 'GEOL', 'PHYS'].indexOf(dept) < 0)||
+				(dept == 'BIOL' && Number(num) > 100)		|| 	// Only Biol classes > 100
+				(dept == 'GEOL' && Number(num) > 200)		|| 	// Only Geol classes > 200
+				(dept == 'PHYS' && Number(num) >=150)) {		// Only Phys classes >=150
+				thisEngObj.natsci = true;
+			}
+		}
+		// Check Engineering
+		if (EngineerReq[dept].eng) {
+			if (num != '296' && num != '297') { // No engineering classes with num 296 or 297
+				thisEngObj.eng = true;
+			}
+		}
+		if (EngineerReq[dept].ss) {
+			if (Number(num) < 500) { // No 500-level ss classes count
+				thisEngObj.ss = true;
+			}
+		}
+		if (EngineerReq[dept].hum) {
+			if (Number(num) < 500) { // No 500-level ss classes count
+				thisEngObj.hum = true;
+			}
+		}
+		if (EngineerReq[dept].tbs) {
+			thisEngObj.tbs = true;
+		}
+		if (EngineerReq[dept].nocred) {
+			if ((dept == 'PHYS' && Number(num) < 140) || (dept == 'STAT' && Number(num) < 430)) {
+				thisEngObj.nocred = true;
+			}
+		}
+	}
+	specificReq = (EngineerReq[dept+'-'+num] || {});
+	if (EngineerReq[dept+'-'+num]) {
+		if (specificReq.hasOwnProperty('math'))	{thisEngObj.math 	= specificReq.math;}
+		if (specificReq.hasOwnProperty('natsci'))	{thisEngObj.natsci 	= specificReq.natsci;}
+		if (specificReq.hasOwnProperty('eng'))	{thisEngObj.eng 	= specificReq.eng}
+		if (specificReq.hasOwnProperty('ss'))		{thisEngObj.ss 		= specificReq.ss;}
+		if (specificReq.hasOwnProperty('hum')) 	{thisEngObj.hum 	= specificReq.hum;}
+		if (specificReq.hasOwnProperty('tbs')) 	{thisEngObj.tbs 	= specificReq.tbs;}
+		if (specificReq.hasOwnProperty('writ')) 	{thisEngObj.writ 	= true;}
+		if (specificReq.hasOwnProperty('nocred'))	{thisEngObj.nocred 	= specificReq.nocred;}
+	}
+	// tbs classes don't count for engineering
+	if (thisEngObj.tbs) {thisEngObj.eng = false;}
+
+	if (thisEngObj.math) 	{engreqCodesList.push('EMAT'); engreqList.push(reqCodes['EMAT']);}
+	if (thisEngObj.natsci) 	{engreqCodesList.push('ESCI'); engreqList.push(reqCodes['ESCI']);}
+	if (thisEngObj.eng) 	{engreqCodesList.push('EENG'); engreqList.push(reqCodes['EENG']);}
+	if (thisEngObj.ss) 		{engreqCodesList.push('ESSC'); engreqList.push(reqCodes['ESSC']);}
+	if (thisEngObj.hum) 	{engreqCodesList.push('EHUM'); engreqList.push(reqCodes['EHUM']);}
+	if (thisEngObj.tbs) 	{engreqCodesList.push('ETBS'); engreqList.push(reqCodes['ETBS']);}
+	if (thisEngObj.writ) 	{engreqCodesList.push('EWRT'); engreqList.push(reqCodes['EWRT']);}
+	if (thisEngObj.nocred) 	{engreqCodesList.push('ENOC'); engreqList.push(reqCodes['ENOC']);}
+
+	return [engreqCodesList, engreqList];
 }
 
 function PullReview(index) {
@@ -315,6 +403,45 @@ function CollectWharton() {
 			if (!err) {
 				var deptJSON = JSON.parse(contents);
 				// var deptJSON = deptJSON[0];
+				for (var key in deptJSON) {
+					var thisCourse = deptJSON[key];
+					if (thisCourse.courseReqs) {
+						var lastreq = thisCourse.courseReqs[thisCourse.courseReqs.length-1];
+						if (lastreq && lastreq.charAt(0) === "W") {
+							wharResp[thisCourse.idSpaced] = {
+								'idDashed': thisCourse.idDashed,
+								'idSpaced': thisCourse.idSpaced,
+								'courseTitle': thisCourse.courseTitle,
+								'courseReqs': thisCourse.courseReqs,
+								'courseCred': thisCourse.courseCred
+							};
+							index++;
+						}
+					}
+					if (thisCourse.idDashed.split('-')[0] === deptList[deptList.length-1]) {
+						var arrResp = [];
+						for (key in wharResp) { if (wharResp.hasOwnProperty(key)) {
+							arrResp.push(wharResp[key]);
+						}}
+						fs.writeFile('./Data/'+currentTerm+'/WHAR.json', JSON.stringify(arrResp), function (err) {
+							if (err) {
+								console.log("Wharton error: " + err);
+							}
+						});
+					}
+				}
+			}
+		});
+	}
+}
+
+function CollectEngineering() {
+	var engResp = {};
+	for (var i = 0; i < deptList.length; i++) {
+		var thisdept = deptList[i];
+		fs.readFile('./Data/' + currentTerm + '/' + thisdept + '.json', 'utf8', function(err, contents) {
+			if (!err) {
+				var deptJSON = JSON.parse(contents);
 				for (var key in deptJSON) {
 					var thisCourse = deptJSON[key];
 					if (thisCourse.courseReqs) {
