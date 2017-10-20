@@ -192,7 +192,6 @@ app.get('/Search', function(req, res) {
 });
 
 function SendPennReq (url, resultType, res) {
-	console.log(url)
 	request({
 		uri: url,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
@@ -336,7 +335,6 @@ function parseCourseList(Res) {
 		var courseListName	= thisDept+' '+thisNum; // Get course dept and number
 		if (Res.hasOwnProperty(key) && !thisKey.is_cancelled) { // Iterate through each course
 			var numCred = Number(thisKey.credits.split(" ")[0]);
-			console.log(courseListName, numCred)
 			if (!coursesList[courseListName]) {
 				var courseTitle	 = thisKey.course_title;
 				var reqCodesList = GetRequirements(thisKey);
