@@ -106,13 +106,16 @@
 						(!checkArr[0]) || ((course.courseReqs.indexOf(checkArr[0]) > -1)) && 
 						(!checkArr[1] || course.courseReqs.indexOf(checkArr[1]) > -1) && 
 						(!checkArr[2] || course.courseReqs.indexOf(checkArr[2]) > -1)
-					">
+					"
+					ng-hide="(course.courseCred != credFilter) && (credFilter != 'noFilter')">
 					<!--Dealing with requirements: The list element will be shown if: 
 						There are no requirements (checkArr == [], therefore !checkArr[0] && !checkArr[1]) 
 						OR
 						There is one requirement (checkArr[0] && !checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0] 
 						OR
 						There are two requirements (checkArr[0] && checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0] AND checkArr[1]
+
+						Also hide the course if it doesn't match the number of credits
 					-->
 					<span class="PCR Qual" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQ | number:2}}</span>
 					<span class="PCR Diff" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cD | number:2}}</span>
@@ -168,8 +171,9 @@
 				<span ng-show="sectionInfo.fullID" style="font-size:1.25em"> {{sectionInfo.fullID}} - {{sectionInfo.title}} <br><br></span>
 				<span ng-show="sectionInfo.timeInfo"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}}</span>
 				<br>
-				<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></span>
 				</span>
+				<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br></span>
+				<!-- <span ng-show="sectionInfo.sectionCred"> {{ sectionInfo.sectionCred }} CU <br><br></span> -->
 				<span ng-show="sectionInfo.description">Description: {{sectionInfo.description}} <br><br></span>
 				<span ng-show="sectionInfo.reqsFilled.length">Requirements Fulfilled: <br><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span>
 				</span>
@@ -183,7 +187,7 @@
 			<div id="FilterSearch">
 				<div class="FilterPanel">
 					<div class="FilterBlock">
-						<span>Filter by College or Wharton requirement (up to two)</span>
+						<span>Filter by College or Wharton requirement (up to 2)</span>
 						<div id="reqFilter">
 							<!--ng-disabled for any given checkbox is true if
 									the checkbox itself if not checked AND
@@ -244,6 +248,13 @@
 							<option value="PRC">SCUE Preceptorial</option>
 							<option value="PRO">NSO Proseminar</option>
 							<option value="ONL">Online Course</option>
+						</select>
+
+						<select id="credSelect" ng-model="credFilter" onchange="ga('send', 'event', 'UI interaction', 'credit');">
+							<option value="noFilter">Filter by CU</option>
+							<option value="0.5">0.5 CU</option>
+							<option value="1">1 CU</option>
+							<option value="1.5">1.5 CU</option>
 						</select>
 					</div>
 

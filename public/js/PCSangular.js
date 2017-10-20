@@ -30,6 +30,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		$scope.showClosed = true; // filter list of sections to exclude closed sections
 		$scope.showAct = 'noFilter'; // value of activity filter select menu
 		$scope.showPro = 'noFilter'; // value of program filter select menu
+		$scope.credFilter = 'noFilter'; // value of credit filter select menu
 		$scope.check = {}; // Object of requirement filters (added as true or false like "MFR": true)
 		$scope.checkArr = []; // Array of enabled requirement filter codes (as strings)
 	};
@@ -59,7 +60,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 	$scope.currentSched = $scope.schedules[0];
 
 	$scope.searchChange = function() {
-		ga('send', 'event', 'UI interaction', 'searchChange', $scope.searchType);		
+		// ga('send', 'event', 'UI interaction', 'searchChange', $scope.searchType);		
 		// This prevents requests from being sent out immediately
 		delay(function() {
 			$scope.initiateSearch($scope.search);

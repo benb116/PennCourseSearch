@@ -192,6 +192,7 @@ app.get('/Search', function(req, res) {
 });
 
 function SendPennReq (url, resultType, res) {
+	console.log(url)
 	request({
 		uri: url,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
@@ -333,17 +334,24 @@ function parseCourseList(Res) {
 		var thisDept	= thisKey.course_department.toUpperCase();
 		var thisNum	 = thisKey.course_number.toString();
 		var courseListName	= thisDept+' '+thisNum; // Get course dept and number
-		if (Res.hasOwnProperty(key) && !coursesList[courseListName] && !thisKey.is_cancelled) { // Iterate through each course
-			var courseTitle	 = thisKey.course_title;
-			var reqCodesList = GetRequirements(thisKey);
-			var revData = GetRevData(thisDept, thisNum);
-			coursesList[courseListName] = {
-				'idSpaced': courseListName,
-				'idDashed': courseListName.replace(/ /g,'-'),
-				'courseTitle': courseTitle,
-				'courseReqs': reqCodesList[0],
-				'revs': revData
-			};
+		if (Res.hasOwnProperty(key) && !thisKey.is_cancelled) { // Iterate through each course
+			var numCred = Number(thisKey.credits.split(" ")[0]);
+			console.log(courseListName, numCred)
+			if (!coursesList[courseListName]) {
+				var courseTitle	 = thisKey.course_title;
+				var reqCodesList = GetRequirements(thisKey);
+				var revData = GetRevData(thisDept, thisNum);
+				coursesList[courseListName] = {
+					'idSpaced': courseListName,
+					'idDashed': courseListName.replace(/ /g,'-'),
+					'courseTitle': courseTitle,
+					'courseReqs': reqCodesList[0],
+					'courseCred': numCred,
+					'revs': revData
+				};
+			} else if (coursesList[courseListName].courseCred < numCred) {
+				coursesList[courseListName].courseCred = numCred
+			}
 		}
 	}}
 	var arrResp = [];
@@ -465,6 +473,7 @@ function parseSectionInfo(Res) {
 		} else {
 			OpenClose = 'Closed';
 		}
+		var secCred = Number(entry.credits.split(" ")[0]);
 
 		var asscType = '';
 		var asscList = [];
@@ -502,6 +511,7 @@ function parseSectionInfo(Res) {
 			'timeInfo': meetArray,
 			'associatedType': asscType,
 			'associatedSections': asscList,
+			'sectionCred': secCred,
 			'reqsFilled': reqsArray
 		};
 		return sectionInfo;
