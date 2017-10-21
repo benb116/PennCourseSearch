@@ -172,7 +172,7 @@
 				<span ng-show="sectionInfo.timeInfo"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}}</span>
 				<br>
 				</span>
-				<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br></span>
+				<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></span>
 				<!-- <span ng-show="sectionInfo.sectionCred"> {{ sectionInfo.sectionCred }} CU <br><br></span> -->
 				<span ng-show="sectionInfo.description">Description: {{sectionInfo.description}} <br><br></span>
 				<span ng-show="sectionInfo.reqsFilled.length">Requirements Fulfilled: <br><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span>
@@ -187,7 +187,7 @@
 			<div id="FilterSearch">
 				<div class="FilterPanel">
 					<div class="FilterBlock">
-						<span>Filter by College or Wharton requirement (up to 2)</span>
+						<span>Filter by requirement</span>
 						<div id="reqFilter">
 							<!--ng-disabled for any given checkbox is true if
 									the checkbox itself if not checked AND

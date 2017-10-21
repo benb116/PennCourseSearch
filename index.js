@@ -73,7 +73,7 @@ git.short(function (str) {
 });
 
 // Start the server
-app.listen(process.env.PORT || 3000, function(){
+app.listen(process.env.PORT || 5000, function(){
 	console.log("Node app is running. Better go catch it.".green);
 });
 
@@ -139,7 +139,7 @@ app.get('/Search', function(req, res) {
 
 	// Building the request URI
 	var reqSearch = buildURI("", 'reqFilter');
-	if (!(req.query.reqParam && req.query.reqParam.charAt(0) === "W")) {
+	if (!(req.query.reqParam && (req.query.reqParam.charAt(0) === "W" || req.query.reqParam.charAt(0) === "E"))) {
 			reqSearch = buildURI(req.query.reqParam, 'reqFilter');
 	}
 	var proSearch   = buildURI(req.query.proParam, 'proFilter');
@@ -161,7 +161,6 @@ app.get('/Search', function(req, res) {
 	if (searchParam) {
 		logEvent('Search', searchEvent);
 	}
-	console.log(baseURL);
 
 	// It's much faster to access pre-fetched department data than to poll the API for dozens of classes
 	// if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !req.query.reqParam && !proSearch && !actSearch && !includeOpen ) {
@@ -192,22 +191,19 @@ app.get('/Search', function(req, res) {
 	// 	SendPennReq(baseURL, resultType, res);
 	// }
 	if (searchType == 'courseIDSearch' && resultType == 'deptSearch' &&!req.query.proParam) {
-		console.log('yes');
-
-		console.log(searchParam);
-		console.log(req.query.reqParam)
+		
 		var returnCourses = allCourses
 		if (searchParam) {
 			var returnCourses = returnCourses.filter(function(obj) {return (obj.idDashed.split('-')[0] == searchParam.toUpperCase());})
 		}
 		if (req.query.reqParam) {
-			console.log('yeyeye')
 			var returnCourses = returnCourses.filter(function(obj) {return ((obj.courseReqs.indexOf(req.query.reqParam) > -1))})
 		}
 
 		retC = ParseDeptList(returnCourses)
 		return res.send(returnCourses)
 	} else {
+		console.log('w')
 		SendPennReq(baseURL, resultType, res);
 
 	}
