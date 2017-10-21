@@ -63,7 +63,9 @@ console.log('Plugins initialized');
 
 console.time('Reviews loaded');
 var allRevs		= require('./loadRevs.js');
+var allCourses	= require('./loadCourses.js');
 var WhartonReq 	= require('./wharreq.json');
+var EngineerReq = require('./engreq.json');
 console.timeEnd('Reviews loaded');
 
 git.short(function (str) {
@@ -133,7 +135,7 @@ app.get('/Search', function(req, res) {
 	var searchType     = req.query.searchType;	 // Course ID, Keyword, or Instructor
 	var resultType     = req.query.resultType;	 // Course numbers, section numbers, section info
 	var instructFilter = req.query.instFilter;	 // Is there an instructor filter?
-	if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {req.query.reqParam += ',MDB';} // this is stupid
+	// if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {req.query.reqParam += ',MDB';} // this is stupid
 
 	// Building the request URI
 	var reqSearch = buildURI("", 'reqFilter');
@@ -145,7 +147,6 @@ app.get('/Search', function(req, res) {
 	var includeOpen = buildURI(req.query.openAllow, 'includeOpen');
 
 	var baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
-
 	if (searchType) {
 		baseURL += searchTypes[searchType] + searchParam;
 	}
@@ -160,34 +161,55 @@ app.get('/Search', function(req, res) {
 	if (searchParam) {
 		logEvent('Search', searchEvent);
 	}
+	console.log(baseURL);
 
 	// It's much faster to access pre-fetched department data than to poll the API for dozens of classes
-	if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !req.query.reqParam && !proSearch && !actSearch && !includeOpen ) {
-		try {
-			fs.readFile('./Data/'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
-				if (err) {
-				// 	baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
-				// 	baseURL += "&description=" + searchParam;
-				// 	SendPennReq(baseURL, resultType, res);
-					return res.send([]);
-				} else {
-					return res.send(ParseDeptList(JSON.parse(data)));
-				}
-			});
-		} catch(err) {
-			return res.send('');
+	// if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !req.query.reqParam && !proSearch && !actSearch && !includeOpen ) {
+	// 	try {
+	// 		fs.readFile('./Data/'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
+	// 			if (err) {
+	// 			// 	baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
+	// 			// 	baseURL += "&description=" + searchParam;
+	// 			// 	SendPennReq(baseURL, resultType, res);
+	// 				return res.send([]);
+	// 			} else {
+	// 				return res.send(ParseDeptList(JSON.parse(data)));
+	// 			}
+	// 		});
+	// 	} catch(err) {
+	// 		return res.send('');
+	// 	}
+	// } else if (req.query.reqParam && req.query.reqParam.charAt(0) == "W" && !proSearch) {
+	// 	try {
+	// 		fs.readFile('./Data/'+currentTerm+'/WHAR.json', function (err, data) {
+	// 			if (err) {return res.send([]);}
+	// 			return res.send(ParseDeptList(JSON.parse(data)));
+	// 		});
+	// 	} catch(err) {
+	// 		return res.send('');
+	// 	}
+	// } else { // Otherwise, ask the API for data
+	// 	SendPennReq(baseURL, resultType, res);
+	// }
+	if (searchType == 'courseIDSearch' && resultType == 'deptSearch' &&!req.query.proParam) {
+		console.log('yes');
+
+		console.log(searchParam);
+		console.log(req.query.reqParam)
+		var returnCourses = allCourses
+		if (searchParam) {
+			var returnCourses = returnCourses.filter(function(obj) {return (obj.idDashed.split('-')[0] == searchParam.toUpperCase());})
 		}
-	} else if (req.query.reqParam && req.query.reqParam.charAt(0) == "W" && !proSearch) {
-		try {
-			fs.readFile('./Data/'+currentTerm+'/WHAR.json', function (err, data) {
-				if (err) {return res.send([]);}
-				return res.send(ParseDeptList(JSON.parse(data)));
-			});
-		} catch(err) {
-			return res.send('');
+		if (req.query.reqParam) {
+			console.log('yeyeye')
+			var returnCourses = returnCourses.filter(function(obj) {return ((obj.courseReqs.indexOf(req.query.reqParam) > -1))})
 		}
-	} else { // Otherwise, ask the API for data
+
+		retC = ParseDeptList(returnCourses)
+		return res.send(returnCourses)
+	} else {
 		SendPennReq(baseURL, resultType, res);
+
 	}
 });
 
@@ -265,8 +287,7 @@ function ParseDeptList (res) {
 	return res;
 }
 
-// The requirement name -> code map
-var reqCodes = {
+var collegeCodes = {
 	Society: "MDS",
 	History: "MDH",
 	Arts: "MDA",
@@ -278,51 +299,154 @@ var reqCodes = {
 	College: "MQS",
 	Formal: "MFR",
 	Cross: "MC1",
-	Cultural: "MC2",
+	Cultural: "MC2"
+}
+
+// The requirement code -> name map
+var reqCodes = {
+	MDS: "Society Sector",
+	MDH: "History & Tradition Sector",
+	MDA: "Arts & Letters Sector",
+	MDO: "Humanities & Social Science Sector",
+	MDL: "Living World Sector",
+	MDP: "Physical World Sector",
+	MDN: "Natural Science & Math Sector",
+	MWC: "Writing Requirement",
+	MQS: "College Quantitative Data Analysis Req.",
+	MFR: "Formal Reasoning Course",
+	MC1: "Cross Cultural Analysis",
+	MC2: "Cultural Diversity in the US",
 	WGLO: "Wharton - Global Environment",
 	WSST: "Wharton - Social Structures",
 	WSAT: "Wharton - Science and Technology",
-	WLAC: "Wharton - Language, Arts & Culture"
+	WLAC: "Wharton - Language, Arts & Culture",
+	EMAT: "SEAS - Math",
+	ESCI: "SEAS - Natural Science",
+	EENG: "SEAS - Engineering",
+	ESSC: "SEAS - Social Sciences",
+	EHUM: "SEAS - Humanities",
+	ETBS: "SEAS - Technology, Business, and Society",
+	EWRT: "SEAS - Writing",
+	ENOC: "SEAS - No Credit"
 };
 
 function GetRequirements(section) {
 	var idDashed = (section.course_department + '-' + section.course_number);
 
-	var reqList = section.fulfills_college_requirements;
+	var reqList = section.fulfills_college_requirements; // Pull standard college requirements
 	var reqCodesList = []; 
 	try {
-		reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
-		reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
+		reqCodesList[0] = collegeCodes[reqList[0].split(" ")[0]];  // Generate the req codes
+		reqCodesList[1] = collegeCodes[reqList[1].split(" ")[0]];
 	} catch(err) {}
-	var extraReq = section.important_notes;
+
+	var extraReq = section.important_notes; // Sometimes there are extra college requirements cause why not
 	var extraReqCode;
-	for (var i = 0; i < extraReq.length; i++) {
-		extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
-		if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
+	for (var i = 0; i < extraReq.length; i++) { // Run through each one
+		extraReqCode = collegeCodes[extraReq[i].split(" ")[0]];
+		if (extraReqCode === 'MDO' || extraReqCode === 'MDN') { // If it matches humanities or natural science
 		  // reqList.push(extraReq[i]);
 		 	reqCodesList.push(extraReqCode);
 		} else if (section.requirements[0]) {
-			if (section.requirements[0].registration_control_code === 'MDB') {
+			if (section.requirements[0].registration_control_code === 'MDB') { // Both?
 				reqCodesList.push('MDO');
 				reqCodesList.push('MDN');
 			}
 		}
-		if (extraReq[i].split(" ")[0] !== "Registration") {
+		if (extraReq[i].split(" ")[0] !== "Registration") { // Other notes that are not about "registration for associated"
 		  reqList.push(extraReq[i]);
 		}
 	}
+
 	try {
-		var this_GED = WhartonReq[idDashed].GED;
+		var this_GED = WhartonReq[idDashed].GED; // Pull the courses wharton requirement if it has one
 		reqCodesList.push(this_GED);
 		reqList.push(reqCodes[this_GED]);
 	} catch (err) {}
 	try {
-		if (WhartonReq[idDashed].global) {
+		if (WhartonReq[idDashed].global) { // Check if it also applies to wharton global requirement
 			reqCodesList.push("WGLO");
 		reqList.push(reqCodes.WGLO);
 		}
 	} catch (err) {}
+
+	engReturn = EngReqRules(section.course_department, section.course_number);
+	reqCodesList = reqCodesList.concat(engReturn[0]);
+	reqList = reqList.concat(engReturn[1]);
 	return [reqCodesList, reqList];
+}
+
+function EngReqRules(dept, num) {
+	// If the course has it's own definition
+	var engreqCodesList = [];
+	var engreqList = [];
+	var thisEngObj = {};
+	// Get the departmental rules first
+	if (EngineerReq[dept]) {
+		// Check math
+		if (EngineerReq[dept].math) {
+			if (dept != 'MATH' || (dept == 'MATH' && Number(num) >= 104)) { // Only math classes >= 104 count
+				thisEngObj.math = true;
+			}
+		}
+		// Check natsci
+		if (EngineerReq[dept].natsci) {
+			if ((['BIOL', 'GEOL', 'PHYS'].indexOf(dept) < 0)||
+				(dept == 'BIOL' && Number(num) > 100)		|| 	// Only Biol classes > 100
+				(dept == 'GEOL' && Number(num) > 200)		|| 	// Only Geol classes > 200
+				(dept == 'PHYS' && Number(num) >=150)) {		// Only Phys classes >=150
+				thisEngObj.natsci = true;
+			}
+		}
+		// Check Engineering
+		if (EngineerReq[dept].eng) {
+			if (num != '296' && num != '297') { // No engineering classes with num 296 or 297
+				thisEngObj.eng = true;
+			}
+		}
+		if (EngineerReq[dept].ss) {
+			if (Number(num) < 500) { // No 500-level ss classes count
+				thisEngObj.ss = true;
+			}
+		}
+		if (EngineerReq[dept].hum) {
+			if (Number(num) < 500) { // No 500-level ss classes count
+				thisEngObj.hum = true;
+			}
+		}
+		if (EngineerReq[dept].tbs) {
+			thisEngObj.tbs = true;
+		}
+		if (EngineerReq[dept].nocred) {
+			if ((dept == 'PHYS' && Number(num) < 140) || (dept == 'STAT' && Number(num) < 430)) {
+				thisEngObj.nocred = true;
+			}
+		}
+	}
+	specificReq = (EngineerReq[dept+'-'+num] || {});
+	if (EngineerReq[dept+'-'+num]) {
+		if (specificReq.hasOwnProperty('math'))	{thisEngObj.math 	= specificReq.math;}
+		if (specificReq.hasOwnProperty('natsci'))	{thisEngObj.natsci 	= specificReq.natsci;}
+		if (specificReq.hasOwnProperty('eng'))	{thisEngObj.eng 	= specificReq.eng}
+		if (specificReq.hasOwnProperty('ss'))		{thisEngObj.ss 		= specificReq.ss;}
+		if (specificReq.hasOwnProperty('hum')) 	{thisEngObj.hum 	= specificReq.hum;}
+		if (specificReq.hasOwnProperty('tbs')) 	{thisEngObj.tbs 	= specificReq.tbs;}
+		if (specificReq.hasOwnProperty('writ')) 	{thisEngObj.writ 	= true;}
+		if (specificReq.hasOwnProperty('nocred'))	{thisEngObj.nocred 	= specificReq.nocred;}
+	}
+	// tbs classes don't count for engineering
+	if (thisEngObj.tbs) {thisEngObj.eng = false;}
+
+	if (thisEngObj.math) 	{engreqCodesList.push('EMAT'); engreqList.push(reqCodes['EMAT']);}
+	if (thisEngObj.natsci) 	{engreqCodesList.push('ESCI'); engreqList.push(reqCodes['ESCI']);}
+	if (thisEngObj.eng) 	{engreqCodesList.push('EENG'); engreqList.push(reqCodes['EENG']);}
+	if (thisEngObj.ss) 		{engreqCodesList.push('ESSC'); engreqList.push(reqCodes['ESSC']);}
+	if (thisEngObj.hum) 	{engreqCodesList.push('EHUM'); engreqList.push(reqCodes['EHUM']);}
+	if (thisEngObj.tbs) 	{engreqCodesList.push('ETBS'); engreqList.push(reqCodes['ETBS']);}
+	if (thisEngObj.writ) 	{engreqCodesList.push('EWRT'); engreqList.push(reqCodes['EWRT']);}
+	if (thisEngObj.nocred) 	{engreqCodesList.push('ENOC'); engreqList.push(reqCodes['ENOC']);}
+
+	return [engreqCodesList, engreqList];
 }
 
 // This function spits out the list of courses that goes in #CourseList

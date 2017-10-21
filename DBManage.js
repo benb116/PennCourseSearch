@@ -15,8 +15,7 @@ var currentTerm = '2018A';
 var deptList = ["AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANCH", "ANEL", "ANTH", "ARAB", "ARCH", "ARTH", "ASAM", "ASTR", "BCHE", "BDS", "BE", "BENF", "BENG", "BEPP", "BIBB", "BIOE", "BIOL", "BIOM", "BIOT", "BMB", "BMIN", "BSTA", "CAMB", "CBE", "CHEM", "CHIN", "CIMS", "CIS", "CIT", "CLST", "COGS", "COML", "COMM", "CPLN", "CRIM", "DEMG", "DENT", "DPED", "DPRD", "DRST", "DTCH", "DYNM", "EALC", "EAS", "ECON", "EDUC", "EEUR", "ENGL", "ENGR", "ENM", "ENMG", "ENVS", "EPID", "ESE", "FNAR", "FNCE", "FOLK", "FREN", "GAFL", "GAS", "GCB", "GEOL", "GREK", "GRMN", "GSWS", "GUJR", "HCIN", "HCMG", "HEBR", "HIND", "HIST", "HPR", "HSOC", "HSPV", "HSSC", "IMUN", "INTG", "INTL", "INTR", "INTS", "IPD", "ITAL", "JPAN", "JWST", "KORN", "LALS", "LARP", "LATN", "LAW", "LAWM", "LGIC", "LGST", "LING", "LSMP", "MATH", "MCS", "MEAM", "MED", "MGEC", "MGMT", "MKTG", "MLA", "MLYM", "MMP", "MSCI", "MSE", "MSSP", "MTR", "MUSA", "MUSC", "NANO", "NELC", "NETS", "NGG", "NPLD", "NSCI", "NURS", "OIDD", "PERS", "PHIL", "PHRM", "PHYS", "PPE", "PREC", "PRTG", "PSCI", "PSYC", "PUBH", "PUNJ", "REAL", "REG", "RELS", "ROML", "RUSS", "SAST", "SCND", "SKRT", "SLAV", "SOCI", "SPAN", "STAT", "STSC", "SWRK", "TAML", "TELU", "THAR", "TURK", "URBS", "URDU", "VBMS", "VCSN", "VCSP", "VIPR", "VISR", "VLST", "VMED", "VPTH", "WH", "WHCP", "WHG", "WRIT", "YDSH"];
 var maxIndex = deptList.length;
 
-// The requirement name -> code map
-var reqCodes = {
+var collegeCodes = {
 	Society: "MDS",
 	History: "MDH",
 	Arts: "MDA",
@@ -28,11 +27,27 @@ var reqCodes = {
 	College: "MQS",
 	Formal: "MFR",
 	Cross: "MC1",
-	Cultural: "MC2",
-	WGLO: "Global Environment",
-	WSST: "Social Structures",
-	WSAT: "Science and Technology",
-	WLAC: "Language, Arts & Culture",
+	Cultural: "MC2"
+}
+
+// The requirement code -> name map
+var reqCodes = {
+	MDS: "Society Sector",
+	MDH: "History & Tradition Sector",
+	MDA: "Arts & Letters Sector",
+	MDO: "Humanities & Social Science Sector",
+	MDL: "Living World Sector",
+	MDP: "Physical World Sector",
+	MDN: "Natural Science & Math Sector",
+	MWC: "Writing Requirement",
+	MQS: "College Quantitative Data Analysis Req.",
+	MFR: "Formal Reasoning Course",
+	MC1: "Cross Cultural Analysis",
+	MC2: "Cultural Diversity in the US",
+	WGLO: "Wharton - Global Environment",
+	WSST: "Wharton - Social Structures",
+	WSAT: "Wharton - Science and Technology",
+	WLAC: "Wharton - Language, Arts & Culture",
 	EMAT: "SEAS - Math",
 	ESCI: "SEAS - Natural Science",
 	EENG: "SEAS - Engineering",
@@ -143,14 +158,14 @@ function GetRequirements(section) {
 	var reqList = section.fulfills_college_requirements; // Pull standard college requirements
 	var reqCodesList = []; 
 	try {
-		reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];  // Generate the req codes
-		reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
+		reqCodesList[0] = collegeCodes[reqList[0].split(" ")[0]];  // Generate the req codes
+		reqCodesList[1] = collegeCodes[reqList[1].split(" ")[0]];
 	} catch(err) {}
 
 	var extraReq = section.important_notes; // Sometimes there are extra college requirements cause why not
 	var extraReqCode;
 	for (var i = 0; i < extraReq.length; i++) { // Run through each one
-		extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
+		extraReqCode = collegeCodes[extraReq[i].split(" ")[0]];
 		if (extraReqCode === 'MDO' || extraReqCode === 'MDN') { // If it matches humanities or natural science
 		  // reqList.push(extraReq[i]);
 		 	reqCodesList.push(extraReqCode);
