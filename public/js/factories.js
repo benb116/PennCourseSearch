@@ -20,7 +20,7 @@ PCS.factory('UpdateCourseList', ['$http', function($http){
 	var retObj = {};
 	retObj.getDeptCourses = function(dept, searchType, reqFilter, proFilter) {
 		// Build the request URL
-		var url = '/Search?searchType='+searchType+'&resultType=deptSearch&searchParam='+dept;
+		var url = '/dev/Search?searchType='+searchType+'&resultType=deptSearch&searchParam='+dept;
 		if (reqFilter) {url += '&reqParam='+reqFilter;}
 		if (proFilter && proFilter !== 'noFilter') {url += '&proParam='+proFilter;}
 		ga('send', 'event', 'Search', 'deptSearch', dept);
@@ -36,7 +36,7 @@ PCS.factory('UpdateSectionList', ['$http', function($http){
 	var retObj = {};
 	retObj.getCourseSections = function(course) {
 		ga('send', 'event', 'Search', 'numbSearch', course);
-		return $http.get('/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam='+course).then(function(data) {
+		return $http.get('/dev/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam='+course).then(function(data) {
 			return data;
 		}, function(err) {
 			ErrorAlert(err);
@@ -48,7 +48,7 @@ PCS.factory('UpdateSectionInfo', ['$http', function($http){
 	var retObj = {};
 	retObj.getSectionInfo = function(section) {
 		ga('send', 'event', 'Search', 'sectSearch', section);
-		return $http.get('/Search?searchType=courseIDSearch&resultType=sectSearch&searchParam='+section).then(function(data) {
+		return $http.get('/dev/Search?searchType=courseIDSearch&resultType=sectSearch&searchParam='+section).then(function(data) {
 			return data;
 		}, function(err) {
 			ErrorAlert(err);
@@ -59,7 +59,7 @@ PCS.factory('UpdateSectionInfo', ['$http', function($http){
 PCS.factory('UpdateSchedules', ['$http', function($http) {
 	var retObj = {};
 	retObj.getSchedData = function(secID, needLoc) {
-		var url = '/Sched?courseID='+secID;
+		var url = '/dev/Sched?courseID='+secID;
 		if (needLoc) {url += '&needLoc=1';}
 		ga('send', 'event', 'Sched', 'addSect', secID);
 		return $http.get(url).then(function(data) {
