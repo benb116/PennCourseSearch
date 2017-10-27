@@ -66,6 +66,7 @@ var allRevs		= require('./loadRevs.js');
 var allCourses	= require('./loadCourses.js');
 var WhartonReq 	= require('./wharreq.json');
 var EngineerReq = require('./engreq.json');
+var r = require('./reqFunctions.js');
 console.timeEnd('Info loaded');
 require('./reqFunctions.js');
 
@@ -295,7 +296,7 @@ function parseCourseList(Res) {
 			var numCred = Number(thisKey.credits.split(" ")[0]);
 			if (!coursesList[courseListName]) {
 				var courseTitle	 = thisKey.course_title;
-				var reqCodesList = GetRequirements(thisKey);
+				var reqCodesList = r.GetRequirements(thisKey);
 				var revData = GetRevData(thisDept, thisNum);
 				coursesList[courseListName] = {
 					'idSpaced': courseListName,
@@ -453,7 +454,7 @@ function parseSectionInfo(Res) {
 			}}
 		}
 
-		var reqsArray = GetRequirements(entry)[1];
+		var reqsArray = r.GetRequirements(entry)[1];
 
 		sectionInfo = {
 			'fullID': FullID,
@@ -473,7 +474,7 @@ function parseSectionInfo(Res) {
 		return sectionInfo;
 	}
 	catch (err) {
-		//console.log(err);
+		console.log(err);
 		return 'No Results';
 	}
 }

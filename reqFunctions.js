@@ -1,4 +1,6 @@
+var requirements = {};
 
+var EngineerReq = require('./engreq.json');
 
 var collegeCodes = {
 	Society: "MDS",
@@ -43,7 +45,7 @@ var reqCodes = {
 	ENOC: "SEAS - No Credit"
 };
 
-function GetRequirements(section) {
+requirements.GetRequirements = function(section) {
 	var idDashed = (section.course_department + '-' + section.course_number);
 
 	var reqList = section.fulfills_college_requirements; // Pull standard college requirements
@@ -158,9 +160,7 @@ function EngReqRules(dept, num, cross) {
 	if (thisEngObj.writ) 	{engreqCodesList.push('EWRT'); engreqList.push(reqCodes['EWRT']);}
 	if (thisEngObj.nocred) 	{engreqCodesList.push('ENOC'); engreqList.push(reqCodes['ENOC']);}
 
-	console.log(dept, num)
 	if (dept == 'ASAM' && cross) {
-		console.log(cross)
 		engReturn = EngReqRules(cross.subject, cross.course_id);
 		engreqCodesList = engReturn[0];
 		engreqList = engReturn[1];
@@ -168,3 +168,5 @@ function EngReqRules(dept, num, cross) {
 
 	return [engreqCodesList, engreqList];
 }
+
+module.exports = requirements;

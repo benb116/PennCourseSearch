@@ -124,6 +124,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 				$scope.secListTitle = $scope.sections[0].courseTitle;
 				if (sec.length < 3) { // If we are not searching for a specific section, show some course information
 					$scope.sectionInfo = resp.data[1];
+					$scope.sectionInfo.fullID = $scope.sectionInfo.fullID.slice(0,-4);
 					delete $scope.sectionInfo.instructor;
 					delete $scope.sectionInfo.openClose;
 					delete $scope.sectionInfo.timeInfo;
