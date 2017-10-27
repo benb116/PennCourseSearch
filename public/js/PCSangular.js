@@ -79,13 +79,16 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		}
 		if(terms[1].length === 3) {
 			$scope.get.Sections(terms[0], terms[1], terms[2]);
-			$scope.get.SectionInfo(terms[0], terms[1], terms[2]);
+			// $scope.get.SectionInfo(terms[0], terms[1], terms[2]);
 		} else {
 			$scope.secListTitle = '';
 			$scope.currentCourse = '000';
 			$scope.sections = [];
 			$scope.currentSection = '000';
 			$scope.sectionInfo = {};
+		}
+		if (terms[2].length === 3) {
+			$scope.get.SectionInfo(terms[0], terms[1], terms[2]);
 		}
 	};
 	$scope.schedChange = function() {
@@ -121,6 +124,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 				$scope.secListTitle = $scope.sections[0].courseTitle;
 				if (sec.length < 3) { // If we are not searching for a specific section, show some course information
 					$scope.sectionInfo = resp.data[1];
+					$scope.sectionInfo.fullID = $scope.sectionInfo.fullID.slice(0,-4);
 					delete $scope.sectionInfo.instructor;
 					delete $scope.sectionInfo.openClose;
 					delete $scope.sectionInfo.timeInfo;

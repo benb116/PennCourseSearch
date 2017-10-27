@@ -3,7 +3,7 @@
 
 <head>
 	<title>PennCourseSearch</title>
-	<meta name="description" content="PennCourseSearch is a web app designed to help Penn students find courses and make schedules.">
+	<meta name="description" content="PennCourseSearch is a web app designed to help Penn students find courses and make schedules. Includes one-click scheduling, Penn Course Review integration, filters for double-counting requirements, and more.">
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/index.css" />
@@ -172,7 +172,7 @@
 				<span ng-show="sectionInfo.timeInfo"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}}</span>
 				<br>
 				</span>
-				<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br></span>
+				<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></span>
 				<!-- <span ng-show="sectionInfo.sectionCred"> {{ sectionInfo.sectionCred }} CU <br><br></span> -->
 				<span ng-show="sectionInfo.description">Description: {{sectionInfo.description}} <br><br></span>
 				<span ng-show="sectionInfo.reqsFilled.length">Requirements Fulfilled: <br><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span>
@@ -187,44 +187,58 @@
 			<div id="FilterSearch">
 				<div class="FilterPanel">
 					<div class="FilterBlock">
-						<span>Filter by College or Wharton requirement (up to 2)</span>
+						<span>Filter by requirement</span>
 						<div id="reqFilter">
 							<!--ng-disabled for any given checkbox is true if
 									the checkbox itself if not checked AND
 									the total number of checked boxes is >= 2
 								This prevents a user from selecting more than two filters
 							-->
-							<input type="checkbox" ng-disabled="(!check.MDS && checkArr.length >= 2)" ng-model="check.MDS" ng-change="reqChange()" value="MDS">Society Sector
+							<input type="checkbox" ng-disabled="" ng-model="check.MDS" ng-change="reqChange()" value="MDS">Society Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDH && checkArr.length >= 2)" ng-model="check.MDH" ng-change="reqChange()" value="MDH">History &amp; Tradition Sector
+							<input type="checkbox" ng-disabled="" ng-model="check.MDH" ng-change="reqChange()" value="MDH">History &amp; Tradition Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDA && checkArr.length >= 2)" ng-model="check.MDA" ng-change="reqChange()" value="MDA">Arts &amp; Letters Sector
+							<input type="checkbox" ng-disabled="" ng-model="check.MDA" ng-change="reqChange()" value="MDA">Arts &amp; Letters Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDO && checkArr.length >= 2)" ng-model="check.MDO" ng-change="reqChange()" value="MDO">Humanities &amp; Social Science Sector
+							<input type="checkbox" ng-disabled="" ng-model="check.MDO" ng-change="reqChange()" value="MDO">Humanities &amp; Social Science Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDL && checkArr.length >= 2)" ng-model="check.MDL" ng-change="reqChange()" value="MDL">Living World Sector
+							<input type="checkbox" ng-disabled="" ng-model="check.MDL" ng-change="reqChange()" value="MDL">Living World Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDP && checkArr.length >= 2)" ng-model="check.MDP" ng-change="reqChange()" value="MDP">Physical World Sector
+							<input type="checkbox" ng-disabled="" ng-model="check.MDP" ng-change="reqChange()" value="MDP">Physical World Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MDN && checkArr.length >= 2)" ng-model="check.MDN" ng-change="reqChange()" value="MDN">Natural Science &amp; Math Sector
+							<input type="checkbox" ng-disabled="" ng-model="check.MDN" ng-change="reqChange()" value="MDN">Natural Science &amp; Math Sector
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MWC && checkArr.length >= 2)" ng-model="check.MWC" ng-change="reqChange()" value="MWC">Writing Requirement
+							<input type="checkbox" ng-disabled="" ng-model="check.MWC" ng-change="reqChange()" value="MWC">Writing Requirement
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MQS && checkArr.length >= 2)" ng-model="check.MQS" ng-change="reqChange()" value="MQS">College Quantitative Data Analysis Req.
+							<input type="checkbox" ng-disabled="" ng-model="check.MQS" ng-change="reqChange()" value="MQS">College Quantitative Data Analysis Req.
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MFR && checkArr.length >= 2)" ng-model="check.MFR" ng-change="reqChange()" value="MFR">Formal Reasoning Course
+							<input type="checkbox" ng-disabled="" ng-model="check.MFR" ng-change="reqChange()" value="MFR">Formal Reasoning Course
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MC1 && checkArr.length >= 2)" ng-model="check.MC1" ng-change="reqChange()" value="MC1">Cross Cultural Analysis
+							<input type="checkbox" ng-disabled="" ng-model="check.MC1" ng-change="reqChange()" value="MC1">Cross Cultural Analysis
 							<br>
-							<input type="checkbox" ng-disabled="(!check.MC2 && checkArr.length >= 2)" ng-model="check.MC2" ng-change="reqChange()" value="MC2">Cultural Diversity in the US
+							<input type="checkbox" ng-disabled="" ng-model="check.MC2" ng-change="reqChange()" value="MC2">Cultural Diversity in the US
 							<br>
 							<input type="checkbox" ng-disabled="" ng-model="check.WGLO" ng-change="reqChange()" value="WGLO">Wharton - Global Environment
 							<br>
-							<input type="checkbox" ng-disabled="(check.WSAT || check.WLAC)" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Wharton - Social Structures
+							<input type="checkbox" ng-disabled="" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Wharton - Social Structures
 							<br>
-							<input type="checkbox" ng-disabled="(check.WSST || check.WLAC)" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Wharton - Science and Technology
+							<input type="checkbox" ng-disabled="" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Wharton - Science and Technology
 							<br>
-							<input type="checkbox" ng-disabled="(check.WSAT || check.WSST)" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Wharton - Language, Arts &amp; Culture
+							<input type="checkbox" ng-disabled="" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Wharton - Language, Arts &amp; Culture
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.EMAT" ng-change="reqChange()" value="EMAT">SEAS - Math
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.ESCI" ng-change="reqChange()" value="ESCI">SEAS - Natural Science
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.EENG" ng-change="reqChange()" value="EENG">SEAS - Engineering
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.ESSC" ng-change="reqChange()" value="ESSC">SEAS - Social Sciences
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.EHUM" ng-change="reqChange()" value="EHUM">SEAS - Humanities
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.ETBS" ng-change="reqChange()" value="ETBS">SEAS - Technology, Business, and Society
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.EWRT" ng-change="reqChange()" value="EWRT">SEAS - Writing
 						</div>
 					</div>
 				</div>

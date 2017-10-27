@@ -61,17 +61,21 @@ var logEvent = function (eventName, eventData) {
 
 console.log('Plugins initialized');
 
-console.time('Reviews loaded');
+console.time('Info loaded');
 var allRevs		= require('./loadRevs.js');
+var allCourses	= require('./loadCourses.js');
 var WhartonReq 	= require('./wharreq.json');
-console.timeEnd('Reviews loaded');
+var EngineerReq = require('./engreq.json');
+var r = require('./reqFunctions.js');
+console.timeEnd('Info loaded');
+require('./reqFunctions.js');
 
 git.short(function (str) {
 	console.log('Current git commit:', str);
 });
 
 // Start the server
-app.listen(process.env.PORT || 3000, function(){
+app.listen(process.env.PORT || 5000, function(){
 	console.log("Node app is running. Better go catch it.".green);
 });
 
@@ -133,11 +137,11 @@ app.get('/Search', function(req, res) {
 	var searchType     = req.query.searchType;	 // Course ID, Keyword, or Instructor
 	var resultType     = req.query.resultType;	 // Course numbers, section numbers, section info
 	var instructFilter = req.query.instFilter;	 // Is there an instructor filter?
-	if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {req.query.reqParam += ',MDB';} // this is stupid
+	// if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {req.query.reqParam += ',MDB';} // this is stupid
 
 	// Building the request URI
 	var reqSearch = buildURI("", 'reqFilter');
-	if (!(req.query.reqParam && req.query.reqParam.charAt(0) === "W")) {
+	if (!(req.query.reqParam && (req.query.reqParam.charAt(0) === "W" || req.query.reqParam.charAt(0) === "E"))) {
 			reqSearch = buildURI(req.query.reqParam, 'reqFilter');
 	}
 	var proSearch   = buildURI(req.query.proParam, 'proFilter');
@@ -145,7 +149,6 @@ app.get('/Search', function(req, res) {
 	var includeOpen = buildURI(req.query.openAllow, 'includeOpen');
 
 	var baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
-
 	if (searchType) {
 		baseURL += searchTypes[searchType] + searchParam;
 	}
@@ -162,32 +165,48 @@ app.get('/Search', function(req, res) {
 	}
 
 	// It's much faster to access pre-fetched department data than to poll the API for dozens of classes
-	if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !req.query.reqParam && !proSearch && !actSearch && !includeOpen ) {
-		try {
-			fs.readFile('./Data/'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
-				if (err) {
-				// 	baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
-				// 	baseURL += "&description=" + searchParam;
-				// 	SendPennReq(baseURL, resultType, res);
-					return res.send([]);
-				} else {
-					return res.send(ParseDeptList(JSON.parse(data)));
-				}
-			});
-		} catch(err) {
-			return res.send('');
+	// if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !req.query.reqParam && !proSearch && !actSearch && !includeOpen ) {
+	// 	try {
+	// 		fs.readFile('./Data/'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
+	// 			if (err) {
+	// 			// 	baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
+	// 			// 	baseURL += "&description=" + searchParam;
+	// 			// 	SendPennReq(baseURL, resultType, res);
+	// 				return res.send([]);
+	// 			} else {
+	// 				return res.send(ParseDeptList(JSON.parse(data)));
+	// 			}
+	// 		});
+	// 	} catch(err) {
+	// 		return res.send('');
+	// 	}
+	// } else if (req.query.reqParam && req.query.reqParam.charAt(0) == "W" && !proSearch) {
+	// 	try {
+	// 		fs.readFile('./Data/'+currentTerm+'/WHAR.json', function (err, data) {
+	// 			if (err) {return res.send([]);}
+	// 			return res.send(ParseDeptList(JSON.parse(data)));
+	// 		});
+	// 	} catch(err) {
+	// 		return res.send('');
+	// 	}
+	// } else { // Otherwise, ask the API for data
+	// 	SendPennReq(baseURL, resultType, res);
+	// }
+	if (searchType == 'courseIDSearch' && resultType == 'deptSearch' &&!req.query.proParam) {
+		
+		var returnCourses = allCourses
+		if (searchParam) {
+			var returnCourses = returnCourses.filter(function(obj) {return (obj.idDashed.split('-')[0] == searchParam.toUpperCase());})
 		}
-	} else if (req.query.reqParam && req.query.reqParam.charAt(0) == "W" && !proSearch) {
-		try {
-			fs.readFile('./Data/'+currentTerm+'/WHAR.json', function (err, data) {
-				if (err) {return res.send([]);}
-				return res.send(ParseDeptList(JSON.parse(data)));
-			});
-		} catch(err) {
-			return res.send('');
+		if (req.query.reqParam) {
+			var returnCourses = returnCourses.filter(function(obj) {return ((obj.courseReqs.indexOf(req.query.reqParam) > -1))})
 		}
-	} else { // Otherwise, ask the API for data
+
+		retC = ParseDeptList(returnCourses)
+		return res.send(returnCourses)
+	} else {
 		SendPennReq(baseURL, resultType, res);
+
 	}
 });
 
@@ -265,66 +284,6 @@ function ParseDeptList (res) {
 	return res;
 }
 
-// The requirement name -> code map
-var reqCodes = {
-	Society: "MDS",
-	History: "MDH",
-	Arts: "MDA",
-	Humanities: "MDO",
-	Living: "MDL",
-	Physical: "MDP",
-	Natural: "MDN",
-	Writing: "MWC",
-	College: "MQS",
-	Formal: "MFR",
-	Cross: "MC1",
-	Cultural: "MC2",
-	WGLO: "Wharton - Global Environment",
-	WSST: "Wharton - Social Structures",
-	WSAT: "Wharton - Science and Technology",
-	WLAC: "Wharton - Language, Arts & Culture"
-};
-
-function GetRequirements(section) {
-	var idDashed = (section.course_department + '-' + section.course_number);
-
-	var reqList = section.fulfills_college_requirements;
-	var reqCodesList = []; 
-	try {
-		reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
-		reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
-	} catch(err) {}
-	var extraReq = section.important_notes;
-	var extraReqCode;
-	for (var i = 0; i < extraReq.length; i++) {
-		extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
-		if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
-		  // reqList.push(extraReq[i]);
-		 	reqCodesList.push(extraReqCode);
-		} else if (section.requirements[0]) {
-			if (section.requirements[0].registration_control_code === 'MDB') {
-				reqCodesList.push('MDO');
-				reqCodesList.push('MDN');
-			}
-		}
-		if (extraReq[i].split(" ")[0] !== "Registration") {
-		  reqList.push(extraReq[i]);
-		}
-	}
-	try {
-		var this_GED = WhartonReq[idDashed].GED;
-		reqCodesList.push(this_GED);
-		reqList.push(reqCodes[this_GED]);
-	} catch (err) {}
-	try {
-		if (WhartonReq[idDashed].global) {
-			reqCodesList.push("WGLO");
-		reqList.push(reqCodes.WGLO);
-		}
-	} catch (err) {}
-	return [reqCodesList, reqList];
-}
-
 // This function spits out the list of courses that goes in #CourseList
 function parseCourseList(Res) {
 	var coursesList = {};
@@ -337,7 +296,7 @@ function parseCourseList(Res) {
 			var numCred = Number(thisKey.credits.split(" ")[0]);
 			if (!coursesList[courseListName]) {
 				var courseTitle	 = thisKey.course_title;
-				var reqCodesList = GetRequirements(thisKey);
+				var reqCodesList = r.GetRequirements(thisKey);
 				var revData = GetRevData(thisDept, thisNum);
 				coursesList[courseListName] = {
 					'idSpaced': courseListName,
@@ -495,7 +454,7 @@ function parseSectionInfo(Res) {
 			}}
 		}
 
-		var reqsArray = GetRequirements(entry)[1];
+		var reqsArray = r.GetRequirements(entry)[1];
 
 		sectionInfo = {
 			'fullID': FullID,
@@ -515,7 +474,7 @@ function parseSectionInfo(Res) {
 		return sectionInfo;
 	}
 	catch (err) {
-		//console.log(err);
+		console.log(err);
 		return 'No Results';
 	}
 }

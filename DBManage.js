@@ -15,25 +15,7 @@ var currentTerm = '2018A';
 var deptList = ["AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANCH", "ANEL", "ANTH", "ARAB", "ARCH", "ARTH", "ASAM", "ASTR", "BCHE", "BDS", "BE", "BENF", "BENG", "BEPP", "BIBB", "BIOE", "BIOL", "BIOM", "BIOT", "BMB", "BMIN", "BSTA", "CAMB", "CBE", "CHEM", "CHIN", "CIMS", "CIS", "CIT", "CLST", "COGS", "COML", "COMM", "CPLN", "CRIM", "DEMG", "DENT", "DPED", "DPRD", "DRST", "DTCH", "DYNM", "EALC", "EAS", "ECON", "EDUC", "EEUR", "ENGL", "ENGR", "ENM", "ENMG", "ENVS", "EPID", "ESE", "FNAR", "FNCE", "FOLK", "FREN", "GAFL", "GAS", "GCB", "GEOL", "GREK", "GRMN", "GSWS", "GUJR", "HCIN", "HCMG", "HEBR", "HIND", "HIST", "HPR", "HSOC", "HSPV", "HSSC", "IMUN", "INTG", "INTL", "INTR", "INTS", "IPD", "ITAL", "JPAN", "JWST", "KORN", "LALS", "LARP", "LATN", "LAW", "LAWM", "LGIC", "LGST", "LING", "LSMP", "MATH", "MCS", "MEAM", "MED", "MGEC", "MGMT", "MKTG", "MLA", "MLYM", "MMP", "MSCI", "MSE", "MSSP", "MTR", "MUSA", "MUSC", "NANO", "NELC", "NETS", "NGG", "NPLD", "NSCI", "NURS", "OIDD", "PERS", "PHIL", "PHRM", "PHYS", "PPE", "PREC", "PRTG", "PSCI", "PSYC", "PUBH", "PUNJ", "REAL", "REG", "RELS", "ROML", "RUSS", "SAST", "SCND", "SKRT", "SLAV", "SOCI", "SPAN", "STAT", "STSC", "SWRK", "TAML", "TELU", "THAR", "TURK", "URBS", "URDU", "VBMS", "VCSN", "VCSP", "VIPR", "VISR", "VLST", "VMED", "VPTH", "WH", "WHCP", "WHG", "WRIT", "YDSH"];
 var maxIndex = deptList.length;
 
-// The requirement name -> code map
-var reqCodes = {
-	Society: "MDS",
-	History: "MDH",
-	Arts: "MDA",
-	Humanities: "MDO",
-	Living: "MDL",
-	Physical: "MDP",
-	Natural: "MDN",
-	Writing: "MWC",
-	College: "MQS",
-	Formal: "MFR",
-	Cross: "MC1",
-	Cultural: "MC2",
-	WGLO: "Global Environment",
-	WSST: "Social Structures",
-	WSAT: "Science and Technology",
-	WLAC: "Language, Arts & Culture"
-};
+var r = require('./reqFunctions.js');
 
 var WhartonReq = require('./wharreq.json');
 
@@ -74,7 +56,6 @@ return "done";
 
 function PullRegistrar(index) {
 	var thedept = deptList[index];
-	console.log(thedept, index);
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
 	if (!thedept) {return;}
 	request({
@@ -82,6 +63,7 @@ function PullRegistrar(index) {
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}
 	}, function(error, response, body) {
 		console.log('Received', thedept);
+		console.time('go');
 		if (!error && body) {
 			var inJSON = JSON.parse(body).result_data; // Convert to JSON object
 
@@ -95,7 +77,7 @@ function PullRegistrar(index) {
 
 				if (!thisKey.is_cancelled) {
 					if (!resp[idSpaced]) {
-						var reqCodesList = GetRequirements(thisKey)[0];
+						var reqCodesList = r.GetRequirements(thisKey)[0];
 						var idDashed = idSpaced.replace(' ', '-');
 						resp[idSpaced] = {
 							'idDashed': idDashed,
@@ -126,46 +108,6 @@ function PullRegistrar(index) {
 			console.log('request error: ' + thedept);
 		}
 	});
-}
-
-function GetRequirements(section) {
-	var idDashed = (section.course_department + '-' + section.course_number);
-
-	var reqList = section.fulfills_college_requirements;
-	var reqCodesList = []; 
-	try {
-		reqCodesList[0] = reqCodes[reqList[0].split(" ")[0]];
-		reqCodesList[1] = reqCodes[reqList[1].split(" ")[0]];
-	} catch(err) {}
-	var extraReq = section.important_notes;
-	var extraReqCode;
-	for (var i = 0; i < extraReq.length; i++) {
-		extraReqCode = reqCodes[extraReq[i].split(" ")[0]];
-		if (extraReqCode === 'MDO' || extraReqCode === 'MDN') {
-		  // reqList.push(extraReq[i]);
-		 	reqCodesList.push(extraReqCode);
-		} else if (section.requirements[0]) {
-			if (section.requirements[0].registration_control_code === 'MDB') {
-				reqCodesList.push('MDO');
-				reqCodesList.push('MDN');
-			}
-		}
-		if (extraReq[i].split(" ")[0] !== "Registration") {
-		  reqList.push(extraReq[i]);
-		}
-	}
-	try {
-		var this_GED = WhartonReq[idDashed].GED;
-		reqCodesList.push(this_GED);
-		reqList.push(reqCodes[this_GED]);
-	} catch (err) {}
-	try {
-		if (WhartonReq[idDashed].global) {
-			reqCodesList.push("WGLO");
-			reqList.push(reqCodes.WGLO);
-		}
-	} catch (err) {}
-	return [reqCodesList, reqList];
 }
 
 function PullReview(index) {
@@ -315,6 +257,45 @@ function CollectWharton() {
 			if (!err) {
 				var deptJSON = JSON.parse(contents);
 				// var deptJSON = deptJSON[0];
+				for (var key in deptJSON) {
+					var thisCourse = deptJSON[key];
+					if (thisCourse.courseReqs) {
+						var lastreq = thisCourse.courseReqs[thisCourse.courseReqs.length-1];
+						if (lastreq && lastreq.charAt(0) === "W") {
+							wharResp[thisCourse.idSpaced] = {
+								'idDashed': thisCourse.idDashed,
+								'idSpaced': thisCourse.idSpaced,
+								'courseTitle': thisCourse.courseTitle,
+								'courseReqs': thisCourse.courseReqs,
+								'courseCred': thisCourse.courseCred
+							};
+							index++;
+						}
+					}
+					if (thisCourse.idDashed.split('-')[0] === deptList[deptList.length-1]) {
+						var arrResp = [];
+						for (key in wharResp) { if (wharResp.hasOwnProperty(key)) {
+							arrResp.push(wharResp[key]);
+						}}
+						fs.writeFile('./Data/'+currentTerm+'/WHAR.json', JSON.stringify(arrResp), function (err) {
+							if (err) {
+								console.log("Wharton error: " + err);
+							}
+						});
+					}
+				}
+			}
+		});
+	}
+}
+
+function CollectEngineering() {
+	var engResp = {};
+	for (var i = 0; i < deptList.length; i++) {
+		var thisdept = deptList[i];
+		fs.readFile('./Data/' + currentTerm + '/' + thisdept + '.json', 'utf8', function(err, contents) {
+			if (!err) {
+				var deptJSON = JSON.parse(contents);
 				for (var key in deptJSON) {
 					var thisCourse = deptJSON[key];
 					if (thisCourse.courseReqs) {
