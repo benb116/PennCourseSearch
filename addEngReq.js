@@ -15,17 +15,17 @@ if (code[0] == '[') {
 	codearray[0] = code;
 }
 var req = process.argv[2].toLowerCase();
-var tf = (process.argv[3][0] == 't');
+var tf = (process.argv[3][0] === 't');
 
 for (var i = 0; i < codearray.length; i++) {
 	if (!engreq[codearray[i]]) {
 		engreq[codearray[i]] = {}
 	}
 	engreq[codearray[i]][req] = tf;
-	if (req == 'tbs') { // TBS classes by definition do not count for eng
+	if (req === 'tbs') { // TBS classes by definition do not count for eng
 		engreq[codearray[i]].eng = false;
 	}
-	if (req == 'writ') {
+	if (req === 'writ') {
 		if (process.argv[3][0].toLowerCase() == 'H') {engreq[codearray[1]].hum = true;}
 		if (process.argv[3][0].toLowerCase() == 'S') {engreq[codearray[1]].ss = true;}
 	}

@@ -17,8 +17,6 @@ var maxIndex = deptList.length;
 
 var r = require('./reqFunctions.js');
 
-var WhartonReq = require('./wharreq.json');
-
 var source = process.argv[2].toLowerCase(); // registrar or review
 var index = Number(process.argv[3]); // Can be a number or a dept code
 var endindex;
@@ -49,8 +47,6 @@ if (source === 'registrar') {
 			PullReview(i);
 		}
 	}
-} else if (source === "wharton") {
-	CollectWharton();
 }
 return "done";
 
@@ -63,7 +59,6 @@ function PullRegistrar(index) {
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}
 	}, function(error, response, body) {
 		console.log('Received', thedept);
-		console.time('go');
 		if (!error && body) {
 			var inJSON = JSON.parse(body).result_data; // Convert to JSON object
 
@@ -246,84 +241,4 @@ function PullReview(index) {
 		});
 	});
 	return 0;
-}
-
-function CollectWharton() {
-	var wharResp = {};
-	for (var i = 0; i < deptList.length; i++) {
-		// console.log(i)
-		var thisdept = deptList[i];
-		fs.readFile('./Data/' + currentTerm + '/' + thisdept + '.json', 'utf8', function(err, contents) {
-			if (!err) {
-				var deptJSON = JSON.parse(contents);
-				// var deptJSON = deptJSON[0];
-				for (var key in deptJSON) {
-					var thisCourse = deptJSON[key];
-					if (thisCourse.courseReqs) {
-						var lastreq = thisCourse.courseReqs[thisCourse.courseReqs.length-1];
-						if (lastreq && lastreq.charAt(0) === "W") {
-							wharResp[thisCourse.idSpaced] = {
-								'idDashed': thisCourse.idDashed,
-								'idSpaced': thisCourse.idSpaced,
-								'courseTitle': thisCourse.courseTitle,
-								'courseReqs': thisCourse.courseReqs,
-								'courseCred': thisCourse.courseCred
-							};
-							index++;
-						}
-					}
-					if (thisCourse.idDashed.split('-')[0] === deptList[deptList.length-1]) {
-						var arrResp = [];
-						for (key in wharResp) { if (wharResp.hasOwnProperty(key)) {
-							arrResp.push(wharResp[key]);
-						}}
-						fs.writeFile('./Data/'+currentTerm+'/WHAR.json', JSON.stringify(arrResp), function (err) {
-							if (err) {
-								console.log("Wharton error: " + err);
-							}
-						});
-					}
-				}
-			}
-		});
-	}
-}
-
-function CollectEngineering() {
-	var engResp = {};
-	for (var i = 0; i < deptList.length; i++) {
-		var thisdept = deptList[i];
-		fs.readFile('./Data/' + currentTerm + '/' + thisdept + '.json', 'utf8', function(err, contents) {
-			if (!err) {
-				var deptJSON = JSON.parse(contents);
-				for (var key in deptJSON) {
-					var thisCourse = deptJSON[key];
-					if (thisCourse.courseReqs) {
-						var lastreq = thisCourse.courseReqs[thisCourse.courseReqs.length-1];
-						if (lastreq && lastreq.charAt(0) === "W") {
-							wharResp[thisCourse.idSpaced] = {
-								'idDashed': thisCourse.idDashed,
-								'idSpaced': thisCourse.idSpaced,
-								'courseTitle': thisCourse.courseTitle,
-								'courseReqs': thisCourse.courseReqs,
-								'courseCred': thisCourse.courseCred
-							};
-							index++;
-						}
-					}
-					if (thisCourse.idDashed.split('-')[0] === deptList[deptList.length-1]) {
-						var arrResp = [];
-						for (key in wharResp) { if (wharResp.hasOwnProperty(key)) {
-							arrResp.push(wharResp[key]);
-						}}
-						fs.writeFile('./Data/'+currentTerm+'/WHAR.json', JSON.stringify(arrResp), function (err) {
-							if (err) {
-								console.log("Wharton error: " + err);
-							}
-						});
-					}
-				}
-			}
-		});
-	}
 }

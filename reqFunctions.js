@@ -115,7 +115,7 @@ function EngReqRules(dept, num, cross) {
 		}
 		// Check Engineering
 		if (EngineerReq[dept].eng) {
-			if (num != '296' && num != '297') { // No engineering classes with num 296 or 297
+			if (num !== '296' && num !== '297') { // No engineering classes with num 296 or 297
 				thisEngObj.eng = true;
 			}
 		}

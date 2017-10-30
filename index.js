@@ -64,8 +64,6 @@ console.log('Plugins initialized');
 console.time('Info loaded');
 var allRevs		= require('./loadRevs.js');
 var allCourses	= require('./loadCourses.js');
-var WhartonReq 	= require('./wharreq.json');
-var EngineerReq = require('./engreq.json');
 var r = require('./reqFunctions.js');
 console.timeEnd('Info loaded');
 require('./reqFunctions.js');
@@ -75,7 +73,7 @@ git.short(function (str) {
 });
 
 // Start the server
-app.listen(process.env.PORT || 5000, function(){
+app.listen(process.env.PORT || 3000, function(){
 	console.log("Node app is running. Better go catch it.".green);
 });
 
