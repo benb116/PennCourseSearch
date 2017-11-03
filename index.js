@@ -140,7 +140,10 @@ app.get('/Search', function(req, res) {
 	// Building the request URI
 	var reqSearch = buildURI("", 'reqFilter');
 	if (!(req.query.reqParam && (req.query.reqParam.charAt(0) === "W" || req.query.reqParam.charAt(0) === "E"))) {
-			reqSearch = buildURI(req.query.reqParam, 'reqFilter');
+		if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {
+			req.query.reqParam += ',MDB';
+		}
+		reqSearch = buildURI(req.query.reqParam, 'reqFilter');
 	}
 	var proSearch   = buildURI(req.query.proParam, 'proFilter');
 	var actSearch   = buildURI(req.query.actParam, 'actFilter');
@@ -472,7 +475,8 @@ function parseSectionInfo(Res) {
 		return sectionInfo;
 	}
 	catch (err) {
-		console.log(err);
+		console.log('parseSectionInfo error: ' + err);
+		console.log(JSON.stringify(Res))
 		return 'No Results';
 	}
 }
