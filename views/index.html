@@ -40,7 +40,7 @@
 		<h1>PennCourseSearch</h1>
 		<span id="subtitle">{{ subtitle }}</span>
 
-		<form ng-submit="searchChange()">
+		<form ng-submit="delaySearch()">
 			<span>Search by:</span>
 			<select id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="searchChange()">
 				<!-- Re search if this select changes -->
@@ -48,7 +48,7 @@
 				<option value="keywordSearch">Keywords</option>
 				<option value="instSearch">Instructor</option>
 			</select>
-			<input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="searchChange()">
+			<input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
 			<span style="margin-left:1em;">Schedule:</span>
 			<select id="schedSelect" ng-model="currentSched" ng-change="schedChange()">
 				<option ng-repeat="schedName in schedules" value="{{schedName}}">{{schedName}}</option>
@@ -102,8 +102,8 @@
 				<li ng-repeat="course in courses | orderBy:courseSort" id="{{ course.idDashed }}" 
 					ng-click="get.Sections(course.idDashed)" 
 					ng-class="{'activeItem': (currentCourse.toUpperCase() == course.idSpaced.replace(' ', ''))}"
-					ng-show="
-						(!checkArr[0]) || ((course.courseReqs.indexOf(checkArr[0]) > -1)) && 
+					ng-if="
+						(!checkArr[0] || course.courseReqs.indexOf(checkArr[0]) > -1) && 
 						(!checkArr[1] || course.courseReqs.indexOf(checkArr[1]) > -1) && 
 						(!checkArr[2] || course.courseReqs.indexOf(checkArr[2]) > -1)
 					"

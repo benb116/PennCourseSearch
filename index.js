@@ -4,8 +4,6 @@ var path        = require('path');
 var express     = require('express');
 var compression = require('compression');
 var request     = require('request');
-var colors      = require('colors');
-var fs          = require('fs');
 var Keen        = require('keen-js');
 var git         = require('git-rev');
 
@@ -61,23 +59,23 @@ var logEvent = function (eventName, eventData) {
 
 console.log('Plugins initialized');
 
+// Pull in course and review information
 console.time('Info loaded');
 var allRevs		= require('./loadRevs.js');
 var allCourses	= require('./loadCourses.js');
-var r = require('./reqFunctions.js');
+var r = require('./reqFunctions.js'); // Functions that help determine which req rules apply to a class
 console.timeEnd('Info loaded');
-require('./reqFunctions.js');
 
 git.short(function (str) {
-	console.log('Current git commit:', str);
+	console.log('Current git commit:', str); // log the current commit we are running
 });
 
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
-	console.log("Node app is running. Better go catch it.".green);
+	console.log("Node app is running. Better go catch it.");
 });
 
-var currentTerm = '2018A';
+var currentTerm = '2018A'; // Which term is currently active
 
 // Handle main page requests
 app.get('/', function(req, res) {
@@ -85,7 +83,7 @@ app.get('/', function(req, res) {
 });
 // Handle status requests. This lets the admin disseminate info if necessary
 app.get('/Status', function(req, res) {
-	var statustext = 'hakol beseder';
+	var statustext = 'hakol beseder'; // Means "everything is ok" in Hebrew
 	// Penn InTouch often is refreshing data between 1:00 AM and 5:00 AM, which renders the API useless.
 	// This is just letting the user know.
 	var now = new Date();
@@ -135,77 +133,54 @@ app.get('/Search', function(req, res) {
 	var searchType     = req.query.searchType;	 // Course ID, Keyword, or Instructor
 	var resultType     = req.query.resultType;	 // Course numbers, section numbers, section info
 	var instructFilter = req.query.instFilter;	 // Is there an instructor filter?
-	// if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {req.query.reqParam += ',MDB';} // this is stupid
 
-	// Building the request URI
-	var reqSearch = buildURI("", 'reqFilter');
-	if (!(req.query.reqParam && (req.query.reqParam.charAt(0) === "W" || req.query.reqParam.charAt(0) === "E"))) {
-		if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {
-			req.query.reqParam += ',MDB';
-		}
-		reqSearch = buildURI(req.query.reqParam, 'reqFilter');
-	}
-	var proSearch   = buildURI(req.query.proParam, 'proFilter');
-	var actSearch   = buildURI(req.query.actParam, 'actFilter');
-	var includeOpen = buildURI(req.query.openAllow, 'includeOpen');
-
-	var baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
-	if (searchType) {
-		baseURL += searchTypes[searchType] + searchParam;
-	}
-	// If we are searching by a certain instructor, the course numbers will be filtered because of searchType 'instSearch'.
-	// However, clicking on one of those courses will show all sections, including those not taught by the instructor.
-	// instructFilter is an extra parameter that allows further filtering of section results by instructor.
-	if (instructFilter !== 'all' && typeof instructFilter !== 'undefined') {
-		baseURL += '&instructor=' + instructFilter;
-	}
 	// Keen.io logging
 	var searchEvent = {searchParam: searchParam};
 	if (searchParam) {
 		logEvent('Search', searchEvent);
 	}
 
-	// It's much faster to access pre-fetched department data than to poll the API for dozens of classes
-	// if (searchType	=== 'courseIDSearch' && resultType	=== 'deptSearch' && !req.query.reqParam && !proSearch && !actSearch && !includeOpen ) {
-	// 	try {
-	// 		fs.readFile('./Data/'+currentTerm+'/'+searchParam.toUpperCase()+'.json', function (err, data) {
-	// 			if (err) {
-	// 			// 	baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
-	// 			// 	baseURL += "&description=" + searchParam;
-	// 			// 	SendPennReq(baseURL, resultType, res);
-	// 				return res.send([]);
-	// 			} else {
-	// 				return res.send(ParseDeptList(JSON.parse(data)));
-	// 			}
-	// 		});
-	// 	} catch(err) {
-	// 		return res.send('');
-	// 	}
-	// } else if (req.query.reqParam && req.query.reqParam.charAt(0) == "W" && !proSearch) {
-	// 	try {
-	// 		fs.readFile('./Data/'+currentTerm+'/WHAR.json', function (err, data) {
-	// 			if (err) {return res.send([]);}
-	// 			return res.send(ParseDeptList(JSON.parse(data)));
-	// 		});
-	// 	} catch(err) {
-	// 		return res.send('');
-	// 	}
-	// } else { // Otherwise, ask the API for data
-	// 	SendPennReq(baseURL, resultType, res);
-	// }
-	if (searchType == 'courseIDSearch' && resultType == 'deptSearch' &&!req.query.proParam) {
-		
-		var returnCourses = allCourses
-		if (searchParam) {
-			var returnCourses = returnCourses.filter(function(obj) {return (obj.idDashed.split('-')[0] == searchParam.toUpperCase());})
+	if (searchType === 'courseIDSearch' && resultType === 'deptSearch' &&!req.query.proParam) { // If we can return results from cached data
+		var returnCourses = allCourses;
+
+		if (searchParam) { // Filter by department
+			var returnCourses = returnCourses.filter(function(obj) {return (obj.idDashed.split('-')[0] === searchParam.toUpperCase());})
 		}
-		if (req.query.reqParam) {
+		if (req.query.reqParam) { // Filter by requirement
 			var returnCourses = returnCourses.filter(function(obj) {return ((obj.courseReqs.indexOf(req.query.reqParam) > -1))})
 		}
 
 		retC = ParseDeptList(returnCourses)
 		return res.send(returnCourses)
-	} else {
+
+	} else { // Otherwise, ask the API
+		// Building the request URI
+		var reqSearch = buildURI("", 'reqFilter');
+		// Don't try to ask API about Wharton and Engineering requirements
+		if (!(req.query.reqParam && (req.query.reqParam.charAt(0) === "W" || req.query.reqParam.charAt(0) === "E"))) {
+
+			// For some reason, these two req codes need extra characters at the end when searching the API
+			if (req.query.reqParam === 'MDO' || req.query.reqParam === 'MDN') {
+				req.query.reqParam += ',MDB';
+			}
+			reqSearch = buildURI(req.query.reqParam, 'reqFilter');
+		}
+
+		var proSearch   = buildURI(req.query.proParam, 'proFilter');
+		var actSearch   = buildURI(req.query.actParam, 'actFilter');
+		var includeOpen = buildURI(req.query.openAllow, 'includeOpen');
+
+		var baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
+		if (searchType) {
+			baseURL += searchTypes[searchType] + searchParam;
+		}
+		// If we are searching by a certain instructor, the course numbers will be filtered because of searchType 'instSearch'.
+		// However, clicking on one of those courses will show all sections, including those not taught by the instructor.
+		// instructFilter is an extra parameter that allows further filtering of section results by instructor.
+		if (instructFilter !== 'all' && typeof instructFilter !== 'undefined') {
+			baseURL += '&instructor=' + instructFilter;
+		}
+
 		SendPennReq(baseURL, resultType, res);
 
 	}
@@ -222,7 +197,7 @@ function SendPennReq (url, resultType, res) {
 		}
 
 		var parsedRes, rawResp = {};
-		try {
+		try { // Try to make into valid JSON
 			rawResp = JSON.parse(body);
 			if (rawResp.statusCode) {
 				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
@@ -236,7 +211,7 @@ function SendPennReq (url, resultType, res) {
 		}
 
 		try {
-			if (rawResp.service_meta.error_text) {
+			if (rawResp.service_meta.error_text) { // If the API returned an error
 				console.log('Resp Err: ' + rawResp.service_meta.error_text);
 				res.statusCode = 513; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
 				return res.send(rawResp.service_meta.error_text);
@@ -266,9 +241,7 @@ function GetRevData (dept, num, inst) {
 	if (deptData) {
 		var revData = deptData[num]; // Get course level ratings
 		if (revData) {
-			// Try to get instructor specific reviews, but fallback to course reviews
-			// var generalReview = revData.Recent;
-			// if (total) {generalReview = revData.Total;}
+			// Try to get instructor specific reviews, but fallback to general course reviews
 			thisRevData = (revData[(inst || '').trim().toUpperCase()] || (revData.Recent));
 		}
 	}
@@ -277,28 +250,30 @@ function GetRevData (dept, num, inst) {
 
 function ParseDeptList (res) {
 	for (var course in res) { if (res.hasOwnProperty(course)) {
-		var courData = res[course].idSpaced.split(' ');
-		var courDept = courData[0];
-		var courNum  = courData[1];
-		res[course].revs = GetRevData(courDept, courNum);
+		var courData     = res[course].idSpaced.split(' ');
+		var courDept     = courData[0];
+		var courNum      = courData[1];
+		res[course].revs = GetRevData(courDept, courNum); // Append PCR data to courses
 	}}
 	return res;
 }
 
-// This function spits out the list of courses that goes in #CourseList
+// This function spits out the array of courses that goes in #CourseList
 function parseCourseList(Res) {
 	var coursesList = {};
 	for(var key in Res) { if (Res.hasOwnProperty(key)) {
 		var thisKey	 = Res[key];
-		var thisDept	= thisKey.course_department.toUpperCase();
-		var thisNum	 = thisKey.course_number.toString();
-		var courseListName	= thisDept+' '+thisNum; // Get course dept and number
-		if (Res.hasOwnProperty(key) && !thisKey.is_cancelled) { // Iterate through each course
-			var numCred = Number(thisKey.credits.split(" ")[0]);
-			if (!coursesList[courseListName]) {
-				var courseTitle	 = thisKey.course_title;
-				var reqCodesList = r.GetRequirements(thisKey);
-				var revData = GetRevData(thisDept, thisNum);
+
+		if (Res.hasOwnProperty(key) && !thisKey.is_cancelled) { // Iterate through each course that isn't cancelled
+			var thisDept       = thisKey.course_department.toUpperCase();
+			var thisNum	       = thisKey.course_number.toString();
+			var courseListName = thisDept+' '+thisNum; // Get course dept and number
+			var numCred        = Number(thisKey.credits.split(" ")[0]); // How many credits does this section count for
+
+			if (!coursesList[courseListName]) { // If there's no entry, make a new one
+				var courseTitle  = thisKey.course_title;
+				var reqCodesList = r.GetRequirements(thisKey); // Check which requirements are fulfilled by this course
+				var revData      = GetRevData(thisDept, thisNum); // Get review information
 				coursesList[courseListName] = {
 					'idSpaced': courseListName,
 					'idDashed': courseListName.replace(/ /g,'-'),
@@ -307,33 +282,33 @@ function parseCourseList(Res) {
 					'courseCred': numCred,
 					'revs': revData
 				};
-			} else if (coursesList[courseListName].courseCred < numCred) {
+			} else if (coursesList[courseListName].courseCred < numCred) { // If there is an entry, choose the higher of the two numcred values
 				coursesList[courseListName].courseCred = numCred
 			}
 		}
 	}}
 	var arrResp = [];
 	for (var course in coursesList) { if (coursesList.hasOwnProperty(course)) {
-		arrResp.push(coursesList[course]);
+		arrResp.push(coursesList[course]); // Convert from object to array
 	}}
 	return arrResp;
 }
 
 function getTimeInfo (JSONObj) { // A function to retrieve and format meeting times
-	var OCStatus = JSONObj.course_status;
+	var OCStatus = JSONObj.course_status; // Is the section open or closed
 	var isOpen;
 	if (OCStatus === "O") {
 		isOpen = true;
 	} else {
 		isOpen = false;
 	}
-	var TimeInfo = [];
+	var TimeInfo = []; // Timeinfo is textual e.g. '10:00 to 11:00 on MWF'
 	try { // Not all sections have time info
 		for(var meeting in JSONObj.meetings) { if (JSONObj.meetings.hasOwnProperty(meeting)) {
 			// Some sections have multiple meeting forms (I'm looking at you PHYS151)
 			var thisMeet = JSONObj.meetings[meeting];
 			var StartTime= thisMeet.start_time.split(" ")[0]; // Get start time
-			var EndTime	 = thisMeet.end_time.split(" ")[0];
+			var EndTime	 = thisMeet.end_time.split(" ")[0]; // Get end time
 
 			if (StartTime[0] === '0') {
 				StartTime = StartTime.slice(1);
@@ -368,18 +343,18 @@ function parseSectionList(Res) {
 				var timeInfoArray = getTimeInfo(thisEntry); // Get meeting times for a section
 				var isOpen        = timeInfoArray[0];
 				var timeInfo      = timeInfoArray[1][0]; // Get the first meeting slot
-				if (timeInfoArray[1][1]) {
+				if (timeInfoArray[1][1]) { // Cut off extra text
 					timeInfo += ' ...';
 				}
 				var actType       = thisEntry.activity;
-				var SectionInst;
+				var SectionInst; // Get the instructor for this section
 				try {
 					SectionInst = thisEntry.instructors[0].name;
 				} catch(err) {
 					SectionInst = '';
 				}
 
-				var revData = GetRevData(thisEntry.course_department, thisEntry.course_number, SectionInst);
+				var revData = GetRevData(thisEntry.course_department, thisEntry.course_number, SectionInst); // Get inst-specific reviews
 
 				if (typeof timeInfo === 'undefined') {
 					timeInfo = '';
@@ -410,7 +385,8 @@ function parseSectionList(Res) {
 function parseSectionInfo(Res) {
 	var entry = Res[0];
 	var sectionInfo = {};
-	try {
+	// try {
+	if (entry) {
 		var Title         = entry.course_title;
 		var FullID        = entry.section_id_normalized.replace(/-/g, " "); // Format name
 		var CourseID      = entry.section_id_normalized.split('-')[0] + ' ' + entry.section_id_normalized.split('-')[1];
@@ -473,10 +449,7 @@ function parseSectionInfo(Res) {
 			'reqsFilled': reqsArray
 		};
 		return sectionInfo;
-	}
-	catch (err) {
-		console.log('parseSectionInfo error: ' + err);
-		console.log(JSON.stringify(Res))
+	} else {
 		return 'No Results';
 	}
 }
@@ -547,18 +520,18 @@ function getSchedInfo(entry) { // Get the properties required to schedule the se
 				}
 				var SchedAsscSecs = [];
 				if (entry.lectures.length) {
-					for (var thisAssc in entry.lectures) {
+					for (var thisAssc in entry.lectures) {  if (entry.lectures.hasOwnProperty(thisAssc)) {
 						SchedAsscSecs.push(entry.lectures[thisAssc].subject + '-' + entry.lectures[thisAssc].course_id + '-' + entry.lectures[thisAssc].section_id);
-					}
+					}}
 				} else {
 					if (entry.recitations.length) {
-						for (var thisAssc in entry.recitations) {
+						for (var thisAssc in entry.recitations) {  if (entry.lectures.hasOwnProperty(thisAssc)) {
 							SchedAsscSecs.push(entry.recitations[thisAssc].subject + '-' + entry.recitations[thisAssc].course_id + '-' + entry.recitations[thisAssc].section_id);
-						}
+						}}
 					} else if (entry.labs.length) {
-						for (var thisAssc in entry.labs) {
+						for (var thisAssc in entry.labs) {  if (entry.lectures.hasOwnProperty(thisAssc)) {
 							SchedAsscSecs.push(entry.labs[thisAssc].subject + '-' + entry.labs[thisAssc].course_id + '-' + entry.labs[thisAssc].section_id);
-						}
+						}}
 					}
 				}
 

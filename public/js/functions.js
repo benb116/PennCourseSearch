@@ -138,7 +138,7 @@ function addrem(item, array) {
 }
 
 function FormatID(rawParam) {
-	var searchParam = rawParam.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
+	var searchParam = rawParam.replace(/\W/g, ''); // Replace non alpha-numeric characters
 	var retArr = ['', '', ''];
 
 	if (isFinite(searchParam[2])) {  // If the third character is a number (e.g. BE100)

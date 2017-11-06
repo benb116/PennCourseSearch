@@ -22,7 +22,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		$scope.currentCourse = ''; // current parameter used to get list of sections
 		$scope.currentSection = ''; // current parameter used to get section information
 		$scope.schedSections = []; // array of section idDashed's as strings
-		$scope.secListTitle = '';
+		$scope.secListTitle = ''; // What text is shown over the seclist
 		$scope.searchType = "courseIDSearch"; // value of Search By select menu
 		$scope.searchPlaceholder = placeholderMap[$scope.searchType];
 		$scope.loading = ($http.pendingRequests.length !== 0); // Are there outstanding HTTP requests
@@ -61,17 +61,24 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 
 	$scope.searchChange = function() {
 		// ga('send', 'event', 'UI interaction', 'searchChange', $scope.searchType);		
+		$scope.currentDept = '';
+		// $scope.courses = [];
+		$scope.initiateSearch($scope.search);
+		$scope.searchPlaceholder = placeholderMap[$scope.searchType];
+	};
+	$scope.delaySearch = function() {
 		// This prevents requests from being sent out immediately
 		delay(function() {
 			$scope.initiateSearch($scope.search);
 		}, 400);
-		$scope.searchPlaceholder = placeholderMap[$scope.searchType];
-	};
+	}
 	$scope.initiateSearch = function(param, courseType) {
 		// Used for typed searches and schedBlock clicks
 		var terms = FormatID(param);
 		if(terms[0] && terms[0] !== '') {
-			$scope.get.Courses(terms[0], courseType); // if (!courseType) then the get.Courses function will default to the searchType value
+			if (terms[0] !== $scope.currentDept) {
+				$scope.get.Courses(terms[0], courseType); // if (!courseType) then the get.Courses function will default to the searchType value
+			}
 		} else {
 			$scope.currentDept = '';
 			$scope.courses = [];
@@ -79,7 +86,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		}
 		if(terms[1].length === 3) {
 			$scope.get.Sections(terms[0], terms[1], terms[2]);
-			// $scope.get.SectionInfo(terms[0], terms[1], terms[2]);
 		} else {
 			$scope.secListTitle = '';
 			$scope.currentCourse = '000';
@@ -441,8 +447,8 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 				}}
 			}}
 
-			for (var weekday in weekdays) {
-				var dayblocks = $scope.schedBlocks.filter(function(n) {return n.letterday == weekdays[weekday];});
+			for (var weekday in weekdays) { if (weekdays.hasOwnProperty(weekday)) {
+				var dayblocks = $scope.schedBlocks.filter(function(n) {return n.letterday === weekdays[weekday];});
 				for (var i = 0; i < dayblocks.length-1; i++) {
 					for (var j = i+1; j < dayblocks.length; j++) {
 						if (TwoOverlap(dayblocks[i], dayblocks[j])) {
@@ -452,9 +458,9 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 						}
 					}
 				}
-				$scope.schedBlocks.filter(function(n) {return n.letterday != weekdays[weekday];});
+				$scope.schedBlocks.filter(function(n) {return n.letterday !== weekdays[weekday];});
 				$scope.schedBlocks.concat(dayblocks);
-			}
+			}}
 
 			function TwoOverlap(block1, block2) {
 				// Thank you to Stack Overflow user BC. for the function this is based on.
@@ -488,9 +494,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		for (var req in $scope.check) { // Build an array of all checked boxes (length <= 2)
 			if ($scope.check[req]) {$scope.checkArr.push(req);}
 		}
-		if ($scope.checkArr[$scope.checkArr.length-1]) {
-			ga('send', 'event', 'UI interaction', 'requirement', $scope.checkArr[$scope.checkArr.length-1]);			
-		}		// If there are no courses in the list and no currentDept search, the user probably just wants to see all classes that satisfy a given requirement
+		// If there are no courses in the list and no currentDept search, the user probably just wants to see all classes that satisfy a given requirement
 		if (!($scope.courses.length && $scope.currentDept !== '') && $scope.checkArr.length === 1 && $scope.showPro === 'noFilter') {
 			$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
 		}
