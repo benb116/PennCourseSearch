@@ -11,8 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="/css/plugins/angular-tooltips.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<!-- Frameworks -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 	<!-- My code -->
 	<script type="text/javascript" src="/js/PCSangular.js"></script>
 	<script type="text/javascript" src="/js/functions.js"></script>
@@ -117,8 +117,8 @@
 
 						Also hide the course if it doesn't match the number of credits
 					-->
-					<span class="PCR Qual" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQ | number:2}}</span>
-					<span class="PCR Diff" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cD | number:2}}</span>
+					<span class="PCR Qual" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQT}}</span>
+					<span class="PCR Diff" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cDT}}</span>
 					<span class="cID">{{ course.idSpaced }}</span>
 					<span class="cTitle">{{ course.courseTitle }}</span>
 				</li>

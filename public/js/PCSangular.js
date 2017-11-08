@@ -191,6 +191,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 
 			// schedSections is a continually updated array of sections in the current schedule
 			if ($scope.schedSections.indexOf(secID) === -1) { // If the requested section is not scheduled
+				ga('send', 'event', 'Sched', 'addSect', secID);
 				UpdateSchedules.getSchedData(secID, needloc).then(function(resp) {
 					if (resp.data) {
 						var oldData = $scope.schedData[(schedname || $scope.currentSched)].meetings;
@@ -201,18 +202,16 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 				});
 			} else {
 				// Filter out meeting objects whose corresponding sectionID is the requested section
+				ga('send', 'event', 'Sched', 'remSect', secID);
 				var oldData = $scope.schedData[$scope.currentSched].meetings;
 				var newData = oldData.filter(function(item) {
-					if (item.idDashed === secID) {
-						return false;
-					} else {
-						return true;
-					}
+					return (item.idDashed !== secID)
 				});
 				$scope.schedData[$scope.currentSched].meetings = newData;
 			}
 		},
 		Download: function() {
+			ga('send', 'event', 'Sched', 'downSched');
 			html2canvas($('#SchedGraph'), { // Convert the div to a canvas
 				onrendered: function(canvas) {
 					var image = new Image();
@@ -223,6 +222,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			});
 		},
 		New: function() {
+			ga('send', 'event', 'Sched', 'newSched');
 			sweetAlert({
 				title: "Please name your new schedule",
 				type: "input",
@@ -331,6 +331,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			shuffle($scope.schedData[$scope.currentSched].colorPalette);
 		},
 		Import: function() {
+			ga('send', 'event', 'Sched', 'importSched');
 			var schedName = Uniquify('Imported', $scope.schedules);
 			$scope.schedData[schedName] = new Schedule(currentTerm);
 			$scope.currentSched = schedName;

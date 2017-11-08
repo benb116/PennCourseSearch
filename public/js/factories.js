@@ -12,6 +12,12 @@ PCS.factory('PCR', function(){
 			if (iFrac < 0.50) {item.pcrIColor = 'black';} else {item.pcrIColor = 'white';}
 			item.revs.QDratio = item.revs.cQ - item.revs.cD; // This is my way of calculating if a class is "good and easy." R > 1 means good and easy, < 1 means bad and hard
 			if (isNaN(item.revs.QDratio) || !isFinite(item.revs.QDratio)) {item.revs.QDratio = 0;} // Cleanup to keep incomplete data on the bottom;
+			item.revs.cQT = (item.revs.cQ * 100).toString();
+			item.revs.cQT = item.revs.cQT.slice(0,1) + '.' + item.revs.cQT.slice(1,3);
+			if (item.revs.cQ == 0) {item.revs.cQT = '';}
+			item.revs.cDT = (item.revs.cD * 100).toString();
+			item.revs.cDT = item.revs.cDT.slice(0,1) + '.' + item.revs.cDT.slice(1,3);
+			if (item.revs.cD == 0) {item.revs.cDT = ''; item.revs.QDratio = -100; item.revs.cD = 100}
 		});
 		return data;
 	};
@@ -61,7 +67,6 @@ PCS.factory('UpdateSchedules', ['$http', function($http) {
 	retObj.getSchedData = function(secID, needLoc) {
 		var url = '/Sched?courseID='+secID;
 		if (needLoc) {url += '&needLoc=1';}
-		ga('send', 'event', 'Sched', 'addSect', secID);
 		return $http.get(url).then(function(data) {
 			return data;
 		}, function(err) {
