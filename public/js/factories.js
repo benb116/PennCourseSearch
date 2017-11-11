@@ -11,8 +11,11 @@ PCS.factory('PCR', function(){
 			if (dFrac < 0.50) {item.pcrDColor = 'black';} else {item.pcrDColor = 'white';}
 			if (iFrac < 0.50) {item.pcrIColor = 'black';} else {item.pcrIColor = 'white';}
 			item.revs.QDratio = item.revs.cQ - item.revs.cD; // This is my way of calculating if a class is "good and easy." R > 1 means good and easy, < 1 means bad and hard
-			if (isNaN(item.revs.QDratio) || !isFinite(item.revs.QDratio)) {item.revs.QDratio = 0;} // Cleanup to keep incomplete data on the bottom;
-			item.revs.cQT = (item.revs.cQ * 100).toString();
+			
+			// Cleanup to keep incomplete data on the bottom;
+			if (isNaN(item.revs.QDratio) || !isFinite(item.revs.QDratio)) {item.revs.QDratio = 0;} 
+			// the rating as a string - let's us make the actual rating something else and still show the correct number
+			item.revs.cQT = (item.revs.cQ * 100).toString(); // two decimal rounding
 			item.revs.cQT = item.revs.cQT.slice(0,1) + '.' + item.revs.cQT.slice(1,3);
 			if (item.revs.cQ == 0) {item.revs.cQT = '';}
 			item.revs.cDT = (item.revs.cD * 100).toString();

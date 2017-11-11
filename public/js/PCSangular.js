@@ -21,7 +21,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		$scope.currentDept = ''; // current parameter used to get list of courses
 		$scope.currentCourse = ''; // current parameter used to get list of sections
 		$scope.currentSection = ''; // current parameter used to get section information
-		$scope.schedSections = []; // array of section idDashed's as strings
+		// $scope.schedSections = []; // array of section idDashed's as strings
 		$scope.secListTitle = ''; // What text is shown over the seclist
 		$scope.searchType = "courseIDSearch"; // value of Search By select menu
 		$scope.searchPlaceholder = placeholderMap[$scope.searchType];
