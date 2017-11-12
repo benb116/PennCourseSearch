@@ -487,16 +487,23 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			}
 		},
 		CrossCheck: function(asscarray) {
-			var filt = asscarray.filter(function(n) {return $scope.schedSections.indexOf(n) !== -1;});
+				var filt = asscarray.filter(function(n) {return $scope.schedSections.indexOf(n) !== -1;});
 			return (filt.length || !asscarray.length);
 		}
 	};
 	
 	$scope.reqChange = function () {
+		var oldarr = $scope.checkArr;
 		$scope.checkArr = [];
 		for (var req in $scope.check) { // Build an array of all checked boxes (length <= 2)
 			if ($scope.check[req]) {$scope.checkArr.push(req);}
 		}
+		var diffreqs = $scope.checkArr.filter(function(i) {return oldarr.indexOf(i) < 0;})
+		console.log($scope.checkArr)
+		if (diffreqs[0]) {
+			ga('send', 'event', 'UI interaction', 'requirement', diffreqs[0]);
+		}
+
 		// If there are no courses in the list and no currentDept search, the user probably just wants to see all classes that satisfy a given requirement
 		if (!($scope.courses.length && $scope.currentDept !== '') && $scope.checkArr.length === 1 && $scope.showPro === 'noFilter') {
 			$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
