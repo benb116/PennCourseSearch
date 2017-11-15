@@ -21,8 +21,8 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		$scope.currentDept = ''; // current parameter used to get list of courses
 		$scope.currentCourse = ''; // current parameter used to get list of sections
 		$scope.currentSection = ''; // current parameter used to get section information
-		$scope.schedSections = []; // array of section idDashed's as strings
-		$scope.secListTitle = '';
+		// $scope.schedSections = []; // array of section idDashed's as strings
+		$scope.secListTitle = ''; // What text is shown over the seclist
 		$scope.searchType = "courseIDSearch"; // value of Search By select menu
 		$scope.searchPlaceholder = placeholderMap[$scope.searchType];
 		$scope.loading = ($http.pendingRequests.length !== 0); // Are there outstanding HTTP requests
@@ -61,17 +61,24 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 
 	$scope.searchChange = function() {
 		// ga('send', 'event', 'UI interaction', 'searchChange', $scope.searchType);		
+		$scope.currentDept = '';
+		// $scope.courses = [];
+		$scope.initiateSearch($scope.search);
+		$scope.searchPlaceholder = placeholderMap[$scope.searchType];
+	};
+	$scope.delaySearch = function() {
 		// This prevents requests from being sent out immediately
 		delay(function() {
 			$scope.initiateSearch($scope.search);
 		}, 400);
-		$scope.searchPlaceholder = placeholderMap[$scope.searchType];
-	};
+	}
 	$scope.initiateSearch = function(param, courseType) {
 		// Used for typed searches and schedBlock clicks
 		var terms = FormatID(param);
 		if(terms[0] && terms[0] !== '') {
-			$scope.get.Courses(terms[0], courseType); // if (!courseType) then the get.Courses function will default to the searchType value
+			if (terms[0] !== $scope.currentDept) {
+				$scope.get.Courses(terms[0], courseType); // if (!courseType) then the get.Courses function will default to the searchType value
+			}
 		} else {
 			$scope.currentDept = '';
 			$scope.courses = [];
@@ -79,7 +86,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 		}
 		if(terms[1].length === 3) {
 			$scope.get.Sections(terms[0], terms[1], terms[2]);
-			// $scope.get.SectionInfo(terms[0], terms[1], terms[2]);
 		} else {
 			$scope.secListTitle = '';
 			$scope.currentCourse = '000';
@@ -124,12 +130,14 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 				$scope.secListTitle = $scope.sections[0].courseTitle;
 				if (sec.length < 3) { // If we are not searching for a specific section, show some course information
 					$scope.sectionInfo = resp.data[1];
-					$scope.sectionInfo.fullID = $scope.sectionInfo.fullID.slice(0,-4);
-					delete $scope.sectionInfo.instructor;
-					delete $scope.sectionInfo.openClose;
-					delete $scope.sectionInfo.timeInfo;
-					delete $scope.sectionInfo.associatedType;
-					delete $scope.sectionInfo.associatedSections;
+					if ($scope.sections.length > 1) {
+						$scope.sectionInfo.fullID = $scope.sectionInfo.fullID.slice(0,-4);
+						delete $scope.sectionInfo.instructor;
+						delete $scope.sectionInfo.openClose;
+						delete $scope.sectionInfo.timeInfo;
+						delete $scope.sectionInfo.associatedType;
+						delete $scope.sectionInfo.associatedSections;
+					}
 			   }
 			});
 		},
@@ -185,6 +193,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 
 			// schedSections is a continually updated array of sections in the current schedule
 			if ($scope.schedSections.indexOf(secID) === -1) { // If the requested section is not scheduled
+				ga('send', 'event', 'Sched', 'addSect', secID);
 				UpdateSchedules.getSchedData(secID, needloc).then(function(resp) {
 					if (resp.data) {
 						var oldData = $scope.schedData[(schedname || $scope.currentSched)].meetings;
@@ -195,18 +204,16 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 				});
 			} else {
 				// Filter out meeting objects whose corresponding sectionID is the requested section
+				ga('send', 'event', 'Sched', 'remSect', secID);
 				var oldData = $scope.schedData[$scope.currentSched].meetings;
 				var newData = oldData.filter(function(item) {
-					if (item.idDashed === secID) {
-						return false;
-					} else {
-						return true;
-					}
+					return (item.idDashed !== secID)
 				});
 				$scope.schedData[$scope.currentSched].meetings = newData;
 			}
 		},
 		Download: function() {
+			ga('send', 'event', 'Sched', 'downSched');
 			html2canvas($('#SchedGraph'), { // Convert the div to a canvas
 				onrendered: function(canvas) {
 					var image = new Image();
@@ -217,6 +224,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			});
 		},
 		New: function() {
+			ga('send', 'event', 'Sched', 'newSched');
 			sweetAlert({
 				title: "Please name your new schedule",
 				type: "input",
@@ -325,6 +333,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			shuffle($scope.schedData[$scope.currentSched].colorPalette);
 		},
 		Import: function() {
+			ga('send', 'event', 'Sched', 'importSched');
 			var schedName = Uniquify('Imported', $scope.schedules);
 			$scope.schedData[schedName] = new Schedule(currentTerm);
 			$scope.currentSched = schedName;
@@ -441,8 +450,8 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 				}}
 			}}
 
-			for (var weekday in weekdays) {
-				var dayblocks = $scope.schedBlocks.filter(function(n) {return n.letterday == weekdays[weekday];});
+			for (var weekday in weekdays) { if (weekdays.hasOwnProperty(weekday)) {
+				var dayblocks = $scope.schedBlocks.filter(function(n) {return n.letterday === weekdays[weekday];});
 				for (var i = 0; i < dayblocks.length-1; i++) {
 					for (var j = i+1; j < dayblocks.length; j++) {
 						if (TwoOverlap(dayblocks[i], dayblocks[j])) {
@@ -452,9 +461,9 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 						}
 					}
 				}
-				$scope.schedBlocks.filter(function(n) {return n.letterday != weekdays[weekday];});
+				$scope.schedBlocks.filter(function(n) {return n.letterday !== weekdays[weekday];});
 				$scope.schedBlocks.concat(dayblocks);
-			}
+			}}
 
 			function TwoOverlap(block1, block2) {
 				// Thank you to Stack Overflow user BC. for the function this is based on.
@@ -478,19 +487,24 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			}
 		},
 		CrossCheck: function(asscarray) {
-			var filt = asscarray.filter(function(n) {return $scope.schedSections.indexOf(n) !== -1;});
+				var filt = asscarray.filter(function(n) {return $scope.schedSections.indexOf(n) !== -1;});
 			return (filt.length || !asscarray.length);
 		}
 	};
 	
 	$scope.reqChange = function () {
+		var oldarr = $scope.checkArr;
 		$scope.checkArr = [];
 		for (var req in $scope.check) { // Build an array of all checked boxes (length <= 2)
 			if ($scope.check[req]) {$scope.checkArr.push(req);}
 		}
-		if ($scope.checkArr[$scope.checkArr.length-1]) {
-			ga('send', 'event', 'UI interaction', 'requirement', $scope.checkArr[$scope.checkArr.length-1]);			
-		}		// If there are no courses in the list and no currentDept search, the user probably just wants to see all classes that satisfy a given requirement
+		var diffreqs = $scope.checkArr.filter(function(i) {return oldarr.indexOf(i) < 0;})
+		console.log($scope.checkArr)
+		if (diffreqs[0]) {
+			ga('send', 'event', 'UI interaction', 'requirement', diffreqs[0]);
+		}
+
+		// If there are no courses in the list and no currentDept search, the user probably just wants to see all classes that satisfy a given requirement
 		if (!($scope.courses.length && $scope.currentDept !== '') && $scope.checkArr.length === 1 && $scope.showPro === 'noFilter') {
 			$scope.get.Courses($scope.currentDept, null, $scope.checkArr[0]);
 		}

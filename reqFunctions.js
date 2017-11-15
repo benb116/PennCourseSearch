@@ -1,5 +1,6 @@
 var requirements = {};
 
+var WhartonReq = require('./wharreq.json');
 var EngineerReq = require('./engreq.json');
 
 var collegeCodes = {
@@ -73,17 +74,25 @@ requirements.GetRequirements = function(section) {
 		}
 	}
 
-	try {
-		var this_GED = WhartonReq[idDashed].GED; // Pull the courses wharton requirement if it has one
-		reqCodesList.push(this_GED);
-		reqList.push(reqCodes[this_GED]);
-	} catch (err) {}
-	try {
-		if (WhartonReq[idDashed].global) { // Check if it also applies to wharton global requirement
-			reqCodesList.push("WGLO");
-		reqList.push(reqCodes.WGLO);
+	if (WhartonReq[idDashed]) {
+		try {
+			if (WhartonReq[idDashed].GED) {
+				var this_GED = WhartonReq[idDashed].GED; // Pull the courses wharton requirement if it has one
+				reqCodesList.push(this_GED);
+				reqList.push(reqCodes[this_GED]);
+			}
+		} catch (err) {
+			console.log(err)
 		}
-	} catch (err) {}
+		try {
+			if (WhartonReq[idDashed].global) { // Check if it also applies to wharton global requirement
+				reqCodesList.push("WGLO");
+				reqList.push(reqCodes.WGLO);
+			}
+		} catch (err) {
+			console.log(err)
+		}
+	}
 
 	engReturn = EngReqRules(section.course_department, section.course_number, section.crosslistings[0]);
 	reqCodesList = reqCodesList.concat(engReturn[0]);
@@ -100,16 +109,16 @@ function EngReqRules(dept, num, cross) {
 	if (EngineerReq[dept]) {
 		// Check math
 		if (EngineerReq[dept].math) {
-			if (dept != 'MATH' || (dept == 'MATH' && Number(num) >= 104)) { // Only math classes >= 104 count
+			if (dept !== 'MATH' || (dept === 'MATH' && Number(num) >= 104)) { // Only math classes >= 104 count
 				thisEngObj.math = true;
 			}
 		}
 		// Check natsci
 		if (EngineerReq[dept].natsci) {
 			if ((['BIOL', 'GEOL', 'PHYS'].indexOf(dept) < 0)||
-				(dept == 'BIOL' && Number(num) > 100)		|| 	// Only Biol classes > 100
-				(dept == 'GEOL' && Number(num) > 200)		|| 	// Only Geol classes > 200
-				(dept == 'PHYS' && Number(num) >=150)) {		// Only Phys classes >=150
+				(dept === 'BIOL' && Number(num) > 100)		|| 	// Only Biol classes > 100
+				(dept === 'GEOL' && Number(num) > 200)		|| 	// Only Geol classes > 200
+				(dept === 'PHYS' && Number(num) >=150)) {		// Only Phys classes >=150
 				thisEngObj.natsci = true;
 			}
 		}
@@ -133,7 +142,7 @@ function EngReqRules(dept, num, cross) {
 			thisEngObj.tbs = true;
 		}
 		if (EngineerReq[dept].nocred) {
-			if ((dept == 'PHYS' && Number(num) < 140) || (dept == 'STAT' && Number(num) < 430)) {
+			if ((dept === 'PHYS' && Number(num) < 140) || (dept === 'STAT' && Number(num) < 430)) {
 				thisEngObj.nocred = true;
 			}
 		}

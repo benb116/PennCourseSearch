@@ -47,16 +47,16 @@ $(document).ready(function() {
 				console.log(statusMessage);
 			} else {
 				if (localStorage.getItem('secondvisit')) {
-					// if (!localStorage.getItem('survey2016C')) {
-						// localStorage.setItem('survey2016C', 'true');
-						// sweetAlert({
-						// 	title: 'PCS Alert',
-						// 	html: true,
-						// 	confirmButtonText: "Close",
-						// 	text: 'Love PCS? Hate it? Want to vent about your life?<br>Take a quick <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSe2KE3iU7eLucDWH2h4WK-wCYrLAb_58mWit-uZ_xbGFAtbYw/viewform">survey!</a>',
-						// 	type: 'warning'
-						// });
-					// }
+					if (!localStorage.getItem('survey2017C')) {
+						localStorage.setItem('survey2017C', 'true');
+						sweetAlert({
+							title: 'PCS Alert',
+							html: true,
+							confirmButtonText: "Close",
+							text: 'Love PCS? Hate it? Want to vent about your life?<br>Take a quick <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSegplgiZsgEZDtIPlYeWN0QwJMj4iqqphS3m7Wp_HFYgqcYNQ/viewform">survey!</a>',
+							type: 'warning'
+						});
+					}
 				} else {
 					localStorage.setItem('secondvisit', 'true');
 				}
@@ -138,7 +138,7 @@ function addrem(item, array) {
 }
 
 function FormatID(rawParam) {
-	var searchParam = rawParam.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
+	var searchParam = rawParam.replace(/\W/g, ''); // Replace non alpha-numeric characters
 	var retArr = ['', '', ''];
 
 	if (isFinite(searchParam[2])) {  // If the third character is a number (e.g. BE100)

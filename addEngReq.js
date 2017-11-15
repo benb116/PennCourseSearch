@@ -4,7 +4,7 @@ var engreq = require('./engreq.json');
 var code = process.argv[4].toUpperCase();
 console.log(code)
 var codearray = [];
-if (code[0] == '[') {
+if (code[0] === '[') {
 	code = code.split('[')[1];
 	var codesplit = code.split(',');
 	var dept = codesplit[0];
