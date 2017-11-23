@@ -1,4 +1,8 @@
+var path        = require('path');
 var request     = require('request');
+var express     = require('express');
+var compression = require('compression');
+
 var config;
 try {
 	config = require('./config.js');
@@ -12,12 +16,41 @@ try {
 	config.autotestKey    = process.env.AUTOTESTKEY;
 }
 
+
+var app = express();
+
+// Set express settings
+app.use(compression());
+app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: 2628000000 }));
+app.use('/js', express.static(path.join(__dirname, 'public/js'), { maxAge: 0 }));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: 2628000000 }));
+
+console.log('Express initialized');
+
+// Start the server
+app.listen(process.env.PORT || 3001, function(){
+	console.log("Node app is running. Better go catch it.");
+});
+
+// Handle main page requests
+app.get('/auto/', function(req, res) {
+	res.sendFile(path.join(__dirname+'/views/auto.html'));
+});
+
+// Handle main page requests
+app.get('/auto/request', function(req, res) {
+	console.log(req.query.course)
+	var courses = req.query.course;
+	// console.log();
+	autoSched(courses, res);
+});
+
 // var args = process.argv;
-var courses = ['cis-110','phys150','cis-120', 'math104', 'math114', 'econ001', 'chem102'];
+// var courses = ['cis-110', 'meam-348','cis-120', 'math114', 'econ001', 'chem102', 'meam545', 'meam101', 'meam201', 'psyc001'];
 
-autoSched(courses)
+// autoSched(courses)
 
-function autoSched(courses) {
+function autoSched(courses, res) {
 	for (var i = 0; i < courses.length; i++) {
 		var thisc = FormatID(courses[i]);
 		courses[i] = thisc[0] + '-' + thisc[1];
@@ -31,8 +64,10 @@ function autoSched(courses) {
 	});
 
 
-	Promise.all(urls).then(function(allData) {
-		run(allData);
+	return Promise.all(urls).then(function(allData) {
+		var resp = run(allData);
+		console.log(resp)
+		res.send(resp)
 	});
 }
 
@@ -43,14 +78,8 @@ function run(allData) {
 	allData.forEach(function(response) {
 		var resp = JSON.parse(response[0].body)
 		var arra = resp.result_data;
-		// var lastact = '';
 		for (var i = 0; i < arra.length; i++) {
 			var thissect = SchedClean(arra[i]);
-		// 	if (thissect.actType !== lastact) {
-		// 		datasched.push([]);
-		// 		var lastact = thissect.actType;
-		// 	}
-		// 	datasched[datasched.length-1].push(thissect);
 			if (thissect.open) {
 				var thiscourseact = thissect.course + '-' + thissect.actType
 				if (!datasched[thiscourseact]) {
@@ -59,7 +88,6 @@ function run(allData) {
 				datasched[thiscourseact].push(thissect);
 			}
 		}
-
 	})
 	// console.log(datasched)
 	var d, twodarr
@@ -84,6 +112,7 @@ function run(allData) {
 		if (!anchor) {
 			console.log('noanch', types[h])
 		}
+		console.log(types[h])
 
 		d = regenData(datasched);
 		twodarr = d[0];
@@ -121,13 +150,12 @@ function run(allData) {
 			coursesAdded.push(anchor.idDashed)
 		}
 	}
-	console.log(coursesAdded)
-
+	console.log(1, coursesAdded)
+	return coursesAdded
 
 	function CompareAnchorToType(i) {
 		var indtorem = []
 		var type = raw_twodarr[i][0];
-		console.log(type)
 		var numoftype = typeNumObj[type];
 		for (var j = 0; j < numoftype; j++) {
 			var ameet = datasched[type][j];
@@ -141,7 +169,6 @@ function run(allData) {
 				}
 			}
 		}
-		console.log(indtorem)
 		return indtorem;
 	}
 
@@ -229,7 +256,7 @@ function requestAsync(url) {
     return new Promise(function(resolve, reject) {
         request({
 			uri: url,
-			method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
+			method: "GET",headers: {"Authorization-Bearer": config.requestAB2, "Authorization-Token": config.requestAT2}, // Send authorization headers
 		}, function(err, res, body) {
             if (err) { return reject(err); }
             return resolve([res, body]);
@@ -238,7 +265,7 @@ function requestAsync(url) {
 }
 
 function SchedClean(sec) {
-	var isOpen = (sec.course_status === 'O');
+	var isOpen = (sec.course_status !== 'X') && (Number(sec.course_number) < 600);
 	var thisInfo = {
 		'idDashed': sec.course_department + '-' + sec.course_number + '-' + sec.section_number,
 		'course': sec.course_department + '-' + sec.course_number,
