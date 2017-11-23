@@ -192,7 +192,9 @@ function SendPennReq (url, resultType, res) {
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
 	}, function(error, response, body) {
 		if (error) {
+			console.log(response)
 			console.log('OpenData Request failed:', error);
+			res.statusCode = 512;
 			return res.send('PCSERROR: request failed');
 		}
 

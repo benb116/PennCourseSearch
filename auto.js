@@ -12,24 +12,33 @@ try {
 	config.autotestKey    = process.env.AUTOTESTKEY;
 }
 
-var args = process.argv;
-var courses = [];
+// var args = process.argv;
+var courses = ['cis-110','phys150','cis-120', 'math104', 'math114', 'econ001', 'chem102'];
 
-for (var i = 2; i < args.length; i++) {
-	var thisc = FormatID(args[i]);
-	courses[i-2] = thisc[0] + '-' + thisc[1];
+autoSched(courses)
+
+function autoSched(courses) {
+	for (var i = 0; i < courses.length; i++) {
+		var thisc = FormatID(courses[i]);
+		courses[i] = thisc[0] + '-' + thisc[1];
+	}
+
+	console.log(courses)
+	var urls = []
+	var BASE_URL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&course_id=';
+	courses.forEach(function(x) {
+		urls.push(requestAsync(BASE_URL+x))
+	});
+
+
+	Promise.all(urls).then(function(allData) {
+		run(allData);
+	});
 }
 
-console.log(courses)
-var urls = []
-var BASE_URL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&course_id=';
-courses.forEach(function(x) {
-	urls.push(requestAsync(BASE_URL+x))
-});
+function run(allData) {
+	var coursesAdded = [];
 
-
-Promise.all(urls).then(function(allData) {
-	console.time('test')
 	var datasched = {};
 	allData.forEach(function(response) {
 		var resp = JSON.parse(response[0].body)
@@ -42,32 +51,101 @@ Promise.all(urls).then(function(allData) {
 		// 		var lastact = thissect.actType;
 		// 	}
 		// 	datasched[datasched.length-1].push(thissect);
-			var thiscourseact = thissect.course + '-' + thissect.actType
-			if (!datasched[thiscourseact]) {
-				datasched[thiscourseact] = []
+			if (thissect.open) {
+				var thiscourseact = thissect.course + '-' + thissect.actType
+				if (!datasched[thiscourseact]) {
+					datasched[thiscourseact] = []
+				}
+				datasched[thiscourseact].push(thissect);
 			}
-			datasched[thiscourseact].push(thissect);
 		}
 
 	})
 	// console.log(datasched)
 	var d, twodarr
 	d = regenData(datasched);
-	twodarr = d[0];
-	datasched = d[1];
+	raw_twodarr = d[0];
+	raw_datasched = d[1];
 
-	types = twodarr.map(function(a) {
+	raw_types = raw_twodarr.map(function(a) {
 		return a[0];
 	})	
-	console.log(twodarr)
-
 
 	var typekey = ['LEC', 'LAB', 'REC'];
-	for (var h = 0; h < types.length; h++) {
+
+	datasched = raw_datasched;
+	twodarr = raw_twodarr;
+	types = raw_types;
+
+	for (var h = 0; h < raw_types.length; h++) {
+		
 
 		var anchor = datasched[types[h]][0];
-		console.log('anchor', anchor.idDashed)
+		if (!anchor) {
+			console.log('noanch', types[h])
+		}
 
+		d = regenData(datasched);
+		twodarr = d[0];
+		datasched = d[1];
+		typeNumObj = d[2];
+
+		for (var i = h+1; i < twodarr.length; i++) {
+			indtorem = CompareAnchorToType(i);
+
+			if (indtorem.length == twodarr[i][1]) { // No sections work with this anchor, move to next anchor index and try again.
+				// anchorind++;
+				console.log('full', types[h])
+				datasched[types[h]].splice(0, 1);
+				i = twodarr.length;
+				h--;
+				var hold = true;
+			} else {
+
+
+				var typeToRem = raw_twodarr[i][0];
+				datasched[typeToRem] = datasched[typeToRem].filter(function(a,e) {
+					return !(indtorem.indexOf(e) > -1)
+				})
+				RemoveNonAsscSections(anchor);
+
+				d = regenData(datasched);
+				twodarr = d[0];
+				datasched = d[1];
+			}
+
+		}
+		if (hold) {
+			hold = false;
+		} else {
+			coursesAdded.push(anchor.idDashed)
+		}
+	}
+	console.log(coursesAdded)
+
+
+	function CompareAnchorToType(i) {
+		var indtorem = []
+		var type = raw_twodarr[i][0];
+		console.log(type)
+		var numoftype = typeNumObj[type];
+		for (var j = 0; j < numoftype; j++) {
+			var ameet = datasched[type][j];
+			if (ameet) {
+				if (anchor.course !== ameet.course) {
+					var isover = Overlap(ameet, anchor)
+					if (isover) {
+						console.log('conflict', ameet.idDashed)
+						indtorem.push(j);
+					}
+				}
+			}
+		}
+		console.log(indtorem)
+		return indtorem;
+	}
+
+	function RemoveNonAsscSections(anchor) {
 		var all_anchor_assc = [anchor.assclec, anchor.assclab, anchor.asscrec];
 		for (var g = 0; g < 3; g++) {
 			var thisassc = all_anchor_assc[g];
@@ -85,39 +163,8 @@ Promise.all(urls).then(function(allData) {
 				})
 			}
 		}
-
-		d = regenData(datasched);
-		twodarr = d[0];
-		datasched = d[1];
-
-		for (var i = h+1; i < twodarr.length; i++) {
-			var indtorem = []
-			var numoftype = twodarr[i][1];
-			for (var j = 0; j < numoftype; j++) {
-				var ameet = datasched[twodarr[i][0]][j];
-				if (anchor.course !== ameet.course) {
-					var isover = Overlap(ameet, anchor)
-					if (isover) {
-						console.log(j)
-						console.log('conflict', ameet.idDashed)
-						indtorem.push(j);
-					}
-				}
-			}
-
-			var typeToRem = twodarr[i][0];
-			datasched[typeToRem] = datasched[typeToRem].filter(function(a,e) {
-				return !(indtorem.indexOf(e) > -1)
-			})
-
-			d = regenData(datasched);
-			twodarr = d[0];
-			datasched = d[1];
-		}
-		console.log(h, 'done')
 	}
-	console.timeEnd('test')
-});
+}
 
 function regenData(datasched) {
 	var types = Object.keys(datasched);
@@ -132,8 +179,13 @@ function regenData(datasched) {
 	}
 	twodarr.sort(function(a,b) {
 		return a[1] - b[1];
-	})
-	return [twodarr, datasched, types];
+	});
+
+	typeNumObj = {};
+	for (var i = 0; i < twodarr.length; i++) {
+		typeNumObj[twodarr[i][0]] = twodarr[i][1];
+	}
+	return [twodarr, datasched, typeNumObj];
 }
 
 function Overlap(block1, block2) {
@@ -143,8 +195,11 @@ function Overlap(block1, block2) {
 	var over = false;
 	for (var i = 0; i < meet1.length; i++) {
 		for (var j = 0; j < meet2.length; j++) {
+			// console.log(1, meet1[i])
+			// console.log(2, meet2[j])
 			if (meet1[i].meetday === meet2[j].meetday) {
 				var over = check(meet1[i], meet2[j]);
+				if (over) {return over;}
 			}
 		}
 	}
@@ -183,6 +238,7 @@ function requestAsync(url) {
 }
 
 function SchedClean(sec) {
+	var isOpen = (sec.course_status === 'O');
 	var thisInfo = {
 		'idDashed': sec.course_department + '-' + sec.course_number + '-' + sec.section_number,
 		'course': sec.course_department + '-' + sec.course_number,
@@ -190,7 +246,8 @@ function SchedClean(sec) {
 		'assclec': sec.lectures,
 		'assclab': sec.labs,
 		'asscrec': sec.recitations,
-		'meetblk': []
+		'meetblk': [],
+		'open': isOpen
 	};
 	sec.meetings.forEach(function(meeting) {
 		for (i = 0; i < meeting.meeting_days.length; i++) {
@@ -239,7 +296,7 @@ function FormatID(rawParam) {
 	}
 
 	function splitTerms(n) {
-		retArr[0] = searchParam.substr(0, n);
+		retArr[0] = searchParam.substr(0, n).toUpperCase();
 		retArr[1] = searchParam.substr(n, 3);
 		retArr[2] = searchParam.substr(n+3, 3);
 	}
