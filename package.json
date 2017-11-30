@@ -12,6 +12,7 @@
     "express": "^4.15.3",
     "fs": "0.0.2",
     "git-rev": "^0.2.1",
+    "iftttmaker": "^1.2.1",
     "keen-js": "^3.4.1",
     "log-timestamp": "^0.1.2",
     "path": "^0.12.7",

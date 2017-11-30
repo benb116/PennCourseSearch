@@ -14,7 +14,7 @@ $(document).ready(function() {
 		"On PennCourseSearch, no one knows you're Amy G.",
 		"Designed by Ben in Speakman. Assembled in China.",
 		"Help! I'm trapped in a NodeJS server! Bring Chipotle!",
-		"With white sauce and hot sauce."
+		"With white sauce AND hot sauce.",
 		"Actually in touch."
 	];
 	var paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";

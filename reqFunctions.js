@@ -1,7 +1,7 @@
 var requirements = {};
 
-var WhartonReq = require('./wharreq.json');
-var EngineerReq = require('./engreq.json');
+var WhartonReq = require('./DB/wharreq.json');
+var EngineerReq = require('./DB/engreq.json');
 
 var collegeCodes = {
 	Society: "MDS",
@@ -101,7 +101,6 @@ requirements.GetRequirements = function(section) {
 }
 
 function EngReqRules(dept, num, cross) {
-	// If the course has it's own definition
 	var engreqCodesList = [];
 	var engreqList = [];
 	var thisEngObj = {};
@@ -169,7 +168,7 @@ function EngReqRules(dept, num, cross) {
 	if (thisEngObj.writ) 	{engreqCodesList.push('EWRT'); engreqList.push(reqCodes['EWRT']);}
 	if (thisEngObj.nocred) 	{engreqCodesList.push('ENOC'); engreqList.push(reqCodes['ENOC']);}
 
-	if (dept == 'ASAM' && cross) {
+	if (dept === 'ASAM' && cross) {
 		engReturn = EngReqRules(cross.subject, cross.course_id);
 		engreqCodesList = engReturn[0];
 		engreqList = engReturn[1];
