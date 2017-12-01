@@ -191,12 +191,28 @@ app.get('/Search', function(req, res) {
 			baseURL += '&instructor=' + instructFilter;
 		}
 
-		SendPennReq(baseURL, resultType, res);
+		RateLimitReq(baseURL, resultType, res);
 
 	}
 });
 
-function SendPennReq (url, resultType, res) {
+var lastRequestTime = 0;
+
+function RateLimitReq(url, resultType, res) {
+// function RateLimitReq() {
+	var now = new Date().getTime();
+	var diff = now - lastRequestTime;
+	var delay = (600 - diff) * (diff < 600);
+
+	setTimeout(function() {
+		// console.log('run')
+		SendPennReq(url, resultType, res)
+	}, delay);
+	lastRequestTime = now;
+}
+
+function SendPennReq(url, resultType, res) {
+	
 	request({
 		uri: url,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
