@@ -1,0 +1,373 @@
+<!doctype html>
+<html ng-app="PCSApp">
+
+<head>
+	<title>PennCourseSearch - Auto</title>
+	<meta name="description" content="PennCourseSearch is a web app designed to help Penn students find courses and make schedules. Includes one-click scheduling, Penn Course Review integration, filters for double-counting requirements, and more.">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="/css/plugins/sweetalert.css">
+	<link rel="stylesheet" type="text/css" href="/css/plugins/angular-tooltips.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<!-- Frameworks -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<!-- My code -->
+	<script type="text/javascript" src="/js/PCSangular.js"></script>
+	<script type="text/javascript" src="/js/functions.js"></script>
+	<script type="text/javascript" src="/js/factories.js"></script>
+	<script defer type="text/javascript" src="/js/pcn.js"></script>
+	<script defer type="text/javascript" src="/js/importSched.js"></script>
+	<!-- Third party plugins -->
+	<script defer type="text/javascript" src="/js/plugins/html2canvas.js"></script>
+	<script defer type="text/javascript" src="/js/plugins/jquery.tooltipster.min.js"></script>
+	<script defer type="text/javascript" src="/js/plugins/sweetalert.min.js"></script>
+	<script defer type="text/javascript" src="/js/plugins/jquery.leanModal.min.js"></script>
+	<script type="text/javascript" src="/js/plugins/angular-local-storage.min.js"></script>
+	<script type="text/javascript" src="/js/plugins/angular-tooltips.min.js"></script>
+</head>
+
+<body ng-controller="CourseController">
+
+	<div id="MenuBar">
+		<a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Donate</span></a>
+		<a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span style="padding-right:0.5em;"><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
+		<a rel="leanModal" href="#ModalWindow" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')" style="padding-right:0.5em;">About</a>
+	</div>
+
+	<div id="Top">
+		<h1>PennCourseSearch</h1>
+		<span id="subtitle">{{ subtitle }}</span>
+
+		<form ng-submit="delaySearch()">
+			<span>Search by:</span>
+			<select id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="searchChange()">
+				<!-- Re search if this select changes -->
+				<option selected="selected" value="courseIDSearch">Course ID</option>
+				<option value="keywordSearch">Keywords</option>
+				<option value="instSearch">Instructor</option>
+			</select>
+			<input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
+			<span style="margin-left:1em;">Schedule:</span>
+			<select id="schedSelect" ng-model="currentSched" ng-change="schedChange()">
+				<option ng-repeat="schedName in schedules" value="{{schedName}}">{{schedName}}</option>
+			</select>
+			<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>
+			<!-- This only shows if loading == true. Need to use visibility: hidden -->
+		</form>
+
+		<div id="MenuButtons">
+			<ul>
+				<li>
+					Schedule <i class="fa fa-caret-down"></i>
+					<ul>
+						<li ng-click="sched.New()">New</li>
+						<li ng-click="sched.Recolor()">Recolor</li>
+						<a ng-click="sched.Download()" rel="leanModal" href="#SchedModal">
+							<li>Download</li>
+						</a>
+						<li ng-click="sched.Duplicate()">Duplicate</li>
+						<li ng-click="sched.Rename()">Rename</li>
+						<li ng-click="sched.Clear()">Clear</li>
+						<li ng-click="sched.Delete()">Delete</li>
+					</ul>
+				</li>
+				<li ng-click="star.Show()"><span>Show Stars</span></li>
+				<a rel="leanModal" href="#UploadModal" id="ImportButton" onclick="ga('send', 'event', 'UI interaction', 'import')">
+					<li>Import</li>
+				</a>
+
+<!-- 				<li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li> -->
+				<li ng-click="clearSearch()"><span>Clear Search</span></li>
+			</ul>
+		</div>
+	</div>
+	<div id="BottomResults">
+		<div id="CourseList">
+
+			<div id="CourseHeader">
+				<span class="PCR Qual tooltip" title="Course quality rating" style="background:rgba(45, 160, 240, 0.85);margin-left:0.45em">Qual</span>
+				<span class="PCR Diff tooltip" title="Course difficulty rating" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
+				<span style="margin-left:0.5em;margin-right:0.5em;">Sort by: </span>
+				<select id="sortCourses" ng-model="courseSort" style="margin-bottom:0.5em;">
+					<option value="idDashed">Course Number</option>
+					<option value="-revs.cQ">Quality (high to low)</option>
+					<option value="revs.cD">Difficulty (easy to hard)</option>
+					<option value="-revs.QDratio">Good and Easy</option>
+				</select>
+			</div>
+
+			<ul>
+				<li ng-repeat="course in courses | orderBy:courseSort" id="{{ course.idDashed }}" 
+					ng-click="get.Sections(course.idDashed)" 
+					ng-class="{'activeItem': (currentCourse.toUpperCase() == course.idSpaced.replace(' ', ''))}"
+					ng-if="
+						(!checkArr[0] || course.courseReqs.indexOf(checkArr[0]) > -1) && 
+						(!checkArr[1] || course.courseReqs.indexOf(checkArr[1]) > -1) && 
+						(!checkArr[2] || course.courseReqs.indexOf(checkArr[2]) > -1)
+					"
+					ng-hide="(course.courseCred != credFilter) && (credFilter != 'noFilter')">
+					<!--Dealing with requirements: The list element will be shown if: 
+						There are no requirements (checkArr == [], therefore !checkArr[0] && !checkArr[1]) 
+						OR
+						There is one requirement (checkArr[0] && !checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0] 
+						OR
+						There are two requirements (checkArr[0] && checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0] AND checkArr[1]
+
+						Also hide the course if it doesn't match the number of credits
+					-->
+					<span class="PCR Qual" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQT}}</span>
+					<span class="PCR Diff" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cDT}}</span>
+					<span class="cID">{{ course.idSpaced }}</span>
+					<span class="cTitle">{{ course.courseTitle }}</span>
+				</li>
+			</ul>
+		</div>
+
+		<div id="SectionCol">
+			<div id="Sections">
+				<div style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+					<span class="tooltip" title="Section status (open or closed)" style="margin-left:1em;margin-right:-0.2em;">O/C</span>
+					<span class="PCR Inst tooltip" title="Instructor Quality rating" style="background:rgba(46, 204, 113, 0.85);">Inst</span>
+					<span style="display:inline;text-overflow:ellipsis">{{secListTitle}}</span>
+				</div>
+
+				<div id="SectionList">
+					<ul>
+						<li ng-repeat="section in sections" id="{{ section.idDashed }}" class="{{section.actType}}" ng-class="{'activeItem': (currentSection == section.idSpaced.replace(' ', '').replace(' ', ''))}" ng-show="
+							(showAct == section.actType || showAct == 'noFilter') &&
+							(section.isOpen || showClosed) && 
+							(currentCourse || starSections.indexOf(section.idDashed) > -1)
+							">
+							<!--Dealing with closed sections, activity types, and stars. The list element will show if:
+								There is no activity filter OR the section actType matches the activity filter
+								AND
+								Closed sections are enabled (showClosed === true) OR the section is open
+								ANDThere is a current course selected (true when user clicks "Show Stars") or the section is starred
+							 -->
+							<i class="fa" ng-class="{'fa-plus': schedSections.indexOf(section.idDashed) === -1, 'fa-times': schedSections.indexOf(section.idDashed) > -1}" ng-click="sched.AddRem(section.idDashed)"></i>
+							<!-- The icon should be a + if the section is not currently scheduled and an x if it is -->
+							<span class="statusClass" ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}" ng-click="get.SectionInfo(section.idDashed)">
+							<!-- the status square should be green if the section is open, red if it's closed -->
+
+								<i class="fa fa-envelope tooltip" ng-hide="section.isOpen" ng-click="Notify(section.idDashed)" title="PennCourseNotify"></i>
+
+								<!-- If the section is closed, show the notify icon -->
+							</span>
+							<!-- <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span> -->
+							<span class="PCR Inst" style="background:rgba(46, 204, 113, {{ section.pcrIShade }});color: {{ section.pcrIColor }}" ng-click="get.SectionInfo(section.idDashed)">{{ section.revs.cI | number:2}}</span>
+							<i class="fa" ng-class="{'fa-star': starSections.indexOf(section.idDashed) > -1, 'fa-star-o': starSections.indexOf(section.idDashed) === -1}" ng-click="star.AddRem(section.idDashed)"></i>
+							<!-- Show an full star if the section is starred, empty star if not -->
+							<!-- <div style="display:inline-block;width:17em"> -->
+							<span class="sectionText" ng-click="get.SectionInfo(section.idDashed)">{{ section.idSpaced}} - {{ section.timeInfo }} </span>
+							<!-- </div> -->
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="SectionInfo">
+				<span ng-show="sectionInfo.fullID" style="font-size:1.25em"> {{sectionInfo.fullID}} - {{sectionInfo.title}} <br><br></span>
+				<span ng-show="sectionInfo.timeInfo"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}}</span>
+				<br>
+				</span>
+				<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></span>
+				<!-- <span ng-show="sectionInfo.sectionCred"> {{ sectionInfo.sectionCred }} CU <br><br></span> -->
+				<span ng-show="sectionInfo.description">Description: {{sectionInfo.description}} <br><br></span>
+				<span ng-show="sectionInfo.reqsFilled.length">Requirements Fulfilled: <br><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span>
+				</span>
+				<span ng-show="sectionInfo.prereqs"> Prerequisites: {{sectionInfo.prereqs}} <br><br></span>
+				<span ng-show="sectionInfo.associatedType"> You must also sign up for a {{sectionInfo.associatedType}}. <br> Associated {{sectionInfo.associatedType}}s: <br></span>
+				<li ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="get.SectionInfo(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></li>
+			</div>
+		</div>
+
+		<div id="InfoPanel">
+			<div id="FilterSearch">
+				<div class="FilterPanel">
+					<div class="FilterBlock">
+						<span>Filter by requirement</span>
+						<div id="reqFilter">
+							<!--ng-disabled for any given checkbox is true if
+									the checkbox itself if not checked AND
+									the total number of checked boxes is >= 2
+								This prevents a user from selecting more than two filters
+							-->
+							<input type="checkbox" ng-disabled="" ng-model="check.MDS" ng-change="reqChange()" value="MDS">Society Sector
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.MDH" ng-change="reqChange()" value="MDH">History &amp; Tradition Sector
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.MDA" ng-change="reqChange()" value="MDA">Arts &amp; Letters Sector
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.MDO" ng-change="reqChange()" value="MDO">Humanities &amp; Social Science Sector
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.MDL" ng-change="reqChange()" value="MDL">Living World Sector
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.MDP" ng-change="reqChange()" value="MDP">Physical World Sector
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.MDN" ng-change="reqChange()" value="MDN">Natural Science &amp; Math Sector
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.MWC" ng-change="reqChange()" value="MWC">Writing Requirement
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.MQS" ng-change="reqChange()" value="MQS">College Quantitative Data Analysis Req.
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.MFR" ng-change="reqChange()" value="MFR">Formal Reasoning Course
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.MC1" ng-change="reqChange()" value="MC1">Cross Cultural Analysis
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.MC2" ng-change="reqChange()" value="MC2">Cultural Diversity in the US
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.WGLO" ng-change="reqChange()" value="WGLO">Wharton - Global Environment
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Wharton - Social Structures
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Wharton - Science and Technology
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Wharton - Language, Arts &amp; Culture
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.EMAT" ng-change="reqChange()" value="EMAT">SEAS - Math
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.ESCI" ng-change="reqChange()" value="ESCI">SEAS - Natural Science
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.EENG" ng-change="reqChange()" value="EENG">SEAS - Engineering
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.ESSC" ng-change="reqChange()" value="ESSC">SEAS - Social Sciences
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.EHUM" ng-change="reqChange()" value="EHUM">SEAS - Humanities
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.ETBS" ng-change="reqChange()" value="ETBS">SEAS - Technology, Business, and Society
+							<br>
+							<input type="checkbox" ng-disabled="" ng-model="check.EWRT" ng-change="reqChange()" value="EWRT">SEAS - Writing
+						</div>
+					</div>
+				</div>
+
+				<div class="FilterPanel">
+					<div class="FilterBlock">
+						<input type="checkbox" id="closedCheck" value="ClosedSec" ng-model="showClosed" checked onchange="ga('send', 'event', 'UI interaction', 'open-close');">Show closed sections
+					</div>
+
+					<div class="FilterBlock">
+						<select id="actFilter" ng-model="showAct" onchange="ga('send', 'event', 'UI interaction', 'activity');">
+							<option value="noFilter">Filter by section type</option>
+							<option value="LEC">Lecture</option>
+							<option value="REC">Recitation</option>
+							<option value="LAB">Laboratory</option>
+							<option value="IND">Independent Study</option>
+							<option value="SEM">Seminar</option>
+							<option value="SRT">Senior Thesis</option>
+							<option value="STU">Studio</option>
+							<option value="CLN">Clinic</option>
+							<option value="PRC">SCUE Preceptorial</option>
+							<option value="PRO">NSO Proseminar</option>
+							<option value="ONL">Online Course</option>
+						</select>
+
+						<select id="credSelect" ng-model="credFilter" onchange="ga('send', 'event', 'UI interaction', 'credit');">
+							<option value="noFilter">Filter by CU</option>
+							<option value="0.5">0.5 CU</option>
+							<option value="1">1 CU</option>
+							<option value="1.5">1.5 CU</option>
+						</select>
+					</div>
+
+					<div class="FilterBlock">
+						<select id="proFilter" ng-model="showPro" ng-change="get.Courses(currentDept, null, checkArr[0]);" onchange="ga('send', 'event', 'UI interaction', 'program');">
+							<option value="noFilter">Filter by program</option>
+							<option value="MSL">ABCS Courses</option>
+							<option value="BFS">Ben Franklin Seminars</option>
+							<option value="CGS">College of Liberal &amp; Professional Studies</option>
+							<option value="CRS">Critical Writing Seminars</option>
+							<option value="FORB">Freshman-Friendly courses</option>
+							<option value="MFS">Freshman Seminars</option>
+							<option value="PLC">Penn Language Center</option>
+							<option value="SS">Summer Sessions I &amp; II</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div id="SchedGraph">
+				<div id="TimeCol" style="position:relative;">
+					<div ng-repeat="timeblock in timeblocks track by $index" class="TimeBlock" style="top: {{schedlines[$index]}}%"> {{timeblock}}:00</div>
+				</div>
+				<div id="Schedule" style="position:relative;">
+					<div id="SchedPlaceholder" ng-hide="schedBlocks.length">
+						<p style="font-size:1.5em;margin-top:7em;display:block;">Search for courses above <br>then click a section's + icon to add it to the schedule.</p><p style="font-size:1em">These are mock schedules.<br> You still need to register for your classes on Penn InTouch.</p>
+					</div>
+					<div id="SchedGrid" ng-show="schedBlocks.length">
+						<hr ng-repeat="thisline in schedlines" width="99.7%" style="top:{{thisline}}%"></hr>
+						<div ng-repeat="weekday in fullWeekdays" class="DayName" style="width:{{percentWidth}}%;">{{weekday}}</div>
+
+						<div ng-repeat="thisBlock in schedBlocks" 
+						class="SchedBlock {{thisBlock.class}} {{thisBlock.letterday}}" 
+						id="{{thisBlock.id}}" 
+						style="
+						top: {{thisBlock.top}}%;
+						left: {{thisBlock.left}}%;
+						width: {{thisBlock.width}}%;
+						height: {{thisBlock.height}}%;
+						background-color: {{thisBlock.color}}"
+						ng-click="initiateSearch(thisBlock.class, 'courseIDSearch');"
+						ng-mouseover="expression">
+							<div class="CloseX" style="width:100%;height:100%;"><span ng-click="e.stopPropagation(); sched.AddRem(thisBlock.class);">X</span></div>
+							<div class="NeedAssc" ng-hide="sched.CrossCheck(thisBlock.asscsecs)" title="Registration is required for an associated section."><b>!</b></div>
+							<span class="SecName">{{thisBlock.name}}</span>
+							<br>
+							<span class="LocName">{{thisBlock.room}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="ModalWindow" class="Modal">
+			<h2>About PennCourseSearch</h2>
+			<p>PennCourseSearch is a cleaner and simpler way for Quakers to find classes and make schedules. While this is not a full replacement for Penn InTouch, it acts as an improvement of the "Course Search" and "Mock Schedules" features. Search across departments, courses, and sections and refine searches by specific criteria.</p>
+			<h2>How do I search for courses?</h2>
+			<p>Just type a course in the search box. Then you can click on the results to see more in-depth information about different sections. If you want to filter the results, click on the filter button and change your options. You can also choose to search by course description or instructor in the menu bar.</p>
+			<h2>How do I change my schedule?</h2>
+			<p>To add a section to your schedule, click on its <i class="fa fa-plus" style="display:inline"></i> icon. To remove a course, mouse over it and click the <i class="fa fa-times" style="display:inline"></i> in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
+			<h2>What do the colors mean?</h2>
+			<p>The rectangles with numbers are Penn Course Review ratings. Course quality ratings are in
+				<span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">blue</span>, course difficulty ratings are in
+				<span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">red</span>, and instructor ratings are in
+				<span class="PCR Inst" style="background:rgba(46, 204, 113, 0.85 );display:inline;padding-left:0.25em;padding-right:0.25em;">green</span>. The squares tell you the status of a section.
+				<span class="statusClass openSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is an open section and
+				<span class="statusClass closedSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is a closed section.</p>
+			<!-- <div class="ModalThird">
+				<span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Venmo Me</span></a>
+			</div> -->
+			<div class="ModalThird">
+				<span>Questions or comments?</span>
+				<a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
+			</div>
+			<div class="ModalThird">
+				<span>Want to see all of PCS's code?</span>
+				<a href="https://github.com/benb116/PennCourseSearch"><span><i class="fa fa-github" style="padding-right:0.25em;"></i>View on Github</span></a>
+			</div>
+			<div class="ModalThird"><a href="https://keen.io?s=badge" rel="nofollow"><img src="/keen.svg" alt="Analytics by Keen IO"/></a></div>
+			<a class="modal_close"><i class="fa fa-times"></i></a>
+		</div>
+
+		<div id="SchedModal" class="Modal">
+			<img id="SchedImage" src="">
+			<span>Right click the image to save it.</span>
+			<a class="modal_close"><i class="fa fa-times"></i></a>
+		</div>
+
+		<div id="UploadModal" class="Modal">
+			<h2>Import your schedule from Penn InTouch</h2>
+			<img src="/Import.png" width="598" height="246">
+			<p style="text-align:center;">Under your schedule on Penn InTouch, click the "Export as iCalendar" button to download the schedule file.</p>
+			<input type="file" id="schedInput" name="file" style="width:160px" accept=".ics" onchange="readCalFile()" />
+			<p style="text-align:center;">Upload the file here to import the classes.</p>
+			<div id="secsToImport"></div>
+			<input type="submit" name="upload" value="Import!" id="importSubmit" disabled ng-click="sched.Import()">
+			<a class="modal_close"><i class="fa fa-times"></i></a>
+		</div>
+</body>
+
+</html>

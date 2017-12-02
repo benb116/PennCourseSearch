@@ -57,6 +57,16 @@ var logEvent = function (eventName, eventData) {
 	}
 };
 
+var IFTTTMaker = require('iftttmaker')(config.IFTTTKey);
+
+function SendError(errmsg) {
+	IFTTTMaker.send('PCSError', errmsg).then(function () {
+	  console.log('Request was sent');
+	}).catch(function (error) {
+	  console.log('The request could not be sent:', error);
+	});
+}
+
 console.log('Plugins initialized');
 
 // Pull in course and review information
@@ -181,18 +191,37 @@ app.get('/Search', function(req, res) {
 			baseURL += '&instructor=' + instructFilter;
 		}
 
-		SendPennReq(baseURL, resultType, res);
+		RateLimitReq(baseURL, resultType, res);
 
 	}
 });
 
-function SendPennReq (url, resultType, res) {
+var lastRequestTime = 0;
+
+function RateLimitReq(url, resultType, res) {
+// function RateLimitReq() {
+	var now = new Date().getTime();
+	var diff = now - lastRequestTime;
+	var delay = (600 - diff) * (diff < 600);
+	lastRequestTime = now+delay;
+
+	setTimeout(function() {
+		// console.log('run')
+		SendPennReq(url, resultType, res)
+	}, delay);
+}
+
+function SendPennReq(url, resultType, res) {
+	
 	request({
 		uri: url,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
 	}, function(error, response, body) {
 		if (error) {
+			console.log(response)
 			console.log('OpenData Request failed:', error);
+			SendError('OpenData Request failed');
+			res.statusCode = 512;
 			return res.send('PCSERROR: request failed');
 		}
 
@@ -200,11 +229,13 @@ function SendPennReq (url, resultType, res) {
 		try { // Try to make into valid JSON
 			rawResp = JSON.parse(body);
 			if (rawResp.statusCode) {
+				SendError('Status Code');
 				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
 				return res.send('status code error');
 			}
 		} catch(err) {
 			console.log('Resp parse error ' + err);
+			SendError('Parse Error!!!');
 			console.log(response);
 			console.log(JSON.stringify(response));
 			return res.send({});
@@ -213,12 +244,14 @@ function SendPennReq (url, resultType, res) {
 		try {
 			if (rawResp.service_meta.error_text) { // If the API returned an error
 				console.log('Resp Err: ' + rawResp.service_meta.error_text);
+				SendError('Error Text');
 				res.statusCode = 513; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
 				return res.send(rawResp.service_meta.error_text);
 			}
 			parsedRes = rawResp.result_data;
 		} catch(err) {
 			console.log(err);
+			SendError('Other Error!!!');
 			res.statusCode = 500;
 			return res.send(err);
 		}

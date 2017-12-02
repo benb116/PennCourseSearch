@@ -14,13 +14,15 @@ $(document).ready(function() {
 		"On PennCourseSearch, no one knows you're Amy G.",
 		"Designed by Ben in Speakman. Assembled in China.",
 		"Help! I'm trapped in a NodeJS server! Bring Chipotle!",
+		"With white sauce AND hot sauce.",
 		"Actually in touch."
 	];
 	var paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";
 	var paymentNotes = [
 		"PennCourseSearch%20rocks%20my%20socks!",
 		"Donation%20to%20PennInTouch%20Sucks,%20Inc.",
-		"For%20your%20next%20trip%20to%20Wawa"
+		"For%20your%20next%20trip%20to%20Wawa",
+		"Offsetting%20the%20increased%20price%20of%20chicken%20over%20rice"
 	];
 	$('#subtitle').html(subtitles[Math.floor(Math.random() * subtitles.length)]); // Show a random subtitle
 	$('#paymentNote').attr('href', paymentNoteBase + paymentNotes[Math.floor(Math.random() * paymentNotes.length)]); // Use a random payment note
