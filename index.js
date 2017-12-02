@@ -203,12 +203,12 @@ function RateLimitReq(url, resultType, res) {
 	var now = new Date().getTime();
 	var diff = now - lastRequestTime;
 	var delay = (600 - diff) * (diff < 600);
+	lastRequestTime = now+delay;
 
 	setTimeout(function() {
 		// console.log('run')
 		SendPennReq(url, resultType, res)
 	}, delay);
-	lastRequestTime = now;
 }
 
 function SendPennReq(url, resultType, res) {
