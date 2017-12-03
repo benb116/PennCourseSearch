@@ -61,9 +61,8 @@ var IFTTTMaker = require('iftttmaker')(config.IFTTTKey);
 
 function SendError(errmsg) {
 	IFTTTMaker.send('PCSError', errmsg).then(function () {
-	  console.log('Request was sent');
 	}).catch(function (error) {
-	  console.log('The request could not be sent:', error);
+	  console.log('The error request could not be sent:', error);
 	});
 }
 
@@ -217,8 +216,8 @@ function SendPennReq(url, resultType, res) {
 		uri: url,
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
 	}, function(error, response, body) {
-		if (error) {
-			console.log(response)
+		if (error || response.statusCode >= 500) {
+			console.log(JSON.stringify(response));
 			console.log('OpenData Request failed:', error);
 			SendError('OpenData Request failed');
 			res.statusCode = 512;
@@ -236,7 +235,6 @@ function SendPennReq(url, resultType, res) {
 		} catch(err) {
 			console.log('Resp parse error ' + err);
 			SendError('Parse Error!!!');
-			console.log(response);
 			console.log(JSON.stringify(response));
 			return res.send({});
 		}

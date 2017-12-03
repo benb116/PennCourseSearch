@@ -350,13 +350,13 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			$('#importSubmit').prop('disabled', true);
 		},
 		AddLoc: function() {
-			for (var thisSched in $scope.schedData) {
-				for (var thissec in $scope.schedData[thisSched].meetings) {
+			for (var thisSched in $scope.schedData) { if ($scope.schedData.hasOwnProperty(thisSched)) {
+				for (var thissec in $scope.schedData[thisSched].meetings) { if ($scope.schedData[thisSched].meetings.hasOwnProperty(thissec)) {
 					var thisID = $scope.schedData[thisSched].meetings[thissec].idDashed;
 					$scope.schedData[thisSched].meetings.splice(thissec, 1);
 					$scope.sched.AddRem(thisID, thisSched, true);
-				}
-			}
+				}}
+			}}
 		},
 		Render: function(thisschedData) {
 			var courseSched = thisschedData.meetings;

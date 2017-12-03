@@ -289,26 +289,6 @@ function SchedClean(sec) {
 	return thisInfo;
 }
 
-function TwoOverlap(block1, block2) {
-	// Thank you to Stack Overflow user BC. for the function this is based on.
-	// http://stackoverflow.com/questions/5419134/how-to-detect-if-two-divs-touch-with-jquery
-	var y1 = block1.top;
-	var h1 = block1.height;
-	var b1 = y1 + h1;
-
-	var y2 = block2.top;
-	var h2 = block2.height;
-	var b2 = y2 + h2;
-
-	// This checks if the top of block 2 is lower down (higher value) than the bottom of block 1...
-	// or if the top of block 1 is lower down (higher value) than the bottom of block 2.
-	// In this case, they are not overlapping, so return false
-	if (b1 <= y2 || b2 <= y1) {
-		return false;
-	} else {
-		return true;
-	}
-}
 function FormatID(rawParam) {
 	var searchParam = rawParam.replace(/ /g, "").replace(/-/g, "").replace(/:/g, ""); // Remove spaces, dashes, and colons
 	var retArr = ['', '', ''];
