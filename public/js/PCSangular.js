@@ -127,7 +127,11 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
 			$scope.currentCourse = cID;
 			UpdateSectionList.getCourseSections(cID).then(function(resp) {
 				$scope.sections = PCR(resp.data[0]);
-				$scope.secListTitle = $scope.sections[0].courseTitle;
+				if ($scope.sections[0]) {
+					$scope.secListTitle = $scope.sections[0].courseTitle;
+				} else {
+					$scope.secListTitle = 'No Results';
+				}
 				if (sec.length < 3) { // If we are not searching for a specific section, show some course information
 					$scope.sectionInfo = resp.data[1];
 					if ($scope.sections.length > 1) {

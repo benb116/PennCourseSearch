@@ -248,13 +248,13 @@ function PullReview(index) {
 					courseSumD += instSumD;
 					courseSumI += instSumI;
 				} else {
-					for (var review in resp[course].Recent.revs) {
+					for (var review in resp[course].Recent.revs) {if (resp[course].Recent.revs.hasOwnProperty(review)) {
 						var thisrev = resp[course].Recent.revs[review];
 						recentQ += thisrev.cQ;
 						recentD += thisrev.cD;
 						recentI += thisrev.cI;
 						recentrevcount++;
-					}
+					}}
 				}
 			}}
 			if (!revcount) {revcount = 1;}

@@ -118,17 +118,18 @@ function run(allData) {
 		twodarr = d[0];
 		datasched = d[1];
 		typeNumObj = d[2];
+		var hold; 
 
 		for (var i = h+1; i < twodarr.length; i++) {
 			indtorem = CompareAnchorToType(i);
 
-			if (indtorem.length == twodarr[i][1]) { // No sections work with this anchor, move to next anchor index and try again.
+			if (indtorem.length === twodarr[i][1]) { // No sections work with this anchor, move to next anchor index and try again.
 				// anchorind++;
 				console.log('full', types[h])
 				datasched[types[h]].splice(0, 1);
 				i = twodarr.length;
 				h--;
-				var hold = true;
+				hold = true;
 			} else {
 
 

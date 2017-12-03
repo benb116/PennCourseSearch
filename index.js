@@ -419,7 +419,7 @@ function parseSectionInfo(Res) {
 	var entry = Res[0];
 	var sectionInfo = {};
 	// try {
-	if (entry) {
+	if (entry && !entry.is_cancelled) {
 		var Title         = entry.course_title;
 		var FullID        = entry.section_id_normalized.replace(/-/g, " "); // Format name
 		var CourseID      = entry.section_id_normalized.split('-')[0] + ' ' + entry.section_id_normalized.split('-')[1];
