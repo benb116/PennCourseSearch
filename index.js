@@ -59,7 +59,7 @@ var logEvent = function (eventName, eventData) {
 
 var IFTTTMaker = require('iftttmaker')(config.IFTTTKey);
 
-function SendError(errmsg) {
+function SendError(errmsg) { // Send an email to Ben through IFTTT when there is a server error
 	IFTTTMaker.send('PCSError', errmsg).then(function () {
 	}).catch(function (error) {
 	  console.log('The error request could not be sent:', error);
@@ -93,6 +93,8 @@ app.get('/', function(req, res) {
 // Handle status requests. This lets the admin disseminate info if necessary
 app.get('/Status', function(req, res) {
 	var statustext = 'hakol beseder'; // Means "everything is ok" in Hebrew
+	// statustext = 'Penn InTouch is being MERT\'ed right now, so PennCourseSearch may not work correctly. Please try again later if you run into issues.'
+	
 	// Penn InTouch often is refreshing data between 1:00 AM and 5:00 AM, which renders the API useless.
 	// This is just letting the user know.
 	var now = new Date();
@@ -116,7 +118,7 @@ var filterURI = {
 	includeOpen: '&open=true'
 };
 
-var buildURI = function (filter, type) {
+var buildURI = function (filter, type) { // Build the request URI given certain filters and requirements
 	if (typeof filter === 'undefined') {
 		return '';
 	} else {
@@ -131,7 +133,8 @@ var buildURI = function (filter, type) {
 var resultTypes = {
 	deptSearch: parseCourseList,
 	numbSearch: parseSectionList,
-	sectSearch: parseSectionInfo
+	sectSearch: parseSectionInfo,
+	schedInfo: getSchedInfo
 };
 
 var BASE_URL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term=';
@@ -144,12 +147,12 @@ app.get('/Search', function(req, res) {
 	var instructFilter = req.query.instFilter;	 // Is there an instructor filter?
 
 	// Keen.io logging
-	var searchEvent = {searchParam: searchParam};
 	if (searchParam) {
+		var searchEvent = {searchParam: searchParam};
 		logEvent('Search', searchEvent);
 	}
 
-	if (searchType === 'courseIDSearch' && resultType === 'deptSearch' &&!req.query.proParam) { // If we can return results from cached data
+	if (searchType === 'courseIDSearch' && resultType === 'deptSearch' && !req.query.proParam) { // If we can return results from cached data
 		var returnCourses = allCourses;
 
 		if (searchParam) { // Filter by department
@@ -197,16 +200,16 @@ app.get('/Search', function(req, res) {
 
 var lastRequestTime = 0;
 
+// API should limit to 100 requests a minute -> 600 ms between requests
 function RateLimitReq(url, resultType, res) {
 // function RateLimitReq() {
 	var now = new Date().getTime();
-	var diff = now - lastRequestTime;
-	var delay = (600 - diff) * (diff < 600);
-	lastRequestTime = now+delay;
+	var diff = now - lastRequestTime; // how long ago was the last request point
+	var delay = (600 - diff) * (diff < 600); // How long to delay the request (if diff is >600, no need to delay)
+	lastRequestTime = now+delay; // Update the latest request timestamp
 
 	setTimeout(function() {
-		// console.log('run')
-		SendPennReq(url, resultType, res)
+		SendPennReq(url, resultType, res) // Send the request after the delay
 	}, delay);
 }
 
@@ -217,22 +220,23 @@ function SendPennReq(url, resultType, res) {
 		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
 	}, function(error, response, body) {
 		if (error || response.statusCode >= 500) {
+			// This is triggered if the OpenData API returns an error or never responds
 			console.log(JSON.stringify(response));
 			console.log('OpenData Request failed:', error);
 			SendError('OpenData Request failed');
-			res.statusCode = 512;
+			res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
 			return res.send('PCSERROR: request failed');
 		}
 
 		var parsedRes, rawResp = {};
-		try { // Try to make into valid JSON
+		try { // Try to make body into valid JSON
 			rawResp = JSON.parse(body);
 			if (rawResp.statusCode) {
 				SendError('Status Code');
 				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
 				return res.send('status code error');
 			}
-		} catch(err) {
+		} catch(err) { // Could not parse the JSON for some reason
 			console.log('Resp parse error ' + err);
 			SendError('Parse Error!!!');
 			console.log(JSON.stringify(response));
@@ -253,7 +257,6 @@ function SendPennReq(url, resultType, res) {
 			res.statusCode = 500;
 			return res.send(err);
 		}
-
 		// Send the raw data to the appropriate formatting function
 		var searchResponse;
 		if (resultType in resultTypes) {
@@ -290,6 +293,7 @@ function ParseDeptList (res) {
 }
 
 // This function spits out the array of courses that goes in #CourseList
+// Takes in data from the API
 function parseCourseList(Res) {
 	var coursesList = {};
 	for(var key in Res) { if (Res.hasOwnProperty(key)) {
@@ -333,7 +337,7 @@ function getTimeInfo (JSONObj) { // A function to retrieve and format meeting ti
 	} else {
 		isOpen = false;
 	}
-	var TimeInfo = []; // Timeinfo is textual e.g. '10:00 to 11:00 on MWF'
+	var TimeInfo = []; // TimeInfo is textual e.g. '10:00 to 11:00 on MWF'
 	try { // Not all sections have time info
 		for(var meeting in JSONObj.meetings) { if (JSONObj.meetings.hasOwnProperty(meeting)) {
 			// Some sections have multiple meeting forms (I'm looking at you PHYS151)
@@ -417,7 +421,7 @@ function parseSectionInfo(Res) {
 	var entry = Res[0];
 	var sectionInfo = {};
 	// try {
-	if (entry && !entry.is_cancelled) {
+	if (entry && !entry.is_cancelled) { // Don't return cancelled sections
 		var Title         = entry.course_title;
 		var FullID        = entry.section_id_normalized.replace(/-/g, " "); // Format name
 		var CourseID      = entry.section_id_normalized.split('-')[0] + ' ' + entry.section_id_normalized.split('-')[1];
@@ -489,47 +493,53 @@ function parseSectionInfo(Res) {
 app.get('/Sched', function(req, res) {
 	var courseID = req.query.courseID;
 	var needLoc = req.query.needLoc;
-	request({
-		uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
-		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
-	}, function(error, response, body) {
-		if (error) {
-			console.log('OpenData Request failed:', error);
-			return res.send('PCSERROR: request failed');
-		}
+	var uri = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID;
+	var schedEvent = {schedCourse: courseID};
+	if (!needLoc) {logEvent('Sched', schedEvent);}
+	SendPennReq(uri, 'schedInfo', res);
+	// request({
+	// 	uri: 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID,
+	// 	method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT},
+	// }, function(error, response, body) {
+	// 	if (error) {
+	// 		console.log('OpenData Request failed:', error);
+	// 		return res.send('PCSERROR: request failed');
+	// 	}
 
-		var parsedRes, rawResp = {};
-		try {
-			rawResp = JSON.parse(body);
-		} catch(err) {
-			console.log('Resp parse error - ' + err);
-			return res.send(undefined);
-		}
+	// 	var parsedRes, rawResp = {};
+	// 	try {
+	// 		rawResp = JSON.parse(body);
+	// 	} catch(err) {
+	// 		console.log('Resp parse error - ' + err);
+	// 		return res.send(undefined);
+	// 	}
 
-		try {
-			if (rawResp.service_meta.error_text) {
-				console.log('Resp Err:' + rawResp.service_meta.error_text);
-				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
-				return res.send(rawResp.service_meta.error_text);
-			}
-			parsedRes = rawResp;
-		} catch(err) {
-			console.log(err);
-			res.statusCode = 500;
-			return res.send(err);
-		}
-		var resJSON = getSchedInfo(parsedRes.result_data[0]); // Format the response
-		// for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
-		//	 SchedCourses[JSONSecID] = resJSON[JSONSecID];
-		// }}
-		var schedEvent = {schedCourse: courseID};
-		if (!needLoc) {logEvent('Sched', schedEvent);}
-		return res.send(resJSON);
-	});
-	// }
+	// 	try {
+	// 		if (rawResp.service_meta.error_text) {
+	// 			console.log('Resp Err:' + rawResp.service_meta.error_text);
+	// 			res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
+	// 			return res.send(rawResp.service_meta.error_text);
+	// 		}
+	// 		parsedRes = rawResp;
+	// 	} catch(err) {
+	// 		console.log(err);
+	// 		res.statusCode = 500;
+	// 		return res.send(err);
+	// 	}
+	// 	var resJSON = getSchedInfo(parsedRes); // Format the response
+	// 	// for (var JSONSecID in resJSON) { if (resJSON.hasOwnProperty(JSONSecID)) { // Compile a list of courses
+	// 	//	 SchedCourses[JSONSecID] = resJSON[JSONSecID];
+	// 	// }}
+	// 	var schedEvent = {schedCourse: courseID};
+	// 	if (!needLoc) {logEvent('Sched', schedEvent);}
+	// 	return res.send(resJSON);
+	// });
+
+
 });
 
 function getSchedInfo(entry) { // Get the properties required to schedule the section
+	if (entry.result_data) {entry = entry.result_data[0]} else {entry = entry[0]}
 	try {
 		var idDashed	 = entry.section_id_normalized.replace(/ /g, ""); // Format ID
 		var idSpaced = idDashed.replace(/-/g, ' ');
