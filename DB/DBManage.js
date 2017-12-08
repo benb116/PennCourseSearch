@@ -1,4 +1,3 @@
-var fs = require('fs');
 var request = require("request");
 
 var config;
@@ -6,8 +5,8 @@ try {
 	config = require('../config.js');
 } catch (err) { // If there is no config file
 	config = {};
-	config.requestAB 	= process.env.REQUESTAB;
-	config.requestAT 	= process.env.REQUESTAT;
+	config.requestAB2 	= process.env.REQUESTAB2;
+	config.requestAT2 	= process.env.REQUESTAT2;
 	config.PCRToken 	= process.env.PCRTOKEN;
 }
 
@@ -15,7 +14,9 @@ var currentTerm = '2018A';
 var deptList = ["AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANCH", "ANEL", "ANTH", "ARAB", "ARCH", "ARTH", "ASAM", "ASTR", "BCHE", "BDS", "BE", "BENF", "BENG", "BEPP", "BIBB", "BIOE", "BIOL", "BIOM", "BIOT", "BMB", "BMIN", "BSTA", "CAMB", "CBE", "CHEM", "CHIN", "CIMS", "CIS", "CIT", "CLST", "COGS", "COML", "COMM", "CPLN", "CRIM", "DEMG", "DENT", "DPED", "DPRD", "DRST", "DTCH", "DYNM", "EALC", "EAS", "ECON", "EDUC", "EEUR", "ENGL", "ENGR", "ENM", "ENMG", "ENVS", "EPID", "ESE", "FNAR", "FNCE", "FOLK", "FREN", "GAFL", "GAS", "GCB", "GEOL", "GREK", "GRMN", "GSWS", "GUJR", "HCIN", "HCMG", "HEBR", "HIND", "HIST", "HPR", "HSOC", "HSPV", "HSSC", "IMUN", "INTG", "INTL", "INTR", "INTS", "IPD", "ITAL", "JPAN", "JWST", "KORN", "LALS", "LARP", "LATN", "LAW", "LAWM", "LGIC", "LGST", "LING", "LSMP", "MATH", "MCS", "MEAM", "MED", "MGEC", "MGMT", "MKTG", "MLA", "MLYM", "MMP", "MSCI", "MSE", "MSSP", "MTR", "MUSA", "MUSC", "NANO", "NELC", "NETS", "NGG", "NPLD", "NSCI", "NURS", "OIDD", "PERS", "PHIL", "PHRM", "PHYS", "PPE", "PREC", "PRTG", "PSCI", "PSYC", "PUBH", "PUNJ", "REAL", "REG", "RELS", "ROML", "RUSS", "SAST", "SCND", "SKRT", "SLAV", "SOCI", "SPAN", "STAT", "STSC", "SWRK", "TAML", "TELU", "THAR", "TURK", "URBS", "URDU", "VBMS", "VCSN", "VCSP", "VIPR", "VISR", "VLST", "VMED", "VPTH", "WH", "WHCP", "WHG", "WRIT", "YDSH"];
 var maxIndex = deptList.length;
 
-var r = require('../reqFunctions.js');
+var parse = require('../parse.js');
+var opendata = require('../opendata.js')(config.requestAB2, config.requestAT2, config.IFTTTKey);
+var lastRequestTime = 0;
 
 /*
 
@@ -39,6 +40,7 @@ if (isNaN(index)) { // If we're doing a specific department (not a number, but r
 if (isNaN(endindex)) { // If there is a first number but not a second, run to the end
 	endindex = maxIndex;
 }
+
 if (source === 'registrar') {
 	if (limit) {
 		PullRegistrar(index); // Single dept
@@ -64,91 +66,8 @@ function PullRegistrar(index) {
 	// Send the request
 	var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
 	if (!thedept) {return;}
-	request({
-		uri: baseURL,
-		method: "GET",headers: {"Authorization-Bearer": config.requestAB2, "Authorization-Token": config.requestAT2}
-	}, function(error, response, body) {
-		console.log('Received', thedept);
-		if (!error && body) {
-			var inJSON = JSON.parse(body).result_data; // Convert to JSON object
 
-			var resp = {};
-			var meetresp = {};
-			for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
-				// For each section that comes up
-				// Get course name (e.g. CIS 120)
-				var thisKey = inJSON[key];
-				var idSpaced = thisKey.course_department + ' ' + thisKey.course_number;
-				var secID = thisKey.course_department + '-' + thisKey.course_number + '-' + thisKey.section_number;
-				var numCred = Number(thisKey.credits.split(" ")[0]);
-
-				if (!thisKey.is_cancelled) { // Don't include cancelled sections
-					var idDashed = idSpaced.replace(' ', '-');
-					if (!resp[idSpaced]) { // If there is no existing record for the course, make a new record
-						var reqCodesList = r.GetRequirements(thisKey)[0];
-						resp[idSpaced] = {
-							'idDashed': idDashed,
-							'idSpaced': idSpaced,
-							'courseTitle': thisKey.course_title,
-							'courseReqs': reqCodesList,
-							'courseCred': numCred
-						};
-					} else if (resp[idSpaced].courseCred < numCred) { // If there is, make the numCred value the max 
-						resp[idSpaced].courseCred = numCred
-					}
-					var meetingInfo = SectionMeeting(thisKey);
-					meetresp[secID] = meetingInfo;
-				}
-			}}
-			var arrResp = [];
-			for (key in resp) { if (resp.hasOwnProperty(key)) {
-				arrResp.push(resp[key]);
-			}}
-			// At the end of the list
-			fs.writeFile('../Data/'+currentTerm+'/'+thedept+'.json', JSON.stringify(arrResp), function (err) {
-				// Write JSON to file
-				if (err) {
-					console.log(index+' '+thedept+' '+err);
-				} else {
-					console.log(('Reg Spit: '+index+' '+thedept));
-				}
-			});
-			fs.writeFile('../Data/'+currentTerm+'Meet/'+thedept+'.json', JSON.stringify(meetresp), function (err) {
-				// Write JSON to file
-				if (err) {
-					console.log(index+' '+thedept+' '+err);
-				} else {
-					console.log(('Meet Spit: '+index+' '+thedept));
-				}
-			});
-		} else {
-			console.log('request error: ' + thedept);
-		}
-	});
-}
-
-function SectionMeeting(sec) {
-	var isOpen = (sec.course_status !== 'X') && (Number(sec.course_number) < 600);
-	var thisInfo = {
-		'idDashed': sec.course_department + '-' + sec.course_number + '-' + sec.section_number,
-		'course': sec.course_department + '-' + sec.course_number,
-		'actType': sec.activity,
-		'assclec': sec.lectures,
-		'assclab': sec.labs,
-		'asscrec': sec.recitations,
-		'meetblk': [],
-		'open': isOpen
-	};
-	sec.meetings.forEach(function(meeting) {
-		for (i = 0; i < meeting.meeting_days.length; i++) {
-			thisInfo.meetblk.push({
-				'meetday': meeting.meeting_days[i],
-				'starthr': meeting.start_hour_24 + (meeting.start_minutes)/60,
-				'endhr': meeting.end_hour_24 + (meeting.end_minutes)/60
-			})
-		}
-	})
-	return thisInfo;
+	lastRequestTime = opendata.RateLimitReq(baseURL, 'registrar', null, lastRequestTime);
 }
 
 function PullReview(index) {

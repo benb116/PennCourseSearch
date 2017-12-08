@@ -64,8 +64,8 @@ module.exports = function(AB, AT, IFTTT) {
 			deptSearch: parse.CourseList,
 			numbSearch: parse.SectionList,
 			sectSearch: parse.SectionInfo,
-			schedInfo: parse.SchedInfo,
-			DBformat: parse.RecordRegistrar
+			schedInfo:  parse.SchedInfo,
+			registrar:  parse.RecordRegistrar
 		};
 
 		var searchResponse;
@@ -77,10 +77,13 @@ module.exports = function(AB, AT, IFTTT) {
 		if (res) {return res.send(JSON.stringify(searchResponse));} // return correct info
 	}
 
+	var rpm = 95;
+
 	opendata.RateLimitReq = function(url, resultType, res, lastRT) {
+		var period = 60 / rpm;
 		var now = new Date().getTime();
 		var diff = now - lastRT; // how long ago was the last request point
-		var delay = (600 - diff) * (diff < 600); // How long to delay the request (if diff is >600, no need to delay)
+		var delay = (period - diff) * (diff < period); // How long to delay the request (if diff is > period, no need to delay)
 		var lastRequestTime = now+delay; // Update the latest request timestamp
 
 		setTimeout(function() {

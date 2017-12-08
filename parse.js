@@ -1,5 +1,4 @@
 var parse = {};
-var allRevs = require('./loadRevs.js');
 var r = require('./reqFunctions.js'); // Functions that help determine which req rules apply to a class
 
 function RecordRegistrar(parsedRes) {
@@ -7,6 +6,7 @@ function RecordRegistrar(parsedRes) {
 }
 
 function GetRevData (dept, num, inst) {
+	var allRevs = require('./loadRevs.js');
 	// Given a department, course number, and instructor (optional), get back the three rating values
 	var deptData = allRevs[dept]; // Get dept level ratings
 	var thisRevData = {"cQ": 0, "cD": 0, "cI": 0};
@@ -53,6 +53,30 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
 		TimeInfo = '';
 	}
 	return [isOpen, TimeInfo];
+}
+
+function SectionMeeting(sec) {
+	var isOpen = (sec.course_status !== 'X') && (Number(sec.course_number) < 600);
+	var thisInfo = {
+		'idDashed': sec.course_department + '-' + sec.course_number + '-' + sec.section_number,
+		'course': sec.course_department + '-' + sec.course_number,
+		'actType': sec.activity,
+		'assclec': sec.lectures,
+		'assclab': sec.labs,
+		'asscrec': sec.recitations,
+		'meetblk': [],
+		'open': isOpen
+	};
+	sec.meetings.forEach(function(meeting) {
+		for (i = 0; i < meeting.meeting_days.length; i++) {
+			thisInfo.meetblk.push({
+				'meetday': meeting.meeting_days[i],
+				'starthr': meeting.start_hour_24 + (meeting.start_minutes)/60,
+				'endhr': meeting.end_hour_24 + (meeting.end_minutes)/60
+			})
+		}
+	})
+	return thisInfo;
 }
 
 parse.SchedInfo = function(entry) { // Get the properties required to schedule the section
@@ -290,6 +314,64 @@ parse.SectionList = function(Res) {
 	var sectionInfo = parse.SectionInfo(Res);
 
 	return [sectionsList, sectionInfo];
+}
+
+parse.RecordRegistrar = function(inJSON) {
+	var fs = require('fs');
+
+	var resp = {};
+	var meetresp = {};
+	for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
+		// For each section that comes up
+		// Get course name (e.g. CIS 120)
+		var thisKey = inJSON[key];
+		var idSpaced = thisKey.course_department + ' ' + thisKey.course_number;
+		var secID = thisKey.course_department + '-' + thisKey.course_number + '-' + thisKey.section_number;
+		var numCred = Number(thisKey.credits.split(" ")[0]);
+
+		if (!thisKey.is_cancelled) { // Don't include cancelled sections
+			var idDashed = idSpaced.replace(' ', '-');
+			if (!resp[idSpaced]) { // If there is no existing record for the course, make a new record
+				var reqCodesList = r.GetRequirements(thisKey)[0];
+				resp[idSpaced] = {
+					'idDashed': idDashed,
+					'idSpaced': idSpaced,
+					'courseTitle': thisKey.course_title,
+					'courseReqs': reqCodesList,
+					'courseCred': numCred
+				};
+			} else if (resp[idSpaced].courseCred < numCred) { // If there is, make the numCred value the max 
+				resp[idSpaced].courseCred = numCred
+			}
+			var meetingInfo = SectionMeeting(thisKey);
+			meetresp[secID] = meetingInfo;
+		}
+	}}
+	var arrResp = [];
+	for (key in resp) { if (resp.hasOwnProperty(key)) {
+		arrResp.push(resp[key]);
+	}}
+	if (inJSON.length) {
+		var thedept = thisKey.course_department;
+		var currentTerm = thisKey.term
+		// At the end of the list
+		fs.writeFile('../Data/'+currentTerm+'/'+thedept+'.json', JSON.stringify(arrResp), function (err) {
+			// Write JSON to file
+			if (err) {
+				console.log(thedept+' '+err);
+			} else {
+				console.log(('Reg Spit: '+thedept));
+			}
+		});
+		fs.writeFile('../Data/'+currentTerm+'Meet/'+thedept+'.json', JSON.stringify(meetresp), function (err) {
+			// Write JSON to file
+			if (err) {
+				console.log(thedept+' '+err);
+			} else {
+				console.log(('Meet Spit: '+thedept));
+			}
+		});
+	}
 }
 
 module.exports = parse;
