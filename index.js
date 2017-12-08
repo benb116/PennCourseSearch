@@ -55,14 +55,6 @@ function logEvent(eventName, eventData) {
 	}
 };
 
-var IFTTTMaker = require('iftttmaker')(config.IFTTTKey);
-function SendError(errmsg) { // Send an email to Ben through IFTTT when there is a server error
-	IFTTTMaker.send('PCSError', errmsg).then(function () {
-	}).catch(function (error) {
-	  console.log('The error request could not be sent:', error);
-	});
-}
-
 console.log('Plugins initialized');
 
 git.short(function (str) {
@@ -72,7 +64,7 @@ git.short(function (str) {
 // Pull in external data and functions
 var allCourses	= require('./loadCourses.js');
 var parse = require('./parse.js');
-var opendata = require('./opendata.js')(config.requestAB, config.requestAT);
+var opendata = require('./opendata.js')(config.requestAB, config.requestAT, config.IFTTTKey);
 
 var currentTerm = '2018A'; // Which term is currently active
 var lastRequestTime = 0;
