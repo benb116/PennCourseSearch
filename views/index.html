@@ -309,7 +309,7 @@
 						width: {{thisBlock.width}}%;
 						height: {{thisBlock.height}}%;
 						background-color: {{thisBlock.color}}"
-						ng-click="initiateSearch(thisBlock.class, 'courseIDSearch');"
+						ng-click="clearSearch();initiateSearch(thisBlock.class, 'courseIDSearch');"
 						ng-mouseover="expression">
 							<div class="CloseX" style="width:100%;height:100%;"><span ng-click="e.stopPropagation(); sched.AddRem(thisBlock.class);">X</span></div>
 							<div class="NeedAssc" ng-hide="sched.CrossCheck(thisBlock.asscsecs)" title="Registration is required for an associated section."><b>!</b></div>

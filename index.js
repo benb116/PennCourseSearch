@@ -26,9 +26,8 @@ try {
 	config.autotestKey    = process.env.AUTOTESTKEY;
 }
 
-var app = express();
-
 // Set express settings
+var app = express();
 app.use(compression());
 app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: 2628000000 }));
 app.use('/js', express.static(path.join(__dirname, 'public/js'), { maxAge: 0 }));
@@ -46,8 +45,7 @@ if (process.env.KEEN_WRITE_KEY && keenEnable) { // Only log from production
 		writeKey: config.KeenIOWriteKey	 // String (required for sending data)
 	});
 }
-
-var logEvent = function (eventName, eventData) {
+function logEvent(eventName, eventData) {
 	if (client) {
 		client.addEvent(eventName, eventData, function (err) {
 			if (err) {
@@ -58,7 +56,6 @@ var logEvent = function (eventName, eventData) {
 };
 
 var IFTTTMaker = require('iftttmaker')(config.IFTTTKey);
-
 function SendError(errmsg) { // Send an email to Ben through IFTTT when there is a server error
 	IFTTTMaker.send('PCSError', errmsg).then(function () {
 	}).catch(function (error) {
@@ -68,23 +65,22 @@ function SendError(errmsg) { // Send an email to Ben through IFTTT when there is
 
 console.log('Plugins initialized');
 
-// Pull in course and review information
-console.time('Info loaded');
-var allRevs		= require('./loadRevs.js');
-var allCourses	= require('./loadCourses.js');
-var r = require('./reqFunctions.js'); // Functions that help determine which req rules apply to a class
-console.timeEnd('Info loaded');
-
 git.short(function (str) {
 	console.log('Current git commit:', str); // log the current commit we are running
 });
+
+// Pull in external data and functions
+var allCourses	= require('./loadCourses.js');
+var parse = require('./parse.js');
+var opendata = require('./opendata.js')(config.requestAB, config.requestAT);
+
+var currentTerm = '2018A'; // Which term is currently active
+var lastRequestTime = 0;
 
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
 	console.log("Node app is running. Better go catch it.");
 });
-
-var currentTerm = '2018A'; // Which term is currently active
 
 // Handle main page requests
 app.get('/', function(req, res) {
@@ -130,13 +126,6 @@ var buildURI = function (filter, type) { // Build the request URI given certain 
 	}
 };
 
-var resultTypes = {
-	deptSearch: parseCourseList,
-	numbSearch: parseSectionList,
-	sectSearch: parseSectionInfo,
-	schedInfo: getSchedInfo
-};
-
 var BASE_URL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&term=';
 
 // Manage search requests
@@ -162,7 +151,7 @@ app.get('/Search', function(req, res) {
 			var returnCourses = returnCourses.filter(function(obj) {return ((obj.courseReqs.indexOf(req.query.reqParam) > -1))})
 		}
 
-		retC = ParseDeptList(returnCourses)
+		retC = parse.DeptList(returnCourses)
 		return res.send(returnCourses)
 
 	} else { // Otherwise, ask the API
@@ -193,301 +182,10 @@ app.get('/Search', function(req, res) {
 			baseURL += '&instructor=' + instructFilter;
 		}
 
-		RateLimitReq(baseURL, resultType, res);
+		lastRequestTime = opendata.RateLimitReq(baseURL, resultType, res, lastRequestTime);
 
 	}
 });
-
-var lastRequestTime = 0;
-
-// API should limit to 100 requests a minute -> 600 ms between requests
-function RateLimitReq(url, resultType, res) {
-// function RateLimitReq() {
-	var now = new Date().getTime();
-	var diff = now - lastRequestTime; // how long ago was the last request point
-	var delay = (600 - diff) * (diff < 600); // How long to delay the request (if diff is >600, no need to delay)
-	lastRequestTime = now+delay; // Update the latest request timestamp
-
-	setTimeout(function() {
-		SendPennReq(url, resultType, res) // Send the request after the delay
-	}, delay);
-}
-
-function SendPennReq(url, resultType, res) {
-	
-	request({
-		uri: url,
-		method: "GET",headers: {"Authorization-Bearer": config.requestAB, "Authorization-Token": config.requestAT}, // Send authorization headers
-	}, function(error, response, body) {
-		if (error || response.statusCode >= 500) {
-			// This is triggered if the OpenData API returns an error or never responds
-			console.log(JSON.stringify(response));
-			console.log('OpenData Request failed:', error);
-			SendError('OpenData Request failed');
-			res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
-			return res.send('PCSERROR: request failed');
-		}
-
-		var parsedRes, rawResp = {};
-		try { // Try to make body into valid JSON
-			rawResp = JSON.parse(body);
-			if (rawResp.statusCode) {
-				SendError('Status Code');
-				res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
-				return res.send('status code error');
-			}
-		} catch(err) { // Could not parse the JSON for some reason
-			console.log('Resp parse error ' + err);
-			SendError('Parse Error!!!');
-			console.log(JSON.stringify(response));
-			return res.send({});
-		}
-
-		try {
-			if (rawResp.service_meta.error_text) { // If the API returned an error
-				console.log('Resp Err: ' + rawResp.service_meta.error_text);
-				SendError('Error Text');
-				res.statusCode = 513; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
-				return res.send(rawResp.service_meta.error_text);
-			}
-			parsedRes = rawResp.result_data;
-		} catch(err) {
-			console.log(err);
-			SendError('Other Error!!!');
-			res.statusCode = 500;
-			return res.send(err);
-		}
-		// Send the raw data to the appropriate formatting function
-		var searchResponse;
-		if (resultType in resultTypes) {
-			searchResponse = resultTypes[resultType](parsedRes);
-		} else {
-			searchResponse = {};
-		}
-		return res.send(JSON.stringify(searchResponse)); // return correct info
-	});
-}
-
-function GetRevData (dept, num, inst) {
-	// Given a department, course number, and instructor (optional), get back the three rating values
-	var deptData = allRevs[dept]; // Get dept level ratings
-	var thisRevData = {"cQ": 0, "cD": 0, "cI": 0};
-	if (deptData) {
-		var revData = deptData[num]; // Get course level ratings
-		if (revData) {
-			// Try to get instructor specific reviews, but fallback to general course reviews
-			thisRevData = (revData[(inst || '').trim().toUpperCase()] || (revData.Recent));
-		}
-	}
-	return thisRevData;
-}
-
-function ParseDeptList (res) {
-	for (var course in res) { if (res.hasOwnProperty(course)) {
-		var courData     = res[course].idSpaced.split(' ');
-		var courDept     = courData[0];
-		var courNum      = courData[1];
-		res[course].revs = GetRevData(courDept, courNum); // Append PCR data to courses
-	}}
-	return res;
-}
-
-// This function spits out the array of courses that goes in #CourseList
-// Takes in data from the API
-function parseCourseList(Res) {
-	var coursesList = {};
-	for(var key in Res) { if (Res.hasOwnProperty(key)) {
-		var thisKey	 = Res[key];
-
-		if (Res.hasOwnProperty(key) && !thisKey.is_cancelled) { // Iterate through each course that isn't cancelled
-			var thisDept       = thisKey.course_department.toUpperCase();
-			var thisNum	       = thisKey.course_number.toString();
-			var courseListName = thisDept+' '+thisNum; // Get course dept and number
-			var numCred        = Number(thisKey.credits.split(" ")[0]); // How many credits does this section count for
-
-			if (!coursesList[courseListName]) { // If there's no entry, make a new one
-				var courseTitle  = thisKey.course_title;
-				var reqCodesList = r.GetRequirements(thisKey); // Check which requirements are fulfilled by this course
-				var revData      = GetRevData(thisDept, thisNum); // Get review information
-				coursesList[courseListName] = {
-					'idSpaced': courseListName,
-					'idDashed': courseListName.replace(/ /g,'-'),
-					'courseTitle': courseTitle,
-					'courseReqs': reqCodesList[0],
-					'courseCred': numCred,
-					'revs': revData
-				};
-			} else if (coursesList[courseListName].courseCred < numCred) { // If there is an entry, choose the higher of the two numcred values
-				coursesList[courseListName].courseCred = numCred
-			}
-		}
-	}}
-	var arrResp = [];
-	for (var course in coursesList) { if (coursesList.hasOwnProperty(course)) {
-		arrResp.push(coursesList[course]); // Convert from object to array
-	}}
-	return arrResp;
-}
-
-function getTimeInfo (JSONObj) { // A function to retrieve and format meeting times
-	var OCStatus = JSONObj.course_status; // Is the section open or closed
-	var isOpen;
-	if (OCStatus === "O") {
-		isOpen = true;
-	} else {
-		isOpen = false;
-	}
-	var TimeInfo = []; // TimeInfo is textual e.g. '10:00 to 11:00 on MWF'
-	try { // Not all sections have time info
-		for(var meeting in JSONObj.meetings) { if (JSONObj.meetings.hasOwnProperty(meeting)) {
-			// Some sections have multiple meeting forms (I'm looking at you PHYS151)
-			var thisMeet = JSONObj.meetings[meeting];
-			var StartTime= thisMeet.start_time.split(" ")[0]; // Get start time
-			var EndTime	 = thisMeet.end_time.split(" ")[0]; // Get end time
-
-			if (StartTime[0] === '0') {
-				StartTime = StartTime.slice(1);
-			} // If it's 08:00, make it 8:00
-			if (EndTime[0] === '0') {
-				EndTime = EndTime.slice(1);
-			}
-
-			var MeetDays = thisMeet.meeting_days; // Output like MWF or TR
-			var meetListInfo = StartTime+" to "+EndTime+" on "+MeetDays;
-			TimeInfo.push(meetListInfo);
-		}}
-	}
-	catch (err) {
-		console.log(("Error getting times" + JSONObj.section_id));
-		TimeInfo = '';
-	}
-	return [isOpen, TimeInfo];
-}
-
-// This function spits out the list of sections that goes in #SectionList
-function parseSectionList(Res) {
-	// Convert to JSON object
-	var sectionsList = [];
-	// var courseInfo = {};
-	for(var key in Res) {
-		if (Res.hasOwnProperty(key)) {
-			var thisEntry = Res[key];
-			if (!thisEntry.is_cancelled) {
-				var idDashed      = thisEntry.section_id_normalized.replace(/ /g, "");
-				var idSpaced      = idDashed.replace(/-/g, ' ');
-				var timeInfoArray = getTimeInfo(thisEntry); // Get meeting times for a section
-				var isOpen        = timeInfoArray[0];
-				var timeInfo      = timeInfoArray[1][0]; // Get the first meeting slot
-				if (timeInfoArray[1][1]) { // Cut off extra text
-					timeInfo += ' ...';
-				}
-				var actType       = thisEntry.activity;
-				var SectionInst; // Get the instructor for this section
-				try {
-					SectionInst = thisEntry.instructors[0].name;
-				} catch(err) {
-					SectionInst = '';
-				}
-
-				var revData = GetRevData(thisEntry.course_department, thisEntry.course_number, SectionInst); // Get inst-specific reviews
-
-				if (typeof timeInfo === 'undefined') {
-					timeInfo = '';
-				}
-
-				var schedInfo = getSchedInfo(thisEntry);
-
-				sectionsList.push({
-					'idDashed': idDashed,
-					'idSpaced': idSpaced,
-					'isOpen': isOpen,
-					'timeInfo': timeInfo,
-					'courseTitle': Res[0].course_title,
-					'SectionInst': SectionInst,
-					'actType': actType,
-					'revs': revData,
-					'fullSchedInfo': schedInfo
-				});
-			}
-		}
-	}
-	var sectionInfo = parseSectionInfo(Res);
-
-	return [sectionsList, sectionInfo];
-}
-
-// This function spits out section-specific info
-function parseSectionInfo(Res) {
-	var entry = Res[0];
-	var sectionInfo = {};
-	// try {
-	if (entry && !entry.is_cancelled) { // Don't return cancelled sections
-		var Title         = entry.course_title;
-		var FullID        = entry.section_id_normalized.replace(/-/g, " "); // Format name
-		var CourseID      = entry.section_id_normalized.split('-')[0] + ' ' + entry.section_id_normalized.split('-')[1];
-		var Instructor    = '';
-		if (entry.instructors[0]) {
-			Instructor    = entry.instructors[0].name;
-		}
-		var Desc          = entry.course_description;
-		var TimeInfoArray = getTimeInfo(entry);
-		var StatusClass   = TimeInfoArray[0];
-		var meetArray     = TimeInfoArray[1];
-		var prereq        = (entry.prerequisite_notes[0] || 'none');
-		var termsOffered  = entry.course_terms_offered;
-
-		var OpenClose;
-		if (StatusClass) {
-			OpenClose = 'Open';
-		} else {
-			OpenClose = 'Closed';
-		}
-		var secCred = Number(entry.credits.split(" ")[0]);
-
-		var asscType = '';
-		var asscList = [];
-		var key;
-		if (entry.recitations.length !== 0) { // If it has recitations
-			asscType = "recitation";
-			for(key in entry.recitations) { if (entry.recitations.hasOwnProperty(key)) {
-					asscList.push(entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id);
-			}}
-
-		} else if (entry.labs.length !== 0) { // If it has labs
-			asscType = "lab";
-			for(key in entry.labs) { if (entry.labs.hasOwnProperty(key)) {
-					asscList.push(entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id);
-			}}
-
-		} else if (entry.lectures.length !== 0) { // If it has lectures
-			asscType = "lecture";
-			for(key in entry.lectures) { if (entry.lectures.hasOwnProperty(key)) {
-					asscList.push(entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id);
-			}}
-		}
-
-		var reqsArray = r.GetRequirements(entry)[1];
-
-		sectionInfo = {
-			'fullID': FullID,
-			'CourseID': CourseID,
-			'title': Title,
-			'instructor': Instructor,
-			'description': Desc,
-			'openClose': OpenClose,
-			'termsOffered': termsOffered,
-			'prereqs': prereq,
-			'timeInfo': meetArray,
-			'associatedType': asscType,
-			'associatedSections': asscList,
-			'sectionCred': secCred,
-			'reqsFilled': reqsArray
-		};
-		return sectionInfo;
-	} else {
-		return 'No Results';
-	}
-}
 
 // Manage scheduling requests
 app.get('/Sched', function(req, res) {
@@ -496,73 +194,8 @@ app.get('/Sched', function(req, res) {
 	var uri = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID;
 	var schedEvent = {schedCourse: courseID};
 	if (!needLoc) {logEvent('Sched', schedEvent);}
-	RateLimitReq(uri, 'schedInfo', res);
+	lastRequestTime = opendata.RateLimitReq(uri, 'schedInfo', res, lastRequestTime);
 });
-
-function getSchedInfo(entry) { // Get the properties required to schedule the section
-	if (entry.result_data) {entry = entry.result_data[0]} else {entry = entry[0]}
-	try {
-		var idDashed	 = entry.section_id_normalized.replace(/ /g, ""); // Format ID
-		var idSpaced = idDashed.replace(/-/g, ' ');
-		var resJSON	 = [];
-		try { // Not all sections have time info
-			for(var meeti in entry.meetings) { if (entry.meetings.hasOwnProperty(meeti)) { // Some sections have multiple meetings
-				var thisMeet   = entry.meetings[meeti];
-				var StartTime  = (thisMeet.start_hour_24) + (thisMeet.start_minutes)/60;
-				var EndTime    = (thisMeet.end_hour_24)   + (thisMeet.end_minutes)/60;
-				var hourLength = EndTime - StartTime;
-				var MeetDays   = thisMeet.meeting_days;
-				var Building, Room;
-				try {
-				 Building	 = thisMeet.building_code;
-				 Room		 = thisMeet.room_number;
-				} catch (err) {
-				 Building	 = "";
-				 Room		 = "";
-				}
-				var SchedAsscSecs = [];
-				if (entry.lectures.length) {
-					for (var thisAssc in entry.lectures) {  if (entry.lectures.hasOwnProperty(thisAssc)) {
-						SchedAsscSecs.push(entry.lectures[thisAssc].subject + '-' + entry.lectures[thisAssc].course_id + '-' + entry.lectures[thisAssc].section_id);
-					}}
-				} else {
-					if (entry.recitations.length) {
-						for (var thisAssc in entry.recitations) {  if (entry.lectures.hasOwnProperty(thisAssc)) {
-							SchedAsscSecs.push(entry.recitations[thisAssc].subject + '-' + entry.recitations[thisAssc].course_id + '-' + entry.recitations[thisAssc].section_id);
-						}}
-					} else if (entry.labs.length) {
-						for (var thisAssc in entry.labs) {  if (entry.lectures.hasOwnProperty(thisAssc)) {
-							SchedAsscSecs.push(entry.labs[thisAssc].subject + '-' + entry.labs[thisAssc].course_id + '-' + entry.labs[thisAssc].section_id);
-						}}
-					}
-				}
-
-				// Full ID will have sectionID+MeetDays+StartTime
-				// This is necessary for classes like PHYS151, which has times: M@13, TR@9, AND R@18
-				var FullID = idDashed+'-'+MeetDays+StartTime.toString().replace(".", "");
-
-				resJSON.push({
-					'fullID': 		FullID,
-					'idDashed':	 	idDashed,
-					'idSpaced': 	idSpaced,
-					'hourLength': 	hourLength,
-					'meetDay':		MeetDays,
-					'meetHour': 	StartTime,
-					'meetLoc':		Building+' '+Room,
-					'SchedAsscSecs': 	SchedAsscSecs
-				});
-			}}
-		}
-		catch (err) {
-			console.log("Error getting times: "+err);
-		}
-		// console.log(JSON.stringify(resJSON))
-		return resJSON;
-	}
-	catch (err) {
-		return 'No Results';
-	}
-}
 
 app.post('/Notify', function(req, res) {
 	var secID = req.query.secID;
