@@ -206,6 +206,23 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                         localStorageService.set('schedData', $scope.schedData);
                     }
                 });
+            } else if (needloc) {
+                UpdateSchedules.getSchedData(secID, needloc).then(function(resp) {
+                    if (resp.data) {
+                        if (resp.data[0].meetLoc !== '') {
+                            localStorage.setItem(currentTerm+'Loc', 'true');
+                        }
+                        // resp.data[0].meetLoc = "";
+                        // console.log(resp.data)
+                        var oldData = $scope.schedData[(schedname || $scope.currentSched)].meetings;
+                        var otherData = oldData.filter(function(meet) {
+                            return (meet.idDashed !== secID);
+                        });
+                        var newData = otherData.concat(resp.data); // Combine old meetings and new meetings
+                        $scope.schedData[(schedname || $scope.currentSched)].meetings = newData;
+                        localStorageService.set('schedData', $scope.schedData);
+                    }
+                });
             } else {
                 // Filter out meeting objects whose corresponding sectionID is the requested section
                 ga('send', 'event', 'Sched', 'remSect', secID);
@@ -353,7 +370,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
             for (var thisSched in $scope.schedData) { if ($scope.schedData.hasOwnProperty(thisSched)) {
                 for (var thissec in $scope.schedData[thisSched].meetings) { if ($scope.schedData[thisSched].meetings.hasOwnProperty(thissec)) {
                     var thisID = $scope.schedData[thisSched].meetings[thissec].idDashed;
-                    $scope.schedData[thisSched].meetings.splice(thissec, 1);
                     $scope.sched.AddRem(thisID, thisSched, true);
                 }}
             }}

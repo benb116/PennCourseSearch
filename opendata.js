@@ -3,12 +3,16 @@ module.exports = function(AB, AT, IFTTT) {
     var parse = require('./parse.js');
     var opendata = {};
 
-    var IFTTTMaker = require('iftttmaker')(IFTTT);
+    if (IFTTT) {
+        var IFTTTMaker = require('iftttmaker')(IFTTT);
+    }
     function SendError(errmsg) { // Send an email to Ben through IFTTT when there is a server error
-        IFTTTMaker.send('PCSError', errmsg).then(function () {
-        }).catch(function (error) {
-          console.log('The error request could not be sent:', error);
-        });
+        if (IFTTT) {
+            IFTTTMaker.send('PCSError', errmsg).then(function () {
+            }).catch(function (error) {
+              console.log('The error request could not be sent:', error);
+            });
+        }
     }
 
     // API should limit to 100 requests a minute -> 600 ms between requests
