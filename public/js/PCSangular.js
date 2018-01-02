@@ -4,7 +4,7 @@ var PCS = angular.module('PCSApp', ['LocalStorageModule', 'tooltips']);
     I know this is scope soup. I'm still learning.
 */
 
-PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules){
+PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules, pendingRequests){
 
     var currentTerm = '2018A';
     var placeholderMap = {
@@ -76,13 +76,13 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         // Used for typed searches and schedBlock clicks
         var terms = FormatID(param);
         if(terms[0] && terms[0] !== '') {
+            pendingRequests.cancelAll();
             if (terms[0] !== $scope.currentDept) {
                 $scope.get.Courses(terms[0], courseType); // if (!courseType) then the get.Courses function will default to the searchType value
             }
         } else {
             $scope.currentDept = '';
             $scope.courses = [];
-            $scope.$apply();
         }
         if(terms[1].length === 3) {
             $scope.get.Sections(terms[0], terms[1], terms[2]);
@@ -519,7 +519,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
             if ($scope.check[req]) {$scope.checkArr.push(req);}
         }
         var diffreqs = $scope.checkArr.filter(function(i) {return oldarr.indexOf(i) < 0;})
-        console.log($scope.checkArr)
         if (diffreqs[0]) {
             ga('send', 'event', 'UI interaction', 'requirement', diffreqs[0]);
         }

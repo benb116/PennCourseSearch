@@ -15,7 +15,7 @@
     "iftttmaker": "^1.2.1",
     "keen-js": "^3.4.1",
     "log-timestamp": "^0.1.2",
-    "nodemon": "^1.13.3",
+    "nodemon": "^1.14.7",
     "npm": "^5.6.0",
     "path": "^0.12.7",
     "pushbullet": "^2.0.0",

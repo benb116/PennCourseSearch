@@ -25,7 +25,7 @@ PCS.factory('PCR', function(){
         return data;
     };
 });
-PCS.factory('UpdateCourseList', ['$http', function($http){
+PCS.factory('UpdateCourseList', ['httpService', function(httpService){
     var retObj = {};
     retObj.getDeptCourses = function(dept, searchType, reqFilter, proFilter) {
         // Build the request URL
@@ -33,48 +33,105 @@ PCS.factory('UpdateCourseList', ['$http', function($http){
         if (reqFilter) {url += '&reqParam='+reqFilter;}
         if (proFilter && proFilter !== 'noFilter') {url += '&proParam='+proFilter;}
         ga('send', 'event', 'Search', 'deptSearch', dept);
-        return $http.get(url).then(function(data) {
+        return httpService.get(url).then(function(data, other) {
             return data;
         }, function(err) {
-            ErrorAlert(err); //  If there's an error, show an error dialog
+            if (!err.config.timeout.$$state.value) {
+                ErrorAlert(err); //  If there's an error, show an error dialog
+            } else {
+                return [];
+            }
         });
     };
     return retObj;
 }]);
-PCS.factory('UpdateSectionList', ['$http', function($http){
+PCS.factory('UpdateSectionList', ['httpService', function(httpService){
     var retObj = {};
     retObj.getCourseSections = function(course) {
         ga('send', 'event', 'Search', 'numbSearch', course);
-        return $http.get('/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam='+course).then(function(data) {
+        return httpService.get('/Search?searchType=courseIDSearch&resultType=numbSearch&searchParam='+course).then(function(data) {
             return data;
         }, function(err) {
-            ErrorAlert(err);
+            if (!err.config.timeout.$$state.value) {
+                ErrorAlert(err); //  If there's an error, show an error dialog
+            } else {
+                return [];
+            }
         });
     };
     return retObj;
 }]);
-PCS.factory('UpdateSectionInfo', ['$http', function($http){
+PCS.factory('UpdateSectionInfo', ['httpService', function(httpService){
     var retObj = {};
     retObj.getSectionInfo = function(section) {
         ga('send', 'event', 'Search', 'sectSearch', section);
-        return $http.get('/Search?searchType=courseIDSearch&resultType=sectSearch&searchParam='+section).then(function(data) {
+        return httpService.get('/Search?searchType=courseIDSearch&resultType=sectSearch&searchParam='+section).then(function(data) {
             return data;
         }, function(err) {
-            ErrorAlert(err);
+            if (!err.config.timeout.$$state.value) {
+                ErrorAlert(err); //  If there's an error, show an error dialog
+            } else {
+                return {};
+            }
         });
     };
     return retObj;
 }]);
-PCS.factory('UpdateSchedules', ['$http', function($http) {
+PCS.factory('UpdateSchedules', ['httpService', function(httpService) {
     var retObj = {};
     retObj.getSchedData = function(secID, needLoc) {
         var url = '/Sched?courseID='+secID;
         if (needLoc) {url += '&needLoc=1';}
-        return $http.get(url).then(function(data) {
+        return httpService.get(url).then(function(data) {
             return data;
         }, function(err) {
-            ErrorAlert(err);
+            if (!err.config.timeout.$$state.value) {
+                ErrorAlert(err); //  If there's an error, show an error dialog
+            } else {
+                return {};
+            }
         });
     };
     return retObj;
+}]);
+// This service keeps track of pending requests
+PCS.service('pendingRequests', function() {
+  var pending = [];
+  this.get = function() {
+    return pending;
+  };
+  this.add = function(request) {
+    pending.push(request);
+  };
+  this.remove = function(request) {
+    pending = pending.filter(function(p) {
+      return p.url !== request;
+    });
+  };
+  this.cancelAll = function() {
+    angular.forEach(pending, function(p) {
+      p.canceller.resolve('cancelled');
+    });
+    pending.length = 0;
+  };
+});
+// This service wraps $http to make sure pending requests are tracked 
+PCS.service('httpService', ['$http', '$q', 'pendingRequests', function($http, $q, pendingRequests) {
+  this.get = function(url) {
+    var canceller = $q.defer();
+    pendingRequests.add({
+      url: url,
+      canceller: canceller
+    });
+    //Request gets cancelled if the timeout-promise is resolved
+    var requestPromise = $http.get(url, { timeout: canceller.promise });
+    requestPromise.catch(function() {
+        console.log
+    })
+    //Once a request has failed or succeeded, remove it from the pending list
+    requestPromise.finally(function() {
+      pendingRequests.remove(url);
+    });
+    return requestPromise;
+  }
 }]);
