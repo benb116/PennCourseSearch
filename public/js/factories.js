@@ -33,7 +33,7 @@ PCS.factory('UpdateCourseList', ['httpService', function(httpService){
         if (reqFilter) {url += '&reqParam='+reqFilter;}
         if (proFilter && proFilter !== 'noFilter') {url += '&proParam='+proFilter;}
         ga('send', 'event', 'Search', 'deptSearch', dept);
-        return httpService.get(url).then(function(data, other) {
+        return httpService.get(url).then(function(data) {
             return data;
         }, function(err) {
             if (!err.config.timeout.$$state.value) {
@@ -125,9 +125,6 @@ PCS.service('httpService', ['$http', '$q', 'pendingRequests', function($http, $q
     });
     //Request gets cancelled if the timeout-promise is resolved
     var requestPromise = $http.get(url, { timeout: canceller.promise });
-    requestPromise.catch(function() {
-        console.log
-    })
     //Once a request has failed or succeeded, remove it from the pending list
     requestPromise.finally(function() {
       pendingRequests.remove(url);

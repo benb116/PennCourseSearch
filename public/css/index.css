@@ -668,6 +668,10 @@ hr {
 		min-width: 320px;
 		margin: 0;
 	}
+	#MenuBar {
+		display: none;
+
+	}
 	#subtitle {
 		font-size: 0.73em;
 	}
@@ -691,5 +695,9 @@ hr {
 	}
 	.cTitle, .cID {
 		font-size: 0.50em;
+	}
+	#Sections,
+	#SectionInfo {
+		width: 100vw;
 	}
 } */

@@ -38,7 +38,7 @@ console.log('Express initialized');
 // Set up Keen Analytics
 var client;
 var keenEnable = true;
-if (process.env.KEEN_WRITE_KEY && keenEnable) { // Only log from production
+if (process.env.NODE_ENV === 'production' && keenEnable) { // Only log from production
     console.log('KeenIO logging enabled');
     client = new Keen({
         projectId: config.KeenIOID,    // String (required always)
@@ -62,12 +62,13 @@ git.short(function (str) {
 });
 
 var currentTerm = '2018A'; // Which term is currently active
-var lastRequestTime = 0;
+var LRTimes = [0, 0];
+var ODkeyInd = 0;
 
 // Pull in external data and functions
 var allCourses    = require('./loadCourses.js')(currentTerm);
 var parse = require('./parse.js');
-var opendata = require('./opendata.js')(config.requestAB, config.requestAT, config.IFTTTKey);
+var opendata = require('./opendata.js')();
 
 // Start the server
 app.listen(process.env.PORT || 3000, function(){
@@ -174,8 +175,8 @@ app.get('/Search', function(req, res) {
             baseURL += '&instructor=' + instructFilter;
         }
 
-        lastRequestTime = opendata.RateLimitReq(baseURL, resultType, res, lastRequestTime);
-
+        LRTimes[ODkeyInd] = opendata.RateLimitReq(baseURL, resultType, res, LRTimes[ODkeyInd], ODkeyInd);
+        ODkeyInd = 1 - ODkeyInd;
     }
 });
 
@@ -186,7 +187,8 @@ app.get('/Sched', function(req, res) {
     var uri = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?term='+currentTerm+'&course_id='+courseID;
     var schedEvent = {schedCourse: courseID};
     if (!needLoc) {logEvent('Sched', schedEvent);}
-    lastRequestTime = opendata.RateLimitReq(uri, 'schedInfo', res, lastRequestTime);
+    LRTimes[ODkeyInd] = opendata.RateLimitReq(uri, 'schedInfo', res, LRTimes[ODkeyInd], ODkeyInd);
+    ODkeyInd = 1 - ODkeyInd;
 });
 
 app.post('/Notify', function(req, res) {
@@ -212,9 +214,8 @@ app.post('/Notify', function(req, res) {
                     res.statusCode = 200;
                 }
             } catch(err) {
-                // console.log(err);
+                console.log('Notify Error:', err);
             }
-            // logEvent('Notify', {user: userEmail.split("@")[0], secID: secID});
             return res.send(returnText);
     });
 });

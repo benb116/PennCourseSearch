@@ -1,13 +1,14 @@
-module.exports = function(AB, AT, IFTTT) {
+module.exports = function() {
     var request = require('request');
     var parse = require('./parse.js');
+    var config = require('./config.js');
     var opendata = {};
 
-    if (IFTTT) {
-        var IFTTTMaker = require('iftttmaker')(IFTTT);
+    if (config.IFTTTKey) {
+        var IFTTTMaker = require('iftttmaker')(config.IFTTTKey);
     }
     function SendError(errmsg) { // Send an email to Ben through IFTTT when there is a server error
-        if (IFTTT) {
+        if (config.IFTTTKey) {
             IFTTTMaker.send('PCSError', errmsg).then(function () {
             }).catch(function (error) {
               console.log('The error request could not be sent:', error);
@@ -16,7 +17,9 @@ module.exports = function(AB, AT, IFTTT) {
     }
 
     // API should limit to 100 requests a minute -> 600 ms between requests
-    function SendPennReq(url, resultType, res) {
+    function SendPennReq(url, resultType, res, ODkeyInd) {
+        var AB = config.requestAB[ODkeyInd];
+        var AT = config.requestAT[ODkeyInd];
         request({
             uri: url,
             method: "GET",headers: {"Authorization-Bearer": AB, "Authorization-Token": AT}, // Send authorization headers
@@ -83,7 +86,7 @@ module.exports = function(AB, AT, IFTTT) {
 
     var rpm = 95;
 
-    opendata.RateLimitReq = function(url, resultType, res, lastRT) {
+    opendata.RateLimitReq = function(url, resultType, res, lastRT, ODkeyInd) {
         var period = 60 / rpm;
         var now = new Date().getTime();
         var diff = now - lastRT; // how long ago was the last request point
@@ -91,7 +94,7 @@ module.exports = function(AB, AT, IFTTT) {
         var lastRequestTime = now+delay; // Update the latest request timestamp
 
         setTimeout(function() {
-            SendPennReq(url, resultType, res) // Send the request after the delay
+            SendPennReq(url, resultType, res, ODkeyInd) // Send the request after the delay
         }, delay);
         return lastRequestTime;
     }
