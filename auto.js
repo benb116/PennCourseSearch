@@ -51,14 +51,15 @@ var meetData = [];
 for (var dept in deptList) { if (deptList.hasOwnProperty(dept)) {
     try {
         var thedept = deptList[dept];
-        var meetData = meetData.concat(Object.values(require('./Data/2018AMeet/'+thedept+'.json')));
+        var deptData = require('./Data/2018AMeet/'+thedept+'.json');
+        var secs = Object.keys(deptData);
+        for (var i = 0; i < secs.length; i++) {
+            var meetData = meetData.concat(deptData[secs[i]])
+        }
     } catch(err) {
         
     }
 }}
-var toAdd = meetData.filter(function(sec) {
-    return sec.course === 'MEAM-101';
-});
 
 // var args = process.argv;
 var courses = ['cis-110', 'meam-348','cis-120', 'math114', 'econ001', 'chem102', 'meam545', 'meam101', 'meam201', 'psyc001'];
