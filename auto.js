@@ -42,54 +42,55 @@ app.get('/auto/request', function(req, res) {
     console.log(req.query.course)
     var courses = req.query.course;
     // console.log();
-    autoSched(courses, res);
+    return res.send(autoSched(courses, res));
+});
+
+var deptList = ["AAMW", "ACCT", "AFRC", "AFST", "ALAN", "AMCS", "ANCH", "ANEL", "ANTH", "ARAB", "ARCH", "ARTH", "ASAM", "ASTR", "BCHE", "BDS", "BE", "BENF", "BENG", "BEPP", "BIBB", "BIOE", "BIOL", "BIOM", "BIOT", "BMB", "BMIN", "BSTA", "CAMB", "CBE", "CHEM", "CHIN", "CIMS", "CIS", "CIT", "CLST", "COGS", "COML", "COMM", "CPLN", "CRIM", "DEMG", "DENT", "DPED", "DPRD", "DRST", "DTCH", "DYNM", "EALC", "EAS", "ECON", "EDUC", "EEUR", "ENGL", "ENGR", "ENM", "ENMG", "ENVS", "EPID", "ESE", "FNAR", "FNCE", "FOLK", "FREN", "GAFL", "GAS", "GCB", "GEOL", "GREK", "GRMN", "GSWS", "GUJR", "HCIN", "HCMG", "HEBR", "HIND", "HIST", "HPR", "HSOC", "HSPV", "HSSC", "IMUN", "INTG", "INTL", "INTR", "INTS", "IPD", "ITAL", "JPAN", "JWST", "KORN", "LALS", "LARP", "LATN", "LAW", "LAWM", "LGIC", "LGST", "LING", "LSMP", "MATH", "MCS", "MEAM", "MED", "MGEC", "MGMT", "MKTG", "MLA", "MLYM", "MMP", "MSCI", "MSE", "MSSP", "MTR", "MUSA", "MUSC", "NANO", "NELC", "NETS", "NGG", "NPLD", "NSCI", "NURS", "OIDD", "PERS", "PHIL", "PHRM", "PHYS", "PPE", "PREC", "PRTG", "PSCI", "PSYC", "PUBH", "PUNJ", "REAL", "REG", "RELS", "ROML", "RUSS", "SAST", "SCND", "SKRT", "SLAV", "SOCI", "SPAN", "STAT", "STSC", "SWRK", "TAML", "TELU", "THAR", "TURK", "URBS", "URDU", "VBMS", "VCSN", "VCSP", "VIPR", "VISR", "VLST", "VMED", "VPTH", "WH", "WHCP", "WHG", "WRIT", "YDSH"];
+
+var meetData = [];
+for (var dept in deptList) { if (deptList.hasOwnProperty(dept)) {
+    try {
+        var thedept = deptList[dept];
+        var meetData = meetData.concat(Object.values(require('./Data/2018AMeet/'+thedept+'.json')));
+    } catch(err) {
+        
+    }
+}}
+var toAdd = meetData.filter(function(sec) {
+    return sec.course === 'MEAM-101';
 });
 
 // var args = process.argv;
 var courses = ['cis-110', 'meam-348','cis-120', 'math114', 'econ001', 'chem102', 'meam545', 'meam101', 'meam201', 'psyc001'];
 
-autoSched(courses)
+// autoSched(courses)
 
 function autoSched(courses, res) {
+    var allData = [];
     for (var i = 0; i < courses.length; i++) {
         var thisc = FormatID(courses[i]);
         courses[i] = thisc[0] + '-' + thisc[1];
+        var toAdd = meetData.filter(function(sec) {
+            return sec.course === courses[i];
+        });
+        allData = allData.concat(toAdd)
     }
-
-    console.log(courses)
-    var urls = []
-    var BASE_URL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=500&course_id=';
-    courses.forEach(function(x) {
-        urls.push(requestAsync(BASE_URL+x))
-    });
-
-
-    return Promise.all(urls).then(function(allData) {
-        var resp = run(allData);
-        console.log(resp)
-        // res.send(resp)
-    });
+    return run(allData)
 }
 
 function run(allData) {
     var coursesAdded = [];
-
     var datasched = {};
-    allData.forEach(function(response) {
-        var resp = JSON.parse(response[0].body)
-        var arra = resp.result_data;
-        for (var i = 0; i < arra.length; i++) {
-            var thissect = SchedClean(arra[i]);
-            if (thissect.open) {
-                var thiscourseact = thissect.course + '-' + thissect.actType
-                if (!datasched[thiscourseact]) {
-                    datasched[thiscourseact] = []
-                }
-                datasched[thiscourseact].push(thissect);
+    allData.forEach(function(thissect) {
+        if (thissect.open) {
+            var thiscourseact = thissect.course + '-' + thissect.actType
+            // console.log(thiscourseact)
+            if (!datasched[thiscourseact]) {
+                datasched[thiscourseact] = []
             }
+            datasched[thiscourseact].push(thissect);
         }
     })
-    // console.log(datasched)
     var d, twodarr
     d = regenData(datasched);
     raw_twodarr = d[0];
@@ -151,7 +152,7 @@ function run(allData) {
             coursesAdded.push(anchor.idDashed)
         }
     }
-    console.log(1, coursesAdded)
+    console.log(coursesAdded)
     return coursesAdded
 
     function CompareAnchorToType(i) {
