@@ -62,11 +62,11 @@ git.short(function (str) {
 });
 
 var currentTerm = '2018A'; // Which term is currently active
-var LRTimes = [0, 0];
-var ODkeyInd = 0;
+var LRTimes = [0, 0]; // Timestamps of latest requests using each OpenData key
+var ODkeyInd = 0; // Which key to use next
 
 // Pull in external data and functions
-var allCourses    = require('./loadCourses.js')(currentTerm);
+var allCourses = require('./loadCourses.js')(currentTerm);
 var parse = require('./parse.js');
 var opendata = require('./opendata.js')();
 

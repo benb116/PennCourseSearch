@@ -392,7 +392,7 @@ ul {
 .FilterPanel {
 	height: 100%;
 	background-color: white;
-	width: 48%;
+	float: left;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -413,9 +413,42 @@ ul {
 #reqFilter {
 	line-height: 1.25em;
 	text-indent: 0;
-	padding-left: 1.75em;
+	padding-left: 1em;
 	height: 7em;
 	overflow-y: scroll;
+}
+
+#reqFilter > span {
+	display: inline-block;
+	float: left;
+	width: 50%;
+}
+
+#reqTypes {
+	width: 100%;
+	margin-bottom: 3px;
+	cursor: pointer;
+}
+
+#reqTypes > span {
+	display: inline-block;
+	width:33.33333333%;
+    float:left;
+	text-align: center;
+	text-indent: 0;
+	/* margin: 0 auto; */
+/* 	background-color: #3498db;
+	color: white; */
+	font-size: 1.25em;
+	flex-basis: 100%;
+	cursor: pointer;
+	border: 3px solid white;
+	box-sizing: border-box;
+}
+
+.schoolSelected {
+	background-color: #3498db;
+	color: white;
 }
 
 #SchedGraph {
@@ -493,6 +526,10 @@ hr {
 	overflow-y: hidden;
 	cursor: pointer;
 	color: black;
+}
+
+.SchedBlock > span {
+	display: block;
 }
 
 /* @media all and (max-width: 1050px) { */

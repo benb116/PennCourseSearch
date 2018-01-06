@@ -10,8 +10,8 @@ try {
     config = {};
     config.requestAB      = process.env.REQUESTAB;
     config.requestAT      = process.env.REQUESTAT;
-    config.PCRToken          = process.env.PCRTOKEN;
-    config.KeenIOID          = process.env.KEEN_PROJECT_ID;
+    config.PCRToken       = process.env.PCRTOKEN;
+    config.KeenIOID       = process.env.KEEN_PROJECT_ID;
     config.KeenIOWriteKey = process.env.KEEN_WRITE_KEY;
     config.autotestKey    = process.env.AUTOTESTKEY;
 }
