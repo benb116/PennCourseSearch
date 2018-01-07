@@ -249,7 +249,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
             sweetAlert({
                 title: "Please name your new schedule",
                 type: "input",
-                inputPlaceholder: "Fall 2017",
+                inputPlaceholder: "Spring 2018",
                 showCancelButton: true,
                 closeOnConfirm: false,
                 animation: "slide-from-top",

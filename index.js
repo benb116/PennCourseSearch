@@ -29,9 +29,12 @@ try {
 // Set express settings
 var app = express();
 app.use(compression());
-app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: 2628000000 }));
-app.use('/js', express.static(path.join(__dirname, 'public/js'), { maxAge: 0 }));
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: 2628000000 }));
+
+if (process.env.NODE_ENV !== 'production') {
+    app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: 2628000000 }));
+    app.use('/js', express.static(path.join(__dirname, 'public/js'), { maxAge: 0 }));
+    app.use(express.static(path.join(__dirname, 'public'), { maxAge: 2628000000 }));
+}
 
 console.log('Express initialized');
 
@@ -75,10 +78,12 @@ app.listen(process.env.PORT || 3000, function(){
     console.log("Node app is running. Better go catch it.");
 });
 
-// Handle main page requests
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname+'/views/index.html'));
-});
+if (process.env.NODE_ENV !== 'production') {
+    // Handle main page requests
+    app.get('/', function(req, res) {
+        res.sendFile(path.join(__dirname+'/views/index.html'));
+    });
+}
 // Handle status requests. This lets the admin disseminate info if necessary
 app.get('/Status', function(req, res) {
     var statustext = 'hakol beseder'; // Means "everything is ok" in Hebrew

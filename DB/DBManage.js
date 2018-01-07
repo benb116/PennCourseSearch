@@ -68,7 +68,7 @@ function PullRegistrar(index) {
     var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
     if (!thedept) {return;}
 
-    lastRequestTime = opendata.RateLimitReq(baseURL, 'registrar', null, lastRequestTime);
+    lastRequestTime = opendata.RateLimitReq(baseURL, 'registrar', null, lastRequestTime, 1);
 }
 
 function PullReview(index) {

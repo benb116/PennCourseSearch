@@ -51,10 +51,12 @@ requirements.GetRequirements = function(section) {
 
     var reqList = section.fulfills_college_requirements; // Pull standard college requirements
     var reqCodesList = []; 
-    try {
+    if (reqCodesList[0]) {
         reqCodesList[0] = collegeCodes[reqList[0].split(" ")[0]];  // Generate the req codes
+    }
+    if (reqCodesList[1]) {
         reqCodesList[1] = collegeCodes[reqList[1].split(" ")[0]];
-    } catch(err) {}
+    }
 
     var extraReq = section.important_notes; // Sometimes there are extra college requirements cause why not
     var extraReqCode;
