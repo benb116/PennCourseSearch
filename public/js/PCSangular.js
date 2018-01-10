@@ -499,7 +499,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 // This checks if the top of block 2 is lower down (higher value) than the bottom of block 1...
                 // or if the top of block 1 is lower down (higher value) than the bottom of block 2.
                 // In this case, they are not overlapping, so return false
-                if (b1 <= y2 || b2 <= y1) {
+                if (b1 <= (y2 + 0.0000001) || b2 <= (y1 + 0.0000001)) {
                     return false;
                 } else {
                     return true;

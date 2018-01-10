@@ -42,12 +42,15 @@ if (isNaN(endindex)) { // If there is a first number but not a second, run to th
     endindex = maxIndex;
 }
 
+var thedept
 if (source === 'registrar') {
     if (limit) {
-        PullRegistrar(index); // Single dept
+        thedept = deptList[index];
+        PullRegistrar(thedept); // Single dept
     } else {
         for (var i = index; i < endindex; i++) {
-            PullRegistrar(i);
+            thedept = deptList[i];
+            PullRegistrar(thedept);
         }
     }
 } else if (source === "review") {
@@ -61,8 +64,7 @@ if (source === 'registrar') {
 }
 return "done";
 
-function PullRegistrar(index) {
-    var thedept = deptList[index];
+function PullRegistrar(thedept) {
     console.log('Start', thedept)
     // Send the request
     var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;

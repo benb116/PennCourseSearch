@@ -78,12 +78,11 @@ app.listen(process.env.PORT || 3000, function(){
     console.log("Node app is running. Better go catch it.");
 });
 
-if (process.env.NODE_ENV !== 'production') {
-    // Handle main page requests
-    app.get('/', function(req, res) {
-        res.sendFile(path.join(__dirname+'/views/index.html'));
-    });
-}
+// Handle main page requests
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname+'/views/index.html'));
+});
+
 // Handle status requests. This lets the admin disseminate info if necessary
 app.get('/Status', function(req, res) {
     var statustext = 'hakol beseder'; // Means "everything is ok" in Hebrew
@@ -210,16 +209,20 @@ app.post('/Notify', function(req, res) {
         }, function(error, response, body) {
             var returnText = "Sorry, there was an error while trying set up notifications.";
             res.statusCode = 201;
-            try {
-                if (response.statusCode === 406) {
-                    returnText = "Notifications already requested.";
-                    res.statusCode = 200;
-                } else if (body.split('<h3>')[1].split('</h3>')[0] === "Success!") {
-                    returnText = "Great! You'll be notified if "+secID+" opens up.";
-                    res.statusCode = 200;
+            if (error) {
+                console.log('PCN req error:', error)
+            } else {
+                try {
+                    if (response.statusCode === 406) {
+                        returnText = "Notifications already requested.";
+                        res.statusCode = 200;
+                    } else if (body.split('<h3>')[1].split('</h3>')[0] === "Success!") {
+                        returnText = "Great! You'll be notified if "+secID+" opens up.";
+                        res.statusCode = 200;
+                    }
+                } catch(err) {
+                    console.log('Notify Error:', err);
                 }
-            } catch(err) {
-                console.log('Notify Error:', err);
             }
             return res.send(returnText);
     });

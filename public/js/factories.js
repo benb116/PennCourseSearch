@@ -15,11 +15,9 @@ PCS.factory('PCR', function(){
             // Cleanup to keep incomplete data on the bottom;
             if (isNaN(item.revs.QDratio) || !isFinite(item.revs.QDratio)) {item.revs.QDratio = 0;} 
             // the rating as a string - let's us make the actual rating something else and still show the correct number
-            item.revs.cQT = (item.revs.cQ * 100).toString(); // two decimal rounding
-            item.revs.cQT = item.revs.cQT.slice(0,1) + '.' + item.revs.cQT.slice(1,3);
+            item.revs.cQT = item.revs.cQ.toFixed(2);
             if (item.revs.cQ === 0) {item.revs.cQT = '';}
-            item.revs.cDT = (item.revs.cD * 100).toString();
-            item.revs.cDT = item.revs.cDT.slice(0,1) + '.' + item.revs.cDT.slice(1,3);
+            item.revs.cDT = item.revs.cD.toFixed(2);
             if (item.revs.cD === 0) {item.revs.cDT = ''; item.revs.QDratio = -100; item.revs.cD = 100}
         });
         return data;
