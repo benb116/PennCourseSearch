@@ -1,12 +1,12 @@
 var parse = {};
 var r = require('./reqFunctions.js'); // Functions that help determine which req rules apply to a class
+var allRevs = require('./loadRevs.js');
 
 function RecordRegistrar(parsedRes) {
     console.log('catch')
 }
 
 function GetRevData (dept, num, inst) {
-    var allRevs = require('./loadRevs.js');
     // Given a department, course number, and instructor (optional), get back the three rating values
     var deptData = allRevs[dept]; // Get dept level ratings
     var thisRevData = {"cQ": 0, "cD": 0, "cI": 0};
@@ -80,39 +80,43 @@ function SectionMeeting(sec) {
 }
 
 parse.SchedInfo = function(entry) { // Get the properties required to schedule the section
-    if (entry.result_data) {entry = entry.result_data[0]} else {entry = entry[0]}
-    try {
-        var idDashed     = entry.section_id_normalized.replace(/ /g, ""); // Format ID
+    if (entry.result_data) {
+        entry = entry.result_data;
+    } else if (!entry[0]) {
+        entry = [entry];
+    }
+    var resJSON  = [];
+    for (var key in entry) { if (entry.hasOwnProperty(key)) {
+        var idDashed = entry[key].section_id_normalized.replace(/ /g, ""); // Format ID
         var idSpaced = idDashed.replace(/-/g, ' ');
-        var resJSON  = [];
         try { // Not all sections have time info
-            for(var meeti in entry.meetings) { if (entry.meetings.hasOwnProperty(meeti)) { // Some sections have multiple meetings
-                var thisMeet   = entry.meetings[meeti];
+            for(var meeti in entry[key].meetings) { if (entry[key].meetings.hasOwnProperty(meeti)) { // Some sections have multiple meetings
+                var thisMeet   = entry[key].meetings[meeti];
                 var StartTime  = (thisMeet.start_hour_24) + (thisMeet.start_minutes)/60;
                 var EndTime    = (thisMeet.end_hour_24)   + (thisMeet.end_minutes)/60;
                 var hourLength = EndTime - StartTime;
                 var MeetDays   = thisMeet.meeting_days;
                 var Building, Room;
                 try {
-                 Building    = thisMeet.building_code;
-                 Room        = thisMeet.room_number;
+                    Building = thisMeet.building_code;
+                    Room     = thisMeet.room_number;
                 } catch (err) {
-                 Building    = "";
-                 Room        = "";
+                    Building = "";
+                    Room     = "";
                 }
                 var SchedAsscSecs = [];
-                if (entry.lectures.length) {
-                    for (var thisAssc in entry.lectures) {  if (entry.lectures.hasOwnProperty(thisAssc)) {
-                        SchedAsscSecs.push(entry.lectures[thisAssc].subject + '-' + entry.lectures[thisAssc].course_id + '-' + entry.lectures[thisAssc].section_id);
+                if (entry[key].lectures.length) {
+                    for (var thisAssc in entry[key].lectures) {  if (entry[key].lectures.hasOwnProperty(thisAssc)) {
+                        SchedAsscSecs.push(entry[key].lectures[thisAssc].subject + '-' + entry[key].lectures[thisAssc].course_id + '-' + entry[key].lectures[thisAssc].section_id);
                     }}
                 } else {
-                    if (entry.recitations.length) {
-                        for (var thisAssc in entry.recitations) {  if (entry.lectures.hasOwnProperty(thisAssc)) {
-                            SchedAsscSecs.push(entry.recitations[thisAssc].subject + '-' + entry.recitations[thisAssc].course_id + '-' + entry.recitations[thisAssc].section_id);
+                    if (entry[key].recitations.length) {
+                        for (var thisAssc in entry[key].recitations) {  if (entry[key].lectures.hasOwnProperty(thisAssc)) {
+                            SchedAsscSecs.push(entry[key].recitations[thisAssc].subject + '-' + entry[key].recitations[thisAssc].course_id + '-' + entry[key].recitations[thisAssc].section_id);
                         }}
-                    } else if (entry.labs.length) {
-                        for (var thisAssc in entry.labs) {  if (entry.lectures.hasOwnProperty(thisAssc)) {
-                            SchedAsscSecs.push(entry.labs[thisAssc].subject + '-' + entry.labs[thisAssc].course_id + '-' + entry.labs[thisAssc].section_id);
+                    } else if (entry[key].labs.length) {
+                        for (var thisAssc in entry[key].labs) {  if (entry[key].lectures.hasOwnProperty(thisAssc)) {
+                            SchedAsscSecs.push(entry[key].labs[thisAssc].subject + '-' + entry[key].labs[thisAssc].course_id + '-' + entry[key].labs[thisAssc].section_id);
                         }}
                     }
                 }
@@ -136,12 +140,8 @@ parse.SchedInfo = function(entry) { // Get the properties required to schedule t
         catch (err) {
             console.log("Error getting times: "+err);
         }
-        // console.log(JSON.stringify(resJSON))
-        return resJSON;
-    }
-    catch (err) {
-        return 'No Results';
-    }
+    }}
+    return resJSON;
 }
 
 parse.DeptList = function(res) {
@@ -260,7 +260,7 @@ parse.SectionInfo = function(Res) {
         };
         return sectionInfo;
     } else {
-        return 'No Results';
+        return {};
     }
 }
 
