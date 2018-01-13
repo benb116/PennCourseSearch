@@ -102,7 +102,8 @@
 			</div>
 
 			<ul>
-				<li ng-repeat="course in courses | orderBy:courseSort" id="{{ course.idDashed }}" 
+				<li ng-repeat="course in courses | orderBy:courseSort" 
+					id="{{ course.idDashed }}" 
 					ng-click="get.Sections(course.idDashed)" 
 					ng-class="{'activeItem': (currentCourse.toUpperCase() == course.idSpaced.replace(' ', ''))}"
 					ng-if="
@@ -138,23 +139,36 @@
 
 				<div id="SectionList">
 					<ul>
-						<li ng-repeat="section in sections" id="{{ section.idDashed }}" class="{{section.actType}}" ng-class="{'activeItem': (currentSection == section.idSpaced.replace(' ', '').replace(' ', ''))}" ng-show="
+						<li ng-repeat="section in sections" 
+						id="{{ section.idDashed }}" 
+						class="{{section.actType}}" 
+						ng-class="{'activeItem': (currentSection == section.idSpaced.replace(' ', '').replace(' ', '')), 
+							'hideSec': (!sched.SecOverlap(section) && schedSections.indexOf(section.idDashed) == -1)}" 
+						ng-show="
 							(showAct == section.actType || showAct == 'noFilter') &&
 							(section.isOpen || showClosed) && 
 							(currentCourse || starSections.indexOf(section.idDashed) > -1)
-							">
+						">
 							<!--Dealing with closed sections, activity types, and stars. The list element will show if:
 								There is no activity filter OR the section actType matches the activity filter
 								AND
 								Closed sections are enabled (showClosed === true) OR the section is open
 								ANDThere is a current course selected (true when user clicks "Show Stars") or the section is starred
 							 -->
-							<i class="fa" ng-class="{'fa-plus': schedSections.indexOf(section.idDashed) === -1, 'fa-times': schedSections.indexOf(section.idDashed) > -1}" ng-click="sched.AddRem(section.idDashed)"></i>
+							<i class="fa" 
+							ng-class="{'fa-plus': schedSections.indexOf(section.idDashed) === -1, 
+								'fa-times': schedSections.indexOf(section.idDashed) > -1}" 
+							ng-click="sched.AddRem(section.idDashed)"></i>
 							<!-- The icon should be a + if the section is not currently scheduled and an x if it is -->
-							<span class="statusClass" ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}" ng-click="get.SectionInfo(section.idDashed)">
+							<span class="statusClass" 
+							ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}" 
+							ng-click="get.SectionInfo(section.idDashed)">
 							<!-- the status square should be green if the section is open, red if it's closed -->
 
-								<i class="fa fa-envelope tooltip" ng-hide="section.isOpen" ng-click="Notify(section.idDashed)" title="PennCourseNotify"></i>
+								<i class="fa fa-envelope tooltip" 
+								ng-hide="section.isOpen" 
+								ng-click="Notify(section.idDashed)" 
+								title="PennCourseNotify"></i>
 
 								<!-- If the section is closed, show the notify icon -->
 							</span>
@@ -194,29 +208,29 @@
 							<span ng-click="reqShow = 'SEAS'" ng-class="{schoolSelected: reqShow == 'SEAS'}">Engineering</span>
 						</div>
 						<div id="reqFilter">
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MDS"  ng-change="reqChange()" value="MDS">Society Sector</span>
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MDH"  ng-change="reqChange()" value="MDH">History &amp; Tradition Sector</span>
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MDA"  ng-change="reqChange()" value="MDA">Arts &amp; Letters Sector</span>
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MDO"  ng-change="reqChange()" value="MDO">Humanities &amp; Social Science </span>
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MDL"  ng-change="reqChange()" value="MDL">Living World Sector</span>
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MDP"  ng-change="reqChange()" value="MDP">Physical World Sector</span>
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MDN"  ng-change="reqChange()" value="MDN">Natural Science &amp; Math Sector</span>
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MWC"  ng-change="reqChange()" value="MWC">Writing Requirement</span>
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MQS"  ng-change="reqChange()" value="MQS">Quantitative Data Analysis</span>
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MFR"  ng-change="reqChange()" value="MFR">Formal Reasoning Course</span>
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MC1"  ng-change="reqChange()" value="MC1">Cross Cultural Analysis</span>
-							<span ng-show="reqShow=='CAS'"  ><input type="checkbox" ng-model="check.MC2"  ng-change="reqChange()" value="MC2">Cultural Diversity in the US</span>
-							<span ng-show="reqShow=='WH'"   ><input type="checkbox" ng-model="check.WGLO" ng-change="reqChange()" value="WGLO">Global Environment</span>
-							<span ng-show="reqShow=='WH'"   ><input type="checkbox" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Social Structures</span>
-							<span ng-show="reqShow=='WH'"   ><input type="checkbox" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Science and Technology</span>
-							<span ng-show="reqShow=='WH'"   ><input type="checkbox" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Language, Arts &amp; Culture</span>
-							<span ng-show="reqShow=='SEAS'" ><input type="checkbox" ng-model="check.EMAT" ng-change="reqChange()" value="EMAT">Math</span>
-							<span ng-show="reqShow=='SEAS'" ><input type="checkbox" ng-model="check.ESCI" ng-change="reqChange()" value="ESCI">Natural Science</span>
-							<span ng-show="reqShow=='SEAS'" ><input type="checkbox" ng-model="check.EENG" ng-change="reqChange()" value="EENG">Engineering</span>
-							<span ng-show="reqShow=='SEAS'" ><input type="checkbox" ng-model="check.ESSC" ng-change="reqChange()" value="ESSC">Social Sciences</span>
-							<span ng-show="reqShow=='SEAS'" ><input type="checkbox" ng-model="check.EHUM" ng-change="reqChange()" value="EHUM">Humanities</span>
-							<span ng-show="reqShow=='SEAS'" ><input type="checkbox" ng-model="check.ETBS" ng-change="reqChange()" value="ETBS">Tech, Bus, and Society</span>
-							<span ng-show="reqShow=='SEAS'" ><input type="checkbox" ng-model="check.EWRT" ng-change="reqChange()" value="EWRT">Writing</span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MDS"  ng-change="reqChange()" value="MDS">Society Sector</span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MDH"  ng-change="reqChange()" value="MDH">History &amp; Tradition Sector</span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MDA"  ng-change="reqChange()" value="MDA">Arts &amp; Letters Sector</span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MDO"  ng-change="reqChange()" value="MDO">Humanities &amp; Social Science </span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MDL"  ng-change="reqChange()" value="MDL">Living World Sector</span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MDP"  ng-change="reqChange()" value="MDP">Physical World Sector</span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MDN"  ng-change="reqChange()" value="MDN">Natural Science &amp; Math Sector</span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MWC"  ng-change="reqChange()" value="MWC">Writing Requirement</span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MQS"  ng-change="reqChange()" value="MQS">Quantitative Data Analysis</span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MFR"  ng-change="reqChange()" value="MFR">Formal Reasoning Course</span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MC1"  ng-change="reqChange()" value="MC1">Cross Cultural Analysis</span>
+							<span ng-show="reqShow=='CAS'" ><input type="checkbox" ng-model="check.MC2"  ng-change="reqChange()" value="MC2">Cultural Diversity in the US</span>
+							<span ng-show="reqShow=='WH'"  ><input type="checkbox" ng-model="check.WGLO" ng-change="reqChange()" value="WGLO">Global Environment</span>
+							<span ng-show="reqShow=='WH'"  ><input type="checkbox" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Social Structures</span>
+							<span ng-show="reqShow=='WH'"  ><input type="checkbox" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Science and Technology</span>
+							<span ng-show="reqShow=='WH'"  ><input type="checkbox" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Language, Arts &amp; Culture</span>
+							<span ng-show="reqShow=='SEAS'"><input type="checkbox" ng-model="check.EMAT" ng-change="reqChange()" value="EMAT">Math</span>
+							<span ng-show="reqShow=='SEAS'"><input type="checkbox" ng-model="check.ESCI" ng-change="reqChange()" value="ESCI">Natural Science</span>
+							<span ng-show="reqShow=='SEAS'"><input type="checkbox" ng-model="check.EENG" ng-change="reqChange()" value="EENG">Engineering</span>
+							<span ng-show="reqShow=='SEAS'"><input type="checkbox" ng-model="check.ESSC" ng-change="reqChange()" value="ESSC">Social Sciences</span>
+							<span ng-show="reqShow=='SEAS'"><input type="checkbox" ng-model="check.EHUM" ng-change="reqChange()" value="EHUM">Humanities</span>
+							<span ng-show="reqShow=='SEAS'"><input type="checkbox" ng-model="check.ETBS" ng-change="reqChange()" value="ETBS">Tech, Bus, and Society</span>
+							<span ng-show="reqShow=='SEAS'"><input type="checkbox" ng-model="check.EWRT" ng-change="reqChange()" value="EWRT">Writing</span>
 						</div>
 					</div>
 				</div>

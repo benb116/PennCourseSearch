@@ -170,3 +170,49 @@ function Schedule(term) {
     this.colorPalette = ["#e74c3c", "#f1c40f", "#3498db", "#9b59b6", "#e67e22", "#2ecc71", "#95a5a6", "#FF73FD", "#73F1FF", "#CA75FF", "#1abc9c", "#F64747", "#ecf0f1"]; // Standard colorPalette
     this.locAdded = false;
 }
+
+function GenMeetBlocks(sec) {
+    var blocks = []
+    for (day in sec.meetDay) { if (sec.meetDay.hasOwnProperty(day)) {
+        var meetLetterDay = sec.meetDay[day]; // On which day does this meeting take place?
+        var meetRoom      = sec.meetLoc;
+        var newid         = sec.idDashed+'-'+meetLetterDay+sec.meetHour.toString().replace(".", "");
+        var asscsecs      = sec.SchedAsscSecs;
+
+        var newblock = {
+            'class': sec.idDashed,
+            'letterday': meetLetterDay,
+            'id': newid,
+            'startHr': sec.meetHour,
+            'duration': sec.hourLength,
+            'name': sec.idSpaced,
+            'room': meetRoom,
+            'asscsecs': asscsecs
+        }
+        blocks.push(newblock)
+    }}
+    return blocks;
+}
+
+function TwoOverlap(block1, block2) {
+    // Thank you to Stack Overflow user BC. for the function this is based on.
+    // http://stackoverflow.com/questions/5419134/how-to-detect-if-two-divs-touch-with-jquery
+    var y1 = (block1.startHr || block1.top);
+    var h1 = (block1.duration || block1.height);
+    var b1 = y1 + h1;
+
+    var y2 = (block2.startHr || block2.top);
+    var h2 = (block1.duration || block2.height);
+    var b2 = y2 + h2;
+
+    
+
+    // This checks if the top of block 2 is lower down (higher value) than the bottom of block 1...
+    // or if the top of block 1 is lower down (higher value) than the bottom of block 2.
+    // In this case, they are not overlapping, so return false
+    if (b1 <= (y2 + 0.0000001) || b2 <= (y1 + 0.0000001)) {
+        return false;
+    } else {
+        return true;
+    }
+}

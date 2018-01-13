@@ -264,6 +264,10 @@ form > input[type="text"] {
 	overflow: hidden;
 	white-space: nowrap;
 }
+.hideSec {
+	opacity: 0.4;
+	/* background-color: #E6E6E6; */
+}
 
 #SectionInfo {
 	height: 65%;

@@ -114,6 +114,9 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
             $scope.currentDept = param;
             UpdateCourseList.getDeptCourses(param, type, reqText, pro).then(function(resp) {
                 $scope.courses = PCR(resp.data);
+                if (!$scope.courses.length) {
+                    $scope.courses = [{'courseTitle': 'No Results'}];
+                }
             });
         },
         Sections: function(dept, num, sec) {
@@ -392,11 +395,11 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                     endHour = Math.ceil(secMeetHour + courseSched[sec].hourLength);
                 }
                 for (day in courseSched[sec].meetDay) { if (courseSched[sec].meetDay.hasOwnProperty(day)) {
-                    var letterDay = courseSched[sec].meetDay[day];
-                    if (letterDay === 'U') { // If there are sunday classes
+                    var topLetterDay = courseSched[sec].meetDay[day];
+                    if (topLetterDay === 'U') { // If there are sunday classes
                         incSun = 1;
                     }
-                    if (letterDay === 'S') { // If there are saturday classes
+                    if (topLetterDay === 'S') { // If there are saturday classes
                         incSat = 1;
                     }
                 }}
@@ -440,34 +443,15 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 }
             }}
 
+            var meetBlocks = [];
             $scope.schedBlocks = [];
             // Add the blocks
             for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
-                for (day in courseSched[sec].meetDay) { if (courseSched[sec].meetDay.hasOwnProperty(day)) {
-                    var meetLetterDay   = courseSched[sec].meetDay[day]; // On which day does this meeting take place?
-                    var blockleft       = weekdays.indexOf(meetLetterDay) * $scope.percentWidth;
-                    var blocktop        = (courseSched[sec].meetHour - startHour) * halfScale + 9; // determine top spacing based on time from startHour (offset for prettiness)
-                    var blockheight     = courseSched[sec].hourLength * halfScale;
-                    var blockname       = courseSched[sec].idSpaced;
-                    var meetRoom        = courseSched[sec].meetLoc;
-                    var thiscol         = (colorMap[courseSched[sec].idDashed] || "#E6E6E6"); // Get the color
-                    var newid           = courseSched[sec].idDashed+'-'+meetLetterDay+courseSched[sec].meetHour.toString().replace(".", "");
-                    var asscsecs         = courseSched[sec].SchedAsscSecs;
+                meetBlocks = meetBlocks.concat(GenMeetBlocks(courseSched[sec]));
+            }}
 
-                    $scope.schedBlocks.push({
-                        'class': courseSched[sec].idDashed,
-                        'letterday': meetLetterDay,
-                        'id': newid,
-                        'top': blocktop,
-                        'left': blockleft,
-                        'width': $scope.percentWidth,
-                        'height': blockheight,
-                        'color': thiscol,
-                        'name': blockname,
-                        'room': meetRoom,
-                        'asscsecs': asscsecs
-                    });
-                }}
+            for (b in meetBlocks) { if (meetBlocks.hasOwnProperty(b)) {
+                $scope.schedBlocks[b] = AddSchedAttr(meetBlocks[b]);
             }}
 
             for (var weekday in weekdays) { if (weekdays.hasOwnProperty(weekday)) {
@@ -485,30 +469,37 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 $scope.schedBlocks.concat(dayblocks);
             }}
 
-            function TwoOverlap(block1, block2) {
-                // Thank you to Stack Overflow user BC. for the function this is based on.
-                // http://stackoverflow.com/questions/5419134/how-to-detect-if-two-divs-touch-with-jquery
-                var y1 = block1.top;
-                var h1 = block1.height;
-                var b1 = y1 + h1;
-
-                var y2 = block2.top;
-                var h2 = block2.height;
-                var b2 = y2 + h2;
-
-                // This checks if the top of block 2 is lower down (higher value) than the bottom of block 1...
-                // or if the top of block 1 is lower down (higher value) than the bottom of block 2.
-                // In this case, they are not overlapping, so return false
-                if (b1 <= (y2 + 0.0000001) || b2 <= (y1 + 0.0000001)) {
-                    return false;
-                } else {
-                    return true;
-                }
+            function AddSchedAttr(block) {
+                block.left   = weekdays.indexOf(block.letterday) * $scope.percentWidth;
+                block.top    = (block.startHr - startHour) * halfScale + 9; // determine top spacing based on time from startHour (offset for prettiness)
+                block.height = block.duration * halfScale;
+                block.color  = (colorMap[block.class] || "#E6E6E6"); // Get the color
+                block.width  = $scope.percentWidth;
+                return block;
             }
         },
         CrossCheck: function(asscarray) {
-                var filt = asscarray.filter(function(n) {return $scope.schedSections.indexOf(n) !== -1;});
+            var filt = asscarray.filter(function(n) {return $scope.schedSections.indexOf(n) !== -1;});
             return (filt.length || !asscarray.length);
+        },
+        SecOverlap: function(secMeet) {
+            var blocks = [];
+            for (i in secMeet.fullSchedInfo) { if (secMeet.fullSchedInfo.hasOwnProperty(i)) {
+                blocks = GenMeetBlocks(secMeet.fullSchedInfo[i]);
+            }}
+            var isFit = true;
+            for (b in blocks) { if (blocks.hasOwnProperty(b)) {
+                var thisDay = blocks[b].letterday;
+                var dayblocks = $scope.schedBlocks.filter(function(n) {return n.letterday === thisDay;});
+                for (db in dayblocks) { if (blocks.hasOwnProperty(b)) {
+                    if (TwoOverlap(dayblocks[db], blocks[b])) {
+                        isFit = false;
+                        break;
+                    }
+                }}
+                if (!isFit) {break;}
+            }}
+            return isFit;
         }
     };
     
