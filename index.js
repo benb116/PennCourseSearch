@@ -80,7 +80,7 @@ app.listen(process.env.PORT || 3000, function(){
 
 // Handle main page requests
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname+'/views/index.html'));
+    res.sendFile(path.join(__dirname+'/public/index.html'));
 });
 
 // Handle status requests. This lets the admin disseminate info if necessary
