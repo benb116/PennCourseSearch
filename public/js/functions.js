@@ -6,16 +6,17 @@ $(document).ready(function() {
 
     var subtitles = [
         "Free shipping on all items in your course cart",
-        "You can press the back button, but you don't even need to",
+        "You can press the back button, but you don't even need to.",
         "Invented by Benjamin Franklin in 1793",
         "Faster than you can say 'Wawa run'",
         "Classes sine PennCourseSearch vanae",
-        "On PennCourseSearch, no one knows you're Amy G",
+        "On PennCourseSearch, no one knows you're Amy G.",
         "Designed by Ben in Speakman. Assembled in China.",
         "Help! I'm trapped in a NodeJS server! Bring Chipotle!",
         "With white sauce AND hot sauce",
         "Now 3.9% faster",
         "Number of squirrels online: 6",
+        "Handling the business side since 2014",
         "Actually in touch"
     ];
     var paymentNoteBase = "https://venmo.com/?txn=pay&recipients=BenBernstein&amount=1&share=f&audience=friends&note=";

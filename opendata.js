@@ -87,7 +87,7 @@ module.exports = function() {
     var rpm = 95;
 
     opendata.RateLimitReq = function(url, resultType, res, lastRT, ODkeyInd) {
-        var period = 60 / rpm;
+        var period = 60000 / rpm;
         var now = new Date().getTime();
         var diff = now - lastRT; // how long ago was the last request point
         var delay = (period - diff) * (diff < period); // How long to delay the request (if diff is > period, no need to delay)

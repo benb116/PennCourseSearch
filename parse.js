@@ -87,6 +87,9 @@ parse.SchedInfo = function(entry) { // Get the properties required to schedule t
     }
     var resJSON  = [];
     for (var key in entry) { if (entry.hasOwnProperty(key)) {
+        if (!entry[key].section_id_normalized) {
+            console(entry, 0);
+        }
         var idDashed = entry[key].section_id_normalized.replace(/ /g, ""); // Format ID
         var idSpaced = idDashed.replace(/-/g, ' ');
         try { // Not all sections have time info
