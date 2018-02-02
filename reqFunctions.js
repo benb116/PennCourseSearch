@@ -77,22 +77,14 @@ requirements.GetRequirements = function(section) {
     }
 
     if (WhartonReq[idDashed]) {
-        try {
-            if (WhartonReq[idDashed].GED) {
-                var this_GED = WhartonReq[idDashed].GED; // Pull the courses wharton requirement if it has one
-                reqCodesList.push(this_GED);
-                reqList.push(reqCodes[this_GED]);
-            }
-        } catch (err) {
-            console.log(err)
+        if (WhartonReq[idDashed].GED) {
+            var this_GED = WhartonReq[idDashed].GED; // Pull the courses wharton requirement if it has one
+            reqCodesList.push(this_GED);
+            reqList.push(reqCodes[this_GED]);
         }
-        try {
-            if (WhartonReq[idDashed].global) { // Check if it also applies to wharton global requirement
-                reqCodesList.push("WGLO");
-                reqList.push(reqCodes.WGLO);
-            }
-        } catch (err) {
-            console.log(err)
+        if (WhartonReq[idDashed].global) { // Check if it also applies to wharton global requirement
+            reqCodesList.push("WGLO");
+            reqList.push(reqCodes.WGLO);
         }
     }
 

@@ -51,16 +51,16 @@ $(document).ready(function() {
                 console.log(statusMessage);
             } else {
                 if (localStorage.getItem('secondvisit')) {
-                    if (!localStorage.getItem('survey2017C')) {
-                        localStorage.setItem('survey2017C', 'true');
-                        sweetAlert({
-                            title: 'PCS Alert',
-                            html: true,
-                            confirmButtonText: "Close",
-                            text: 'Love PCS? Hate it? Want to vent about your life?<br>Take a quick <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSegplgiZsgEZDtIPlYeWN0QwJMj4iqqphS3m7Wp_HFYgqcYNQ/viewform">survey!</a>',
-                            type: 'warning'
-                        });
-                    }
+                    // if (!localStorage.getItem('survey2017C')) {
+                    //     localStorage.setItem('survey2017C', 'true');
+                    //     sweetAlert({
+                    //         title: 'PCS Alert',
+                    //         html: true,
+                    //         confirmButtonText: "Close",
+                    //         text: 'Love PCS? Hate it? Want to vent about your life?<br>Take a quick <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSegplgiZsgEZDtIPlYeWN0QwJMj4iqqphS3m7Wp_HFYgqcYNQ/viewform">survey!</a>',
+                    //         type: 'warning'
+                    //     });
+                    // }
                 } else {
                     localStorage.setItem('secondvisit', 'true');
                 }

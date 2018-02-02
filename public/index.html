@@ -109,7 +109,9 @@
 					ng-if="
 						(!checkArr[0] || course.courseReqs.indexOf(checkArr[0]) > -1) && 
 						(!checkArr[1] || course.courseReqs.indexOf(checkArr[1]) > -1) && 
-						(!checkArr[2] || course.courseReqs.indexOf(checkArr[2]) > -1)
+						(!checkArr[2] || course.courseReqs.indexOf(checkArr[2]) > -1) && 
+						(!checkArr[3] || course.courseReqs.indexOf(checkArr[3]) > -1) && 
+						(!checkArr[4] || course.courseReqs.indexOf(checkArr[4]) > -1)
 					"
 					ng-hide="(course.courseCred != credFilter) && (credFilter != 'noFilter')">
 					<!--Dealing with requirements: The list element will be shown if: 
