@@ -1,7 +1,7 @@
 var PCS = angular.module('PCSApp', ['LocalStorageModule', 'tooltips']);
 
 /*
-    I know this is scope soup. I'm still learning.
+    I know this is scope soup. If you'd like to fix it (or give me advice about Angular), let me know.
 */
 
 PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules, pendingRequests){

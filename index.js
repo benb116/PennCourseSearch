@@ -95,7 +95,7 @@ app.get('/Status', function(req, res) {
     if (hour >= 5 && hour < 9) {
         statustext = "Penn InTouch sometimes screws up around this time of night, which can cause problems with PennCourseSearch. <br> Sorry in advance.";
     }
-    res.send(statustext);
+    return res.send(statustext);
 });
 
 var searchTypes = {

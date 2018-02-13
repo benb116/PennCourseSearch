@@ -1,3 +1,16 @@
+/*
+    Main script for automating data scraping.
+    Used with the OpenData API for registrar requests (in conjunction with opendata.js),
+    as well as with the PCR API.
+
+    Run as a script like so:
+
+    node DBManage.js registrar MEAM // Run for a single department
+    node DBManage.js registrar 0 30 // Run for a set of depts by index
+    node DBManage.js registrar 50 // Run for all depts starting at index
+    node DBManage.js review CIS
+*/
+
 var request = require("request");
 var fs = require("fs");
 
@@ -19,14 +32,6 @@ var maxIndex = deptList.length;
 var parse = require('../parse.js');
 var opendata = require('../opendata.js')(config.requestAB2, config.requestAT2, config.IFTTTKey);
 var lastRequestTime = 0;
-
-/*
-
-node DBManage.js registrar MEAM
-node DBManage.js registrar 0 30
-node DBManage.js review CIS
-
-*/
 
 var source = process.argv[2].toLowerCase(); // registrar or review
 var index = Number(process.argv[3]); // Can be a number or a dept code

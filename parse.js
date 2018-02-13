@@ -324,10 +324,11 @@ parse.RecordRegistrar = function(inJSON) {
 
     var resp = {};
     var meetresp = {};
+    var thisKey;
     for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
         // For each section that comes up
         // Get course name (e.g. CIS 120)
-        var thisKey = inJSON[key];
+        thisKey = inJSON[key];
         var idSpaced = thisKey.course_department + ' ' + thisKey.course_number;
         var secID = thisKey.course_department + '-' + thisKey.course_number + '-' + thisKey.section_number;
         var numCred = Number(thisKey.credits.split(" ")[0]);
@@ -354,7 +355,7 @@ parse.RecordRegistrar = function(inJSON) {
     for (key in resp) { if (resp.hasOwnProperty(key)) {
         arrResp.push(resp[key]);
     }}
-    if (inJSON.length) {
+    if (thisKey) {
         var thedept = thisKey.course_department;
         var currentTerm = thisKey.term
         // At the end of the list
