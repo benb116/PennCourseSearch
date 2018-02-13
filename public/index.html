@@ -193,7 +193,7 @@
 				<!-- <span ng-show="sectionInfo.sectionCred"> {{ sectionInfo.sectionCred }} CU <br><br></span> -->
 				<span ng-show="sectionInfo.description">Description: {{sectionInfo.description}} <br><br></span>
 				<span ng-show="sectionInfo.reqsFilled.length">Requirements Fulfilled: <br><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span>
-				</span>
+				<br><br></span>
 				<span ng-show="sectionInfo.prereqs"> Prerequisites: {{sectionInfo.prereqs}} <br><br></span>
 				<span ng-show="sectionInfo.associatedType"> You must also sign up for a {{sectionInfo.associatedType}}. <br> Associated {{sectionInfo.associatedType}}s: <br></span>
 				<li ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="get.SectionInfo(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></li>

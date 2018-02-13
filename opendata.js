@@ -97,7 +97,7 @@ module.exports = function() {
     }
 
     // Delay a requests the necessary amount of time before sending it to the API
-    var rpm = 35;
+    var rpm = 95;
 
     opendata.RateLimitReq = function(url, resultType, res, lastRT, ODkeyInd) {
         // lastRT is the timestamp of the last sent request using this auth key
