@@ -36,15 +36,15 @@ var reqCodes = {
     WSST: "Wharton - Social Structures",
     WSAT: "Wharton - Science and Technology",
     WLAC: "Wharton - Language, Arts & Culture",
-    WNHR: "Enter 2017 - Humanities",
-    WNNS: "Enter 2017 - Natural Science",
-    WNSS: "Enter 2017 - Social Structures",
-    WNFR: "Enter 2017 - Flexible",
-    WURE: "Enter 2017 - Unrestricted Elective",
-    WNSA: "Enter 2017 - See Advisor",
-    WCCY: "Enter 2017 - Cross-Cultural Perspectives",
-    WCCS: "Enter 2017 - CCP See Advisor",
-    WCCC: "Enter 2017 - CCP CDUS",
+    WNHR: "Wharton 2017 - Humanities",
+    WNNS: "Wharton 2017 - Natural Science",
+    WNSS: "Wharton 2017 - Social Structures",
+    WNFR: "Wharton 2017 - Flexible",
+    WURE: "Wharton 2017 - Unrestricted Elective",
+    WNSA: "Wharton 2017 - See Advisor",
+    WCCY: "Wharton 2017 - Cross-Cultural Perspectives",
+    WCCS: "Wharton 2017 - CCP See Advisor",
+    WCCC: "Wharton 2017 - CCP CDUS",
     EMAT: "SEAS - Math",
     ESCI: "SEAS - Natural Science",
     EENG: "SEAS - Engineering",
@@ -86,15 +86,6 @@ requirements.GetRequirements = function(section) {
     }
 
     if (WhartonReq[idDashed]) {
-        // if (WhartonReq[idDashed].GEDOld) {
-        //     var this_GED = WhartonReq[idDashed].GEDOld; // Pull the course's wharton requirement if it has one
-        //     reqCodesList.push(this_GED);
-        //     reqList.push(reqCodes[this_GED]);
-        // }
-        // if (WhartonReq[idDashed].global) { // Check if it also applies to wharton global requirement
-        //     reqCodesList.push("WGLO");
-        //     reqList.push(reqCodes.WGLO);
-        // }
         var rules = Object.keys(WhartonReq[idDashed]);
         for (var r in rules) {
             if (WhartonReq[idDashed][rules[r]]) {
