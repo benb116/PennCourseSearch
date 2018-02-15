@@ -73,9 +73,14 @@ var allCourses = require('./loadCourses.js')(currentTerm);
 var parse = require('./parse.js');
 var opendata = require('./opendata.js')();
 
+var listenPort = 3000;
+if (process.argv[1].includes('beta')) {
+    listenPort = 3001
+}
+
 // Start the server
-app.listen(process.env.PORT || 3000, function(){
-    console.log("Node app is running. Better go catch it.");
+app.listen(listenPort, function(){
+    console.log("Node app is running on port "+listenPort+". Better go catch it.");
 });
 
 // Handle main page requests
@@ -95,7 +100,7 @@ app.get('/Status', function(req, res) {
     if (hour >= 5 && hour < 9) {
         statustext = "Penn InTouch sometimes screws up around this time of night, which can cause problems with PennCourseSearch. <br> Sorry in advance.";
     }
-    res.send(statustext);
+    return res.send(statustext);
 });
 
 var searchTypes = {

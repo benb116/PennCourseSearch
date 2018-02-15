@@ -87,9 +87,6 @@ parse.SchedInfo = function(entry) { // Get the properties required to schedule t
     }
     var resJSON  = [];
     for (var key in entry) { if (entry.hasOwnProperty(key)) {
-        if (!entry[key].section_id_normalized) {
-            console(entry, 0);
-        }
         var idDashed = entry[key].section_id_normalized.replace(/ /g, ""); // Format ID
         var idSpaced = idDashed.replace(/-/g, ' ');
         try { // Not all sections have time info
@@ -99,29 +96,21 @@ parse.SchedInfo = function(entry) { // Get the properties required to schedule t
                 var EndTime    = (thisMeet.end_hour_24)   + (thisMeet.end_minutes)/60;
                 var hourLength = EndTime - StartTime;
                 var MeetDays   = thisMeet.meeting_days;
-                var Building, Room;
-                try {
-                    Building = thisMeet.building_code;
-                    Room     = thisMeet.room_number;
-                } catch (err) {
-                    Building = "";
-                    Room     = "";
-                }
+                var Building   = (thisMeet.building_code || '');
+                var Room       = (thisMeet.room_number || '');
                 var SchedAsscSecs = [];
                 if (entry[key].lectures.length) {
-                    for (var thisAssc in entry[key].lectures) {  if (entry[key].lectures.hasOwnProperty(thisAssc)) {
-                        SchedAsscSecs.push(entry[key].lectures[thisAssc].subject + '-' + entry[key].lectures[thisAssc].course_id + '-' + entry[key].lectures[thisAssc].section_id);
-                    }}
-                } else {
-                    if (entry[key].recitations.length) {
-                        for (var thisAssc in entry[key].recitations) {  if (entry[key].lectures.hasOwnProperty(thisAssc)) {
-                            SchedAsscSecs.push(entry[key].recitations[thisAssc].subject + '-' + entry[key].recitations[thisAssc].course_id + '-' + entry[key].recitations[thisAssc].section_id);
-                        }}
-                    } else if (entry[key].labs.length) {
-                        for (var thisAssc in entry[key].labs) {  if (entry[key].lectures.hasOwnProperty(thisAssc)) {
-                            SchedAsscSecs.push(entry[key].labs[thisAssc].subject + '-' + entry[key].labs[thisAssc].course_id + '-' + entry[key].labs[thisAssc].section_id);
-                        }}
-                    }
+                    var SchedAsscSecs = entry[key].lectures.map(function(a) {
+                        return [a.subject, a.course_id, a.section_id].join('-');
+                    });
+                } else if (entry[key].recitations.length) {
+                    var SchedAsscSecs = entry[key].recitations.map(function(a) {
+                        return [a.subject, a.course_id, a.section_id].join('-');
+                    });
+                } else if (entry[key].labs.length) {
+                    var SchedAsscSecs = entry[key].labs.map(function(a) {
+                        return [a.subject, a.course_id, a.section_id].join('-');
+                    });
                 }
 
                 // Full ID will have sectionID+MeetDays+StartTime
@@ -164,7 +153,7 @@ parse.CourseList = function(Res) {
     for(var key in Res) { if (Res.hasOwnProperty(key)) {
         var thisKey  = Res[key];
 
-        if (Res.hasOwnProperty(key) && !thisKey.is_cancelled) { // Iterate through each course that isn't cancelled
+        if (!thisKey.is_cancelled) { // Iterate through each course that isn't cancelled
             var thisDept       = thisKey.course_department.toUpperCase();
             var thisNum        = thisKey.course_number.toString();
             var courseListName = thisDept+' '+thisNum; // Get course dept and number
@@ -203,10 +192,7 @@ parse.SectionInfo = function(Res) {
         var Title         = entry.course_title;
         var FullID        = entry.section_id_normalized.replace(/-/g, " "); // Format name
         var CourseID      = entry.section_id_normalized.split('-')[0] + ' ' + entry.section_id_normalized.split('-')[1];
-        var Instructor    = '';
-        if (entry.instructors[0]) {
-            Instructor    = entry.instructors[0].name;
-        }
+        var Instructor    = (entry.instructors[0].name || '');
         var Desc          = entry.course_description;
         var TimeInfoArray = getTimeInfo(entry);
         var StatusClass   = TimeInfoArray[0];
@@ -214,34 +200,29 @@ parse.SectionInfo = function(Res) {
         var prereq        = (entry.prerequisite_notes[0] || 'none');
         var termsOffered  = entry.course_terms_offered;
 
-        var OpenClose;
+        var OpenClose = 'Closed';
         if (StatusClass) {
             OpenClose = 'Open';
-        } else {
-            OpenClose = 'Closed';
         }
         var secCred = Number(entry.credits.split(" ")[0]);
 
         var asscType = '';
         var asscList = [];
-        var key;
-        if (entry.recitations.length !== 0) { // If it has recitations
-            asscType = "recitation";
-            for(key in entry.recitations) { if (entry.recitations.hasOwnProperty(key)) {
-                    asscList.push(entry.recitations[key].subject+' '+entry.recitations[key].course_id+' '+entry.recitations[key].section_id);
-            }}
-
-        } else if (entry.labs.length !== 0) { // If it has labs
-            asscType = "lab";
-            for(key in entry.labs) { if (entry.labs.hasOwnProperty(key)) {
-                    asscList.push(entry.labs[key].subject+' '+entry.labs[key].course_id+' '+entry.labs[key].section_id);
-            }}
-
-        } else if (entry.lectures.length !== 0) { // If it has lectures
-            asscType = "lecture";
-            for(key in entry.lectures) { if (entry.lectures.hasOwnProperty(key)) {
-                    asscList.push(entry.lectures[key].subject+' '+entry.lectures[key].course_id+' '+entry.lectures[key].section_id);
-            }}
+        if (entry.lectures.length) {
+            asscType = 'lecture';
+            var asscList = entry.lectures.map(function(a) {
+                return [a.subject, a.course_id, a.section_id].join(' ');
+            });
+        } else if (entry.recitations.length) {
+            asscType = 'recitation';
+            var asscList = entry.recitations.map(function(a) {
+                return [a.subject, a.course_id, a.section_id].join(' ');
+            });
+        } else if (entry.labs.length) {
+            asscType = 'lab';
+            var asscList = entry.labs.map(function(a) {
+                return [a.subject, a.course_id, a.section_id].join(' ');
+            });
         }
 
         var reqsArray = r.GetRequirements(entry)[1];
@@ -280,24 +261,14 @@ parse.SectionList = function(Res) {
                 var idSpaced      = idDashed.replace(/-/g, ' ');
                 var timeInfoArray = getTimeInfo(thisEntry); // Get meeting times for a section
                 var isOpen        = timeInfoArray[0];
-                var timeInfo      = timeInfoArray[1][0]; // Get the first meeting slot
+                var timeInfo      = (timeInfoArray[1][0] || ''); // Get the first meeting slot
                 if (timeInfoArray[1][1]) { // Cut off extra text
                     timeInfo += ' ...';
                 }
                 var actType       = thisEntry.activity;
-                var SectionInst; // Get the instructor for this section
-                try {
-                    SectionInst = thisEntry.instructors[0].name;
-                } catch(err) {
-                    SectionInst = '';
-                }
+                var SectionInst = (thisEntry.instructors[0].name || '');
 
                 var revData = GetRevData(thisEntry.course_department, thisEntry.course_number, SectionInst); // Get inst-specific reviews
-
-                if (typeof timeInfo === 'undefined') {
-                    timeInfo = '';
-                }
-
                 var schedInfo = parse.SchedInfo(thisEntry);
 
                 sectionsList.push({
@@ -324,10 +295,11 @@ parse.RecordRegistrar = function(inJSON) {
 
     var resp = {};
     var meetresp = {};
+    var thisKey;
     for(var key in inJSON) { if (inJSON.hasOwnProperty(key)) {
         // For each section that comes up
         // Get course name (e.g. CIS 120)
-        var thisKey = inJSON[key];
+        thisKey = inJSON[key];
         var idSpaced = thisKey.course_department + ' ' + thisKey.course_number;
         var secID = thisKey.course_department + '-' + thisKey.course_number + '-' + thisKey.section_number;
         var numCred = Number(thisKey.credits.split(" ")[0]);
@@ -354,7 +326,7 @@ parse.RecordRegistrar = function(inJSON) {
     for (key in resp) { if (resp.hasOwnProperty(key)) {
         arrResp.push(resp[key]);
     }}
-    if (inJSON.length) {
+    if (thisKey) {
         var thedept = thisKey.course_department;
         var currentTerm = thisKey.term
         // At the end of the list

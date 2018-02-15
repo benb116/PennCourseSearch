@@ -1,3 +1,9 @@
+/*
+    This module has functions used to interface with the Penn OpenData API.
+    It allows for rate-limiting requests and granular error reporting.
+    The main function is RateLimitReq.
+*/
+
 module.exports = function() {
     var request = require('request');
     var parse = require('./parse.js');
@@ -16,14 +22,18 @@ module.exports = function() {
         }
     }
 
-    // API should limit to 100 requests a minute -> 600 ms between requests
+    // Send requests to the API and deal with the result
     function SendPennReq(url, resultType, res, ODkeyInd) {
+        // Choose the auth bearer and token pair to use based on ODkeyInd
         var AB = config.requestAB[ODkeyInd];
         var AT = config.requestAT[ODkeyInd];
+        // Send the request
         request({
             uri: url,
             method: "GET",headers: {"Authorization-Bearer": AB, "Authorization-Token": AT}, // Send authorization headers
         }, function(error, response, body) {
+            console.time('request')
+
             if (error || response.statusCode >= 500) {
                 // This is triggered if the OpenData API returns an error or never responds
                 console.log(JSON.stringify(response));
@@ -49,7 +59,7 @@ module.exports = function() {
             }
 
             try {
-                if (rawResp.service_meta.error_text) { // If the API returned an error
+                if (rawResp.service_meta.error_text) { // If the API returned an error in its response
                     console.log('Resp Err: ' + rawResp.service_meta.error_text);
                     SendError('Error Text');
                     res.statusCode = 513; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
@@ -62,6 +72,8 @@ module.exports = function() {
                 res.statusCode = 500;
                 return res.send(err);
             }
+
+            // Route the parsed response to the correct function
             RouteAPIResp(resultType, parsedRes, res)
         });
     }
@@ -84,20 +96,23 @@ module.exports = function() {
         if (res) {return res.send(JSON.stringify(searchResponse));} // return correct info
     }
 
+    // Delay a requests the necessary amount of time before sending it to the API
     var rpm = 95;
 
     opendata.RateLimitReq = function(url, resultType, res, lastRT, ODkeyInd) {
+        // lastRT is the timestamp of the last sent request using this auth key
+
         var period = 60000 / rpm;
         var now = new Date().getTime();
         var diff = now - lastRT; // how long ago was the last request point
         var delay = (period - diff) * (diff < period); // How long to delay the request (if diff is > period, no need to delay)
-        var lastRequestTime = now+delay; // Update the latest request timestamp
+        var lastRequestTime = now+delay; // Update the latest request timestamp (will be a future timestamp if a delay is added)
 
         setTimeout(function() {
             SendPennReq(url, resultType, res, ODkeyInd) // Send the request after the delay
         }, delay);
-        return lastRequestTime;
+        return lastRequestTime; // Return the latest request time for recording.
     }
 
-    return opendata
+    return opendata;
 }
