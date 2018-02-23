@@ -192,7 +192,7 @@ parse.SectionInfo = function(Res) {
         var Title         = entry.course_title;
         var FullID        = entry.section_id_normalized.replace(/-/g, " "); // Format name
         var CourseID      = entry.section_id_normalized.split('-')[0] + ' ' + entry.section_id_normalized.split('-')[1];
-        var Instructor    = (entry.instructors[0].name || '');
+        var Instructor    = ((entry.instructors[0] && entry.instructors[0].name) || '');
         var Desc          = entry.course_description;
         var TimeInfoArray = getTimeInfo(entry);
         var StatusClass   = TimeInfoArray[0];
@@ -266,12 +266,7 @@ parse.SectionList = function(Res) {
                     timeInfo += ' ...';
                 }
                 var actType       = thisEntry.activity;
-                var SectionInst; // Get the instructor for this section
-                try {  
-                    SectionInst = thisEntry.instructors[0].name;   
-                } catch(err) { 
-                    SectionInst = '';  
-                }
+                var SectionInst = ((thisEntry.instructors[0] && thisEntry.instructors[0].name) || '');; // Get the instructor for this section
                 var revData = GetRevData(thisEntry.course_department, thisEntry.course_number, SectionInst); // Get inst-specific reviews
                 var schedInfo = parse.SchedInfo(thisEntry);
 
