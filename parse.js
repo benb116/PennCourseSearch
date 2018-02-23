@@ -266,8 +266,12 @@ parse.SectionList = function(Res) {
                     timeInfo += ' ...';
                 }
                 var actType       = thisEntry.activity;
-                var SectionInst = (thisEntry.instructors[0].name || '');
-
+                var SectionInst; // Get the instructor for this section
+                try {  
+                    SectionInst = thisEntry.instructors[0].name;   
+                } catch(err) { 
+                    SectionInst = '';  
+                }
                 var revData = GetRevData(thisEntry.course_department, thisEntry.course_number, SectionInst); // Get inst-specific reviews
                 var schedInfo = parse.SchedInfo(thisEntry);
 

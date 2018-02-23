@@ -37,3 +37,6 @@ Logs/
 Analytics/
 Keen\ Export/
 letsencrypt/
+package-lock.json
+
+package.json
