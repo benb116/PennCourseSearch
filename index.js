@@ -6,7 +6,7 @@ var compression = require('compression');
 var request     = require('request');
 var Keen        = require('keen-js');
 var git         = require('git-rev');
-
+var helmet      = require('helmet')
 require('log-timestamp')(function() { return new Date().toISOString() + ' %s'; });
 
 console.timeEnd('Modules loaded');
@@ -29,6 +29,7 @@ try {
 // Set express settings
 var app = express();
 app.use(compression());
+app.use(helmet());
 
 if (process.env.NODE_ENV !== 'production') {
     app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: 2628000000 }));
@@ -75,7 +76,7 @@ var opendata = require('./opendata.js')();
 
 var listenPort = 3000;
 if (process.argv[1].includes('beta')) {
-    listenPort = 3001
+    listenPort = 3001;
 }
 
 // Start the server
