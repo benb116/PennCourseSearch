@@ -65,7 +65,7 @@ git.short(function (str) {
     console.log('Current git commit:', str); // log the current commit we are running
 });
 
-var currentTerm = '2018A'; // Which term is currently active
+var currentTerm = '2018C'; // Which term is currently active
 var LRTimes = [0, 0]; // Timestamps of latest requests using each OpenData key
 var ODkeyInd = 0; // Which key to use next
 
