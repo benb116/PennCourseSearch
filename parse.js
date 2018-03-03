@@ -2,10 +2,6 @@ var parse = {};
 var r = require('./reqFunctions.js'); // Functions that help determine which req rules apply to a class
 var allRevs = require('./loadRevs.js');
 
-function RecordRegistrar(parsedRes) {
-    console.log('catch')
-}
-
 function GetRevData (dept, num, inst) {
     // Given a department, course number, and instructor (optional), get back the three rating values
     var deptData = allRevs[dept]; // Get dept level ratings
@@ -49,7 +45,7 @@ function getTimeInfo(JSONObj) { // A function to retrieve and format meeting tim
         }}
     }
     catch (err) {
-        console.log(("Error getting times" + JSONObj.section_id));
+        console.log(("Error getting times", JSONObj.section_id));
         TimeInfo = '';
     }
     return [isOpen, TimeInfo];

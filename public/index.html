@@ -11,8 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="/css/plugins/angular-tooltips.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<!-- Frameworks -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<!-- My code -->
 	<script type="text/javascript" src="/js/PCSangular.js"></script>
 	<script type="text/javascript" src="/js/functions.js"></script>
@@ -29,9 +29,9 @@
 </head>
 
 <body ng-controller="CourseController">
-
+	<i class="fa fa-volume-off" style="position:absolute;top:0.25em;left:0.25em;font-size:2em;visibility:hidden" onclick="$('iframe').remove(); $(this).hide()"></i>
 	<div id="MenuBar">
-		<a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Donate</span></a>
+		<!-- <a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Donate</span></a> -->
 		<a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span style="padding-right:0.5em;"><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
 		<a rel="leanModal" href="#ModalWindow" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')" style="padding-right:0.5em;">About</a>
 	</div>

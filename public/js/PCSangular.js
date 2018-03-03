@@ -32,7 +32,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         $scope.credFilter = 'noFilter'; // value of credit filter select menu
         $scope.check = {}; // Object of requirement filters (added as true or false like "MFR": true)
         $scope.checkArr = []; // Array of enabled requirement filter codes (as strings)
-        $scope.reqShow = 'CAS';
+        $scope.reqShow = 'CAS'; // Which requirement boxes to show by default
     };
     $scope.clearSearch();
 

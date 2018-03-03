@@ -64,14 +64,15 @@ for (var dept in deptList) { if (deptList.hasOwnProperty(dept)) {
 // var args = process.argv;
 var courses = ['cis-110', 'meam-348','cis-120', 'math114', 'econ001', 'chem102', 'meam545', 'meam101', 'meam201', 'psyc001'];
 
-// autoSched(courses)
+autoSched(courses)
 
 function autoSched(courses) {
     var allData = [];
+    // Pull relevant meeting time info for the classes
     for (var i = 0; i < courses.length; i++) {
         var thisc = FormatID(courses[i]);
         courses[i] = thisc[0] + '-' + thisc[1];
-        var toAdd = meetData.filter(function(sec) {
+        var toAdd = meetData.filter(function(sec) { // Find all sections of the course
             return sec.course === courses[i];
         });
         allData = allData.concat(toAdd)
@@ -81,11 +82,14 @@ function autoSched(courses) {
 
 function run(allData) {
     var coursesAdded = [];
-    var datasched = {};
+    var datasched = {}; // Create object with each required course section type
+    // {
+    //  MEAM-101-LAB: [MEAM-101-101, MEAM-101-102 ...],
+    //  ;..
+    // }
     allData.forEach(function(thissect) {
         if (thissect.open) {
             var thiscourseact = thissect.course + '-' + thissect.actType
-            // console.log(thiscourseact)
             if (!datasched[thiscourseact]) {
                 datasched[thiscourseact] = []
             }
@@ -94,8 +98,8 @@ function run(allData) {
     })
     var d, twodarr
     d = regenData(datasched);
-    raw_twodarr = d[0];
-    raw_datasched = d[1];
+    raw_twodarr = d[0]; // [MEAM-101-LEC, MEAM-101-LAB]
+    raw_datasched = d[1];//[1, 4]
 
     raw_types = raw_twodarr.map(function(a) {
         return a[0];
@@ -201,7 +205,7 @@ function regenData(datasched) {
     var nums = [];
     for (var i = 0; i < types.length; i++) {
         nums[i] = datasched[types[i]].length
-    }
+    } // Number of each sections of a specific type
 
     var twodarr = [];
     for (var i = 0; i < types.length; i++) {
@@ -210,8 +214,9 @@ function regenData(datasched) {
     twodarr.sort(function(a,b) {
         return a[1] - b[1];
     });
+    // Sorted double list of types and number of available sections of those types (low to hi)
 
-    typeNumObj = {};
+    typeNumObj = {}; // Objectified
     for (var i = 0; i < twodarr.length; i++) {
         typeNumObj[twodarr[i][0]] = twodarr[i][1];
     }

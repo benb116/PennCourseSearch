@@ -32,6 +32,8 @@ app.use(compression());
 app.use(helmet());
 
 if (process.env.NODE_ENV !== 'production') {
+    // I want this to have the client always pull the newest JS, since uodates happen very often.
+    // IDK if this is the best way to do that.
     app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: 2628000000 }));
     app.use('/js', express.static(path.join(__dirname, 'public/js'), { maxAge: 0 }));
     app.use(express.static(path.join(__dirname, 'public'), { maxAge: 2628000000 }));
@@ -66,16 +68,16 @@ git.short(function (str) {
 });
 
 var currentTerm = '2018C'; // Which term is currently active
-var LRTimes = [0, 0]; // Timestamps of latest requests using each OpenData key
+var LRTimes = [0, 0]; // Timestamps of latest requests using each OpenData key (see OpenData.js)
 var ODkeyInd = 0; // Which key to use next
 
 // Pull in external data and functions
-var allCourses = require('./loadCourses.js')(currentTerm);
-var parse = require('./parse.js');
+var allCourses = require('./loadCourses.js')(currentTerm); // Get array of all courses
+var parse = require('./parse.js'); // Load the parsing functions
 var opendata = require('./opendata.js')();
 
 var listenPort = 3000;
-if (process.argv[1].includes('beta')) {
+if (process.argv[1].includes('beta')) { // If running in the staging environment, run on a different port
     listenPort = 3001;
 }
 
@@ -185,8 +187,14 @@ app.get('/Search', function(req, res) {
             baseURL += '&instructor=' + instructFilter;
         }
 
+        // Send request to OpenData and record the timestamp of the request. Arguments:
+            // requestURL
+            // parse function to send result
+            // res function to send response to client
+            // Latest timestamp
+            // Auth key to use
         LRTimes[ODkeyInd] = opendata.RateLimitReq(baseURL, resultType, res, LRTimes[ODkeyInd], ODkeyInd);
-        ODkeyInd = 1 - ODkeyInd;
+        ODkeyInd = 1 - ODkeyInd; // Use the other auth key next time
     }
 });
 
@@ -201,13 +209,13 @@ app.get('/Sched', function(req, res) {
     ODkeyInd = 1 - ODkeyInd;
 });
 
+// Handle requests with penncoursenotify
 app.post('/Notify', function(req, res) {
     var secID = req.query.secID;
     // var formatSecID = secID.replace(/-/g, ' ');
     var userEmail = req.query.email;
 
-    var schedEvent = {notifySec: secID};
-    logEvent('Notify', schedEvent);
+    logEvent('Notify', {notifySec: secID});
     request({
             uri: 'http://www.penncoursenotify.com/',
             method: "POST",
