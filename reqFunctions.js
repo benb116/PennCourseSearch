@@ -16,7 +16,7 @@ var collegeCodes = {
     Formal: "MFR",
     Cross: "MC1",
     Cultural: "MC2"
-}
+};
 
 // The requirement code -> name map
 var reqCodes = {
@@ -100,7 +100,7 @@ requirements.GetRequirements = function(section) {
     reqCodesList = reqCodesList.concat(engReturn[0]);
     reqList = reqList.concat(engReturn[1]);
     return [reqCodesList, reqList];
-}
+};
 
 function EngReqRules(dept, num, cross) {
     var engreqCodesList = [];
@@ -152,7 +152,7 @@ function EngReqRules(dept, num, cross) {
     specificReq = (EngineerReq[dept+'-'+num] || {});
     if (specificReq.hasOwnProperty('math'))   {thisEngObj.math   = specificReq.math;}
     if (specificReq.hasOwnProperty('natsci')) {thisEngObj.natsci = specificReq.natsci;}
-    if (specificReq.hasOwnProperty('eng'))    {thisEngObj.eng    = specificReq.eng}
+    if (specificReq.hasOwnProperty('eng'))    {thisEngObj.eng    = specificReq.eng;}
     if (specificReq.hasOwnProperty('ss'))     {thisEngObj.ss     = specificReq.ss;}
     if (specificReq.hasOwnProperty('hum'))    {thisEngObj.hum    = specificReq.hum;}
     if (specificReq.hasOwnProperty('tbs'))    {thisEngObj.tbs    = specificReq.tbs;}
@@ -162,14 +162,14 @@ function EngReqRules(dept, num, cross) {
     // tbs classes don't count for engineering
     if (thisEngObj.tbs) {thisEngObj.eng = false;}
 
-    if (thisEngObj.math)   {engreqCodesList.push('EMAT'); engreqList.push(reqCodes['EMAT']);}
-    if (thisEngObj.natsci) {engreqCodesList.push('ESCI'); engreqList.push(reqCodes['ESCI']);}
-    if (thisEngObj.eng)    {engreqCodesList.push('EENG'); engreqList.push(reqCodes['EENG']);}
-    if (thisEngObj.ss)     {engreqCodesList.push('ESSC'); engreqList.push(reqCodes['ESSC']);}
-    if (thisEngObj.hum)    {engreqCodesList.push('EHUM'); engreqList.push(reqCodes['EHUM']);}
-    if (thisEngObj.tbs)    {engreqCodesList.push('ETBS'); engreqList.push(reqCodes['ETBS']);}
-    if (thisEngObj.writ)   {engreqCodesList.push('EWRT'); engreqList.push(reqCodes['EWRT']);}
-    if (thisEngObj.nocred) {engreqCodesList.push('ENOC'); engreqList.push(reqCodes['ENOC']);}
+    if (thisEngObj.math)   {engreqCodesList.push('EMAT'); engreqList.push(reqCodes.EMAT);}
+    if (thisEngObj.natsci) {engreqCodesList.push('ESCI'); engreqList.push(reqCodes.ESCI);}
+    if (thisEngObj.eng)    {engreqCodesList.push('EENG'); engreqList.push(reqCodes.EENG);}
+    if (thisEngObj.ss)     {engreqCodesList.push('ESSC'); engreqList.push(reqCodes.ESSC);}
+    if (thisEngObj.hum)    {engreqCodesList.push('EHUM'); engreqList.push(reqCodes.EHUM);}
+    if (thisEngObj.tbs)    {engreqCodesList.push('ETBS'); engreqList.push(reqCodes.ETBS);}
+    if (thisEngObj.writ)   {engreqCodesList.push('EWRT'); engreqList.push(reqCodes.EWRT);}
+    if (thisEngObj.nocred) {engreqCodesList.push('ENOC'); engreqList.push(reqCodes.ENOC);}
 
     if (dept === 'ASAM' && cross) {
         engReturn = EngReqRules(cross.subject, cross.course_id);

@@ -5,14 +5,14 @@
 	<title>PennCourseSearch</title>
 	<meta name="description" content="PennCourseSearch is a web app designed to help Penn students find courses and make schedules. Includes one-click scheduling, Penn Course Review integration, filters for double-counting requirements, and more.">
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/index.css" />
 	<link rel="stylesheet" type="text/css" href="/css/plugins/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="/css/plugins/angular-tooltips.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<!-- Frameworks -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<!-- My code -->
 	<script type="text/javascript" src="/js/PCSangular.js"></script>
 	<script type="text/javascript" src="/js/functions.js"></script>
@@ -77,11 +77,6 @@
 				<a rel="leanModal" href="#UploadModal" id="ImportButton" onclick="ga('send', 'event', 'UI interaction', 'import')">
 					<li>Import</li>
 				</a>
-				<!-- <a rel="leanModal" href="#AutoModal" id="AutoButton" onclick="ga('send', 'event', 'UI interaction', 'auto')">
-					<li>Auto</li>
-				</a> -->
-
-<!-- 				<li onclick="$('#FilterSearch').slideToggle(200);"><span>Filter</span></li> -->
 				<li ng-click="clearSearch()"><span>Clear Search</span></li>
 			</ul>
 		</div>
@@ -107,13 +102,13 @@
 					ng-click="get.Sections(course.idDashed)" 
 					ng-class="{'activeItem': (currentCourse.toUpperCase() == course.idSpaced.replace(' ', ''))}"
 					ng-if="
-						(!checkArr[0] || course.courseReqs.indexOf(checkArr[0]) > -1) && 
-						(!checkArr[1] || course.courseReqs.indexOf(checkArr[1]) > -1) && 
-						(!checkArr[2] || course.courseReqs.indexOf(checkArr[2]) > -1) && 
-						(!checkArr[3] || course.courseReqs.indexOf(checkArr[3]) > -1) && 
+						(!checkArr[0] || course.courseReqs.indexOf(checkArr[0]) > -1) &amp;&amp; 
+						(!checkArr[1] || course.courseReqs.indexOf(checkArr[1]) > -1) &amp;&amp; 
+						(!checkArr[2] || course.courseReqs.indexOf(checkArr[2]) > -1) &amp;&amp; 
+						(!checkArr[3] || course.courseReqs.indexOf(checkArr[3]) > -1) &amp;&amp; 
 						(!checkArr[4] || course.courseReqs.indexOf(checkArr[4]) > -1)
 					"
-					ng-hide="(course.courseCred != credFilter) && (credFilter != 'noFilter')">
+					ng-hide="(course.courseCred != credFilter) &amp;&amp; (credFilter != 'noFilter')">
 					<!--Dealing with requirements: The list element will be shown if: 
 						There are no requirements (checkArr == [], therefore !checkArr[0] && !checkArr[1]) 
 						OR
@@ -145,10 +140,10 @@
 						id="{{ section.idDashed }}" 
 						class="{{section.actType}}" 
 						ng-class="{'activeItem': (currentSection == section.idSpaced.replace(' ', '').replace(' ', '')), 
-							'hideSec': (!sched.SecOverlap(section) && schedSections.indexOf(section.idDashed) == -1)}" 
+							'hideSec': (!sched.SecOverlap(section) &amp;&amp; schedSections.indexOf(section.idDashed) == -1)}" 
 						ng-show="
-							(showAct == section.actType || showAct == 'noFilter') &&
-							(section.isOpen || showClosed) && 
+							(showAct == section.actType || showAct == 'noFilter') &amp;&amp;
+							(section.isOpen || showClosed) &amp;&amp; 
 							(currentCourse || starSections.indexOf(section.idDashed) > -1)
 						">
 							<!--Dealing with closed sections, activity types, and stars. The list element will show if:
@@ -196,7 +191,9 @@
 				<br></span>
 				<span ng-show="sectionInfo.prereqs"> Prerequisites: {{sectionInfo.prereqs}} <br><br></span>
 				<span ng-show="sectionInfo.associatedType"> You must also sign up for a {{sectionInfo.associatedType}}. <br> Associated {{sectionInfo.associatedType}}s: <br></span>
-				<li ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="get.SectionInfo(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></li>
+				<ul>
+					<li ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="get.SectionInfo(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></li>
+				</ul>
 			</div>
 		</div>
 

@@ -47,7 +47,7 @@ if (isNaN(endindex)) { // If there is a first number but not a second, run to th
     endindex = maxIndex;
 }
 
-var thedept
+var thedept;
 if (source === 'registrar') {
     if (limit) {
         thedept = deptList[index];
@@ -70,7 +70,7 @@ if (source === 'registrar') {
 return "done";
 
 function PullRegistrar(thedept) {
-    console.log('Start', thedept)
+    console.log('Start', thedept);
     // Send the request
     var baseURL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_search?number_of_results_per_page=400&term='+currentTerm+'&course_id='+thedept;
     if (!thedept) {return;}
@@ -151,12 +151,14 @@ function PullReview(index) {
             var recentI = 0;
             var recentrevcount = 0;
             for (var inst in resp[course]) { if (resp[course].hasOwnProperty(inst)) {
+                var review;
+                var thisrev;
                 if (inst !== 'Recent') {
                     var instSumQ = 0;
                     var instSumD = 0;
                     var instSumI = 0;
-                    for (var review in resp[course][inst]) { if (resp[course][inst].hasOwnProperty(review)) {
-                        var thisrev = resp[course][inst][review];
+                    for (review in resp[course][inst]) { if (resp[course][inst].hasOwnProperty(review)) {
+                        thisrev = resp[course][inst][review];
                         instSumQ += thisrev.cQ;
                         instSumD += thisrev.cD;
                         instSumI += thisrev.cI;
@@ -175,8 +177,8 @@ function PullReview(index) {
                     courseSumD += instSumD;
                     courseSumI += instSumI;
                 } else {
-                    for (var review in resp[course].Recent.revs) {if (resp[course].Recent.revs.hasOwnProperty(review)) {
-                        var thisrev = resp[course].Recent.revs[review];
+                    for (review in resp[course].Recent.revs) {if (resp[course].Recent.revs.hasOwnProperty(review)) {
+                        thisrev = resp[course].Recent.revs[review];
                         recentQ += thisrev.cQ;
                         recentD += thisrev.cD;
                         recentI += thisrev.cI;

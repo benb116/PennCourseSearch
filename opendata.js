@@ -32,7 +32,6 @@ module.exports = function() {
             uri: url,
             method: "GET",headers: {"Authorization-Bearer": AB, "Authorization-Token": AT}, // Send authorization headers
         }, function(error, response, body) {
-            console.time('request')
 
             if (error || response.statusCode >= 500) {
                 // This is triggered if the OpenData API returns an error or never responds
@@ -74,7 +73,7 @@ module.exports = function() {
             }
 
             // Route the parsed response to the correct function
-            RouteAPIResp(resultType, parsedRes, res)
+            RouteAPIResp(resultType, parsedRes, res);
         });
     }
 
@@ -109,10 +108,10 @@ module.exports = function() {
         var lastRequestTime = now+delay; // Update the latest request timestamp (will be a future timestamp if a delay is added)
 
         setTimeout(function() {
-            SendPennReq(url, resultType, res, ODkeyInd) // Send the request after the delay
+            SendPennReq(url, resultType, res, ODkeyInd) ;// Send the request after the delay
         }, delay);
         return lastRequestTime; // Return the latest request time for recording.
-    }
+    };
 
     return opendata;
-}
+};

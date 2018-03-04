@@ -71,7 +71,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         delay(function() {
             $scope.initiateSearch($scope.search);
         }, 400);
-    }
+    };
     $scope.initiateSearch = function(param, courseType) {
         // Used for typed searches and schedBlock clicks
         var terms = FormatID(param);
@@ -231,7 +231,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 ga('send', 'event', 'Sched', 'remSect', secID);
                 var oldData = $scope.schedData[$scope.currentSched].meetings;
                 var newData = oldData.filter(function(item) {
-                    return (item.idDashed !== secID)
+                    return (item.idDashed !== secID);
                 });
                 $scope.schedData[$scope.currentSched].meetings = newData;
             }
@@ -386,7 +386,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
             var incSun       = 0; // no weekends
             var incSat       = 0;
 
-            for (sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
+            for (var sec in courseSched) { if (courseSched.hasOwnProperty(sec)) {
                 var secMeetHour = courseSched[sec].meetHour;
                 if (secMeetHour <= startHour) { // If there are classes earlier than the default start
                     startHour = Math.floor(secMeetHour); // push back the earliest hour
@@ -394,7 +394,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 if (secMeetHour + courseSched[sec].hourLength >= endHour) { // Push back latest hour if necessary
                     endHour = Math.ceil(secMeetHour + courseSched[sec].hourLength);
                 }
-                for (day in courseSched[sec].meetDay) { if (courseSched[sec].meetDay.hasOwnProperty(day)) {
+                for (var day in courseSched[sec].meetDay) { if (courseSched[sec].meetDay.hasOwnProperty(day)) {
                     var topLetterDay = courseSched[sec].meetDay[day];
                     if (topLetterDay === 'U') { // If there are sunday classes
                         incSun = 1;
@@ -419,9 +419,9 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
             $scope.timeblocks = [];
             $scope.schedlines = [];
             if (courseSched.length) {
-                for (var i = 0; i <= (endHour - startHour); i++) { // for each hour
-                    var toppos = (i) * halfScale + 7.5; // each height value is linearly spaced with an offset
-                    var hourtext = Math.round(i + startHour); // If startHour is not an integer, make it pretty
+                for (var h = 0; h <= (endHour - startHour); h++) { // for each hour
+                    var toppos = (h) * halfScale + 7.5; // each height value is linearly spaced with an offset
+                    var hourtext = Math.round(h + startHour); // If startHour is not an integer, make it pretty
                     if (hourtext > 12) {
                         hourtext -= 12;
                     } // no 24-hour time
@@ -450,7 +450,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 meetBlocks = meetBlocks.concat(GenMeetBlocks(courseSched[sec]));
             }}
 
-            for (b in meetBlocks) { if (meetBlocks.hasOwnProperty(b)) {
+            for (var b in meetBlocks) { if (meetBlocks.hasOwnProperty(b)) {
                 $scope.schedBlocks[b] = AddSchedAttr(meetBlocks[b]);
             }}
 
@@ -484,14 +484,14 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         },
         SecOverlap: function(secMeet) {
             var blocks = [];
-            for (i in secMeet.fullSchedInfo) { if (secMeet.fullSchedInfo.hasOwnProperty(i)) {
+            for (var i in secMeet.fullSchedInfo) { if (secMeet.fullSchedInfo.hasOwnProperty(i)) {
                 blocks = GenMeetBlocks(secMeet.fullSchedInfo[i]);
             }}
             var isFit = true;
-            for (b in blocks) { if (blocks.hasOwnProperty(b)) {
+            for (var b in blocks) { if (blocks.hasOwnProperty(b)) {
                 var thisDay = blocks[b].letterday;
                 var dayblocks = $scope.schedBlocks.filter(function(n) {return n.letterday === thisDay;});
-                for (db in dayblocks) { if (blocks.hasOwnProperty(b)) {
+                for (var db in dayblocks) { if (blocks.hasOwnProperty(b)) {
                     if (TwoOverlap(dayblocks[db], blocks[b])) {
                         isFit = false;
                         break;
@@ -509,7 +509,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         for (var req in $scope.check) { // Build an array of all checked boxes (length <= 2)
             if ($scope.check[req]) {$scope.checkArr.push(req);}
         }
-        var diffreqs = $scope.checkArr.filter(function(i) {return oldarr.indexOf(i) < 0;})
+        var diffreqs = $scope.checkArr.filter(function(i) {return oldarr.indexOf(i) < 0;});
         if (diffreqs[0]) {
             ga('send', 'event', 'UI interaction', 'requirement', diffreqs[0]);
         }

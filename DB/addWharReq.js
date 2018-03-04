@@ -3,16 +3,16 @@ var fs = require('fs');
 var oldd = require('./OldWharton.json');
 var newd = require('./NewWharton.json');
 
-var obj2 = {}
+var obj2 = {};
 
 
 var GEDOldmap = {
 	'SS': 'WSST',
 	'SandT': 'WSAT',
 	'LAC': 'WLAC'
-}
+};
 
-for (c in oldd.data) {
+for (var c in oldd.data) {
 	var thisc = oldd.data[c];
 	var idDashed = thisc[0] + '-' + thisc[1].toString().padStart(3,'0');
 	if (!obj2[idDashed]) {obj2[idDashed] = {};}
@@ -29,7 +29,7 @@ var ccpmap = {
 	'Yes -': 'WCCY',
 	'See Advisor': 'WCCS',
 	'Yes - CDUS': 'WCCC'
-}
+};
 
 var GEDNewmap = {
 	'H': 'WNHR',
@@ -38,14 +38,14 @@ var GEDNewmap = {
 	'FGE': 'WNFR',
 	'URE': 'WURE',
 	'See Advisor': 'WNSA'
-}
+};
 
 for (c in newd.data){
 	var thisc = newd.data[c];
 	var idDashed = thisc[0] + '-' + thisc[1].toString().padStart(3,'0');
 	var thisGED = GEDNewmap[thisc[3]];
 	var thisCCP = ccpmap[thisc[4]];
-	console.log(idDashed, thisGED, thisCCP)
+	// console.log(idDashed, thisGED, thisCCP)
 	if (!obj2[idDashed]) {obj2[idDashed] = {};}
 	if (thisCCP !== 'N') {
 		obj2[idDashed].CCPNew = thisCCP;

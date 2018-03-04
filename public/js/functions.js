@@ -70,7 +70,7 @@ $(document).ready(function() {
     var today = new Date();
     if (today.getMonth() === 3 && today.getDate() === 0) {
         $('.fa-volume-off').css("visibility", "visible");
-        $('body').append('<iframe style="visibility:hidden;display:none" width="0" height="0" src="https://www.youtube.com/embed/64vJoGcokVE?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>')
+        $('body').append('<iframe style="visibility:hidden;display:none" width="0" height="0" src="https://www.youtube.com/embed/64vJoGcokVE?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
     }
     // GA Tracking
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -177,8 +177,8 @@ function Schedule(term) {
 }
 
 function GenMeetBlocks(sec) {
-    var blocks = []
-    for (day in sec.meetDay) { if (sec.meetDay.hasOwnProperty(day)) {
+    var blocks = [];
+    for (var day in sec.meetDay) { if (sec.meetDay.hasOwnProperty(day)) {
         var meetLetterDay = sec.meetDay[day]; // On which day does this meeting take place?
         var meetRoom      = sec.meetLoc;
         var newid         = sec.idDashed+'-'+meetLetterDay+sec.meetHour.toString().replace(".", "");
@@ -193,8 +193,8 @@ function GenMeetBlocks(sec) {
             'name': sec.idSpaced,
             'room': meetRoom,
             'asscsecs': asscsecs
-        }
-        blocks.push(newblock)
+        };
+        blocks.push(newblock);
     }}
     return blocks;
 }

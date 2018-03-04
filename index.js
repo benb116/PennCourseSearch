@@ -6,7 +6,7 @@ var compression = require('compression');
 var request     = require('request');
 var Keen        = require('keen-js');
 var git         = require('git-rev');
-var helmet      = require('helmet')
+var helmet      = require('helmet');
 require('log-timestamp')(function() { return new Date().toISOString() + ' %s'; });
 
 console.timeEnd('Modules loaded');
@@ -59,7 +59,7 @@ function logEvent(eventName, eventData) {
             }
         });
     }
-};
+}
 
 console.log('Plugins initialized');
 
@@ -150,14 +150,14 @@ app.get('/Search', function(req, res) {
         var returnCourses = allCourses;
 
         if (searchParam) { // Filter by department
-            var returnCourses = returnCourses.filter(function(obj) {return (obj.idDashed.split('-')[0] === searchParam.toUpperCase());})
+            returnCourses = returnCourses.filter(function(obj) {return (obj.idDashed.split('-')[0] === searchParam.toUpperCase());});
         }
         if (req.query.reqParam) { // Filter by requirement
-            var returnCourses = returnCourses.filter(function(obj) {return ((obj.courseReqs.indexOf(req.query.reqParam) > -1))})
+            returnCourses = returnCourses.filter(function(obj) {return ((obj.courseReqs.indexOf(req.query.reqParam) > -1));});
         }
 
-        retC = parse.DeptList(returnCourses)
-        return res.send(returnCourses)
+        retC = parse.DeptList(returnCourses);
+        return res.send(returnCourses);
 
     } else { // Otherwise, ask the API
         // Building the request URI
@@ -224,7 +224,7 @@ app.post('/Notify', function(req, res) {
             var returnText = "Sorry, there was an error while trying set up notifications.";
             res.statusCode = 201;
             if (error) {
-                console.log('PCN req error:', error)
+                console.log('PCN req error:', error);
             } else {
                 try {
                     if (response.statusCode === 406) {

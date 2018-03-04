@@ -26,7 +26,7 @@ var tf = (process.argv[3][0].toLowerCase() === 't');
 
 for (var i = 0; i < codearray.length; i++) {
     if (!engreq[codearray[i]]) { // If the dept/course doesn't exist in the record, make an entry
-        engreq[codearray[i]] = {}
+        engreq[codearray[i]] = {};
     }
     engreq[codearray[i]][req] = tf; // Set the value
     if (req === 'tbs') { // TBS classes by definition do not count for eng
@@ -37,7 +37,7 @@ for (var i = 0; i < codearray.length; i++) {
         if (process.argv[3][0].toLowerCase() === 's') {engreq[codearray[1]].ss = true;}
     }
 }
-console.log(engreq)
+console.log(engreq);
 fs.writeFile('./engreq.json', JSON.stringify(engreq), function (err) { // Write to file
     if (err) {
         console.log("error: " + err);

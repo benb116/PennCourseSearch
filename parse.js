@@ -69,9 +69,9 @@ function SectionMeeting(sec) {
                 'meetday': meeting.meeting_days[i],
                 'starthr': meeting.start_hour_24 + (meeting.start_minutes)/60,
                 'endhr': meeting.end_hour_24 + (meeting.end_minutes)/60
-            })
+            });
         }
-    })
+    });
     return thisInfo;
 }
 
@@ -96,15 +96,15 @@ parse.SchedInfo = function(entry) { // Get the properties required to schedule t
                 var Room       = (thisMeet.room_number || '');
                 var SchedAsscSecs = [];
                 if (entry[key].lectures.length) {
-                    var SchedAsscSecs = entry[key].lectures.map(function(a) {
+                    SchedAsscSecs = entry[key].lectures.map(function(a) {
                         return [a.subject, a.course_id, a.section_id].join('-');
                     });
                 } else if (entry[key].recitations.length) {
-                    var SchedAsscSecs = entry[key].recitations.map(function(a) {
+                    SchedAsscSecs = entry[key].recitations.map(function(a) {
                         return [a.subject, a.course_id, a.section_id].join('-');
                     });
                 } else if (entry[key].labs.length) {
-                    var SchedAsscSecs = entry[key].labs.map(function(a) {
+                    SchedAsscSecs = entry[key].labs.map(function(a) {
                         return [a.subject, a.course_id, a.section_id].join('-');
                     });
                 }
@@ -130,7 +130,7 @@ parse.SchedInfo = function(entry) { // Get the properties required to schedule t
         }
     }}
     return resJSON;
-}
+};
 
 parse.DeptList = function(res) {
     for (var course in res) { if (res.hasOwnProperty(course)) {
@@ -140,7 +140,7 @@ parse.DeptList = function(res) {
         res[course].revs = GetRevData(courDept, courNum); // Append PCR data to courses
     }}
     return res;
-}
+};
 
 // This function spits out the array of courses that goes in #CourseList
 // Takes in data from the API
@@ -168,7 +168,7 @@ parse.CourseList = function(Res) {
                     'revs': revData
                 };
             } else if (coursesList[courseListName].courseCred < numCred) { // If there is an entry, choose the higher of the two numcred values
-                coursesList[courseListName].courseCred = numCred
+                coursesList[courseListName].courseCred = numCred;
             }
         }
     }}
@@ -177,7 +177,7 @@ parse.CourseList = function(Res) {
         arrResp.push(coursesList[course]); // Convert from object to array
     }}
     return arrResp;
-}
+};
 
 // This function spits out section-specific info
 parse.SectionInfo = function(Res) {
@@ -206,17 +206,17 @@ parse.SectionInfo = function(Res) {
         var asscList = [];
         if (entry.lectures.length) {
             asscType = 'lecture';
-            var asscList = entry.lectures.map(function(a) {
+            asscList = entry.lectures.map(function(a) {
                 return [a.subject, a.course_id, a.section_id].join(' ');
             });
         } else if (entry.recitations.length) {
             asscType = 'recitation';
-            var asscList = entry.recitations.map(function(a) {
+            asscList = entry.recitations.map(function(a) {
                 return [a.subject, a.course_id, a.section_id].join(' ');
             });
         } else if (entry.labs.length) {
             asscType = 'lab';
-            var asscList = entry.labs.map(function(a) {
+            asscList = entry.labs.map(function(a) {
                 return [a.subject, a.course_id, a.section_id].join(' ');
             });
         }
@@ -242,7 +242,7 @@ parse.SectionInfo = function(Res) {
     } else {
         return {};
     }
-}
+};
 
 // This function spits out the list of sections that goes in #SectionList
 parse.SectionList = function(Res) {
@@ -262,7 +262,7 @@ parse.SectionList = function(Res) {
                     timeInfo += ' ...';
                 }
                 var actType       = thisEntry.activity;
-                var SectionInst = ((thisEntry.instructors[0] && thisEntry.instructors[0].name) || '');; // Get the instructor for this section
+                var SectionInst = ((thisEntry.instructors[0] && thisEntry.instructors[0].name) || ''); // Get the instructor for this section
                 var revData = GetRevData(thisEntry.course_department, thisEntry.course_number, SectionInst); // Get inst-specific reviews
                 var schedInfo = parse.SchedInfo(thisEntry);
 
@@ -283,7 +283,7 @@ parse.SectionList = function(Res) {
     var sectionInfo = parse.SectionInfo(Res);
 
     return [sectionsList, sectionInfo];
-}
+};
 
 parse.RecordRegistrar = function(inJSON) {
     var fs = require('fs');
@@ -311,7 +311,7 @@ parse.RecordRegistrar = function(inJSON) {
                     'courseCred': numCred
                 };
             } else if (resp[idSpaced].courseCred < numCred) { // If there is, make the numCred value the max 
-                resp[idSpaced].courseCred = numCred
+                resp[idSpaced].courseCred = numCred;
             }
             var meetingInfo = SectionMeeting(thisKey);
             meetresp[secID] = meetingInfo;
@@ -323,7 +323,7 @@ parse.RecordRegistrar = function(inJSON) {
     }}
     if (thisKey) {
         var thedept = thisKey.course_department;
-        var currentTerm = thisKey.term
+        var currentTerm = thisKey.term;
         // At the end of the list
         fs.writeFile('../Data/'+currentTerm+'/'+thedept+'.json', JSON.stringify(arrResp), function (err) {
             // Write JSON to file
@@ -342,6 +342,6 @@ parse.RecordRegistrar = function(inJSON) {
             }
         });
     }
-}
+};
 
 module.exports = parse;

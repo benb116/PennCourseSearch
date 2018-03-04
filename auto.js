@@ -39,7 +39,7 @@ app.get('/auto/', function(req, res) {
 
 // Handle main page requests
 app.get('/auto/request', function(req, res) {
-    console.log(req.query.course)
+    console.log(req.query.course);
     var courses = req.query.course;
     // console.log();
     return res.send(autoSched(courses));
@@ -54,7 +54,7 @@ for (var dept in deptList) { if (deptList.hasOwnProperty(dept)) {
         var deptData = require('./Data/2018AMeet/'+thedept+'.json');
         var secs = Object.keys(deptData);
         for (var i = 0; i < secs.length; i++) {
-            var meetData = meetData.concat(deptData[secs[i]])
+            var meetData = meetData.concat(deptData[secs[i]]);
         }
     } catch(err) {
         
@@ -64,7 +64,7 @@ for (var dept in deptList) { if (deptList.hasOwnProperty(dept)) {
 // var args = process.argv;
 var courses = ['cis-110', 'meam-348','cis-120', 'math114', 'econ001', 'chem102', 'meam545', 'meam101', 'meam201', 'psyc001'];
 
-autoSched(courses)
+autoSched(courses);
 
 function autoSched(courses) {
     var allData = [];
@@ -75,9 +75,9 @@ function autoSched(courses) {
         var toAdd = meetData.filter(function(sec) { // Find all sections of the course
             return sec.course === courses[i];
         });
-        allData = allData.concat(toAdd)
+        allData = allData.concat(toAdd);
     }
-    return run(allData)
+    return run(allData);
 }
 
 function run(allData) {
@@ -89,21 +89,21 @@ function run(allData) {
     // }
     allData.forEach(function(thissect) {
         if (thissect.open) {
-            var thiscourseact = thissect.course + '-' + thissect.actType
+            var thiscourseact = thissect.course + '-' + thissect.actType;
             if (!datasched[thiscourseact]) {
-                datasched[thiscourseact] = []
+                datasched[thiscourseact] = [];
             }
             datasched[thiscourseact].push(thissect);
         }
-    })
-    var d, twodarr
+    });
+    var d, twodarr;
     d = regenData(datasched);
     raw_twodarr = d[0]; // [MEAM-101-LEC, MEAM-101-LAB]
     raw_datasched = d[1];//[1, 4]
 
     raw_types = raw_twodarr.map(function(a) {
         return a[0];
-    })    
+    });
 
     var typekey = ['LEC', 'LAB', 'REC'];
 
@@ -116,9 +116,9 @@ function run(allData) {
 
         var anchor = datasched[types[h]][0];
         if (!anchor) {
-            console.log('noanch', types[h])
+            console.log('noanch', types[h]);
         }
-        console.log(types[h])
+        console.log(types[h]);
 
         d = regenData(datasched);
         twodarr = d[0];
@@ -131,7 +131,7 @@ function run(allData) {
 
             if (indtorem.length === twodarr[i][1]) { // No sections work with this anchor, move to next anchor index and try again.
                 // anchorind++;
-                console.log('full', types[h])
+                console.log('full', types[h]);
                 datasched[types[h]].splice(0, 1);
                 i = twodarr.length;
                 h--;
@@ -141,8 +141,8 @@ function run(allData) {
 
                 var typeToRem = raw_twodarr[i][0];
                 datasched[typeToRem] = datasched[typeToRem].filter(function(a,e) {
-                    return !(indtorem.indexOf(e) > -1)
-                })
+                    return (indtorem.indexOf(e) === -1);
+                });
                 RemoveNonAsscSections(anchor);
 
                 d = regenData(datasched);
@@ -154,23 +154,23 @@ function run(allData) {
         if (hold) {
             hold = false;
         } else {
-            coursesAdded.push(anchor.idDashed)
+            coursesAdded.push(anchor.idDashed);
         }
     }
-    console.log(coursesAdded)
-    return coursesAdded
+    console.log(coursesAdded);
+    return coursesAdded;
 
     function CompareAnchorToType(i) {
-        var indtorem = []
+        var indtorem = [];
         var type = raw_twodarr[i][0];
         var numoftype = typeNumObj[type];
         for (var j = 0; j < numoftype; j++) {
             var ameet = datasched[type][j];
             if (ameet) {
                 if (anchor.course !== ameet.course) {
-                    var isover = Overlap(ameet, anchor)
+                    var isover = Overlap(ameet, anchor);
                     if (isover) {
-                        console.log('conflict', ameet.idDashed)
+                        console.log('conflict', ameet.idDashed);
                         indtorem.push(j);
                     }
                 }
@@ -186,15 +186,15 @@ function run(allData) {
             if (thisassc.length) {
                 thisassclist = thisassc.map(function(a) {
                     return a.subject + '-' + a.course_id + '-' + a.section_id;
-                })
+                });
                 var thisassctype = anchor.course + '-' + typekey[g];
                 var dataschedassc = datasched[thisassctype].map(function(a) {
                     return a.idDashed;
-                })
+                });
 
                 datasched[thisassctype] = datasched[thisassctype].filter(function(a,e) {
                     return (thisassclist.indexOf(dataschedassc[e]) > -1);
-                })
+                });
             }
         }
     }
@@ -204,11 +204,11 @@ function regenData(datasched) {
     var types = Object.keys(datasched);
     var nums = [];
     for (var i = 0; i < types.length; i++) {
-        nums[i] = datasched[types[i]].length
+        nums[i] = datasched[types[i]].length;
     } // Number of each sections of a specific type
 
     var twodarr = [];
-    for (var i = 0; i < types.length; i++) {
+    for (i = 0; i < types.length; i++) {
         twodarr[i] = [types[i], nums[i]];
     }
     twodarr.sort(function(a,b) {
@@ -217,7 +217,7 @@ function regenData(datasched) {
     // Sorted double list of types and number of available sections of those types (low to hi)
 
     typeNumObj = {}; // Objectified
-    for (var i = 0; i < twodarr.length; i++) {
+    for (i = 0; i < twodarr.length; i++) {
         typeNumObj[twodarr[i][0]] = twodarr[i][1];
     }
     return [twodarr, datasched, typeNumObj];
@@ -233,7 +233,7 @@ function Overlap(block1, block2) {
             // console.log(1, meet1[i])
             // console.log(2, meet2[j])
             if (meet1[i].meetday === meet2[j].meetday) {
-                var over = check(meet1[i], meet2[j]);
+                over = check(meet1[i], meet2[j]);
                 if (over) {return over;}
             }
         }
