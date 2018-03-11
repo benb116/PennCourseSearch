@@ -207,7 +207,7 @@ function TwoOverlap(block1, block2) {
     var b1 = y1 + h1;
 
     var y2 = (block2.startHr || block2.top);
-    var h2 = (block1.duration || block2.height);
+    var h2 = (block2.duration || block2.height);
     var b2 = y2 + h2;
 
     
