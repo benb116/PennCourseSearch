@@ -4,10 +4,17 @@
     The main function is RateLimitReq.
 */
 
-module.exports = function() {
+module.exports = function(rpm) {
     var request = require('request');
     var parse = require('./parse.js');
-    var config = require('./config.js');
+    var config;
+    try {
+        config = require('./config.js');
+    } catch (err) { // If there is no config file
+        config = {};
+        config.requestAB = process.env.REQUESTAB;
+        config.requestAT = process.env.REQUESTAT;
+    }
     var opendata = {};
 
     if (config.IFTTTKey) {
@@ -96,7 +103,7 @@ module.exports = function() {
     }
 
     // Delay a requests the necessary amount of time before sending it to the API
-    var rpm = 95; // Max requests limit per key
+    if (!rpm) {rpm = 95;}
 
     opendata.RateLimitReq = function(url, resultType, res, lastRT, ODkeyInd) {
         // lastRT is the timestamp of the last sent request using this auth key

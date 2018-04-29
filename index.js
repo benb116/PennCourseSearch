@@ -29,7 +29,7 @@ try {
 // Set express settings
 var app = express();
 app.use(compression());
-app.use(helmet());
+app.use(helmet()); // Hides certain HTTP headers, supposedly more secure?
 
 if (process.env.NODE_ENV !== 'production') {
     // I want this to have the client always pull the newest JS, since uodates happen very often.
@@ -74,7 +74,7 @@ var ODkeyInd = 0; // Which key to use next
 // Pull in external data and functions
 var allCourses = require('./loadCourses.js')(currentTerm); // Get array of all courses
 var parse = require('./parse.js'); // Load the parsing functions
-var opendata = require('./opendata.js')();
+var opendata = require('./opendata.js');
 
 var listenPort = 3000;
 if (process.argv[1].includes('beta')) { // If running in the staging environment, run on a different port
@@ -100,7 +100,7 @@ app.get('/Status', function(req, res) {
     // This is just letting the user know.
     var now = new Date();
     var hour = now.getHours();
-    if (hour >= 5 && hour < 9) {
+    if (hour >= 1 && hour < 5) {
         statustext = "Penn InTouch sometimes screws up around this time of night, which can cause problems with PennCourseSearch. <br> Sorry in advance.";
     }
     return res.send(statustext);

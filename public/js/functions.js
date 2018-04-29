@@ -68,7 +68,7 @@ $(document).ready(function() {
         });
     }
     var today = new Date();
-    if (today.getMonth() === 3 && today.getDate() === 0) {
+    if (today.getMonth() === 3 && today.getDate() === 1) {
         $('.fa-volume-off').css("visibility", "visible");
         $('body').append('<iframe style="visibility:hidden;display:none" width="0" height="0" src="https://www.youtube.com/embed/64vJoGcokVE?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
     }
