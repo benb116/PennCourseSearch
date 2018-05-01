@@ -74,7 +74,7 @@ var ODkeyInd = 0; // Which key to use next
 // Pull in external data and functions
 var allCourses = require('./loadCourses.js')(currentTerm); // Get array of all courses
 var parse = require('./parse.js'); // Load the parsing functions
-var opendata = require('./opendata.js');
+var opendata = require('./opendata.js')(95);
 
 var listenPort = 3000;
 if (process.argv[1].includes('beta')) { // If running in the staging environment, run on a different port
