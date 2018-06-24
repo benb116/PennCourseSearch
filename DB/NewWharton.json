@@ -58,49 +58,49 @@
     ],
     [
       "AFRC",
-      1,
+      "001",
       "Introduction to Africana Studies",
       "SS",
       "Yes -"
     ],
     [
       "AFRC",
-      10,
+      "010",
       "Race, Crime, & Punishment",
       "SS",
       "Yes - CDUS"
     ],
     [
       "AFRC",
-      11,
+      "011",
       "Urban Sociology ",
       "SS",
       "Yes -"
     ],
     [
       "AFRC",
-      41,
+      "041",
       "Homelessness & Urban Inequality",
       "SS",
       "Yes - CDUS"
     ],
     [
       "AFRC",
-      75,
+      "075",
       "Africa Before 1800",
       "SS",
       "Yes -"
     ],
     [
       "AFRC",
-      78,
+      "078",
       "Faculty-Student Collaborative Action Seminar in Urban University-Community Relations",
       "SS",
       "Yes - CDUS"
     ],
     [
       "AFRC",
-      81,
+      "081",
       "African American Literature",
       "H",
       "Yes - CDUS"
@@ -345,21 +345,21 @@
     ],
     [
       "AFST",
-      53,
+      "053",
       "Music of Africa",
       "H",
       "Yes -"
     ],
     [
       "AFST",
-      75,
+      "075",
       "Africa Before 1800",
       "SS",
       "Yes -"
     ],
     [
       "AFST",
-      76,
+      "076",
       "Africa Since 1800",
       "SS",
       "Yes -"
@@ -583,28 +583,28 @@
     ],
     [
       "ALAN",
-      30,
+      "030",
       "Beginning Tibetan I ",
       "H",
       "No -"
     ],
     [
       "ALAN",
-      31,
+      "031",
       "Beginning Tibetan II ",
       "H",
       "No -"
     ],
     [
       "ALAN",
-      32,
+      "032",
       "Intermediate Tibetan I",
       "H",
       "Yes -"
     ],
     [
       "ALAN",
-      33,
+      "033",
       "Intermediate Tibetan II",
       "H",
       "Yes -"
@@ -737,21 +737,21 @@
     ],
     [
       "ANCH",
-      25,
+      "025",
       "Ancient Near East",
       "SS",
       "Yes -"
     ],
     [
       "ANCH",
-      26,
+      "026",
       "Ancient Greece",
       "SS",
       "Yes -"
     ],
     [
       "ANCH",
-      27,
+      "027",
       "Ancient Rome",
       "SS",
       "Yes -"
@@ -856,35 +856,35 @@
     ],
     [
       "ANTH",
-      1,
+      "001",
       "Introduction to Archaeology",
       "SS",
       "Yes -"
     ],
     [
       "ANTH",
-      2,
+      "002",
       "Introduction to Cultural Anthropology",
       "SS",
       "Yes -"
     ],
     [
       "ANTH",
-      3,
+      "003",
       "Introduction to Human Evolution",
       "NSME",
       "Yes -"
     ],
     [
       "ANTH",
-      4,
+      "004",
       "The Modern World and its Cultural Background",
       "SS",
       "Yes -"
     ],
     [
       "ANTH",
-      5,
+      "005",
       "Great Transformations",
       "SS",
       "Yes -"
@@ -898,77 +898,77 @@
     ],
     [
       "ANTH",
-      86,
+      "086",
       "Desire and Demand",
       "SS",
       "Yes - CDUS"
     ],
     [
       "ARAB",
-      31,
+      "031",
       "Elementary Arabic I ",
       "H",
       "No -"
     ],
     [
       "ARAB",
-      32,
+      "032",
       "Elementary Arabic II ",
       "H",
       "No -"
     ],
     [
       "ARAB",
-      33,
+      "033",
       "Intermediate Arabic III ",
       "H",
       "Yes -"
     ],
     [
       "ARAB",
-      34,
+      "034",
       "Intermediate Arabic IV ",
       "H",
       "Yes -"
     ],
     [
       "ARAB",
-      35,
+      "035",
       "Advanced Intermediate Arabic I ",
       "H",
       "Yes -"
     ],
     [
       "ARAB",
-      36,
+      "036",
       "Advanced Intermediate Arabic II ",
       "H",
       "Yes -"
     ],
     [
       "ARAB",
-      37,
+      "037",
       "Advanced Arabic and Syntax I ",
       "H",
       "Yes -"
     ],
     [
       "ARAB",
-      41,
+      "041",
       "Beginning Arabic I ",
       "H",
       "No -"
     ],
     [
       "ARAB",
-      43,
+      "043",
       "Continuing Arabic III ",
       "H",
       "Yes -"
     ],
     [
       "ARAB",
-      44,
+      "044",
       "Continuing Arabic IV ",
       "H",
       "Yes -"
@@ -1052,28 +1052,28 @@
     ],
     [
       "ASAM",
-      1,
+      "001",
       "Asian Americans in Contemporary Society",
       "SS",
       "Yes - CDUS"
     ],
     [
       "ASAM",
-      2,
+      "002",
       "Introduction to Asian American Literature",
       "H",
       "Yes - CDUS"
     ],
     [
       "ASAM",
-      3,
+      "003",
       "Introduction to Asian American History",
       "SS",
       "Yes - CDUS"
     ],
     [
       "ASTR",
-      1,
+      "001",
       "Survey of the Universe",
       "NSME",
       "No -"
@@ -1115,21 +1115,21 @@
     ],
     [
       "BIBB",
-      30,
+      "030",
       "Neurobiology of Brain Disorders",
       "NSME",
       "No -"
     ],
     [
       "BIBB",
-      50,
+      "050",
       "Forensic Neuroscience",
       "NSME",
       "No -"
     ],
     [
       "BIBB",
-      60,
+      "060",
       "Music and the Brain",
       "NSME",
       "No -"
@@ -1220,133 +1220,133 @@
     ],
     [
       "CHEM",
-      1,
+      "001",
       "General Chemistry I",
       "NSME",
       "No -"
     ],
     [
       "CHEM",
-      22,
+      "022",
       "Structural Biology & Genomics (.5 CU)",
       "NSME",
       "No -"
     ],
     [
       "CHEM",
-      53,
+      "053",
       "General Chemistry Lab I (.5 CU)",
       "NSME",
       "No -"
     ],
     [
       "CHEM",
-      54,
+      "054",
       "General Chemistry Lab II (.5 CU)",
       "NSME",
       "No -"
     ],
     [
       "CHIN",
-      1,
+      "001",
       "First Year Spoken Chinese I ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      2,
+      "002",
       "First Year Spoken Chinese II ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      4,
+      "004",
       "2nd Year Spoken Chinese II ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      11,
+      "011",
       "Beginning Modern Chinese I ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      12,
+      "012",
       "Beginning Modern Chinese II ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      21,
+      "021",
       "Intensive Beginning Modern Chinese I & II ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      22,
+      "022",
       "Intensive Beginning Modern Chinese III & IV ",
       "H",
       "Yes -"
     ],
     [
       "CHIN",
-      31,
+      "031",
       "Beginning Reading and Writing in Chinese I (for Fluent Speakers) ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      32,
+      "032",
       "Beginning Reading and Writing in Chinese II (for Fluent Speakers) ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      41,
+      "041",
       "Beginning Cantonese I ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      42,
+      "042",
       "Beginning Cantonese II ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      51,
+      "051",
       "Beginning Taiwanese I ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      52,
+      "052",
       "Beginning Taiwanese II ",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      61,
+      "061",
       "Elementary Shanghainese",
       "H",
       "No -"
     ],
     [
       "CHIN",
-      81,
+      "081",
       "Beginning Business Chinese I ",
       "H",
       "No -"
@@ -1563,28 +1563,28 @@
     ],
     [
       "CIMS",
-      15,
+      "015",
       "Copyright and Culture",
       "H",
       "No -"
     ],
     [
       "CIMS",
-      16,
+      "016",
       "Modern Sci-Fi Cinema",
       "H",
       "No -"
     ],
     [
       "CIMS",
-      16,
+      "016",
       "A Cinema We Couldn't Refuse: Italians in American Film",
       "H",
       "Yes - CDUS"
     ],
     [
       "CIMS",
-      36,
+      "036",
       "The Middle East through Many Lenses ",
       "SS",
       "Yes -"
@@ -1654,21 +1654,21 @@
     ],
     [
       "CLST",
-      5,
+      "005",
       "Plato's Republic",
       "H",
       "Yes -"
     ],
     [
       "CLST",
-      29,
+      "029",
       "Rome & America",
       "SS",
       "Yes -"
     ],
     [
       "COGS",
-      1,
+      "001",
       "Introduction to Cognitive Science",
       "NSME",
       "No -"
@@ -1724,7 +1724,7 @@
     ],
     [
       "COML",
-      94,
+      "094",
       "Introduction to Literary Theory",
       "H",
       "Yes -"
@@ -1864,49 +1864,49 @@
     ],
     [
       "EALC",
-      1,
+      "001",
       "Introduction to Chinese Civilization",
       "SS",
       "Yes -"
     ],
     [
       "EALC",
-      2,
+      "002",
       "Introduction to Japanese Civilization",
       "SS",
       "Yes -"
     ],
     [
       "EALC",
-      3,
+      "003",
       "Introduction to Korean Civilization",
       "SS",
       "Yes -"
     ],
     [
       "EALC",
-      7,
+      "007",
       "East Asia: Past and Present",
       "SS",
       "Yes -"
     ],
     [
       "EALC",
-      8,
+      "008",
       "East Asian Religions",
       "SS",
       "Yes -"
     ],
     [
       "EALC",
-      13,
+      "013",
       "Art and Civilization in East Asia",
       "H",
       "Yes -"
     ],
     [
       "EALC",
-      16,
+      "016",
       "Gender and Sexuality in East Asia",
       "SS",
       "Yes -"
@@ -1934,14 +1934,14 @@
     ],
     [
       "ECON",
-      1,
+      "001",
       "Introduction to Microeconomics",
       "SS",
       "No -"
     ],
     [
       "ECON",
-      2,
+      "002",
       "Introduction to Macroeconomics",
       "SS",
       "No -"
@@ -2109,77 +2109,77 @@
     ],
     [
       "ENGL",
-      10,
+      "010",
       "Creative Writing",
       "H",
       "No -"
     ],
     [
       "ENGL",
-      15,
+      "015",
       "Copyright and Culture",
       "H",
       "No -"
     ],
     [
       "ENGL",
-      16,
+      "016",
       "Arts and Nature",
       "H",
       "No -"
     ],
     [
       "ENGL",
-      16,
+      "016",
       "Contact and Conflict: Literatures of Israel and Palestine",
       "H",
       "Yes -"
     ],
     [
       "ENGL",
-      16,
+      "016",
       "Counterfictions",
       "H",
       "Yes - CDUS"
     ],
     [
       "ENGL",
-      20,
+      "020",
       "Literature Before 1660",
       "H",
       "Yes -"
     ],
     [
       "ENGL",
-      40,
+      "040",
       "British Poetry 1660-1914",
       "H",
       "Yes -"
     ],
     [
       "ENGL",
-      69,
+      "069",
       "Poetry and Poetics",
       "H",
       "Yes -"
     ],
     [
       "ENGL",
-      70,
+      "070",
       "Latina/o Literature and Culture",
       "H",
       "Yes - CDUS"
     ],
     [
       "ENGL",
-      81,
+      "081",
       "African-American Literature",
       "H",
       "Yes - CDUS"
     ],
     [
       "ENGL",
-      90,
+      "090",
       "Gender, Sexuality, and Literature",
       "H",
       "Yes -"
@@ -2333,7 +2333,7 @@
     ],
     [
       "FNAR",
-      61,
+      "061",
       "Video I",
       "H",
       "No -"
@@ -2543,14 +2543,14 @@
     ],
     [
       "GREK",
-      16,
+      "016",
       "Elementary Modern Greek II ",
       "H",
       "No -"
     ],
     [
       "GREK",
-      17,
+      "017",
       "Intermediate Modern Greek I ",
       "H",
       "Yes -"
@@ -2599,7 +2599,7 @@
     ],
     [
       "GRMN",
-      27,
+      "027",
       "Euro Zone Crisis - The EU in a Currency War For Survival?",
       "SS",
       "Yes -"
@@ -2732,21 +2732,21 @@
     ],
     [
       "GSWS",
-      2,
+      "002",
       "Gender and Society",
       "SS",
       "Yes - CDUS"
     ],
     [
       "GSWS",
-      3,
+      "003",
       "Introduction to Queer Studies",
       "SS",
       "Yes - CDUS"
     ],
     [
       "GSWS",
-      4,
+      "004",
       "The Family",
       "SS",
       "No -"
@@ -2781,35 +2781,35 @@
     ],
     [
       "HEBR",
-      51,
+      "051",
       "Elementary Modern Hebrew I ",
       "H",
       "No -"
     ],
     [
       "HEBR",
-      52,
+      "052",
       "Elementary Modern Hebrew II ",
       "H",
       "No -"
     ],
     [
       "HEBR",
-      53,
+      "053",
       "Intermediate Modern Hebrew III ",
       "H",
       "Yes -"
     ],
     [
       "HEBR",
-      54,
+      "054",
       "Intermediate Modern Hebrew IV ",
       "H",
       "Yes -"
     ],
     [
       "HEBR",
-      59,
+      "059",
       "Advanced Modern Hebrew: Reading and Composition ",
       "H",
       "Yes -"
@@ -3061,35 +3061,35 @@
     ],
     [
       "HIST",
-      1,
+      "001",
       "Making of the Modern World",
       "SS",
       "Yes -"
     ],
     [
       "HIST",
-      11,
+      "011",
       "Deciphering America ",
       "SS",
       "Yes - CDUS"
     ],
     [
       "HIST",
-      70,
+      "070",
       "Colonial Latin America",
       "SS",
       "Yes -"
     ],
     [
       "HIST",
-      81,
+      "081",
       "History of the Middle East since 1800",
       "SS",
       "Yes -"
     ],
     [
       "HIST",
-      84,
+      "084",
       "From Oil Fields to Soccer Fields: The Middle East in the 20th Century",
       "SS",
       "Yes -"
@@ -3173,21 +3173,21 @@
     ],
     [
       "HSOC",
-      2,
+      "002",
       "Medicine in History ",
       "SS",
       "Yes -"
     ],
     [
       "HSOC",
-      10,
+      "010",
       "Health and Societies: Global Perspectives ",
       "SS",
       "Yes -"
     ],
     [
       "HSOC",
-      59,
+      "059",
       "Medical Missionaries and Partners",
       "SS",
       "Yes -"
@@ -3334,42 +3334,42 @@
     ],
     [
       "JPAN",
-      1,
+      "001",
       "Introduction to Spoken Japanese I ",
       "H",
       "No -"
     ],
     [
       "JPAN",
-      2,
+      "002",
       "Introduction to Spoken Japanese II ",
       "H",
       "No -"
     ],
     [
       "JPAN",
-      11,
+      "011",
       "Beginning Japanese I ",
       "H",
       "No -"
     ],
     [
       "JPAN",
-      12,
+      "012",
       "Beginning Japanese II ",
       "H",
       "No -"
     ],
     [
       "JPAN",
-      21,
+      "021",
       "Intensive Beginning Japanese I ",
       "H",
       "No -"
     ],
     [
       "JPAN",
-      22,
+      "022",
       "Intensive Beginning Japanese II ",
       "H",
       "No -"
@@ -3523,63 +3523,63 @@
     ],
     [
       "JWST",
-      31,
+      "031",
       "Beginning Yiddish ",
       "H",
       "No -"
     ],
     [
       "JWST",
-      32,
+      "032",
       "Beginning Yiddish II ",
       "H",
       "No -"
     ],
     [
       "JWST",
-      33,
+      "033",
       "Intermediate Yiddish I ",
       "H",
       "Yes -"
     ],
     [
       "JWST",
-      34,
+      "034",
       "Intermediate Yiddish II ",
       "H",
       "Yes -"
     ],
     [
       "JWST",
-      51,
+      "051",
       "Elementary Modern Hebrew I ",
       "H",
       "No -"
     ],
     [
       "JWST",
-      52,
+      "052",
       "Elementary Modern Hebrew II ",
       "H",
       "No -"
     ],
     [
       "JWST",
-      53,
+      "053",
       "Intermediate Modern Hebrew III ",
       "H",
       "Yes -"
     ],
     [
       "JWST",
-      54,
+      "054",
       "Intermediate Modern Hebrew II ",
       "H",
       "Yes -"
     ],
     [
       "JWST",
-      59,
+      "059",
       "Advanced Modern Hebrew: Reading and Composition ",
       "H",
       "Yes -"
@@ -3642,14 +3642,14 @@
     ],
     [
       "KORN",
-      11,
+      "011",
       "Elementary Korean I ",
       "H",
       "No -"
     ],
     [
       "KORN",
-      12,
+      "012",
       "Elementary Korean II ",
       "H",
       "No -"
@@ -3789,14 +3789,14 @@
     ],
     [
       "LALS",
-      60,
+      "060",
       "Latina/o Literature",
       "H",
       "Yes - CDUS"
     ],
     [
       "LALS",
-      71,
+      "071",
       "Latin America 1791 to Present",
       "SS",
       "Yes -"
@@ -3873,98 +3873,98 @@
     ],
     [
       "LING",
-      1,
+      "001",
       "Introduction to Linguistics",
       "NSME",
       "No -"
     ],
     [
       "LING",
-      52,
+      "052",
       "Big Data",
       "SS",
       "No -"
     ],
     [
       "LING",
-      54,
+      "054",
       "Bilingualism in History",
       "H",
       "Yes -"
     ],
     [
       "LING",
-      59,
+      "059",
       "Language and Evolution",
       "H",
       "No -"
     ],
     [
       "LING",
-      60,
+      "060",
       "Social Identity in Language",
       "SS",
       "No -"
     ],
     [
       "LING",
-      71,
+      "071",
       "American Sign Language I ",
       "H",
       "No -"
     ],
     [
       "LING",
-      72,
+      "072",
       "American Sign Language II ",
       "H",
       "No -"
     ],
     [
       "LING",
-      73,
+      "073",
       "American Sign Language III ",
       "H",
       "Yes - CDUS"
     ],
     [
       "LING",
-      74,
+      "074",
       "American Sign Language IV ",
       "H",
       "Yes - CDUS"
     ],
     [
       "LING",
-      75,
+      "075",
       "American Sign Language V ",
       "H",
       "Yes - CDUS"
     ],
     [
       "LING",
-      81,
+      "081",
       "Beginning Irish Gaelic I ",
       "H",
       "No -"
     ],
     [
       "LING",
-      82,
+      "082",
       "Beginning Irish Gaelic II ",
       "H",
       "No -"
     ],
     [
       "LING",
-      83,
+      "083",
       "Intermediate Irish Gaelic I ",
       "H",
       "Yes -"
     ],
     [
       "LING",
-      84,
+      "084",
       "Intermediate Irish Gaelic II ",
       "H",
       "Yes -"
@@ -4083,21 +4083,21 @@
     ],
     [
       "MUSC",
-      16,
+      "016",
       "Beethoven's 9th Symphony",
       "H",
       "Yes -"
     ],
     [
       "MUSC",
-      18,
+      "018",
       "Music in Urban Spaces",
       "H",
       "Yes - CDUS"
     ],
     [
       "MUSC",
-      70,
+      "070",
       "Making Sense of Music: Introduction to Music Theory and Musicianship",
       "H",
       "No -"
@@ -4146,28 +4146,28 @@
     ],
     [
       "NELC",
-      36,
+      "036",
       "The Middle East through Many Lenses ",
       "SS",
       "Yes -"
     ],
     [
       "NELC",
-      46,
+      "046",
       "Myths and Religions of the Ancient World",
       "H",
       "Yes -"
     ],
     [
       "NELC",
-      61,
+      "061",
       "Literary Legacy of Ancient Egypt",
       "H",
       "Yes -"
     ],
     [
       "NELC",
-      62,
+      "062",
       "Land of the Pharaohs: Introduction to Ancient Egyptian Civilization",
       "SS",
       "Yes -"
@@ -4237,21 +4237,21 @@
     ],
     [
       "NURS",
-      61,
+      "061",
       "Biologically-based Chemistry (.5 CU)",
       "NSME",
       "No -"
     ],
     [
       "NURS",
-      62,
+      "062",
       "Cell Biology",
       "NSME",
       "No -"
     ],
     [
       "NURS",
-      63,
+      "063",
       "Microbiology",
       "NSME",
       "No -"
@@ -4342,56 +4342,56 @@
     ],
     [
       "PERS",
-      11,
+      "011",
       "Elementary Persian I ",
       "H",
       "No -"
     ],
     [
       "PERS",
-      12,
+      "012",
       "Elementary Persian II ",
       "H",
       "No -"
     ],
     [
       "PERS",
-      13,
+      "013",
       "Intermediate Persian I ",
       "H",
       "Yes -"
     ],
     [
       "PERS",
-      14,
+      "014",
       "Intermediate Persian II ",
       "H",
       "Yes -"
     ],
     [
       "PERS",
-      15,
+      "015",
       "Advanced Persian I ",
       "H",
       "Yes -"
     ],
     [
       "PERS",
-      16,
+      "016",
       "Advanced Persian II ",
       "H",
       "Yes -"
     ],
     [
       "PERS",
-      17,
+      "017",
       "Persian for Heritage Speakers I ",
       "H",
       "No -"
     ],
     [
       "PERS",
-      19,
+      "019",
       "Persian for Heritage Speakers II ",
       "H",
       "No -"
@@ -4475,70 +4475,70 @@
     ],
     [
       "PHIL",
-      2,
+      "002",
       "Ethics  ",
       "SS",
       "No -"
     ],
     [
       "PHIL",
-      3,
+      "003",
       "Ancient Philosophy",
       "SS",
       "Yes -"
     ],
     [
       "PHIL",
-      4,
+      "004",
       "History of Modern Philosophy",
       "SS",
       "Yes -"
     ],
     [
       "PHIL",
-      5,
+      "005",
       "Formal Logic I",
       "SS",
       "No -"
     ],
     [
       "PHIL",
-      8,
+      "008",
       "Social Contract",
       "SS",
       "Yes -"
     ],
     [
       "PHIL",
-      10,
+      "010",
       "Plato's Republic",
       "H",
       "Yes -"
     ],
     [
       "PHIL",
-      25,
+      "025",
       "Philosophy of Science",
       "SS",
       "No -"
     ],
     [
       "PHIL",
-      32,
+      "032",
       "Enhancing the Human Mind Through Technology",
       "SS",
       "No -"
     ],
     [
       "PHIL",
-      72,
+      "072",
       "Bioethics",
       "SS",
       "No -"
     ],
     [
       "PHIL",
-      80,
+      "080",
       "Aesthetics",
       "SS",
       "No -"
@@ -4587,7 +4587,7 @@
     ],
     [
       "PHYS",
-      16,
+      "016",
       "Energy, Oil, & Global Warming",
       "NSME",
       "No -"
@@ -4748,28 +4748,28 @@
     ],
     [
       "PSCI",
-      10,
+      "010",
       "The Rise of Authoritianism",
       "SS",
       "Yes -"
     ],
     [
       "PSCI",
-      10,
+      "010",
       "Race, Crime, & Punishment",
       "SS",
       "Yes - CDUS"
     ],
     [
       "PSCI",
-      10,
+      "010",
       "The Contemporary American City",
       "SS",
       "Yes - CDUS"
     ],
     [
       "PSCI",
-      10,
+      "010",
       "The Politics of Reproduction",
       "SS",
       "Yes - CDUS"
@@ -4818,14 +4818,14 @@
     ],
     [
       "PSYC",
-      1,
+      "001",
       "Introduction to Experimental Psychology ",
       "NSME",
       "No -"
     ],
     [
       "PSYC",
-      45,
+      "045",
       "The Embodied Mind",
       "NSME",
       "No -"
@@ -4923,49 +4923,49 @@
     ],
     [
       "RELS",
-      1,
+      "001",
       "Religions of Asia",
       "SS",
       "Yes -"
     ],
     [
       "RELS",
-      2,
+      "002",
       "Religions of the West",
       "SS",
       "Yes -"
     ],
     [
       "RELS",
-      3,
+      "003",
       "Religion & Literature",
       "H",
       "Yes -"
     ],
     [
       "RELS",
-      5,
+      "005",
       "Women & Religion",
       "SS",
       "Yes -"
     ],
     [
       "RELS",
-      13,
+      "013",
       "Gods, Ghosts, and Monsters",
       "SS",
       "Yes -"
     ],
     [
       "RELS",
-      33,
+      "033",
       "Modern Catholic Christianity",
       "SS",
       "Yes -"
     ],
     [
       "RELS",
-      69,
+      "069",
       "Love, Sex, and Power",
       "SS",
       "Yes -"
@@ -5049,28 +5049,28 @@
     ],
     [
       "RUSS",
-      1,
+      "001",
       "Elementary Russian I ",
       "H",
       "No -"
     ],
     [
       "RUSS",
-      2,
+      "002",
       "Elementary Russian II ",
       "H",
       "No -"
     ],
     [
       "RUSS",
-      3,
+      "003",
       "Intermediate Russian I ",
       "H",
       "Yes -"
     ],
     [
       "RUSS",
-      4,
+      "004",
       "Intermediate Russian II ",
       "H",
       "Yes -"
@@ -5105,56 +5105,56 @@
     ],
     [
       "SAST",
-      1,
+      "001",
       "Introduction to Modern India",
       "SS",
       "Yes -"
     ],
     [
       "SAST",
-      2,
+      "002",
       "The City in South Asia",
       "SS",
       "Yes -"
     ],
     [
       "SAST",
-      3,
+      "003",
       "History, Culture, Religion in Early India",
       "SS",
       "Yes -"
     ],
     [
       "SAST",
-      4,
+      "004",
       "India's Literature",
       "H",
       "Yes -"
     ],
     [
       "SAST",
-      5,
+      "005",
       "Perform Arts in South Asia",
       "H",
       "Yes -"
     ],
     [
       "SAST",
-      6,
+      "006",
       "Hindu Mythology",
       "H",
       "Yes -"
     ],
     [
       "SAST",
-      57,
+      "057",
       "Planning To Be Offshore",
       "SS",
       "Yes -"
     ],
     [
       "SAST",
-      63,
+      "063",
       "East/West: Hitchhiker's Guide to the Cultural History of the Modern World",
       "SS",
       "Yes -"
@@ -5322,56 +5322,56 @@
     ],
     [
       "SOCI",
-      1,
+      "001",
       "Introduction to Sociology",
       "SS",
       "Yes - CDUS"
     ],
     [
       "SOCI",
-      2,
+      "002",
       "Social Problems & Public Policy",
       "SS",
       "Yes - CDUS"
     ],
     [
       "SOCI",
-      4,
+      "004",
       "The Family",
       "SS",
       "No -"
     ],
     [
       "SOCI",
-      6,
+      "006",
       "Race & Ethnic Relations",
       "SS",
       "Yes - CDUS"
     ],
     [
       "SOCI",
-      10,
+      "010",
       "Social Stratification",
       "SS",
       "Yes - CDUS"
     ],
     [
       "SOCI",
-      11,
+      "011",
       "Urban Sociology ",
       "SS",
       "Yes -"
     ],
     [
       "SOCI",
-      41,
+      "041",
       "Homelessness & Urban Inequality",
       "SS",
       "Yes - CDUS"
     ],
     [
       "SOCI",
-      41,
+      "041",
       "Poverty and Inequality",
       "SS",
       "Yes - CDUS"
@@ -5574,21 +5574,21 @@
     ],
     [
       "STSC",
-      1,
+      "001",
       "The Emergence of Modern Science",
       "SS",
       "Yes -"
     ],
     [
       "STSC",
-      3,
+      "003",
       "Technology & Society",
       "SS",
       "Yes -"
     ],
     [
       "STSC",
-      78,
+      "078",
       "Everyday Technologies and the Making of the Modern World",
       "SS",
       "Yes -"
@@ -5714,49 +5714,49 @@
     ],
     [
       "THAR",
-      76,
+      "076",
       "Theatre in Philadelphia",
       "H",
       "No -"
     ],
     [
       "TURK",
-      21,
+      "021",
       "Elementary Turkish I ",
       "H",
       "No -"
     ],
     [
       "TURK",
-      22,
+      "022",
       "Elementary Turkish II ",
       "H",
       "No -"
     ],
     [
       "TURK",
-      23,
+      "023",
       "Intermediate Turkish I ",
       "H",
       "Yes -"
     ],
     [
       "TURK",
-      24,
+      "024",
       "Intermediate Turkish II ",
       "H",
       "Yes -"
     ],
     [
       "TURK",
-      27,
+      "027",
       "Advanced Spoken Turkish and Cinema I ",
       "H",
       "Yes -"
     ],
     [
       "TURK",
-      28,
+      "028",
       "Advanced Spoken Turkish and Cinema II ",
       "H",
       "Yes -"
@@ -5826,14 +5826,14 @@
     ],
     [
       "URBS",
-      10,
+      "010",
       "Homelessness & Urban Inequality",
       "SS",
       "Yes - CDUS"
     ],
     [
       "URBS",
-      18,
+      "018",
       "Music in Urban Spaces",
       "H",
       "Yes - CDUS"
@@ -5910,56 +5910,56 @@
     ],
     [
       "AFRC",
-      2,
+      "002",
       "Introduction to Sociology",
       "SS",
       "Yes - CDUS"
     ],
     [
       "AFRC",
-      6,
+      "006",
       "Race and Ethnic Relations ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "AFRC",
-      50,
+      "050",
       "World Musics and Cultures ",
       "FGE",
       "Yes -"
     ],
     [
       "AFRC",
-      53,
+      "053",
       "Music of Africa ",
       "FGE",
       "Yes -"
     ],
     [
       "AFRC",
-      70,
+      "070",
       "Colonial Latin America ",
       "FGE",
       "Yes -"
     ],
     [
       "AFRC",
-      76,
+      "076",
       "Africa Since 1800 ",
       "FGE",
       "Yes -"
     ],
     [
       "AFRC",
-      77,
+      "077",
       "Jazz Style and History ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "AFRC",
-      98,
+      "098",
       "Africana Studies Institute",
       "URE",
       "No -"
@@ -6260,14 +6260,14 @@
     ],
     [
       "AFST",
-      50,
+      "050",
       "World Musics and Cultures ",
       "FGE",
       "Yes -"
     ],
     [
       "AFST",
-      62,
+      "062",
       "Land of the Pharaohs ",
       "FGE",
       "Yes -"
@@ -6414,9 +6414,9 @@
     ],
     [
       "ANCH",
-      46,
-      "Myths and Religions of the Ancient World ",
-      "FGE",
+      "046",
+      "Myths and Religions of the Ancient World",
+      "H",
       "Yes -"
     ],
     [
@@ -6463,14 +6463,14 @@
     ],
     [
       "ANTH",
-      22,
+      "022",
       "World Music and Cultures ",
       "FGE",
       "Yes -"
     ],
     [
       "ANTH",
-      63,
+      "063",
       "East&West: A Hitchhiker's Guide to the Cultural History of the Modern World ",
       "FGE",
       "Yes -"
@@ -7219,7 +7219,7 @@
     ],
     [
       "ASAM",
-      6,
+      "006",
       "Race and Ethnic Relations ",
       "FGE",
       "Yes - CDUS"
@@ -7268,14 +7268,14 @@
     ],
     [
       "ASTR",
-      6,
+      "006",
       "The Solar System, Exoplanets, and Life ",
       "FGE",
       "No -"
     ],
     [
       "ASTR",
-      7,
+      "007",
       "The Big Bang and Beyond ",
       "FGE",
       "No -"
@@ -7590,28 +7590,28 @@
     ],
     [
       "BIOL",
-      8,
+      "008",
       "The Superbug Epidemic ",
       "FGE",
       "No -"
     ],
     [
       "BIOL",
-      15,
+      "015",
       "Biology of Human Disease ",
       "FGE",
       "No -"
     ],
     [
       "BIOL",
-      17,
+      "017",
       "The Biology of Food ",
       "FGE",
       "No -"
     ],
     [
       "BIOL",
-      19,
+      "019",
       "Biological Science and Public Policy ",
       "FGE",
       "No -"
@@ -8115,14 +8115,14 @@
     ],
     [
       "CHEM",
-      10,
+      "010",
       "Academic Based Community Service-Chemistry Outreach",
       "NSME",
       "No -"
     ],
     [
       "CHEM",
-      12,
+      "012",
       "Environmental Chemistry ",
       "FGE",
       "No -"
@@ -8248,56 +8248,56 @@
     ],
     [
       "CIMS",
-      14,
+      "014",
       "Italian Food Culture in Art, Cinema and Literature",
       "FGE",
       "Yes -"
     ],
     [
       "CIMS",
-      61,
+      "061",
       "Video I ",
       "FGE",
       "No -"
     ],
     [
       "CIMS",
-      62,
+      "062",
       "Video II ",
       "FGE",
       "No -"
     ],
     [
       "CIMS",
-      63,
+      "063",
       "Documentary Video ",
       "FGE",
       "No -"
     ],
     [
       "CIMS",
-      65,
+      "065",
       "Cinema Production ",
       "FGE",
       "No -"
     ],
     [
       "CIMS",
-      70,
+      "070",
       "Film Sound: History, Aesthetics & Subversion ",
       "FGE",
       "No -"
     ],
     [
       "CIMS",
-      73,
+      "073",
       "Radical Arts: Literature, Visual Arts, Theater, and Cinema in the Americas",
       "FGE",
       "Yes -"
     ],
     [
       "CIMS",
-      75,
+      "075",
       "Image and Sound Editing ",
       "FGE",
       "No -"
@@ -8752,21 +8752,21 @@
     ],
     [
       "CLST",
-      19,
+      "019",
       "Emotions",
       "FGE",
       "No -"
     ],
     [
       "CLST",
-      26,
+      "026",
       "Ancient Greece",
       "SS",
       "Yes -"
     ],
     [
       "CLST",
-      27,
+      "027",
       "Ancient Rome ",
       "FGE",
       "Yes -"
@@ -8969,98 +8969,98 @@
     ],
     [
       "COML",
-      1,
+      "001",
       "Approaches to Genre ",
       "FGE",
       "No -"
     ],
     [
       "COML",
-      2,
+      "002",
       "Approaches to Literary Studies ",
       "FGE",
       "No -"
     ],
     [
       "COML",
-      9,
+      "009",
       "Introduction to Digital Humanities ",
       "FGE",
       "No -"
     ],
     [
       "COML",
-      10,
+      "010",
       "Literature and Human Nature ",
       "FGE",
       "No -"
     ],
     [
       "COML",
-      12,
+      "012",
       "India's Literature: Love, War, Wisdom and Humor ",
       "FGE",
       "Yes -"
     ],
     [
       "COML",
-      13,
+      "013",
       "Introduction to Modern South Asian Literatures ",
       "FGE",
       "Yes -"
     ],
     [
       "COML",
-      23,
+      "023",
       "In Praise of the Small in Literature and the Arts ",
       "FGE",
       "No -"
     ],
     [
       "COML",
-      32,
+      "032",
       "Hipster Philosophy from Marx to Zizek ",
       "FGE",
       "Yes -"
     ],
     [
       "COML",
-      53,
+      "053",
       "Music of Africa ",
       "FGE",
       "Yes -"
     ],
     [
       "COML",
-      62,
+      "062",
       "20th-Century Poetry ",
       "FGE",
       "Yes -"
     ],
     [
       "COML",
-      65,
+      "065",
       "20th-Century British Novel ",
       "FGE",
       "Yes -"
     ],
     [
       "COML",
-      73,
+      "073",
       "Radical Arts: Literature, Visual Arts, Theater, and Cinema in the Americas",
       "FGE",
       "Yes -"
     ],
     [
       "COML",
-      90,
+      "090",
       "Women and Literature ",
       "FGE",
       "Yes -"
     ],
     [
       "COML",
-      99,
+      "099",
       "Television and New Media ",
       "FGE",
       "No -"
@@ -9075,8 +9075,8 @@
     [
       "COML",
       108,
-      "Greek and Roman Mythology ",
-      "FGE",
+      "Greek and Roman Mythology",
+      "H",
       "Yes -"
     ],
     [
@@ -9690,28 +9690,28 @@
     ],
     [
       "EALC",
-      25,
+      "025",
       "Chinese Popular Culture ",
       "FGE",
       "Yes -"
     ],
     [
       "EALC",
-      44,
+      "044",
       "China and the World: Modern Times ",
       "FGE",
       "Yes -"
     ],
     [
       "EALC",
-      47,
+      "047",
       "China in the 20th Century ",
       "FGE",
       "Yes -"
     ],
     [
       "EALC",
-      69,
+      "069",
       "Japanese Popular Culture ",
       "FGE",
       "Yes -"
@@ -9900,42 +9900,42 @@
     ],
     [
       "EAS",
-      28,
+      "028",
       "Mgmt & Tech Summer Institute",
       "URE",
       "No -"
     ],
     [
       "EAS",
-      30,
+      "030",
       "Effective Tech Report Writing",
       "FGE",
       "No -"
     ],
     [
       "EAS",
-      31,
+      "031",
       "Managing Technology Project Teams",
       "FGE",
       "No -"
     ],
     [
       "EAS",
-      32,
+      "032",
       "Making Effective Presentations",
       "FGE",
       "No -"
     ],
     [
       "EAS",
-      33,
+      "033",
       "Intercultural Awareness in Teamwork",
       "FGE",
       "No -"
     ],
     [
       "EAS",
-      97,
+      "097",
       "Embed Controlled Gardening",
       "NSME",
       "No -"
@@ -9991,49 +9991,49 @@
     ],
     [
       "ECON",
-      10,
+      "010",
       "Introduction to Economics for Business ",
       "FGE",
       "No -"
     ],
     [
       "ECON",
-      13,
+      "013",
       "Strategic Reasoning ",
       "FGE",
       "No -"
     ],
     [
       "ECON",
-      28,
+      "028",
       "Financial Meltdown, Past and Present",
       "FGE",
       "Yes -"
     ],
     [
       "ECON",
-      32,
+      "032",
       "Political Economy ",
       "FGE",
       "No -"
     ],
     [
       "ECON",
-      35,
+      "035",
       "Industrial Organization ",
       "FGE",
       "No -"
     ],
     [
       "ECON",
-      36,
+      "036",
       "Law and Economics ",
       "FGE",
       "No -"
     ],
     [
       "ECON",
-      50,
+      "050",
       "International Economics ",
       "FGE",
       "Yes -"
@@ -10243,14 +10243,14 @@
     ],
     [
       "EEUR",
-      9,
+      "009",
       "Russia and Eurasia ",
       "FGE",
       "Yes -"
     ],
     [
       "EEUR",
-      10,
+      "010",
       "Central and Eastern Europe: Cultures, Histories, Societies",
       "FGE",
       "Yes -"
@@ -10285,252 +10285,252 @@
     ],
     [
       "ENGL",
-      1,
+      "001",
       "Approaches to Genre ",
       "FGE",
       "No -"
     ],
     [
       "ENGL",
-      2,
+      "002",
       "Approaches to Literary Studies ",
       "FGE",
       "No -"
     ],
     [
       "ENGL",
-      9,
+      "009",
       "Introduction to Digital Humanities ",
       "FGE",
       "No -"
     ],
     [
       "ENGL",
-      18,
+      "018",
       "Old English ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      21,
+      "021",
       "Medieval Literature and Culture ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      25,
+      "025",
       "The Age of Chaucer ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      26,
+      "026",
       "Early Drama ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      29,
+      "029",
       "Classical Antiquity and English Literature ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      31,
+      "031",
       "Introduction to Renaissance Literature and Culture ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      34,
+      "034",
       "Cultures of The Book ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      41,
+      "041",
       "18th-Century British Literature ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      46,
+      "046",
       "Drama from 1660 - 1840 ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      47,
+      "047",
       "Scottish Literature ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      50,
+      "050",
       "The Romantic Period ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      55,
+      "055",
       "19th-Century Novel ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      56,
+      "056",
       "Modern Drama ",
       "FGE",
       "No -"
     ],
     [
       "ENGL",
-      57,
+      "057",
       "Literature of the Americas to 1900 ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "ENGL",
-      58,
+      "058",
       "Irish Literature ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      59,
+      "059",
       "Modernisms and Modernities ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      60,
+      "060",
       "Rise of the Novel ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      62,
+      "062",
       "20th-Century Poetry ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      65,
+      "065",
       "20th-Century British Novel ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      72,
+      "072",
       "Asian American Literature ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "ENGL",
-      73,
+      "073",
       "Radical Arts: Literature, Visual Arts, Theater, and Cinema in the Americas",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      75,
+      "075",
       "Science and Literature ",
       "FGE",
       "No -"
     ],
     [
       "ENGL",
-      76,
+      "076",
       "Literature in a Comparative Context ",
       "FGE",
       "No -"
     ],
     [
       "ENGL",
-      78,
+      "078",
       "Television and New Media ",
       "FGE",
       "No -"
     ],
     [
       "ENGL",
-      82,
+      "082",
       "Native-American Literature ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "ENGL",
-      87,
+      "087",
       "Theatre, History and Culture I, Classical Athens to Elizabethan London ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      88,
+      "088",
       "American Poetry ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "ENGL",
-      89,
+      "089",
       "American Fiction ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "ENGL",
-      91,
+      "091",
       "World Film History to 1945 ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      92,
+      "092",
       "World Film History 1945-Present ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      94,
+      "094",
       "Introduction to Literary Theory ",
       "FGE",
       "Yes -"
     ],
     [
       "ENGL",
-      96,
+      "096",
       "Theories of Gender and Sexuality ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "ENGL",
-      97,
+      "097",
       "Theatre, History and Culture II ",
       "FGE",
       "Yes -"
@@ -11349,63 +11349,63 @@
     ],
     [
       "FNAR",
-      62,
+      "062",
       "Video II ",
       "FGE",
       "No -"
     ],
     [
       "FNAR",
-      63,
+      "063",
       "Documentary Video ",
       "FGE",
       "No -"
     ],
     [
       "FNAR",
-      65,
+      "065",
       "Cinema Production ",
       "FGE",
       "No -"
     ],
     [
       "FNAR",
-      67,
+      "067",
       "Advanced Video Projects ",
       "FGE",
       "No -"
     ],
     [
       "FNAR",
-      70,
+      "070",
       "Film Sound: History, Aesthetics and Subversion ",
       "FGE",
       "No -"
     ],
     [
       "FNAR",
-      73,
+      "073",
       "Machine for Seeing: Architecture and the Moving Image ",
       "FGE",
       "No -"
     ],
     [
       "FNAR",
-      74,
+      "074",
       "A Virus in the Culture: Social Critique in Media Arts ",
       "FGE",
       "No -"
     ],
     [
       "FNAR",
-      75,
+      "075",
       "Image and Sound Editing ",
       "FGE",
       "No -"
     ],
     [
       "FNAR",
-      85,
+      "085",
       "Performance Studio ",
       "FGE",
       "No -"
@@ -11755,14 +11755,14 @@
     ],
     [
       "FOLK",
-      22,
+      "022",
       "World Music and Cultures ",
       "FGE",
       "Yes -"
     ],
     [
       "FOLK",
-      29,
+      "029",
       "Women and Religion ",
       "FGE",
       "Yes -"
@@ -12042,21 +12042,21 @@
     ],
     [
       "GRMN",
-      11,
+      "011",
       "Bad Taste",
       "H",
       "No -"
     ],
     [
       "GRMN",
-      23,
+      "023",
       "In Praise of the Small in Literature and the Arts ",
       "FGE",
       "No -"
     ],
     [
       "GRMN",
-      31,
+      "031",
       "Hipster Philosophy from Marx to Zizek ",
       "FGE",
       "Yes -"
@@ -12154,56 +12154,56 @@
     ],
     [
       "GSWS",
-      6,
+      "006",
       "History of Modern Philosophy ",
       "FGE",
       "Yes -"
     ],
     [
       "GSWS",
-      7,
+      "007",
       "Population and Society ",
       "FGE",
       "Yes -"
     ],
     [
       "GSWS",
-      8,
+      "008",
       "Critical Speaking Seminar ",
       "FGE",
       "No -"
     ],
     [
       "GSWS",
-      10,
+      "010",
       "Freshman Seminar (Politics of Reproduction)",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "GSWS",
-      28,
+      "028",
       "Introduction to Feminist Philosophy ",
       "FGE",
       "No -"
     ],
     [
       "GSWS",
-      50,
+      "050",
       "The Romantic Period ",
       "FGE",
       "Yes -"
     ],
     [
       "GSWS",
-      90,
+      "090",
       "Gender, Sexuality, and Literature ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "GSWS",
-      96,
+      "096",
       "Theories of Gender and Sexuality ",
       "FGE",
       "Yes - CDUS"
@@ -12455,154 +12455,154 @@
     ],
     [
       "HIST",
-      9,
+      "009",
       "Introduction to the Digital Humanities ",
       "FGE",
       "No -"
     ],
     [
       "HIST",
-      12,
+      "012",
       "Topics in Non-Western History ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      23,
+      "023",
       "Intro to Middle East ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      24,
+      "024",
       "Introduction to the Ancient Near East ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      26,
+      "026",
       "Ancient Greece",
       "SS",
       "Yes -"
     ],
     [
       "HIST",
-      27,
+      "027",
       "Ancient Rome ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      35,
+      "035",
       "Biology and Society ",
       "FGE",
       "No -"
     ],
     [
       "HIST",
-      36,
+      "036",
       "Medicine in History ",
       "FGE",
       "No -"
     ],
     [
       "HIST",
-      40,
+      "040",
       "Early Modern Europe, 1450-1750 ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      45,
+      "045",
       "Portraits of Old Russia ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      46,
+      "046",
       "Portraits of Soviet Society: Literature, Film, Drama ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      47,
+      "047",
       "Portraits of Russian Society",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      49,
+      "049",
       "The Soviet Century, 1917-1991 ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      51,
+      "051",
       "Modern Britain, 1783-2000: Empire, Expansion and Democracy ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      71,
+      "071",
       "Latin American Survey 1782-Present ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      75,
+      "075",
       "Africa Before 1800 ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      76,
+      "076",
       "Africa Since 1800 ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      85,
+      "085",
       "India: Culture and Society ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      87,
+      "087",
       "East&West: A Hitchhiker's Guide to the Cultural History of the Modern World ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      89,
+      "089",
       "Introduction to Modern India",
       "SS",
       "Yes -"
     ],
     [
       "HIST",
-      97,
+      "097",
       "History of Modern China ",
       "FGE",
       "Yes -"
     ],
     [
       "HIST",
-      98,
+      "098",
       "Introduction to Korean Civilization ",
       "FGE",
       "Yes -"
@@ -13057,21 +13057,21 @@
     ],
     [
       "HSOC",
-      1,
+      "001",
       "Emergence of Modern Science ",
       "FGE",
       "No -"
     ],
     [
       "HSOC",
-      3,
+      "003",
       "Technology and Society ",
       "FGE",
       "Yes -"
     ],
     [
       "HSOC",
-      42,
+      "042",
       "Snip and Tuck A History of Surgery ",
       "FGE",
       "No -"
@@ -13288,14 +13288,14 @@
     ],
     [
       "INTG",
-      1,
+      "001",
       "Integrated Studies I: Identity, Inheritance, Change ",
       "See Advisor",
       "Yes -"
     ],
     [
       "INTG",
-      2,
+      "002",
       "Integrated Studies II: ",
       "See Advisor",
       "Yes -"
@@ -13491,14 +13491,14 @@
     ],
     [
       "LALS",
-      70,
+      "070",
       "Colonial Latin America ",
       "FGE",
       "Yes -"
     ],
     [
       "LALS",
-      73,
+      "073",
       "Radical Arts: Literature, Visual Arts, Theater, and Cinema in the Americas",
       "FGE",
       "Yes -"
@@ -13624,7 +13624,7 @@
     ],
     [
       "LGIC",
-      10,
+      "010",
       "Ideas in Logic and Computation ",
       "FGE",
       "No -"
@@ -13666,14 +13666,14 @@
     ],
     [
       "LING",
-      77,
+      "077",
       "ASL/Deaf Studies - ABCS",
       "H",
       "Yes - CDUS"
     ],
     [
       "LING",
-      78,
+      "078",
       "Deaf Culture",
       "H",
       "Yes - CDUS"
@@ -14184,98 +14184,98 @@
     ],
     [
       "MUSC",
-      5,
+      "005",
       "College Music Program",
       "URE",
       "No -"
     ],
     [
       "MUSC",
-      7,
+      "007",
       "Ensemble Performance",
       "URE",
       "No -"
     ],
     [
       "MUSC",
-      30,
+      "030",
       "1000 Years of Musical Listening ",
       "FGE",
       "Yes -"
     ],
     [
       "MUSC",
-      32,
+      "032",
       "Composers ",
       "FGE",
       "Yes -"
     ],
     [
       "MUSC",
-      33,
+      "033",
       "History of Opera ",
       "FGE",
       "Yes -"
     ],
     [
       "MUSC",
-      35,
+      "035",
       "Jazz Style and History ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "MUSC",
-      44,
+      "044",
       "Popular Music ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "MUSC",
-      46,
+      "046",
       "Urban Sound Studies ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "MUSC",
-      50,
+      "050",
       "World Musics and Cultures ",
       "FGE",
       "Yes -"
     ],
     [
       "MUSC",
-      51,
+      "051",
       "Music of Africa ",
       "FGE",
       "Yes -"
     ],
     [
       "MUSC",
-      60,
+      "060",
       "Beginning Tabla I ",
       "FGE",
       "Yes -"
     ],
     [
       "MUSC",
-      61,
+      "061",
       "Indian Musical Performance A: Elementary ",
       "FGE",
       "Yes -"
     ],
     [
       "MUSC",
-      63,
+      "063",
       "Beginning Sitar II ",
       "FGE",
       "Yes -"
     ],
     [
       "MUSC",
-      81,
+      "081",
       "Film Sound and Film Music ",
       "FGE",
       "No -"
@@ -14373,21 +14373,21 @@
     ],
     [
       "NELC",
-      8,
+      "008",
       "Critical Speaking Seminar ",
       "FGE",
       "No -"
     ],
     [
       "NELC",
-      31,
+      "031",
       "History of the Middle East Since 1800 ",
       "FGE",
       "Yes -"
     ],
     [
       "NELC",
-      68,
+      "068",
       "Art and Architecture in Ancient Egypt ",
       "FGE",
       "Yes -"
@@ -14709,7 +14709,7 @@
     ],
     [
       "NURS",
-      65,
+      "065",
       "Fundamentals of Nutrition ",
       "FGE",
       "No -"
@@ -14996,91 +14996,91 @@
     ],
     [
       "PFP",
-      0,
+      "000",
       "Wharton Pre-Freshman Program",
       "URE",
       "No -"
     ],
     [
       "PHIL",
-      1,
+      "001",
       "Introduction to Philosophy ",
       "SS",
       "Yes -"
     ],
     [
       "PHIL",
-      15,
+      "015",
       "Logic and Formal Reasoning ",
       "FGE",
       "No -"
     ],
     [
       "PHIL",
-      24,
+      "024",
       "Philosophy of Biology ",
       "FGE",
       "No -"
     ],
     [
       "PHIL",
-      26,
+      "026",
       "Philosophy of Space and Time ",
       "FGE",
       "No -"
     ],
     [
       "PHIL",
-      28,
+      "028",
       "Introduction to Feminist Philosophy ",
       "FGE",
       "No -"
     ],
     [
       "PHIL",
-      29,
+      "029",
       "Philosophy of Sport ",
       "FGE",
       "No -"
     ],
     [
       "PHIL",
-      44,
+      "044",
       "Introduction to Cognitive Science ",
       "FGE",
       "No -"
     ],
     [
       "PHIL",
-      45,
+      "045",
       "Animal Minds ",
       "FGE",
       "No -"
     ],
     [
       "PHIL",
-      50,
+      "050",
       "Introduction to Indian Philosophy ",
       "FGE",
       "Yes -"
     ],
     [
       "PHIL",
-      51,
+      "051",
       "Yoga and Philosophy ",
       "FGE",
       "Yes -"
     ],
     [
       "PHIL",
-      71,
+      "071",
       "Animal Ethics ",
       "FGE",
       "No -"
     ],
     [
       "PHIL",
-      74,
+      "074",
       "Business Ethics ",
       "FGE",
       "No -"
@@ -15227,21 +15227,21 @@
     ],
     [
       "PHYS",
-      8,
+      "008",
       "Physics for Architects I ",
       "FGE",
       "No -"
     ],
     [
       "PHYS",
-      50,
+      "050",
       "Physics Laboratory I ",
       "FGE",
       "No -"
     ],
     [
       "PHYS",
-      51,
+      "051",
       "Physics Laboratory II ",
       "FGE",
       "No -"
@@ -15367,28 +15367,28 @@
     ],
     [
       "PPE",
-      8,
+      "008",
       "The Social Contract ",
       "FGE",
       "Yes -"
     ],
     [
       "PPE",
-      36,
+      "036",
       "Law and Economics ",
       "FGE",
       "No -"
     ],
     [
       "PPE",
-      62,
+      "062",
       "Soviet and Post-Soviet Economy ",
       "FGE",
       "Yes -"
     ],
     [
       "PPE",
-      72,
+      "072",
       "Biomedical Ethics ",
       "FGE",
       "No -"
@@ -15738,7 +15738,7 @@
     ],
     [
       "PSYC",
-      70,
+      "070",
       "Psychology of Food",
       "NSME",
       "No -"
@@ -15941,63 +15941,63 @@
     ],
     [
       "RELS",
-      11,
+      "011",
       "Science and Religion ",
       "FGE",
       "No -"
     ],
     [
       "RELS",
-      14,
+      "014",
       "Myths and Religions of the Ancient World",
-      "FGE",
+      "H",
       "Yes -"
     ],
     [
       "RELS",
-      16,
+      "016",
       "Religious Sacrifice",
       "FGE",
       "Yes -"
     ],
     [
       "RELS",
-      27,
+      "027",
       "Great Books of Judaism ",
       "FGE",
       "Yes -"
     ],
     [
       "RELS",
-      30,
+      "030",
       "Gurus, Prophets & Aliens: Understanding New Religious Movements ",
       "FGE",
       "Yes -"
     ],
     [
       "RELS",
-      31,
+      "031",
       "Religion and Violence ",
       "FGE",
       "Yes -"
     ],
     [
       "RELS",
-      66,
-      "Hindu Mythology ",
-      "FGE",
+      "066",
+      "Hindu Mythology",
+      "H",
       "Yes -"
     ],
     [
       "RELS",
-      68,
+      "068",
       "India: Culture and Society ",
       "FGE",
       "Yes -"
     ],
     [
       "RELS",
-      91,
+      "091",
       "Native American Literature ",
       "FGE",
       "Yes - CDUS"
@@ -16249,21 +16249,21 @@
     ],
     [
       "RUSS",
-      9,
+      "009",
       "Central and Eastern Europe: Cultures, Histories, Societies ",
       "FGE",
       "Yes -"
     ],
     [
       "RUSS",
-      10,
+      "010",
       "Russia and Eurasia ",
       "FGE",
       "Yes -"
     ],
     [
       "RUSS",
-      49,
+      "049",
       "The Soviet Century, 1917-1991 ",
       "FGE",
       "Yes -"
@@ -16410,28 +16410,28 @@
     ],
     [
       "SAST",
-      7,
+      "007",
       "Introduction to Modern South Asian Literatures ",
       "FGE",
       "Yes -"
     ],
     [
       "SAST",
-      8,
+      "008",
       "India: Culture and Society ",
       "FGE",
       "Yes -"
     ],
     [
       "SAST",
-      9,
+      "009",
       "Introduction to Hinduism ",
       "FGE",
       "Yes -"
     ],
     [
       "SAST",
-      50,
+      "050",
       "Introduction to Indian Philosophy ",
       "FGE",
       "Yes -"
@@ -16578,14 +16578,14 @@
     ],
     [
       "SOCI",
-      5,
+      "005",
       "American Society ",
       "FGE",
       "Yes - CDUS"
     ],
     [
       "SOCI",
-      7,
+      "007",
       "Population and Society ",
       "FGE",
       "Yes -"
@@ -16599,7 +16599,7 @@
     ],
     [
       "SOCI",
-      33,
+      "033",
       "Technology and Society ",
       "FGE",
       "Yes -"
@@ -16921,14 +16921,14 @@
     ],
     [
       "STSC",
-      2,
+      "002",
       "Medicine in History ",
       "FGE",
       "No -"
     ],
     [
       "STSC",
-      26,
+      "026",
       "Relativity and the Philosophy of Space and Time ",
       "FGE",
       "No -"
@@ -17075,7 +17075,7 @@
     ],
     [
       "THAR",
-      73,
+      "073",
       "Radical Arts: Literature, Visual Arts, Theater, and Cinema in the Americas",
       "FGE",
       "Yes -"
@@ -17194,7 +17194,7 @@
     ],
     [
       "URBS",
-      46,
+      "046",
       "Urban Sound Studies ",
       "FGE",
       "Yes - CDUS"
@@ -17684,14 +17684,14 @@
     ],
     [
       "CIMS",
-      15,
+      "015",
       "Freshman Seminar in Cinema and Media Studies ",
       "H",
       "See Advisor"
     ],
     [
       "CIMS",
-      16,
+      "016",
       "Freshman Seminar in Cinema and Media Studies ",
       "H",
       "See Advisor"
@@ -17712,14 +17712,14 @@
     ],
     [
       "ENGL",
-      15,
+      "015",
       "Topics in Literature ",
       "H",
       "See Advisor"
     ],
     [
       "ENGL",
-      16,
+      "016",
       "Topics in Literature ",
       "H",
       "See Advisor"
@@ -17747,21 +17747,21 @@
     ],
     [
       "MUSC",
-      16,
+      "016",
       "Freshman Seminar ",
       "H",
       "See Advisor"
     ],
     [
       "PHIL",
-      10,
+      "010",
       "Topics in Philosophy I ",
       "H",
       "See Advisor"
     ],
     [
       "PHIL",
-      32,
+      "032",
       "Topics in Contemporary Philosophy ",
       "SS",
       "See Advisor"
@@ -17782,14 +17782,14 @@
     ],
     [
       "SOCI ",
-      41,
+      "041",
       "Freshman Seminar",
       "SS",
       "See Advisor"
     ],
     [
       "SOCI",
-      41,
+      "041",
       "Social Inequality & Health",
       "SS",
       "Yes - CDUS"
@@ -18080,6 +18080,69 @@
       "Religion and Sports",
       "SS",
       "No -"
+    ],
+    [
+      "ECON",
+      272,
+      "China: Institutions and the Economy",
+      "FGE",
+      "Yes -"
+    ],
+    [
+      "PSCI",
+      272,
+      "China: Institutions and the Economy",
+      "FGE",
+      "Yes -"
+    ],
+    [
+      "KORN",
+      382,
+      "Business Korean II",
+      "H",
+      "Yes -"
+    ],
+    [
+      "EALC",
+      "034",
+      "What is Taoism?",
+      "FGE",
+      "Yes -"
+    ],
+    [
+      "RELS",
+      184,
+      "What is Taoism?",
+      "FGE",
+      "Yes -"
+    ],
+    [
+      "SAST",
+      295,
+      "Women in Modern South Asia",
+      "FGE",
+      "Yes -"
+    ],
+    [
+      "HIST",
+      279,
+      "Women in Modern South Asia",
+      "FGE",
+      "Yes -"
+    ],
+    [
+      "RELS",
+      295,
+      "Women in Modern South Asia",
+      "FGE",
+      "Yes -"
+    ],
+    [
+      "AFRC",
+      218,
+      "Race, Racism and American Law",
+      "FGE",
+      "Yes - CDUS"
     ]
   ]
 }

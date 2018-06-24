@@ -12598,14 +12598,14 @@
       "001",
       "Introduction to Microeconomics",
       "No ",
-      "SS"
+      "See Advisor"
     ],
     [
       "ECON",
       "002",
       "Introduction to Macroeconomics",
       "No ",
-      "SS"
+      "See Advisor"
     ],
     [
       "ECON",
@@ -20372,8 +20372,8 @@
     ],
     [
       "HIST",
-      "084",
-      "History of the Middle East in the 20th Century",
+      "088",
+      "The Middle East in the 20th Century",
       "Yes ",
       "SS"
     ],
@@ -24713,7 +24713,7 @@
     [
       "MUSC",
       "063",
-      "Beginning Star II",
+      "Beginning Sitar II",
       "Yes ",
       "LAC"
     ],
@@ -25545,7 +25545,7 @@
     ],
     [
       "NELC",
-      "032",
+      "088",
       "The Middle East in the 20th Century",
       "Yes ",
       "SS"
@@ -36203,6 +36203,48 @@
       "Sex and Socialism",
       "Yes ",
       "SS"
+    ],
+    [
+      "ECON",
+      272,
+      "China: Institutions and the Economy",
+      "Yes ",
+      "SS"
+    ],
+    [
+      "PSCI",
+      272,
+      "China: Institutions and the Economy",
+      "Yes ",
+      "SS"
+    ],
+    [
+      "KORN",
+      311,
+      "Topics in Advanced Korean",
+      "Yes ",
+      "LAC"
+    ],
+    [
+      "CIS",
+      105,
+      "Computational Data Exploration",
+      "No ",
+      "SandT"
+    ],
+    [
+      "COMM",
+      218,
+      "Social Media and Social Data",
+      "No ",
+      "LAC"
+    ],
+    [
+      "ENVS",
+      100,
+      "Introduction to Environmental Science",
+      "No ",
+      "SandT"
     ]
   ]
 }
