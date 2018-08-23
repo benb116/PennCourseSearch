@@ -38,6 +38,7 @@ module.exports = function(rpm) {
         request({
             uri: url,
             method: "GET",headers: {"Authorization-Bearer": AB, "Authorization-Token": AT}, // Send authorization headers
+            timeout: 19000,
         }, function(error, response, body) {
 
             if (error || response.statusCode >= 500) {
