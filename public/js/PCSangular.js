@@ -7,6 +7,9 @@ var PCS = angular.module('PCSApp', ['LocalStorageModule', 'tooltips']);
 PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules, pendingRequests){
 
     var currentTerm = '2018C';
+    var shouldAddLoc = true;
+    var locString = 'Loc' + currentTerm;
+
     var placeholderMap = {
         'courseIDSearch': 'Search for a department, course, or section',
         'keywordSearch': 'Search by course title or description',
@@ -103,6 +106,11 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
             return $scope.schedData[$scope.currentSched].meetings[index].idDashed;
         });
         $scope.schedules = Object.keys($scope.schedData);
+
+        if (shouldAddLoc && !localStorage[locString]) {
+            console.log('addingLoc')    
+            $scope.sched.AddLoc();
+        }
     };
     $scope.get = {
         Courses: function(param, type, req, pro) {
@@ -213,10 +221,8 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 UpdateSchedules.getSchedData(secID, needloc).then(function(resp) {
                     if (resp.data) {
                         if (resp.data[0].meetLoc !== '') {
-                            localStorage.setItem(currentTerm+'Loc', 'true');
+                            localStorage[locString] = true;
                         }
-                        // resp.data[0].meetLoc = "";
-                        // console.log(resp.data)
                         var oldData = $scope.schedData[(schedname || $scope.currentSched)].meetings;
                         var otherData = oldData.filter(function(meet) {
                             return (meet.idDashed !== secID);
