@@ -100,7 +100,7 @@ module.exports = function(rpm) {
         } else {
             searchResponse = {};
         }
-        if (res) {return res.send(JSON.stringify(searchResponse));} // return correct info
+        if (res !== {}) {return res.send(JSON.stringify(searchResponse));} // return correct info
     }
 
     // Delay a requests the necessary amount of time before sending it to the API

@@ -33,8 +33,8 @@ for (var i = 0; i < codearray.length; i++) {
         engreq[codearray[i]].eng = false;
     }
     if (req === 'writ') { // For writing, instead of true or false, assume that a record means true and specifiy the req it fills
-        if (process.argv[3][0].toLowerCase() === 'h') {engreq[codearray[1]].hum = true;}
-        if (process.argv[3][0].toLowerCase() === 's') {engreq[codearray[1]].ss = true;}
+        if (process.argv[3][0].toLowerCase() === 'h') {engreq[codearray[i]].writ = true; engreq[codearray[i]].hum = true;}
+        if (process.argv[3][0].toLowerCase() === 's') {engreq[codearray[i]].writ = true; engreq[codearray[i]].ss = true;}
     }
 }
 console.log(engreq);

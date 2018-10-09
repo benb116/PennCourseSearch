@@ -120,13 +120,12 @@ function EngReqRules(dept, num, cross) {
                 (dept === 'BIOL' && Number(num) > 100)       ||     // Only Biol classes > 100
                 (dept === 'GEOL' && Number(num) > 200)       ||     // Only Geol classes > 200
                 (dept === 'PHYS' && Number(num) >=150)) {           // Only Phys classes >=150
-
                 thisEngObj.natsci = true;
             }
         }
         // Check Engineering
         if (EngineerReq[dept].eng) {
-            if (num !== '296' && num !== '297') { // No engineering classes with num 296 or 297
+            if (num !== '296' && num !== '297' && num < 600) { // No engineering classes with num 296 or 297 and not necessarily 600 level
                 thisEngObj.eng = true;
             }
         }
@@ -150,17 +149,16 @@ function EngReqRules(dept, num, cross) {
         }
     }
     specificReq = (EngineerReq[dept+'-'+num] || {});
-    if (specificReq.hasOwnProperty('math'))   {thisEngObj.math   = specificReq.math;}
-    if (specificReq.hasOwnProperty('natsci')) {thisEngObj.natsci = specificReq.natsci;}
-    if (specificReq.hasOwnProperty('eng'))    {thisEngObj.eng    = specificReq.eng;}
-    if (specificReq.hasOwnProperty('ss'))     {thisEngObj.ss     = specificReq.ss;}
-    if (specificReq.hasOwnProperty('hum'))    {thisEngObj.hum    = specificReq.hum;}
-    if (specificReq.hasOwnProperty('tbs'))    {thisEngObj.tbs    = specificReq.tbs;}
-    if (specificReq.hasOwnProperty('writ'))   {thisEngObj.writ   = specificReq.writ;}
-    if (specificReq.hasOwnProperty('nocred')) {thisEngObj.nocred = specificReq.nocred;}
+    thisEngObj = Object.assign(thisEngObj, specificReq);
 
     // tbs classes don't count for engineering
     if (thisEngObj.tbs) {thisEngObj.eng = false;}
+
+    if (dept === 'IPD' && cross) { // IPD Rule
+        if (cross.subject === 'ARCH' || cross.subject === 'EAS' || cross.subject === 'FNAR') {
+            thisEngObj.eng = false;
+        }
+    }
 
     if (thisEngObj.math)   {engreqCodesList.push('EMAT'); engreqList.push(reqCodes.EMAT);}
     if (thisEngObj.natsci) {engreqCodesList.push('ESCI'); engreqList.push(reqCodes.ESCI);}
@@ -171,7 +169,9 @@ function EngReqRules(dept, num, cross) {
     if (thisEngObj.writ)   {engreqCodesList.push('EWRT'); engreqList.push(reqCodes.EWRT);}
     if (thisEngObj.nocred) {engreqCodesList.push('ENOC'); engreqList.push(reqCodes.ENOC);}
 
-    if (dept === 'ASAM' && cross) {
+    var listCross = ['AFST', 'ASAM', 'AFRC', 'AAMW', 'CINE', 'GSWS'];
+
+    if (listCross.indexOf(dept) > -1 && cross) {
         engReturn = EngReqRules(cross.subject, cross.course_id);
         engreqCodesList = engReturn[0];
         engreqList = engReturn[1];
