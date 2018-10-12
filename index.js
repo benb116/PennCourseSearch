@@ -68,7 +68,7 @@ git.short(function (str) {
 });
 
 var currentTerm = '2019A'; // Which term is currently active
-var LRTimes = [0, 0]; // Timestamps of latest requests using each OpenData key (see OpenData.js)
+var LRTimes = Array(config.requestAB.length).fill(0); // Timestamps of latest requests using each OpenData key (see OpenData.js)
 var ODkeyInd = 0; // Which key to use next
 
 // Pull in external data and functions
@@ -194,7 +194,10 @@ app.get('/Search', function(req, res) {
             // Latest timestamp
             // Auth key to use
         LRTimes[ODkeyInd] = opendata.RateLimitReq(baseURL, resultType, res, LRTimes[ODkeyInd], ODkeyInd);
-        ODkeyInd = 1 - ODkeyInd; // Use the other auth key next time
+        ODkeyInd++; // Use the other auth key next time
+        if (ODkeyInd >= LRTimes.length) {
+            ODkeyInd = 0;
+        }
     }
 });
 

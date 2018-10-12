@@ -108,7 +108,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         $scope.schedules = Object.keys($scope.schedData);
 
         if (shouldAddLoc && !localStorage[locString]) {
-            console.log('addingLoc')    
             $scope.sched.AddLoc();
         }
     };
