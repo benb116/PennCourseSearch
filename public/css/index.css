@@ -526,10 +526,42 @@ hr {
 	display: block;
 	box-sizing: border-box;
 	position: absolute;
-	border: 1px solid black;
 	overflow-y: hidden;
 	cursor: pointer;
 	color: black;
+	border-top: 2px solid;
+}
+
+.SchedBlock.red{
+	border-top-color:#D0021B;
+}
+
+.SchedBlock.orange{
+	border-top-color:#F5A623;
+}
+
+.SchedBlock.blue{
+	border-top-color:#00BFDD;
+}
+
+.SchedBlock.aqua{
+	border-top-color:#35E1BB;
+}
+
+.SchedBlock.green{
+	border-top-color:#7ED321;
+}
+
+.SchedBlock.pink{
+	border-top-color:#FF34CC;
+}
+
+.SchedBlock.sea{
+	border-top-color:#3055CC;
+}
+
+.SchedBlock.indigo{
+	border-top-color:#7874CF;
 }
 
 .SchedBlock > span {

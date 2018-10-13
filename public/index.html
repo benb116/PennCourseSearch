@@ -304,7 +304,7 @@
 						<div ng-repeat="weekday in fullWeekdays" class="DayName" style="width:{{percentWidth}}%;">{{weekday}}</div>
 
 						<div ng-repeat="thisBlock in schedBlocks" 
-						class="SchedBlock {{thisBlock.class}} {{thisBlock.letterday}}" 
+						class="SchedBlock {{thisBlock.class}} {{thisBlock.letterday}} {{thisBlock.topc}}"
 						id="{{thisBlock.id}}" 
 						style="
 						top: {{thisBlock.top}}%;

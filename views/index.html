@@ -300,9 +300,9 @@
 						<hr ng-repeat="thisline in schedlines" width="99.7%" style="top:{{thisline}}%"></hr>
 						<div ng-repeat="weekday in fullWeekdays" class="DayName" style="width:{{percentWidth}}%;">{{weekday}}</div>
 
-						<div ng-repeat="thisBlock in schedBlocks" 
-						class="SchedBlock {{thisBlock.class}} {{thisBlock.letterday}}" 
-						id="{{thisBlock.id}}" 
+						<div ng-repeat="thisBlock in schedBlocks"
+						class="SchedBlock {{thisBlock.class}} {{thisBlock.topc}} {{thisBlock.letterday}}"
+						id="{{thisBlock.id}}"
 						style="
 						top: {{thisBlock.top}}%;
 						left: {{thisBlock.left}}%;
@@ -311,6 +311,7 @@
 						background-color: {{thisBlock.color}}"
 						ng-click="clearSearch();initiateSearch(thisBlock.class, 'courseIDSearch');"
 						ng-mouseover="expression">
+							{{thisBlock.class}}
 							<div class="CloseX" style="width:100%;height:100%;"><span ng-click="e.stopPropagation(); sched.AddRem(thisBlock.class);">X</span></div>
 							<div class="NeedAssc" ng-hide="sched.CrossCheck(thisBlock.asscsecs)" title="Registration is required for an associated section."><b>!</b></div>
 							<span class="SecName">{{thisBlock.name}}</span>

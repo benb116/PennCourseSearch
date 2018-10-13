@@ -192,7 +192,8 @@ function GenMeetBlocks(sec) {
             'duration': sec.hourLength,
             'name': sec.idSpaced,
             'room': meetRoom,
-            'asscsecs': asscsecs
+            'asscsecs': asscsecs,
+            "topc" : "blue"
         };
         blocks.push(newblock);
     }}
