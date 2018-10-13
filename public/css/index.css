@@ -530,6 +530,7 @@ hr {
 	cursor: pointer;
 	color: black;
 	border-top: 2px solid;
+    margin-top:5px;
 }
 
 .SchedBlock.red{

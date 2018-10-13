@@ -4,12 +4,6 @@ var PCS = angular.module('PCSApp', ['LocalStorageModule', 'tooltips']);
     I know this is scope soup. If you'd like to fix it (or give me advice about Angular), let me know.
 */
 
-top_colors = ["red","orange","blue","aqua","green","pink","sea","indigo"];
-
-function generate_color(var1,var2){
-    return top_colors[(["M","T","W","R","F"].indexOf(var1) + var2)%top_colors.length]
-}
-
 PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules, pendingRequests){
 
     var currentTerm = '2018C';
@@ -487,7 +481,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 block.height = block.duration * halfScale;
                 block.color  = ("#E6E6E6"); // Get the color
                 block.width  = $scope.percentWidth;
-                block.topc = generate_color(block.letterday,block.startHr);
+                block.topc = generate_color(block.letterday,block.startHr,block.name);
                 console.log(block.topc);
                 return block;
             }
