@@ -508,6 +508,7 @@ ul {
 hr {
 	position: absolute;
 	text-align: right;
+	margin-5px;
 }
 
 .TimeBlock {
