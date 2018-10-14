@@ -32,177 +32,202 @@
 </head>
 
 <body ng-controller="CourseController" ng-cloak>
-	<i class="fa fa-volume-off" style="position:absolute;top:0.25em;left:0.25em;font-size:2em;visibility:hidden" onclick="$('iframe').remove(); $(this).hide()"></i>
-	<div id="MenuBar">
-		<!-- <a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Donate</span></a> -->
-		<a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span style="padding-right:0.5em;"><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
-		<a rel="leanModal" href="#ModalWindow" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')" style="padding-right:0.5em;">About</a>
-	</div>
-
-	<div id="Top">
-		<h1>PennCourseSearch</h1>
-		<span id="subtitle">{{ subtitle }}</span>
-
-		<span id = "searchbar">
-			<form ng-submit="delaySearch()">
-				<span>Search by:</span>
-				<select id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="searchChange()">
-					<!-- Re search if this select changes -->
-					<option selected="selected" value="courseIDSearch">Course ID</option>
-					<option value="keywordSearch">Keywords</option>
-					<option value="instSearch">Instructor</option>
-				</select>
-				<input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
-				<span style="margin-left:1em;">Schedule:</span>
-				<select id="schedSelect" ng-model="currentSched" ng-change="schedChange()">
-					<option ng-repeat="schedName in schedules" value="{{schedName}}">{{schedName}}</option>
-				</select>
-				<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>
-				<!-- This only shows if loading == true. Need to use visibility: hidden -->
-			</form>
-		</span>
-
-		<div id="MenuButtons">
-			<ul>
-				<li>
-					Schedule <i class="fa fa-caret-down"></i>
-					<ul>
-						<li ng-click="sched.New()">New</li>
-						<li ng-click="sched.Recolor()">Recolor</li>
-						<a ng-click="sched.Download()" rel="leanModal" href="#SchedModal">
-							<li>Download</li>
-						</a>
-						<li ng-click="sched.Duplicate()">Duplicate</li>
-						<li ng-click="sched.Rename()">Rename</li>
-						<li ng-click="sched.Clear()">Clear</li>
-						<li ng-click="sched.Delete()">Delete</li>
-					</ul>
-				</li>
-				<li ng-click="star.Show()"><span>Show Stars</span></li>
-				<a rel="leanModal" href="#UploadModal" id="ImportButton" onclick="ga('send', 'event', 'UI interaction', 'import')">
-					<li>Import</li>
-				</a>
-				<li ng-click="clearSearch()"><span>Clear Search</span></li>
-			</ul>
+	<nav class="navbar is-link" role="navigation" >
+		<div class="navbar-brand">
+			<a class="navbar-item" href="/">
+				<img src="favicon.ico">
+			</a>
+			<a class="navbar-item nav-header">
+				Penn Course Search
+			</a>
 		</div>
-	</div>
-	<div id="BottomResults">
-		<div id="CourseList">
+		<div class="navbar-menu">
+			<div class="navbar-start">
 
-			<div id="CourseHeader">
-				<span class="PCR Qual tooltip" title="Course quality rating" style="background:rgba(45, 160, 240, 0.85);margin-left:0.45em">Qual</span>
-				<span class="PCR Diff tooltip" title="Course difficulty rating" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
-				<span style="margin-left:0.5em;margin-right:0.5em;">Sort by: </span>
-				<select id="sortCourses" ng-model="courseSort" style="margin-bottom:0.5em;">
-					<option value="idDashed">Course Number</option>
-					<option value="-revs.cQ">Quality (high to low)</option>
-					<option value="revs.cD">Difficulty (easy to hard)</option>
-					<option value="-revs.QDratio">Good and Easy</option>
-				</select>
+			</div>
+			<div class="navbar-end">
+				<a class="navbar-item" href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch">
+					<i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</a>
+				<a class="navbar-item" rel="leanModal" href="#ModalWindow" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')" style="padding-right:0.5em;">About</a>
+			</div>
+		</div>
+	</nav>
+
+	<div>
+		<!--Searchbar-->
+		<div id="searchbar">
+			<span>Search by:</span>
+			<select id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="searchChange()">
+				<!-- Re search if this select changes -->
+				<option selected="selected" value="courseIDSearch">Course ID</option>
+				<option value="keywordSearch">Keywords</option>
+				<option value="instSearch">Instructor</option>
+			</select>
+			<span style="margin-left:1em;">Schedule:</span>
+			<select id="schedSelect" ng-model="currentSched" ng-change="schedChange()">
+				<option ng-repeat="schedName in schedules" value="{{schedName}}">{{schedName}}</option>
+			</select>
+			<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>
+		</div>
+		<!--Toolbar-->
+		<div class="columns is-gapless">
+			<div class="column is-one-third"></div>
+			<div class="column">
+				<div class="dropdown is-hoverable">
+					<div class="dropdown-trigger">
+						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+							<span>Schedule</span>
+							<span class="icon is-small">
+								<i class="fa fa-angle-down" aria-hidden="true"></i>
+							</span>
+						</button>
+					</div>
+					<div class="dropdown-menu" id="dropdown-menu4" role="menu">
+						<div class="dropdown-content">
+							<a class="dropdown-item" ng-click="sched.New()">New</a>
+							<a class="dropdown-item" ng-click="sched.Download()" rel="leanModal" href="#SchedModal">
+								Download
+							</a>
+							<a class="dropdown-item" ng-click="sched.Duplicate()">Duplicate</a>
+							<a class="dropdown-item" ng-click="sched.Rename()">Rename</a>
+							<a class="dropdown-item" ng-click="sched.Clear()">Clear</a>
+							<a class="dropdown-item" ng-click="sched.Delete()">Delete</a>
+						</div>
+					</div>
+				</div>
+				<button class="button" ng-click="star.Show()"><span>Show Stars</span></button>
+				<a class="button" rel="leanModal" href="#UploadModal" id="ImportButton" onclick="ga('send', 'event', 'UI interaction', 'import')">
+					Import
+				</a>
+				<button class="button" ng-click="clearSearch()"><span>Clear Search</span></button>
+			</div>
+			<div class="column is-one-third"></div>
+		</div>
+	<div class="columns">
+		<div class="column is-two-fifths">
+			<div>
+				<form ng-submit="delaySearch()">
+					<input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
+					<!-- This only shows if loading == true. Need to use visibility: hidden -->
+				</form>
 			</div>
 
-			<ul>
-				<li ng-repeat="course in courses | orderBy:courseSort" 
-					id="{{ course.idDashed }}" 
-					ng-click="get.Sections(course.idDashed)" 
-					ng-class="{'activeItem': (currentCourse.toUpperCase() == course.idSpaced.replace(' ', ''))}"
-					ng-if="
-						(!checkArr[0] || course.courseReqs.indexOf(checkArr[0]) > -1) &amp;&amp; 
-						(!checkArr[1] || course.courseReqs.indexOf(checkArr[1]) > -1) &amp;&amp; 
-						(!checkArr[2] || course.courseReqs.indexOf(checkArr[2]) > -1) &amp;&amp; 
-						(!checkArr[3] || course.courseReqs.indexOf(checkArr[3]) > -1) &amp;&amp; 
+			<div class="columns">
+				<div id="CourseList" class="column">
+					<div id="CourseHeader">
+						<span class="PCR Qual tooltip" title="Course quality rating" style="background:rgba(45, 160, 240, 0.85);margin-left:0.45em">Qual</span>
+						<span class="PCR Diff tooltip" title="Course difficulty rating" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
+						<span style="margin-left:0.5em;margin-right:0.5em;">Sort by: </span>
+						<select id="sortCourses" ng-model="courseSort" style="margin-bottom:0.5em;">
+							<option value="idDashed">Course Number</option>
+							<option value="-revs.cQ">Quality (high to low)</option>
+							<option value="revs.cD">Difficulty (easy to hard)</option>
+							<option value="-revs.QDratio">Good and Easy</option>
+						</select>
+					</div>
+
+					<ul>
+						<li ng-repeat="course in courses | orderBy:courseSort"
+							id="{{ course.idDashed }}"
+							ng-click="get.Sections(course.idDashed)"
+							ng-class="{'activeItem': (currentCourse.toUpperCase() == course.idSpaced.replace(' ', ''))}"
+							ng-if="
+						(!checkArr[0] || course.courseReqs.indexOf(checkArr[0]) > -1) &amp;&amp;
+						(!checkArr[1] || course.courseReqs.indexOf(checkArr[1]) > -1) &amp;&amp;
+						(!checkArr[2] || course.courseReqs.indexOf(checkArr[2]) > -1) &amp;&amp;
+						(!checkArr[3] || course.courseReqs.indexOf(checkArr[3]) > -1) &amp;&amp;
 						(!checkArr[4] || course.courseReqs.indexOf(checkArr[4]) > -1)
 					"
-					ng-hide="(course.courseCred != credFilter) &amp;&amp; (credFilter != 'noFilter')">
-					<!--Dealing with requirements: The list element will be shown if: 
-						There are no requirements (checkArr == [], therefore !checkArr[0] && !checkArr[1]) 
-						OR
-						There is one requirement (checkArr[0] && !checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0] 
-						OR
-						There are two requirements (checkArr[0] && checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0] AND checkArr[1]
+							ng-hide="(course.courseCred != credFilter) &amp;&amp; (credFilter != 'noFilter')">
+							<!--Dealing with requirements: The list element will be shown if:
+                                There are no requirements (checkArr == [], therefore !checkArr[0] && !checkArr[1])
+                                OR
+                                There is one requirement (checkArr[0] && !checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0]
+                                OR
+                                There are two requirements (checkArr[0] && checkArr[1]) AND the course's array of reqs fulfilled contains checkArr[0] AND checkArr[1]
 
-						Also hide the course if it doesn't match the number of credits
-					-->
-					<span class="PCR Qual" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQT}}</span>
-					<span class="PCR Diff" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cDT}}</span>
-					<span class="cID">{{ course.idSpaced }}</span>
-					<span class="cTitle">{{ course.courseTitle }}</span>
-				</li>
-			</ul>
-		</div>
-
-		<div id="SectionCol">
-			<div id="Sections">
-				<div style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-					<span class="tooltip" title="Section status (open or closed)" style="margin-left:1em;margin-right:-0.2em;">O/C</span>
-					<span class="PCR Inst tooltip" title="Instructor Quality rating" style="background:rgba(46, 204, 113, 0.85);">Inst</span>
-					<span style="display:inline;text-overflow:ellipsis">{{secListTitle}}</span>
-				</div>
-
-				<div id="SectionList">
-					<ul>
-						<li ng-repeat="section in sections" 
-						id="{{ section.idDashed }}" 
-						class="{{section.actType}}" 
-						ng-class="{'activeItem': (currentSection == section.idSpaced.replace(' ', '').replace(' ', '')), 
-							'hideSec': (!sched.SecOverlap(section) &amp;&amp; schedSections.indexOf(section.idDashed) == -1)}" 
-						ng-show="
-							(showAct == section.actType || showAct == 'noFilter') &amp;&amp;
-							(section.isOpen || showClosed) &amp;&amp; 
-							(currentCourse || starSections.indexOf(section.idDashed) > -1)
-						">
-							<!--Dealing with closed sections, activity types, and stars. The list element will show if:
-								There is no activity filter OR the section actType matches the activity filter
-								AND
-								Closed sections are enabled (showClosed === true) OR the section is open
-								ANDThere is a current course selected (true when user clicks "Show Stars") or the section is starred
-							 -->
-							<i class="fa" 
-							ng-class="{'fa-plus': schedSections.indexOf(section.idDashed) === -1, 
-								'fa-times': schedSections.indexOf(section.idDashed) > -1}" 
-							ng-click="sched.AddRem(section.idDashed)"></i>
-							<!-- The icon should be a + if the section is not currently scheduled and an x if it is -->
-							<span class="statusClass" 
-							ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}" 
-							ng-click="get.SectionInfo(section.idDashed)">
-							<!-- the status square should be green if the section is open, red if it's closed -->
-
-								<i class="fa fa-envelope tooltip" 
-								ng-hide="section.isOpen" 
-								ng-click="Notify(section.idDashed)" 
-								title="PennCourseNotify"></i>
-
-								<!-- If the section is closed, show the notify icon -->
-							</span>
-							<!-- <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span> -->
-							<span class="PCR Inst" style="background:rgba(46, 204, 113, {{ section.pcrIShade }});color: {{ section.pcrIColor }}" ng-click="get.SectionInfo(section.idDashed)">{{ section.revs.cI | number:2}}</span>
-							<i class="fa" ng-class="{'fa-star': starSections.indexOf(section.idDashed) > -1, 'fa-star-o': starSections.indexOf(section.idDashed) === -1}" ng-click="star.AddRem(section.idDashed)"></i>
-							<!-- Show an full star if the section is starred, empty star if not -->
-							<!-- <div style="display:inline-block;width:17em"> -->
-							<span class="sectionText" ng-click="get.SectionInfo(section.idDashed)">{{ section.idSpaced}} - {{ section.timeInfo }} </span>
-							<!-- </div> -->
+                                Also hide the course if it doesn't match the number of credits
+                            -->
+							<span class="PCR Qual" style="background:rgba(45, 160, 240, {{ course.pcrQShade }});color: {{ course.pcrQColor }} ">{{ course.revs.cQT}}</span>
+							<span class="PCR Diff" style="background:rgba(231, 76, 60, {{ course.pcrDShade }});color: {{ course.pcrDColor }} ">{{ course.revs.cDT}}</span>
+							<span class="cID">{{ course.idSpaced }}</span>
+							<span class="cTitle">{{ course.courseTitle }}</span>
 						</li>
 					</ul>
 				</div>
-			</div>
+				<div id="SectionCol" class="column is-half">
+					<div id="Sections">
+						<div style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+							<span class="tooltip" title="Section status (open or closed)" style="margin-left:1em;margin-right:-0.2em;">O/C</span>
+							<span class="PCR Inst tooltip" title="Instructor Quality rating" style="background:rgba(46, 204, 113, 0.85);">Inst</span>
+						</div>
 
-			<div id="SectionInfo">
-				<span ng-show="sectionInfo.fullID" style="font-size:1.25em"> {{sectionInfo.fullID}} - {{sectionInfo.title}} <br><br></span>
-				<span ng-show="sectionInfo.timeInfo"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}} <br></span></span>
-				<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></span>
-				<!-- <span ng-show="sectionInfo.sectionCred"> {{ sectionInfo.sectionCred }} CU <br><br></span> -->
-				<span ng-show="sectionInfo.description">Description: {{sectionInfo.description}} <br><br></span>
-				<span ng-show="sectionInfo.reqsFilled.length">Requirements Fulfilled: <br><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span>
+						<div id="SectionList">
+							<ul>
+								<li ng-repeat="section in sections"
+									id="{{ section.idDashed }}"
+									class="{{section.actType}}"
+									ng-class="{'activeItem': (currentSection == section.idSpaced.replace(' ', '').replace(' ', '')),
+							'hideSec': (!sched.SecOverlap(section) &amp;&amp; schedSections.indexOf(section.idDashed) == -1)}"
+									ng-show="
+							(showAct == section.actType || showAct == 'noFilter') &amp;&amp;
+							(section.isOpen || showClosed) &amp;&amp;
+							(currentCourse || starSections.indexOf(section.idDashed) > -1)
+						">
+									<!--Dealing with closed sections, activity types, and stars. The list element will show if:
+                                        There is no activity filter OR the section actType matches the activity filter
+                                        AND
+                                        Closed sections are enabled (showClosed === true) OR the section is open
+                                        ANDThere is a current course selected (true when user clicks "Show Stars") or the section is starred
+                                     -->
+									<i class="fa"
+									   ng-class="{'fa-plus': schedSections.indexOf(section.idDashed) === -1,
+								'fa-times': schedSections.indexOf(section.idDashed) > -1}"
+									   ng-click="sched.AddRem(section.idDashed)"></i>
+									<!-- The icon should be a + if the section is not currently scheduled and an x if it is -->
+									<span class="statusClass"
+										  ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"
+										  ng-click="get.SectionInfo(section.idDashed)">
+							<!-- the status square should be green if the section is open, red if it's closed -->
+
+								<i class="fa fa-envelope tooltip"
+								   ng-hide="section.isOpen"
+								   ng-click="Notify(section.idDashed)"
+								   title="PennCourseNotify"></i>
+
+										<!-- If the section is closed, show the notify icon -->
+							</span>
+									<!-- <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span> -->
+									<span class="PCR Inst" style="background:rgba(46, 204, 113, {{ section.pcrIShade }});color: {{ section.pcrIColor }}" ng-click="get.SectionInfo(section.idDashed)">{{ section.revs.cI | number:2}}</span>
+									<i class="fa" ng-class="{'fa-star': starSections.indexOf(section.idDashed) > -1, 'fa-star-o': starSections.indexOf(section.idDashed) === -1}" ng-click="star.AddRem(section.idDashed)"></i>
+									<!-- Show an full star if the section is starred, empty star if not -->
+									<!-- <div style="display:inline-block;width:17em"> -->
+									<span class="sectionText" ng-click="get.SectionInfo(section.idDashed)">{{ section.idSpaced}} - {{ section.timeInfo }} </span>
+									<!-- </div> -->
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div id="SectionInfo">
+						<span ng-show="sectionInfo.fullID" style="font-size:1.25em"> {{sectionInfo.fullID}} - {{sectionInfo.title}} <br><br></span>
+						<span ng-show="sectionInfo.timeInfo"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}} <br></span></span>
+						<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></span>
+						<!-- <span ng-show="sectionInfo.sectionCred"> {{ sectionInfo.sectionCred }} CU <br><br></span> -->
+						<span ng-show="sectionInfo.description">Description: {{sectionInfo.description}} <br><br></span>
+						<span ng-show="sectionInfo.reqsFilled.length">Requirements Fulfilled: <br><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span>
 				<br></span>
-				<span ng-show="sectionInfo.prereqs"> Prerequisites: {{sectionInfo.prereqs}} <br><br></span>
-				<span ng-show="sectionInfo.associatedType"> You must also sign up for a {{sectionInfo.associatedType}}. <br> Associated {{sectionInfo.associatedType}}s: <br></span>
-				<ul>
-					<li ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="get.SectionInfo(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></li>
-				</ul>
+						<span ng-show="sectionInfo.prereqs"> Prerequisites: {{sectionInfo.prereqs}} <br><br></span>
+						<span ng-show="sectionInfo.associatedType"> You must also sign up for a {{sectionInfo.associatedType}}. <br> Associated {{sectionInfo.associatedType}}s: <br></span>
+						<ul>
+							<li ng-repeat="asscSec in sectionInfo.associatedSections" id="{{asscSec.replace(' ', '-').replace(' ', '-')}}" ng-click="get.SectionInfo(asscSec.replace(' ', '-').replace(' ', '-'))"> {{asscSec}} <br></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div id="InfoPanel">
+		<div id="InfoPanel" class="column">
 			<div id="FilterSearch">
 				<div class="FilterPanel" style="width:60%;">
 					<div class="FilterBlock">
@@ -332,13 +357,13 @@
 	</div>
 
 	<div id="ModalWindow" class="Modal">
-			<h2>About PennCourseSearch</h2>
+			<h2 class="title">About PennCourseSearch</h2>
 			<p>PennCourseSearch is a cleaner and simpler way for Quakers to find classes and make schedules. While this is not a full replacement for Penn InTouch, it acts as an improvement of the "Course Search" and "Mock Schedules" features. Search across departments, courses, and sections and refine searches by specific criteria.</p>
-			<h2>How do I search for courses?</h2>
+			<h2 class="title">How do I search for courses?</h2>
 			<p>Just type a course in the search box. Then you can click on the results to see more in-depth information about different sections. If you want to filter the results, click on the filter button and change your options. You can also choose to search by course description or instructor in the menu bar.</p>
-			<h2>How do I change my schedule?</h2>
+			<h2 class="title">How do I change my schedule?</h2>
 			<p>To add a section to your schedule, click on its <i class="fa fa-plus" style="display:inline"></i> icon. To remove a course, mouse over it and click the <i class="fa fa-times" style="display:inline"></i> in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
-			<h2>What do the colors mean?</h2>
+			<h2 class="title">What do the colors mean?</h2>
 			<p>The rectangles with numbers are Penn Course Review ratings. Course quality ratings are in
 				<span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">blue</span>, course difficulty ratings are in
 				<span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">red</span>, and instructor ratings are in
@@ -376,6 +401,7 @@
 			<input type="submit" name="upload" value="Import!" id="importSubmit" disabled ng-click="sched.Import()">
 			<a class="modal_close"><i class="fa fa-times"></i></a>
 		</div>
+	</div>
 </body>
 
 </html>
