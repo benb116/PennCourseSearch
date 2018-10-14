@@ -1,11 +1,11 @@
 html {
 	font-size: calc(100vw/90);
+	background-color: #3498db;
 }
 body {
 	width: 100%;
 	min-width: 1000px;
 	margin: 0;
-	background-color: #3498db;
 	color: white;
 	font-family: 'Helvetica';
 	font-family: 'Open Sans', sans-serif;
