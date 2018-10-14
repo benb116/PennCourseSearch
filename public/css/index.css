@@ -535,15 +535,25 @@ hr {
 	background-color:#E1E1E1;
 }
 
+.SchedBlock_container{
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    overflow-y: hidden;
+}
+
 .SchedBlock {
-	display: block;
-	box-sizing: border-box;
-	position: absolute;
+    margin-right:10px;
 	overflow-y: hidden;
 	cursor: pointer;
 	color: black;
 	border-top: 2px solid;
 	background-color:#FAFAFA;
+}
+
+.SchedBlock.F{
+    margin-right:0;
+    /*Prevents extra margin from showing up on right side of schedule*/
 }
 
 .SchedBlock.red{
