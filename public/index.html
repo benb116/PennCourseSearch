@@ -32,17 +32,30 @@
 </head>
 
 <body ng-controller="CourseController" ng-cloak>
+	<nav class="navbar" role="navigation" >
+		<div class="navbar-brand">
+			<a class="navbar-item" href="/">
+				<img src="favicon.ico">
+			</a>
+			<a class="navbar-item">
+				Penn Course Search
+			</a>
+		</div>
+		<div class="navbar-menu">
+			<div class="navbar-start">
+
+			</div>
+			<div class="navbar-end">
+				<a class="navbar-item" href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch">
+					<i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</a>
+				<a class="navbar-item" rel="leanModal" href="#ModalWindow" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')" style="padding-right:0.5em;">About</a>
+			</div>
+		</div>
+	</nav>
+	<div>
 	<i class="fa fa-volume-off" style="position:absolute;top:0.25em;left:0.25em;font-size:2em;visibility:hidden" onclick="$('iframe').remove(); $(this).hide()"></i>
-	<div id="MenuBar">
-		<!-- <a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Donate</span></a> -->
-		<a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span style="padding-right:0.5em;"><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
-		<a rel="leanModal" href="#ModalWindow" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')" style="padding-right:0.5em;">About</a>
-	</div>
 
 	<div id="Top">
-		<h1>PennCourseSearch</h1>
-		<span id="subtitle">{{ subtitle }}</span>
-
 		<span id = "searchbar">
 			<form ng-submit="delaySearch()">
 				<span>Search by:</span>
@@ -330,13 +343,13 @@
 	</div>
 
 	<div id="ModalWindow" class="Modal">
-			<h2>About PennCourseSearch</h2>
+			<h2 class="title">About PennCourseSearch</h2>
 			<p>PennCourseSearch is a cleaner and simpler way for Quakers to find classes and make schedules. While this is not a full replacement for Penn InTouch, it acts as an improvement of the "Course Search" and "Mock Schedules" features. Search across departments, courses, and sections and refine searches by specific criteria.</p>
-			<h2>How do I search for courses?</h2>
+			<h2 class="title">How do I search for courses?</h2>
 			<p>Just type a course in the search box. Then you can click on the results to see more in-depth information about different sections. If you want to filter the results, click on the filter button and change your options. You can also choose to search by course description or instructor in the menu bar.</p>
-			<h2>How do I change my schedule?</h2>
+			<h2 class="title">How do I change my schedule?</h2>
 			<p>To add a section to your schedule, click on its <i class="fa fa-plus" style="display:inline"></i> icon. To remove a course, mouse over it and click the <i class="fa fa-times" style="display:inline"></i> in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
-			<h2>What do the colors mean?</h2>
+			<h2 class="title">What do the colors mean?</h2>
 			<p>The rectangles with numbers are Penn Course Review ratings. Course quality ratings are in
 				<span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">blue</span>, course difficulty ratings are in
 				<span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">red</span>, and instructor ratings are in
@@ -374,6 +387,7 @@
 			<input type="submit" name="upload" value="Import!" id="importSubmit" disabled ng-click="sched.Import()">
 			<a class="modal_close"><i class="fa fa-times"></i></a>
 		</div>
+	</div>
 </body>
 
 </html>
