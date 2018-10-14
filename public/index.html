@@ -6,6 +6,7 @@
 	<meta name="description" content="PennCourseSearch is a web app designed to help Penn students find courses and make schedules. Includes one-click scheduling, Penn Course Review integration, filters for double-counting requirements, and more.">
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!--<link rel = "stylesheet" type ="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>-->
 	<link rel="stylesheet" type="text/css" href="/css/index.css" />
 	<link rel="stylesheet" type="text/css" href="/css/plugins/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="/css/plugins/angular-tooltips.min.css">
@@ -41,22 +42,24 @@
 		<h1>PennCourseSearch</h1>
 		<span id="subtitle">{{ subtitle }}</span>
 
-		<form ng-submit="delaySearch()">
-			<span>Search by:</span>
-			<select id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="searchChange()">
-				<!-- Re search if this select changes -->
-				<option selected="selected" value="courseIDSearch">Course ID</option>
-				<option value="keywordSearch">Keywords</option>
-				<option value="instSearch">Instructor</option>
-			</select>
-			<input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
-			<span style="margin-left:1em;">Schedule:</span>
-			<select id="schedSelect" ng-model="currentSched" ng-change="schedChange()">
-				<option ng-repeat="schedName in schedules" value="{{schedName}}">{{schedName}}</option>
-			</select>
-			<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>
-			<!-- This only shows if loading == true. Need to use visibility: hidden -->
-		</form>
+		<span id = "searchbar">
+			<form ng-submit="delaySearch()">
+				<span>Search by:</span>
+				<select id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="searchChange()">
+					<!-- Re search if this select changes -->
+					<option selected="selected" value="courseIDSearch">Course ID</option>
+					<option value="keywordSearch">Keywords</option>
+					<option value="instSearch">Instructor</option>
+				</select>
+				<input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
+				<span style="margin-left:1em;">Schedule:</span>
+				<select id="schedSelect" ng-model="currentSched" ng-change="schedChange()">
+					<option ng-repeat="schedName in schedules" value="{{schedName}}">{{schedName}}</option>
+				</select>
+				<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>
+				<!-- This only shows if loading == true. Need to use visibility: hidden -->
+			</form>
+		</span>
 
 		<div id="MenuButtons">
 			<ul>
@@ -301,7 +304,7 @@
 						<p style="font-size:1.5em;margin-top:7em;display:block;">Search for courses above <br>then click a section's + icon to add it to the schedule.</p><p style="font-size:1em">These are mock schedules.<br> You still need to register for your classes on Penn InTouch.</p>
 					</div>
 					<div id="SchedGrid" ng-show="schedBlocks.length">
-						<hr ng-repeat="thisline in schedlines" width="99.7%" style="top:{{thisline}}%"></hr>
+						<hr ng-repeat="thisline in schedlines" width="99.7%" class = "schedline" style="top:{{thisline}}%"></hr>
 						<div ng-repeat="weekday in fullWeekdays" class="DayName" style="width:{{percentWidth}}%;">{{weekday}}</div>
 
 						<div ng-repeat="thisBlock in schedBlocks" 
@@ -311,8 +314,7 @@
 						top: {{thisBlock.top}}%;
 						left: {{thisBlock.left}}%;
 						width: {{thisBlock.width}}%;
-						height: {{thisBlock.height}}%;
-						background-color: {{thisBlock.color}}"
+						height: {{thisBlock.height}}%;"
 						ng-click="clearSearch();initiateSearch(thisBlock.class, 'courseIDSearch');"
 						ng-mouseover="expression">
 							<div class="CloseX" style="width:100%;height:100%;"><span ng-click="e.stopPropagation(); sched.AddRem(thisBlock.class);">X</span></div>

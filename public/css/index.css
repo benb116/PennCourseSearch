@@ -5,7 +5,7 @@ body {
 	width: 100%;
 	min-width: 1000px;
 	margin: 0;
-	background-color: #3498db;
+	background-color: #ECECEC;
 	color: white;
 	font-family: 'Helvetica';
 	font-family: 'Open Sans', sans-serif;
@@ -522,6 +522,19 @@ hr {
 	line-height: 2.5em;
 }
 
+#searchbar{
+	background-color:#D8D8D8;
+	display:block;
+}
+
+#searchbar form{
+	display:table;
+}
+
+.schedline{
+	background-color:#E1E1E1;
+}
+
 .SchedBlock {
 	display: block;
 	box-sizing: border-box;
@@ -530,7 +543,7 @@ hr {
 	cursor: pointer;
 	color: black;
 	border-top: 2px solid;
-    margin-top:5px;
+	background-color:#FAFAFA;
 }
 
 .SchedBlock.red{

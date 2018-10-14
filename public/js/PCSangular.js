@@ -479,7 +479,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 block.left   = weekdays.indexOf(block.letterday) * $scope.percentWidth;
                 block.top    = (block.startHr - startHour) * halfScale + 9; // determine top spacing based on time from startHour (offset for prettiness)
                 block.height = block.duration * halfScale;
-                block.color  = ("#E6E6E6"); // Get the color
                 block.width  = $scope.percentWidth;
                 block.topc = generate_color(block.letterday,block.startHr,block.name);
                 console.log(block.topc);
