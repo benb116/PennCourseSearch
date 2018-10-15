@@ -66,7 +66,7 @@
 			<select id="schedSelect" ng-model="currentSched" ng-change="schedChange()">
 				<option ng-repeat="schedName in schedules" value="{{schedName}}">{{schedName}}</option>
 			</select>
-			<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>
+			<!--<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>-->
 		</div>
 		<!--Toolbar-->
 		<div class="columns is-gapless">
@@ -107,9 +107,9 @@
 		</div>
 	<div class="columns">
 		<div class="column is-two-fifths">
-			<div>
+			<div style="text-align: center;">
 				<form ng-submit="delaySearch()">
-					<input id="CSearch" type="text" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
+					<input id="CSearch" type="text" ng-class="{'is-loading': loading}" class="input is-medium is-rounded" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
 					<!-- This only shows if loading == true. Need to use visibility: hidden -->
 				</form>
 			</div>
