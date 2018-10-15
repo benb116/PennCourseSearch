@@ -465,6 +465,8 @@ hr {
 	box-shadow:0 1px 3px 0px lightgrey;
 	text-align: center;
 	height:100%;
+	height:calc(100% - 4px);
+	margin-bottom:5px;
 }
 
 
