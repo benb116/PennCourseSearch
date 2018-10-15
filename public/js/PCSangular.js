@@ -456,6 +456,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 meetBlocks = meetBlocks.concat(GenMeetBlocks(courseSched[sec]));
             }}
 
+            reset_colors();
             for (var b in meetBlocks) { if (meetBlocks.hasOwnProperty(b)) {
                 $scope.schedBlocks[b] = AddSchedAttr(meetBlocks[b]);
             }}

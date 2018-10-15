@@ -485,32 +485,64 @@ hr {
 	border-top-color:#D0021B;
 }
 
+.SchedBlock.red .SecName{
+    color:#D0021B;
+}
+
 .SchedBlock.orange{
 	border-top-color:#F5A623;
+}
+
+.SchedBlock.orange .SecName{
+    color:#F5A623;
 }
 
 .SchedBlock.blue{
 	border-top-color:#00BFDD;
 }
 
+.SchedBlock.blue .SecName{
+    color:#00BFDD;
+}
+
 .SchedBlock.aqua{
 	border-top-color:#35E1BB;
+}
+
+.SchedBlock.aqua .SecName{
+    color:#35E1BB;
 }
 
 .SchedBlock.green{
 	border-top-color:#7ED321;
 }
 
+.SchedBlock.green .SecName{
+    color:#7ED321;
+}
+
 .SchedBlock.pink{
 	border-top-color:#FF34CC;
+}
+
+.SchedBlock.pink .SecName{
+    color:#FF34CC;
 }
 
 .SchedBlock.sea{
 	border-top-color:#3055CC;
 }
 
+.SchedBlock.sea .SecName{
+    color:#3055CC;
+}
+
 .SchedBlock.indigo{
 	border-top-color:#7874CF;
+}
+
+.SchedBlock.indigo .SecName{
+    color:#7874CF;
 }
 
 .SchedBlock > span {
