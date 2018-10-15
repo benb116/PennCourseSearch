@@ -28,6 +28,18 @@ i {
 
 .nav-header {
 	font-size: 1.5em;
+	font-weight: bold;
+}
+
+#byline {
+	text-align: right;
+	margin-right: 3em;
+}
+
+#byline span.txt{
+	vertical-align: middle;
+	display: inline-block;
+	padding-top: .5em;
 }
 
 #MenuBar {
@@ -158,6 +170,7 @@ form > input[type="text"] {
 	height: 30%;
 	border-top-right-radius: .375em;
 	overflow-y: hidden;
+	text-align: center;
 }
 
 #SectionList {
@@ -165,7 +178,7 @@ form > input[type="text"] {
 	overflow-y: scroll;
 }
 .sectionText {
-	display: inline-block;
+	/*display: inline-block;*/
 	height: 1.5em;
 	line-height: 1.5em;
 	text-overflow: ellipsis;

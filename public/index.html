@@ -53,7 +53,6 @@
 		</div>
 	</nav>
 
-	<div>
 		<!--Searchbar-->
 		<div id="searchbar">
 			<span>Search by:</span>
@@ -101,7 +100,10 @@
 				</a>
 				<button class="button" ng-click="clearSearch()"><span>Clear Search</span></button>
 			</div>
-			<div class="column is-one-third"></div>
+			<div class="column is-one-third" id="byline">
+				<!--<span class="txt">Made with <span class="icon is-small" style="color:#F56F71"><i class="fa fa-heart"></i></span> by <a href="https://github.com/benb116">Ben Bernstein </a> and <a href="http://pennlabs.org" target="_blank">Penn Labs</a>-->
+				<!--</span>-->
+			</div>
 		</div>
 	<div class="columns">
 		<div class="column is-two-fifths">
@@ -157,9 +159,11 @@
 				</div>
 				<div id="SectionCol" class="column is-half">
 					<div id="Sections">
-						<div style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-							<span class="tooltip" title="Section status (open or closed)" style="margin-left:1em;margin-right:-0.2em;">O/C</span>
-							<span class="PCR Inst tooltip" title="Instructor Quality rating" style="background:rgba(46, 204, 113, 0.85);">Inst</span>
+						<div class="columns is-gapless" style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+							<div class="tooltip column is-one-fifth" title="Section status (open or closed)">O/C</div>
+							<div class="PCR Inst tooltip column is-one-fifth" title="Instructor Quality rating" style="background:rgba(46, 204, 113, 0.85);">Inst</div>
+							<div class="tooltip column is-one-fifth" title="Section ID" style="">Sect</div>
+							<div class="tooltip column" title="Meeting Time" style="">Time</div>
 						</div>
 
 						<div id="SectionList">
@@ -180,29 +184,39 @@
                                         Closed sections are enabled (showClosed === true) OR the section is open
                                         ANDThere is a current course selected (true when user clicks "Show Stars") or the section is starred
                                      -->
-									<i class="fa"
-									   ng-class="{'fa-plus': schedSections.indexOf(section.idDashed) === -1,
+									<div class="columns is-gapless">
+										<div class="column is-one-fifth">
+											<i class="fa"
+											   ng-class="{'fa-plus': schedSections.indexOf(section.idDashed) === -1,
 								'fa-times': schedSections.indexOf(section.idDashed) > -1}"
-									   ng-click="sched.AddRem(section.idDashed)"></i>
-									<!-- The icon should be a + if the section is not currently scheduled and an x if it is -->
-									<span class="statusClass"
-										  ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"
-										  ng-click="get.SectionInfo(section.idDashed)">
-							<!-- the status square should be green if the section is open, red if it's closed -->
+											   ng-click="sched.AddRem(section.idDashed)"></i>
+											<!-- The icon should be a + if the section is not currently scheduled and an x if it is -->
+											<span class="statusClass"
+												  ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"
+												  ng-click="get.SectionInfo(section.idDashed)">
+											<!-- the status square should be green if the section is open, red if it's closed -->
+											<i class="fa fa-envelope tooltip"
+											   ng-hide="section.isOpen"
+											   ng-click="Notify(section.idDashed)"
+											   title="PennCourseNotify"></i>
+											<!-- If the section is closed, show the notify icon -->
+											</span>
+										</div>
+										<div class="column is-one-fifth">
+											<span class="PCR Inst" style="background:rgba(46, 204, 113, {{ section.pcrIShade }});color: {{ section.pcrIColor }}" ng-click="get.SectionInfo(section.idDashed)">{{ section.revs.cI | number:2}}</span>
+										</div>
+										<div class="column is-one-fifth">
+											<span class="sectionText" ng-click="get.SectionInfo(section.idDashed)">{{ justSection(section.idSpaced)}} </span>
+										</div>
+										<div class="column">
+											<span class="sectionText" ng-click="get.SectionInfo(section.idDashed)">{{ stripTime(section.timeInfo) }} </span>
+										</div>
+									</div>
 
-								<i class="fa fa-envelope tooltip"
-								   ng-hide="section.isOpen"
-								   ng-click="Notify(section.idDashed)"
-								   title="PennCourseNotify"></i>
-
-										<!-- If the section is closed, show the notify icon -->
-							</span>
 									<!-- <span class="PCR Qual" style="background:rgba(45, 160, 240, {{ section.pcrQShade }});color: {{ section.pcrQColor }} ">{{ section.revs.cQ | number:2}}</span> -->
-									<span class="PCR Inst" style="background:rgba(46, 204, 113, {{ section.pcrIShade }});color: {{ section.pcrIColor }}" ng-click="get.SectionInfo(section.idDashed)">{{ section.revs.cI | number:2}}</span>
-									<i class="fa" ng-class="{'fa-star': starSections.indexOf(section.idDashed) > -1, 'fa-star-o': starSections.indexOf(section.idDashed) === -1}" ng-click="star.AddRem(section.idDashed)"></i>
+									<!--<i class="fa" ng-class="{'fa-star': starSections.indexOf(section.idDashed) > -1, 'fa-star-o': starSections.indexOf(section.idDashed) === -1}" ng-click="star.AddRem(section.idDashed)"></i>-->
 									<!-- Show an full star if the section is starred, empty star if not -->
 									<!-- <div style="display:inline-block;width:17em"> -->
-									<span class="sectionText" ng-click="get.SectionInfo(section.idDashed)">{{ section.idSpaced}} - {{ section.timeInfo }} </span>
 									<!-- </div> -->
 								</li>
 							</ul>
@@ -401,7 +415,15 @@
 			<input type="submit" name="upload" value="Import!" id="importSubmit" disabled ng-click="sched.Import()">
 			<a class="modal_close"><i class="fa fa-times"></i></a>
 		</div>
-	</div>
+	<footer class="footer">
+		<div class="container">
+			<div class="content has-text-centered">
+				<p style="font-size:0.8rem">
+					Made with <span class="icon is-small" style="color:#F56F71"><i class="fa fa-heart"></i></span> by <a href="https://github.com/benb116">Ben Bernstein </a> and <a href="http://pennlabs.org" target="_blank">Penn Labs</a>
+				</p>
+			</div>
+		</div>
+	</footer>
 </body>
 
 </html>
