@@ -408,12 +408,15 @@ ul {
 }
 
 
-.box.column{
-    /*styles the columns for lists of sections and lists of courses*/
+.box{
     border-radius:3px;
     background:white;
     border: 1px solid lightgrey;
-    margin: 10px;
+	margin: 10px;
+}
+
+.box.column{
+	/*styles the columns for lists of sections and lists of courses*/
 }
 
 #courses_and_sections{
@@ -497,14 +500,11 @@ hr {
 	overflow-y: hidden;
 	cursor: pointer;
 	color: black;
-	border-top: 2px solid;
+	border-top: 3px solid;
 	background-color:#FAFAFA;
 	box-shadow:0 1px 3px 0 lightgrey;
 	text-align: center;
 	height:100%;
-    /*put height twice in case calc isn't supported*/
-	height:calc(100% - 6px);
-	margin-bottom:5px;
 }
 
 
@@ -616,8 +616,9 @@ hr {
 }
 
 .LocName {
-	font-size: 1em;
+	font-size: 0.9em;
 	line-height: 1em;
+	color:grey;
 }
 
 #lean_overlay {

@@ -16,7 +16,7 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<!-- My code -->
-	<script type="text/javascript" src="/js/colors.js"></script>
+	<script type="text/javascript" src="/js/ui_adjustment.js"></script>
 	<script type="text/javascript" src="/js/PCSangular.js"></script>
 	<script type="text/javascript" src="/js/functions.js"></script>
 	<script type="text/javascript" src="/js/factories.js"></script>
@@ -239,7 +239,7 @@
 		</div>
 
 		<div id="InfoPanel" class="column">
-			<div id="FilterSearch">
+			<div id="FilterSearch" class = "box">
 				<div class="FilterPanel" style="width:60%;">
 					<div class="FilterBlock">
 						<div id="reqTypes">
@@ -332,7 +332,7 @@
 				</div>
 			</div>
 
-			<div id="SchedGraph">
+			<div id="SchedGraph" class = "box">
 				<div id="TimeCol" style="position:relative;">
 					<div ng-repeat="timeblock in timeblocks track by $index" class="TimeBlock" style="top: {{schedlines[$index]}}%"> {{timeblock}}</div>
 				</div>

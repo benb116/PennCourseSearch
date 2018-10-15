@@ -437,13 +437,13 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 for (var h = 0; h <= (endHour - startHour); h++) { // for each hour
                     var toppos = (h) * halfScale + 7.5; // each height value is linearly spaced with an offset
                     var hourtext = Math.round(h + startHour); // If startHour is not an integer, make it pretty
-                    if (hourtext > 12) {
-                        hourtext -= 12;
-                    } // no 24-hour time
-                    if(hourtext < 12){
-                        hourtext += "AM";
-                    }else{
+                    if (hourtext >= 12) {
+                        if(hourtext !== 12){
+                            hourtext -= 12;
+                        }
                         hourtext += "PM";
+                    }else{
+                        hourtext += "AM";
                     }
                     $scope.schedlines.push(toppos);
                     $scope.timeblocks.push(hourtext);

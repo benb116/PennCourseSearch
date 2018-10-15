@@ -1,4 +1,4 @@
-//file for managing color scheme
+//file for managing color scheme and other aspects of UI
 
 //possible color classes (corresponds with CSS classes)
 const top_colors_recitation_save = ["red", "orange", "pink"];
