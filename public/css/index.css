@@ -170,6 +170,7 @@ form > input[type="text"] {
 	height: 30%;
 	border-top-right-radius: .375em;
 	overflow-y: hidden;
+	text-align: center;
 }
 
 #SectionList {
@@ -177,7 +178,7 @@ form > input[type="text"] {
 	overflow-y: scroll;
 }
 .sectionText {
-	display: inline-block;
+	/*display: inline-block;*/
 	height: 1.5em;
 	line-height: 1.5em;
 	text-overflow: ellipsis;

@@ -202,6 +202,15 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         }
     };
 
+    $scope.justSection = function(s) {
+        return s.substring(s.lastIndexOf(' ') + 1)
+    }
+    $scope.stripTime = function(s) {
+        s = s.replace(' to ', '-')
+        s = s.replace('on', '')
+        return s
+    }
+
     $scope.sched = {
         AddRem: function(secID, schedname, needloc) {
             secID = FormatID(secID).join('-');
