@@ -34,12 +34,9 @@
 <body ng-controller="CourseController" ng-cloak>
 	<nav class="navbar is-link" role="navigation" >
 		<div class="navbar-brand">
-			<a class="navbar-item" href="/">
-				<img src="favicon.ico">
-			</a>
-			<a class="navbar-item nav-header">
+			<div class="navbar-item nav-header">
 				Penn Course Search
-			</a>
+			</div>
 		</div>
 		<div class="navbar-menu">
 			<div class="navbar-start">
@@ -105,7 +102,7 @@
 				<!--</span>-->
 			</div>
 		</div>
-	<div class="columns">
+	<div class="columns" id ="courses_and_sections">
 		<div class="column is-two-fifths">
 			<div style="text-align: center;">
 				<form ng-submit="delaySearch()">
@@ -115,7 +112,7 @@
 			</div>
 
 			<div class="columns">
-				<div id="CourseList" class="column">
+				<div id="CourseList" class="box column">
 					<div id="CourseHeader">
 						<span class="PCR Qual tooltip" title="Course quality rating" style="background:rgba(45, 160, 240, 0.85);margin-left:0.45em">Qual</span>
 						<span class="PCR Diff tooltip" title="Course difficulty rating" style="background:rgba(231, 76, 60, 0.85);">Diff</span>
@@ -157,7 +154,7 @@
 						</li>
 					</ul>
 				</div>
-				<div id="SectionCol" class="column is-half">
+				<div id="SectionCol" class="box column is-half">
 					<div id="Sections">
 						<div class="columns is-gapless" style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 							<div class="tooltip column is-one-fifth" title="Section status (open or closed)">O/C</div>
@@ -337,7 +334,7 @@
 
 			<div id="SchedGraph">
 				<div id="TimeCol" style="position:relative;">
-					<div ng-repeat="timeblock in timeblocks track by $index" class="TimeBlock" style="top: {{schedlines[$index]}}%"> {{timeblock}}:00</div>
+					<div ng-repeat="timeblock in timeblocks track by $index" class="TimeBlock" style="top: {{schedlines[$index]}}%"> {{timeblock}}</div>
 				</div>
 				<div id="Schedule" style="position:relative;">
 					<div id="SchedPlaceholder" ng-hide="schedBlocks.length">

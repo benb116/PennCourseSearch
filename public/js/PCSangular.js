@@ -440,7 +440,11 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                     if (hourtext > 12) {
                         hourtext -= 12;
                     } // no 24-hour time
-
+                    if(hourtext < 12){
+                        hourtext += "AM";
+                    }else{
+                        hourtext += "PM";
+                    }
                     $scope.schedlines.push(toppos);
                     $scope.timeblocks.push(hourtext);
                 }

@@ -91,6 +91,7 @@ form > input[type="text"] {
 
 #CSearch {
 	width: 80%;
+    background-color: white;
 }
 
 
@@ -407,6 +408,19 @@ ul {
 }
 
 
+.box.column{
+    /*styles the columns for lists of sections and lists of courses*/
+    border-radius:3px;
+    background:white;
+    border: 1px solid lightgrey;
+    margin: 10px;
+}
+
+#courses_and_sections{
+    /*Styles column set with courses and sections lists*/
+    padding-left:20px;
+}
+
 /*
 #Schedule > span {
 	font-size: 1.5em;
@@ -433,6 +447,7 @@ hr {
 	position: absolute;
 	text-align: right;
 	margin: 5px;
+    color: #87a2aa;
 }
 
 .TimeBlock {
@@ -445,6 +460,10 @@ hr {
 	display: inline-block;
 	height: 2.5em;
 	line-height: 2.5em;
+    text-align:center;
+    color: #87a2aa;
+    font-size:1.1em;
+    vertical-align:center;
 }
 
 #searchbar{
@@ -453,6 +472,11 @@ hr {
 
 #searchbar form{
 	display:table;
+}
+
+.navbar-brand .navbar-item{
+    /*Adds some spacing between the heading and the left edge of the screen*/
+    margin-left:35%;
 }
 
 .schedline{
@@ -475,10 +499,11 @@ hr {
 	color: black;
 	border-top: 2px solid;
 	background-color:#FAFAFA;
-	box-shadow:0 1px 3px 0px lightgrey;
+	box-shadow:0 1px 3px 0 lightgrey;
 	text-align: center;
 	height:100%;
-	height:calc(100% - 4px);
+    /*put height twice in case calc isn't supported*/
+	height:calc(100% - 6px);
 	margin-bottom:5px;
 }
 
