@@ -84,6 +84,8 @@ form > input[type="text"] {
 
 #CSearch {
 	width: 100%;
+	min-width:25rem;
+	padding:0.5rem;
     background-color: white;
 }
 
@@ -307,9 +309,12 @@ ul {
 	/*margin-bottom: 3px;*/
 }
 
+#InfoPanel .box{
+	width: 95%;
+}
+
 #FilterSearch {
 	overflow: hidden;
-	width: 95%;
 	font-size: 1em;
 	min-width: 500px;
 	height: 10em;
@@ -392,6 +397,7 @@ ul {
 }
 
 #InfoPanel {
+	padding:0!important;
 	height: calc(100vh - 16em);
 	/*min-width: 500px;*/
 	width: calc(100% - 58.5em);
@@ -473,7 +479,7 @@ hr {
 
 #searchbar{
 	background-color:#D8D8D8;
-	padding:0.25rem;
+	padding:15px;
 }
 
 #searchbar form{
@@ -509,6 +515,9 @@ hr {
 	box-shadow:0 1px 3px 0 lightgrey;
 	text-align: center;
 	height:100%;
+	align-items:center;
+	display:flex;
+	justify-content:center;
 }
 
 

@@ -54,7 +54,6 @@
 		<div id="searchbar" class = "level">
 			<span class = "level-left">
 
-				<div> Search by:</div>
 				<div class="dropdown" role = "menu" onclick = "toggle_activation(this)" id="searchSelect" ng-model="searchType" ng-change="searchChange()">
 					  <div class="dropdown-trigger">
 						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
@@ -84,21 +83,11 @@
 			</span>
 
 			<span class = "level-right">
-				Schedule:
-				<select id="schedSelect" ng-model="currentSched" ng-change="schedChange()">
-					<option ng-repeat="schedName in schedules" value="{{schedName}}">{{schedName}}</option>
-				</select>
-			</span>
-			<!--<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>-->
-		</div>
-		<!--Toolbar-->
-		<div class="columns is-gapless">
-			<div class="column is-one-third"></div>
-			<div class="column">
+
 				<div class="dropdown is-hoverable">
 					<div class="dropdown-trigger">
 						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-							<span>Schedule</span>
+							<span>Schedule Options</span>
 							<span class="icon is-small">
 								<i class="fa fa-angle-down" aria-hidden="true"></i>
 							</span>
@@ -122,6 +111,30 @@
 					Import
 				</a>
 				<button class="button" ng-click="clearSearch()"><span>Clear Search</span></button>
+				<div class="dropdown" onclick = "toggle_activation(this)">
+					  <div class="dropdown-trigger">
+						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+							<span><span class ="selected_name">Schedules</span><i class="fa fa-angle-down"></i></span>
+
+						</button>
+					  </div>
+					  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+						<div class="dropdown-content" id = "sched-select" role = "menu" ng-modle = "currentSched" ng-change = "schedChange()" ng-model="searchType" ng-change="searchChange()">
+						  <a value = "{{schedName}}" onclick="activate_dropdown_item(this)" class="dropdown-item"
+						  	ng-repeat = "schedName in schedules">
+							{{schedName}}
+						  </a>
+						</div>
+					  </div>
+					</div>
+			</span>
+			<!--<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>-->
+		</div>
+		<!--Toolbar-->
+		<div class="columns is-gapless">
+			<div class="column is-one-third"></div>
+			<div class="column">
+
 			</div>
 			<div class="column is-one-third" id="byline">
 				<!--<span class="txt">Made with <span class="icon is-small" style="color:#F56F71"><i class="fa fa-heart"></i></span> by <a href="https://github.com/benb116">Ben Bernstein </a> and <a href="http://pennlabs.org" target="_blank">Penn Labs</a>-->
@@ -379,7 +392,6 @@
 									<div class="CloseX" style="width:100%;height:100%;"><span ng-click="e.stopPropagation(); sched.AddRem(thisBlock.class);">X</span></div>
 									<div class="NeedAssc" ng-hide="sched.CrossCheck(thisBlock.asscsecs)" title="Registration is required for an associated section."><b>!</b></div>
 									<span class="SecName">{{thisBlock.name}}</span>
-									<span class="LocName">{{thisBlock.room}}</span>
 							</div>
 						</div>
 					</div>
