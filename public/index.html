@@ -55,34 +55,28 @@
 			<span class = "level-left">
 
 				<div> Search by:</div>
-				<div class="dropdown" onclick = "toggle_activation(this)">
+				<div class="dropdown" role = "menu" onclick = "toggle_activation(this)" id="searchSelect" ng-model="searchType" ng-change="searchChange()">
 					  <div class="dropdown-trigger">
 						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-						  <span>Search By <i class="fa fa-angle-down"></i></span>
+							<span><span class ="selected_name">Search By</span><i class="fa fa-angle-down"></i></span>
 
 						</button>
 					  </div>
 					  <div class="dropdown-menu" id="dropdown-menu" role="menu">
 						<div class="dropdown-content">
-						  <a onclick="activate_dropdown_item(this)" class="dropdown-item">
+						  <a value = "courseIDSearch" onclick="activate_dropdown_item(this)" class="dropdown-item">
 							Course ID
 						  </a>
-						  <a onclick="activate_dropdown_item(this)" class="dropdown-item">
+						  <a value = "keywordSearch" onclick="activate_dropdown_item(this)" class="dropdown-item">
 							Keywords
 						  </a>
-						  <a onclick="activate_dropdown_item(this)" class="dropdown-item">
+						  <a value = "instSearch" onclick="activate_dropdown_item(this)" class="dropdown-item">
 							Instructor
 						  </a>
 						</div>
 					  </div>
 					</div>
 
-				<div id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="searchChange()" class="dropdown is-active">
-					<!-- Re search if this select changes -->
-					<div class = "dropdown-item" selected="selected" value="courseIDSearch">Course ID</div>
-					<div class = "dropdown-item" value="keywordSearch">Keywords</div>
-					<div class = "dropdown-item" value="instSearch">Instructor</div>
-				</div>
 				<form ng-submit="delaySearch()">
 					<input id="CSearch" type="text" ng-class="{'is-loading': loading}" class="input is-small is-rounded" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
 					<!-- This only shows if loading == true. Need to use visibility: hidden -->

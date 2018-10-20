@@ -72,13 +72,18 @@ const is_descendant = function(parent, child) {
 //deactivates a bulma dropdown/dropdown item
 const deactivate_node = function(node){
     let prev_class = node.getAttribute("class");
-    node.setAttribute("class",prev_class.replace("is-active",""));
+    node.setAttribute("class",prev_class.replace("is-active","").replace("selected",""));
 };
 
 //activates a bulma dropdown/dropdown item
 const activate_node = function(node){
     let prev_class = node.getAttribute("class");
-    node.setAttribute("class",prev_class + " is-active");
+    if(prev_class.indexOf("item")!==-1){
+        node.setAttribute("class",prev_class + " selected is-active");
+    }else{
+        node.setAttribute("class",prev_class + " is-active");
+    }
+
 };
 
 //toggles activation of a bulma dropdown
@@ -89,14 +94,21 @@ const toggle_activation = function(dropdown){
     }else{
         activate_node(dropdown);
         window.addEventListener("click",function(e) {
-            console.log(e.target);
-            console.log("deactivating dropdown");
             if(!(e.target == dropdown || is_descendant(dropdown,e.target))){
                 deactivate_node(dropdown);
             }
         });
     }
 };
+
+//returns the parent node dropdown of the given node
+function find_parent_dropdown(node){
+    if(node.parentNode !== undefined && node.parentNode.getAttribute("class").indexOf("dropdown")!==-1){
+        return find_parent_dropdown(node.parentNode);
+    }else{
+        return node;
+    }
+}
 
 //takes in an HTMLCollection and returns an array
 function arr(elementsByClassName) {
@@ -109,7 +121,6 @@ function arr(elementsByClassName) {
 
 //activates bulma dropdown item
 const activate_dropdown_item = function(dropdown_item){
-    console.log(dropdown_item);
     let prev_class = dropdown_item.getAttribute("class");
     if(prev_class.indexOf("is-active")===-1){
         arr(document.getElementsByClassName("dropdown-item")).forEach(
@@ -120,5 +131,9 @@ const activate_dropdown_item = function(dropdown_item){
           }
         );
         activate_node(dropdown_item);
+        let parent_node = find_parent_dropdown(dropdown_item);
+        //let text_node = parent_node.childNodes[0];
+        //console.log(text_node);
+        parent_node.childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent = dropdown_item.textContent;
     }
 };
