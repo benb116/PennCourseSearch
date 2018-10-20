@@ -55,3 +55,70 @@ const generate_color = function (day, hour, name) {
         return result;
     }
 };
+
+//returns whether child is a child of parent
+//credit to https://stackoverflow.com/questions/2234979/how-to-check-in-javascript-if-one-element-is-contained-within-another
+const is_descendant = function(parent, child) {
+    var node = child.parentNode;
+    while (node != null) {
+        if (node == parent) {
+            return true;
+        }
+        node = node.parentNode;
+    }
+    return false;
+};
+
+//deactivates a bulma dropdown/dropdown item
+const deactivate_node = function(node){
+    let prev_class = node.getAttribute("class");
+    node.setAttribute("class",prev_class.replace("is-active",""));
+};
+
+//activates a bulma dropdown/dropdown item
+const activate_node = function(node){
+    let prev_class = node.getAttribute("class");
+    node.setAttribute("class",prev_class + " is-active");
+};
+
+//toggles activation of a bulma dropdown
+const toggle_activation = function(dropdown){
+    let prev_class = dropdown.getAttribute("class");
+    if(prev_class.indexOf("is-active")!==-1){
+        deactivate_node(dropdown);
+    }else{
+        activate_node(dropdown);
+        window.addEventListener("click",function(e) {
+            console.log(e.target);
+            console.log("deactivating dropdown");
+            if(!(e.target == dropdown || is_descendant(dropdown,e.target))){
+                deactivate_node(dropdown);
+            }
+        });
+    }
+};
+
+//takes in an HTMLCollection and returns an array
+function arr(elementsByClassName) {
+    result = [];
+    for(var i = 0;i<elementsByClassName.length; i++){
+        result[i] = elementsByClassName[i];
+    }
+    return result;
+}
+
+//activates bulma dropdown item
+const activate_dropdown_item = function(dropdown_item){
+    console.log(dropdown_item);
+    let prev_class = dropdown_item.getAttribute("class");
+    if(prev_class.indexOf("is-active")===-1){
+        arr(document.getElementsByClassName("dropdown-item")).forEach(
+          function(node){
+              if(node.getAttribute("class").indexOf("item")!==-1){
+                  deactivate_node(node);
+              }
+          }
+        );
+        activate_node(dropdown_item);
+    }
+};

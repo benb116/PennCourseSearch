@@ -74,26 +74,28 @@ select {
 	margin-left: 1em;
 }
 
-form {
-	padding-bottom:1em;
-}
-
 form > input[type="text"] {
-	border: solid 1px #ccc;
 	border-radius: .3em;
 	padding: 0.4em;
-
 	font-size: .75em;
-	margin-bottom: 0.5em;
-	margin-top: 1em;
+	margin: 4px;
 	background-color: #f5f5f5;
 }
 
 #CSearch {
-	width: 80%;
+	width: 100%;
     background-color: white;
 }
 
+#searchbar .level-left > *, #searchbar .level-right > *{
+	margin-left:0.5rem;
+	margin-right:0.5rem;
+}
+
+
+.is-active i.fa.fa-angle-down::before{
+	content:"\f106"!important;
+}
 
 /*#loaderWrap {height: 30px; width: 30px; display: inline-block; vertical-align: middle;}
 .loader {
@@ -471,11 +473,13 @@ hr {
 
 #searchbar{
 	background-color:#D8D8D8;
+	padding:0.25rem;
 }
 
 #searchbar form{
 	display:table;
 }
+
 
 .navbar-brand .navbar-item{
     /*Adds some spacing between the heading and the left edge of the screen*/

@@ -51,18 +51,50 @@
 	</nav>
 
 		<!--Searchbar-->
-		<div id="searchbar">
-			<span>Search by:</span>
-			<select id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="searchChange()">
-				<!-- Re search if this select changes -->
-				<option selected="selected" value="courseIDSearch">Course ID</option>
-				<option value="keywordSearch">Keywords</option>
-				<option value="instSearch">Instructor</option>
-			</select>
-			<span style="margin-left:1em;">Schedule:</span>
-			<select id="schedSelect" ng-model="currentSched" ng-change="schedChange()">
-				<option ng-repeat="schedName in schedules" value="{{schedName}}">{{schedName}}</option>
-			</select>
+		<div id="searchbar" class = "level">
+			<span class = "level-left">
+
+				<div> Search by:</div>
+				<div class="dropdown" onclick = "toggle_activation(this)">
+					  <div class="dropdown-trigger">
+						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+						  <span>Search By <i class="fa fa-angle-down"></i></span>
+
+						</button>
+					  </div>
+					  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+						<div class="dropdown-content">
+						  <a onclick="activate_dropdown_item(this)" class="dropdown-item">
+							Course ID
+						  </a>
+						  <a onclick="activate_dropdown_item(this)" class="dropdown-item">
+							Keywords
+						  </a>
+						  <a onclick="activate_dropdown_item(this)" class="dropdown-item">
+							Instructor
+						  </a>
+						</div>
+					  </div>
+					</div>
+
+				<div id="searchSelect" style="margin-right:1em;" ng-model="searchType" ng-change="searchChange()" class="dropdown is-active">
+					<!-- Re search if this select changes -->
+					<div class = "dropdown-item" selected="selected" value="courseIDSearch">Course ID</div>
+					<div class = "dropdown-item" value="keywordSearch">Keywords</div>
+					<div class = "dropdown-item" value="instSearch">Instructor</div>
+				</div>
+				<form ng-submit="delaySearch()">
+					<input id="CSearch" type="text" ng-class="{'is-loading': loading}" class="input is-small is-rounded" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
+					<!-- This only shows if loading == true. Need to use visibility: hidden -->
+				</form>
+			</span>
+
+			<span class = "level-right">
+				Schedule:
+				<select id="schedSelect" ng-model="currentSched" ng-change="schedChange()">
+					<option ng-repeat="schedName in schedules" value="{{schedName}}">{{schedName}}</option>
+				</select>
+			</span>
 			<!--<div ng-class="{'hide': !loading, '': loading}" class="spinner"></div>-->
 		</div>
 		<!--Toolbar-->
@@ -104,12 +136,7 @@
 		</div>
 	<div class="columns" id ="courses_and_sections">
 		<div class="column is-two-fifths">
-			<div style="text-align: center;">
-				<form ng-submit="delaySearch()">
-					<input id="CSearch" type="text" ng-class="{'is-loading': loading}" class="input is-medium is-rounded" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
-					<!-- This only shows if loading == true. Need to use visibility: hidden -->
-				</form>
-			</div>
+
 
 			<div class="columns">
 				<div id="CourseList" class="box column">
