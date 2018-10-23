@@ -134,6 +134,9 @@ const activate_dropdown_item = function(dropdown_item){
         let parent_node = find_parent_dropdown(dropdown_item);
         //let text_node = parent_node.childNodes[0];
         //console.log(text_node);
-        parent_node.childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent = dropdown_item.textContent;
+        const new_text = dropdown_item.textContent;
+        parent_node.setAttribute("value",new_text.replace(" ","").replace("\n","").replace("\t",""));
+        angular.element(parent_node).scope().searchChange();
+        parent_node.childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent = new_text;
     }
 };

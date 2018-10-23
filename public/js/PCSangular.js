@@ -66,6 +66,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         // ga('send', 'event', 'UI interaction', 'searchChange', $scope.searchType);        
         $scope.currentDept = '';
         // $scope.courses = [];
+        console.log($scope.search);
         $scope.initiateSearch($scope.search);
         $scope.searchPlaceholder = placeholderMap[$scope.searchType];
     };

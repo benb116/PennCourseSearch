@@ -54,27 +54,7 @@
 		<div id="searchbar" class = "level">
 			<span class = "level-left">
 
-				<div class="dropdown" role = "menu" onclick = "toggle_activation(this)" id="searchSelect" ng-model="searchType" ng-change="searchChange()">
-					  <div class="dropdown-trigger">
-						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-							<span><span class ="selected_name">Search By</span><i class="fa fa-angle-down"></i></span>
-
-						</button>
-					  </div>
-					  <div class="dropdown-menu" id="dropdown-menu" role="menu">
-						<div class="dropdown-content">
-						  <a value = "courseIDSearch" onclick="activate_dropdown_item(this)" class="dropdown-item">
-							Course ID
-						  </a>
-						  <a value = "keywordSearch" onclick="activate_dropdown_item(this)" class="dropdown-item">
-							Keywords
-						  </a>
-						  <a value = "instSearch" onclick="activate_dropdown_item(this)" class="dropdown-item">
-							Instructor
-						  </a>
-						</div>
-					  </div>
-					</div>
+				<div id ="searchSelect">ERROR</div>
 
 				<form ng-submit="delaySearch()">
 					<input id="CSearch" type="text" ng-class="{'is-loading': loading}" class="input is-small is-rounded" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
@@ -454,6 +434,12 @@
 			</div>
 		</div>
 	</footer>
+
+	<!-- Load React. -->
+	<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+	<script type="text/javascript" src="/js/test_component.js"></script>
 </body>
 
 </html>
