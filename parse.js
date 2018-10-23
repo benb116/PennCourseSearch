@@ -333,14 +333,14 @@ parse.RecordRegistrar = function(inJSON) {
                 console.log(('Reg Spit: '+thedept));
             }
         });
-        // fs.writeFile('../Data/'+currentTerm+'Meet/'+thedept+'.json', JSON.stringify(meetresp), function (err) {
-        //     // Write JSON to file
-        //     if (err) {
-        //         console.log(thedept+' '+err);
-        //     } else {
-        //         console.log(('Meet Spit: '+thedept));
-        //     }
-        // });
+        fs.writeFile('../Data/'+currentTerm+'Meet/'+thedept+'.json', JSON.stringify(meetresp), function (err) {
+            // Write JSON to file
+            if (err) {
+                console.log(thedept+' '+err);
+            } else {
+                console.log(('Meet Spit: '+thedept));
+            }
+        });
     }
 };
 

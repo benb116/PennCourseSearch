@@ -31,7 +31,7 @@ var app = express();
 app.use(compression());
 app.use(helmet()); // Hides certain HTTP headers, supposedly more secure?
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'production') {
     // I want this to have the client always pull the newest JS, since uodates happen very often.
     // IDK if this is the best way to do that.
     app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: 2628000000 }));

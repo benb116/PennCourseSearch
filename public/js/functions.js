@@ -10,7 +10,7 @@ $(document).ready(function() {
         "Invented by Benjamin Franklin in 1793",
         "Faster than you can say 'Wawa run'",
         "Classes sine PennCourseSearch vanae",
-        // "On PennCourseSearch, no one knows you're Amy G.",
+        "On PennCourseSearch, no one knows you're Amy G.",
         "Designed by Ben in Speakman. Assembled in China.",
         "Help! I'm trapped in a NodeJS server! Bring Chipotle!",
         "With white sauce AND hot sauce",
