@@ -176,7 +176,7 @@ app.get('/Search', function(req, res) {
 
         var baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
         if (searchType) {
-            baseURL += searchTypes[searchType] + searchParam;
+            baseURL += searchTypes[searchType] + decodeURIComponent(searchParam);
         }
         // If we are searching by a certain instructor, the course numbers will be filtered because of searchType 'instSearch'.
         // However, clicking on one of those courses will show all sections, including those not taught by the instructor.
