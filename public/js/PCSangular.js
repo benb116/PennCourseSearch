@@ -77,27 +77,34 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
     };
     $scope.initiateSearch = function(param, courseType) {
         // Used for typed searches and schedBlock clicks
-        var terms = FormatID(param);
-        if(terms[0] && terms[0] !== '') {
-            pendingRequests.cancelAll();
-            if (terms[0] !== $scope.currentDept) {
-                $scope.get.Courses(terms[0], courseType); // if (!courseType) then the get.Courses function will default to the searchType value
+        if (!courseType) {courseType = $scope.searchType;}
+        if (courseType === 'courseIDSearch') {
+            var terms = FormatID(param);
+            if(terms[0] && terms[0] !== '') {
+                pendingRequests.cancelAll();
+                if (terms[0] !== $scope.currentDept) {
+                    $scope.get.Courses(terms[0], courseType);
+                }
+            } else {
+                $scope.currentDept = '';
+                $scope.courses = [];
+            }
+            if(terms[1].length === 3) {
+                $scope.get.Sections(terms[0], terms[1], terms[2]);
+            } else {
+                $scope.secListTitle = '';
+                $scope.currentCourse = '000';
+                $scope.sections = [];
+                $scope.currentSection = '000';
+                $scope.sectionInfo = {};
+            }
+            if (terms[2].length === 3) {
+                $scope.get.SectionInfo(terms[0], terms[1], terms[2]);
             }
         } else {
-            $scope.currentDept = '';
-            $scope.courses = [];
-        }
-        if(terms[1].length === 3) {
-            $scope.get.Sections(terms[0], terms[1], terms[2]);
-        } else {
-            $scope.secListTitle = '';
-            $scope.currentCourse = '000';
-            $scope.sections = [];
-            $scope.currentSection = '000';
-            $scope.sectionInfo = {};
-        }
-        if (terms[2].length === 3) {
-            $scope.get.SectionInfo(terms[0], terms[1], terms[2]);
+            if (param !== '') {
+                $scope.get.Courses(param, courseType);
+            }
         }
     };
     $scope.schedChange = function() {
