@@ -72,7 +72,7 @@ class Dropdown extends React.Component {
                         <span>
                             <span className={"selected_name"}>{this.state.label_text}</span>
                             <span className="icon is-small">
-                                <i className="fas fa-angle-down" aria-hidden="true"/>
+                                <i className="fa fa-angle-down" aria-hidden="true"/>
                             </span>
                         </span>
                     </button>
