@@ -54,7 +54,7 @@
 		<div id="searchbar" class = "level">
 			<span class = "level-left">
 
-				<div id ="searchSelect">ERROR</div>
+				<div id ="searchSelectContainer">ERROR</div>
 
 				<form ng-submit="delaySearch()">
 					<input id="CSearch" type="text" ng-class="{'is-loading': loading}" class="input is-small is-rounded" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
@@ -64,27 +64,7 @@
 
 			<span class = "level-right">
 
-				<div class="dropdown is-hoverable">
-					<div class="dropdown-trigger">
-						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-							<span>Schedule Options</span>
-							<span class="icon is-small">
-								<i class="fa fa-angle-down" aria-hidden="true"></i>
-							</span>
-						</button>
-					</div>
-					<div class="dropdown-menu" id="dropdown-menu4" role="menu">
-						<div class="dropdown-content">
-							<a class="dropdown-item" ng-click="sched.New()">New</a>
-							<a class="dropdown-item" ng-click="sched.Download()" rel="leanModal" href="#SchedModal">
-								Download
-							</a>
-							<a class="dropdown-item" ng-click="sched.Duplicate()">Duplicate</a>
-							<a class="dropdown-item" ng-click="sched.Rename()">Rename</a>
-							<a class="dropdown-item" ng-click="sched.Clear()">Clear</a>
-							<a class="dropdown-item" ng-click="sched.Delete()">Delete</a>
-						</div>
-					</div>
+				<div id = "scheduleOptionsContainer">
 				</div>
 				<button class="button" ng-click="star.Show()"><span>Show Stars</span></button>
 				<a class="button" rel="leanModal" href="#UploadModal" id="ImportButton" onclick="ga('send', 'event', 'UI interaction', 'import')">
