@@ -1,6 +1,31 @@
 'use strict';
 
-class Dropdown extends React.Component {
+class OutClickable extends React.Component{
+    // a component that you can "click out" of
+    //requires that ref={this.setWrapperRef} is added as an attribute
+    constructor(props){
+        super(props);
+        this.setWrapperRef = this.setWrapperRef.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+        document.addEventListener("click", this.handleClickOutside);
+    }
+
+    /**
+     * Alert if clicked on outside of element
+     */
+    handleClickOutside(event) {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            this.close_dropdown();
+        }
+    }
+
+    setWrapperRef(node) {
+        this.wrapperRef = node;
+    }
+
+}
+
+class Dropdown extends OutClickable{
     constructor(props) {
         super(props);
         let starting_activity = -1;
@@ -13,22 +38,6 @@ class Dropdown extends React.Component {
         this.activate_dropdown = this.activate_dropdown.bind(this);
         this.activate_item = this.activate_item.bind(this);
         this.close_dropdown = this.close_dropdown.bind(this);
-        this.setWrapperRef = this.setWrapperRef.bind(this);
-        this.handleClickOutside = this.handleClickOutside.bind(this);
-        document.addEventListener("click", this.handleClickOutside);
-    }
-
-    setWrapperRef(node) {
-        this.wrapperRef = node;
-    }
-
-    /**
-     * Alert if clicked on outside of element
-     */
-    handleClickOutside(event) {
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-            this.close_dropdown();
-        }
     }
 
     close_dropdown() {
@@ -111,7 +120,11 @@ ReactDOM.render(<Dropdown id = {"searchSelect"} update_label def_active={0} def_
 console.log("rendering schedule options...");
 const dom_container_schedule = document.querySelector("#scheduleOptionsContainer");
 const new_schedule = function(){angular.element(document.body).scope().sched.New()};
-const download_schedule = function(){angular.element($("SchedGraph")).scope().sched.Download()};
+const download_schedule = function(){
+    const scope = angular.element(document.body).scope();
+    scope.sched.Download();
+    window.location = "#SchedModal";
+};
 const duplicate_schedule = function(){angular.element(document.body).scope().sched.Duplicate()};
 const rename_schedule = function(){angular.element(document.body).scope().sched.Rename()};
 const clear_schedule = function(){angular.element(document.body).scope().sched.Clear()};
@@ -125,3 +138,34 @@ const schedule_contents_list = [["New",new_schedule],
                                 ];
 ReactDOM.render(<Dropdown id = {"scheduleDropdown"} def_text = {"Schedule Options"} contents = {schedule_contents_list}/>, dom_container_schedule);
 console.log("schedule options rendered");
+
+class ToggleButton extends OutClickable{
+    //not a dropdown itself, but interacts with adjacent elements via css
+    constructor(props){
+        super(props);
+        this.props = props;
+        this.containerHTML = props.parent.innerHTML;
+        console.log(props.parent);
+        this.state = {active: false};
+        this.closeDropdown = this.closeDropdown.bind(this);
+        this.activateDropdown = this.activateDropdown.bind(this);
+
+    }
+
+    activateDropdown(){
+        this.setState(state=>({active:true}));
+    }
+
+    closeDropdown(){
+        this.setState(state=>({active:false}));
+    }
+
+    render(){
+        return <Button ref={this.setWrapperRef} className={"toggle_button "+this.state.active}>{this.props.name}</Button>;
+    }
+
+}
+
+//const filter_search_dom_container = document.getElementById("FilterSearchButton");
+
+//ReactDOM.render(<ContentDropdown name = {"X"}/>,temp_dom_container);

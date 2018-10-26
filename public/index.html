@@ -64,6 +64,8 @@
 
 			<span class = "level-right">
 
+				<Button id = "filter_search_toggler" onclick = "toggle_filter_search_display(this);">X</Button>
+
 				<div id = "scheduleOptionsContainer">
 				</div>
 				<button class="button" ng-click="star.Show()"><span>Show Stars</span></button>
@@ -233,99 +235,6 @@
 		</div>
 
 		<div id="InfoPanel" class="column">
-			<div id="FilterSearch" class = "box">
-				<div class="FilterPanel" style="width:60%;">
-					<div class="FilterBlock">
-						<div id="reqTypes">
-							<span ng-click="reqShow = 'CAS'"  ng-class="{schoolSelected: reqShow == 'CAS'}" >College</span>
-							<span ng-click="reqShow = 'WH'"   ng-class="{schoolSelected: reqShow == 'WH'}"  >Wharton</span>
-							<span ng-click="reqShow = 'SEAS'" ng-class="{schoolSelected: reqShow == 'SEAS'}">Engineering</span>
-						</div>
-						<div id="reqFilter">
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDS"  ng-change="reqChange()" value="MDS">Society Sector</span>
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDH"  ng-change="reqChange()" value="MDH">History &amp; Tradition Sector</span>
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDA"  ng-change="reqChange()" value="MDA">Arts &amp; Letters Sector</span>
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDO"  ng-change="reqChange()" value="MDO">Humanities &amp; Social Science </span>
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDL"  ng-change="reqChange()" value="MDL">Living World Sector</span>
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDP"  ng-change="reqChange()" value="MDP">Physical World Sector</span>
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDN"  ng-change="reqChange()" value="MDN">Natural Science &amp; Math Sector</span>
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MWC"  ng-change="reqChange()" value="MWC">Writing Requirement</span>
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MQS"  ng-change="reqChange()" value="MQS">Quantitative Data Analysis</span>
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MFR"  ng-change="reqChange()" value="MFR">Formal Reasoning Course</span>
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MC1"  ng-change="reqChange()" value="MC1">Cross Cultural Analysis</span>
-							<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MC2"  ng-change="reqChange()" value="MC2">Cultural Diversity in the US</span>
-							
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WGLO" ng-change="reqChange()" value="WGLO">Global Environment</span>
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Social Structures</span>
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Science and Technology</span>
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Language, Arts &amp; Culture</span>
-							<span ng-show="reqShow==='WH'"  style="width:100%;height:1em;display:inline;"><hr style="width:95%;position:relative"></hr></span>
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNHR" ng-change="reqChange()" value="WNHR">Enter 2017 - Humanities</span>
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNNS" ng-change="reqChange()" value="WNNS">Enter 2017 - Nat. Science</span>
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNSS" ng-change="reqChange()" value="WNSS">Enter 2017 - Social Struct.</span>
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNFR" ng-change="reqChange()" value="WNFR">Enter 2017 - Flexible</span>
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WURE" ng-change="reqChange()" value="WURE">Enter 2017 - Unrestricted Elec.</span>
-							<!-- <span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNSA" ng-change="reqChange()" value="WNSA">Enter 2017 - See Advisor</span> -->
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCY" ng-change="reqChange()" value="WCCY">Enter 2017 - Cross Cul. Pers.</span>
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCS" ng-change="reqChange()" value="WCCS">Enter 2017 - CCP See Advisor</span>
-							<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCC" ng-change="reqChange()" value="WCCC">Enter 2017 - CCP CDUS</span>
-							
-							<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EMAT" ng-change="reqChange()" value="EMAT">Math</span>
-							<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ESCI" ng-change="reqChange()" value="ESCI">Natural Science</span>
-							<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EENG" ng-change="reqChange()" value="EENG">Engineering</span>
-							<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ESSC" ng-change="reqChange()" value="ESSC">Social Sciences</span>
-							<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EHUM" ng-change="reqChange()" value="EHUM">Humanities</span>
-							<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ETBS" ng-change="reqChange()" value="ETBS">Tech, Bus, and Society</span>
-							<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EWRT" ng-change="reqChange()" value="EWRT">Writing</span>
-						</div>
-					</div>
-				</div>
-
-				<div class="FilterPanel" style="width:40%;">
-					<div class="FilterBlock">
-						<input type="checkbox" id="closedCheck" value="ClosedSec" ng-model="showClosed" checked onchange="ga('send', 'event', 'UI interaction', 'open-close');">Show closed sections
-					</div>
-
-					<div class="FilterBlock">
-						<select id="actFilter" ng-model="showAct" onchange="ga('send', 'event', 'UI interaction', 'activity');">
-							<option value="noFilter">Filter by section type</option>
-							<option value="LEC">Lecture</option>
-							<option value="REC">Recitation</option>
-							<option value="LAB">Laboratory</option>
-							<option value="IND">Independent Study</option>
-							<option value="SEM">Seminar</option>
-							<option value="SRT">Senior Thesis</option>
-							<option value="STU">Studio</option>
-							<option value="CLN">Clinic</option>
-							<option value="PRC">SCUE Preceptorial</option>
-							<option value="PRO">NSO Proseminar</option>
-							<option value="ONL">Online Course</option>
-						</select>
-
-						<select id="credSelect" ng-model="credFilter" onchange="ga('send', 'event', 'UI interaction', 'credit');">
-							<option value="noFilter">Filter by CU</option>
-							<option value="0.5">0.5 CU</option>
-							<option value="1">1 CU</option>
-							<option value="1.5">1.5 CU</option>
-						</select>
-					</div>
-
-					<div class="FilterBlock">
-						<select id="proFilter" ng-model="showPro" ng-change="get.Courses(currentDept, null, checkArr[0]);" onchange="ga('send', 'event', 'UI interaction', 'program');">
-							<option value="noFilter">Filter by program</option>
-							<option value="MSL">ABCS Courses</option>
-							<option value="BFS">Ben Franklin Seminars</option>
-							<option value="CGS">College of Liberal &amp; Professional Studies</option>
-							<option value="CRS">Critical Writing Seminars</option>
-							<option value="FORB">Freshman-Friendly courses</option>
-							<option value="MFS">Freshman Seminars</option>
-							<option value="PLC">Penn Language Center</option>
-							<option value="SS">Summer Sessions I &amp; II</option>
-						</select>
-					</div>
-				</div>
-			</div>
-
 			<div id="SchedGraph" class = "box">
 				<div id="TimeCol" style="position:relative;">
 					<div ng-repeat="timeblock in timeblocks track by $index" class="TimeBlock" style="top: {{schedlines[$index]}}%"> {{timeblock}}</div>
@@ -356,6 +265,99 @@
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="FilterSearch" class = "content_dropdown box">
+		<div class="FilterPanel" style="width:60%;">
+			<div class="FilterBlock">
+				<div id="reqTypes">
+					<span ng-click="reqShow = 'CAS'"  ng-class="{schoolSelected: reqShow == 'CAS'}" >College</span>
+					<span ng-click="reqShow = 'WH'"   ng-class="{schoolSelected: reqShow == 'WH'}"  >Wharton</span>
+					<span ng-click="reqShow = 'SEAS'" ng-class="{schoolSelected: reqShow == 'SEAS'}">Engineering</span>
+				</div>
+				<div id="reqFilter">
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDS"  ng-change="reqChange()" value="MDS">Society Sector</span>
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDH"  ng-change="reqChange()" value="MDH">History &amp; Tradition Sector</span>
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDA"  ng-change="reqChange()" value="MDA">Arts &amp; Letters Sector</span>
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDO"  ng-change="reqChange()" value="MDO">Humanities &amp; Social Science </span>
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDL"  ng-change="reqChange()" value="MDL">Living World Sector</span>
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDP"  ng-change="reqChange()" value="MDP">Physical World Sector</span>
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDN"  ng-change="reqChange()" value="MDN">Natural Science &amp; Math Sector</span>
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MWC"  ng-change="reqChange()" value="MWC">Writing Requirement</span>
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MQS"  ng-change="reqChange()" value="MQS">Quantitative Data Analysis</span>
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MFR"  ng-change="reqChange()" value="MFR">Formal Reasoning Course</span>
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MC1"  ng-change="reqChange()" value="MC1">Cross Cultural Analysis</span>
+					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MC2"  ng-change="reqChange()" value="MC2">Cultural Diversity in the US</span>
+
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WGLO" ng-change="reqChange()" value="WGLO">Global Environment</span>
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Social Structures</span>
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Science and Technology</span>
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Language, Arts &amp; Culture</span>
+					<span ng-show="reqShow==='WH'"  style="width:100%;height:1em;display:inline;"><hr style="width:95%;position:relative"></hr></span>
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNHR" ng-change="reqChange()" value="WNHR">Enter 2017 - Humanities</span>
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNNS" ng-change="reqChange()" value="WNNS">Enter 2017 - Nat. Science</span>
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNSS" ng-change="reqChange()" value="WNSS">Enter 2017 - Social Struct.</span>
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNFR" ng-change="reqChange()" value="WNFR">Enter 2017 - Flexible</span>
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WURE" ng-change="reqChange()" value="WURE">Enter 2017 - Unrestricted Elec.</span>
+					<!-- <span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNSA" ng-change="reqChange()" value="WNSA">Enter 2017 - See Advisor</span> -->
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCY" ng-change="reqChange()" value="WCCY">Enter 2017 - Cross Cul. Pers.</span>
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCS" ng-change="reqChange()" value="WCCS">Enter 2017 - CCP See Advisor</span>
+					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCC" ng-change="reqChange()" value="WCCC">Enter 2017 - CCP CDUS</span>
+
+					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EMAT" ng-change="reqChange()" value="EMAT">Math</span>
+					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ESCI" ng-change="reqChange()" value="ESCI">Natural Science</span>
+					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EENG" ng-change="reqChange()" value="EENG">Engineering</span>
+					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ESSC" ng-change="reqChange()" value="ESSC">Social Sciences</span>
+					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EHUM" ng-change="reqChange()" value="EHUM">Humanities</span>
+					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ETBS" ng-change="reqChange()" value="ETBS">Tech, Bus, and Society</span>
+					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EWRT" ng-change="reqChange()" value="EWRT">Writing</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="FilterPanel" style="width:40%;">
+			<div class="FilterBlock">
+				<input type="checkbox" id="closedCheck" value="ClosedSec" ng-model="showClosed" checked onchange="ga('send', 'event', 'UI interaction', 'open-close');">Show closed sections
+			</div>
+
+			<div class="FilterBlock">
+				<select id="actFilter" ng-model="showAct" onchange="ga('send', 'event', 'UI interaction', 'activity');">
+					<option value="noFilter">Filter by section type</option>
+					<option value="LEC">Lecture</option>
+					<option value="REC">Recitation</option>
+					<option value="LAB">Laboratory</option>
+					<option value="IND">Independent Study</option>
+					<option value="SEM">Seminar</option>
+					<option value="SRT">Senior Thesis</option>
+					<option value="STU">Studio</option>
+					<option value="CLN">Clinic</option>
+					<option value="PRC">SCUE Preceptorial</option>
+					<option value="PRO">NSO Proseminar</option>
+					<option value="ONL">Online Course</option>
+				</select>
+
+				<select id="credSelect" ng-model="credFilter" onchange="ga('send', 'event', 'UI interaction', 'credit');">
+					<option value="noFilter">Filter by CU</option>
+					<option value="0.5">0.5 CU</option>
+					<option value="1">1 CU</option>
+					<option value="1.5">1.5 CU</option>
+				</select>
+			</div>
+
+			<div class="FilterBlock">
+				<select id="proFilter" ng-model="showPro" ng-change="get.Courses(currentDept, null, checkArr[0]);" onchange="ga('send', 'event', 'UI interaction', 'program');">
+					<option value="noFilter">Filter by program</option>
+					<option value="MSL">ABCS Courses</option>
+					<option value="BFS">Ben Franklin Seminars</option>
+					<option value="CGS">College of Liberal &amp; Professional Studies</option>
+					<option value="CRS">Critical Writing Seminars</option>
+					<option value="FORB">Freshman-Friendly courses</option>
+					<option value="MFS">Freshman Seminars</option>
+					<option value="PLC">Penn Language Center</option>
+					<option value="SS">Summer Sessions I &amp; II</option>
+				</select>
 			</div>
 		</div>
 	</div>

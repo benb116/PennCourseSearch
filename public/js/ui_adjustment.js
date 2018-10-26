@@ -140,3 +140,19 @@ const activate_dropdown_item = function(dropdown_item){
         parent_node.childNodes[1].childNodes[1].childNodes[1].childNodes[0].textContent = new_text;
     }
 };
+
+let is_filter_search_displayed = false;
+
+//toggles whether the filter search box is displayed or not
+const toggle_filter_search_display = function(el){
+    is_filter_search_displayed = !is_filter_search_displayed;
+    const node = document.getElementById("FilterSearch");
+    if(is_filter_search_displayed){
+        const rect = el.getBoundingClientRect();
+        node.style.left = (1.5 * rect.left - rect.right) + "px";
+        node.style.top = rect.top + "px";
+        document.getElementById("FilterSearch").style.visibility = "visible";
+    }else{
+        node.style.visibility = "hidden";
+    }
+};
