@@ -150,9 +150,13 @@ const toggle_filter_search_display = function(el){
     if(is_filter_search_displayed){
         const rect = el.getBoundingClientRect();
         node.style.left = (1.5 * rect.left - rect.right) + "px";
-        node.style.top = rect.top + "px";
-        document.getElementById("FilterSearch").style.visibility = "visible";
+        node.style.top = (rect.bottom + 10) + "px";
+        node.style.visibility = "visible";
+        node.style.opacity = "1";
+        el.style.backgroundImage = "url(\"/css/filter_b.png\")";
     }else{
-        node.style.visibility = "hidden";
+        node.style.opacity = "0";
+        window.setTimeout(function(){node.style.visibility = "hidden";},250);
+        el.style.backgroundImage = "url(\"/css/filter_a.png\")";
     }
 };

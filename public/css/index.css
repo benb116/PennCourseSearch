@@ -321,8 +321,10 @@ ul {
 	overflow: hidden;
 	font-size: 1em;
 	min-width: 500px;
-	max-width:50%;
-	height: 10em;
+	opacity:0;
+	max-width:60%;
+	min-height: 15em;
+	max-height:50%;
 	position:fixed;
 	visibility:hidden;
 	margin-bottom: 1em;
@@ -330,6 +332,15 @@ ul {
 	background-color: white;
 	border-radius: 5px;
 	vertical-align: top;
+	transition: opacity 250ms ease;
+}
+
+#filter_search_toggler{
+	background-image:url("/css/filter_a.png");
+	background-size: 100% 100%;
+	width:2.5em;
+	height:2.5em;
+	cursor:pointer;
 }
 
 .FilterPanel {
@@ -357,7 +368,7 @@ ul {
 	line-height: 1.25em;
 	text-indent: 0;
 	padding-left: 1em;
-	height: 7em;
+	margin-bottom: 3px;
 	overflow-y: scroll;
 }
 
