@@ -180,3 +180,8 @@ $(document).click(function(event) {
         hide_filter_search_display(toggler);
     }
 });
+
+//closes the modal, given a close button
+const close_modal = function(el){
+    el.parentNode.setAttribute("class",el.parentNode.getAttribute("class").replace("is-active",""));
+};

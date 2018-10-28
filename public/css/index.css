@@ -789,3 +789,7 @@ hr {
 	margin:0;
 	padding:0;
 }
+
+.modal-content *{
+    color:white;
+}

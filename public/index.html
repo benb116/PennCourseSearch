@@ -392,10 +392,14 @@
 			<a class="modal_close"><i class="fa fa-times"></i></a>
 		</div>
 
-		<div id="SchedModal" class="Modal">
-			<img id="SchedImage" src="">
-			<span>Right click the image to save it.</span>
-			<a class="modal_close"><i class="fa fa-times"></i></a>
+		<div id="schedule_modal" class="modal">
+			<div class="modal-background"></div>
+			<div class="modal-content">
+				<img id="SchedImage" src=""/>
+				<span>Right click the image to save it.</span>
+			</div>
+			<button class="modal-close is-large" aria-label="close"
+					onclick="close_modal(this);"/>
 		</div>
 
 		<div id="UploadModal" class="Modal">

@@ -186,11 +186,24 @@ var Dropdown = function (_OutClickable) {
 
 
 var domContainer_search = document.querySelector('#searchSelectContainer');
-var angular_update = function angular_update() {
-    angular.element(document.body).scope().searchChange();
+var angular_update = function angular_update(searchType) {
+    var appElement = document.body;
+    var $scope = angular.element(appElement).scope();
+    $scope.$apply(function () {
+        $scope.searchType = searchType;
+        $scope.searchChange();
+        console.log("changed");
+    });
 };
+
 //function that updates the angular function that listens for changes in search type
-var search_contents_list = [["Course ID", angular_update], ["Keywords", angular_update], ["Instructor", angular_update]];
+var search_contents_list = [["Course ID", function () {
+    angular_update("courseIDSearch");
+}], ["Keywords", function () {
+    angular_update("keywordSearch");
+}], ["Instructor", function () {
+    angular_update("instSearch");
+}]];
 //list of options for the dropdown
 ReactDOM.render(React.createElement(Dropdown, { id: "searchSelect", update_label: true, def_active: 0, def_text: "Search By", contents: search_contents_list }), domContainer_search);
 
@@ -201,10 +214,15 @@ var new_schedule = function new_schedule() {
     angular.element(document.body).scope().sched.New();
 };
 var download_schedule = function download_schedule() {
-    var scope = angular.element(document.body).scope();
-    scope.sched.Download();
-    window.location = "#SchedModal";
+    var $scope = angular.element(document.body).scope();
+    $scope.$apply(function () {
+        $scope.sched.Download();
+        document.getElementById("schedule_modal").setAttribute("class", "modal is-active");
+        console.log("download");
+    });
+    //window.location = "#SchedModal";
 };
+
 var duplicate_schedule = function duplicate_schedule() {
     angular.element(document.body).scope().sched.Duplicate();
 };
