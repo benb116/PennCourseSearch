@@ -60,12 +60,11 @@
 					<input id="CSearch" type="text" ng-class="{'is-loading': loading}" class="input is-small is-rounded" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
 					<!-- This only shows if loading == true. Need to use visibility: hidden -->
 				</form>
+				<div id = "filter_search_toggler" onclick = "toggle_filter_search_display(this);">
+				</div>
 			</span>
 
 			<span class = "level-right">
-
-				<div id = "filter_search_toggler" onclick = "toggle_filter_search_display(this);">
-				</div>
 
 				<div id = "scheduleOptionsContainer">
 				</div>
