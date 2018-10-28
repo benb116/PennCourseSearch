@@ -174,11 +174,9 @@ const toggle_filter_search_display = function(el){
 const add_outer_click_listener = function(ignore_nodes, listener, modal_mode){
     $(document).click(function(event) {
         let check = false;
-        console.log(ignore_nodes+","+ listener+","+ modal_mode);
         if(modal_mode &&
             (event.target.tagName.toLocaleLowerCase() === "a" ||
                 event.target.tagName.toLocaleLowerCase() === "button")){
-            console.log("blocked! "+event.target.tagName);
             check = true;
         }else{
             if(modal_mode && event.target.getAttribute("class") !== null &&

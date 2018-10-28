@@ -71,7 +71,8 @@
 				<div id = "scheduleOptionsContainer">
 				</div>
 				<button class="button" ng-click="star.Show()"><span>Show Stars</span></button>
-				<a class="button" rel="leanModal" href="#UploadModal" id="ImportButton" onclick="ga('send', 'event', 'UI interaction', 'import')">
+				<a class="button" href="#UploadModal" id="ImportButton" onclick="ga('send', 'event', 'UI interaction', 'import');
+																				  activate_modal(document.getElementById('UploadModal'))">
 					Import
 				</a>
 				<button class="button" ng-click="clearSearch()"><span>Clear Search</span></button>
@@ -157,7 +158,7 @@
 						<div class="columns is-gapless" style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 							<div class="tooltip column is-one-fifth" title="Section status (open or closed)">O/C</div>
 							<div class="PCR Inst tooltip column is-one-fifth" title="Instructor Quality rating" style="background:rgba(46, 204, 113, 0.85);">Inst</div>
-							<div class="tooltip column is-one-fifth" title="Section ID" style="">Sect</div>
+							<div class="tooltip column is-one-fifth" title="Section ID" >Sect</div>
 							<div class="tooltip column" title="Meeting Time" style="">Time</div>
 						</div>
 
@@ -200,7 +201,7 @@
 										<div class="column is-one-fifth">
 											<span class="PCR Inst" style="background:rgba(46, 204, 113, {{ section.pcrIShade }});color: {{ section.pcrIColor }}" ng-click="get.SectionInfo(section.idDashed)">{{ section.revs.cI | number:2}}</span>
 										</div>
-										<div class="column is-one-fifth">
+										<div class="column is-one-fifth" style = "margin-left:0.4rem; ">
 											<span class="sectionText" ng-click="get.SectionInfo(section.idDashed)">{{ justSection(section.idSpaced)}} </span>
 										</div>
 										<div class="column">
@@ -410,15 +411,23 @@
 					onclick="close_modal('schedule_modal');"/>
 		</div>
 
-		<div id="UploadModal" class="Modal">
-			<h2>Import your schedule from Penn InTouch</h2>
-			<img src="/Import.png" width="598" height="246">
-			<p style="text-align:center;">Under your schedule on Penn InTouch, click the "Export as iCalendar" button to download the schedule file.</p>
-			<input type="file" id="schedInput" name="file" style="width:160px" accept=".ics" onchange="readCalFile()" />
-			<p style="text-align:center;">Upload the file here to import the classes.</p>
-			<div id="secsToImport"></div>
-			<input type="submit" name="upload" value="Import!" id="importSubmit" disabled ng-click="sched.Import()">
-			<a class="modal_close"><i class="fa fa-times"></i></a>
+		<div id="UploadModal" class="modal">
+			<div class="modal-background"></div>
+			<div class = "modal-card">
+				<header class = "modal-card-head">
+					<p class = "modal-card-title">Import your schedule from Penn InTouch</p>
+					<button class="delete" aria-label="close"
+							onclick="close_modal('UploadModal');"/>
+				</header>
+				<section class = "modal-card-body">
+					<img src="/Import.png" width="598" height="246">
+					<p style="text-align:center;">Under your schedule on Penn InTouch, click the "Export as iCalendar" button to download the schedule file.</p>
+					<input class="file" type="file" id="schedInput" name="file" style="width:160px" accept=".ics" onchange="readCalFile()" />
+					<p style="text-align:center;">Upload the file here to import the classes.</p>
+					<div id="secsToImport"></div>
+					<input class = "button is-link" type="submit" name="upload" value="Import!" id="importSubmit" disabled ng-click="sched.Import()" onclick = "close_modal('UploadModal');">
+				</section>
+			</div>
 		</div>
 	<footer class="footer">
 		<span class = "arrow_container"><i class="fa fa-angle-up"></i></span>

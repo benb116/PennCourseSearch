@@ -98,6 +98,9 @@ form > input[type="text"] {
 	margin-right:0.5rem;
 }
 
+#searchbar button{
+	min-width:8rem;
+}
 
 .is-active i.fa.fa-angle-down::before{
 	content:"\f106"!important;
@@ -681,6 +684,11 @@ hr {
 .Modal a {
 	color: black;
 	text-decoration: none;
+}
+
+.modal-card-body .button, .modal-card-body input{
+	display:block;
+	margin: 1.5rem auto auto;
 }
 
 .Modal h2 {
