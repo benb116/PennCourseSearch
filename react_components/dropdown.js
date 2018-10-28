@@ -38,11 +38,20 @@ class Dropdown extends OutClickable{
         this.activate_dropdown = this.activate_dropdown.bind(this);
         this.activate_item = this.activate_item.bind(this);
         this.close_dropdown = this.close_dropdown.bind(this);
+        this.toggle_dropdown = this.toggle_dropdown.bind(this);
     }
 
     close_dropdown() {
         console.log("closing dropdown!");
         this.setState(state => ({active: false}));
+    }
+
+    toggle_dropdown(){
+        if(this.state.active){
+            this.close_dropdown();
+        }else{
+            this.activate_dropdown();
+        }
     }
 
     activate_dropdown() {
@@ -88,7 +97,7 @@ class Dropdown extends OutClickable{
         }
         return (
             <div id = {this.props.id} ref={this.setWrapperRef} className={"dropdown" + addition}>
-                <div className={"dropdown-trigger"} onClick={self.activate_dropdown}>
+                <div className={"dropdown-trigger"} onClick={self.toggle_dropdown}>
                     <button className={"button"} aria-haspopup={true} aria-controls={"dropdown-menu"}>
                         <span>
                             <span className={"selected_name"}>{this.state.label_text}</span>

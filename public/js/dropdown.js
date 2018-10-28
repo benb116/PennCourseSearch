@@ -64,6 +64,7 @@ var Dropdown = function (_OutClickable) {
         _this2.activate_dropdown = _this2.activate_dropdown.bind(_this2);
         _this2.activate_item = _this2.activate_item.bind(_this2);
         _this2.close_dropdown = _this2.close_dropdown.bind(_this2);
+        _this2.toggle_dropdown = _this2.toggle_dropdown.bind(_this2);
         return _this2;
     }
 
@@ -74,6 +75,15 @@ var Dropdown = function (_OutClickable) {
             this.setState(function (state) {
                 return { active: false };
             });
+        }
+    }, {
+        key: "toggle_dropdown",
+        value: function toggle_dropdown() {
+            if (this.state.active) {
+                this.close_dropdown();
+            } else {
+                this.activate_dropdown();
+            }
         }
     }, {
         key: "activate_dropdown",
@@ -146,7 +156,7 @@ var Dropdown = function (_OutClickable) {
                 { id: this.props.id, ref: this.setWrapperRef, className: "dropdown" + addition },
                 React.createElement(
                     "div",
-                    { className: "dropdown-trigger", onClick: self.activate_dropdown },
+                    { className: "dropdown-trigger", onClick: self.toggle_dropdown },
                     React.createElement(
                         "button",
                         { className: "button", "aria-haspopup": true, "aria-controls": "dropdown-menu" },
