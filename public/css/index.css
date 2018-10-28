@@ -98,9 +98,16 @@ form > input[type="text"] {
 	margin-right:0.5rem;
 }
 
+#searchbar button{
+	min-width:8rem;
+}
 
 .is-active i.fa.fa-angle-down::before{
 	content:"\f106"!important;
+}
+
+footer:hover i.fa.fa-angle-up::before{
+    content:"\f107"!important;
 }
 
 /*#loaderWrap {height: 30px; width: 30px; display: inline-block; vertical-align: middle;}
@@ -148,7 +155,7 @@ form > input[type="text"] {
 
 #CourseList,
 #SectionCol {
-	height: calc(100vh - 15.5em);
+	height: calc(100vh - 16em);
 	box-sizing: border-box;
 	list-style-type: none;
 	background-color: white;
@@ -679,7 +686,13 @@ hr {
 	text-decoration: none;
 }
 
+.modal-card-body .button, .modal-card-body input{
+	display:block;
+	margin: 1.5rem auto auto;
+}
+
 .Modal h2 {
+	font-size:initial!important;
 	line-height: 0.5em;
 }
 

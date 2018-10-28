@@ -45,7 +45,9 @@
 			<div class="navbar-end">
 				<a class="navbar-item" href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch">
 					<i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</a>
-				<a class="navbar-item" rel="leanModal" href="#ModalWindow" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')" style="padding-right:0.5em;">About</a>
+				<a class="navbar-item" onclick="ga('send', 'event', 'UI interaction', 'AboutModal');
+																activate_modal(document.getElementById('ModalWindow'));"
+				   style="padding-right:0.5em;">About</a>
 			</div>
 		</div>
 	</nav>
@@ -69,7 +71,8 @@
 				<div id = "scheduleOptionsContainer">
 				</div>
 				<button class="button" ng-click="star.Show()"><span>Show Stars</span></button>
-				<a class="button" rel="leanModal" href="#UploadModal" id="ImportButton" onclick="ga('send', 'event', 'UI interaction', 'import')">
+				<a class="button" href="#UploadModal" id="ImportButton" onclick="ga('send', 'event', 'UI interaction', 'import');
+																				  activate_modal(document.getElementById('UploadModal'))">
 					Import
 				</a>
 				<button class="button" ng-click="clearSearch()"><span>Clear Search</span></button>
@@ -155,7 +158,7 @@
 						<div class="columns is-gapless" style="margin-bottom:0.6em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 							<div class="tooltip column is-one-fifth" title="Section status (open or closed)">O/C</div>
 							<div class="PCR Inst tooltip column is-one-fifth" title="Instructor Quality rating" style="background:rgba(46, 204, 113, 0.85);">Inst</div>
-							<div class="tooltip column is-one-fifth" title="Section ID" style="">Sect</div>
+							<div class="tooltip column is-one-fifth" title="Section ID" >Sect</div>
 							<div class="tooltip column" title="Meeting Time" style="">Time</div>
 						</div>
 
@@ -198,7 +201,7 @@
 										<div class="column is-one-fifth">
 											<span class="PCR Inst" style="background:rgba(46, 204, 113, {{ section.pcrIShade }});color: {{ section.pcrIColor }}" ng-click="get.SectionInfo(section.idDashed)">{{ section.revs.cI | number:2}}</span>
 										</div>
-										<div class="column is-one-fifth">
+										<div class="column is-one-fifth" style = "margin-left:0.4rem; ">
 											<span class="sectionText" ng-click="get.SectionInfo(section.idDashed)">{{ justSection(section.idSpaced)}} </span>
 										</div>
 										<div class="column">
@@ -362,33 +365,40 @@
 		</div>
 	</div>
 
-	<div id="ModalWindow" class="Modal">
-			<h2 class="title">About PennCourseSearch</h2>
-			<p>PennCourseSearch is a cleaner and simpler way for Quakers to find classes and make schedules. While this is not a full replacement for Penn InTouch, it acts as an improvement of the "Course Search" and "Mock Schedules" features. Search across departments, courses, and sections and refine searches by specific criteria.</p>
-			<h2 class="title">How do I search for courses?</h2>
-			<p>Just type a course in the search box. Then you can click on the results to see more in-depth information about different sections. If you want to filter the results, click on the filter button and change your options. You can also choose to search by course description or instructor in the menu bar.</p>
-			<h2 class="title">How do I change my schedule?</h2>
-			<p>To add a section to your schedule, click on its <i class="fa fa-plus" style="display:inline"></i> icon. To remove a course, mouse over it and click the <i class="fa fa-times" style="display:inline"></i> in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
-			<h2 class="title">What do the colors mean?</h2>
-			<p>The rectangles with numbers are Penn Course Review ratings. Course quality ratings are in
-				<span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">blue</span>, course difficulty ratings are in
-				<span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">red</span>, and instructor ratings are in
-				<span class="PCR Inst" style="background:rgba(46, 204, 113, 0.85 );display:inline;padding-left:0.25em;padding-right:0.25em;">green</span>. The squares tell you the status of a section.
-				<span class="statusClass openSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is an open section and
-				<span class="statusClass closedSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is a closed section.</p>
-			<!-- <div class="ModalThird">
-				<span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Venmo Me</span></a>
-			</div> -->
-			<div class="ModalThird">
-				<span>Questions or comments?</span>
-				<a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
+	<div id="ModalWindow" class="modal">
+			<div class = "modal-background"></div>
+			<div class = "modal-card">
+				<header class = "modal-card-head">
+					<p class = "modal-card-title">About PennCourseSearch</p>
+					<button class="delete" aria-label="close" onclick = "close_modal('ModalWindow')"></button>
+				</header>
+				<section class = "modal-card-body">
+					<p>PennCourseSearch is a cleaner and simpler way for Quakers to find classes and make schedules. While this is not a full replacement for Penn InTouch, it acts as an improvement of the "Course Search" and "Mock Schedules" features. Search across departments, courses, and sections and refine searches by specific criteria.</p>
+					<h1 class="title">How do I search for courses?</h1>
+					<p>Just type a course in the search box. Then you can click on the results to see more in-depth information about different sections. If you want to filter the results, click on the filter button and change your options. You can also choose to search by course description or instructor in the menu bar.</p>
+					<h1 class="title">How do I change my schedule?</h1>
+					<p>To add a section to your schedule, click on its <i class="fa fa-plus" style="display:inline"></i> icon. To remove a course, mouse over it and click the <i class="fa fa-times" style="display:inline"></i> in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
+					<h1 class="title">What do the colors mean?</h1>
+					<p>The rectangles with numbers are Penn Course Review ratings. Course quality ratings are in
+						<span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">blue</span>, course difficulty ratings are in
+						<span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">red</span>, and instructor ratings are in
+						<span class="PCR Inst" style="background:rgba(46, 204, 113, 0.85 );display:inline;padding-left:0.25em;padding-right:0.25em;">green</span>. The squares tell you the status of a section.
+						<span class="statusClass openSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is an open section and
+						<span class="statusClass closedSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is a closed section.</p>
+					<!-- <div class="ModalThird">
+						<span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Venmo Me</span></a>
+					</div> -->
+					<div>
+						<span>Questions or comments?</span>
+						<a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
+					</div>
+					<div>
+						<span>Want to see all of PCS's code?</span>
+						<a href="https://github.com/benb116/PennCourseSearch"><span><i class="fa fa-github" style="padding-right:0.25em;"></i>View on Github</span></a>
+					</div>
+					<div><a href="https://keen.io?s=badge" rel="nofollow"><img src="/keen.svg" alt="Analytics by Keen IO"/></a></div>
+				</section>
 			</div>
-			<div class="ModalThird">
-				<span>Want to see all of PCS's code?</span>
-				<a href="https://github.com/benb116/PennCourseSearch"><span><i class="fa fa-github" style="padding-right:0.25em;"></i>View on Github</span></a>
-			</div>
-			<div class="ModalThird"><a href="https://keen.io?s=badge" rel="nofollow"><img src="/keen.svg" alt="Analytics by Keen IO"/></a></div>
-			<a class="modal_close"><i class="fa fa-times"></i></a>
 		</div>
 
 		<div id="schedule_modal" class="modal">
@@ -398,21 +408,29 @@
 				<span>Right click the image to save it.</span>
 			</div>
 			<button class="modal-close is-large" aria-label="close"
-					onclick="close_modal(this);"/>
+					onclick="close_modal('schedule_modal');"/>
 		</div>
 
-		<div id="UploadModal" class="Modal">
-			<h2>Import your schedule from Penn InTouch</h2>
-			<img src="/Import.png" width="598" height="246">
-			<p style="text-align:center;">Under your schedule on Penn InTouch, click the "Export as iCalendar" button to download the schedule file.</p>
-			<input type="file" id="schedInput" name="file" style="width:160px" accept=".ics" onchange="readCalFile()" />
-			<p style="text-align:center;">Upload the file here to import the classes.</p>
-			<div id="secsToImport"></div>
-			<input type="submit" name="upload" value="Import!" id="importSubmit" disabled ng-click="sched.Import()">
-			<a class="modal_close"><i class="fa fa-times"></i></a>
+		<div id="UploadModal" class="modal">
+			<div class="modal-background"></div>
+			<div class = "modal-card">
+				<header class = "modal-card-head">
+					<p class = "modal-card-title">Import your schedule from Penn InTouch</p>
+					<button class="delete" aria-label="close"
+							onclick="close_modal('UploadModal');"/>
+				</header>
+				<section class = "modal-card-body">
+					<img src="/Import.png" width="598" height="246">
+					<p style="text-align:center;">Under your schedule on Penn InTouch, click the "Export as iCalendar" button to download the schedule file.</p>
+					<input class="file" type="file" id="schedInput" name="file" style="width:160px" accept=".ics" onchange="readCalFile()" />
+					<p style="text-align:center;">Upload the file here to import the classes.</p>
+					<div id="secsToImport"></div>
+					<input class = "button is-link" type="submit" name="upload" value="Import!" id="importSubmit" disabled ng-click="sched.Import()" onclick = "close_modal('UploadModal');">
+				</section>
+			</div>
 		</div>
 	<footer class="footer">
-		<span class = "arrow_container"><i class="fa fa-angle-down"></i></span>
+		<span class = "arrow_container"><i class="fa fa-angle-up"></i></span>
 		<div class="container">
 			<div class="content has-text-centered">
 				<p style="font-size:0.8rem">
@@ -421,6 +439,9 @@
 			</div>
 		</div>
 	</footer>
+
+	<!--Adjust modals-->
+	<script src="/js/modal_adjustments.js"></script>
 
 	<!-- Load React. -->
 	<!-- Note: when deploying, replace "development.js" with "production.min.js". -->

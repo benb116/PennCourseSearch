@@ -132,8 +132,6 @@ const activate_dropdown_item = function(dropdown_item){
         );
         activate_node(dropdown_item);
         let parent_node = find_parent_dropdown(dropdown_item);
-        //let text_node = parent_node.childNodes[0];
-        //console.log(text_node);
         const new_text = dropdown_item.textContent;
         parent_node.setAttribute("value",new_text.replace(" ","").replace("\n","").replace("\t",""));
         angular.element(parent_node).scope().searchChange();
@@ -149,7 +147,6 @@ const hide_filter_search_display = function(el){
     node.style.opacity = "0";
     window.setTimeout(function(){node.style.visibility = "hidden";},250);
     el.style.backgroundImage = "url(\"/css/filter_a.png\")";
-    console.log("hiding display");
 };
 
 const show_filter_search_display = function(el){
@@ -161,7 +158,6 @@ const show_filter_search_display = function(el){
     node.style.visibility = "visible";
     node.style.opacity = "1";
     el.style.backgroundImage = "url(\"/css/filter_b.png\")";
-    console.log("showing display");
 };
 
 
@@ -174,27 +170,60 @@ const toggle_filter_search_display = function(el){
     }
 };
 
-$(document).click(function(event) {
-    const toggler = document.getElementById("filter_search_toggler");
-    if(!$(event.target).closest('#FilterSearch').length && !$(event.target).closest('#filter_search_toggler').length) {
-        hide_filter_search_display(toggler);
-    }
+//pass in the #ids of the nodes to ignore clicks in and the function to call if a click is outside of these nodes
+const add_outer_click_listener = function(ignore_nodes, listener, modal_mode){
+    $(document).click(function(event) {
+        let check = false;
+        if(modal_mode &&
+            (event.target.tagName.toLocaleLowerCase() === "a" ||
+                event.target.tagName.toLocaleLowerCase() === "button")){
+            check = true;
+        }else{
+            if(modal_mode && event.target.getAttribute("class") !== null &&
+                event.target.getAttribute("class").indexOf("modal-background")!==-1){
+                check = false;
+            }else {
+                ignore_nodes.forEach(function (id) {
+                    if ($(event.target).closest(id).length) {
+                        check = true;
+                    }
+                });
+            }
+        }
+
+        if(!check) {
+            listener();
+        }
+    });
+};
+
+//adds outer click listener to filter search
+add_outer_click_listener(['#FilterSearch', '#filter_search_toggler'], function(){
+    hide_filter_search_display(document.getElementById("filter_search_toggler"), false);
 });
 
-//closes the modal, given a close button
-const close_modal = function(el){
-    el.parentNode.setAttribute("class",el.parentNode.getAttribute("class").replace("is-active",""));
+//closes the modal given an id
+const close_modal = function(id){
+    const el = document.getElementById(id);
+    el.setAttribute("class", el.getAttribute("class").replace("is-active", ""));
+};
+
+//whether any modal is displayed
+let modal_displayed = false;
+
+//activates the modal passed in
+const activate_modal = function(el){
+    el.setAttribute("class",el.getAttribute("class")+" is-active");
+    modal_displayed = true;
 };
 
 //changes schedule to given value
 const change_schedule = function(schedNameNode){
     const schedName = schedNameNode.getAttribute("value");
-    console.log(schedName);
     const appElement = document.body;
     const $scope = angular.element(appElement).scope();
     $scope.$apply(function(){
         $scope.currentSched = schedName;
         $scope.schedChange();
-        console.log("changed sched");
     });
 };

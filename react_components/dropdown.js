@@ -38,15 +38,22 @@ class Dropdown extends OutClickable{
         this.activate_dropdown = this.activate_dropdown.bind(this);
         this.activate_item = this.activate_item.bind(this);
         this.close_dropdown = this.close_dropdown.bind(this);
+        this.toggle_dropdown = this.toggle_dropdown.bind(this);
     }
 
     close_dropdown() {
-        console.log("closing dropdown!");
         this.setState(state => ({active: false}));
     }
 
+    toggle_dropdown(){
+        if(this.state.active){
+            this.close_dropdown();
+        }else{
+            this.activate_dropdown();
+        }
+    }
+
     activate_dropdown() {
-        console.log("activating dropdown!");
         this.setState(state => ({active: true}));
     }
 
@@ -88,7 +95,7 @@ class Dropdown extends OutClickable{
         }
         return (
             <div id = {this.props.id} ref={this.setWrapperRef} className={"dropdown" + addition}>
-                <div className={"dropdown-trigger"} onClick={self.activate_dropdown}>
+                <div className={"dropdown-trigger"} onClick={self.toggle_dropdown}>
                     <button className={"button"} aria-haspopup={true} aria-controls={"dropdown-menu"}>
                         <span>
                             <span className={"selected_name"}>{this.state.label_text}</span>
@@ -116,7 +123,6 @@ const angular_update = function(searchType){
     $scope.$apply(function(){
         $scope.searchType = searchType;
         $scope.searchChange();
-        console.log("changed");
     });
 };
 
@@ -129,15 +135,13 @@ const search_contents_list = [["Course ID",function(){angular_update("courseIDSe
 ReactDOM.render(<Dropdown id = {"searchSelect"} update_label def_active={0} def_text={"Search By"} contents={search_contents_list}/>, domContainer_search);
 
 //renders schedule options dropdown
-console.log("rendering schedule options...");
 const dom_container_schedule = document.querySelector("#scheduleOptionsContainer");
 const new_schedule = function(){angular.element(document.body).scope().sched.New()};
 const download_schedule = function(){
     var $scope = angular.element(document.body).scope();
     $scope.$apply(function(){
         $scope.sched.Download();
-        document.getElementById("schedule_modal").setAttribute("class","modal is-active");
-        console.log("download");
+        activate_modal(document.getElementById("schedule_modal"));
     });
     //window.location = "#SchedModal";
 };
@@ -154,7 +158,6 @@ const schedule_contents_list = [["New",new_schedule],
                                 ["Delete",delete_schedule]
                                 ];
 ReactDOM.render(<Dropdown id = {"scheduleDropdown"} def_text = {"Schedule Options"} contents = {schedule_contents_list}/>, dom_container_schedule);
-console.log("schedule options rendered");
 
 class ToggleButton extends OutClickable{
     //not a dropdown itself, but interacts with adjacent elements via css
@@ -162,7 +165,6 @@ class ToggleButton extends OutClickable{
         super(props);
         this.props = props;
         this.containerHTML = props.parent.innerHTML;
-        console.log(props.parent);
         this.state = {active: false};
         this.closeDropdown = this.closeDropdown.bind(this);
         this.activateDropdown = this.activateDropdown.bind(this);
