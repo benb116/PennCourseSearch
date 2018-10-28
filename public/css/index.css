@@ -152,7 +152,7 @@ footer:hover i.fa.fa-angle-up::before{
 
 #CourseList,
 #SectionCol {
-	height: calc(100vh - 15.5em);
+	height: calc(100vh - 16em);
 	box-sizing: border-box;
 	list-style-type: none;
 	background-color: white;
@@ -684,6 +684,7 @@ hr {
 }
 
 .Modal h2 {
+	font-size:initial!important;
 	line-height: 0.5em;
 }
 

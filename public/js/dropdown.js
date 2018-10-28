@@ -71,7 +71,6 @@ var Dropdown = function (_OutClickable) {
     _createClass(Dropdown, [{
         key: "close_dropdown",
         value: function close_dropdown() {
-            console.log("closing dropdown!");
             this.setState(function (state) {
                 return { active: false };
             });
@@ -88,7 +87,6 @@ var Dropdown = function (_OutClickable) {
     }, {
         key: "activate_dropdown",
         value: function activate_dropdown() {
-            console.log("activating dropdown!");
             this.setState(function (state) {
                 return { active: true };
             });
@@ -202,7 +200,6 @@ var angular_update = function angular_update(searchType) {
     $scope.$apply(function () {
         $scope.searchType = searchType;
         $scope.searchChange();
-        console.log("changed");
     });
 };
 
@@ -218,7 +215,6 @@ var search_contents_list = [["Course ID", function () {
 ReactDOM.render(React.createElement(Dropdown, { id: "searchSelect", update_label: true, def_active: 0, def_text: "Search By", contents: search_contents_list }), domContainer_search);
 
 //renders schedule options dropdown
-console.log("rendering schedule options...");
 var dom_container_schedule = document.querySelector("#scheduleOptionsContainer");
 var new_schedule = function new_schedule() {
     angular.element(document.body).scope().sched.New();
@@ -227,8 +223,7 @@ var download_schedule = function download_schedule() {
     var $scope = angular.element(document.body).scope();
     $scope.$apply(function () {
         $scope.sched.Download();
-        document.getElementById("schedule_modal").setAttribute("class", "modal is-active");
-        console.log("download");
+        activate_modal(document.getElementById("schedule_modal"));
     });
     //window.location = "#SchedModal";
 };
@@ -247,7 +242,6 @@ var delete_schedule = function delete_schedule() {
 };
 var schedule_contents_list = [["New", new_schedule], ["Download", download_schedule], ["Duplicate", duplicate_schedule], ["Rename", rename_schedule], ["Clear", clear_schedule], ["Delete", delete_schedule]];
 ReactDOM.render(React.createElement(Dropdown, { id: "scheduleDropdown", def_text: "Schedule Options", contents: schedule_contents_list }), dom_container_schedule);
-console.log("schedule options rendered");
 
 var ToggleButton = function (_OutClickable2) {
     _inherits(ToggleButton, _OutClickable2);
@@ -260,7 +254,6 @@ var ToggleButton = function (_OutClickable2) {
 
         _this5.props = props;
         _this5.containerHTML = props.parent.innerHTML;
-        console.log(props.parent);
         _this5.state = { active: false };
         _this5.closeDropdown = _this5.closeDropdown.bind(_this5);
         _this5.activateDropdown = _this5.activateDropdown.bind(_this5);

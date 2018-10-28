@@ -34,7 +34,7 @@
 	<div id="MenuBar">
 		<a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Donate</span></a>
 		<a href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch"><span style="padding-right:0.5em;"><i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</span></a>
-		<a rel="leanModal" href="#ModalWindow" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')" style="padding-right:0.5em;">About</a>
+		<a rel="leanModal" onclick="ga('send', 'event', 'UI interaction', 'AboutModal')" style="padding-right:0.5em;">About</a>
 	</div>
 
 	<div id="Top">
@@ -75,7 +75,9 @@
 					</ul>
 				</li>
 				<li ng-click="star.Show()"><span>Show Stars</span></li>
-				<a rel="leanModal" href="#UploadModal" id="ImportButton" onclick="ga('send', 'event', 'UI interaction', 'import')">
+				<a rel="leanModal" href="#UploadModal" id="ImportButton"
+				   onclick="ga('send', 'event', 'UI interaction', 'import');
+							activate_modal(document.getElementById('ModalWindow'));">
 					<li>Import</li>
 				</a>
 
