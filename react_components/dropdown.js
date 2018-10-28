@@ -110,9 +110,21 @@ class Dropdown extends OutClickable{
 
 //renders search type dropdown
 const domContainer_search = document.querySelector('#searchSelectContainer');
-const angular_update = function(){angular.element(document.body).scope().searchChange()};
+const angular_update = function(searchType){
+    var appElement = document.body;
+    var $scope = angular.element(appElement).scope();
+    $scope.$apply(function(){
+        $scope.searchType = searchType;
+        $scope.searchChange();
+        console.log("changed");
+    });
+};
+
+
 //function that updates the angular function that listens for changes in search type
-const search_contents_list = [["Course ID",angular_update], ["Keywords",angular_update],["Instructor",angular_update]];
+const search_contents_list = [["Course ID",function(){angular_update("courseIDSearch")}],
+                              ["Keywords",function(){angular_update("keywordSearch")}],
+                              ["Instructor",function(){angular_update("instSearch")}]];
 //list of options for the dropdown
 ReactDOM.render(<Dropdown id = {"searchSelect"} update_label def_active={0} def_text={"Search By"} contents={search_contents_list}/>, domContainer_search);
 
@@ -121,10 +133,15 @@ console.log("rendering schedule options...");
 const dom_container_schedule = document.querySelector("#scheduleOptionsContainer");
 const new_schedule = function(){angular.element(document.body).scope().sched.New()};
 const download_schedule = function(){
-    const scope = angular.element(document.body).scope();
-    scope.sched.Download();
-    window.location = "#SchedModal";
+    var $scope = angular.element(document.body).scope();
+    $scope.$apply(function(){
+        $scope.sched.Download();
+        document.getElementById("schedule_modal").setAttribute("class","modal is-active");
+        console.log("download");
+    });
+    //window.location = "#SchedModal";
 };
+
 const duplicate_schedule = function(){angular.element(document.body).scope().sched.Duplicate()};
 const rename_schedule = function(){angular.element(document.body).scope().sched.Rename()};
 const clear_schedule = function(){angular.element(document.body).scope().sched.Clear()};

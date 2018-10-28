@@ -60,12 +60,11 @@
 					<input id="CSearch" type="text" ng-class="{'is-loading': loading}" class="input is-small is-rounded" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
 					<!-- This only shows if loading == true. Need to use visibility: hidden -->
 				</form>
+				<div id = "filter_search_toggler" onclick = "toggle_filter_search_display(this);">
+				</div>
 			</span>
 
 			<span class = "level-right">
-
-				<div id = "filter_search_toggler" onclick = "toggle_filter_search_display(this);">
-				</div>
 
 				<div id = "scheduleOptionsContainer">
 				</div>
@@ -83,7 +82,7 @@
 					  </div>
 					  <div class="dropdown-menu" id="dropdown-menu" role="menu">
 						<div class="dropdown-content" id = "sched-select" role = "menu" ng-modle = "currentSched" ng-change = "schedChange()" ng-model="searchType" ng-change="searchChange()">
-						  <a value = "{{schedName}}" onclick="activate_dropdown_item(this)" class="dropdown-item"
+						  <a value = "{{schedName}}" onclick="activate_dropdown_item(this);change_schedule(this);" class="dropdown-item"
 						  	ng-repeat = "schedName in schedules">
 							{{schedName}}
 						  </a>
@@ -392,10 +391,14 @@
 			<a class="modal_close"><i class="fa fa-times"></i></a>
 		</div>
 
-		<div id="SchedModal" class="Modal">
-			<img id="SchedImage" src="">
-			<span>Right click the image to save it.</span>
-			<a class="modal_close"><i class="fa fa-times"></i></a>
+		<div id="schedule_modal" class="modal">
+			<div class="modal-background"></div>
+			<div class="modal-content">
+				<img id="SchedImage" src=""/>
+				<span>Right click the image to save it.</span>
+			</div>
+			<button class="modal-close is-large" aria-label="close"
+					onclick="close_modal(this);"/>
 		</div>
 
 		<div id="UploadModal" class="Modal">

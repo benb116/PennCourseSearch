@@ -180,3 +180,21 @@ $(document).click(function(event) {
         hide_filter_search_display(toggler);
     }
 });
+
+//closes the modal, given a close button
+const close_modal = function(el){
+    el.parentNode.setAttribute("class",el.parentNode.getAttribute("class").replace("is-active",""));
+};
+
+//changes schedule to given value
+const change_schedule = function(schedNameNode){
+    const schedName = schedNameNode.getAttribute("value");
+    console.log(schedName);
+    const appElement = document.body;
+    const $scope = angular.element(appElement).scope();
+    $scope.$apply(function(){
+        $scope.currentSched = schedName;
+        $scope.schedChange();
+        console.log("changed sched");
+    });
+};
