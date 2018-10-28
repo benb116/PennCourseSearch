@@ -143,20 +143,40 @@ const activate_dropdown_item = function(dropdown_item){
 
 let is_filter_search_displayed = false;
 
+const hide_filter_search_display = function(el){
+    is_filter_search_displayed = false;
+    const node = document.getElementById("FilterSearch");
+    node.style.opacity = "0";
+    window.setTimeout(function(){node.style.visibility = "hidden";},250);
+    el.style.backgroundImage = "url(\"/css/filter_a.png\")";
+    console.log("hiding display");
+};
+
+const show_filter_search_display = function(el){
+    is_filter_search_displayed = true;
+    const node = document.getElementById("FilterSearch");
+    const rect = el.getBoundingClientRect();
+    node.style.left = (1.5 * rect.left - rect.right) + "px";
+    node.style.top = (rect.bottom + 10) + "px";
+    node.style.visibility = "visible";
+    node.style.opacity = "1";
+    el.style.backgroundImage = "url(\"/css/filter_b.png\")";
+    console.log("showing display");
+};
+
+
 //toggles whether the filter search box is displayed or not
 const toggle_filter_search_display = function(el){
-    is_filter_search_displayed = !is_filter_search_displayed;
-    const node = document.getElementById("FilterSearch");
     if(is_filter_search_displayed){
-        const rect = el.getBoundingClientRect();
-        node.style.left = (1.5 * rect.left - rect.right) + "px";
-        node.style.top = (rect.bottom + 10) + "px";
-        node.style.visibility = "visible";
-        node.style.opacity = "1";
-        el.style.backgroundImage = "url(\"/css/filter_b.png\")";
+        hide_filter_search_display(el);
     }else{
-        node.style.opacity = "0";
-        window.setTimeout(function(){node.style.visibility = "hidden";},250);
-        el.style.backgroundImage = "url(\"/css/filter_a.png\")";
+        show_filter_search_display(el);
     }
 };
+
+$(document).click(function(event) {
+    const toggler = document.getElementById("filter_search_toggler");
+    if(!$(event.target).closest('#FilterSearch').length && !$(event.target).closest('#filter_search_toggler').length) {
+        hide_filter_search_display(toggler);
+    }
+});
