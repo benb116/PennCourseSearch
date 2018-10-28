@@ -82,7 +82,7 @@
 					  </div>
 					  <div class="dropdown-menu" id="dropdown-menu" role="menu">
 						<div class="dropdown-content" id = "sched-select" role = "menu" ng-modle = "currentSched" ng-change = "schedChange()" ng-model="searchType" ng-change="searchChange()">
-						  <a value = "{{schedName}}" onclick="activate_dropdown_item(this)" class="dropdown-item"
+						  <a value = "{{schedName}}" onclick="activate_dropdown_item(this);change_schedule(this);" class="dropdown-item"
 						  	ng-repeat = "schedName in schedules">
 							{{schedName}}
 						  </a>
