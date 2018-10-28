@@ -338,8 +338,8 @@ ul {
 #filter_search_toggler{
 	background-image:url("/css/filter_a.png");
 	background-size: 100% 100%;
-	width:2.5em;
-	height:2.5em;
+	width:1.3rem;
+	height:1.3rem;
 	cursor:pointer;
 }
 
