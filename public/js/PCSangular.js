@@ -66,6 +66,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         // ga('send', 'event', 'UI interaction', 'searchChange', $scope.searchType);        
         $scope.currentDept = '';
         // $scope.courses = [];
+        console.log($scope.search);
         $scope.initiateSearch($scope.search);
         $scope.searchPlaceholder = placeholderMap[$scope.searchType];
     };
@@ -108,7 +109,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         $scope.schedules = Object.keys($scope.schedData);
 
         if (shouldAddLoc && !localStorage[locString]) {
-            console.log('addingLoc')    
+            console.log('addingLoc')
             $scope.sched.AddLoc();
         }
     };
@@ -495,7 +496,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 block.height = block.duration * halfScale;
                 block.width  = $scope.percentWidth;
                 block.topc = generate_color(block.letterday,block.startHr,block.name);
-                console.log(block.topc);
                 return block;
             }
         },

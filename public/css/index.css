@@ -8,6 +8,10 @@ body {
 	margin: 0;
 }
 
+.button{
+	border-radius: 30px!important;
+}
+
 ::-webkit-scrollbar {
 	width: .5em;
 	height: .5em;
@@ -74,26 +78,30 @@ select {
 	margin-left: 1em;
 }
 
-form {
-	padding-bottom:1em;
-}
-
 form > input[type="text"] {
-	border: solid 1px #ccc;
 	border-radius: .3em;
 	padding: 0.4em;
-
 	font-size: .75em;
-	margin-bottom: 0.5em;
-	margin-top: 1em;
+	margin: 4px;
 	background-color: #f5f5f5;
 }
 
 #CSearch {
-	width: 80%;
+	width: 100%;
+	min-width:25rem;
+	padding:0.5rem;
     background-color: white;
 }
 
+#searchbar .level-left > *, #searchbar .level-right > *{
+	margin-left:0.5rem;
+	margin-right:0.5rem;
+}
+
+
+.is-active i.fa.fa-angle-down::before{
+	content:"\f106"!important;
+}
 
 /*#loaderWrap {height: 30px; width: 30px; display: inline-block; vertical-align: middle;}
 .loader {
@@ -305,17 +313,34 @@ ul {
 	/*margin-bottom: 3px;*/
 }
 
+#InfoPanel .box{
+	width: 95%;
+}
+
 #FilterSearch {
 	overflow: hidden;
-	width: 95%;
 	font-size: 1em;
 	min-width: 500px;
-	height: 10em;
+	opacity:0;
+	max-width:60%;
+	min-height: 15em;
+	max-height:50%;
+	position:fixed;
+	visibility:hidden;
 	margin-bottom: 1em;
 	/*display: none;*/
 	background-color: white;
 	border-radius: 5px;
 	vertical-align: top;
+	transition: opacity 250ms ease;
+}
+
+#filter_search_toggler{
+	background-image:url("/css/filter_a.png");
+	background-size: 100% 100%;
+	width:2.5em;
+	height:2.5em;
+	cursor:pointer;
 }
 
 .FilterPanel {
@@ -343,7 +368,7 @@ ul {
 	line-height: 1.25em;
 	text-indent: 0;
 	padding-left: 1em;
-	height: 7em;
+	margin-bottom: 3px;
 	overflow-y: scroll;
 }
 
@@ -381,7 +406,7 @@ ul {
 }
 
 #SchedGraph {
-	height: 75%;
+	height: 100%;
 	min-height: 350px;
 	min-width: 500px;
 	overflow: hidden;
@@ -390,6 +415,7 @@ ul {
 }
 
 #InfoPanel {
+	padding:0!important;
 	height: calc(100vh - 16em);
 	/*min-width: 500px;*/
 	width: calc(100% - 58.5em);
@@ -471,11 +497,13 @@ hr {
 
 #searchbar{
 	background-color:#D8D8D8;
+	padding:15px;
 }
 
 #searchbar form{
 	display:table;
 }
+
 
 .navbar-brand .navbar-item{
     /*Adds some spacing between the heading and the left edge of the screen*/
@@ -505,6 +533,9 @@ hr {
 	box-shadow:0 1px 3px 0 lightgrey;
 	text-align: center;
 	height:100%;
+	align-items:center;
+	display:flex;
+	justify-content:center;
 }
 
 
