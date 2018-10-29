@@ -27,7 +27,7 @@ PCS.factory('UpdateCourseList', ['httpService', function(httpService){
     var retObj = {};
     retObj.getDeptCourses = function(dept, searchType, reqFilter, proFilter) {
         // Build the request URL
-        var url = '/Search?searchType='+searchType+'&resultType=deptSearch&searchParam='+dept;
+        var url = '/Search?searchType='+searchType+'&resultType=deptSearch&searchParam='+encodeURIComponent(dept);
         if (reqFilter) {url += '&reqParam='+reqFilter;}
         if (proFilter && proFilter !== 'noFilter') {url += '&proParam='+proFilter;}
         ga('send', 'event', 'Search', 'deptSearch', dept);

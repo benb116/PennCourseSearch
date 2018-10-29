@@ -31,13 +31,11 @@ var app = express();
 app.use(compression());
 app.use(helmet()); // Hides certain HTTP headers, supposedly more secure?
 
-if (process.env.NODE_ENV !== 'production') {
-    // I want this to have the client always pull the newest JS, since uodates happen very often.
-    // IDK if this is the best way to do that.
-    app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: 2628000000 }));
-    app.use('/js', express.static(path.join(__dirname, 'public/js'), { maxAge: 0 }));
-    app.use(express.static(path.join(__dirname, 'public'), { maxAge: 2628000000 }));
-}
+// I want this to have the client always pull the newest JS, since uodates happen very often.
+// IDK if this is the best way to do that.
+app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: 2628000000 }));
+app.use('/js', express.static(path.join(__dirname, 'public/js'), { maxAge: 0 }));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: 2628000000 }));
 
 console.log('Express initialized');
 
@@ -67,8 +65,8 @@ git.short(function (str) {
     console.log('Current git commit:', str); // log the current commit we are running
 });
 
-var currentTerm = '2018C'; // Which term is currently active
-var LRTimes = [0, 0]; // Timestamps of latest requests using each OpenData key (see OpenData.js)
+var currentTerm = '2019A'; // Which term is currently active
+var LRTimes = Array(config.requestAB.length).fill(0); // Timestamps of latest requests using each OpenData key (see OpenData.js)
 var ODkeyInd = 0; // Which key to use next
 
 // Pull in external data and functions
@@ -179,7 +177,7 @@ app.get('/Search', function(req, res) {
 
         var baseURL = BASE_URL + currentTerm + reqSearch + proSearch + actSearch + includeOpen;
         if (searchType) {
-            baseURL += searchTypes[searchType] + searchParam;
+            baseURL += searchTypes[searchType] + decodeURIComponent(searchParam);
         }
         // If we are searching by a certain instructor, the course numbers will be filtered because of searchType 'instSearch'.
         // However, clicking on one of those courses will show all sections, including those not taught by the instructor.
@@ -195,7 +193,10 @@ app.get('/Search', function(req, res) {
             // Latest timestamp
             // Auth key to use
         LRTimes[ODkeyInd] = opendata.RateLimitReq(baseURL, resultType, res, LRTimes[ODkeyInd], ODkeyInd);
-        ODkeyInd = 1 - ODkeyInd; // Use the other auth key next time
+        ODkeyInd++; // Use the other auth key next time
+        if (ODkeyInd >= LRTimes.length) {
+            ODkeyInd = 0;
+        }
     }
 });
 
@@ -242,3 +243,47 @@ app.post('/Notify', function(req, res) {
             return res.send(returnText);
     });
 });
+
+// // Handle requests with PennCourseAlert
+// app.post('/Alert', function(req, res) {
+//     var secID = req.query.secID;
+//     // var formatSecID = secID.replace(/-/g, ' ');
+//     var userEmail = req.query.email;
+//     var userPhone = req.query.phone;
+//     var userCarrier = req.query.carrier;
+
+//     var formdata = {'course': secID};
+//     if (userEmail) {formdata.email = userEmail;}
+//     if (userPhone && userCarrier) {
+//         formdata.phone = userPhone;
+//         formdata.carrier = userCarrier;
+//     }
+
+//     logEvent('Alert', {alertsec: secID});
+//     console.log(JSON.stringify(formdata))
+//     request({
+//             uri: 'http://www.penncoursealert.com/submitted/',
+//             method: "POST",
+//             form: formdata
+//         }, function(error, response, body) {
+//             console.log(JSON.stringify(response))
+//             var returnText = "Sorry, there was an error while trying set up notifications.";
+//             // res.statusCode = 201;
+//             // if (error) {
+//             //     console.log('PCN req error:', error);
+//             // } else {
+//             //     try {
+//             //         if (response.statusCode === 406) {
+//             //             returnText = "Notifications already requested.";
+//             //             res.statusCode = 200;
+//             //         } else if (body.split('<h3>')[1].split('</h3>')[0] === "Success!") {
+//             //             returnText = "Great! You'll be notified if "+secID+" opens up.";
+//             //             res.statusCode = 200;
+//             //         }
+//             //     } catch(err) {
+//             //         console.log('Notify Error:', err);
+//             //     }
+//             // }
+//             return res.send(returnText);
+//     });
+// });
