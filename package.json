@@ -1,0 +1,35 @@
+{
+  "name": "PennCourseSearch",
+  "version": "1.0.0",
+  "description": "A barebones web app designed to help Penn students find classes and make schedules",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "compression": "^1.7.0",
+    "express": "^4.15.3",
+    "fs": "0.0.2",
+    "git-rev": "^0.2.1",
+    "helmet": "^3.11.0",
+    "iftttmaker": "^1.2.1",
+    "keen-js": "^3.4.1",
+    "log-timestamp": "^0.1.2",
+    "nodemon": "^1.17.5",
+    "npm": "^5.6.0",
+    "path": "^0.12.7",
+    "request": "^2.81.0"
+  },
+  "engines": {
+    "node": "5.4.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benb116/PennCourseSearch"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
+}

@@ -1,15 +1,15 @@
 html {
 	font-size: calc(100vw/90);
+	background-color: #ECECEC;
 }
 body {
 	width: 100%;
 	min-width: 1000px;
 	margin: 0;
-	background-color: #3498db;
-	color: white;
-	font-family: 'Helvetica';
-	font-family: 'Open Sans', sans-serif;
-	text-align: center;
+}
+
+.button{
+	border-radius: 30px!important;
 }
 
 ::-webkit-scrollbar {
@@ -28,6 +28,22 @@ body {
 
 i {
 	cursor: pointer;
+}
+
+.nav-header {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+#byline {
+	text-align: right;
+	margin-right: 3em;
+}
+
+#byline span.txt{
+	vertical-align: middle;
+	display: inline-block;
+	padding-top: .5em;
 }
 
 #MenuBar {
@@ -49,10 +65,6 @@ i {
 	color: black;
 }
 
-#Top {
-	height: 5em;
-}
-
 h1 {
 	margin: 1em 0 0 0;
 }
@@ -66,21 +78,37 @@ select {
 	margin-left: 1em;
 }
 
-form {
-	padding-left: 3em;
-}
-
 form > input[type="text"] {
-	border: solid 1px #ccc;
 	border-radius: .3em;
 	padding: 0.4em;
-	width: 30em;
 	font-size: .75em;
-	margin-bottom: 0.5em;
-	margin-top: 1em;
+	margin: 4px;
 	background-color: #f5f5f5;
 }
 
+#CSearch {
+	width: 100%;
+	min-width:25rem;
+	padding:0.5rem;
+    background-color: white;
+}
+
+#searchbar .level-left > *, #searchbar .level-right > *{
+	margin-left:0.5rem;
+	margin-right:0.5rem;
+}
+
+#searchbar button{
+	min-width:8rem;
+}
+
+.is-active i.fa.fa-angle-down::before{
+	content:"\f106"!important;
+}
+
+footer:hover i.fa.fa-angle-up::before{
+    content:"\f107"!important;
+}
 
 /*#loaderWrap {height: 30px; width: 30px; display: inline-block; vertical-align: middle;}
 .loader {
@@ -120,91 +148,6 @@ form > input[type="text"] {
 	/*visibility: hidden;*/
 }
 
-
-/*Menubar*/
-
-
-/*http://cssdeck.com/labs/another-simple-css3-dropdown-menu*/
-
-#MenuButtons ul {
-	z-index: 99;
-	display: inline;
-	list-style: none;
-	text-align: left;
-}
-
-#MenuButtons ul li {
-	display: inline-block;
-	position: relative;
-	margin-right: -4px;
-	padding: 0.3125em 1.5625em;
-	cursor: pointer;
-	font-size: 1em;
-	transition: all 0.2s;
-}
-
-#MenuButtons ul li:hover {
-	background: #555;
-}
-
-#MenuButtons ul li:active {
-	background: #333;
-}
-
-#MenuButtons ul li ul {
-	display: none;
-	visibility: hidden;
-	position: absolute;
-	top: 2em;
-	left: 0;
-	padding: 0;
-	box-shadow: none;
-	opacity: 0;
-	filter: alpha(opacity=0);
-	-webkit-transiton: opacity 0.2s;
-	-ms-transition: opacity 0.2s;
-	-o-transition: opacity 0.2s;
-	-transition: opacity 0.2s;
-}
-
-#MenuButtons ul li ul li {
-	display: block;
-	width: 100%;
-	min-width: 5em;
-	background: #555;
-	padding: 0.625em 1.25em;
-	font-size: 1em;
-	line-height: 1.5em;
-	text-shadow: 0 -1px 0 #000;
-}
-
-#MenuButtons ul li ul li:hover {
-	background: #666;
-}
-
-#MenuButtons ul li ul > li:nth-last-child(1):hover {
-	background-color: #c0392b;
-}
-
-#MenuButtons ul li:hover ul {
-	display: block;
-	visibility: visible;
-	opacity: 1;
-	filter: alpha(opacity=100);
-}
-
-#MenuButtons a {
-	text-decoration: none;
-	color: white;
-}
-
-#BottomResults {
-	width: 100%;
-	position: absolute;
-	top: 11.5em;
-	color: black;
-}
-
 #CourseHeader {
 	overflow: hidden;
 	height: 1.5em;
@@ -212,23 +155,18 @@ form > input[type="text"] {
 
 #CourseList,
 #SectionCol {
-	height: calc(100vh - 15.5em);
-	border-left: .375em solid white;
-	border-top: .375em solid white;
+	height: calc(100vh - 16em);
 	box-sizing: border-box;
-	margin: 0;
-	float: left;
 	list-style-type: none;
 	background-color: white;
 	font-size: 0.75em;
 	text-align: left;
+	border-radius: .375em;
 }
 
 #CourseList {
-	width: 25em;
-	margin-left: 2.5%;
 	text-align: left;
-	border-top-left-radius: .375em;
+	margin-right: 1em;
 }
 #CourseList > ul {
 	overflow-y: scroll;
@@ -241,7 +179,6 @@ form > input[type="text"] {
 
 #Sections,
 #SectionInfo {
-	width: 25em;
 	padding-left: 0.5em;
 }
 
@@ -249,6 +186,7 @@ form > input[type="text"] {
 	height: 30%;
 	border-top-right-radius: .375em;
 	overflow-y: hidden;
+	text-align: center;
 }
 
 #SectionList {
@@ -256,8 +194,7 @@ form > input[type="text"] {
 	overflow-y: scroll;
 }
 .sectionText {
-	display: inline-block;
-	width: 16.5em;
+	/*display: inline-block;*/
 	height: 1.5em;
 	line-height: 1.5em;
 	text-overflow: ellipsis;
@@ -301,6 +238,10 @@ ul {
 .sectionText,
 #SectionInfo li {
 	cursor: pointer;
+}
+
+#sortCourses {
+	width: 40%;
 }
 
 #CourseList li:hover,
@@ -355,7 +296,7 @@ ul {
 	/* height: 1.5em; */
 	text-indent: 0;
 	display: inline-block;
-	border-radius: 3px;
+	border-radius: 15px;
 	text-align: center;
 	margin-left: 2px;
 	margin-right: 2px;
@@ -379,18 +320,34 @@ ul {
 	/*margin-bottom: 3px;*/
 }
 
+#InfoPanel .box{
+	width: 95%;
+}
+
 #FilterSearch {
 	overflow: hidden;
-	width: 90%;
-	margin: 0 auto;
 	font-size: 1em;
 	min-width: 500px;
-	height: 10em;
+	opacity:0;
+	max-width:60%;
+	min-height: 15em;
+	max-height:50%;
+	position:fixed;
+	visibility:hidden;
 	margin-bottom: 1em;
 	/*display: none;*/
 	background-color: white;
 	border-radius: 5px;
 	vertical-align: top;
+	transition: opacity 250ms ease;
+}
+
+#filter_search_toggler{
+	background-image:url("/css/filter_a.png");
+	background-size: 100% 100%;
+	width:1.3rem;
+	height:1.3rem;
+	cursor:pointer;
 }
 
 .FilterPanel {
@@ -418,7 +375,7 @@ ul {
 	line-height: 1.25em;
 	text-indent: 0;
 	padding-left: 1em;
-	height: 7em;
+	margin-bottom: 3px;
 	overflow-y: scroll;
 }
 
@@ -456,7 +413,7 @@ ul {
 }
 
 #SchedGraph {
-	height: 75%;
+	height: 100%;
 	min-height: 350px;
 	min-width: 500px;
 	overflow: hidden;
@@ -465,6 +422,7 @@ ul {
 }
 
 #InfoPanel {
+	padding:0!important;
 	height: calc(100vh - 16em);
 	/*min-width: 500px;*/
 	width: calc(100% - 58.5em);
@@ -482,6 +440,22 @@ ul {
 	min-height: 300px;
 }
 
+
+.box{
+    border-radius:3px;
+    background:white;
+    border: 1px solid lightgrey;
+	margin: 10px;
+}
+
+.box.column{
+	/*styles the columns for lists of sections and lists of courses*/
+}
+
+#courses_and_sections{
+    /*Styles column set with courses and sections lists*/
+    padding-left:20px;
+}
 
 /*
 #Schedule > span {
@@ -508,6 +482,8 @@ ul {
 hr {
 	position: absolute;
 	text-align: right;
+	margin: 5px;
+    color: #87a2aa;
 }
 
 .TimeBlock {
@@ -520,16 +496,119 @@ hr {
 	display: inline-block;
 	height: 2.5em;
 	line-height: 2.5em;
+    text-align:center;
+    color: #87a2aa;
+    font-size:1.1em;
+    vertical-align:center;
+}
+
+#searchbar{
+	background-color:#D8D8D8;
+	padding:6px;
+}
+
+#searchbar form{
+	display:table;
+}
+
+
+.navbar-brand .navbar-item{
+    /*Adds some spacing between the heading and the left edge of the screen*/
+    margin-left:35%;
+}
+
+.schedline{
+	background-color:#E1E1E1;
+	margin-top:5px!important;
+}
+
+.SchedBlock_container{
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    overflow-y: hidden;
 }
 
 .SchedBlock {
-	display: block;
-	box-sizing: border-box;
-	position: absolute;
-	border: 1px solid black;
+    margin-right:5px;
+	margin-left:5px;
 	overflow-y: hidden;
 	cursor: pointer;
 	color: black;
+	border-top: 3px solid;
+	background-color:#FAFAFA;
+	box-shadow:0 1px 3px 0 lightgrey;
+	text-align: center;
+	height:100%;
+	align-items:center;
+	display:flex;
+	justify-content:center;
+}
+
+
+
+.SchedBlock.red{
+	border-top-color:#D0021B;
+}
+
+.SchedBlock.red .SecName{
+    color:#D0021B;
+}
+
+.SchedBlock.orange{
+	border-top-color:#F5A623;
+}
+
+.SchedBlock.orange .SecName{
+    color:#F5A623;
+}
+
+.SchedBlock.blue{
+	border-top-color:#00BFDD;
+}
+
+.SchedBlock.blue .SecName{
+    color:#00BFDD;
+}
+
+.SchedBlock.aqua{
+	border-top-color:#35E1BB;
+}
+
+.SchedBlock.aqua .SecName{
+    color:#35E1BB;
+}
+
+.SchedBlock.green{
+	border-top-color:#7ED321;
+}
+
+.SchedBlock.green .SecName{
+    color:#7ED321;
+}
+
+.SchedBlock.pink{
+	border-top-color:#FF34CC;
+}
+
+.SchedBlock.pink .SecName{
+    color:#FF34CC;
+}
+
+.SchedBlock.sea{
+	border-top-color:#3055CC;
+}
+
+.SchedBlock.sea .SecName{
+    color:#3055CC;
+}
+
+.SchedBlock.indigo{
+	border-top-color:#7874CF;
+}
+
+.SchedBlock.indigo .SecName{
+    color:#7874CF;
 }
 
 .SchedBlock > span {
@@ -575,8 +654,9 @@ hr {
 }
 
 .LocName {
-	font-size: 1em;
+	font-size: 0.9em;
 	line-height: 1em;
+	color:grey;
 }
 
 #lean_overlay {
@@ -606,7 +686,13 @@ hr {
 	text-decoration: none;
 }
 
+.modal-card-body .button, .modal-card-body input{
+	display:block;
+	margin: 1.5rem auto auto;
+}
+
 .Modal h2 {
+	font-size:initial!important;
 	line-height: 0.5em;
 }
 
@@ -696,49 +782,27 @@ hr {
 	position: absolute;
 }
 
+.footer{
+	position:fixed;
+	bottom:-2rem;
+	transition:250ms ease bottom;
+	left:0;
+	right:0;
+	padding: 0 0 0.7rem;
+}
 
-/* @media only screen and (max-device-width: 480px) {
-	#SchedGraph, #schedSelect, #MenuButtons, form>span, #searchSelect {
-		display: none;
-	}
-	html {
-		font-size: 3em;
-	}
-	body {
-		width: 100vw;
-		min-width: 320px;
-		margin: 0;
-	}
-	#MenuBar {
-		display: none;
+.footer:hover{
+	bottom:0;
+}
 
-	}
-	#subtitle {
-		font-size: 0.73em;
-	}
-	form {
-		padding: 0.25em;
-	}
-	#CSearch {
-		width: 23em;
-	}
-	#BottomResults {
-		top: 10em;
-	}
-	#FilterSearch {
-		display: none;
-	}
-	#CourseList {
-		width: 100vw;
-		margin: 0;
-		border-radius: 0;
-		height: 30em;
-	}
-	.cTitle, .cID {
-		font-size: 0.50em;
-	}
-	#Sections,
-	#SectionInfo {
-		width: 100vw;
-	}
-} */
+.footer span.arrow_container{
+	width:100%;
+	text-align:center;
+	display:inline-block;
+	margin:0;
+	padding:0;
+}
+
+.modal-content *{
+    color:white;
+}
