@@ -7,7 +7,7 @@ var PCS = angular.module('PCSApp', ['LocalStorageModule', 'tooltips']);
 PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules, pendingRequests) {
 
     var currentTerm = '2018C';
-    var shouldAddLoc = true;
+    var shouldAddLoc = false;
     var locString = 'Loc' + currentTerm;
 
     var placeholderMap = {
@@ -109,7 +109,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         $scope.schedules = Object.keys($scope.schedData);
 
         if (shouldAddLoc && !localStorage[locString]) {
-            console.log('addingLoc');
             $scope.sched.AddLoc();
         }
     };

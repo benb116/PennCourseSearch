@@ -135,7 +135,6 @@ var BASE_URL = 'https://esb.isc-seo.upenn.edu/8091/open_data/course_section_sear
 app.get('/Search', function(req, res) {
     var searchParam    = req.query.searchParam;    // The search terms
     var searchType     = req.query.searchType;     // Course ID, Keyword, or Instructor
-    console.log("Search type "+searchType);
     var resultType     = req.query.resultType;     // Course numbers, section numbers, section info
     var instructFilter = req.query.instFilter;     // Is there an instructor filter?
 
