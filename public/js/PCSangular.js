@@ -120,6 +120,17 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
             $scope.sched.AddLoc();
         }
     };
+
+    //gets the section from $scope.sections given current section
+    $scope.getAssociatedSection=function(fullIDSelected){
+        for(let i = 0; i < $scope.sections.length; i ++){
+            let section = $scope.sections[i];
+            if(section.idDashed.replace(" ","").replace("-","") === fullIDSelected.replace(" ","")){
+                return section;
+            }
+        }
+        return undefined;
+    };
     $scope.get = {
         Courses: function(param, type, req, pro) {
             if (!param) {param = '';}

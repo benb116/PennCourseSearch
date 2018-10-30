@@ -220,7 +220,12 @@
 					</div>
 
 					<div id="SectionInfo">
-						<span ng-show="sectionInfo.fullID" style="font-size:1.25em"> {{sectionInfo.fullID}} - {{sectionInfo.title}} <br><br></span>
+						<span ng-show="sectionInfo.fullID" style="font-size:1.25em"> {{sectionInfo.fullID}} - {{sectionInfo.title}}
+							<!--<i ng-if = "sectionInfo.associatedSections.length !== undefined" class="fa fa-star"
+							   ng-class="{'fa-star': starSections.indexOf(getAssociatedSection(sectionInfo.fullID)) > -1, 'fa-star-o': starSections.indexOf(getAssociatedSection(sectionInfo.fullID)) === -1}"
+							   ng-click="star.AddRem(getAssociatedSection(sectionInfo.fullID))"></i>-->
+							<br><br>
+						</span>
 						<span ng-show="sectionInfo.timeInfo"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}} <br></span></span>
 						<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></span>
 						<!-- <span ng-show="sectionInfo.sectionCred"> {{ sectionInfo.sectionCred }} CU <br><br></span> -->
@@ -401,6 +406,20 @@
 			</div>
 		</div>
 
+		<div id = "NotificationModal" class = "modal">
+			<div class = "modal-background"></div>
+			<div class = "modal-card">
+				<header class = "modal-card-head">
+					<p class = "modal-card-title">Welcome to the New Penn Course Search!</p>
+					<button class="delete" aria-label="close"
+							onclick="close_modal('NotificationModal')"/>
+				</header>
+				<section class = "modal-card-body">
+					<p>We've made some design changes. Filler text. <a href  = "#">Give us feedback!</a></p>
+				</section>
+			</div>
+		</div>
+
 		<div id="schedule_modal" class="modal">
 			<div class="modal-background"></div>
 			<div class="modal-content">
@@ -442,6 +461,8 @@
 
 	<!--Adjust modals-->
 	<script src="/js/modal_adjustments.js"></script>
+	<!-- Misc. functions that run after loading the page-->
+	<script src="/js/after_load.js"></script>
 
 	<!-- Load React. -->
 	<!-- Note: when deploying, replace "development.js" with "production.min.js". -->

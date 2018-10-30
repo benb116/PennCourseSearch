@@ -70,6 +70,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         $scope.initiateSearch($scope.search);
         $scope.searchPlaceholder = placeholderMap[$scope.searchType];
     };
+
     $scope.delaySearch = function () {
         // This prevents requests from being sent out immediately
         delay(function () {
