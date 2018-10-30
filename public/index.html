@@ -220,15 +220,15 @@
 					</div>
 
 					<div id="SectionInfo">
-						<span ng-show="sectionInfo.fullID" style="font-size:1.25em"> {{sectionInfo.fullID}} - {{sectionInfo.title}}
-							<!--<i ng-if = "sectionInfo.associatedSections.length !== undefined" class="fa fa-star"
-							   ng-class="{'fa-star': starSections.indexOf(getAssociatedSection(sectionInfo.fullID)) > -1, 'fa-star-o': starSections.indexOf(getAssociatedSection(sectionInfo.fullID)) === -1}"
-							   ng-click="star.AddRem(getAssociatedSection(sectionInfo.fullID))"></i>-->
-							<br><br>
-						</span>
-						<span ng-show="sectionInfo.timeInfo"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}} <br></span></span>
-						<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></span>
+						<p ng-show="sectionInfo.fullID" style="font-size:1.25em"> {{sectionInfo.fullID}} - {{sectionInfo.title}}
+								<i style = "float:right;margin-right:2rem;" ng-if = "sectionInfo.associatedSections !== undefined" class="fa fa-star"
+								   ng-class="{'fa-star': starSections.indexOf(currentSectionDashed) > -1, 'fa-star-o': starSections.indexOf(currentSectionDashed) === -1}"
+								   ng-click="star.AddRem(currentSectionDashed)"></i>
+						</p>
+						<p ng-show="sectionInfo.timeInfo" style="display:block;"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}} <br></span></p>
+						<p ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></p>
 						<!-- <span ng-show="sectionInfo.sectionCred"> {{ sectionInfo.sectionCred }} CU <br><br></span> -->
+						<br ng-if = "sectionInfo.associatedSections === undefined"/>
 						<span ng-show="sectionInfo.description">Description: {{sectionInfo.description}} <br><br></span>
 						<span ng-show="sectionInfo.reqsFilled.length">Requirements Fulfilled: <br><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span>
 				<br></span>
@@ -410,13 +410,26 @@
 			<div class = "modal-background"></div>
 			<div class = "modal-card">
 				<header class = "modal-card-head">
-					<p class = "modal-card-title">Welcome to the New Penn Course Search!</p>
+					<p class = "modal-card-title">Welcome to the Improved Penn Course Search!</p>
 					<button class="delete" aria-label="close"
 							onclick="close_modal('NotificationModal')"/>
 				</header>
 				<section class = "modal-card-body">
-					<p>We've made some design changes. Filler text. <a href  = "#">Give us feedback!</a></p>
+					<p>
+						Featuring a sleeker mock schedule tool for all your planning needs
+					</p>
+
+					<br/>
+
+					<p>
+						As we continuously make Penn Course Search better, we want to hear from you! Problems, feedback, feature ideas? Drop ’em <a>here</a>. This form can always be found at the bottom of the site.
+					</p>
+
+					<p>
+						Thanks for using Penn Course Search!
+					</p>
 				</section>
+				<footer class = "modal-card-foot"></footer>
 			</div>
 		</div>
 

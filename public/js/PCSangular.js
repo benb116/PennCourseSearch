@@ -184,6 +184,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
                 sec = terms[2];
             }
             var secID = dept+num+sec;
+            $scope.currentSectionDashed = dept +"-"+num+"-"+sec;
             $scope.currentSection = secID;
             UpdateSectionInfo.getSectionInfo(secID).then(function(resp) {
                 $scope.sectionInfo = resp.data;

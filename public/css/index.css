@@ -185,12 +185,12 @@ footer:hover i.fa.fa-angle-up::before{
 #Sections {
 	height: 30%;
 	border-top-right-radius: .375em;
-	overflow-y: hidden;
 	text-align: center;
+	overflow-y:hidden;
 }
 
 #SectionList {
-	height: calc(100% - 1em);
+	height: calc(100% - 2em);
 	overflow-y: scroll;
 }
 .sectionText {
