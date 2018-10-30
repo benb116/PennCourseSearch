@@ -806,3 +806,11 @@ hr {
 .modal-content *{
     color:white;
 }
+
+.modal header, .modal footer{
+	background-color:#3273dc;
+}
+
+.modal header *, .modal footer *{
+	color:white;
+}
