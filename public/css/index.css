@@ -814,3 +814,35 @@ hr {
 .modal header *, .modal footer *{
 	color:white;
 }
+
+img.small{
+	width:1.5rem;
+	display:inline;
+}
+
+.modal-card{
+	border-radius:9px;
+}
+
+.modal-card-body{
+	padding-bottom: 1.5rem;
+}
+
+#NotificationModal .modal-card-body *:not(a){
+	display:inline-block;
+}
+
+#NotificationModal .modal-card-body span{
+	margin-top:1rem;
+	margin-bottom:1rem;
+	max-width:60%;
+}
+
+#NotificationModal .modal-card-body img.small{
+	display:inline-block;
+	max-height:1.5rem;
+}
+
+#NotificationModal a{
+	display:contents;
+}
