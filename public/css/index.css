@@ -226,6 +226,10 @@ ul {
 	text-indent: -6.25em;
 }
 
+#CourseList li:first-child{
+	margin-top:0.35rem;
+}
+
 #SectionList li,
 #SectionInfo li {
 	padding: 0.125em 0.5em 0 0;
