@@ -185,12 +185,12 @@ footer:hover i.fa.fa-angle-up::before{
 #Sections {
 	height: 30%;
 	border-top-right-radius: .375em;
-	overflow-y: hidden;
 	text-align: center;
+	overflow-y:hidden;
 }
 
 #SectionList {
-	height: calc(100% - 1em);
+	height: calc(100% - 2em);
 	overflow-y: scroll;
 }
 .sectionText {
@@ -224,6 +224,10 @@ ul {
 #CourseList li {
 	padding: 0.125em 1em .125em 6.5em;
 	text-indent: -6.25em;
+}
+
+#CourseList li:first-child{
+	margin-top:0.35rem;
 }
 
 #SectionList li,
@@ -805,4 +809,62 @@ hr {
 
 .modal-content *{
     color:white;
+}
+
+.modal header, .modal footer{
+	background-color:#3273dc;
+}
+
+.modal header *, .modal footer *{
+	color:white;
+}
+
+img.small{
+	width:1.5rem;
+	display:inline;
+}
+
+.modal-card{
+	border-radius:9px;
+}
+
+.modal-card-body{
+	padding-bottom: 1.5rem;
+}
+
+#NotificationModal .modal-card-body *:not(a){
+	display:inline-block;
+}
+
+#NotificationModal .modal-card-body span{
+	margin-top:1rem;
+	margin-bottom:1rem;
+	max-width:60%;
+}
+
+#NotificationModal .modal-card-body img.small{
+	display:inline-block;
+	max-height:1.5rem;
+}
+
+#NotificationModal a{
+	display:contents;
+}
+
+.modal-background{
+	background-color:#707070;
+	opacity:0.75;
+}
+
+#feedback_button{
+	width:3rem;
+	height:3rem;
+	border-radius:50%!important;
+	padding:0;
+	background:white;
+	position:fixed;
+	right: 1rem;
+	bottom: 2rem;
+	opacity:0.8;
+	box-shadow: 0 0 0.7rem rgba(100,100,100,0.6);
 }

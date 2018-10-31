@@ -6,8 +6,8 @@
 	<meta name="description" content="PennCourseSearch is a web app designed to help Penn students find courses and make schedules. Includes one-click scheduling, Penn Course Review integration, filters for double-counting requirements, and more.">
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<!--<link rel = "stylesheet" type ="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<link rel = "stylesheet" type ="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>-->
 	<link rel="stylesheet" type="text/css" href="/css/index.css" />
 	<link rel="stylesheet" type="text/css" href="/css/plugins/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="/css/plugins/angular-tooltips.min.css">
@@ -43,8 +43,11 @@
 
 			</div>
 			<div class="navbar-end">
-				<a class="navbar-item" href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch">
-					<i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</a>
+
+                <a class = "navbar-item" href = "https://airtable.com/shrf3pVP8e8HO2tO1">
+                    <i class="fa fa-comment" style = "margin-right:0.5rem"></i>
+                    Feedback
+                </a>
 				<a class="navbar-item" onclick="ga('send', 'event', 'UI interaction', 'AboutModal');
 																activate_modal(document.getElementById('ModalWindow'));"
 				   style="padding-right:0.5em;">About</a>
@@ -79,7 +82,7 @@
 				<div class="dropdown" onclick = "toggle_activation(this)">
 					  <div class="dropdown-trigger">
 						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-							<span><span class ="selected_name">Schedules</span><i class="fa fa-angle-down"></i></span>
+							<span><span class ="selected_name">Schedules</span><span class ="icon is-small"><i class="fa fa-angle-down" ></i></span></span>
 
 						</button>
 					  </div>
@@ -220,10 +223,15 @@
 					</div>
 
 					<div id="SectionInfo">
-						<span ng-show="sectionInfo.fullID" style="font-size:1.25em"> {{sectionInfo.fullID}} - {{sectionInfo.title}} <br><br></span>
-						<span ng-show="sectionInfo.timeInfo"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}} <br></span></span>
-						<span ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></span>
+						<p ng-show="sectionInfo.fullID" style="font-size:1.25em"> {{sectionInfo.fullID}} - {{sectionInfo.title}}
+								<i style = "float:right;margin-right:2rem;" ng-if = "sectionInfo.associatedSections !== undefined" class="fa fa-star"
+								   ng-class="{'fa-star': starSections.indexOf(currentSectionDashed) > -1, 'fa-star-o': starSections.indexOf(currentSectionDashed) === -1}"
+								   ng-click="star.AddRem(currentSectionDashed)"></i>
+						</p>
+						<p ng-show="sectionInfo.timeInfo" style="display:block;"><span ng-repeat="meeting in sectionInfo.timeInfo"> {{meeting}} <br></span></p>
+						<p ng-show="sectionInfo.instructor"> {{'Instructor: '+ sectionInfo.instructor}} <br><br></p>
 						<!-- <span ng-show="sectionInfo.sectionCred"> {{ sectionInfo.sectionCred }} CU <br><br></span> -->
+						<br ng-if = "sectionInfo.associatedSections === undefined"/>
 						<span ng-show="sectionInfo.description">Description: {{sectionInfo.description}} <br><br></span>
 						<span ng-show="sectionInfo.reqsFilled.length">Requirements Fulfilled: <br><span ng-repeat="req in sectionInfo.reqsFilled"> {{req}}<br></span>
 				<br></span>
@@ -369,7 +377,7 @@
 			<div class = "modal-background"></div>
 			<div class = "modal-card">
 				<header class = "modal-card-head">
-					<p class = "modal-card-title">About PennCourseSearch</p>
+					<p class = "modal-card-title">About Penn Course Search</p>
 					<button class="delete" aria-label="close" onclick = "close_modal('ModalWindow')"></button>
 				</header>
 				<section class = "modal-card-body">
@@ -396,7 +404,39 @@
 						<span>Want to see all of PCS's code?</span>
 						<a href="https://github.com/benb116/PennCourseSearch"><span><i class="fa fa-github" style="padding-right:0.25em;"></i>View on Github</span></a>
 					</div>
+					<br/>
 					<div><a href="https://keen.io?s=badge" rel="nofollow"><img src="/keen.svg" alt="Analytics by Keen IO"/></a></div>
+				</section>
+			</div>
+		</div>
+
+		<div id = "NotificationModal" class = "modal">
+			<div class = "modal-background"></div>
+			<div class = "modal-card">
+				<header class = "modal-card-head">
+					<p class = "modal-card-title">Welcome to the improved Penn Course Search!</p>
+					<button class="delete" aria-label="close"
+							onclick="close_modal('NotificationModal')"/>
+				</header>
+				<section class = "modal-card-body">
+					<span style = "width:100%;max-width:unset;">
+						Featuring a sleeker mock schedule tool for all your planning needs <img class = "small" style ="width:1rem" src = "\css\sparkles.png" style = "float:unset!important;"></img>
+					</span>
+
+                    <br/>
+
+                    <span style = "width:100%;max-width:unset;margin-bottom:0;">
+						As we continuously make Penn Course Search better, we want to hear from you! Problems, feedback, feature ideas? Drop ’em <a href = "https://airtable.com/shrf3pVP8e8HO2tO1">here</a>.
+					</span>
+
+                    <span  style = "	float:left; margin-top:0;">
+                         This form can always be found at the top of the site. <br/><br/> Thanks for using Penn Course Search <img class="small" style="width:1rem"
+                                                                                                                                                  src="\css\blue_heart_2.png"/>
+                    </span>
+                    <img align = "right" style = "position:relative;bottom:-0.5rem;height:7.5rem;margin: 1rem;display:inline-flex;float:right;" src = "\css\graphic.svg"/>
+
+					<br/>
+
 				</section>
 			</div>
 		</div>
@@ -405,7 +445,13 @@
 			<div class="modal-background"></div>
 			<div class="modal-content">
 				<img id="SchedImage" src=""/>
-				<span>Right click the image to save it.</span>
+				<span style="
+                    padding: 1rem;
+                    display: block;
+                    background-color: rgba(100,100,100,0.6);
+                    text-align: center;
+                    /* padding: 0.5rem; */
+                ">Right click the image to save it.</span>
 			</div>
 			<button class="modal-close is-large" aria-label="close"
 					onclick="close_modal('schedule_modal');"/>
@@ -429,7 +475,8 @@
 				</section>
 			</div>
 		</div>
-	<footer class="footer">
+
+    <footer class="footer">
 		<span class = "arrow_container"><i class="fa fa-angle-up"></i></span>
 		<div class="container">
 			<div class="content has-text-centered">
@@ -442,11 +489,13 @@
 
 	<!--Adjust modals-->
 	<script src="/js/modal_adjustments.js"></script>
+	<!-- Misc. functions that run after loading the page-->
+	<script src="/js/after_load.js"></script>
 
 	<!-- Load React. -->
 	<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+	<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
 	<script type="text/javascript" src="/js/dropdown.js"></script>
 </body>
 

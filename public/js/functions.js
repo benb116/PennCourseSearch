@@ -50,20 +50,7 @@ $(document).ready(function() {
                 }, 300);
                 console.log(statusMessage);
             } else {
-                if (localStorage.getItem('secondvisit')) {
-                    if (!localStorage.getItem('survey2018C')) {
-                        localStorage.setItem('survey2018C', 'true');
-                        sweetAlert({
-                            title: 'PCS Alert',
-                            html: true,
-                            confirmButtonText: "Close",
-                            text: 'Love PCS? Hate it? Want to vent about your life?<br>Take a quick <a target="_blank" href="https://goo.gl/forms/0CuiW2CdZerwFQwQ2">survey!</a>',
-                            type: 'warning'
-                        });
-                    }
-                } else {
-                    localStorage.setItem('secondvisit', 'true');
-                }
+
             }
         });
     }
