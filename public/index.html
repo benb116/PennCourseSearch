@@ -50,6 +50,9 @@
 				<a class="navbar-item" onclick="ga('send', 'event', 'UI interaction', 'AboutModal');
 																activate_modal(document.getElementById('ModalWindow'));"
 				   style="padding-right:0.5em;">About</a>
+				<a class="navbar-item" onclick="ga('send', 'event', 'UI interaction', 'HelpModal');
+																activate_modal(document.getElementById('HelpModal'));"
+				   style="padding-right:0.5em;">Help</a>
 			</div>
 		</div>
 	</nav>
@@ -372,6 +375,30 @@
 		</div>
 	</div>
 
+	<div id="HelpModal" class="modal">
+		<div class="modal-background"></div>
+		<div class = "modal-card">
+			<header class = "modal-card-head">
+				<p class = "modal-card-title">Using Penn Course Search</p>
+				<button class="delete" aria-label="close" onclick = "close_modal('HelpModal')"></button>
+			</header>
+			<section class = "modal-card-body">
+				<h4 class="title is-4" style="margin-bottom:0">How do I search for courses?</h4>
+				<p>Just type a course in the search box. Then you can click on the results to see more in-depth information about different sections. If you want to filter the results, click on the filter button and change your options. You can also choose to search by course description or instructor in the menu bar.</p>
+				<h4 class="title is-4" style="margin-bottom:0;margin-top:.5em">How do I change my schedule?</h4>
+				<p>To add a section to your schedule, click on its <i class="fa fa-plus" style="display:inline"></i> icon. To remove a course, mouse over it and click the <i class="fa fa-times" style="display:inline"></i> in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
+				<h4 class="title is-4" style="margin-bottom:0;margin-top:.5em">What do the colors mean?</h4>
+				<p>The rectangles with numbers are Penn Course Review ratings. Course quality ratings are in
+					<span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">blue</span>, course difficulty ratings are in
+					<span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">red</span>, and instructor ratings are in
+					<span class="PCR Inst" style="background:rgba(46, 204, 113, 0.85 );display:inline;padding-left:0.25em;padding-right:0.25em;">green</span>. The squares tell you the status of a section.
+					<span class="statusClass openSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is an open section and
+					<span class="statusClass closedSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is a closed section.</p>
+				<br />
+			</section>
+		</div>
+	</div>
+
 	<div id="ModalWindow" class="modal">
 			<div class = "modal-background"></div>
 			<div class = "modal-card">
@@ -380,21 +407,16 @@
 					<button class="delete" aria-label="close" onclick = "close_modal('ModalWindow')"></button>
 				</header>
 				<section class = "modal-card-body">
-					<p>Penn Course Search is a cleaner and simpler way for Quakers to find classes and make schedules. While this is not a full replacement for Penn InTouch, it acts as an improvement of the "Course Search" and "Mock Schedules" features. Search across departments, courses, and sections and refine searches by specific criteria.</p>
-					<h1 class="title">How do I search for courses?</h1>
-					<p>Just type a course in the search box. Then you can click on the results to see more in-depth information about different sections. If you want to filter the results, click on the filter button and change your options. You can also choose to search by course description or instructor in the menu bar.</p>
-					<h1 class="title">How do I change my schedule?</h1>
-					<p>To add a section to your schedule, click on its <i class="fa fa-plus" style="display:inline"></i> icon. To remove a course, mouse over it and click the <i class="fa fa-times" style="display:inline"></i> in the top left corner. You can see more options in the "Schedule" menu, including changing the colors as well as creating and deleting schedules.</p>
-					<h1 class="title">What do the colors mean?</h1>
-					<p>The rectangles with numbers are Penn Course Review ratings. Course quality ratings are in
-						<span class="PCR Qual" style="background:rgba(45, 160, 240, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">blue</span>, course difficulty ratings are in
-						<span class="PCR Diff" style="background:rgba(231, 76, 60, 0.85);display:inline;padding-left:0.25em;padding-right:0.25em;">red</span>, and instructor ratings are in
-						<span class="PCR Inst" style="background:rgba(46, 204, 113, 0.85 );display:inline;padding-left:0.25em;padding-right:0.25em;">green</span>. The squares tell you the status of a section.
-						<span class="statusClass openSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is an open section and
-						<span class="statusClass closedSec" style="display:inline-block;vertical-align:middle;font-size:0.5em;"></span> is a closed section.</p>
-					<!-- <div class="ModalThird">
-						<span>Want to give <a href="http://benbernstein.me/" target="_blank">Ben</a> free money?</span><a id="paymentNote" href="" target="_blank"><span class="logo"></span><span class="label">Venmo Me</span></a>
-					</div> -->
+					<p>Penn Course Search is a cleaner and simpler way to find classes and make schedules.
+						While this is not a full replacement for PennInTouch, it acts as an improvement of the “Course Search”
+						and “Mock Schedules” features. Search across departments, courses, and sections, as well as refine searches
+						by specific criteria. Easily create and organize mock schedules, too.</p>
+					<p style="margin-top:.5em">And now, Penn Course Search is a <a href="//pennlabs.org/products">Penn Labs product</a>! As you’re going through the course selection process,
+						check out our other tools: <a href="//penncoursereview.com">Penn Course Review</a> and <a href="//penncoursealert.com">Penn Course Alert</a>.
+						We’re continuing to improve Penn Course Search, and we hope to add other useful features
+						such as longterm academic planning. If you’d like to see a feature added, be sure to reach out
+						through our <a href="https://airtable.com/shrf3pVP8e8HO2tO1">feedback form</a>! Hearing back from students who use the site means everything to us.</p>
+					<br />
 					<div>
 						<span>Questions or comments?</span>
 						<a href="https://airtable.com/shrf3pVP8e8HO2tO1">
