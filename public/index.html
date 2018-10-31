@@ -422,12 +422,12 @@
 
                     <br/>
 
-                    <span style = "width:100%;max-width:unset;">
+                    <span style = "width:100%;max-width:unset;margin-bottom:0;">
 						As we continuously make Penn Course Search better, we want to hear from you! Problems, feedback, feature ideas? Drop ’em <a>here</a>.
 					</span>
 
-                    <span  style = "	float:left;">
-                         This form can always be found at the bottom of the site. <br/> Thanks for using Penn Course Search <img class="small" style="width:1rem"
+                    <span  style = "	float:left; margin-top:0;">
+                         This form can always be found at the bottom of the site. <br/><br/> Thanks for using Penn Course Search <img class="small" style="width:1rem"
                                                                                                                                                   src="\css\blue_heart_2.png"/>
                     </span>
                     <img align = "right" style = "position:relative;bottom:-0.5rem;height:7.5rem;margin: 1rem;display:inline-flex;float:right;" src = "https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/notebook_g9x9.svg"/>
@@ -442,7 +442,13 @@
 			<div class="modal-background"></div>
 			<div class="modal-content">
 				<img id="SchedImage" src=""/>
-				<span>Right click the image to save it.</span>
+				<span style="
+                    padding: 1rem;
+                    display: block;
+                    background-color: rgba(100,100,100,0.6);
+                    text-align: center;
+                    /* padding: 0.5rem; */
+                ">Right click the image to save it.</span>
 			</div>
 			<button class="modal-close is-large" aria-label="close"
 					onclick="close_modal('schedule_modal');"/>

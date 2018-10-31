@@ -846,3 +846,8 @@ img.small{
 #NotificationModal a{
 	display:contents;
 }
+
+.modal-background{
+	background-color:#707070;
+	opacity:0.75;
+}
