@@ -6,8 +6,8 @@
 	<meta name="description" content="PennCourseSearch is a web app designed to help Penn students find courses and make schedules. Includes one-click scheduling, Penn Course Review integration, filters for double-counting requirements, and more.">
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<!--<link rel = "stylesheet" type ="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<link rel = "stylesheet" type ="text/css" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>-->
 	<link rel="stylesheet" type="text/css" href="/css/index.css" />
 	<link rel="stylesheet" type="text/css" href="/css/plugins/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="/css/plugins/angular-tooltips.min.css">
@@ -43,8 +43,11 @@
 
 			</div>
 			<div class="navbar-end">
-				<a class="navbar-item" href="mailto:bernsb@seas.upenn.edu?Subject=PennCourseSearch">
-					<i class="fa fa-envelope-o" style="padding-right:0.5em;"></i>Email Me</a>
+
+                <a class = "navbar-item" href = "https://airtable.com/shrf3pVP8e8HO2tO1">
+                    <i class="fa fa-comment" style = "margin-right:0.5rem"></i>
+                    Feedback
+                </a>
 				<a class="navbar-item" onclick="ga('send', 'event', 'UI interaction', 'AboutModal');
 																activate_modal(document.getElementById('ModalWindow'));"
 				   style="padding-right:0.5em;">About</a>
@@ -79,7 +82,7 @@
 				<div class="dropdown" onclick = "toggle_activation(this)">
 					  <div class="dropdown-trigger">
 						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-							<span><span class ="selected_name">Schedules</span><i class="fa fa-angle-down"></i></span>
+							<span><span class ="selected_name">Schedules</span><span class ="icon is-small"><i class="fa fa-angle-down" ></i></span></span>
 
 						</button>
 					  </div>
@@ -427,7 +430,7 @@
 					</span>
 
                     <span  style = "	float:left; margin-top:0;">
-                         This form can always be found at the bottom of the site. <br/><br/> Thanks for using Penn Course Search <img class="small" style="width:1rem"
+                         This form can always be found at the top of the site. <br/><br/> Thanks for using Penn Course Search <img class="small" style="width:1rem"
                                                                                                                                                   src="\css\blue_heart_2.png"/>
                     </span>
                     <img align = "right" style = "position:relative;bottom:-0.5rem;height:7.5rem;margin: 1rem;display:inline-flex;float:right;" src = "\css\graphic.svg"/>
@@ -472,7 +475,8 @@
 				</section>
 			</div>
 		</div>
-	<footer class="footer">
+
+    <footer class="footer">
 		<span class = "arrow_container"><i class="fa fa-angle-up"></i></span>
 		<div class="container">
 			<div class="content has-text-centered">
