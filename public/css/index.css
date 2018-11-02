@@ -695,6 +695,10 @@ hr {
 	margin: 1.5rem auto auto;
 }
 
+.modal-card-title{
+	flex-shrink:unset!important;
+}
+
 .Modal h2 {
 	font-size:initial!important;
 	line-height: 0.5em;
