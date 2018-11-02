@@ -195,10 +195,10 @@
 												  ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"
 												  ng-click="get.SectionInfo(section.idDashed)">
 											<!-- the status square should be green if the section is open, red if it's closed -->
-											<i class="fa fa-envelope tooltip"
+											<i class="fa fa-bell-o tooltip"
 											   ng-hide="section.isOpen"
-											   ng-click="Notify(section.idDashed)"
-											   title="PennCourseNotify"></i>
+											   ng-click="registerNotify(section.idDashed)"
+											   title="Penn Course Alert"></i>
 											<!-- If the section is closed, show the notify icon -->
 											</span>
 										</div>

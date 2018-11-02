@@ -17,7 +17,8 @@ function GetRevData (dept, num, inst) {
 }
 
 function getTimeInfo(JSONObj) { // A function to retrieve and format meeting times
-    var OCStatus = JSONObj.course_status; // Is the section open or closed
+    //var OCStatus = JSONObj.course_status; // Is the section open or closed
+    var OCStatus = "C";
     var isOpen;
     if (OCStatus === "O") {
         isOpen = true;

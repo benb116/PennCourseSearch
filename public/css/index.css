@@ -275,6 +275,7 @@ ul {
 	text-align: center;
 	/* line-height: 13px; */
 	border-radius: 2px;
+    color:#959a9a;
 }
 
 .openSec {
@@ -282,7 +283,7 @@ ul {
 }
 
 .closedSec {
-	background-color: #F73B3B;
+	background-color: transparent;
 }
 
 .errorSec {
