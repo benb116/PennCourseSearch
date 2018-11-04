@@ -576,7 +576,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
     });
 
     $scope.registerNotify = function(secID) {
-        console.log("happy birthday!");
         window.open('https://penncoursealert.com/?course='+secID+'&source=pcs','_blank')
     };
 });

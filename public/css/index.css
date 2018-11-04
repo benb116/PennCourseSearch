@@ -99,7 +99,7 @@ form > input[type="text"] {
 }
 
 #searchbar button{
-	min-width:8rem;
+	min-width:6rem;
 }
 
 .is-active i.fa.fa-angle-down::before{
@@ -335,7 +335,7 @@ ul {
 	min-width: 500px;
 	opacity:0;
 	max-width:60%;
-	min-height: 15em;
+	min-height: 12.5rem;
 	max-height:50%;
 	position:fixed;
 	visibility:hidden;
@@ -345,6 +345,7 @@ ul {
 	border-radius: 5px;
 	vertical-align: top;
 	transition: opacity 250ms ease;
+	padding:0.5rem!important;
 }
 
 #filter_search_toggler{
@@ -384,10 +385,11 @@ ul {
 	overflow-y: scroll;
 }
 
-#reqFilter > span {
+#reqFilter > span, #reqFilter > label {
 	display: inline-block;
 	float: left;
 	width: 50%;
+	font-size: 0.75rem;
 }
 
 #reqTypes {
@@ -413,8 +415,8 @@ ul {
 }
 
 .schoolSelected {
-	background-color: #3498db;
-	color: white;
+	background-color: #ececec;
+	transition:500ms ease background-color;
 }
 
 #SchedGraph {
@@ -872,4 +874,8 @@ img.small{
 	bottom: 2rem;
 	opacity:0.8;
 	box-shadow: 0 0 0.7rem rgba(100,100,100,0.6);
+}
+
+.level .button{
+	font-size:0.75rem!important;
 }
