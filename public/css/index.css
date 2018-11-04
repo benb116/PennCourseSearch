@@ -275,6 +275,7 @@ ul {
 	text-align: center;
 	/* line-height: 13px; */
 	border-radius: 2px;
+    color:#959a9a;
 }
 
 .openSec {
@@ -282,7 +283,7 @@ ul {
 }
 
 .closedSec {
-	background-color: #F73B3B;
+	background-color: transparent;
 }
 
 .errorSec {
@@ -693,6 +694,10 @@ hr {
 .modal-card-body .button, .modal-card-body input{
 	display:block;
 	margin: 1.5rem auto auto;
+}
+
+.modal-card-title{
+	flex-shrink:unset!important;
 }
 
 .Modal h2 {
