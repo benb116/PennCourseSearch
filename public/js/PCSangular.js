@@ -286,7 +286,7 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
             sweetAlert({
                 title: "Please name your new schedule",
                 type: "input",
-                inputPlaceholder: "Spring 2018",
+                inputPlaceholder: "Spring 2019",
                 showCancelButton: true,
                 closeOnConfirm: false,
                 animation: "slide-from-top",
@@ -560,7 +560,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         // Otherwise the filtering in the view will take care of hiding and showing the corrent courses
     };
 
-    $scope.Notify = promptNotify;
     $scope.$watch('schedData', function() { // When schedData changes
         $scope.schedChange();
     }, true);
@@ -575,4 +574,9 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
     }, function() {
         $scope.loading = ($http.pendingRequests.length !== 0);
     });
+
+    $scope.registerNotify = function(secID) {
+        console.log("happy birthday!");
+        window.open('https://penncoursealert.com/?course='+secID+'&source=pcs','_blank')
+    };
 });

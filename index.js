@@ -210,39 +210,6 @@ app.get('/Sched', function(req, res) {
     ODkeyInd = 1 - ODkeyInd;
 });
 
-// Handle requests with penncoursenotify
-app.post('/Notify', function(req, res) {
-    var secID = req.query.secID;
-    // var formatSecID = secID.replace(/-/g, ' ');
-    var userEmail = req.query.email;
-
-    logEvent('Notify', {notifySec: secID});
-    request({
-            uri: 'http://www.penncoursenotify.com/',
-            method: "POST",
-            form: {'course': secID, 'email': userEmail}
-        }, function(error, response, body) {
-            var returnText = "Sorry, there was an error while trying set up notifications.";
-            res.statusCode = 201;
-            if (error) {
-                console.log('PCN req error:', error);
-            } else {
-                try {
-                    if (response.statusCode === 406) {
-                        returnText = "Notifications already requested.";
-                        res.statusCode = 200;
-                    } else if (body.split('<h3>')[1].split('</h3>')[0] === "Success!") {
-                        returnText = "Great! You'll be notified if "+secID+" opens up.";
-                        res.statusCode = 200;
-                    }
-                } catch(err) {
-                    console.log('Notify Error:', err);
-                }
-            }
-            return res.send(returnText);
-    });
-});
-
 // // Handle requests with PennCourseAlert
 // app.post('/Alert', function(req, res) {
 //     var secID = req.query.secID;

@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="/css/index.css?version=2.0" />
 	<link rel="stylesheet" type="text/css" href="/css/plugins/sweetalert.css">
 	<link rel="stylesheet" type="text/css" href="/css/plugins/angular-tooltips.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -15,12 +15,12 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<!-- My code -->
-	<script type="text/javascript" src="/js/ui_adjustment.js"></script>
-	<script type="text/javascript" src="/js/PCSangular.js"></script>
-	<script type="text/javascript" src="/js/functions.js"></script>
-	<script type="text/javascript" src="/js/factories.js"></script>
-	<script defer type="text/javascript" src="/js/pcn.js"></script>
-	<script defer type="text/javascript" src="/js/importSched.js"></script>
+	<script type="text/javascript" src="/js/ui_adjustment.js?version=2.0"></script>
+	<script type="text/javascript" src="/js/PCSangular.js?version=2.0"></script>
+	<script type="text/javascript" src="/js/functions.js?version=2.0"></script>
+	<script type="text/javascript" src="/js/factories.js?version=2.0"></script>
+	<script defer type="text/javascript" src="/js/pcn.js?version=2.0"></script>
+	<script defer type="text/javascript" src="/js/importSched.js?version=2.0"></script>
 	<!-- Third party plugins -->
 	<script defer type="text/javascript" src="/js/plugins/html2canvas.js"></script>
 	<script defer type="text/javascript" src="/js/plugins/jquery.tooltipster.min.js"></script>
@@ -195,10 +195,10 @@
 												  ng-class="{'openSec': section.isOpen, 'closedSec': !section.isOpen}"
 												  ng-click="get.SectionInfo(section.idDashed)">
 											<!-- the status square should be green if the section is open, red if it's closed -->
-											<i class="fa fa-envelope tooltip"
+											<i class="fa fa-bell-o tooltip"
 											   ng-hide="section.isOpen"
-											   ng-click="Notify(section.idDashed)"
-											   title="PennCourseNotify"></i>
+											   ng-click="registerNotify(section.idDashed)"
+											   title="Penn Course Alert"></i>
 											<!-- If the section is closed, show the notify icon -->
 											</span>
 										</div>
@@ -511,15 +511,15 @@
 	</footer>
 
 	<!--Adjust modals-->
-	<script src="/js/modal_adjustments.js"></script>
+	<script src="/js/modal_adjustments.js?version=2.0"></script>
 	<!-- Misc. functions that run after loading the page-->
-	<script src="/js/after_load.js"></script>
+	<script src="/js/after_load.js?version=2.0"></script>
 
 	<!-- Load React. -->
 	<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
 	<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
 	<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
-	<script type="text/javascript" src="/js/dropdown.js"></script>
+	<script type="text/javascript" src="/js/dropdown.js?version=2.0"></script>
 </body>
 
 </html>

@@ -601,7 +601,6 @@ PCS.controller('CourseController', function ($scope, $http, localStorageService,
         // Otherwise the filtering in the view will take care of hiding and showing the corrent courses
     };
 
-    $scope.Notify = promptNotify;
     $scope.$watch('schedData', function () {
         // When schedData changes
         $scope.schedChange();
