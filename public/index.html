@@ -19,7 +19,6 @@
 	<script type="text/javascript" src="/js/PCSangular.js?version=2.0"></script>
 	<script type="text/javascript" src="/js/functions.js?version=2.0"></script>
 	<script type="text/javascript" src="/js/factories.js?version=2.0"></script>
-	<script defer type="text/javascript" src="/js/pcn.js?version=2.0"></script>
 	<script defer type="text/javascript" src="/js/importSched.js?version=2.0"></script>
 	<!-- Third party plugins -->
 	<script defer type="text/javascript" src="/js/plugins/html2canvas.js"></script>
@@ -290,41 +289,41 @@
 					<span ng-click="reqShow = 'SEAS'" ng-class="{schoolSelected: reqShow == 'SEAS'}">Engineering</span>
 				</div>
 				<div id="reqFilter">
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDS"  ng-change="reqChange()" value="MDS">Society Sector</span>
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDH"  ng-change="reqChange()" value="MDH">History &amp; Tradition Sector</span>
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDA"  ng-change="reqChange()" value="MDA">Arts &amp; Letters Sector</span>
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDO"  ng-change="reqChange()" value="MDO">Humanities &amp; Social Science </span>
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDL"  ng-change="reqChange()" value="MDL">Living World Sector</span>
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDP"  ng-change="reqChange()" value="MDP">Physical World Sector</span>
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDN"  ng-change="reqChange()" value="MDN">Natural Science &amp; Math Sector</span>
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MWC"  ng-change="reqChange()" value="MWC">Writing Requirement</span>
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MQS"  ng-change="reqChange()" value="MQS">Quantitative Data Analysis</span>
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MFR"  ng-change="reqChange()" value="MFR">Formal Reasoning Course</span>
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MC1"  ng-change="reqChange()" value="MC1">Cross Cultural Analysis</span>
-					<span ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MC2"  ng-change="reqChange()" value="MC2">Cultural Diversity in the US</span>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDS"  ng-change="reqChange()" value="MDS">Society Sector</label>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDH"  ng-change="reqChange()" value="MDH">History &amp; Tradition Sector</label>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDA"  ng-change="reqChange()" value="MDA">Arts &amp; Letters Sector</label>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDO"  ng-change="reqChange()" value="MDO">Humanities &amp; Social Science </label>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDL"  ng-change="reqChange()" value="MDL">Living World Sector</label>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDP"  ng-change="reqChange()" value="MDP">Physical World Sector</label>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MDN"  ng-change="reqChange()" value="MDN">Natural Science &amp; Math Sector</label>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MWC"  ng-change="reqChange()" value="MWC">Writing Requirement</label>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MQS"  ng-change="reqChange()" value="MQS">Quantitative Data Analysis</label>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MFR"  ng-change="reqChange()" value="MFR">Formal Reasoning Course</label>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MC1"  ng-change="reqChange()" value="MC1">Cross Cultural Analysis</label>
+					<label ng-show="reqShow==='CAS'" ><input type="checkbox" ng-model="check.MC2"  ng-change="reqChange()" value="MC2">Cultural Diversity in the US</label>
 
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WGLO" ng-change="reqChange()" value="WGLO">Global Environment</span>
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Social Structures</span>
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Science and Technology</span>
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Language, Arts &amp; Culture</span>
-					<span ng-show="reqShow==='WH'"  style="width:100%;height:1em;display:inline;"><hr style="width:95%;position:relative"></hr></span>
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNHR" ng-change="reqChange()" value="WNHR">Enter 2017 - Humanities</span>
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNNS" ng-change="reqChange()" value="WNNS">Enter 2017 - Nat. Science</span>
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNSS" ng-change="reqChange()" value="WNSS">Enter 2017 - Social Struct.</span>
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNFR" ng-change="reqChange()" value="WNFR">Enter 2017 - Flexible</span>
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WURE" ng-change="reqChange()" value="WURE">Enter 2017 - Unrestricted Elec.</span>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WGLO" ng-change="reqChange()" value="WGLO">Global Environment</label>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WSST" ng-change="reqChange()" value="WSST">Social Structures</label>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WSAT" ng-change="reqChange()" value="WSAT">Science and Technology</label>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WLAC" ng-change="reqChange()" value="WLAC">Language, Arts &amp; Culture</label>
+					<label ng-show="reqShow==='WH'"  style="width:100%;height:1em;display:inline;"><hr style="width:95%;position:relative"></hr></label>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNHR" ng-change="reqChange()" value="WNHR">Enter 2017 - Humanities</label>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNNS" ng-change="reqChange()" value="WNNS">Enter 2017 - Nat. Science</label>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNSS" ng-change="reqChange()" value="WNSS">Enter 2017 - Social Struct.</label>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNFR" ng-change="reqChange()" value="WNFR">Enter 2017 - Flexible</label>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WURE" ng-change="reqChange()" value="WURE">Enter 2017 - Unrestricted Elec.</label>
 					<!-- <span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WNSA" ng-change="reqChange()" value="WNSA">Enter 2017 - See Advisor</span> -->
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCY" ng-change="reqChange()" value="WCCY">Enter 2017 - Cross Cul. Pers.</span>
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCS" ng-change="reqChange()" value="WCCS">Enter 2017 - CCP See Advisor</span>
-					<span ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCC" ng-change="reqChange()" value="WCCC">Enter 2017 - CCP CDUS</span>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCY" ng-change="reqChange()" value="WCCY">Enter 2017 - Cross Cul. Pers.</label>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCS" ng-change="reqChange()" value="WCCS">Enter 2017 - CCP See Advisor</label>
+					<label ng-show="reqShow==='WH'"  ><input type="checkbox" ng-model="check.WCCC" ng-change="reqChange()" value="WCCC">Enter 2017 - CCP CDUS</label>
 
-					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EMAT" ng-change="reqChange()" value="EMAT">Math</span>
-					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ESCI" ng-change="reqChange()" value="ESCI">Natural Science</span>
-					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EENG" ng-change="reqChange()" value="EENG">Engineering</span>
-					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ESSC" ng-change="reqChange()" value="ESSC">Social Sciences</span>
-					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EHUM" ng-change="reqChange()" value="EHUM">Humanities</span>
-					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ETBS" ng-change="reqChange()" value="ETBS">Tech, Bus, and Society</span>
-					<span ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EWRT" ng-change="reqChange()" value="EWRT">Writing</span>
+					<label ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EMAT" ng-change="reqChange()" value="EMAT">Math</label>
+					<label ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ESCI" ng-change="reqChange()" value="ESCI">Natural Science</label>
+					<label ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EENG" ng-change="reqChange()" value="EENG">Engineering</label>
+					<label ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ESSC" ng-change="reqChange()" value="ESSC">Social Sciences</label>
+					<label ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EHUM" ng-change="reqChange()" value="EHUM">Humanities</label>
+					<label ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.ETBS" ng-change="reqChange()" value="ETBS">Tech, Bus, and Society</label>
+					<label ng-show="reqShow==='SEAS'"><input type="checkbox" ng-model="check.EWRT" ng-change="reqChange()" value="EWRT">Writing</label>
 				</div>
 			</div>
 		</div>
