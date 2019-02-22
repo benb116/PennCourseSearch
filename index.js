@@ -30,6 +30,7 @@ try {
 var app = express();
 app.use(compression());
 app.use(helmet()); // Hides certain HTTP headers, supposedly more secure?
+app.use(helmet.noCache());
 
 // I want this to have the client always pull the newest JS, since updates happen very often.
 // IDK if this is the best way to do that.
