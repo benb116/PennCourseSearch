@@ -60,7 +60,6 @@
 			<span class = "level-left">
 
 				<div id ="searchSelectContainer">ERROR</div>
-
 				<form ng-submit="delaySearch()">
 					<input id="CSearch" type="text" ng-class="{'is-loading': loading}" class="input is-small is-rounded" name="courseSearch" autocomplete="off" placeholder="{{searchPlaceholder}}" autofocus="autofocus" ng-model="search" ng-change="delaySearch()">
 					<!-- This only shows if loading == true. Need to use visibility: hidden -->

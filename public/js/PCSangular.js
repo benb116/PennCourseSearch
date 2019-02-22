@@ -6,7 +6,7 @@ var PCS = angular.module('PCSApp', ['LocalStorageModule', 'tooltips']);
 
 PCS.controller('CourseController', function ($scope, $http, localStorageService, PCR, UpdateCourseList, UpdateSectionList, UpdateSectionInfo, UpdateSchedules, pendingRequests){
 
-    var currentTerm = '2019A';
+    var currentTerm = '2019C';
     var shouldAddLoc = false;
     var locString = 'Loc' + currentTerm;
 

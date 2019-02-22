@@ -3,11 +3,11 @@ console.time('Modules loaded');
 var path        = require('path');
 var express     = require('express');
 var compression = require('compression');
-var request     = require('request');
 var Keen        = require('keen-js');
 var git         = require('git-rev');
 var helmet      = require('helmet');
-require('log-timestamp')(function() { return new Date().toISOString() + ' %s'; });
+var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+require('log-timestamp')(function() { return (new Date(Date.now() - tzoffset)).toISOString() + ' %s'; });
 
 console.timeEnd('Modules loaded');
 
@@ -31,7 +31,7 @@ var app = express();
 app.use(compression());
 app.use(helmet()); // Hides certain HTTP headers, supposedly more secure?
 
-// I want this to have the client always pull the newest JS, since uodates happen very often.
+// I want this to have the client always pull the newest JS, since updates happen very often.
 // IDK if this is the best way to do that.
 app.use('/js/plugins', express.static(path.join(__dirname, 'public/js/plugins'), { maxAge: 2628000000 }));
 app.use('/js', express.static(path.join(__dirname, 'public/js'), { maxAge: 0 }));
@@ -65,14 +65,14 @@ git.short(function (str) {
     console.log('Current git commit:', str); // log the current commit we are running
 });
 
-var currentTerm = '2019A'; // Which term is currently active
+var currentTerm = '2019C'; // Which term is currently active
 var LRTimes = Array(config.requestAB.length).fill(0); // Timestamps of latest requests using each OpenData key (see OpenData.js)
 var ODkeyInd = 0; // Which key to use next
 
 // Pull in external data and functions
 var allCourses = require('./loadCourses.js')(currentTerm); // Get array of all courses
 var parse = require('./parse.js'); // Load the parsing functions
-var opendata = require('./opendata.js')(95);
+var opendata = require('./opendata.js')(95); // Pull in the OpenData request functions and set the max requests per minute
 
 var listenPort = 3000;
 if (process.argv[1].includes('beta')) { // If running in the staging environment, run on a different port
@@ -117,7 +117,7 @@ var filterURI = {
     includeOpen: '&open=true'
 };
 
-var buildURI = function (filter, type) { // Build the request URI given certain filters and requirements
+var buildURI = function (filter, type) { // Build the OD request URI given certain filters and requirements
     if (typeof filter === 'undefined') {
         return '';
     } else {
@@ -140,8 +140,7 @@ app.get('/Search', function(req, res) {
 
     // Keen.io logging
     if (searchParam) {
-        var searchEvent = {searchParam: searchParam};
-        logEvent('Search', searchEvent);
+        logEvent('Search', {searchParam: searchParam});
     }
 
     if (searchType === 'courseIDSearch' && resultType === 'deptSearch' && !req.query.proParam) { // If we can return results from cached data
