@@ -142,10 +142,8 @@ function EngReqRules(dept, num, cross) {
         if (EngineerReq[dept].tbs) {
             thisEngObj.tbs = true;
         }
-        if (EngineerReq[dept].nocred) {
-            if ((dept === 'PHYS' && Number(num) < 140) || (dept === 'STAT' && Number(num) < 430)) {
-                thisEngObj.nocred = true;
-            }
+        if ((dept === 'PHYS' && Number(num) < 140) || (dept === 'STAT' && Number(num) < 430)) {
+            thisEngObj.nocred = true;
         }
     }
     specificReq = (EngineerReq[dept+'-'+num] || {});

@@ -54,7 +54,7 @@ for (c in newd.data){
 }
 // console.log(obj2)
 
-fs.writeFile('./wharreq.json', JSON.stringify(obj2), function (err) { // Write to file
+fs.writeFile('./wharreq.json', JSON.stringify(obj2, null, 4), function (err) { // Write to file
     if (err) {
         console.log("error: " + err);
     }

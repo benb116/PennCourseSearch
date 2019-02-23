@@ -38,7 +38,7 @@ for (var i = 0; i < codearray.length; i++) {
     }
 }
 console.log(engreq);
-fs.writeFile('./engreq.json', JSON.stringify(engreq), function (err) { // Write to file
+fs.writeFile('./engreq.json', JSON.stringify(engreq, null, 4), function (err) { // Write to file
     if (err) {
         console.log("error: " + err);
     }
