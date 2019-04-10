@@ -20,9 +20,9 @@ module.exports = function(rpm) {
     if (config.IFTTTKey) {
         var IFTTTMaker = require('iftttmaker')(config.IFTTTKey);
     }
-    function SendError(errmsg) { // Send an email to Ben through IFTTT when there is a server error
+    function SendError(errType, errMsg) { // Send an email to Ben through IFTTT when there is a server error
         if (config.IFTTTKey) {
-            IFTTTMaker.send('PCSError', errmsg).then(function () {
+            IFTTTMaker.send('PCSError', errType, errMsg).then(function () {
             }).catch(function (error) {
               console.log('The error request could not be sent:', error);
             });
@@ -45,7 +45,7 @@ module.exports = function(rpm) {
                 // This is triggered if the OpenData API returns an error or never responds
                 console.log(JSON.stringify(response));
                 console.log('OpenData Request failed:', url, error);
-                SendError('OpenData Request failed');
+                SendError('OpenData Request failed', error);
                 res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
                 return res.send('PCSERROR: request failed');
             }
@@ -54,13 +54,13 @@ module.exports = function(rpm) {
             try { // Try to make body into valid JSON
                 rawResp = JSON.parse(body);
                 if (rawResp.statusCode) {
-                    SendError('Status Code');
+                    SendError('Status Code', rawResp.statusCode);
                     res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
                     return res.send('status code error');
                 }
             } catch(err) { // Could not parse the JSON for some reason
                 console.log('Resp parse error ' + err);
-                SendError('Parse Error!!!');
+                SendError('Parse Error!!!', err);
                 console.log(JSON.stringify(response));
                 return res.send({});
             }
@@ -68,14 +68,14 @@ module.exports = function(rpm) {
             try {
                 if (rawResp.service_meta.error_text) { // If the API returned an error in its response
                     console.log('Resp Err: ' + rawResp.service_meta.error_text);
-                    SendError('Error Text');
+                    SendError('Error Text', rawResp.service_meta.error_text);
                     res.statusCode = 513; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
                     return res.send(rawResp.service_meta.error_text);
                 }
                 parsedRes = rawResp.result_data;
             } catch(err) {
                 console.log(err);
-                SendError('Other Error!!!');
+                SendError('Other Error!!!', err);
                 res.statusCode = 500;
                 return res.send(err);
             }
