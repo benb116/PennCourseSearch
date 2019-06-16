@@ -4,7 +4,7 @@ var allRevs = {};
 for (var dept in deptList) { if (deptList.hasOwnProperty(dept)) {
     try {
         var thedept = deptList[dept];
-        allRevs[thedept] = require('./Data/2018ARev/'+thedept);
+        allRevs[thedept] = require('./Data/2018CRev/'+thedept);
     } catch(err) {
         
     }
