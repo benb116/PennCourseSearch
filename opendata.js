@@ -45,7 +45,7 @@ module.exports = function(rpm) {
                 // This is triggered if the OpenData API returns an error or never responds
                 console.log(JSON.stringify(response));
                 console.log('OpenData Request failed:', url, error);
-                SendError('OpenData Request failed', error);
+                SendError('OpenData Request failed', error.code);
                 res.statusCode = 512; // Reserved error code to tell front end that its a Penn InTouch problem, not a PCS problem
                 return res.send('PCSERROR: request failed');
             }

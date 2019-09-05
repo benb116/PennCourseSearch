@@ -5,9 +5,9 @@
 
     Run as a script like so:
 
-    node DBManage.js registrar MEAM // Run for a single department
-    node DBManage.js registrar 0 30 // Run for a set of depts by index
-    node DBManage.js registrar 50 // Run for all depts starting at index
+    node DBManage.js registrar 20 MEAM // Run for a single department
+    node DBManage.js registrar 20 0 30 // Run for a set of depts by index
+    node DBManage.js registrar 20 50 // Run for all depts starting at index
     node DBManage.js review CIS
 */
 
