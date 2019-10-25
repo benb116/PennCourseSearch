@@ -1,3 +1,5 @@
+# This repo is deprecated, please see [Penn Course Plan](https://github.com/pennlabs/penn-courses/)
+
 # PennCourseSearch
 
 Fed up with the bloated, inefficient, and slow excuse for an online portal that is Penn InTouch, I decided to make a cleaner and simpler way for Quakers to find classes and make schedules. While this is not a full replacement for Penn InTouch, it acts as an improvement of the "Course Search" and "Mock Schedules" features.
